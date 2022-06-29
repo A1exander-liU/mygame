@@ -78,8 +78,9 @@ public class CollisionSystem extends EntitySystem {
         Position pos = cg.getPosition(entity);
         MapObjects objects = gameMapProperties.tiledMap.getLayers().get("Object Layer 1").getObjects();
         for (int i = 0; i < objects.getCount() - 1; i++) {
+            Rectangle collisionZone = null;
             if (objects.get(i) instanceof RectangleMapObject) {
-
+                collisionZone = ((RectangleMapObject) objects.get(i)).getRectangle();
             }
             if (objects.get(i) instanceof TextureMapObject) {
 
