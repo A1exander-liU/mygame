@@ -27,6 +27,8 @@ import com.mygdx.game.entityComponentSystem.components.Speed;
 import com.mygdx.game.entityComponentSystem.systems.CollisionSystem;
 import com.mygdx.game.entityComponentSystem.systems.MovementSystem;
 
+import org.graalvm.compiler.lir.sparc.SPARCMove;
+
 public class GameScreen implements Screen {
     public MyGame parent;
 
@@ -95,8 +97,10 @@ public class GameScreen implements Screen {
         tmo.setName(player.playerName);
         objectLayer.getObjects().add(tmo);
 
-        parent.engine.addSystem(new MovementSystem(cg, parent));
-        parent.engine.addSystem(new CollisionSystem(cg, parent, gameMapProperties));
+        MovementSystem movementSystem = new MovementSystem(cg, parent);
+        CollisionSystem collisionSystem = new CollisionSystem(cg, parent, gameMapProperties);
+        parent.engine.addSystem(movementSystem);
+        parent.engine.addSystem(collisionSystem);
     }
 
     @Override
