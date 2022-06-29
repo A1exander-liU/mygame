@@ -8,6 +8,8 @@ import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.MapProperties;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
+import com.badlogic.gdx.maps.objects.TextureMapObject;
 import com.badlogic.gdx.math.Rectangle;
 import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.MyGame;
@@ -76,6 +78,12 @@ public class CollisionSystem extends EntitySystem {
         Position pos = cg.getPosition(entity);
         MapObjects objects = gameMapProperties.tiledMap.getLayers().get("Object Layer 1").getObjects();
         for (int i = 0; i < objects.getCount() - 1; i++) {
+            if (objects.get(i) instanceof RectangleMapObject) {
+
+            }
+            if (objects.get(i) instanceof TextureMapObject) {
+
+            }
             MapProperties objectProperties = objects.get(i).getProperties();
             if (!Objects.equals(objects.get(i).getName(), "" + id.ID)) {
                 float objX = objectProperties.get("x", Float.class);
