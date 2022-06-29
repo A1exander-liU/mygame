@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.9" tiledversion="1.9.0" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="31">
+ <tileset firstgid="1" source="sampleTileSheet.tsx"/>
+ <layer id="1" name="Tile Layer 1" width="30" height="20">
+  <data encoding="base64" compression="zlib">
+   eJzFlesNwjAQgzMAbABsUFZpN+A2YAVGp0itZD7sVEg8flhKz7lnUmdsrY0LJkGJXfkRe2jrfWusywLGLeEcr/t0vfqVIOVNHONOxk95jaU8fVde42qP6jMh5jt59TxcX+ytArfG5KxcXtbn8rI31qsz0Zi0a97djL0B51GI6fjEqX1dH2YcDVwtn8R1yXObMQhcLd/AqT3fnX/lHX6Ec8u61wO1I2nilk7SVgG9eIV1tdf/X20uL3XL1ZP0pJrXN9qc3qYaqZlaw5YuUs/SeZTZm75dP65mN6eevjkNrbDmzF1e9k0N752J+ruz2crLGfNt6/1fbm86t6T9vDeK3nuROPqm9/KBO8NYsHA=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Object Layer 1">
+  <object id="3" x="846.751" y="515.98" width="35.5" height="24.7706"/>
+  <object id="9" x="800.5" y="415.477" width="33" height="27.7777"/>
+  <object id="10" x="930" y="451.975" width="29.5" height="26.525"/>
+  <object id="11" x="898.5" y="580.975" width="30.5" height="26.525"/>
+  <object id="12" x="736" y="512.726" width="33" height="31.7742"/>
+  <object id="13" x="675.5" y="417.5" width="59" height="25.5"/>
+  <object id="14" x="898" y="268.5" width="30" height="19.5"/>
+  <object id="15" x="892.5" y="140.5" width="37.5" height="18.5"/>
+  <object id="16" x="673" y="159.5" width="62.5" height="25"/>
+  <object id="17" x="443.667" y="547" width="70.6667" height="31"/>
+  <object id="18" x="351.333" y="420" width="67.3333" height="18.6667"/>
+  <object id="19" x="222.667" y="520" width="68" height="18.6667"/>
+  <object id="20" x="219.333" y="163.333" width="75.3333" height="22"/>
+ </objectgroup>
+ <layer id="3" name="Tile Layer 2" width="30" height="20">
+  <data encoding="base64" compression="zlib">
+   eJztk0EKgDAMBOv/f6a+QH2BgnpWqMZDoQRMt2krIg7ES7skzbrG/DhqquZBnaOj6jPrZkA/Uk2KvpLOAvqNalf01eq+COJvCRB/3wKay9T8ctA8a3N/B5pnfq+N7MP3heaS3xvYeWgOaV8pHvI5ONJeEQ/9dy1UKziXtFfEa/9dx/WpwMbKmSRi/7FchLwtzQkihDfQ
+  </data>
+ </layer>
+</map>
