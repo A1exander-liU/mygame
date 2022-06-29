@@ -72,7 +72,6 @@ public class GameScreen implements Screen {
         enemySprite.texture = new Texture(Gdx.files.internal("testPlayer.png"));
         parent.engine.addEntity(enemy);
         entityToMapAdder = new EntityToMapAdder(testMap, cg);
-        // PROBLEM: error with addEntityToMap method
         entityToMapAdder.addEntityToMap(testMap, enemy);
         // families (entities with same collection of components)
         /* here: creating a family called obstacles (meaning obstacles will only
