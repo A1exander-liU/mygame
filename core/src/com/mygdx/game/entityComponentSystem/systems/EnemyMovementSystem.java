@@ -51,10 +51,9 @@ public class EnemyMovementSystem extends EntitySystem {
     @Override
     // will update every frame
     public void update(float deltaTime) {
-        for (int i = 0; i < entities.size() - 1; i++) {
+        for (int i = 0; i < entities.size(); i++) {
             Entity entity = entities.get(i);
-            System.out.println("running movement");
-            moveEnemy(entity, getRandomDirection(), i, deltaTime);
+            moveEnemy(entity, getRandomDirection(), deltaTime);
             keepEntityInsideMap(entity);
             resolveCollisions(entity);
             updateEntityInMap(entity);
@@ -64,43 +63,42 @@ public class EnemyMovementSystem extends EntitySystem {
     private String getRandomDirection() {
         String[] directions = {"N", "NE", "E", "SE", "S", "SW", "W", "NW"};
         Random random = new Random();
-        return directions[random.nextInt(directions.length) - 1];
+        return directions[random.nextInt(directions.length)];
     }
 
-    private void moveEnemy(Entity entity, String direction, int index, float deltaTime) {
+    private void moveEnemy(Entity entity, String direction, float deltaTime) {
         Position pos = cg.getPosition(entity);
         Speed speed = cg.getSpeed(entity);
         pos.oldX = pos.x;
         pos.oldY = pos.y;
-        System.out.println("Chosen Direction: " + direction);
         switch (direction) {
             case "N":
-                pos.y += speed.ySpeed * deltaTime;
+                pos.y += speed.ySpeed;
                 break;
             case "NE":
-                pos.x += speed.xSpeed * deltaTime;
-                pos.y += speed.ySpeed * deltaTime;
+                pos.x += speed.xSpeed;
+                pos.y += speed.ySpeed;
                 break;
             case "E":
-                pos.x += speed.xSpeed * deltaTime;
+                pos.x += speed.xSpeed;
                 break;
             case "SE":
-                pos.x += speed.xSpeed * deltaTime;
-                pos.y -= speed.ySpeed * deltaTime;
+                pos.x += speed.xSpeed;
+                pos.y -= speed.ySpeed;
                 break;
             case "S":
-                pos.y -= speed.ySpeed * deltaTime;
+                pos.y -= speed.ySpeed;
                 break;
             case "SW":
-                pos.x -= speed.xSpeed * deltaTime;
-                pos.y -= speed.ySpeed * deltaTime;
+                pos.x -= speed.xSpeed;
+                pos.y -= speed.ySpeed;
                 break;
             case "W":
-                pos.x -= speed.xSpeed * deltaTime;
+                pos.x -= speed.xSpeed;
                 break;
             case "NW":
-                pos.x -= speed.xSpeed * deltaTime;
-                pos.y += speed.ySpeed * deltaTime;
+                pos.x -= speed.xSpeed;
+                pos.y += speed.ySpeed;
                 break;
         }
     }
