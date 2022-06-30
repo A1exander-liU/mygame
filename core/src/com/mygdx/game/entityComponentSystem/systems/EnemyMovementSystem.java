@@ -118,6 +118,7 @@ public class EnemyMovementSystem extends IntervalSystem {
     private void resolveCollisions(Entity entity) {
         ID id = cg.getID(entity);
         Position pos = cg.getPosition(entity);
+        System.out.println("(" + pos.x + ", " + pos.y + ")");
         MapObjects objects = gameMapProperties.tiledMap.getLayers().get("Object Layer 1").getObjects();
         for (int i = 0; i < objects.getCount() - 1; i++) {
             Rectangle collisionZone = null;
@@ -135,6 +136,7 @@ public class EnemyMovementSystem extends IntervalSystem {
                 }
                 Rectangle currentEntity = getEntityArea(objects.get("" + id.ID));
                 if (collisionZone != null && currentEntity.overlaps(collisionZone)) {
+                    System.out.println("there was a collision!");
                     pos.x = pos.oldX;
                     pos.y = pos.oldY;
                 }
@@ -145,8 +147,9 @@ public class EnemyMovementSystem extends IntervalSystem {
     private Rectangle getEntityArea(MapObject mapObject) {
         TextureMapObject textureMapObject = (TextureMapObject) mapObject;
         TextureRegion textureRegion = textureMapObject.getTextureRegion();
-        float objX = textureRegion.getRegionX();
-        float objY = textureRegion.getRegionY();
+        float objX = textureMapObject.getX();
+        float objY = textureMapObject.getY();
+        System.out.println(objX + ", " + objY);
         float objWidth = textureRegion.getRegionWidth();
         float objHeight = textureRegion.getRegionHeight();
         return new Rectangle(objX, objY, objWidth, objHeight);
