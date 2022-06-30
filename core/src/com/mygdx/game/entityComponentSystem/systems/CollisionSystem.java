@@ -93,7 +93,7 @@ public class CollisionSystem extends EntitySystem {
                     collisionZone = new Rectangle(objX, objY, objWidth, objHeight);
                 }
                 Rectangle currentEntity = getEntityArea(objects.get("" + id.ID));
-                if (currentEntity.overlaps(collisionZone)) {
+                if (collisionZone != null && currentEntity.overlaps(collisionZone)) {
                     pos.x = pos.oldX;
                     pos.y = pos.oldY;
                 }
