@@ -53,6 +53,7 @@ public class CollisionSystem extends EntitySystem {
             Entity entity = entities.get(i);
             keepEntityInsideMap(entity);
             resolveCollisions(entity);
+            updateEntityInMap(entity);
         }
     }
 
@@ -109,5 +110,14 @@ public class CollisionSystem extends EntitySystem {
         float objWidth = textureRegion.getRegionWidth();
         float objHeight = textureRegion.getRegionHeight();
         return new Rectangle(objX, objY, objWidth, objHeight);
+    }
+
+    private void updateEntityInMap(Entity entity) {
+        ID id = cg.getID(entity);
+        Position pos = cg.getPosition(entity);
+        TextureMapObject textureMapObject = (TextureMapObject) gameMapProperties.tiledMap
+                .getLayers().get("Object Layer 1").getObjects().get("" + id.ID);
+        textureMapObject.setX(pos.x);
+        textureMapObject.setY(pos.y);
     }
 }
