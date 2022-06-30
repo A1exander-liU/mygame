@@ -5,6 +5,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.MapProperties;
@@ -83,17 +84,17 @@ public class CollisionSystem extends EntitySystem {
                 collisionZone = ((RectangleMapObject) objects.get(i)).getRectangle();
             }
             if (objects.get(i) instanceof TextureMapObject) {
-
+                TextureRegion textureRegion = ((TextureMapObject) objects.get(i)).getTextureRegion();
+                float objX = textureRegion.getRegionX();
+                float objY = textureRegion.getRegionY();
+                float objWidth = textureRegion.getRegionWidth();
+                float objHeight = textureRegion.getRegionHeight();
+                collisionZone = new Rectangle(objX, objY, objWidth, objHeight);
             }
-            MapProperties objectProperties = objects.get(i).getProperties();
+
             if (!Objects.equals(objects.get(i).getName(), "" + id.ID)) {
-                float objX = objectProperties.get("x", Float.class);
-                float objY = objectProperties.get("y", Float.class);
-                float objWidth = objectProperties.get("width", Float.class);
-                float objHeight = objectProperties.get("height", Float.class);
-                Rectangle collisionArea = new Rectangle(objX, objY, objWidth, objHeight);
                 Rectangle currentEntity = getEntityArea(objects.get("" + id.ID));
-                if (currentEntity.overlaps(collisionArea)) {
+                if (currentEntity.overlaps(collisionZone)) {
                     pos.x = pos.oldX;
                     pos.y = pos.oldY;
                 }
