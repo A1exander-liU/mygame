@@ -2,8 +2,8 @@ package com.mygdx.game.entityComponentSystem.systems;
 
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
-import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.core.Family;
+import com.badlogic.ashley.systems.IntervalSystem;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapObject;
@@ -23,14 +23,14 @@ import com.mygdx.game.entityComponentSystem.components.Speed;
 import java.util.Objects;
 import java.util.Random;
 
-public class EnemyMovementSystem extends EntitySystem {
+public class EnemyMovementSystem extends IntervalSystem {
     private ImmutableArray<Entity> entities;
     ComponentGrabber cg;
     MyGame root;
     GameMapProperties gameMapProperties;
 
     public EnemyMovementSystem(ComponentGrabber cg, MyGame root, GameMapProperties gameMapProperties) {
-        super(1);
+        super(1, 1);
         this.cg = cg;
         this.root = root;
         this.gameMapProperties = gameMapProperties;
@@ -49,11 +49,10 @@ public class EnemyMovementSystem extends EntitySystem {
     }
 
     @Override
-    // will update every frame
-    public void update(float deltaTime) {
+    protected void updateInterval() {
         for (int i = 0; i < entities.size(); i++) {
             Entity entity = entities.get(i);
-            moveEnemy(entity, getRandomDirection(), deltaTime);
+            moveEnemy(entity, getRandomDirection());
             keepEntityInsideMap(entity);
             resolveCollisions(entity);
             updateEntityInMap(entity);
@@ -66,7 +65,7 @@ public class EnemyMovementSystem extends EntitySystem {
         return directions[random.nextInt(directions.length)];
     }
 
-    private void moveEnemy(Entity entity, String direction, float deltaTime) {
+    private void moveEnemy(Entity entity, String direction) {
         Position pos = cg.getPosition(entity);
         Speed speed = cg.getSpeed(entity);
         pos.oldX = pos.x;
