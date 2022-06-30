@@ -39,6 +39,7 @@ public class MovementSystem extends EntitySystem {
     // will update every frame
     public void update(float deltaTime) {
         for (int i = 0; i < entities.size() - 1; i++) {
+            System.out.println("running movement");
             moveEnemy(getRandomDirection(), i, deltaTime);
         }
     }

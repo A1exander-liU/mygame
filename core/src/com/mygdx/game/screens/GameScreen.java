@@ -101,6 +101,8 @@ public class GameScreen implements Screen {
         CollisionSystem collisionSystem = new CollisionSystem(cg, parent, gameMapProperties);
         parent.engine.addSystem(movementSystem);
         parent.engine.addSystem(collisionSystem);
+        movementSystem.setProcessing(true);
+        collisionSystem.setProcessing(true);
     }
 
     @Override
