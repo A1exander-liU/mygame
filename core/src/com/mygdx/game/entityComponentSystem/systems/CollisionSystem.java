@@ -102,11 +102,12 @@ public class CollisionSystem extends EntitySystem {
     }
 
     private Rectangle getEntityArea(MapObject mapObject) {
-        MapProperties entityProperties = mapObject.getProperties();
-        float objX = entityProperties.get("x", Float.class);
-        float objY = entityProperties.get("y", Float.class);
-        float objWidth = entityProperties.get("width", Float.class);
-        float objHeight = entityProperties.get("height", Float.class);
+        TextureMapObject textureMapObject = (TextureMapObject) mapObject;
+        TextureRegion textureRegion = textureMapObject.getTextureRegion();
+        float objX = textureRegion.getRegionX();
+        float objY = textureRegion.getRegionY();
+        float objWidth = textureRegion.getRegionWidth();
+        float objHeight = textureRegion.getRegionHeight();
         return new Rectangle(objX, objY, objWidth, objHeight);
     }
 }
