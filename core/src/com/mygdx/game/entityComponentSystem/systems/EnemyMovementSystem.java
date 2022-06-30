@@ -118,7 +118,6 @@ public class EnemyMovementSystem extends IntervalSystem {
     private void resolveCollisions(Entity entity) {
         ID id = cg.getID(entity);
         Position pos = cg.getPosition(entity);
-        System.out.println("(" + pos.x + ", " + pos.y + ")");
         MapObjects objects = gameMapProperties.tiledMap.getLayers().get("Object Layer 1").getObjects();
         for (int i = 0; i < objects.getCount() - 1; i++) {
             Rectangle collisionZone = null;
@@ -128,8 +127,8 @@ public class EnemyMovementSystem extends IntervalSystem {
                 }
                 if (objects.get(i) instanceof TextureMapObject) {
                     TextureRegion textureRegion = ((TextureMapObject) objects.get(i)).getTextureRegion();
-                    float objX = textureRegion.getRegionX();
-                    float objY = textureRegion.getRegionY();
+                    float objX = ((TextureMapObject) objects.get(i)).getX();
+                    float objY = ((TextureMapObject) objects.get(i)).getY();
                     float objWidth = textureRegion.getRegionWidth();
                     float objHeight = textureRegion.getRegionHeight();
                     collisionZone = new Rectangle(objX, objY, objWidth, objHeight);
@@ -137,8 +136,11 @@ public class EnemyMovementSystem extends IntervalSystem {
                 Rectangle currentEntity = getEntityArea(objects.get("" + id.ID));
                 if (collisionZone != null && currentEntity.overlaps(collisionZone)) {
                     System.out.println("there was a collision!");
+                    System.out.println("Old: " + pos.oldX + ", " + pos.oldY);
+                    System.out.println("Current: " + pos.x + ", " + pos.y);
                     pos.x = pos.oldX;
                     pos.y = pos.oldY;
+                    System.out.println("After resetting position: " + pos.x + ", " + pos.y);
                 }
             }
         }
@@ -158,6 +160,7 @@ public class EnemyMovementSystem extends IntervalSystem {
     private void updateEntityInMap(Entity entity) {
         ID id = cg.getID(entity);
         Position pos = cg.getPosition(entity);
+        System.out.println("Before update: " + pos.x + ", " + pos.y);
         TextureMapObject textureMapObject = (TextureMapObject) gameMapProperties.tiledMap
                 .getLayers().get("Object Layer 1").getObjects().get("" + id.ID);
         textureMapObject.setX(pos.x);
