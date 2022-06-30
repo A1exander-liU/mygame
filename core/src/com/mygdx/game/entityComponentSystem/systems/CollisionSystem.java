@@ -80,19 +80,18 @@ public class CollisionSystem extends EntitySystem {
         MapObjects objects = gameMapProperties.tiledMap.getLayers().get("Object Layer 1").getObjects();
         for (int i = 0; i < objects.getCount() - 1; i++) {
             Rectangle collisionZone = null;
-            if (objects.get(i) instanceof RectangleMapObject) {
-                collisionZone = ((RectangleMapObject) objects.get(i)).getRectangle();
-            }
-            if (objects.get(i) instanceof TextureMapObject) {
-                TextureRegion textureRegion = ((TextureMapObject) objects.get(i)).getTextureRegion();
-                float objX = textureRegion.getRegionX();
-                float objY = textureRegion.getRegionY();
-                float objWidth = textureRegion.getRegionWidth();
-                float objHeight = textureRegion.getRegionHeight();
-                collisionZone = new Rectangle(objX, objY, objWidth, objHeight);
-            }
-
             if (!Objects.equals(objects.get(i).getName(), "" + id.ID)) {
+                if (objects.get(i) instanceof RectangleMapObject) {
+                    collisionZone = ((RectangleMapObject) objects.get(i)).getRectangle();
+                }
+                if (objects.get(i) instanceof TextureMapObject) {
+                    TextureRegion textureRegion = ((TextureMapObject) objects.get(i)).getTextureRegion();
+                    float objX = textureRegion.getRegionX();
+                    float objY = textureRegion.getRegionY();
+                    float objWidth = textureRegion.getRegionWidth();
+                    float objHeight = textureRegion.getRegionHeight();
+                    collisionZone = new Rectangle(objX, objY, objWidth, objHeight);
+                }
                 Rectangle currentEntity = getEntityArea(objects.get("" + id.ID));
                 if (currentEntity.overlaps(collisionZone)) {
                     pos.x = pos.oldX;
