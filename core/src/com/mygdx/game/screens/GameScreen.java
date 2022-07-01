@@ -25,6 +25,8 @@ import com.mygdx.game.entityComponentSystem.components.Position;
 import com.mygdx.game.entityComponentSystem.components.Size;
 import com.mygdx.game.entityComponentSystem.components.Speed;
 import com.mygdx.game.entityComponentSystem.systems.CollisionSystem;
+import com.mygdx.game.entityComponentSystem.systems.EnemyMovementSystem;
+import com.mygdx.game.entityComponentSystem.systems.EntityRendererSystem;
 import com.mygdx.game.entityComponentSystem.systems.MovementSystem;
 
 import org.graalvm.compiler.lir.sparc.SPARCMove;
@@ -75,6 +77,7 @@ public class GameScreen implements Screen {
         parent.engine.addEntity(enemy);
         entityToMapAdder = new EntityToMapAdder(testMap, cg);
         entityToMapAdder.addEntityToMap(testMap, enemy);
+
         // families (entities with same collection of components)
         /* here: creating a family called obstacles (meaning obstacles will only
         have the components: position and size) */
@@ -97,12 +100,12 @@ public class GameScreen implements Screen {
         tmo.setName(player.playerName);
         objectLayer.getObjects().add(tmo);
 
+
+        EnemyMovementSystem enemyMovementSystem = new EnemyMovementSystem(cg, parent, gameMapProperties);
         MovementSystem movementSystem = new MovementSystem(cg, parent);
         CollisionSystem collisionSystem = new CollisionSystem(cg, parent, gameMapProperties);
         parent.engine.addSystem(movementSystem);
         parent.engine.addSystem(collisionSystem);
-        movementSystem.setProcessing(true);
-        collisionSystem.setProcessing(true);
     }
 
     @Override
@@ -116,9 +119,9 @@ public class GameScreen implements Screen {
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         player.movePlayer(gameMapProperties);
+        parent.engine.update(delta);
         tiledMapRenderer.setView(player.getCamera());
         tiledMapRenderer.render();
-        parent.engine.update(delta);
     }
 
     @Override
@@ -129,12 +132,12 @@ public class GameScreen implements Screen {
     @Override
     public void pause() {
         // stop enemies from moving when game is paused
-        parent.engine.getSystem(MovementSystem.class).setProcessing(false);
+        parent.engine.getSystem(EnemyMovementSystem.class).setProcessing(false);
     }
 
     @Override
     public void resume() {
-
+        parent.engine.getSystem(EnemyMovementSystem.class).setProcessing(true);
     }
 
     @Override
