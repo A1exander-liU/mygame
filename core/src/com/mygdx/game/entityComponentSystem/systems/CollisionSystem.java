@@ -8,7 +8,6 @@ import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
-import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.objects.TextureMapObject;
 import com.badlogic.gdx.math.Rectangle;
@@ -16,7 +15,6 @@ import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.entityComponentSystem.ComponentGrabber;
 import com.mygdx.game.entityComponentSystem.components.EntitySprite;
-import com.mygdx.game.entityComponentSystem.components.Health;
 import com.mygdx.game.entityComponentSystem.components.ID;
 import com.mygdx.game.entityComponentSystem.components.Position;
 import com.mygdx.game.entityComponentSystem.components.Size;
@@ -50,7 +48,6 @@ public class CollisionSystem extends EntitySystem {
     @Override
     public void update(float deltaTime) {
         for (int i = 0; i < entities.size(); i++) {
-            System.out.println("running collision");
             Entity entity = entities.get(i);
             keepEntityInsideMap(entity);
             resolveCollisions(entity);
@@ -80,7 +77,7 @@ public class CollisionSystem extends EntitySystem {
         ID id = cg.getID(entity);
         Position pos = cg.getPosition(entity);
         MapObjects objects = gameMapProperties.tiledMap.getLayers().get("Object Layer 1").getObjects();
-        for (int i = 0; i < objects.getCount() - 1; i++) {
+        for (int i = 13; i < objects.getCount(); i++) {
             Rectangle collisionZone = null;
             if (!Objects.equals(objects.get(i).getName(), "" + id.ID)) {
                 if (objects.get(i) instanceof RectangleMapObject) {
@@ -96,6 +93,7 @@ public class CollisionSystem extends EntitySystem {
                 }
                 Rectangle currentEntity = getEntityArea(objects.get("" + id.ID));
                 if (collisionZone != null && currentEntity.overlaps(collisionZone)) {
+                    System.out.println("Collided");
                     pos.x = pos.oldX;
                     pos.y = pos.oldY;
                 }
@@ -118,7 +116,6 @@ public class CollisionSystem extends EntitySystem {
         Position pos = cg.getPosition(entity);
         TextureMapObject textureMapObject = (TextureMapObject) gameMapProperties.tiledMap
                 .getLayers().get("Object Layer 1").getObjects().get("" + id.ID);
-        System.out.println(pos.x + ", " + pos.y);
         textureMapObject.setX(pos.x);
         textureMapObject.setY(pos.y);
     }

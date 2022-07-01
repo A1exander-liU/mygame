@@ -25,11 +25,7 @@ import com.mygdx.game.entityComponentSystem.components.Position;
 import com.mygdx.game.entityComponentSystem.components.Size;
 import com.mygdx.game.entityComponentSystem.components.Speed;
 import com.mygdx.game.entityComponentSystem.systems.CollisionSystem;
-import com.mygdx.game.entityComponentSystem.systems.EnemyMovementSystem;
-import com.mygdx.game.entityComponentSystem.systems.EntityRendererSystem;
 import com.mygdx.game.entityComponentSystem.systems.MovementSystem;
-
-import org.graalvm.compiler.lir.sparc.SPARCMove;
 
 public class GameScreen implements Screen {
     public MyGame parent;
@@ -100,8 +96,6 @@ public class GameScreen implements Screen {
         tmo.setName(player.playerName);
         objectLayer.getObjects().add(tmo);
 
-
-        EnemyMovementSystem enemyMovementSystem = new EnemyMovementSystem(cg, parent, gameMapProperties);
         MovementSystem movementSystem = new MovementSystem(cg, parent);
         CollisionSystem collisionSystem = new CollisionSystem(cg, parent, gameMapProperties);
         parent.engine.addSystem(movementSystem);
@@ -132,12 +126,14 @@ public class GameScreen implements Screen {
     @Override
     public void pause() {
         // stop enemies from moving when game is paused
-        parent.engine.getSystem(EnemyMovementSystem.class).setProcessing(false);
+        parent.engine.getSystem(MovementSystem.class).setProcessing(false);
+        parent.engine.getSystem(CollisionSystem.class).setProcessing(false);
     }
 
     @Override
     public void resume() {
-        parent.engine.getSystem(EnemyMovementSystem.class).setProcessing(true);
+        parent.engine.getSystem(MovementSystem.class).setProcessing(true);
+        parent.engine.getSystem(CollisionSystem.class).setProcessing(true);
     }
 
     @Override

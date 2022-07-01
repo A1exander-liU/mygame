@@ -2,7 +2,6 @@ package com.mygdx.game.entityComponentSystem.systems;
 
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
-import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IntervalSystem;
 import com.badlogic.ashley.utils.ImmutableArray;
@@ -40,23 +39,11 @@ public class MovementSystem extends IntervalSystem {
         return root.engine;
     }
 
-//    @Override
-//    // will update every frame
-//    public void update(float deltaTime) {
-//        for (int i = 0; i < entities.size() - 1; i++) {
-//            System.out.println("running movement");
-//            moveEnemy(getRandomDirection(), i, deltaTime);
-//        }
-//    }
-
     @Override
     protected void updateInterval() {
-        System.out.println("movement system: running");
         for (int i = 0; i < entities.size(); i++) {
             Entity entity = entities.get(i);
-            Position pos = cg.getPosition(entity);
             moveEnemy(getRandomDirection(), entity);
-            System.out.println(pos.x + ", " + pos.y);
         }
     }
 
@@ -65,7 +52,6 @@ public class MovementSystem extends IntervalSystem {
         Speed speed = cg.getSpeed(entity);
         pos.oldX = pos.x;
         pos.oldY = pos.y;
-        System.out.println("Chosen Direction: " + direction);
         switch (direction) {
             case "N":
                 pos.y += speed.ySpeed;
