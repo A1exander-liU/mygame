@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.0" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="31">
+<map version="1.9" tiledversion="1.9.0" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="34">
  <tileset firstgid="1" source="sampleTileSheet.tsx"/>
  <layer id="1" name="Tile Layer 1" width="30" height="20">
   <data encoding="base64" compression="zlib">
    eJzFlesNwjAQgzMAbABsUFZpN+A2YAVGp0itZD7sVEg8flhKz7lnUmdsrY0LJkGJXfkRe2jrfWusywLGLeEcr/t0vfqVIOVNHONOxk95jaU8fVde42qP6jMh5jt59TxcX+ytArfG5KxcXtbn8rI31qsz0Zi0a97djL0B51GI6fjEqX1dH2YcDVwtn8R1yXObMQhcLd/AqT3fnX/lHX6Ec8u61wO1I2nilk7SVgG9eIV1tdf/X20uL3XL1ZP0pJrXN9qc3qYaqZlaw5YuUs/SeZTZm75dP65mN6eevjkNrbDmzF1e9k0N752J+ruz2crLGfNt6/1fbm86t6T9vDeK3nuROPqm9/KBO8NYsHA=
   </data>
  </layer>
+ <objectgroup id="5" name="Enemy Spawns">
+  <object id="31" x="479.054" y="126.68">
+   <point/>
+  </object>
+  <object id="32" x="91.7337" y="467.405">
+   <point/>
+  </object>
+  <object id="33" x="551.858" y="432.459">
+   <point/>
+  </object>
+ </objectgroup>
  <objectgroup id="4" name="Object Layer 1">
   <object id="3" x="846.751" y="515.98" width="35.5" height="24.7706"/>
   <object id="9" x="800.5" y="415.477" width="33" height="27.7777"/>
