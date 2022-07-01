@@ -77,7 +77,7 @@ public class CollisionSystem extends EntitySystem {
         ID id = cg.getID(entity);
         Position pos = cg.getPosition(entity);
         MapObjects objects = gameMapProperties.tiledMap.getLayers().get("Object Layer 1").getObjects();
-        for (int i = 13; i < objects.getCount(); i++) {
+        for (int i = 0; i < objects.getCount(); i++) {
             Rectangle collisionZone = null;
             if (!Objects.equals(objects.get(i).getName(), "" + id.ID)) {
                 if (objects.get(i) instanceof RectangleMapObject) {
