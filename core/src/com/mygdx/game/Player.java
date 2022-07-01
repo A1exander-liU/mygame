@@ -113,6 +113,7 @@ public class Player {
         collided = false;
         xSpeed = 5;
         ySpeed = 5;
+
         MapObjects obstacles = gameMapProperties.tiledMap.getLayers().get("Object Layer 1").getObjects();
         // removing the player object, it was added last, so its last obj
         for (int i = 0; i < obstacles.getCount() - 1; i++) {
@@ -131,8 +132,8 @@ public class Player {
                     // getting TextureRegion of the TextureMapObject
                     TextureRegion textureRegion = ((TextureMapObject) obstacles.get(i)).getTextureRegion();
                     // Grabbing the values from the TextureRegion
-                    float objX = textureRegion.getRegionX();
-                    float objY = textureRegion.getRegionY();
+                    float objX = ((TextureMapObject) obstacles.get(i)).getX();
+                    float objY = ((TextureMapObject) obstacles.get(i)).getY();
                     float objWidth = textureRegion.getRegionWidth();
                     float objHeight = textureRegion.getRegionHeight();
                     // assign collisionArea a new Rectangle object
