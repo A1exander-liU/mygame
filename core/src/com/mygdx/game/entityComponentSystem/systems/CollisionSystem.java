@@ -41,15 +41,15 @@ public class CollisionSystem extends EntitySystem {
     public void addedToEngine(Engine engine) {
         entities = root.engine.getEntitiesFor(Family.all(
                 EntitySprite.class,
-                Health.class,
                 Position.class,
                 Size.class,
-                Speed.class).get());
+                Speed.class,
+                ID.class).get());
     }
 
     @Override
     public void update(float deltaTime) {
-        for (int i = 0; i < entities.size() - 1; i++) {
+        for (int i = 0; i < entities.size(); i++) {
             System.out.println("running collision");
             Entity entity = entities.get(i);
             keepEntityInsideMap(entity);
@@ -88,8 +88,8 @@ public class CollisionSystem extends EntitySystem {
                 }
                 if (objects.get(i) instanceof TextureMapObject) {
                     TextureRegion textureRegion = ((TextureMapObject) objects.get(i)).getTextureRegion();
-                    float objX = textureRegion.getRegionX();
-                    float objY = textureRegion.getRegionY();
+                    float objX = ((TextureMapObject) objects.get(i)).getX();
+                    float objY = ((TextureMapObject) objects.get(i)).getY();
                     float objWidth = textureRegion.getRegionWidth();
                     float objHeight = textureRegion.getRegionHeight();
                     collisionZone = new Rectangle(objX, objY, objWidth, objHeight);
@@ -106,8 +106,8 @@ public class CollisionSystem extends EntitySystem {
     private Rectangle getEntityArea(MapObject mapObject) {
         TextureMapObject textureMapObject = (TextureMapObject) mapObject;
         TextureRegion textureRegion = textureMapObject.getTextureRegion();
-        float objX = textureRegion.getRegionX();
-        float objY = textureRegion.getRegionY();
+        float objX = textureMapObject.getX();
+        float objY = textureMapObject.getY();
         float objWidth = textureRegion.getRegionWidth();
         float objHeight = textureRegion.getRegionHeight();
         return new Rectangle(objX, objY, objWidth, objHeight);
@@ -118,6 +118,7 @@ public class CollisionSystem extends EntitySystem {
         Position pos = cg.getPosition(entity);
         TextureMapObject textureMapObject = (TextureMapObject) gameMapProperties.tiledMap
                 .getLayers().get("Object Layer 1").getObjects().get("" + id.ID);
+        System.out.println(pos.x + ", " + pos.y);
         textureMapObject.setX(pos.x);
         textureMapObject.setY(pos.y);
     }
