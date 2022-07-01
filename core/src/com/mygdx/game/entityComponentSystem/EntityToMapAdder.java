@@ -11,7 +11,7 @@ import com.mygdx.game.entityComponentSystem.components.Position;
 import com.mygdx.game.entityComponentSystem.components.Size;
 
 public class EntityToMapAdder {
-    public static int totalEntities = 0;
+//    public static int totalEntities = 0;
     TiledMap tiledMap;
     ComponentGrabber cg;
 
@@ -26,7 +26,7 @@ public class EntityToMapAdder {
         Position pos = cg.getPosition(entity);
         ID id = cg.getID(entity);
 //        entity.getComponent(ID.class).
-        id.ID = ++totalEntities;
+//        id.ID = ++totalEntities;
         System.out.println(entitySprite.texture);
         System.out.println(size.width + " " + size.height);
         System.out.println("(" + pos.x + ", " + pos.y + ")");
