@@ -2,6 +2,7 @@ package com.mygdx.game.entityComponentSystem;
 
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
+import com.mygdx.game.entityComponentSystem.components.Enemy;
 import com.mygdx.game.entityComponentSystem.components.EntitySprite;
 import com.mygdx.game.entityComponentSystem.components.Health;
 import com.mygdx.game.entityComponentSystem.components.ID;
@@ -13,6 +14,11 @@ import com.mygdx.game.entityComponentSystem.components.Speed;
 public class ComponentGrabber {
 
     public ComponentGrabber() {}
+
+    public Enemy getEnemy(Entity entity) {
+        ComponentMapper<Enemy> enemy = ComponentMapper.getFor(Enemy.class);
+        return enemy.get(entity);
+    }
 
     public EntitySprite getSprite(Entity entity) {
         ComponentMapper<EntitySprite> img = ComponentMapper.getFor(EntitySprite.class);
