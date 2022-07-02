@@ -5,6 +5,7 @@ import com.badlogic.ashley.core.Entity;
 import com.mygdx.game.entityComponentSystem.components.EntitySprite;
 import com.mygdx.game.entityComponentSystem.components.Health;
 import com.mygdx.game.entityComponentSystem.components.ID;
+import com.mygdx.game.entityComponentSystem.components.Name;
 import com.mygdx.game.entityComponentSystem.components.Position;
 import com.mygdx.game.entityComponentSystem.components.Size;
 import com.mygdx.game.entityComponentSystem.components.Speed;
@@ -27,6 +28,11 @@ public class ComponentGrabber {
     public ID getID(Entity entity) {
         ComponentMapper<ID> id = ComponentMapper.getFor(ID.class);
         return id.get(entity);
+    }
+
+    public Name getName(Entity entity) {
+        ComponentMapper<Name> name = ComponentMapper.getFor(Name.class);
+        return name.get(entity);
     }
 
     public Position getPosition(Entity entity) {
