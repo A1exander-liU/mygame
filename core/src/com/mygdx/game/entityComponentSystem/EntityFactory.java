@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.MyGame;
+import com.mygdx.game.entityComponentSystem.components.Enemy;
 import com.mygdx.game.entityComponentSystem.components.EntitySprite;
 import com.mygdx.game.entityComponentSystem.components.Health;
 import com.mygdx.game.entityComponentSystem.components.ID;
@@ -21,15 +22,17 @@ public class EntityFactory {
         this.root = root;
     }
 
-    public void makeEnemy(String name, int width, int height, float xSpeed, float ySpeed,
+    public Entity makeEnemy(String name, int width, int height, float xSpeed, float ySpeed,
                           int maxHealth, String pathToImg) {
         Entity enemy = new Entity();
         addEnemyComponents(enemy);
         modifyComponentValues(enemy, name, width, height, xSpeed, ySpeed, maxHealth, pathToImg);
         root.engine.addEntity(enemy);
+        return enemy;
     }
 
     private void addEnemyComponents(Entity entity) {
+        entity.add(new Enemy());
         entity.add(new EntitySprite());
         entity.add(new Health());
         entity.add(new ID());
