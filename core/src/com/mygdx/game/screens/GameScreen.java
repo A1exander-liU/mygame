@@ -17,6 +17,7 @@ import com.mygdx.game.MapObjectDrawer;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.Player;
 import com.mygdx.game.GameMapProperties;
+import com.mygdx.game.entityComponentSystem.EntityFactory;
 import com.mygdx.game.entityComponentSystem.EntityToMapAdder;
 import com.mygdx.game.entityComponentSystem.components.EntitySprite;
 import com.mygdx.game.entityComponentSystem.components.Health;
@@ -25,6 +26,7 @@ import com.mygdx.game.entityComponentSystem.components.Position;
 import com.mygdx.game.entityComponentSystem.components.Size;
 import com.mygdx.game.entityComponentSystem.components.Speed;
 import com.mygdx.game.entityComponentSystem.systems.CollisionSystem;
+import com.mygdx.game.entityComponentSystem.systems.EnemySpawningSystem;
 import com.mygdx.game.entityComponentSystem.systems.MovementSystem;
 
 public class GameScreen implements Screen {
@@ -52,6 +54,12 @@ public class GameScreen implements Screen {
         this.parent = parent;
         parent.engine = new Engine();
         ComponentGrabber cg = new ComponentGrabber();
+        entityToMapAdder = new EntityToMapAdder(testMap, cg);
+        EntityFactory entityFactory = new EntityFactory(cg, parent);
+        for (int i = 0; i < 3; i++) {
+            Entity enemy = entityFactory.makeEnemy("Slime", 32, 32, 15, 15, 100, "testPlayer.png");
+            entityToMapAdder.addEntityToMap(testMap, enemy);
+        }
         // to add system (now all allowed entities will move every frame)
         // you can enable and disable a system temporarily
         /* disabled systems will not update (enemies will stop moving)
@@ -70,9 +78,8 @@ public class GameScreen implements Screen {
         enemy.add(new ID());
         EntitySprite enemySprite = cg.getSprite(enemy);
         enemySprite.texture = new Texture(Gdx.files.internal("testPlayer.png"));
-        parent.engine.addEntity(enemy);
-        entityToMapAdder = new EntityToMapAdder(testMap, cg);
-        entityToMapAdder.addEntityToMap(testMap, enemy);
+//        parent.engine.addEntity(enemy);
+//        entityToMapAdder.addEntityToMap(testMap, enemy);
 
         // families (entities with same collection of components)
         /* here: creating a family called obstacles (meaning obstacles will only
@@ -98,8 +105,10 @@ public class GameScreen implements Screen {
 
         MovementSystem movementSystem = new MovementSystem(cg, parent);
         CollisionSystem collisionSystem = new CollisionSystem(cg, parent, gameMapProperties);
+        EnemySpawningSystem enemySpawningSystem = new EnemySpawningSystem(cg, parent, gameMapProperties);
         parent.engine.addSystem(movementSystem);
         parent.engine.addSystem(collisionSystem);
+        parent.engine.addSystem(enemySpawningSystem);
     }
 
     @Override
