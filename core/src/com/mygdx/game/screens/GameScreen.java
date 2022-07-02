@@ -12,6 +12,11 @@ import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.objects.TextureMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.entityComponentSystem.ComponentGrabber;
 import com.mygdx.game.MapObjectDrawer;
 import com.mygdx.game.MyGame;
@@ -48,7 +53,11 @@ public class GameScreen implements Screen {
 
     EntityToMapAdder entityToMapAdder;
 
+    Stage gameScreenUI;
+
     public GameScreen(MyGame parent) {
+        gameScreenUI = new Stage(new ScreenViewport());
+
         testMap = new TmxMapLoader().load("untitled.tmx");
         gameMapProperties = new GameMapProperties(testMap);
         this.parent = parent;
@@ -104,7 +113,7 @@ public class GameScreen implements Screen {
         objectLayer.getObjects().add(tmo);
 
         MovementSystem movementSystem = new MovementSystem(cg, parent);
-        CollisionSystem collisionSystem = new CollisionSystem(cg, parent, gameMapProperties);
+        CollisionSystem collisionSystem = new CollisionSystem(cg, parent, gameMapProperties, gameScreenUI);
         EnemySpawningSystem enemySpawningSystem = new EnemySpawningSystem(cg, parent, gameMapProperties);
         parent.engine.addSystem(movementSystem);
         parent.engine.addSystem(collisionSystem);
@@ -113,18 +122,40 @@ public class GameScreen implements Screen {
 
     @Override
     public void show() {
+        gameScreenUI.clear();
+        Skin gameUI = new Skin(Gdx.files.internal("Game_UI_Skin/Game_UI_Skin.json"));
+        Table table = new Table();
+        gameScreenUI.addActor(table);
+        table.setDebug(true);
+        table.setFillParent(true);
+        table.setColor(0.8824f, 0.7765f, 0.6f, 1);
+        table.setWidth(Gdx.graphics.getWidth() / 4f);
 
+        ProgressBar healthBar = new ProgressBar(0, 100, 1, false, gameUI);
+        healthBar.setValue(healthBar.getMaxValue());
+        healthBar.setName("Player-HP");
+        table.add(healthBar).expand().left().top();
     }
 
     @Override
     public void render(float delta) {
+
         Gdx.gl.glClearColor(1f, 0f, 0f, 1);
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
         player.movePlayer(gameMapProperties);
         parent.engine.update(delta);
         tiledMapRenderer.setView(player.getCamera());
         tiledMapRenderer.render();
+
+        gameScreenUI.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
+        gameScreenUI.draw();
+
+        if (!parent.engine.getSystem(CollisionSystem.class).playerAlive) {
+            parent.changeScreen(MyGame.MENU_SCREEN);
+            dispose();
+        }
     }
 
     @Override
@@ -154,5 +185,6 @@ public class GameScreen implements Screen {
     public void dispose() {
         parent.batch.dispose();
         testMap.dispose();
+        gameScreenUI.dispose();
     }
 }
