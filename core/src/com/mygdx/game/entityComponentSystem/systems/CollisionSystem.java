@@ -118,7 +118,6 @@ public class CollisionSystem extends EntitySystem {
     private void keepEntityInsideSpawnZone(Entity entity) {
         ID id = cg.getID(entity);
         Position pos = cg.getPosition(entity);
-        Size size = cg.getSize(entity);
         Rectangle spawnZone = ((RectangleMapObject) spawnPoints.get(id.ID - 1)).getRectangle();
         if (pos.x < spawnZone.x)
             pos.x = spawnZone.x;
