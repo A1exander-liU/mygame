@@ -34,6 +34,9 @@ public class Player {
 
     OrthographicCamera camera;
 
+    public float maxHealth = 100;
+    public float currentHealth = 100;
+
     public Player(FileHandle playerImg, String playerName) {
         this.playerName = playerName;
         playerSprite = new Texture(playerImg);
