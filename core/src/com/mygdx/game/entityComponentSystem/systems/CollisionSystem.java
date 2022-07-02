@@ -11,6 +11,13 @@ import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.objects.TextureMapObject;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Cell;
+import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.Widget;
+import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.entityComponentSystem.ComponentGrabber;
@@ -29,13 +36,17 @@ public class CollisionSystem extends EntitySystem {
     ComponentGrabber cg;
     MyGame root;
     GameMapProperties gameMapProperties;
+    Stage stage;
 
-    public CollisionSystem(ComponentGrabber cg, MyGame root, GameMapProperties gameMapProperties) {
+    public boolean playerAlive = true;
+
+    public CollisionSystem(ComponentGrabber cg, MyGame root, GameMapProperties gameMapProperties, Stage stage) {
         super(3);
         this.cg = cg;
         this.root = root;
         this.gameMapProperties = gameMapProperties;
         spawnPoints = gameMapProperties.tiledMap.getLayers().get("Enemy Spawns").getObjects();
+        this.stage = stage;
     }
 
     @Override
@@ -77,6 +88,8 @@ public class CollisionSystem extends EntitySystem {
     }
 
     private void resolveCollisions(Entity entity) {
+        Table table = (Table) stage.getActors().get(0);
+        Array<Cell> cells = ((Table) stage.getActors().get(0)).getCells();
         ID id = cg.getID(entity);
         Position pos = cg.getPosition(entity);
         MapObjects objects = gameMapProperties.tiledMap.getLayers().get("Object Layer 1").getObjects();
@@ -97,6 +110,7 @@ public class CollisionSystem extends EntitySystem {
                 Rectangle currentEntity = getEntityArea(objects.get("" + id.ID));
                 if (collisionZone != null && currentEntity.overlaps(collisionZone)) {
                     System.out.println("Collided");
+                    checkIfPlayerAttacked(objects.get(i));
                     pos.x = pos.oldX;
                     pos.y = pos.oldY;
                 }
@@ -113,6 +127,30 @@ public class CollisionSystem extends EntitySystem {
         float objWidth = textureRegion.getRegionWidth();
         float objHeight = textureRegion.getRegionHeight();
         return new Rectangle(objX, objY, objWidth, objHeight);
+    }
+
+    private void checkIfPlayerAttacked(MapObject mapObject) {
+        if (Objects.equals(mapObject.getName(), "player")) {
+            System.out.println("hit player");
+            Array<Cell> cells = ((Table) stage.getActors().get(0)).getCells();
+            findHealthBar(cells);
+        }
+
+    }
+
+    private void findHealthBar(Array<Cell> cells) {
+        for (int i = 0; i < cells.size; i++) {
+            if (Objects.equals(cells.get(i).getActor().getName(), "Player-HP"))
+                updatePlayerHealth(cells.get(i).getActor());
+        }
+    }
+
+    private void updatePlayerHealth(Actor actor) {
+        Widget widget = (Widget) actor;
+        ProgressBar healthBar = (ProgressBar) widget;
+        healthBar.setValue(healthBar.getValue() - 45);
+        if (healthBar.getValue() <= 0)
+            playerAlive = false;
     }
 
     private void keepEntityInsideSpawnZone(Entity entity) {
