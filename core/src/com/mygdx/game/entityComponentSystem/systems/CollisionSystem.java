@@ -20,10 +20,12 @@ import com.mygdx.game.entityComponentSystem.components.Position;
 import com.mygdx.game.entityComponentSystem.components.Size;
 import com.mygdx.game.entityComponentSystem.components.Speed;
 
+import java.util.Map;
 import java.util.Objects;
 
 public class CollisionSystem extends EntitySystem {
     private ImmutableArray<Entity> entities;
+    private MapObjects spawnPoints;
     ComponentGrabber cg;
     MyGame root;
     GameMapProperties gameMapProperties;
@@ -33,6 +35,7 @@ public class CollisionSystem extends EntitySystem {
         this.cg = cg;
         this.root = root;
         this.gameMapProperties = gameMapProperties;
+        spawnPoints = gameMapProperties.tiledMap.getLayers().get("Enemy Spawns").getObjects();
     }
 
     @Override
@@ -97,6 +100,7 @@ public class CollisionSystem extends EntitySystem {
                     pos.x = pos.oldX;
                     pos.y = pos.oldY;
                 }
+                keepEntityInsideSpawnZone(entity);
             }
         }
     }
@@ -109,6 +113,21 @@ public class CollisionSystem extends EntitySystem {
         float objWidth = textureRegion.getRegionWidth();
         float objHeight = textureRegion.getRegionHeight();
         return new Rectangle(objX, objY, objWidth, objHeight);
+    }
+
+    private void keepEntityInsideSpawnZone(Entity entity) {
+        ID id = cg.getID(entity);
+        Position pos = cg.getPosition(entity);
+        Size size = cg.getSize(entity);
+        Rectangle spawnZone = ((RectangleMapObject) spawnPoints.get(id.ID - 1)).getRectangle();
+        if (pos.x < spawnZone.x)
+            pos.x = spawnZone.x;
+        if (pos.x > spawnZone.x + spawnZone.width)
+            pos.x = spawnZone.width - size.width;
+        if (pos.y < spawnZone.y)
+            pos.y = spawnZone.y;
+        if (pos.y > spawnZone.y + spawnZone.height)
+            pos.y = spawnZone.height - size.height;
     }
 
     private void updateEntityInMap(Entity entity) {
