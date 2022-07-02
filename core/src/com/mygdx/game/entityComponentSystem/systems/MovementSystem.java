@@ -5,6 +5,8 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IntervalSystem;
 import com.badlogic.ashley.utils.ImmutableArray;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.entityComponentSystem.ComponentGrabber;
 import com.mygdx.game.entityComponentSystem.components.EntitySprite;
@@ -21,7 +23,7 @@ public class MovementSystem extends IntervalSystem {
     MyGame root;
 
     public MovementSystem(ComponentGrabber cg, MyGame root) {
-        super(0.75f, 1);
+        super(0.75f, 2);
         this.cg = cg;
         this.root = root;
     }
@@ -52,6 +54,14 @@ public class MovementSystem extends IntervalSystem {
         Speed speed = cg.getSpeed(entity);
         pos.oldX = pos.x;
         pos.oldY = pos.y;
+//        if (Gdx.input.isKeyPressed(Input.Keys.UP))
+//            pos.y += speed.ySpeed;
+//        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT))
+//            pos.x += speed.xSpeed;
+//        if (Gdx.input.isKeyPressed(Input.Keys.DOWN))
+//            pos.y -= speed.ySpeed;
+//        if (Gdx.input.isKeyPressed(Input.Keys.LEFT))
+//            pos.x -= speed.xSpeed;
         switch (direction) {
             case "N":
                 pos.y += speed.ySpeed;
