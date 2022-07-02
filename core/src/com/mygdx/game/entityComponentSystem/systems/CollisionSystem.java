@@ -122,12 +122,12 @@ public class CollisionSystem extends EntitySystem {
         Rectangle spawnZone = ((RectangleMapObject) spawnPoints.get(id.ID - 1)).getRectangle();
         if (pos.x < spawnZone.x)
             pos.x = spawnZone.x;
-        if (pos.x > spawnZone.x + spawnZone.width)
-            pos.x = spawnZone.width - size.width;
-        if (pos.y < spawnZone.y)
+        else if (pos.x > spawnZone.x + spawnZone.width)
+            pos.x = spawnZone.x + spawnZone.width;
+        else if (pos.y < spawnZone.y)
             pos.y = spawnZone.y;
-        if (pos.y > spawnZone.y + spawnZone.height)
-            pos.y = spawnZone.height - size.height;
+        else if (pos.y > spawnZone.y + spawnZone.height)
+            pos.y = spawnZone.y + spawnZone.height;
     }
 
     private void updateEntityInMap(Entity entity) {
