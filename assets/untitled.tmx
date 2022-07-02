@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.0" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="34">
+<map version="1.9" tiledversion="1.9.0" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="43">
  <tileset firstgid="1" source="sampleTileSheet.tsx"/>
  <layer id="1" name="Tile Layer 1" width="30" height="20">
   <data encoding="base64" compression="zlib">
@@ -7,15 +7,9 @@
   </data>
  </layer>
  <objectgroup id="5" name="Enemy Spawns">
-  <object id="31" x="479.054" y="126.68">
-   <point/>
-  </object>
-  <object id="32" x="91.7337" y="467.405">
-   <point/>
-  </object>
-  <object id="33" x="551.858" y="432.459">
-   <point/>
-  </object>
+  <object id="37" x="511.5" y="388.5" width="83" height="79"/>
+  <object id="38" x="438.5" y="77.8333" width="83" height="79"/>
+  <object id="39" x="44" y="415" width="100" height="83.3333"/>
  </objectgroup>
  <objectgroup id="4" name="Object Layer 1">
   <object id="3" x="846.751" y="515.98" width="35.5" height="24.7706"/>
