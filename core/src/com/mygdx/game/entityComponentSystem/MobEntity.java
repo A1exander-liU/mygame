@@ -22,5 +22,17 @@ public class MobEntity extends Entity {
         this.cg = cg;
         this.root = root;
         this.gameMapProperties = gameMapProperties;
+        addRequiredComponents();
+    }
+
+    private void addRequiredComponents() {
+        super.add(new Enemy());
+        super.add(new EntitySprite());
+        super.add(new Health());
+        super.add(new ID());
+        super.add(new Name());
+        super.add(new Position());
+        super.add(new Size());
+        super.add(new Speed());
     }
 }
