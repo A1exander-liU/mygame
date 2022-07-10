@@ -14,18 +14,21 @@ import com.badlogic.gdx.math.Rectangle;
 import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.entityComponentSystem.ComponentGrabber;
+import com.mygdx.game.entityComponentSystem.components.Camera;
+import com.mygdx.game.entityComponentSystem.components.Enemy;
 import com.mygdx.game.entityComponentSystem.components.EntitySprite;
 import com.mygdx.game.entityComponentSystem.components.ID;
+import com.mygdx.game.entityComponentSystem.components.Player;
 import com.mygdx.game.entityComponentSystem.components.Position;
 import com.mygdx.game.entityComponentSystem.components.Size;
 import com.mygdx.game.entityComponentSystem.components.Speed;
 
-import java.util.Map;
 import java.util.Objects;
 
 public class CollisionSystem extends EntitySystem {
     private ImmutableArray<Entity> entities;
     private MapObjects spawnPoints;
+    private Entity player;
     ComponentGrabber cg;
     MyGame root;
     GameMapProperties gameMapProperties;
@@ -46,6 +49,7 @@ public class CollisionSystem extends EntitySystem {
                 Size.class,
                 Speed.class,
                 ID.class).get());
+        player = root.engine.getEntitiesFor(Family.all(Player.class).get()).get(0);
     }
 
     @Override
@@ -54,6 +58,7 @@ public class CollisionSystem extends EntitySystem {
             Entity entity = entities.get(i);
             keepEntityInsideMap(entity);
             resolveCollisions(entity);
+            updatePlayerCamPosition();
             updateEntityInMap(entity);
         }
     }
@@ -128,6 +133,14 @@ public class CollisionSystem extends EntitySystem {
             pos.y = spawnZone.y;
         else if (pos.y > spawnZone.y + spawnZone.height)
             pos.y = spawnZone.y + spawnZone.height;
+    }
+
+    private void updatePlayerCamPosition() {
+        Camera camera = cg.getCamera(player);
+        Position pos = cg.getPosition(player);
+        camera.camera.update();
+        camera.camera.position.x = pos.x;
+        camera.camera.position.y = pos.y;
     }
 
     private void updateEntityInMap(Entity entity) {
