@@ -2,11 +2,13 @@ package com.mygdx.game.entityComponentSystem;
 
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
+import com.mygdx.game.entityComponentSystem.components.Camera;
 import com.mygdx.game.entityComponentSystem.components.Enemy;
 import com.mygdx.game.entityComponentSystem.components.EntitySprite;
 import com.mygdx.game.entityComponentSystem.components.Health;
 import com.mygdx.game.entityComponentSystem.components.ID;
 import com.mygdx.game.entityComponentSystem.components.Name;
+import com.mygdx.game.entityComponentSystem.components.Player;
 import com.mygdx.game.entityComponentSystem.components.Position;
 import com.mygdx.game.entityComponentSystem.components.Size;
 import com.mygdx.game.entityComponentSystem.components.Speed;
@@ -14,6 +16,11 @@ import com.mygdx.game.entityComponentSystem.components.Speed;
 public class ComponentGrabber {
 
     public ComponentGrabber() {}
+
+    public Camera getCamera(Entity entity) {
+        ComponentMapper<Camera> camera = ComponentMapper.getFor(Camera.class);
+        return camera.get(entity);
+    }
 
     public Enemy getEnemy(Entity entity) {
         ComponentMapper<Enemy> enemy = ComponentMapper.getFor(Enemy.class);
@@ -39,6 +46,11 @@ public class ComponentGrabber {
     public Name getName(Entity entity) {
         ComponentMapper<Name> name = ComponentMapper.getFor(Name.class);
         return name.get(entity);
+    }
+
+    public Player getPlayer(Entity entity) {
+        ComponentMapper<Player> player = ComponentMapper.getFor(Player.class);
+        return player.get(entity);
     }
 
     public Position getPosition(Entity entity) {
