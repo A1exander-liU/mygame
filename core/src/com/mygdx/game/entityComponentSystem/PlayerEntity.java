@@ -30,6 +30,7 @@ public class PlayerEntity extends Entity {
         this.root = root;
         this.gameMapProperties = gameMapProperties;
         addRequiredComponents();
+        modifyComponentValues(name);
     }
 
     private void addRequiredComponents() {
@@ -42,5 +43,24 @@ public class PlayerEntity extends Entity {
         super.add(new Position());
         super.add(new Size());
         super.add(new Speed());
+    }
+
+    private void modifyComponentValues(String playerName) {
+        cg.getSprite(this).texture = new Texture(Gdx.files.internal("testPlayer.png"));
+        cg.getHealth(this).maxHealth = 100;
+        cg.getHealth(this).currentHealth = 100;
+        cg.getName(this).name = playerName;
+        cg.getPosition(this).x = 200;
+        cg.getPosition(this).y = 200;
+        cg.getPosition(this).oldX = 200;
+        cg.getPosition(this).oldY = 200;
+        cg.getSize(this).width = 32;
+        cg.getSize(this).height = 32;
+        cg.getSpeed(this).xSpeed = 5;
+        cg.getSpeed(this).ySpeed = 5;
+        Camera player = cg.getCamera(this);
+        player.camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        player.camera.position.x = Gdx.graphics.getWidth() / 2f;
+        player.camera.position.y = Gdx.graphics.getHeight() / 2f;
     }
 }
