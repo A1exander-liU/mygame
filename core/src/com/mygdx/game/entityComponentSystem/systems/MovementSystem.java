@@ -45,6 +45,14 @@ public class MovementSystem extends EntitySystem {
         return root.engine;
     }
 
+    @Override
+    public void update(float delta) {
+        for (int i = 0; i < enemies.size(); i++) {
+            Entity entity = enemies.get(i);
+            moveEnemy(getRandomDirection(), entity);
+        }
+    }
+
     private void moveEnemy(String direction, Entity entity) {
         Position pos = cg.getPosition(entity);
         Speed speed = cg.getSpeed(entity);
