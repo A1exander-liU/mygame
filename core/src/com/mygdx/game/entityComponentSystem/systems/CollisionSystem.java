@@ -57,6 +57,9 @@ public class CollisionSystem extends EntitySystem {
         for (int i = 0; i < entities.size(); i++) {
             Entity entity = entities.get(i);
             keepEntityInsideMap(entity);
+            if (entity.getComponent(Enemy.class) != null) {
+                keepEntityInsideSpawnZone(entity);
+            }
             resolveCollisions(entity);
             updatePlayerCamPosition();
             updateEntityInMap(entity);
@@ -105,7 +108,6 @@ public class CollisionSystem extends EntitySystem {
                     pos.x = pos.oldX;
                     pos.y = pos.oldY;
                 }
-                keepEntityInsideSpawnZone(entity);
             }
         }
     }
@@ -123,7 +125,6 @@ public class CollisionSystem extends EntitySystem {
     private void keepEntityInsideSpawnZone(Entity entity) {
         ID id = cg.getID(entity);
         Position pos = cg.getPosition(entity);
-        Size size = cg.getSize(entity);
         Rectangle spawnZone = ((RectangleMapObject) spawnPoints.get(id.ID - 1)).getRectangle();
         if (pos.x < spawnZone.x)
             pos.x = spawnZone.x;
