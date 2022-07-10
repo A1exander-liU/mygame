@@ -88,6 +88,7 @@ public class CollisionSystem extends EntitySystem {
         ID id = cg.getID(entity);
         Position pos = cg.getPosition(entity);
         MapObjects objects = gameMapProperties.tiledMap.getLayers().get("Object Layer 1").getObjects();
+        Rectangle currentEntity = getEntityArea(objects.get("" + id.ID));
         for (int i = 0; i < objects.getCount(); i++) {
             Rectangle collisionZone = null;
             if (!Objects.equals(objects.get(i).getName(), "" + id.ID)) {
@@ -102,7 +103,6 @@ public class CollisionSystem extends EntitySystem {
                     float objHeight = textureRegion.getRegionHeight();
                     collisionZone = new Rectangle(objX, objY, objWidth, objHeight);
                 }
-                Rectangle currentEntity = getEntityArea(objects.get("" + id.ID));
                 if (collisionZone != null && currentEntity.overlaps(collisionZone)) {
                     System.out.println("Collided");
                     pos.x = pos.oldX;
