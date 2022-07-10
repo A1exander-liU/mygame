@@ -10,8 +10,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.entityComponentSystem.ComponentGrabber;
+import com.mygdx.game.entityComponentSystem.components.Enemy;
 import com.mygdx.game.entityComponentSystem.components.EntitySprite;
 import com.mygdx.game.entityComponentSystem.components.ID;
+import com.mygdx.game.entityComponentSystem.components.Player;
 import com.mygdx.game.entityComponentSystem.components.Position;
 import com.mygdx.game.entityComponentSystem.components.Size;
 import com.mygdx.game.entityComponentSystem.components.Speed;
@@ -19,7 +21,8 @@ import com.mygdx.game.entityComponentSystem.components.Speed;
 import java.util.Random;
 
 public class MovementSystem extends EntitySystem {
-    private ImmutableArray<Entity> entities;
+    private ImmutableArray<Entity> enemies;
+    private Entity player;
     ComponentGrabber cg;
     MyGame root;
 
@@ -33,8 +36,8 @@ public class MovementSystem extends EntitySystem {
     public void addedToEngine(Engine engine) {
         /* selecting all entities which have a position and speed
         * basically saying movement system for entities that have both position and speed component */
-        entities = root.engine.getEntitiesFor(Family.all(EntitySprite.class, Position.class, Size.class, Speed.class, ID.class).get());
-        System.out.println(entities);
+        enemies = root.engine.getEntitiesFor(Family.all(Enemy.class).get());
+        player = root.engine.getEntitiesFor(Family.all(Player.class).get()).get(0);
     }
 
     @Override
