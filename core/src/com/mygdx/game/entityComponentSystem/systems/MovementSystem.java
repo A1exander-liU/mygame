@@ -2,6 +2,7 @@ package com.mygdx.game.entityComponentSystem.systems;
 
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IntervalSystem;
 import com.badlogic.ashley.utils.ImmutableArray;
@@ -17,13 +18,13 @@ import com.mygdx.game.entityComponentSystem.components.Speed;
 
 import java.util.Random;
 
-public class MovementSystem extends IntervalSystem {
+public class MovementSystem extends EntitySystem {
     private ImmutableArray<Entity> entities;
     ComponentGrabber cg;
     MyGame root;
 
     public MovementSystem(ComponentGrabber cg, MyGame root) {
-        super(0.75f, 2);
+        super(2);
         this.cg = cg;
         this.root = root;
     }
@@ -39,14 +40,6 @@ public class MovementSystem extends IntervalSystem {
     @Override
     public Engine getEngine() {
         return root.engine;
-    }
-
-    @Override
-    protected void updateInterval() {
-        for (int i = 0; i < entities.size(); i++) {
-            Entity entity = entities.get(i);
-            moveEnemy(getRandomDirection(), entity);
-        }
     }
 
     private void moveEnemy(String direction, Entity entity) {
