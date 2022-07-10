@@ -2,7 +2,6 @@ package com.mygdx.game.entityComponentSystem;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.mygdx.game.GameMapProperties;
@@ -23,7 +22,6 @@ public class PlayerEntity extends Entity {
     GameMapProperties gameMapProperties;
 
     Rectangle playerBox;
-    OrthographicCamera camera;
 
     public PlayerEntity(ComponentGrabber cg, MyGame root, GameMapProperties gameMapProperties, String name) {
         this.cg = cg;
@@ -31,6 +29,9 @@ public class PlayerEntity extends Entity {
         this.gameMapProperties = gameMapProperties;
         addRequiredComponents();
         modifyComponentValues(name);
+        Position pos = cg.getPosition(this);
+        Size size = cg.getSize(this);
+        playerBox = new Rectangle(pos.x, pos.y, size.width, size.height);
     }
 
     private void addRequiredComponents() {
