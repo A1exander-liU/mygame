@@ -1,6 +1,8 @@
 package com.mygdx.game.entityComponentSystem;
 
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.entityComponentSystem.components.Enemy;
@@ -23,6 +25,7 @@ public class MobEntity extends Entity {
         this.root = root;
         this.gameMapProperties = gameMapProperties;
         addRequiredComponents();
+        modifyComponentValues();
     }
 
     private void addRequiredComponents() {
@@ -34,5 +37,19 @@ public class MobEntity extends Entity {
         super.add(new Position());
         super.add(new Size());
         super.add(new Speed());
+    }
+
+    private void modifyComponentValues() {
+        EntitySprite entitySprite = cg.getSprite(this);
+        ID id = cg.getID(this);
+        Name name = cg.getName(this);
+        Size size = cg.getSize(this);
+        Speed speed = cg.getSpeed(this);
+        entitySprite.texture = new Texture(Gdx.files.internal("testPlayer.png"));
+        name.name = "" + id.ID;
+        size.width = 32;
+        size.height = 32;
+        speed.xSpeed = 2;
+        speed.ySpeed = 2;
     }
 }
