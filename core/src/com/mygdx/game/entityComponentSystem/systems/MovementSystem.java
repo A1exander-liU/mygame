@@ -51,6 +51,7 @@ public class MovementSystem extends EntitySystem {
             Entity entity = enemies.get(i);
             moveEnemy(getRandomDirection(), entity);
         }
+        playerMovement();
     }
 
     private void moveEnemy(String direction, Entity entity) {
@@ -102,5 +103,22 @@ public class MovementSystem extends EntitySystem {
         String[] directions = {"N", "NE", "E", "SE", "S", "SW", "W", "NW"};
         Random random = new Random();
         return directions[random.nextInt(directions.length)];
+    }
+
+    private void playerMovement() {
+        Position pos = cg.getPosition(player);
+        Speed speed = cg.getSpeed(player);
+        if (Gdx.input.isKeyPressed(Input.Keys.W)) {
+            pos.y += speed.ySpeed;
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.D)) {
+            pos.x += speed.xSpeed;
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.S)) {
+            pos.y -= speed.ySpeed;
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.A)) {
+            pos.x -= speed.xSpeed;
+        }
     }
 }
