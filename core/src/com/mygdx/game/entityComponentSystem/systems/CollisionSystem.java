@@ -10,6 +10,7 @@ import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.objects.TextureMapObject;
+import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
 import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.MyGame;
@@ -88,14 +89,17 @@ public class CollisionSystem extends EntitySystem {
         ID id = cg.getID(entity);
         Position pos = cg.getPosition(entity);
         MapObjects objects = gameMapProperties.tiledMap.getLayers().get("Object Layer 1").getObjects();
-        Rectangle currentEntity = getEntityArea(objects.get("" + id.ID));
+        Polygon currentEntity = getEntityArea(objects.get("" + id.ID));
         for (int i = 0; i < objects.getCount(); i++) {
+            Polygon collisionSpace = new Polygon();
             Rectangle collisionZone = null;
             if (!Objects.equals(objects.get(i).getName(), "" + id.ID)) {
                 if (objects.get(i) instanceof RectangleMapObject) {
                     collisionZone = ((RectangleMapObject) objects.get(i)).getRectangle();
+                    collisionSpace = getEntityArea(objects.get(i));
                 }
                 if (objects.get(i) instanceof TextureMapObject) {
+                    collisionSpace = getEntityArea(objects.get(i));
                     TextureRegion textureRegion = ((TextureMapObject) objects.get(i)).getTextureRegion();
                     float objX = ((TextureMapObject) objects.get(i)).getX();
                     float objY = ((TextureMapObject) objects.get(i)).getY();
@@ -103,23 +107,25 @@ public class CollisionSystem extends EntitySystem {
                     float objHeight = textureRegion.getRegionHeight();
                     collisionZone = new Rectangle(objX, objY, objWidth, objHeight);
                 }
-                if (collisionZone != null && currentEntity.overlaps(collisionZone)) {
-                    System.out.println("Collided");
-                    pos.x = pos.oldX;
-                    pos.y = pos.oldY;
-                }
+
             }
         }
     }
 
-    private Rectangle getEntityArea(MapObject mapObject) {
+    private Polygon getEntityArea(MapObject mapObject) {
         TextureMapObject textureMapObject = (TextureMapObject) mapObject;
         TextureRegion textureRegion = textureMapObject.getTextureRegion();
+        float mapHeight = gameMapProperties.mapHeight;
         float objX = textureMapObject.getX();
         float objY = textureMapObject.getY();
         float objWidth = textureRegion.getRegionWidth();
         float objHeight = textureRegion.getRegionHeight();
-        return new Rectangle(objX, objY, objWidth, objHeight);
+        float[] vertices =
+                {objX, mapHeight - (objY + objHeight),
+                 objX, objY,
+                 objX + objWidth, objY,
+                 objX + objWidth, mapHeight - (objY + objHeight)};
+        return new Polygon(vertices);
     }
 
     private void keepEntityInsideSpawnZone(Entity entity) {
