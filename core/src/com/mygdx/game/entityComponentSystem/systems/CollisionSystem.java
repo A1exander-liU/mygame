@@ -123,7 +123,10 @@ public class CollisionSystem extends EntitySystem {
         // convert the float array of vertices to Vector2 array
         Array<Vector2> s1Vectors = toVectorArray(s1);
         Array<Vector2> s2Vectors = toVectorArray(s2);
-        
+
+        Vector2 A;
+        Vector2 B;
+        Vector2 C;
         Array<Vector2> simplexPoints = new Array<>(0);
 
         Vector2 center1 = centerPoint(s1Vectors);
