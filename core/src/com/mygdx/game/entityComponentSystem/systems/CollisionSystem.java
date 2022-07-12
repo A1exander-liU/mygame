@@ -144,6 +144,8 @@ public class CollisionSystem extends EntitySystem {
 
         // setting new direction, opposite of first direction chosen
         direction = negate(direction);
+        B = support(s1Vectors, s2Vectors, direction);
+        simplexPoints.add(B);
 
         return false;
     }
