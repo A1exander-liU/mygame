@@ -124,6 +124,14 @@ public class CollisionSystem extends EntitySystem {
         Array<Vector2> s1Vectors = toVectorArray(s1);
         Array<Vector2> s2Vectors = toVectorArray(s2);
         com.mygdx.game.utils.Polygon polygon = new com.mygdx.game.utils.Polygon();
+
+        Vector2 center1 = centerPoint(s1Vectors);
+        Vector2 center2 = centerPoint(s2Vectors);
+        // initial direction
+        Vector2 direction = center1.sub(center2);
+        if (direction.x == 0 && direction.y == 0)
+            direction.x = 1;
+
         return false;
     }
 
@@ -136,6 +144,17 @@ public class CollisionSystem extends EntitySystem {
             temp.add(new Vector2(vertices[i], vertices[i+1]));
         }
         return temp;
+    }
+
+    private Vector2 centerPoint(Array<Vector2> vertices) {
+        Vector2 averageCenter = new Vector2(0, 0);
+        for (int i = 0; i < vertices.size; i++) {
+            averageCenter.x += vertices.get(i).x;
+            averageCenter.y += vertices.get(i).y;
+        }
+        averageCenter.x /= vertices.size;
+        averageCenter.y /= vertices.size;
+        return averageCenter;
     }
 
     private Polygon getEntityArea(MapObject mapObject) {
