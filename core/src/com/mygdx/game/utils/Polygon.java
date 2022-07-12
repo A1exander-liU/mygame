@@ -22,7 +22,7 @@ public class Polygon extends com.badlogic.gdx.math.Polygon {
         vertices.add(vector);
     }
 
-    public void clearVerticesArray() {
+    public void clearVertices() {
         vertices.clear();
     }
 }
