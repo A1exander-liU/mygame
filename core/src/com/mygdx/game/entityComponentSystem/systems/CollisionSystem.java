@@ -12,6 +12,8 @@ import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.objects.TextureMapObject;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.entityComponentSystem.ComponentGrabber;
@@ -24,6 +26,7 @@ import com.mygdx.game.entityComponentSystem.components.Position;
 import com.mygdx.game.entityComponentSystem.components.Size;
 import com.mygdx.game.entityComponentSystem.components.Speed;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 public class CollisionSystem extends EntitySystem {
@@ -108,8 +111,31 @@ public class CollisionSystem extends EntitySystem {
                     collisionZone = new Rectangle(objX, objY, objWidth, objHeight);
                 }
 
+                boolean collided = GJK(currentEntity, collisionSpace);
+                if (collided) {
+
+                }
             }
         }
+    }
+
+    private boolean GJK(Polygon s1, Polygon s2) {
+        // convert the float array of vertices to Vector2 array
+        Array<Vector2> s1Vectors = toVectorArray(s1);
+        Array<Vector2> s2Vectors = toVectorArray(s2);
+        com.mygdx.game.utils.Polygon polygon = new com.mygdx.game.utils.Polygon();
+        return false;
+    }
+
+    private Array<Vector2> toVectorArray(Polygon polygon) {
+        Array<Vector2> temp = new Array<>(0);
+        float[] vertices = polygon.getTransformedVertices();
+        // even index = x
+        // odd value = y
+        for (int i = 0; i < vertices.length; i += 2) {
+            temp.add(new Vector2(vertices[i], vertices[i+1]));
+        }
+        return temp;
     }
 
     private Polygon getEntityArea(MapObject mapObject) {
