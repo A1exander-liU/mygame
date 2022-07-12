@@ -123,7 +123,8 @@ public class CollisionSystem extends EntitySystem {
         // convert the float array of vertices to Vector2 array
         Array<Vector2> s1Vectors = toVectorArray(s1);
         Array<Vector2> s2Vectors = toVectorArray(s2);
-        com.mygdx.game.utils.Polygon simplex = new com.mygdx.game.utils.Polygon();
+        
+        Array<Vector2> simplexPoints = new Array<>(0);
 
         Vector2 center1 = centerPoint(s1Vectors);
         Vector2 center2 = centerPoint(s2Vectors);
@@ -137,7 +138,9 @@ public class CollisionSystem extends EntitySystem {
         // to get point on the minkowski difference (point will be an exterior point)
         Vector2 p3 = p1.sub(p2);
         // add point to construct the simplex
-        simplex.addVertex(p3);
+        simplexPoints.add(p3);
+
+
 
         return false;
     }
