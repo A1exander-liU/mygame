@@ -135,13 +135,9 @@ public class CollisionSystem extends EntitySystem {
         Vector2 direction = center1.sub(center2);
         if (direction.x == 0 && direction.y == 0)
             direction.x = 1;
-        // getting most extreme points in opposite directions of the 2 shapes
-        Vector2 p1 = getFarthestPointInDirection(s1Vectors, direction);
-        Vector2 p2 = getFarthestPointInDirection(s2Vectors, negate(direction));
-        // to get point on the minkowski difference (point will be an exterior point)
-        Vector2 p3 = p1.sub(p2);
-        // add point to construct the simplex
-        simplexPoints.add(p3);
+
+        C = support(s1Vectors, s2Vectors, direction);
+        simplexPoints.add(C);
 
 
 
@@ -168,6 +164,14 @@ public class CollisionSystem extends EntitySystem {
         averageCenter.x /= vertices.size;
         averageCenter.y /= vertices.size;
         return averageCenter;
+    }
+
+    private Vector2 support(Array<Vector2> s1Vectors, Array<Vector2> s2Vectors, Vector2 direction) {
+        // getting most extreme points in opposite directions of the 2 shapes
+        Vector2 p1 = getFarthestPointInDirection(s1Vectors, direction);
+        Vector2 p2 = getFarthestPointInDirection(s2Vectors, negate(direction));
+        // to get point on the minkowski difference (point will be an exterior point)
+        return p1.sub(p2);
     }
 
     private Vector2 getFarthestPointInDirection(Array<Vector2> vertices, Vector2 direction) {
