@@ -131,6 +131,9 @@ public class CollisionSystem extends EntitySystem {
         Vector2 direction = center1.sub(center2);
         if (direction.x == 0 && direction.y == 0)
             direction.x = 1;
+        // getting most extreme points in opposite directions of the 2 shapes
+        Vector2 p1 = getFarthestPointInDirection(s1Vectors, direction);
+        Vector2 p2 = getFarthestPointInDirection(s2Vectors, negate(direction));
 
         return false;
     }
@@ -155,6 +158,34 @@ public class CollisionSystem extends EntitySystem {
         averageCenter.x /= vertices.size;
         averageCenter.y /= vertices.size;
         return averageCenter;
+    }
+
+    private Vector2 getFarthestPointInDirection(Array<Vector2> vertices, Vector2 direction) {
+        /* direction is just another vector
+        * it compares the location of each of the vertices to it
+        * and calculates the dot product.
+        * The highest dot product means that vector is the furthest
+        * vector in the direction (Dot Product: dot product grows larger
+        *  as the vector gets closer to the direction or magnitude increases
+        * closer to direction of the vector) */
+        float maxProduct = dotProduct(direction, vertices.get(0));
+        int index = 0;
+        for (int i = 0; i < vertices.size; i++) {
+            float product = dotProduct(direction, vertices.get(i));
+            if (product > maxProduct) {
+                maxProduct = product;
+                index = 1;
+            }
+        }
+        return vertices.get(index);
+    }
+
+    private float dotProduct(Vector2 v1, Vector2 v2) {
+        return (v1.x * v2.x) + (v1.y * v2.y);
+    }
+
+    private Vector2 negate(Vector2 vector2) {
+        return new Vector2(-1 * vector2.x, -1 * vector2.y);
     }
 
     private Polygon getEntityArea(MapObject mapObject) {
