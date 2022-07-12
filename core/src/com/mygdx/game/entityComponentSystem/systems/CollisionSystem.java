@@ -124,9 +124,10 @@ public class CollisionSystem extends EntitySystem {
         Array<Vector2> s1Vectors = toVectorArray(s1);
         Array<Vector2> s2Vectors = toVectorArray(s2);
 
+        // 2d game, so 2-simplexes are used (3 points/triangle)
         Vector2 A;
         Vector2 B;
-        Vector2 C;
+        Vector2 C; // first point of simplex
         Array<Vector2> simplexPoints = new Array<>(0);
 
         Vector2 center1 = centerPoint(s1Vectors);
@@ -136,10 +137,13 @@ public class CollisionSystem extends EntitySystem {
         if (direction.x == 0 && direction.y == 0)
             direction.x = 1;
 
+        // calculated first point of current simplex
         C = support(s1Vectors, s2Vectors, direction);
         simplexPoints.add(C);
 
-
+        // setting new direction, opposite of first direction chosen
+        direction.x *= -1;
+        direction.y *= -1;
 
         return false;
     }
