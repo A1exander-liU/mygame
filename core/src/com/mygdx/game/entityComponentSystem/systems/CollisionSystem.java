@@ -120,13 +120,17 @@ public class CollisionSystem extends EntitySystem {
     }
 
     private boolean GJK(Polygon s1, Polygon s2) {
+        // XY = Y - X where X and Y are both vectors
+        // XY: direction from Vector X towards Vector Y
+        // OD = D(x,y) - O(x,y) = D(x,y)
+
         // convert the float array of vertices to Vector2 array
+        final Vector2 ORIGIN = new Vector2();
         Array<Vector2> s1Vectors = toVectorArray(s1);
         Array<Vector2> s2Vectors = toVectorArray(s2);
-
         // 2d game, so 2-simplexes are used (3 points/triangle)
-        Vector2 A;
-        Vector2 B;
+        Vector2 A; // last point
+        Vector2 B; // second point
         Vector2 C; // first point of simplex
         Array<Vector2> simplexPoints = new Array<>(0);
 
@@ -138,16 +142,19 @@ public class CollisionSystem extends EntitySystem {
             direction.x = 1;
 
         // calculated first point of current simplex
+        // first is manually added, not part of the loop
         C = support(s1Vectors, s2Vectors, direction);
         simplexPoints.add(C);
 
+        while(true) {
+            // after first selected direction, choose new direction that is opposite
+            // CO is direction from C to Origin
+            direction = negate(direction);
 
-        // setting new direction, opposite of first direction chosen
-        direction = negate(direction);
-        B = support(s1Vectors, s2Vectors, direction);
-        simplexPoints.add(B);
+            B = support(s1Vectors, s2Vectors, direction);
+            simplexPoints.add(B);
 
-        return false;
+        }
     }
 
     private Array<Vector2> toVectorArray(Polygon polygon) {
