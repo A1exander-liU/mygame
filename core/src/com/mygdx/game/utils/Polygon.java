@@ -14,6 +14,10 @@ public class Polygon extends com.badlogic.gdx.math.Polygon {
         vertices = new Array<>();
     }
 
+    public Polygon(Array<Vector2> vertices) {
+        this.vertices = vertices;
+    }
+
     public Array<Vector2> getVerticesArray() {
         return vertices;
     }
