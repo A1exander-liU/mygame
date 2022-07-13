@@ -13,6 +13,7 @@ import com.badlogic.gdx.maps.objects.TextureMapObject;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.MyGame;
@@ -163,6 +164,13 @@ public class CollisionSystem extends EntitySystem {
             if (dotProduct(CO, OB) <= 0) {
                 return false;
             }
+
+            // get perpendicular to CB that points to origin
+            // CB x CO x CB
+            direction = perpendicular(C, B, ORIGIN);
+            A = support(s1Vectors, s2Vectors, direction);
+
+
         }
     }
 
@@ -222,6 +230,29 @@ public class CollisionSystem extends EntitySystem {
 
     private Vector2 negate(Vector2 vector2) {
         return new Vector2(-1 * vector2.x, -1 * vector2.y);
+    }
+
+    private Vector2 perpendicular(Vector2 C, Vector2 B, Vector2 O) {
+        return vectorTripleProduct(C, B, O);
+    }
+
+    private Vector2 vectorTripleProduct(Vector2 C, Vector2 B, Vector2 O) {
+        // take cross product of CB and CO
+        // take cross product of the result with CB again
+        Vector2 CB = B.sub(C);
+        Vector2 CO = O.sub(C);
+        float AO = dotProduct(C, O);
+        float BO = dotProduct(B, O);
+        Vector2 r = new Vector2();
+        return crossProduct(crossProduct(CB, CO), CB);
+    }
+
+    private Vector2 crossProduct(Vector2 a, Vector2 b) {
+        // also area of parallelogram if a and b
+        // z value of cross product treating a and b as vectors in 3d
+        // by setting their z values to 0
+        float magnitude = (a.x * b.y) - (a.y * b.x);
+        return new Vector2(a.x*b.x, a.y*b.y);
     }
 
     private Polygon getEntityArea(MapObject mapObject) {
