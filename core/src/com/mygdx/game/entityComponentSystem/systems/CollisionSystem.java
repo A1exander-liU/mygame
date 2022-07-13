@@ -154,6 +154,15 @@ public class CollisionSystem extends EntitySystem {
             B = support(s1Vectors, s2Vectors, direction);
             simplexPoints.add(B);
 
+            // C(-1,5), B(-4,-3)
+            // O - C = (1, -5)
+            // B - O = B
+            Vector2 CO = ORIGIN.sub(C);
+            Vector2 OB = B.sub(ORIGIN);
+
+            if (dotProduct(CO, OB) <= 0) {
+                return false;
+            }
         }
     }
 
