@@ -114,13 +114,17 @@ public class CollisionSystem extends EntitySystem {
 
                 boolean collided = GJK(currentEntity, collisionSpace);
                 if (collided) {
-
+                    System.out.println("collided");
                 }
             }
         }
     }
 
     private boolean GJK(Polygon s1, Polygon s2) {
+        // direction 1: random, could be anything
+        // direction 2: opposite to direction 1 (negate first direction)
+        // direction 3: perpendicular to the line segment towards origin (the vector of the two points AB)
+
         // XY = Y - X where X and Y are both vectors
         // XY: direction from Vector X towards Vector Y
         // OD = D(x,y) - O(x,y) = D(x,y)
@@ -147,25 +151,29 @@ public class CollisionSystem extends EntitySystem {
         C = support(s1Vectors, s2Vectors, direction);
         simplexPoints.add(C);
 
-        // negate direction to get opposite point
+        // negate direction to get opposite point (second point)
         direction = negate(direction);
 
         while(true) {
+            // each iteration we add one point to the simple
 
             B = support(s1Vectors, s2Vectors, direction);
-            simplexPoints.add(B);
-
-            // C(-1,5), B(-4,-3)
-            // O - C = (1, -5)
-            // B - O = B
-            Vector2 CO = ORIGIN.sub(C);
-            Vector2 OB = B.sub(ORIGIN);
+            simplexPoints.add(support(s1Vectors, s2Vectors, direction));
 
             // points past the origin have a positive dot product
             // c -> O
             // O -> B
-            if (dotProduct(CO, OB) <= 0) {
+            // have 2 points now
+            // need to check if B passes the origin
+            // it will check the last point added to the simplex
+            if (dotProduct(simplexPoints.get(simplexPoints.size-1), direction) < 0) {
                 return false;
+            }
+
+
+
+            if (simplexPoints.size > 2) {
+                // handle 2-simplex region checks
             }
 
             // get perpendicular to CB that points to origin
@@ -173,7 +181,25 @@ public class CollisionSystem extends EntitySystem {
             direction = perpendicular(C, B, ORIGIN);
             A = support(s1Vectors, s2Vectors, direction);
 
-
+            // checking these regions that aren't the simplex's region
+            // if dot product are both <= 0 then the origin is inside simplex
+            // vector perpendicular to AB
+            Vector2 ABperp = perpendicular(A, B, C);
+            if (dotProduct(ABperp, negate(A)) > 0) {
+                simplexPoints.removeValue(B, true);
+                B = support(s1Vectors, s2Vectors, ABperp);
+                simplexPoints.insert(0, B);
+                continue;
+            }
+            // vector perpendicular to AC
+            Vector2 ACperp = perpendicular(A, C, B);
+            if (dotProduct(ACperp, negate(A)) > 0) {
+                simplexPoints.removeValue(B, true);
+                B = support(s1Vectors, s2Vectors, ACperp);
+                simplexPoints.insert(0, B);
+                continue;
+            }
+            return true;
             // takes 2 shapes
             // find first support point (first point of simplex)
             // negate direction and get second support point
@@ -181,9 +207,6 @@ public class CollisionSystem extends EntitySystem {
             // if second point passes origin add to simplex
             // calc triple product and get third point
             // determine if it lies inside the triangle
-            com.mygdx.game.utils.Polygon triangle = new com.mygdx.game.utils.Polygon(simplexPoints);
-            if (triangle.contains(new Vector2()))
-                return true;
         }
     }
 
