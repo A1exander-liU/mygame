@@ -147,10 +147,10 @@ public class CollisionSystem extends EntitySystem {
         C = support(s1Vectors, s2Vectors, direction);
         simplexPoints.add(C);
 
+        // negate direction to get opposite point
+        direction = negate(direction);
+
         while(true) {
-            // after first selected direction, choose new direction that is opposite
-            // CO is direction from C to Origin
-            direction = negate(direction);
 
             B = support(s1Vectors, s2Vectors, direction);
             simplexPoints.add(B);
@@ -161,6 +161,9 @@ public class CollisionSystem extends EntitySystem {
             Vector2 CO = ORIGIN.sub(C);
             Vector2 OB = B.sub(ORIGIN);
 
+            // points past the origin have a positive dot product
+            // c -> O
+            // O -> B
             if (dotProduct(CO, OB) <= 0) {
                 return false;
             }
@@ -171,6 +174,16 @@ public class CollisionSystem extends EntitySystem {
             A = support(s1Vectors, s2Vectors, direction);
 
 
+            // takes 2 shapes
+            // find first support point (first point of simplex)
+            // negate direction and get second support point
+            // if second point does not pass origin return false
+            // if second point passes origin add to simplex
+            // calc triple product and get third point
+            // determine if it lies inside the triangle
+            com.mygdx.game.utils.Polygon triangle = new com.mygdx.game.utils.Polygon(simplexPoints);
+            if (triangle.contains(new Vector2()))
+                return true;
         }
     }
 
@@ -197,7 +210,7 @@ public class CollisionSystem extends EntitySystem {
     }
 
     private Vector2 support(Array<Vector2> s1Vectors, Array<Vector2> s2Vectors, Vector2 direction) {
-        // getting most extreme points in opposite directions of the 2 shapes
+        // getting most extreme points in opposite directions
         Vector2 p1 = getFarthestPointInDirection(s1Vectors, direction);
         Vector2 p2 = getFarthestPointInDirection(s2Vectors, negate(direction));
         // to get point on the minkowski difference (point will be an exterior point)
@@ -239,20 +252,33 @@ public class CollisionSystem extends EntitySystem {
     private Vector2 vectorTripleProduct(Vector2 C, Vector2 B, Vector2 O) {
         // take cross product of CB and CO
         // take cross product of the result with CB again
-        Vector2 CB = B.sub(C);
-        Vector2 CO = O.sub(C);
-        float AO = dotProduct(C, O);
-        float BO = dotProduct(B, O);
-        Vector2 r = new Vector2();
-        return crossProduct(crossProduct(CB, CO), CB);
+
+        // CB * CO * CB
+
+        // C: (-1,5) B: (-4,-3), O: (0,0)
+        // B - C: (-4,-3) + (1,-5)
+        // CB: (-3,-8)
+        // O - C: (0,0) + (1,-5)
+        // CO: (1,-5)
+        Vector3 C3 = new Vector3(C.x, C.y, 0);
+        Vector3 B3 = new Vector3(B.x, B.y, 0);
+        Vector3 O3 = new Vector3(O.x, O.y, 0);
+        Vector3 CB = B3.sub(C3);
+        Vector3 CO = O3.sub(C3);
+        Vector3 CBCOCB = crossProduct(crossProduct(CB, CO), CB);
+        return new Vector2(CBCOCB.x, CBCOCB.y);
     }
 
-    private Vector2 crossProduct(Vector2 a, Vector2 b) {
+    private Vector3 crossProduct(Vector3 a, Vector3 b) {
         // also area of parallelogram if a and b
         // z value of cross product treating a and b as vectors in 3d
         // by setting their z values to 0
-        float magnitude = (a.x * b.y) - (a.y * b.x);
-        return new Vector2(a.x*b.x, a.y*b.y);
+
+
+        float x = a.y * b.z - a.z * b.y;
+        float y = a.z * b.x - a.x * b.z;
+        float z = a.x * b.y - a.y * b.x;
+        return new Vector3(x, y, z);
     }
 
     private Polygon getEntityArea(MapObject mapObject) {
