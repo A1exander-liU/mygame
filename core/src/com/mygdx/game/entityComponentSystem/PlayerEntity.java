@@ -2,6 +2,7 @@ package com.mygdx.game.entityComponentSystem;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.mygdx.game.GameMapProperties;
@@ -63,6 +64,7 @@ public class PlayerEntity extends Entity {
         cg.getSpeed(this).xSpeed = 5;
         cg.getSpeed(this).ySpeed = 5;
         Camera player = cg.getCamera(this);
+        player.camera = new OrthographicCamera();
         player.camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         player.camera.position.x = Gdx.graphics.getWidth() / 2f;
         player.camera.position.y = Gdx.graphics.getHeight() / 2f;
