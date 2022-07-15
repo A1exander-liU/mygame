@@ -57,8 +57,6 @@ public class PlayerEntity extends Entity {
         cg.getName(this).name = playerName;
         cg.getPosition(this).x = 200;
         cg.getPosition(this).y = 200;
-        cg.getPosition(this).oldX = 200;
-        cg.getPosition(this).oldY = 200;
         cg.getSize(this).width = 32;
         cg.getSize(this).height = 32;
         cg.getSpeed(this).xSpeed = 5;
