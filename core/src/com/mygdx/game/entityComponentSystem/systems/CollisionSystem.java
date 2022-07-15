@@ -362,6 +362,21 @@ public class CollisionSystem extends EntitySystem {
         return new Polygon(vertices);
     }
 
+    private Polygon getEntityArea(RectangleMapObject rectangleMapObject) {
+        // rectangle already has (x,y) in bottom left
+        Rectangle rectangle = rectangleMapObject.getRectangle();
+        float x = rectangle.getX();
+        float y = rectangle.getY();
+        float width = rectangle.getWidth();
+        float height = rectangle.getHeight();
+        float[] vertices =
+                {x, y,
+                 x, y + height,
+                 x + width, y + height,
+                 x + width, y};
+        return new Polygon(vertices);
+    }
+
     private void keepEntityInsideSpawnZone(Entity entity) {
         ID id = cg.getID(entity);
         Position pos = cg.getPosition(entity);
