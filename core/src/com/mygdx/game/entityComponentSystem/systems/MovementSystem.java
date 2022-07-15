@@ -7,6 +7,7 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.entityComponentSystem.ComponentGrabber;
 import com.mygdx.game.entityComponentSystem.components.Enemy;
@@ -53,8 +54,7 @@ public class MovementSystem extends EntitySystem {
     private void moveEnemy(String direction, Entity entity) {
         Position pos = cg.getPosition(entity);
         Speed speed = cg.getSpeed(entity);
-        pos.oldX = pos.x;
-        pos.oldY = pos.y;
+        Vector2 normal = new Vector2();
 //        if (Gdx.input.isKeyPressed(Input.Keys.UP))
 //            pos.y += speed.ySpeed;
 //        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT))
@@ -106,15 +106,19 @@ public class MovementSystem extends EntitySystem {
         Speed speed = cg.getSpeed(player);
         if (Gdx.input.isKeyPressed(Input.Keys.W)) {
             pos.y += speed.ySpeed;
+            pos.futureY += speed.ySpeed;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.D)) {
             pos.x += speed.xSpeed;
+            pos.futureX += speed.xSpeed;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.S)) {
             pos.y -= speed.ySpeed;
+            pos.futureY -= speed.ySpeed;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.A)) {
             pos.x -= speed.xSpeed;
+            pos.futureX -= speed.xSpeed;
         }
     }
 }
