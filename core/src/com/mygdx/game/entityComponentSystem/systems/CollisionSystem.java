@@ -10,6 +10,7 @@ import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.objects.TextureMapObject;
+import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -37,6 +38,7 @@ public class CollisionSystem extends EntitySystem {
     ComponentGrabber cg;
     MyGame root;
     GameMapProperties gameMapProperties;
+    int collisions = 0;
 
     public CollisionSystem(ComponentGrabber cg, MyGame root, GameMapProperties gameMapProperties) {
         super(3);
@@ -110,13 +112,14 @@ public class CollisionSystem extends EntitySystem {
                     float objHeight = textureRegion.getRegionHeight();
                     collisionZone = new Rectangle(objX, objY, objWidth, objHeight);
                 }
-
+                boolean intersected = Intersector.overlapConvexPolygons(currentEntity, collisionSpace);
+                if (intersected) {
+                    System.out.println("intersected");
+                }
                 boolean collided = GJK(currentEntity, collisionSpace);
                 if (collided) {
-                    System.out.println("collided");
-                }
-                else {
-                    System.out.println("no collision");
+                    collisions++;
+                    System.out.println("collided" + collisions);
                 }
             }
         }
@@ -150,8 +153,7 @@ public class CollisionSystem extends EntitySystem {
 
         // calculated first point of current simplex
         // first is manually added, not part of the loop
-        C = support(s1Vectors, s2Vectors, direction);
-        simplexPoints.add(C);
+        simplexPoints.add(support(s1Vectors, s2Vectors, direction));
 
         // negate direction to get opposite point (second point)
         direction = negate(direction);
@@ -159,21 +161,20 @@ public class CollisionSystem extends EntitySystem {
         while(true) {
 //            if (iterations == 30) {
 //                System.out.println("stop");
-//                break;
+//                return false;
 //            }
 //            iterations++;
             // each iteration we add one point to the simple
 
             simplexPoints.add(support(s1Vectors, s2Vectors, direction));
 
-            A = simplexPoints.get(simplexPoints.size-1);
             // points past the origin have a positive dot product
             // c -> O
             // O -> B
             // have 2 points now
             // need to check if B passes the origin
             // it will check the last point added to the simplex
-            if (dotProduct(simplexPoints.get(simplexPoints.size-1), direction) < 0) {
+            if (dotProduct(simplexPoints.get(simplexPoints.size-1), direction) <= 0) {
                 return false;
             }
 
@@ -198,8 +199,13 @@ public class CollisionSystem extends EntitySystem {
                 /* can be 0 b/c 0 means touch contact not penetration,
                 * still overlaps but the overlap is one the edge points
                 * of the shape */
+
                 Vector2 ABperpendicular = tripleProduct(AC, AB, AB);
                 if (dotProduct(ABperpendicular, negate(A)) >= 0) {
+                    // [C,B,A]
+                    // [B,A]
+                    // [B,A,A]
+                    // [C,B,A]
                     simplexPoints.removeValue(C, true);
                     direction = ABperpendicular;
                     continue;
@@ -209,6 +215,10 @@ public class CollisionSystem extends EntitySystem {
                 /* still need A and C since the region was found
                 * perpendicular to the line segment AC */
                 if (dotProduct(ACperpendicular, negate(A)) >= 0) {
+                    // [C,B,A]
+                    // [C,A]
+                    // [C,A,A]
+                    // [C,B,A]
                     simplexPoints.removeValue(B, true);
                     direction = ACperpendicular;
                     continue;
@@ -223,6 +233,7 @@ public class CollisionSystem extends EntitySystem {
                 // CB x CO x CB
                 // only two points at this time
                 // A is most recent and B becomes the first point
+                A = simplexPoints.get(simplexPoints.size-1);
                 B = simplexPoints.get(0);
                 Vector2 AB = B.sub(A);
                 Vector2 AO = ORIGIN.sub(A);
@@ -343,6 +354,11 @@ public class CollisionSystem extends EntitySystem {
         Vector3 AB = crossProduct(A, B);
         Vector3 AB_C = crossProduct(AB, C);
         return new Vector2(AB_C.x, AB_C.y);
+    }
+
+    private Vector2 subtract(Vector2 a, Vector2 b) {
+        // a - b
+        return new Vector2(a.x - b.x, a.y - b.y);
     }
 
     private Polygon getEntityArea(MapObject mapObject) {
