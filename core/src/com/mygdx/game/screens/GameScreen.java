@@ -2,6 +2,7 @@ package com.mygdx.game.screens;
 
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.ashley.core.Family;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
@@ -19,6 +20,9 @@ import com.mygdx.game.Player;
 import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.entityComponentSystem.EntityFactory;
 import com.mygdx.game.entityComponentSystem.EntityToMapAdder;
+import com.mygdx.game.entityComponentSystem.MobEntity;
+import com.mygdx.game.entityComponentSystem.PlayerEntity;
+import com.mygdx.game.entityComponentSystem.components.Camera;
 import com.mygdx.game.entityComponentSystem.components.EntitySprite;
 import com.mygdx.game.entityComponentSystem.components.Health;
 import com.mygdx.game.entityComponentSystem.components.ID;
@@ -46,6 +50,7 @@ public class GameScreen implements Screen {
 
     Player player;
 
+    ComponentGrabber cg;
     EntityToMapAdder entityToMapAdder;
 
     public GameScreen(MyGame parent) {
@@ -53,13 +58,16 @@ public class GameScreen implements Screen {
         gameMapProperties = new GameMapProperties(testMap);
         this.parent = parent;
         parent.engine = new Engine();
-        ComponentGrabber cg = new ComponentGrabber();
+        cg = new ComponentGrabber();
         entityToMapAdder = new EntityToMapAdder(testMap, cg);
         EntityFactory entityFactory = new EntityFactory(cg, parent);
         for (int i = 0; i < 3; i++) {
-            Entity enemy = entityFactory.makeEnemy("Slime", 32, 32, 15, 15, 100, "testPlayer.png");
-            entityToMapAdder.addEntityToMap(testMap, enemy);
+            MobEntity entity = new MobEntity(cg, parent, gameMapProperties);
+            parent.engine.addEntity(entity);
+            entityToMapAdder.addEntityToMap(testMap, entity);
         }
+        PlayerEntity playerEntity = new PlayerEntity(cg, parent, gameMapProperties, "player");
+
         // to add system (now all allowed entities will move every frame)
         // you can enable and disable a system temporarily
         /* disabled systems will not update (enemies will stop moving)
@@ -101,7 +109,7 @@ public class GameScreen implements Screen {
         tmo.setX(0);
         tmo.setY(0);
         tmo.setName(player.playerName);
-        objectLayer.getObjects().add(tmo);
+//        objectLayer.getObjects().add(tmo);
 
         MovementSystem movementSystem = new MovementSystem(cg, parent);
         CollisionSystem collisionSystem = new CollisionSystem(cg, parent, gameMapProperties);
@@ -121,9 +129,10 @@ public class GameScreen implements Screen {
         Gdx.gl.glClearColor(1f, 0f, 0f, 1);
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        player.movePlayer(gameMapProperties);
+//        player.movePlayer(gameMapProperties);
+        Entity entity = parent.engine.getEntitiesFor(Family.all(com.mygdx.game.entityComponentSystem.components.Player.class).get()).get(0);
+        tiledMapRenderer.setView(cg.getCamera(entity).camera);
         parent.engine.update(delta);
-        tiledMapRenderer.setView(player.getCamera());
         tiledMapRenderer.render();
     }
 
