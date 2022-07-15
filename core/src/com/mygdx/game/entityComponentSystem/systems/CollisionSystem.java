@@ -92,25 +92,20 @@ public class CollisionSystem extends EntitySystem {
     }
 
     private void resolveCollisions(Entity entity) {
+        //
         ID id = cg.getID(entity);
         Position pos = cg.getPosition(entity);
         MapObjects objects = gameMapProperties.tiledMap.getLayers().get("Object Layer 1").getObjects();
         Polygon currentEntity = getEntityArea(objects.get("" + id.ID));
         for (int i = 0; i < objects.getCount(); i++) {
             Polygon collisionSpace = new Polygon();
-            Rectangle collisionZone = null;
             if (!Objects.equals(objects.get(i).getName(), "" + id.ID)) {
                 if (objects.get(i) instanceof RectangleMapObject) {
                     collisionSpace = getEntityArea((RectangleMapObject) objects.get(i));
                 }
+                // dynamic objects: movable things like enemies
                 if (objects.get(i) instanceof TextureMapObject) {
                     collisionSpace = getEntityArea(objects.get(i));
-                    TextureRegion textureRegion = ((TextureMapObject) objects.get(i)).getTextureRegion();
-                    float objX = ((TextureMapObject) objects.get(i)).getX();
-                    float objY = ((TextureMapObject) objects.get(i)).getY();
-                    float objWidth = textureRegion.getRegionWidth();
-                    float objHeight = textureRegion.getRegionHeight();
-                    collisionZone = new Rectangle(objX, objY, objWidth, objHeight);
                 }
                 boolean intersected = Intersector.overlapConvexPolygons(currentEntity, collisionSpace);
                 if (intersected) {
@@ -365,11 +360,11 @@ public class CollisionSystem extends EntitySystem {
         // (x,y) is at top left
         TextureMapObject textureMapObject = (TextureMapObject) mapObject;
         TextureRegion textureRegion = textureMapObject.getTextureRegion();
-        float mapHeight = gameMapProperties.mapHeight;
         float objX = textureMapObject.getX();
         float objY = textureMapObject.getY();
         float objWidth = textureRegion.getRegionWidth();
         float objHeight = textureRegion.getRegionHeight();
+
         float[] vertices =
                 {objX, objY + objHeight,
                  objX, objY,
