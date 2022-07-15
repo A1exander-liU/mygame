@@ -11,4 +11,6 @@ import java.util.Random;
 public class Position implements Component {
     public float x;
     public float y;
+    public float futureX = x;
+    public float futureY = y;
 }
