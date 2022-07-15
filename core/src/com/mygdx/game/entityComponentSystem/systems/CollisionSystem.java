@@ -99,8 +99,7 @@ public class CollisionSystem extends EntitySystem {
             Rectangle collisionZone = null;
             if (!Objects.equals(objects.get(i).getName(), "" + id.ID)) {
                 if (objects.get(i) instanceof RectangleMapObject) {
-                    collisionZone = ((RectangleMapObject) objects.get(i)).getRectangle();
-                    collisionSpace = getEntityArea(objects.get(i));
+                    collisionSpace = getEntityArea((RectangleMapObject) objects.get(i));
                 }
                 if (objects.get(i) instanceof TextureMapObject) {
                     collisionSpace = getEntityArea(objects.get(i));
@@ -115,6 +114,9 @@ public class CollisionSystem extends EntitySystem {
                 boolean collided = GJK(currentEntity, collisionSpace);
                 if (collided) {
                     System.out.println("collided");
+                }
+                else {
+                    System.out.println("no collision");
                 }
             }
         }
@@ -155,11 +157,16 @@ public class CollisionSystem extends EntitySystem {
         direction = negate(direction);
 
         while(true) {
+//            if (iterations == 30) {
+//                System.out.println("stop");
+//                break;
+//            }
+//            iterations++;
             // each iteration we add one point to the simple
 
-            B = support(s1Vectors, s2Vectors, direction);
             simplexPoints.add(support(s1Vectors, s2Vectors, direction));
 
+            A = simplexPoints.get(simplexPoints.size-1);
             // points past the origin have a positive dot product
             // c -> O
             // O -> B
@@ -170,36 +177,58 @@ public class CollisionSystem extends EntitySystem {
                 return false;
             }
 
-
-
-            if (simplexPoints.size > 2) {
+            if (simplexPoints.size == 3) {
                 // handle 2-simplex region checks
+                // A is most recently added point, aka last point in array
+                // have three points now
+                // this means C becomes our first point and B is the second point now
+
+                A = simplexPoints.get(simplexPoints.size-1);
+                B = simplexPoints.get(1);
+                C = simplexPoints.get(0);
+                Vector2 AB = B.sub(A);
+                Vector2 AC = C.sub(A);
+                // checking these regions that aren't the simplex' region
+                // if dot product are both <= 0 then the origin is inside simplex
+                // vector perpendicular to AB
+                /* rebuild simplex by using new point perpendicular in
+                * region that contains the origin */
+                /* Vector AO is (O - A = -A) , or otherwise just negate
+                * the Vector A */
+                /* can be 0 b/c 0 means touch contact not penetration,
+                * still overlaps but the overlap is one the edge points
+                * of the shape */
+                Vector2 ABperpendicular = tripleProduct(AC, AB, AB);
+                if (dotProduct(ABperpendicular, negate(A)) >= 0) {
+                    simplexPoints.removeValue(C, true);
+                    direction = ABperpendicular;
+                    continue;
+                }
+                // vector perpendicular to AC
+                Vector2 ACperpendicular = tripleProduct(AB, AC, AC);
+                /* still need A and C since the region was found
+                * perpendicular to the line segment AC */
+                if (dotProduct(ACperpendicular, negate(A)) >= 0) {
+                    simplexPoints.removeValue(B, true);
+                    direction = ACperpendicular;
+                    continue;
+                }
+                /* if the origin weren't in those 2 regions, origin must be
+                * in the simplex */
+                return true;
+            }
+            // if we don't have a 2-simplex yet, stills need to evolve
+            else {
+                // get perpendicular to CB that points to origin
+                // CB x CO x CB
+                // only two points at this time
+                // A is most recent and B becomes the first point
+                B = simplexPoints.get(0);
+                Vector2 AB = B.sub(A);
+                Vector2 AO = ORIGIN.sub(A);
+                direction = tripleProduct(AB, AO, AB);
             }
 
-            // get perpendicular to CB that points to origin
-            // CB x CO x CB
-            direction = perpendicular(C, B, ORIGIN);
-            A = support(s1Vectors, s2Vectors, direction);
-
-            // checking these regions that aren't the simplex's region
-            // if dot product are both <= 0 then the origin is inside simplex
-            // vector perpendicular to AB
-            Vector2 ABperp = perpendicular(A, B, C);
-            if (dotProduct(ABperp, negate(A)) > 0) {
-                simplexPoints.removeValue(B, true);
-                B = support(s1Vectors, s2Vectors, ABperp);
-                simplexPoints.insert(0, B);
-                continue;
-            }
-            // vector perpendicular to AC
-            Vector2 ACperp = perpendicular(A, C, B);
-            if (dotProduct(ACperp, negate(A)) > 0) {
-                simplexPoints.removeValue(B, true);
-                B = support(s1Vectors, s2Vectors, ACperp);
-                simplexPoints.insert(0, B);
-                continue;
-            }
-            return true;
             // takes 2 shapes
             // find first support point (first point of simplex)
             // negate direction and get second support point
@@ -212,7 +241,7 @@ public class CollisionSystem extends EntitySystem {
 
     private Array<Vector2> toVectorArray(Polygon polygon) {
         Array<Vector2> temp = new Array<>(0);
-        float[] vertices = polygon.getTransformedVertices();
+        float[] vertices = polygon.getVertices();
         // even index = x
         // odd value = y
         for (int i = 0; i < vertices.length; i += 2) {
@@ -304,7 +333,20 @@ public class CollisionSystem extends EntitySystem {
         return new Vector3(x, y, z);
     }
 
+    private Vector2 tripleProduct(Vector2 a, Vector2 b, Vector2 c) {
+        // method steps: (A * B) * C
+        // A * B is first
+        // then result of A * B is multiplied with C
+        Vector3 A = new Vector3(a.x, a.y, 0);
+        Vector3 B = new Vector3(b.x, b.y, 0);
+        Vector3 C = new Vector3(c.x, c.y, 0);
+        Vector3 AB = crossProduct(A, B);
+        Vector3 AB_C = crossProduct(AB, C);
+        return new Vector2(AB_C.x, AB_C.y);
+    }
+
     private Polygon getEntityArea(MapObject mapObject) {
+        // (x,y) is at top left
         TextureMapObject textureMapObject = (TextureMapObject) mapObject;
         TextureRegion textureRegion = textureMapObject.getTextureRegion();
         float mapHeight = gameMapProperties.mapHeight;
@@ -313,10 +355,10 @@ public class CollisionSystem extends EntitySystem {
         float objWidth = textureRegion.getRegionWidth();
         float objHeight = textureRegion.getRegionHeight();
         float[] vertices =
-                {objX, mapHeight - (objY + objHeight),
+                {objX, objY + objHeight,
                  objX, objY,
                  objX + objWidth, objY,
-                 objX + objWidth, mapHeight - (objY + objHeight)};
+                 objX + objWidth, objY + objHeight};
         return new Polygon(vertices);
     }
 
