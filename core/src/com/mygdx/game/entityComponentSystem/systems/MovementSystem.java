@@ -54,7 +54,6 @@ public class MovementSystem extends EntitySystem {
     private void moveEnemy(String direction, Entity entity) {
         Position pos = cg.getPosition(entity);
         Speed speed = cg.getSpeed(entity);
-        Vector2 normal = new Vector2();
 //        if (Gdx.input.isKeyPressed(Input.Keys.UP))
 //            pos.y += speed.ySpeed;
 //        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT))
@@ -63,34 +62,36 @@ public class MovementSystem extends EntitySystem {
 //            pos.y -= speed.ySpeed;
 //        if (Gdx.input.isKeyPressed(Input.Keys.LEFT))
 //            pos.x -= speed.xSpeed;
+        pos.futureX = pos.x;
+        pos.futureY = pos.y;
         switch (direction) {
             case "N":
-                pos.y += speed.ySpeed;
+                pos.futureY += speed.ySpeed;
                 break;
             case "NE":
-                pos.x += speed.xSpeed;
-                pos.y += speed.ySpeed;
+                pos.futureX += speed.xSpeed;
+                pos.futureY += speed.ySpeed;
                 break;
             case "E":
-                pos.x += speed.xSpeed;
+                pos.futureX += speed.xSpeed;
                 break;
             case "SE":
-                pos.x += speed.xSpeed;
-                pos.y -= speed.ySpeed;
+                pos.futureX += speed.xSpeed;
+                pos.futureY -= speed.ySpeed;
                 break;
             case "S":
-                pos.y -= speed.ySpeed;
+                pos.futureY -= speed.ySpeed;
                 break;
             case "SW":
-                pos.x -= speed.xSpeed;
-                pos.y -= speed.ySpeed;
+                pos.futureX -= speed.xSpeed;
+                pos.futureY -= speed.ySpeed;
                 break;
             case "W":
-                pos.x -= speed.xSpeed;
+                pos.futureX -= speed.xSpeed;
                 break;
             case "NW":
-                pos.x -= speed.xSpeed;
-                pos.y += speed.ySpeed;
+                pos.futureX -= speed.xSpeed;
+                pos.futureY += speed.ySpeed;
                 break;
             }
     }
@@ -104,20 +105,22 @@ public class MovementSystem extends EntitySystem {
     private void playerMovement() {
         Position pos = cg.getPosition(player);
         Speed speed = cg.getSpeed(player);
+        pos.futureX = pos.x;
+        pos.futureY = pos.y;
         if (Gdx.input.isKeyPressed(Input.Keys.W)) {
-            pos.y += speed.ySpeed;
+//            pos.y += speed.ySpeed;
             pos.futureY += speed.ySpeed;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.D)) {
-            pos.x += speed.xSpeed;
+//            pos.x += speed.xSpeed;
             pos.futureX += speed.xSpeed;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.S)) {
-            pos.y -= speed.ySpeed;
+//            pos.y -= speed.ySpeed;
             pos.futureY -= speed.ySpeed;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.A)) {
-            pos.x -= speed.xSpeed;
+//            pos.x -= speed.xSpeed;
             pos.futureX -= speed.xSpeed;
         }
     }
