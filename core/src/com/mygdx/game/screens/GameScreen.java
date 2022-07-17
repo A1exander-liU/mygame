@@ -2,7 +2,9 @@ package com.mygdx.game.screens;
 
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.core.Family;
+import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
@@ -31,6 +33,7 @@ import com.mygdx.game.entityComponentSystem.components.Size;
 import com.mygdx.game.entityComponentSystem.components.Speed;
 import com.mygdx.game.entityComponentSystem.systems.CollisionSystem;
 import com.mygdx.game.entityComponentSystem.systems.EnemySpawningSystem;
+import com.mygdx.game.entityComponentSystem.systems.MovementAndCollision;
 import com.mygdx.game.entityComponentSystem.systems.MovementSystem;
 
 public class GameScreen implements Screen {
@@ -58,7 +61,7 @@ public class GameScreen implements Screen {
         gameMapProperties = new GameMapProperties(testMap);
         this.parent = parent;
         parent.engine = new Engine();
-        cg = new ComponentGrabber();
+        cg = new ComponentGrabber(parent);
         entityToMapAdder = new EntityToMapAdder(testMap, cg);
         EntityFactory entityFactory = new EntityFactory(cg, parent);
         for (int i = 0; i < 3; i++) {
@@ -111,11 +114,13 @@ public class GameScreen implements Screen {
         tmo.setName(player.playerName);
 //        objectLayer.getObjects().add(tmo);
 
+        MovementAndCollision movementAndCollision = new MovementAndCollision(cg, parent, gameMapProperties);
         MovementSystem movementSystem = new MovementSystem(cg, parent);
         CollisionSystem collisionSystem = new CollisionSystem(cg, parent, gameMapProperties);
         EnemySpawningSystem enemySpawningSystem = new EnemySpawningSystem(cg, parent, gameMapProperties);
-        parent.engine.addSystem(movementSystem);
-        parent.engine.addSystem(collisionSystem);
+        parent.engine.addSystem(movementAndCollision);
+//        parent.engine.addSystem(movementSystem);
+//        parent.engine.addSystem(collisionSystem);
         parent.engine.addSystem(enemySpawningSystem);
     }
 
@@ -143,15 +148,12 @@ public class GameScreen implements Screen {
 
     @Override
     public void pause() {
-        // stop enemies from moving when game is paused
-        parent.engine.getSystem(MovementSystem.class).setProcessing(false);
-        parent.engine.getSystem(CollisionSystem.class).setProcessing(false);
+        pauseSystems();
     }
 
     @Override
     public void resume() {
-        parent.engine.getSystem(MovementSystem.class).setProcessing(true);
-        parent.engine.getSystem(CollisionSystem.class).setProcessing(true);
+        resumeSystems();
     }
 
     @Override
@@ -163,5 +165,19 @@ public class GameScreen implements Screen {
     public void dispose() {
         parent.batch.dispose();
         testMap.dispose();
+    }
+
+    private void pauseSystems() {
+        ImmutableArray<EntitySystem> systems = parent.engine.getSystems();
+        for (EntitySystem system : systems) {
+            system.setProcessing(false);
+        }
+    }
+
+    private void resumeSystems() {
+        ImmutableArray<EntitySystem> systems = parent.engine.getSystems();
+        for (EntitySystem system : systems) {
+            system.setProcessing(true);
+        }
     }
 }
