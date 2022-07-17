@@ -22,6 +22,7 @@ import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.entityComponentSystem.ComponentGrabber;
+import com.mygdx.game.entityComponentSystem.Families;
 import com.mygdx.game.entityComponentSystem.components.Camera;
 import com.mygdx.game.entityComponentSystem.components.Enemy;
 import com.mygdx.game.entityComponentSystem.components.EntitySprite;
@@ -53,14 +54,9 @@ public class MovementAndCollision extends EntitySystem {
 
     @Override
     public void addedToEngine(Engine engine) {
-        entities = root.engine.getEntitiesFor(Family.all(
-                EntitySprite.class,
-                Position.class,
-                Size.class,
-                Speed.class,
-                ID.class).get());
-        enemies = root.engine.getEntitiesFor(Family.all(Enemy.class).get());
-        player = root.engine.getEntitiesFor(Family.all(Player.class).get()).get(0);
+        entities = root.engine.getEntities();
+        enemies = root.engine.getEntitiesFor(Families.enemies);
+        player = root.engine.getEntitiesFor(Families.player).get(0);
     }
 
     @Override
