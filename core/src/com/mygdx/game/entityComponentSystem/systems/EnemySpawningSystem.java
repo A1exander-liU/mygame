@@ -13,7 +13,7 @@ import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.entityComponentSystem.ComponentGrabber;
 import com.mygdx.game.entityComponentSystem.components.Enemy;
-import com.mygdx.game.entityComponentSystem.components.EntitySprite;
+import com.mygdx.game.entityComponentSystem.components.Sprite;
 import com.mygdx.game.entityComponentSystem.components.Health;
 import com.mygdx.game.entityComponentSystem.components.ID;
 import com.mygdx.game.entityComponentSystem.components.Name;
@@ -41,7 +41,7 @@ public class EnemySpawningSystem extends EntitySystem {
     @Override
     public void addedToEngine(Engine engine) {
         entities = root.engine.getEntitiesFor(Family.all(
-                Enemy.class, EntitySprite.class, Health.class, ID.class,
+                Enemy.class, Sprite.class, Health.class, ID.class,
                 Name.class, Position.class, Size.class, Speed.class).get());
     }
 

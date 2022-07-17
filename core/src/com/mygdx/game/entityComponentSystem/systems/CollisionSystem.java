@@ -21,7 +21,7 @@ import com.mygdx.game.MyGame;
 import com.mygdx.game.entityComponentSystem.ComponentGrabber;
 import com.mygdx.game.entityComponentSystem.components.Camera;
 import com.mygdx.game.entityComponentSystem.components.Enemy;
-import com.mygdx.game.entityComponentSystem.components.EntitySprite;
+import com.mygdx.game.entityComponentSystem.components.Sprite;
 import com.mygdx.game.entityComponentSystem.components.ID;
 import com.mygdx.game.entityComponentSystem.components.Player;
 import com.mygdx.game.entityComponentSystem.components.Position;
@@ -50,7 +50,7 @@ public class CollisionSystem extends EntitySystem {
     @Override
     public void addedToEngine(Engine engine) {
         entities = root.engine.getEntitiesFor(Family.all(
-                EntitySprite.class,
+                Sprite.class,
                 Position.class,
                 Size.class,
                 Speed.class,

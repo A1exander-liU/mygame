@@ -6,7 +6,7 @@ import com.badlogic.ashley.utils.ImmutableArray;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.entityComponentSystem.components.Camera;
 import com.mygdx.game.entityComponentSystem.components.Enemy;
-import com.mygdx.game.entityComponentSystem.components.EntitySprite;
+import com.mygdx.game.entityComponentSystem.components.Sprite;
 import com.mygdx.game.entityComponentSystem.components.Health;
 import com.mygdx.game.entityComponentSystem.components.ID;
 import com.mygdx.game.entityComponentSystem.components.Name;
@@ -32,8 +32,8 @@ public class ComponentGrabber {
         return enemy.get(entity);
     }
 
-    public EntitySprite getSprite(Entity entity) {
-        ComponentMapper<EntitySprite> img = ComponentMapper.getFor(EntitySprite.class);
+    public Sprite getSprite(Entity entity) {
+        ComponentMapper<Sprite> img = ComponentMapper.getFor(Sprite.class);
         return img.get(entity);
     }
 

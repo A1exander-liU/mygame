@@ -25,7 +25,7 @@ import com.mygdx.game.entityComponentSystem.ComponentGrabber;
 import com.mygdx.game.entityComponentSystem.Families;
 import com.mygdx.game.entityComponentSystem.components.Camera;
 import com.mygdx.game.entityComponentSystem.components.Enemy;
-import com.mygdx.game.entityComponentSystem.components.EntitySprite;
+import com.mygdx.game.entityComponentSystem.components.Sprite;
 import com.mygdx.game.entityComponentSystem.components.ID;
 import com.mygdx.game.entityComponentSystem.components.Player;
 import com.mygdx.game.entityComponentSystem.components.Position;

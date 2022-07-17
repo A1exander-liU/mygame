@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.entityComponentSystem.components.Enemy;
-import com.mygdx.game.entityComponentSystem.components.EntitySprite;
+import com.mygdx.game.entityComponentSystem.components.Sprite;
 import com.mygdx.game.entityComponentSystem.components.Health;
 import com.mygdx.game.entityComponentSystem.components.ID;
 import com.mygdx.game.entityComponentSystem.components.Name;
@@ -30,7 +30,7 @@ public class MobEntity extends Entity {
 
     private void addRequiredComponents() {
         super.add(new Enemy());
-        super.add(new EntitySprite());
+        super.add(new Sprite());
         super.add(new Health());
         super.add(new ID());
         super.add(new Name());
@@ -40,7 +40,7 @@ public class MobEntity extends Entity {
     }
 
     private void modifyComponentValues() {
-        EntitySprite entitySprite = cg.getSprite(this);
+        Sprite entitySprite = cg.getSprite(this);
         ID id = cg.getID(this);
         Name name = cg.getName(this);
         Size size = cg.getSize(this);

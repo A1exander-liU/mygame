@@ -5,7 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.entityComponentSystem.components.Enemy;
-import com.mygdx.game.entityComponentSystem.components.EntitySprite;
+import com.mygdx.game.entityComponentSystem.components.Sprite;
 import com.mygdx.game.entityComponentSystem.components.Health;
 import com.mygdx.game.entityComponentSystem.components.ID;
 import com.mygdx.game.entityComponentSystem.components.Name;
@@ -33,7 +33,7 @@ public class EntityFactory {
 
     private void addEnemyComponents(Entity entity) {
         entity.add(new Enemy());
-        entity.add(new EntitySprite());
+        entity.add(new Sprite());
         entity.add(new Health());
         entity.add(new ID());
         entity.add(new Name());
@@ -45,7 +45,7 @@ public class EntityFactory {
     private void modifyComponentValues
             (Entity entity, String name, int width, int height,float xSpeed, float ySpeed,
              int maxHealth, String pathToImg) {
-        EntitySprite enemyEntitySprite = cg.getSprite(entity);
+        Sprite enemyEntitySprite = cg.getSprite(entity);
         Health enemyHealth = cg.getHealth(entity);
         Name enemyName = cg.getName(entity);
         Size enemySize = cg.getSize(entity);

@@ -8,7 +8,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.entityComponentSystem.components.Camera;
-import com.mygdx.game.entityComponentSystem.components.EntitySprite;
+import com.mygdx.game.entityComponentSystem.components.Sprite;
 import com.mygdx.game.entityComponentSystem.components.Health;
 import com.mygdx.game.entityComponentSystem.components.ID;
 import com.mygdx.game.entityComponentSystem.components.Name;
@@ -40,7 +40,7 @@ public class PlayerEntity extends Entity {
 
     private void addRequiredComponents() {
         super.add(new Camera());
-        super.add(new EntitySprite());
+        super.add(new Sprite());
         super.add(new Health());
         super.add(new ID());
         super.add(new Name());
