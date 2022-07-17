@@ -82,19 +82,24 @@ public class MovementAndCollision extends EntitySystem {
         // 200, 200
         // 200, 205 (0,5)
         // (200,200) - (0,5) = (200,200)
+
+        // get enemy move
+        for (int i = 0; i < enemies.size(); i++) {
+            Entity enemy = enemies.get(i);
+            moveEnemy(getRandomDirection(), enemy);
+        }
+        // get player move
+        // at this point each enemy and player has their future move
         playerMovement();
-        keepEntityInsideMap(player);
-        handlePlayerCollisions();
+        // now we can detect and resolve any collisions
+        // *will need to implement broad phase detection in future*
+        for (int i = 0; i < entities.size(); i++) {
+            Entity entity = entities.get(i);
+            if (cg.getEnemy(entity) != null)
+                keepEntityInsideSpawnZone(entity);
+            handleCollisions(entity);
+        }
         updatePlayerCamPosition();
-//        for (int i = 0; i < entities.size(); i++) {
-//            Entity entity = entities.get(i);
-//            keepEntityInsideMap(entity);
-//            if (cg.getEnemy(entity) != null)
-//                keepEntityInsideSpawnZone(entity);
-//            resolveCollisions(entity);
-//            updatePlayerCamPosition();
-//            updateEntityInMap(entity);
-//        }
     }
 
     private void moveEnemy(String direction, Entity entity) {
@@ -218,6 +223,45 @@ public class MovementAndCollision extends EntitySystem {
             pos.y = spawnZone.y;
         else if (pos.y > spawnZone.y + spawnZone.height)
             pos.y = spawnZone.y + spawnZone.height;
+    }
+
+    private void handleCollisions(Entity entity) {
+        ID id = cg.getID(entity);
+        Position pos = cg.getPosition(entity);
+        MapObjects mapObjects = gameMapProperties.tiledMap.getLayers().get("Object Layer 1").getObjects();
+        Polygon playerArea = getEntityArea(entity);
+        // loop through each map object to see if entity collides with any of them
+        for (int i = 0; i < mapObjects.getCount(); i++) {
+            if (!Objects.equals(mapObjects.get(i).getName(), "" + id.ID)) {
+                Polygon collisionSpace = new Polygon();
+                Polyline wall = null;
+                // resolving the different sub classes
+                // creating polygon from the map objects
+                if (mapObjects.get(i) instanceof RectangleMapObject)
+                    collisionSpace = getEntityArea((RectangleMapObject) mapObjects.get(i));
+                if (mapObjects.get(i) instanceof TextureMapObject) {
+                    collisionSpace = getEntityArea(mapObjects.get(i));
+                }
+                if (mapObjects.get(i) instanceof PolylineMapObject) {
+                    wall = ((PolylineMapObject) mapObjects.get(i)).getPolyline();
+                }
+
+                // passing them to static method to determine if the two mapObjects collide
+                boolean intersected = Intersector.overlapConvexPolygons(playerArea, collisionSpace);
+                boolean intersectedWithBorder = false;
+                // checking if there was a collision with map border
+                if (wall != null)
+                    intersectedWithBorder = checkWallCollisions(wall, playerArea);
+
+                if (intersected || intersectedWithBorder) {
+                    System.out.println("intersected");
+                    pos.x = pos.oldX;
+                    pos.y = pos.oldY;
+                }
+                // updates their position
+                updateEntityInMap(entity);
+            }
+        }
     }
 
     private void handlePlayerCollisions() {
