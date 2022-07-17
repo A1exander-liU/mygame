@@ -22,7 +22,6 @@ import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.entityComponentSystem.ComponentGrabber;
-import com.mygdx.game.entityComponentSystem.PlayerEntity;
 import com.mygdx.game.entityComponentSystem.components.Camera;
 import com.mygdx.game.entityComponentSystem.components.Enemy;
 import com.mygdx.game.entityComponentSystem.components.EntitySprite;
@@ -111,32 +110,44 @@ public class MovementAndCollision extends EntitySystem {
 //            pos.x -= speed.xSpeed;
         switch (direction) {
             case "N":
-                pos.futureY += speed.ySpeed;
+                pos.y += speed.ySpeed;
+                pos.oldY = pos.y - speed.ySpeed;
                 break;
             case "NE":
-                pos.futureX += speed.xSpeed;
-                pos.futureY += speed.ySpeed;
+                pos.x += speed.xSpeed;
+                pos.y += speed.ySpeed;
+                pos.oldX = pos.x - speed.xSpeed;
+                pos.oldY = pos.y - speed.ySpeed;
                 break;
             case "E":
-                pos.futureX += speed.xSpeed;
+                pos.x += speed.xSpeed;
+                pos.oldX = pos.x - speed.xSpeed;
                 break;
             case "SE":
-                pos.futureX += speed.xSpeed;
-                pos.futureY -= speed.ySpeed;
+                pos.x += speed.xSpeed;
+                pos.y -= speed.ySpeed;
+                pos.oldX = pos.x - speed.xSpeed;
+                pos.oldY = pos.y + speed.ySpeed;
                 break;
             case "S":
-                pos.futureY -= speed.ySpeed;
+                pos.y -= speed.ySpeed;
+                pos.oldY = pos.y + speed.ySpeed;
                 break;
             case "SW":
-                pos.futureX -= speed.xSpeed;
-                pos.futureY -= speed.ySpeed;
+                pos.x -= speed.xSpeed;
+                pos.y -= speed.ySpeed;
+                pos.oldX = pos.x + speed.xSpeed;
+                pos.oldY = pos.y + speed.ySpeed;
                 break;
             case "W":
-                pos.futureX -= speed.xSpeed;
+                pos.x -= speed.xSpeed;
+                pos.oldX = pos.x + speed.xSpeed;
                 break;
             case "NW":
-                pos.futureX -= speed.xSpeed;
-                pos.futureY += speed.ySpeed;
+                pos.x -= speed.xSpeed;
+                pos.y += speed.ySpeed;
+                pos.oldX = pos.x + speed.xSpeed;
+                pos.oldY = pos.y - speed.ySpeed;
                 break;
         }
     }
@@ -157,6 +168,8 @@ public class MovementAndCollision extends EntitySystem {
 //            pos.oldX = pos.x;
             pos.oldY = pos.y - speed.ySpeed;
 //            pos.futureY += speed.ySpeed;
+            pos.position = pos.position.add(0, speed.ySpeed);
+            pos.oldPosition = pos.position.sub(0, speed.ySpeed);
         }
         if (Gdx.input.isKeyPressed(Input.Keys.D)) {
 
