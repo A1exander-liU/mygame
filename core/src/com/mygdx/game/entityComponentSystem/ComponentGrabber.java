@@ -2,6 +2,8 @@ package com.mygdx.game.entityComponentSystem;
 
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.ashley.utils.ImmutableArray;
+import com.mygdx.game.MyGame;
 import com.mygdx.game.entityComponentSystem.components.Camera;
 import com.mygdx.game.entityComponentSystem.components.Enemy;
 import com.mygdx.game.entityComponentSystem.components.EntitySprite;
@@ -14,8 +16,11 @@ import com.mygdx.game.entityComponentSystem.components.Size;
 import com.mygdx.game.entityComponentSystem.components.Speed;
 
 public class ComponentGrabber {
+    MyGame root;
 
-    public ComponentGrabber() {}
+    public ComponentGrabber(MyGame root) {
+        this.root = root;
+    }
 
     public Camera getCamera(Entity entity) {
         ComponentMapper<Camera> camera = ComponentMapper.getFor(Camera.class);
@@ -66,5 +71,15 @@ public class ComponentGrabber {
     public Speed getSpeed(Entity entity) {
         ComponentMapper<Speed> speed = ComponentMapper.getFor(Speed.class);
         return speed.get(entity);
+    }
+
+    public Entity findEntity(int entityID) {
+        ImmutableArray<Entity> entities = root.engine.getEntities();
+        for (Entity entity : entities) {
+            int id = getID(entity).ID;
+            if (id == entityID)
+                return entity;
+        }
+        return null;
     }
 }
