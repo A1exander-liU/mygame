@@ -4,14 +4,14 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.MyGame;
-import com.mygdx.game.entityComponentSystem.components.Enemy;
-import com.mygdx.game.entityComponentSystem.components.EntitySprite;
-import com.mygdx.game.entityComponentSystem.components.Health;
-import com.mygdx.game.entityComponentSystem.components.ID;
-import com.mygdx.game.entityComponentSystem.components.Name;
-import com.mygdx.game.entityComponentSystem.components.Position;
-import com.mygdx.game.entityComponentSystem.components.Size;
-import com.mygdx.game.entityComponentSystem.components.Speed;
+import com.mygdx.game.entityComponentSystem.components.EnemyComponent;
+import com.mygdx.game.entityComponentSystem.components.NameComponent;
+import com.mygdx.game.entityComponentSystem.components.SpriteComponent;
+import com.mygdx.game.entityComponentSystem.components.HealthComponent;
+import com.mygdx.game.entityComponentSystem.components.IDComponent;
+import com.mygdx.game.entityComponentSystem.components.PositionComponent;
+import com.mygdx.game.entityComponentSystem.components.SizeComponent;
+import com.mygdx.game.entityComponentSystem.components.SpeedComponent;
 
 public class EntityFactory {
     ComponentGrabber cg;
@@ -32,31 +32,31 @@ public class EntityFactory {
     }
 
     private void addEnemyComponents(Entity entity) {
-        entity.add(new Enemy());
-        entity.add(new EntitySprite());
-        entity.add(new Health());
-        entity.add(new ID());
-        entity.add(new Name());
-        entity.add(new Position());
-        entity.add(new Size());
-        entity.add(new Speed());
+        entity.add(new EnemyComponent());
+        entity.add(new SpriteComponent());
+        entity.add(new HealthComponent());
+        entity.add(new IDComponent());
+        entity.add(new NameComponent());
+        entity.add(new PositionComponent());
+        entity.add(new SizeComponent());
+        entity.add(new SpeedComponent());
     }
 
     private void modifyComponentValues
             (Entity entity, String name, int width, int height,float xSpeed, float ySpeed,
              int maxHealth, String pathToImg) {
-        EntitySprite enemyEntitySprite = cg.getSprite(entity);
-        Health enemyHealth = cg.getHealth(entity);
-        Name enemyName = cg.getName(entity);
-        Size enemySize = cg.getSize(entity);
-        Speed enemySpeed = cg.getSpeed(entity);
-        enemyName.name = name;
-        enemySize.width = width;
-        enemySize.height = height;
-        enemySpeed.xSpeed = xSpeed;
-        enemySpeed.ySpeed = ySpeed;
-        enemyHealth.maxHealth = maxHealth;
-        enemyHealth.currentHealth = maxHealth;
-        enemyEntitySprite.texture = new Texture(Gdx.files.internal(pathToImg));
+        SpriteComponent enemySpriteComponent = cg.getSprite(entity);
+        HealthComponent enemyHealthComponent = cg.getHealth(entity);
+        NameComponent enemyNameComponent = cg.getName(entity);
+        SizeComponent enemySizeComponent = cg.getSize(entity);
+        SpeedComponent enemySpeedComponent = cg.getSpeed(entity);
+        enemyNameComponent.name = name;
+        enemySizeComponent.width = width;
+        enemySizeComponent.height = height;
+        enemySpeedComponent.xSpeed = xSpeed;
+        enemySpeedComponent.ySpeed = ySpeed;
+        enemyHealthComponent.maxHealth = maxHealth;
+        enemyHealthComponent.currentHealth = maxHealth;
+        enemySpriteComponent.texture = new Texture(Gdx.files.internal(pathToImg));
     }
 }

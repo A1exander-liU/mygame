@@ -22,15 +22,14 @@ import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.entityComponentSystem.ComponentGrabber;
-import com.mygdx.game.entityComponentSystem.PlayerEntity;
-import com.mygdx.game.entityComponentSystem.components.Camera;
-import com.mygdx.game.entityComponentSystem.components.Enemy;
-import com.mygdx.game.entityComponentSystem.components.EntitySprite;
-import com.mygdx.game.entityComponentSystem.components.ID;
-import com.mygdx.game.entityComponentSystem.components.Player;
-import com.mygdx.game.entityComponentSystem.components.Position;
-import com.mygdx.game.entityComponentSystem.components.Size;
-import com.mygdx.game.entityComponentSystem.components.Speed;
+import com.mygdx.game.entityComponentSystem.components.CameraComponent;
+import com.mygdx.game.entityComponentSystem.components.EnemyComponent;
+import com.mygdx.game.entityComponentSystem.components.IDComponent;
+import com.mygdx.game.entityComponentSystem.components.SpriteComponent;
+import com.mygdx.game.entityComponentSystem.components.PlayerComponent;
+import com.mygdx.game.entityComponentSystem.components.PositionComponent;
+import com.mygdx.game.entityComponentSystem.components.SizeComponent;
+import com.mygdx.game.entityComponentSystem.components.SpeedComponent;
 
 import java.util.Objects;
 import java.util.Random;
@@ -55,13 +54,13 @@ public class MovementAndCollision extends EntitySystem {
     @Override
     public void addedToEngine(Engine engine) {
         entities = root.engine.getEntitiesFor(Family.all(
-                EntitySprite.class,
-                Position.class,
-                Size.class,
-                Speed.class,
-                ID.class).get());
-        enemies = root.engine.getEntitiesFor(Family.all(Enemy.class).get());
-        player = root.engine.getEntitiesFor(Family.all(Player.class).get()).get(0);
+                SpriteComponent.class,
+                PositionComponent.class,
+                SizeComponent.class,
+                SpeedComponent.class,
+                IDComponent.class).get());
+        enemies = root.engine.getEntitiesFor(Family.all(EnemyComponent.class).get());
+        player = root.engine.getEntitiesFor(Family.all(PlayerComponent.class).get()).get(0);
     }
 
     @Override
@@ -99,8 +98,8 @@ public class MovementAndCollision extends EntitySystem {
     }
 
     private void moveEnemy(String direction, Entity entity) {
-        Position pos = cg.getPosition(entity);
-        Speed speed = cg.getSpeed(entity);
+        PositionComponent pos = cg.getPosition(entity);
+        SpeedComponent speedComponent = cg.getSpeed(entity);
 //        if (Gdx.input.isKeyPressed(Input.Keys.UP))
 //            pos.y += speed.ySpeed;
 //        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT))
@@ -111,32 +110,32 @@ public class MovementAndCollision extends EntitySystem {
 //            pos.x -= speed.xSpeed;
         switch (direction) {
             case "N":
-                pos.futureY += speed.ySpeed;
+                pos.futureY += speedComponent.ySpeed;
                 break;
             case "NE":
-                pos.futureX += speed.xSpeed;
-                pos.futureY += speed.ySpeed;
+                pos.futureX += speedComponent.xSpeed;
+                pos.futureY += speedComponent.ySpeed;
                 break;
             case "E":
-                pos.futureX += speed.xSpeed;
+                pos.futureX += speedComponent.xSpeed;
                 break;
             case "SE":
-                pos.futureX += speed.xSpeed;
-                pos.futureY -= speed.ySpeed;
+                pos.futureX += speedComponent.xSpeed;
+                pos.futureY -= speedComponent.ySpeed;
                 break;
             case "S":
-                pos.futureY -= speed.ySpeed;
+                pos.futureY -= speedComponent.ySpeed;
                 break;
             case "SW":
-                pos.futureX -= speed.xSpeed;
-                pos.futureY -= speed.ySpeed;
+                pos.futureX -= speedComponent.xSpeed;
+                pos.futureY -= speedComponent.ySpeed;
                 break;
             case "W":
-                pos.futureX -= speed.xSpeed;
+                pos.futureX -= speedComponent.xSpeed;
                 break;
             case "NW":
-                pos.futureX -= speed.xSpeed;
-                pos.futureY += speed.ySpeed;
+                pos.futureX -= speedComponent.xSpeed;
+                pos.futureY += speedComponent.ySpeed;
                 break;
         }
     }
@@ -148,55 +147,55 @@ public class MovementAndCollision extends EntitySystem {
     }
 
     private void playerMovement() {
-        Position pos = cg.getPosition(player);
-        Speed speed = cg.getSpeed(player);
+        PositionComponent pos = cg.getPosition(player);
+        SpeedComponent speedComponent = cg.getSpeed(player);
         // old pos is position before move change
         if (Gdx.input.isKeyPressed(Input.Keys.W)) {
 
-            pos.y += speed.ySpeed;
+            pos.y += speedComponent.ySpeed;
 //            pos.oldX = pos.x;
-            pos.oldY = pos.y - speed.ySpeed;
+            pos.oldY = pos.y - speedComponent.ySpeed;
 //            pos.futureY += speed.ySpeed;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.D)) {
 
-            pos.x += speed.xSpeed;
-            pos.oldX = pos.x - speed.xSpeed;
+            pos.x += speedComponent.xSpeed;
+            pos.oldX = pos.x - speedComponent.xSpeed;
 //            pos.oldY = pos.y;
 //            pos.futureX += speed.xSpeed;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.S)) {
-            pos.y -= speed.ySpeed;
+            pos.y -= speedComponent.ySpeed;
 //            pos.oldX = pos.x;
-            pos.oldY = pos.y + speed.ySpeed;
+            pos.oldY = pos.y + speedComponent.ySpeed;
 //            pos.futureY -= speed.ySpeed;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.A)) {
-            pos.x -= speed.xSpeed;
-            pos.oldX = pos.x + speed.xSpeed;
+            pos.x -= speedComponent.xSpeed;
+            pos.oldX = pos.x + speedComponent.xSpeed;
 //            pos.oldY = pos.y;
 //            pos.futureX -= speed.xSpeed;
         }
     }
 
     private void keepEntityInsideMap(Entity entity) {
-        Position pos = cg.getPosition(entity);
-        Size size = cg.getSize(entity);
+        PositionComponent pos = cg.getPosition(entity);
+        SizeComponent sizeComponent = cg.getSize(entity);
         // checks if future move is legal or not
         if (pos.futureX < 0)
             pos.x = 0;
-        if (pos.futureX + size.width > gameMapProperties.mapWidth)
-            pos.x = gameMapProperties.mapWidth - size.width;
+        if (pos.futureX + sizeComponent.width > gameMapProperties.mapWidth)
+            pos.x = gameMapProperties.mapWidth - sizeComponent.width;
         if (pos.futureY < 0)
             pos.y = 0;
-        if (pos.futureY + size.height > gameMapProperties.mapHeight)
-            pos.y = gameMapProperties.mapHeight - size.height;
+        if (pos.futureY + sizeComponent.height > gameMapProperties.mapHeight)
+            pos.y = gameMapProperties.mapHeight - sizeComponent.height;
     }
 
     private void keepEntityInsideSpawnZone(Entity entity) {
-        ID id = cg.getID(entity);
-        Position pos = cg.getPosition(entity);
-        Rectangle spawnZone = ((RectangleMapObject) spawnPoints.get(id.ID - 1)).getRectangle();
+        IDComponent idComponent = cg.getID(entity);
+        PositionComponent pos = cg.getPosition(entity);
+        Rectangle spawnZone = ((RectangleMapObject) spawnPoints.get(idComponent.ID - 1)).getRectangle();
         if (pos.x < spawnZone.x)
             pos.x = spawnZone.x;
         else if (pos.x > spawnZone.x + spawnZone.width)
@@ -209,12 +208,12 @@ public class MovementAndCollision extends EntitySystem {
 
     private void handlePlayerCollisions() {
         // in player movement, future was recorded
-        ID id = cg.getID(player);
-        Position pos = cg.getPosition(player);
+        IDComponent idComponent = cg.getID(player);
+        PositionComponent pos = cg.getPosition(player);
         MapObjects mapObjects = gameMapProperties.tiledMap.getLayers().get("Object Layer 1").getObjects();
         Polygon playerArea = getEntityArea(player);
         for (int i = 0; i < mapObjects.getCount(); i++) {
-            if (!Objects.equals(mapObjects.get(i).getName(), "" + id.ID)) {
+            if (!Objects.equals(mapObjects.get(i).getName(), "" + idComponent.ID)) {
                 Polygon collisionSpace = new Polygon();
                 Polyline wall = null;
                 if (mapObjects.get(i) instanceof RectangleMapObject)
@@ -283,13 +282,13 @@ public class MovementAndCollision extends EntitySystem {
     }
 
     private void resolveCollisions(Entity entity) {
-        ID id = cg.getID(entity);
-        Position pos = cg.getPosition(entity);
+        IDComponent idComponent = cg.getID(entity);
+        PositionComponent pos = cg.getPosition(entity);
         MapObjects objects = gameMapProperties.tiledMap.getLayers().get("Object Layer 1").getObjects();
         Polygon currentEntity = getEntityArea(entity);
         for (int i = 0; i < objects.getCount(); i++) {
             Polygon collisionSpace = new Polygon();
-            if (!Objects.equals(objects.get(i).getName(), "" + id.ID)) {
+            if (!Objects.equals(objects.get(i).getName(), "" + idComponent.ID)) {
                 if (objects.get(i) instanceof RectangleMapObject) {
                     collisionSpace = getEntityArea((RectangleMapObject) objects.get(i));
                 }
@@ -351,29 +350,29 @@ public class MovementAndCollision extends EntitySystem {
     }
 
     private Polygon getEntityArea(Entity entity) {
-        Size size = cg.getSize(entity);
-        Position pos = cg.getPosition(entity);
+        SizeComponent sizeComponent = cg.getSize(entity);
+        PositionComponent pos = cg.getPosition(entity);
         float[] vertices =
                 {pos.x, pos.y,
-                        pos.x, pos.y + size.height,
-                        pos.x + size.width, pos.y + size.height,
-                        pos.x + size.width, pos.y};
+                        pos.x, pos.y + sizeComponent.height,
+                        pos.x + sizeComponent.width, pos.y + sizeComponent.height,
+                        pos.x + sizeComponent.width, pos.y};
         return new Polygon(vertices);
     }
 
     private void updatePlayerCamPosition() {
-        Camera camera = cg.getCamera(player);
-        Position pos = cg.getPosition(player);
-        camera.camera.update();
-        camera.camera.position.x = pos.x;
-        camera.camera.position.y = pos.y;
+        CameraComponent cameraComponent = cg.getCamera(player);
+        PositionComponent pos = cg.getPosition(player);
+        cameraComponent.camera.update();
+        cameraComponent.camera.position.x = pos.x;
+        cameraComponent.camera.position.y = pos.y;
     }
 
     private void updateEntityInMap(Entity entity) {
-        ID id = cg.getID(entity);
-        Position pos = cg.getPosition(entity);
+        IDComponent idComponent = cg.getID(entity);
+        PositionComponent pos = cg.getPosition(entity);
         TextureMapObject textureMapObject = (TextureMapObject) gameMapProperties.tiledMap
-                .getLayers().get("Object Layer 1").getObjects().get("" + id.ID);
+                .getLayers().get("Object Layer 1").getObjects().get("" + idComponent.ID);
         textureMapObject.setX(pos.x);
         textureMapObject.setY(pos.y);
     }

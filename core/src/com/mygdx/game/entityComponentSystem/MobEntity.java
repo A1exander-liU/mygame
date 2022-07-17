@@ -5,14 +5,14 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.MyGame;
-import com.mygdx.game.entityComponentSystem.components.Enemy;
-import com.mygdx.game.entityComponentSystem.components.EntitySprite;
-import com.mygdx.game.entityComponentSystem.components.Health;
-import com.mygdx.game.entityComponentSystem.components.ID;
-import com.mygdx.game.entityComponentSystem.components.Name;
-import com.mygdx.game.entityComponentSystem.components.Position;
-import com.mygdx.game.entityComponentSystem.components.Size;
-import com.mygdx.game.entityComponentSystem.components.Speed;
+import com.mygdx.game.entityComponentSystem.components.EnemyComponent;
+import com.mygdx.game.entityComponentSystem.components.NameComponent;
+import com.mygdx.game.entityComponentSystem.components.SpriteComponent;
+import com.mygdx.game.entityComponentSystem.components.HealthComponent;
+import com.mygdx.game.entityComponentSystem.components.IDComponent;
+import com.mygdx.game.entityComponentSystem.components.PositionComponent;
+import com.mygdx.game.entityComponentSystem.components.SizeComponent;
+import com.mygdx.game.entityComponentSystem.components.SpeedComponent;
 
 public class MobEntity extends Entity {
     ComponentGrabber cg;
@@ -29,27 +29,27 @@ public class MobEntity extends Entity {
     }
 
     private void addRequiredComponents() {
-        super.add(new Enemy());
-        super.add(new EntitySprite());
-        super.add(new Health());
-        super.add(new ID());
-        super.add(new Name());
-        super.add(new Position());
-        super.add(new Size());
-        super.add(new Speed());
+        super.add(new EnemyComponent());
+        super.add(new SpriteComponent());
+        super.add(new HealthComponent());
+        super.add(new IDComponent());
+        super.add(new NameComponent());
+        super.add(new PositionComponent());
+        super.add(new SizeComponent());
+        super.add(new SpeedComponent());
     }
 
     private void modifyComponentValues() {
-        EntitySprite entitySprite = cg.getSprite(this);
-        ID id = cg.getID(this);
-        Name name = cg.getName(this);
-        Size size = cg.getSize(this);
-        Speed speed = cg.getSpeed(this);
-        entitySprite.texture = new Texture(Gdx.files.internal("testPlayer.png"));
-        name.name = "" + id.ID;
-        size.width = 32;
-        size.height = 32;
-        speed.xSpeed = 2;
-        speed.ySpeed = 2;
+        SpriteComponent spriteComponent = cg.getSprite(this);
+        IDComponent idComponent = cg.getID(this);
+        NameComponent nameComponent = cg.getName(this);
+        SizeComponent sizeComponent = cg.getSize(this);
+        SpeedComponent speedComponent = cg.getSpeed(this);
+        spriteComponent.texture = new Texture(Gdx.files.internal("testPlayer.png"));
+        nameComponent.name = "" + idComponent.ID;
+        sizeComponent.width = 32;
+        sizeComponent.height = 32;
+        speedComponent.xSpeed = 2;
+        speedComponent.ySpeed = 2;
     }
 }

@@ -12,14 +12,14 @@ import com.badlogic.gdx.math.Rectangle;
 import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.entityComponentSystem.ComponentGrabber;
-import com.mygdx.game.entityComponentSystem.components.Enemy;
-import com.mygdx.game.entityComponentSystem.components.EntitySprite;
-import com.mygdx.game.entityComponentSystem.components.Health;
-import com.mygdx.game.entityComponentSystem.components.ID;
-import com.mygdx.game.entityComponentSystem.components.Name;
-import com.mygdx.game.entityComponentSystem.components.Position;
-import com.mygdx.game.entityComponentSystem.components.Size;
-import com.mygdx.game.entityComponentSystem.components.Speed;
+import com.mygdx.game.entityComponentSystem.components.EnemyComponent;
+import com.mygdx.game.entityComponentSystem.components.IDComponent;
+import com.mygdx.game.entityComponentSystem.components.NameComponent;
+import com.mygdx.game.entityComponentSystem.components.SpriteComponent;
+import com.mygdx.game.entityComponentSystem.components.HealthComponent;
+import com.mygdx.game.entityComponentSystem.components.PositionComponent;
+import com.mygdx.game.entityComponentSystem.components.SizeComponent;
+import com.mygdx.game.entityComponentSystem.components.SpeedComponent;
 
 public class EnemySpawningSystem extends EntitySystem {
     private ImmutableArray<Entity> entities;
@@ -41,27 +41,27 @@ public class EnemySpawningSystem extends EntitySystem {
     @Override
     public void addedToEngine(Engine engine) {
         entities = root.engine.getEntitiesFor(Family.all(
-                Enemy.class, EntitySprite.class, Health.class, ID.class,
-                Name.class, Position.class, Size.class, Speed.class).get());
+                EnemyComponent.class, SpriteComponent.class, HealthComponent.class, IDComponent.class,
+                NameComponent.class, PositionComponent.class, SizeComponent.class, SpeedComponent.class).get());
     }
 
     @Override
     public void update(float deltaTime) {
         for (int i = 0; i < entities.size(); i++) {
             Entity entity = entities.get(i);
-            Enemy enemy = cg.getEnemy(entity);
-            if (!enemy.spawned)
+            EnemyComponent enemyComponent = cg.getEnemy(entity);
+            if (!enemyComponent.spawned)
                 spawnEnemy(entity);
         }
     }
 
     private void spawnEnemy(Entity entity) {
-        ID id = cg.getID(entity);
-        Enemy enemy = cg.getEnemy(entity);
-        Position pos = cg.getPosition(entity);
-        enemy.spawned = true;
+        IDComponent idComponent = cg.getID(entity);
+        EnemyComponent enemyComponent = cg.getEnemy(entity);
+        PositionComponent pos = cg.getPosition(entity);
+        enemyComponent.spawned = true;
         gameMapProperties.tiledMap.getLayers().get("Object Layer 1").getObjects().get(0);
-        Rectangle spawnArea = ((RectangleMapObject) spawnPoints.get(id.ID - 1)).getRectangle();
+        Rectangle spawnArea = ((RectangleMapObject) spawnPoints.get(idComponent.ID - 1)).getRectangle();
         float xCenter = spawnArea.x + (spawnArea.width / 2f);
         float yCenter = spawnArea.y + (spawnArea.height / 2f);
         pos.x = xCenter;
@@ -70,7 +70,7 @@ public class EnemySpawningSystem extends EntitySystem {
         pos.futureY = pos.y;
         pos.position.x = pos.x;
         pos.position.y = pos.y;
-        TextureMapObject textureMapObject = (TextureMapObject) objects.get("" + id.ID);
+        TextureMapObject textureMapObject = (TextureMapObject) objects.get("" + idComponent.ID);
         textureMapObject.setX(pos.x);
         textureMapObject.setY(pos.y);
     }

@@ -1,167 +1,167 @@
 
 Game_UI_Skin.png
-size: 512, 512
+sizeComponent: 512, 512
 format: RGBA8888
 filter: Linear, Linear
 repeat: none
 white-pixel
   rotate: false
   xy: 167, 257
-  size: 1, 1
+  sizeComponent: 1, 1
   orig: 1, 1
   offset: 0, 0
   index: -1
 advanced_pixel-7
   rotate: false
   xy: 1, 326
-  size: 505, 105
+  sizeComponent: 505, 105
   orig: 505, 105
   offset: 0, 0
   index: -1
 advanced_pixel-7(1)
   rotate: false
   xy: 1, 433
-  size: 506, 76
+  sizeComponent: 506, 76
   orig: 506, 76
   offset: 0, 0
   index: -1
 pixil-frame-0
   rotate: false
   xy: 1, 94
-  size: 32, 32
+  sizeComponent: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 pixil-frame-16
   rotate: false
   xy: 1, 260
-  size: 64, 64
+  sizeComponent: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 pixil-frame-17
   rotate: false
   xy: 1, 194
-  size: 64, 64
+  sizeComponent: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 pixil-frame-18
   rotate: false
   xy: 67, 260
-  size: 64, 64
+  sizeComponent: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 pixil-frame-19
   rotate: false
   xy: 1, 128
-  size: 64, 64
+  sizeComponent: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 pixil-frame-20
   rotate: false
   xy: 67, 194
-  size: 64, 64
+  sizeComponent: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 pixil-frame-22
   rotate: false
   xy: 133, 260
-  size: 64, 64
+  sizeComponent: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 pixil-frame-25
   rotate: false
   xy: 67, 160
-  size: 32, 32
+  sizeComponent: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 pixil-frame-26
   rotate: false
   xy: 133, 226
-  size: 32, 32
+  sizeComponent: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 pixil-frame-27
   rotate: false
   xy: 199, 292
-  size: 32, 32
+  sizeComponent: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 pixil-frame-28
   rotate: false
   xy: 1, 60
-  size: 32, 32
+  sizeComponent: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 pixil-frame-29
   rotate: false
   xy: 267, 292
-  size: 32, 32
+  sizeComponent: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 pixil-frame-30
   rotate: false
   xy: 301, 292
-  size: 32, 32
+  sizeComponent: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 pixil-frame-31
   rotate: false
   xy: 133, 208
-  size: 1, 16
+  sizeComponent: 1, 16
   orig: 1, 16
   offset: 0, 0
   index: -1
 pixil-frame-32
   rotate: false
   xy: 509, 493
-  size: 2, 16
+  sizeComponent: 2, 16
   orig: 2, 16
   offset: 0, 0
   index: -1
 pixil-frame-33
   rotate: false
   xy: 35, 110
-  size: 16, 16
+  sizeComponent: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 pixil-frame-34
   rotate: false
   xy: 67, 136
-  size: 16, 22
+  sizeComponent: 16, 22
   orig: 16, 22
   offset: 0, 0
   index: -1
 slider-bg
   rotate: false
   xy: 233, 292
-  size: 32, 32
+  sizeComponent: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 slider-knob2
   rotate: false
   xy: 101, 160
-  size: 15, 32
+  sizeComponent: 15, 32
   orig: 15, 32
   offset: 0, 0
   index: -1
 slider-knobBefore
   rotate: false
   xy: 1, 26
-  size: 32, 32
+  sizeComponent: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1

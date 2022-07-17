@@ -42,11 +42,11 @@
 },
 "com.badlogic.gdx.scenes.scene2d.ui.Skin$TintedDrawable": {
 	"text-area-highlight": {
-		"name": "white-pixel",
+		"nameComponent": "white-pixel",
 		"color": "light-brown"
 	},
 	"cursor-black": {
-		"name": "white-pixel",
+		"nameComponent": "white-pixel",
 		"color": "black"
 	}
 },
@@ -592,7 +592,7 @@
 		"background": "progress-bar-bg",
 		"knobBefore": "knob-before-experience"
 	},
-	"enemy-health": {
+	"enemyComponent-health": {
 		"background": "progress-bar-bg",
 		"knobAfter": "knob-after-health"
 	}
