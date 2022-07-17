@@ -66,6 +66,10 @@ public class EnemySpawningSystem extends EntitySystem {
         float yCenter = spawnArea.y + (spawnArea.height / 2f);
         pos.x = xCenter;
         pos.y = yCenter;
+        pos.futureX = pos.x;
+        pos.futureY = pos.y;
+        pos.position.x = pos.x;
+        pos.position.y = pos.y;
         TextureMapObject textureMapObject = (TextureMapObject) objects.get("" + id.ID);
         textureMapObject.setX(pos.x);
         textureMapObject.setY(pos.y);
