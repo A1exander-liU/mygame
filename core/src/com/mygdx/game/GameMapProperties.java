@@ -1,5 +1,6 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 
@@ -23,5 +24,13 @@ public class GameMapProperties {
         tileHeight = mapProps.get("tileheight", Integer.class);
         mapWidth = xCells * tileWidth;
         mapHeight = yCells * tileHeight;
+    }
+
+    public MapLayer getMapLayer(String name) {
+        return tiledMap.getLayers().get(name);
+    }
+
+    public MapLayer getMapLayer(int index) {
+        return tiledMap.getLayers().get(index);
     }
 }
