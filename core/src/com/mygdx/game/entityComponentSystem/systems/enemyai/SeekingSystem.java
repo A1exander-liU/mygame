@@ -11,6 +11,7 @@ public class SeekingSystem extends EntitySystem {
     GameMapProperties gameMapProperties;
 
     public SeekingSystem(ComponentGrabber cg, MyGame root, GameMapProperties gameMapProperties) {
+        super(4);
         this.cg = cg;
         this.root = root;
         this.gameMapProperties = gameMapProperties;
