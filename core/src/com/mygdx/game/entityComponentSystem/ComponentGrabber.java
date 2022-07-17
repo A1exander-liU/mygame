@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.mygdx.game.MyGame;
+import com.mygdx.game.entityComponentSystem.components.AI;
 import com.mygdx.game.entityComponentSystem.components.Camera;
 import com.mygdx.game.entityComponentSystem.components.Enemy;
 import com.mygdx.game.entityComponentSystem.components.Sprite;
@@ -20,6 +21,11 @@ public class ComponentGrabber {
 
     public ComponentGrabber(MyGame root) {
         this.root = root;
+    }
+
+    public AI getAI(Entity entity) {
+        ComponentMapper<AI> ai = ComponentMapper.getFor(AI.class);
+        return ai.get(entity);
     }
 
     public Camera getCamera(Entity entity) {
