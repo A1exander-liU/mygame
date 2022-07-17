@@ -28,7 +28,6 @@ import com.mygdx.game.entityComponentSystem.components.Position;
 import com.mygdx.game.entityComponentSystem.components.Size;
 import com.mygdx.game.entityComponentSystem.components.Speed;
 
-import java.util.Arrays;
 import java.util.Objects;
 
 public class CollisionSystem extends EntitySystem {

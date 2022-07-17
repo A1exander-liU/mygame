@@ -24,7 +24,6 @@ import com.mygdx.game.entityComponentSystem.EntityFactory;
 import com.mygdx.game.entityComponentSystem.EntityToMapAdder;
 import com.mygdx.game.entityComponentSystem.MobEntity;
 import com.mygdx.game.entityComponentSystem.PlayerEntity;
-import com.mygdx.game.entityComponentSystem.components.Camera;
 import com.mygdx.game.entityComponentSystem.components.EntitySprite;
 import com.mygdx.game.entityComponentSystem.components.Health;
 import com.mygdx.game.entityComponentSystem.components.ID;
