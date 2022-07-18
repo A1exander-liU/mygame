@@ -14,6 +14,7 @@ import com.mygdx.game.entityComponentSystem.components.Name;
 import com.mygdx.game.entityComponentSystem.components.Position;
 import com.mygdx.game.entityComponentSystem.components.Size;
 import com.mygdx.game.entityComponentSystem.components.Speed;
+import com.mygdx.game.entityComponentSystem.components.Steering;
 
 public class MobEntity extends Entity {
     ComponentGrabber cg;
@@ -38,6 +39,7 @@ public class MobEntity extends Entity {
         super.add(new Spawn());
         super.add(new Size());
         super.add(new Speed());
+        super.add(new Steering());
     }
 
     private void modifyComponentValues() {

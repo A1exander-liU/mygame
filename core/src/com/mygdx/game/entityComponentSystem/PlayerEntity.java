@@ -16,6 +16,7 @@ import com.mygdx.game.entityComponentSystem.components.Player;
 import com.mygdx.game.entityComponentSystem.components.Position;
 import com.mygdx.game.entityComponentSystem.components.Size;
 import com.mygdx.game.entityComponentSystem.components.Speed;
+import com.mygdx.game.entityComponentSystem.components.Steering;
 
 public class PlayerEntity extends Entity {
     ComponentGrabber cg;
@@ -48,6 +49,7 @@ public class PlayerEntity extends Entity {
         super.add(new Position());
         super.add(new Size());
         super.add(new Speed());
+        super.add(new Steering());
     }
 
     private void modifyComponentValues(String playerName) {
