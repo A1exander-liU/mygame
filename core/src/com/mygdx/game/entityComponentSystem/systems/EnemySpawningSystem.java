@@ -13,6 +13,7 @@ import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.entityComponentSystem.ComponentGrabber;
 import com.mygdx.game.entityComponentSystem.components.Enemy;
+import com.mygdx.game.entityComponentSystem.components.Spawn;
 import com.mygdx.game.entityComponentSystem.components.Sprite;
 import com.mygdx.game.entityComponentSystem.components.Health;
 import com.mygdx.game.entityComponentSystem.components.ID;
@@ -59,6 +60,7 @@ public class EnemySpawningSystem extends EntitySystem {
         ID id = cg.getID(entity);
         Enemy enemy = cg.getEnemy(entity);
         Position pos = cg.getPosition(entity);
+        Spawn spawn = cg.getSpawn(entity);
         enemy.spawned = true;
         gameMapProperties.tiledMap.getLayers().get("Object Layer 1").getObjects().get(0);
         Rectangle spawnArea = ((RectangleMapObject) spawnPoints.get(id.ID - 1)).getRectangle();
@@ -66,6 +68,8 @@ public class EnemySpawningSystem extends EntitySystem {
         float yCenter = spawnArea.y + (spawnArea.height / 2f);
         pos.x = xCenter;
         pos.y = yCenter;
+        spawn.spawnPosX = xCenter;
+        spawn.spawnPosY = yCenter;
         pos.futureX = pos.x;
         pos.futureY = pos.y;
         pos.position.x = pos.x;
