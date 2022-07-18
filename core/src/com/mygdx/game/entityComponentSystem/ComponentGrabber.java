@@ -7,6 +7,7 @@ import com.mygdx.game.MyGame;
 import com.mygdx.game.entityComponentSystem.components.AI;
 import com.mygdx.game.entityComponentSystem.components.Camera;
 import com.mygdx.game.entityComponentSystem.components.Enemy;
+import com.mygdx.game.entityComponentSystem.components.Spawn;
 import com.mygdx.game.entityComponentSystem.components.Sprite;
 import com.mygdx.game.entityComponentSystem.components.Health;
 import com.mygdx.game.entityComponentSystem.components.ID;
@@ -67,6 +68,11 @@ public class ComponentGrabber {
     public Position getPosition(Entity entity) {
         ComponentMapper<Position> pos = ComponentMapper.getFor(Position.class);
         return pos.get(entity);
+    }
+    
+    public Spawn getSpawn(Entity entity) {
+        ComponentMapper<Spawn> spawn = ComponentMapper.getFor(Spawn.class);
+        return spawn.get(entity);
     }
 
     public Size getSize(Entity entity) {
