@@ -34,6 +34,7 @@ import com.mygdx.game.entityComponentSystem.systems.CollisionSystem;
 import com.mygdx.game.entityComponentSystem.systems.EnemySpawningSystem;
 import com.mygdx.game.entityComponentSystem.systems.MovementAndCollision;
 import com.mygdx.game.entityComponentSystem.systems.MovementSystem;
+import com.mygdx.game.entityComponentSystem.systems.SpawnZoneDetectionSystem;
 
 public class GameScreen implements Screen {
     public MyGame parent;
@@ -117,10 +118,12 @@ public class GameScreen implements Screen {
         MovementSystem movementSystem = new MovementSystem(cg, parent);
         CollisionSystem collisionSystem = new CollisionSystem(cg, parent, gameMapProperties);
         EnemySpawningSystem enemySpawningSystem = new EnemySpawningSystem(cg, parent, gameMapProperties);
+        SpawnZoneDetectionSystem spawnZoneDetectionSystem = new SpawnZoneDetectionSystem(cg, parent, gameMapProperties);
         parent.engine.addSystem(movementAndCollision);
 //        parent.engine.addSystem(movementSystem);
 //        parent.engine.addSystem(collisionSystem);
         parent.engine.addSystem(enemySpawningSystem);
+        parent.engine.addSystem(spawnZoneDetectionSystem);
     }
 
     @Override
