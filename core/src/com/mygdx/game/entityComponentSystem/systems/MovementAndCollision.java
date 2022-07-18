@@ -251,7 +251,6 @@ public class MovementAndCollision extends EntitySystem {
                     intersectedWithBorder = checkWallCollisions(wall, playerArea);
 
                 if (intersected || intersectedWithBorder) {
-                    System.out.println("intersected");
                     pos.x = pos.oldX;
                     pos.y = pos.oldY;
                 }
@@ -362,12 +361,12 @@ public class MovementAndCollision extends EntitySystem {
                     pos.y = pos.futureY;
 
                 }
-                else {
-                    System.out.println("intersected");
-                    System.out.println(pos.futureX + ", " + pos.futureY);
-                    System.out.println(pos.x + ", " + pos.y);
-                    System.out.println("------------");
-                }
+//                else {
+//                    System.out.println("intersected");
+//                    System.out.println(pos.futureX + ", " + pos.futureY);
+//                    System.out.println(pos.x + ", " + pos.y);
+//                    System.out.println("------------");
+//                }
             }
         }
     }
