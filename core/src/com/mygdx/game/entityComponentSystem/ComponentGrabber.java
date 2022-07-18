@@ -4,7 +4,7 @@ import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.mygdx.game.MyGame;
-import com.mygdx.game.entityComponentSystem.components.AI;
+import com.mygdx.game.entityComponentSystem.components.Steering;
 import com.mygdx.game.entityComponentSystem.components.Camera;
 import com.mygdx.game.entityComponentSystem.components.Enemy;
 import com.mygdx.game.entityComponentSystem.components.Spawn;
@@ -22,11 +22,6 @@ public class ComponentGrabber {
 
     public ComponentGrabber(MyGame root) {
         this.root = root;
-    }
-
-    public AI getAI(Entity entity) {
-        ComponentMapper<AI> ai = ComponentMapper.getFor(AI.class);
-        return ai.get(entity);
     }
 
     public Camera getCamera(Entity entity) {
@@ -69,7 +64,7 @@ public class ComponentGrabber {
         ComponentMapper<Position> pos = ComponentMapper.getFor(Position.class);
         return pos.get(entity);
     }
-    
+
     public Spawn getSpawn(Entity entity) {
         ComponentMapper<Spawn> spawn = ComponentMapper.getFor(Spawn.class);
         return spawn.get(entity);
@@ -83,6 +78,11 @@ public class ComponentGrabber {
     public Speed getSpeed(Entity entity) {
         ComponentMapper<Speed> speed = ComponentMapper.getFor(Speed.class);
         return speed.get(entity);
+    }
+
+    public Steering getSteering(Entity entity) {
+        ComponentMapper<Steering> steering = ComponentMapper.getFor(Steering.class);
+        return steering.get(entity);
     }
 
     public Entity findEntity(int entityID) {
