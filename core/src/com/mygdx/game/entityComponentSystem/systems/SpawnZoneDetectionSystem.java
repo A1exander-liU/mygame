@@ -59,6 +59,18 @@ public class SpawnZoneDetectionSystem extends EntitySystem {
                     enemy.hunting = true;
             }
         }
+        for (int i = 0; i < spawnZones.getCount(); i++) {
+            int id = i + 1;
+            Entity entity = cg.findEntity(id);
+            if (cg.getEnemy(entity).hunting) {
+//                System.out.println(distanceFromSpawnZone(spawnZones.get(i)));
+                if (distanceFromSpawnZone(spawnZones.get(i)) > 400) {
+                    System.out.println("too far");
+                    // to far from spawn make enemy stop hunting
+                    cg.getEnemy(entity).hunting = false;
+                }
+            }
+        }
     }
 
     public Polygon getEntityArea(Entity entity) {
@@ -82,5 +94,16 @@ public class SpawnZoneDetectionSystem extends EntitySystem {
                 rect.x + rect.width, rect.y
         };
         return new Polygon(vertices);
+    }
+
+    private float distanceFromSpawnZone(MapObject spawnZone) {
+        Rectangle rect = ((RectangleMapObject) spawnZone).getRectangle();
+        Vector2 spawnZoneCenter = new Vector2(
+                rect.x + rect.width / 2,
+                rect.y + rect.height / 2
+        );
+        Position pos = cg.getPosition(player);
+        Vector2 playerPosition = new Vector2(pos.x, pos.y);
+        return playerPosition.dst(spawnZoneCenter);
     }
 }
