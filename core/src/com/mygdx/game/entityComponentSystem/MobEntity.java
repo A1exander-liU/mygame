@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.entityComponentSystem.components.Enemy;
+import com.mygdx.game.entityComponentSystem.components.Spawn;
 import com.mygdx.game.entityComponentSystem.components.Sprite;
 import com.mygdx.game.entityComponentSystem.components.Health;
 import com.mygdx.game.entityComponentSystem.components.ID;
@@ -18,7 +19,6 @@ public class MobEntity extends Entity {
     ComponentGrabber cg;
     MyGame root;
     GameMapProperties gameMapProperties;
-
 
     public MobEntity(ComponentGrabber cg, MyGame root, GameMapProperties gameMapProperties) {
         this.cg = cg;
@@ -35,6 +35,7 @@ public class MobEntity extends Entity {
         super.add(new ID());
         super.add(new Name());
         super.add(new Position());
+        super.add(new Spawn());
         super.add(new Size());
         super.add(new Speed());
     }
