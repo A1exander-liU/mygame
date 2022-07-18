@@ -3,16 +3,19 @@ package com.mygdx.game.entityComponentSystem.systems;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
+import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.entityComponentSystem.ComponentGrabber;
 import com.mygdx.game.entityComponentSystem.Families;
+import com.mygdx.game.entityComponentSystem.components.Enemy;
 import com.mygdx.game.entityComponentSystem.components.Position;
 import com.mygdx.game.entityComponentSystem.components.Size;
 
@@ -22,6 +25,7 @@ public class SpawnZoneDetectionSystem extends EntitySystem {
     GameMapProperties gameMapProperties;
     Entity player;
     MapObjects spawnZones;
+    ImmutableArray<Entity> enemies;
 
     public SpawnZoneDetectionSystem(ComponentGrabber cg, MyGame root, GameMapProperties gameMapProperties) {
         super(5);
@@ -30,6 +34,7 @@ public class SpawnZoneDetectionSystem extends EntitySystem {
         this.gameMapProperties = gameMapProperties;
         player = root.engine.getEntitiesFor(Families.player).get(0);
         spawnZones = gameMapProperties.getMapLayer("Enemy Spawns").getObjects();
+        enemies = root.engine.getEntitiesFor(Families.enemies);
     }
 
     @Override
@@ -44,8 +49,15 @@ public class SpawnZoneDetectionSystem extends EntitySystem {
             // spawn zones are all rectangles
             Polygon spawnZone = getEntityArea((RectangleMapObject) spawnZones.get(i));
             boolean crossedSpawnZone = Intersector.overlapConvexPolygons(playerArea, spawnZone);
-            if (crossedSpawnZone)
+            if (crossedSpawnZone) {
                 System.out.println("entered spawn zone");
+                // id is for the enemy
+                int id = i + 1;
+                Entity entity = cg.findEntity(id);
+                Enemy enemy = cg.getEnemy(entity);
+                if (enemy != null)
+                    enemy.hunting = true;
+            }
         }
     }
 
@@ -71,5 +83,4 @@ public class SpawnZoneDetectionSystem extends EntitySystem {
         };
         return new Polygon(vertices);
     }
-
 }
