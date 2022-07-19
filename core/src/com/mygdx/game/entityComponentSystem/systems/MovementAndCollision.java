@@ -204,17 +204,19 @@ public class MovementAndCollision extends EntitySystem {
     }
 
     private void keepEntityInsideSpawnZone(Entity entity) {
-        ID id = cg.getID(entity);
-        Position pos = cg.getPosition(entity);
-        Rectangle spawnZone = ((RectangleMapObject) spawnPoints.get(id.ID - 1)).getRectangle();
-        if (pos.x < spawnZone.x)
-            pos.x = spawnZone.x;
-        else if (pos.x > spawnZone.x + spawnZone.width)
-            pos.x = spawnZone.x + spawnZone.width;
-        else if (pos.y < spawnZone.y)
-            pos.y = spawnZone.y;
-        else if (pos.y > spawnZone.y + spawnZone.height)
-            pos.y = spawnZone.y + spawnZone.height;
+        if (!cg.getEnemy(entity).hunting) {
+            ID id = cg.getID(entity);
+            Position pos = cg.getPosition(entity);
+            Rectangle spawnZone = ((RectangleMapObject) spawnPoints.get(id.ID - 1)).getRectangle();
+            if (pos.x < spawnZone.x)
+                pos.x = spawnZone.x;
+            else if (pos.x > spawnZone.x + spawnZone.width)
+                pos.x = spawnZone.x + spawnZone.width;
+            else if (pos.y < spawnZone.y)
+                pos.y = spawnZone.y;
+            else if (pos.y > spawnZone.y + spawnZone.height)
+                pos.y = spawnZone.y + spawnZone.height;
+        }
     }
 
     private void handleCollisions(Entity entity) {
