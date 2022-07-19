@@ -39,7 +39,7 @@ public class MobEntity extends Entity {
         super.add(new Spawn());
         super.add(new Size());
         super.add(new Speed());
-        super.add(new Steering());
+        super.add(new Steering(this));
     }
 
     private void modifyComponentValues() {

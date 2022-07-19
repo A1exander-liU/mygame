@@ -49,7 +49,7 @@ public class PlayerEntity extends Entity {
         super.add(new Position());
         super.add(new Size());
         super.add(new Speed());
-        super.add(new Steering());
+        super.add(new Steering(this));
     }
 
     private void modifyComponentValues(String playerName) {
