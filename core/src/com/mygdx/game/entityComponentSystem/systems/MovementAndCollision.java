@@ -83,7 +83,8 @@ public class MovementAndCollision extends EntitySystem {
         // get enemy move
         for (int i = 0; i < enemies.size(); i++) {
             Entity enemy = enemies.get(i);
-            moveEnemy(getRandomDirection(), enemy);
+            if (!cg.getEnemy(enemy).hunting)
+                moveEnemy(getRandomDirection(), enemy);
         }
         // get player move
         // at this point each enemy and player has their future move
@@ -110,46 +111,48 @@ public class MovementAndCollision extends EntitySystem {
 //            pos.y -= speed.ySpeed;
 //        if (Gdx.input.isKeyPressed(Input.Keys.LEFT))
 //            pos.x -= speed.xSpeed;
+        pos.oldX = pos.x;
+        pos.oldY = pos.y;
         switch (direction) {
             case "N":
                 pos.y += speed.ySpeed;
-                pos.oldY = pos.y - speed.ySpeed;
+//                pos.oldY = pos.y - speed.ySpeed;
                 break;
             case "NE":
                 pos.x += speed.xSpeed;
                 pos.y += speed.ySpeed;
-                pos.oldX = pos.x - speed.xSpeed;
-                pos.oldY = pos.y - speed.ySpeed;
+//                pos.oldX = pos.x - speed.xSpeed;
+//                pos.oldY = pos.y - speed.ySpeed;
                 break;
             case "E":
                 pos.x += speed.xSpeed;
-                pos.oldX = pos.x - speed.xSpeed;
+//                pos.oldX = pos.x - speed.xSpeed;
                 break;
             case "SE":
                 pos.x += speed.xSpeed;
                 pos.y -= speed.ySpeed;
-                pos.oldX = pos.x - speed.xSpeed;
-                pos.oldY = pos.y + speed.ySpeed;
+//                pos.oldX = pos.x - speed.xSpeed;
+//                pos.oldY = pos.y + speed.ySpeed;
                 break;
             case "S":
                 pos.y -= speed.ySpeed;
-                pos.oldY = pos.y + speed.ySpeed;
+//                pos.oldY = pos.y + speed.ySpeed;
                 break;
             case "SW":
                 pos.x -= speed.xSpeed;
                 pos.y -= speed.ySpeed;
-                pos.oldX = pos.x + speed.xSpeed;
-                pos.oldY = pos.y + speed.ySpeed;
+//                pos.oldX = pos.x + speed.xSpeed;
+//                pos.oldY = pos.y + speed.ySpeed;
                 break;
             case "W":
                 pos.x -= speed.xSpeed;
-                pos.oldX = pos.x + speed.xSpeed;
+//                pos.oldX = pos.x + speed.xSpeed;
                 break;
             case "NW":
                 pos.x -= speed.xSpeed;
                 pos.y += speed.ySpeed;
-                pos.oldX = pos.x + speed.xSpeed;
-                pos.oldY = pos.y - speed.ySpeed;
+//                pos.oldX = pos.x + speed.xSpeed;
+//                pos.oldY = pos.y - speed.ySpeed;
                 break;
         }
     }
@@ -164,33 +167,25 @@ public class MovementAndCollision extends EntitySystem {
         Position pos = cg.getPosition(player);
         Speed speed = cg.getSpeed(player);
         // old pos is position before move change
+        pos.oldX = pos.x;
+        pos.oldY = pos.y;
         if (Gdx.input.isKeyPressed(Input.Keys.W)) {
 
             pos.y += speed.ySpeed;
-//            pos.oldX = pos.x;
-            pos.oldY = pos.y - speed.ySpeed;
-//            pos.futureY += speed.ySpeed;
-            pos.position = pos.position.add(0, speed.ySpeed);
-            pos.oldPosition = pos.position.sub(0, speed.ySpeed);
+//            pos.oldY = pos.y - speed.ySpeed;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.D)) {
 
             pos.x += speed.xSpeed;
-            pos.oldX = pos.x - speed.xSpeed;
-//            pos.oldY = pos.y;
-//            pos.futureX += speed.xSpeed;
+//            pos.oldX = pos.x - speed.xSpeed;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.S)) {
             pos.y -= speed.ySpeed;
-//            pos.oldX = pos.x;
-            pos.oldY = pos.y + speed.ySpeed;
-//            pos.futureY -= speed.ySpeed;
+//            pos.oldY = pos.y + speed.ySpeed;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.A)) {
             pos.x -= speed.xSpeed;
-            pos.oldX = pos.x + speed.xSpeed;
-//            pos.oldY = pos.y;
-//            pos.futureX -= speed.xSpeed;
+//            pos.oldX = pos.x + speed.xSpeed;
         }
     }
 
