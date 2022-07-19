@@ -1,10 +1,12 @@
 package com.mygdx.game.entityComponentSystem.components;
 
 import com.badlogic.ashley.core.Component;
+import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.ai.steer.Steerable;
 import com.badlogic.gdx.ai.steer.SteeringAcceleration;
 import com.badlogic.gdx.ai.steer.SteeringBehavior;
 import com.badlogic.gdx.ai.utils.Location;
+import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.math.Vector2;
 
 public class Steering implements Component, Steerable<Vector2> {
@@ -23,7 +25,12 @@ public class Steering implements Component, Steerable<Vector2> {
     public SteeringBehavior<Vector2> steeringBehavior;
     public static final SteeringAcceleration<Vector2> steeringAcceleration =
             new SteeringAcceleration<>(new Vector2());
+    // store reference to access
+    public Entity entity;
 
+    public Steering(Entity entity) {
+        this.entity = entity;
+    }
 
     @Override
     public Vector2 getLinearVelocity() {
@@ -141,7 +148,7 @@ public class Steering implements Component, Steerable<Vector2> {
         this.position.mulAdd(linearVelocity, time);
         this.linearVelocity.mulAdd(steeringAcceleration.linear, time).limit(this.getMaxLinearSpeed());
         if (!independentFacing) {
-
+            
         }
     }
 }
