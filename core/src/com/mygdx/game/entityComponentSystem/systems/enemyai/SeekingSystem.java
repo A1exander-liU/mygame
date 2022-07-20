@@ -47,6 +47,15 @@ public class SeekingSystem extends EntitySystem {
         GdxAI.getTimepiece().update(delta);
         // checks if the enemy is hunting (aggressive towards player)
         checkIfEnemyHunting();
+//        GdxAI.getTimepiece().update(delta);
+        for (int i = 0; i < enemies.size(); i++) {
+            // update the steering behavior of
+            Entity entity = enemies.get(i);
+            if (cg.getSteering(entity).steeringBehavior != null) {
+                cg.getSteering(entity).update(delta);
+                updateEntityInMap(entity);
+            }
+        }
 
     }
 
@@ -66,5 +75,14 @@ public class SeekingSystem extends EntitySystem {
                 .setTimeToTarget(0.1f)
                 .setTarget(cg.getSteering(player));
     }
-    
+
+    private void updateEntityInMap(Entity entity) {
+        ID id = cg.getID(entity);
+        Position pos = cg.getPosition(entity);
+        TextureMapObject textureMapObject = (TextureMapObject) gameMapProperties.tiledMap
+                .getLayers().get("Object Layer 1").getObjects().get("" + id.ID);
+        textureMapObject.setX(pos.x);
+        textureMapObject.setY(pos.y);
+    }
+
 }
