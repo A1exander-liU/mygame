@@ -33,6 +33,9 @@ public class ReturnToSpawnSystem extends EntitySystem {
         for (int i = 0; i < enemies.size(); i++) {
             Entity entity = enemies.get(i);
             Enemy enemy = cg.getEnemy(entity);
+            if (enemy.state == Enemy.States.RETURN) {
+                
+            }
         }
     }
 }
