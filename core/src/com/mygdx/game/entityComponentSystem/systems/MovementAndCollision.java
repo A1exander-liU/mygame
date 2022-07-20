@@ -83,7 +83,7 @@ public class MovementAndCollision extends EntitySystem {
         // get enemy move
         for (int i = 0; i < enemies.size(); i++) {
             Entity enemy = enemies.get(i);
-            if (!cg.getEnemy(enemy).hunting)
+            if (cg.getSteering(enemy).steeringBehavior != null)
                 moveEnemy(getRandomDirection(), enemy);
         }
         // get player move
