@@ -136,7 +136,7 @@ public class Steering implements Component, Steerable<Vector2> {
 
     @Override
     public Location<Vector2> newLocation() {
-        return null;
+        return new GameLocation();
     }
 
     public void update(float delta) {
