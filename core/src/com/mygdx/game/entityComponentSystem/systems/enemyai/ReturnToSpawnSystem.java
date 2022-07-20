@@ -4,11 +4,16 @@ import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.utils.ImmutableArray;
+import com.badlogic.gdx.ai.steer.Steerable;
+import com.badlogic.gdx.ai.steer.behaviors.Arrive;
+import com.badlogic.gdx.math.Vector2;
+import com.mygdx.game.GameLocation;
 import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.entityComponentSystem.ComponentGrabber;
 import com.mygdx.game.entityComponentSystem.Families;
 import com.mygdx.game.entityComponentSystem.components.Enemy;
+import com.mygdx.game.entityComponentSystem.components.Spawn;
 
 public class ReturnToSpawnSystem extends EntitySystem {
     ComponentGrabber cg;
@@ -33,9 +38,20 @@ public class ReturnToSpawnSystem extends EntitySystem {
         for (int i = 0; i < enemies.size(); i++) {
             Entity entity = enemies.get(i);
             Enemy enemy = cg.getEnemy(entity);
+            Spawn spawn = cg.getSpawn(entity);
             if (enemy.state == Enemy.States.RETURN) {
-                
+                cg.getSteering(entity).steeringBehavior = returnToSpawn(entity);
             }
         }
+    }
+
+    private Arrive<Vector2> returnToSpawn(Entity enemy) {
+        Spawn spawn = cg.getSpawn(enemy);
+        GameLocation spawnPosition = new GameLocation();
+        spawnPosition.setPosition(spawn.spawnPosX, spawn.spawnPosY);
+        return new Arrive<>(cg.getSteering(enemy), spawnPosition)
+                .setArrivalTolerance(3f)
+                .setDecelerationRadius(10f)
+                .setTimeToTarget(0.1f);
     }
 }
