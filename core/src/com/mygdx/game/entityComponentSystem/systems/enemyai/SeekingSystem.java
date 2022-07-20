@@ -13,6 +13,7 @@ import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.entityComponentSystem.ComponentGrabber;
 import com.mygdx.game.entityComponentSystem.Families;
+import com.mygdx.game.entityComponentSystem.components.Enemy;
 import com.mygdx.game.entityComponentSystem.components.ID;
 import com.mygdx.game.entityComponentSystem.components.Position;
 import com.mygdx.game.entityComponentSystem.components.Steering;
@@ -61,10 +62,8 @@ public class SeekingSystem extends EntitySystem {
 
     private void checkIfEnemyHunting() {
         for (int i = 0; i < enemies.size(); i++) {
-            if (cg.getEnemy(enemies.get(i)).hunting)
+            if (cg.getEnemy(enemies.get(i)).state == Enemy.States.PURSUE)
                 cg.getSteering(enemies.get(i)).steeringBehavior = setToArrive(cg.getSteering(enemies.get(i)));
-            else
-                cg.getSteering(enemies.get(i)).steeringBehavior = null;
         }
     }
 
