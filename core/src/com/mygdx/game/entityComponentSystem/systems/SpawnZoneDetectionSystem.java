@@ -72,6 +72,7 @@ public class SpawnZoneDetectionSystem extends EntitySystem {
 //                System.out.println(distanceFromSpawnZone(spawnZones.get(i)));
                 if (distanceFromSpawnZone(spawnZones.get(i)) > 400) {
                     System.out.println("too far");
+                    cg.getEnemy(entity).state = Enemy.States.RETURN;
 //                    cg.getEnemy(entity).hunting = false;
                     // to far from spawn make enemy stop hunting
                     // now we need to make the enemy move back to their spawn
