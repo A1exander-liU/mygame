@@ -44,6 +44,7 @@ public class SeekingSystem extends EntitySystem {
         Position playerPos = cg.getPosition(player);
         playerSteering.position.x = playerPos.x;
         playerSteering.position.y = playerPos.y;
+        GdxAI.getTimepiece().update(delta);
 
     }
 }
