@@ -146,15 +146,28 @@ public class Steering implements Component, Steerable<Vector2> {
         position.y = pos.y;
         if (steeringBehavior != null) {
             steeringBehavior.calculateSteering(steeringAcceleration);
-            applySteering(delta);
+            applySteering(steeringAcceleration, delta);
         }
     }
 
-    private void applySteering(float time) {
-        this.position.mulAdd(linearVelocity, time);
-        this.linearVelocity.mulAdd(steeringAcceleration.linear, time).limit(this.getMaxLinearSpeed());
-        if (!independentFacing) {
+    private void applySteering(SteeringAcceleration<Vector2> steering, float time) {
+        // apply to change to position of the entity
+        applyVelocityToPosition();
+        linearVelocity.mulAdd(steering.linear, time).limit(getMaxLinearSpeed());
+    }
 
-        }
+    private void applyVelocityToPosition() {
+        Position pos = entity.getComponent(Position.class);
+        // update old position to position before update
+        pos.oldX = pos.x;
+        pos.oldY = pos.y;
+        // set position of this component to pos component of this entity
+        pos.position.x = pos.x;
+        pos.position.y = pos.y;
+        // apply velocity
+        pos.position.mulAdd(linearVelocity, 0.25f);
+        // update the pos component of entity with newly calculated pos here
+        pos.x = pos.position.x;
+        pos.y = pos.position.y;
     }
 }
