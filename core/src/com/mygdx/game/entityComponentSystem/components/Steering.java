@@ -140,6 +140,10 @@ public class Steering implements Component, Steerable<Vector2> {
     }
 
     public void update(float delta) {
+        // update the position with position component of this entity
+        Position pos = entity.getComponent(Position.class);
+        position.x = pos.x;
+        position.y = pos.y;
         if (steeringBehavior != null) {
             steeringBehavior.calculateSteering(steeringAcceleration);
             applySteering(delta);
