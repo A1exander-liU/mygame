@@ -83,7 +83,7 @@ public class MovementAndCollision extends EntitySystem {
         // get enemy move
         for (int i = 0; i < enemies.size(); i++) {
             Entity enemy = enemies.get(i);
-            if (cg.getSteering(enemy).steeringBehavior != null)
+            if (cg.getSteering(enemy).steeringBehavior == null)
                 moveEnemy(getRandomDirection(), enemy);
         }
         // get player move
@@ -204,6 +204,8 @@ public class MovementAndCollision extends EntitySystem {
     }
 
     private void keepEntityInsideSpawnZone(Entity entity) {
+        // this makes the enemy warp back to spawn since hunting is set back to false when player too far
+        // need to move enemy back inside spawn point first
         if (!cg.getEnemy(entity).hunting) {
             ID id = cg.getID(entity);
             Position pos = cg.getPosition(entity);
