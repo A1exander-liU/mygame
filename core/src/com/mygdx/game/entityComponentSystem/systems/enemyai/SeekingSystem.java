@@ -45,6 +45,18 @@ public class SeekingSystem extends EntitySystem {
         playerSteering.position.x = playerPos.x;
         playerSteering.position.y = playerPos.y;
         GdxAI.getTimepiece().update(delta);
+        // checks if the enemy is hunting (aggressive towards player)
+        checkIfEnemyHunting();
 
     }
+
+    private void checkIfEnemyHunting() {
+        for (int i = 0; i < enemies.size(); i++) {
+            if (cg.getEnemy(enemies.get(i)).hunting)
+                cg.getSteering(enemies.get(i)).steeringBehavior = setToArrive(cg.getSteering(enemies.get(i)));
+            else
+                cg.getSteering(enemies.get(i)).steeringBehavior = null;
+        }
+    }
+
 }
