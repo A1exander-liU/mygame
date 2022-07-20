@@ -40,5 +40,10 @@ public class SeekingSystem extends EntitySystem {
 
     @Override
     public void update(float delta) {
+        Steering playerSteering = cg.getSteering(player);
+        Position playerPos = cg.getPosition(player);
+        playerSteering.position.x = playerPos.x;
+        playerSteering.position.y = playerPos.y;
+
     }
 }
