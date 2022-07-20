@@ -51,8 +51,14 @@ public class EnemySpawningSystem extends EntitySystem {
         for (int i = 0; i < entities.size(); i++) {
             Entity entity = entities.get(i);
             Enemy enemy = cg.getEnemy(entity);
-            if (!enemy.spawned)
+            if (!enemy.spawned) {
                 spawnEnemy(entity);
+                // when spawned start of as wander
+                // once player enterred spawn, change to pursise
+                // if player too far, change to return
+                // once returned back to spawn switch back to wander
+                enemy.state = Enemy.States.WANDER;
+            }
         }
     }
 
