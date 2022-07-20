@@ -21,6 +21,7 @@ import com.mygdx.game.entityComponentSystem.Families;
 import com.mygdx.game.entityComponentSystem.components.Enemy;
 import com.mygdx.game.entityComponentSystem.components.Position;
 import com.mygdx.game.entityComponentSystem.components.Size;
+import com.mygdx.game.entityComponentSystem.components.Spawn;
 
 public class SpawnZoneDetectionSystem extends EntitySystem {
     ComponentGrabber cg;
@@ -89,6 +90,37 @@ public class SpawnZoneDetectionSystem extends EntitySystem {
                 }
             }
         }
+
+        for (int i = 0; i < enemies.size(); i++) {
+            Entity entity = enemies.get(i);
+            if (cg.getEnemy(entity).state == Enemy.States.RETURN) {
+                checkIfReturnedToSpawn(entity);
+            }
+        }
+    }
+
+    private void checkIfReturnedToSpawn(Entity entity) {
+        Position pos = cg.getPosition(entity);
+        Size size = cg.getSize(entity);
+        Spawn spawn = cg.getSpawn(entity);
+        Rectangle enemy = new Rectangle(
+                pos.x, pos.y, size.width, size.height
+        );
+        Rectangle spawnArea = getSpawnArea(spawn);
+        if (spawnArea != null)
+            if (spawnArea.contains(enemy))
+                cg.getEnemy(entity).state = Enemy.States.WANDER;
+    }
+
+    private Rectangle getSpawnArea(Spawn spawn) {
+        for (int i = 0; i < spawnZones.getCount(); i++) {
+            Rectangle spawnArea = ((RectangleMapObject) spawnZones.get(i)).getRectangle();
+            float xCenter = spawnArea.x + (spawnArea.width / 2f);
+            float yCenter = spawnArea.y + (spawnArea.height / 2f);
+            if (xCenter == spawn.spawnPosX && yCenter == spawn.spawnPosY)
+                return spawnArea;
+        }
+        return null;
     }
 
     public Polygon getEntityArea(Entity entity) {
