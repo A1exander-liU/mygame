@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.utils.ImmutableArray;
+import com.badlogic.gdx.ai.GdxAI;
 import com.badlogic.gdx.ai.steer.Steerable;
 import com.badlogic.gdx.ai.steer.behaviors.Arrive;
 import com.badlogic.gdx.math.Vector2;
@@ -35,6 +36,7 @@ public class ReturnToSpawnSystem extends EntitySystem {
 
     @Override
     public void update(float delta) {
+        GdxAI.getTimepiece().update(delta);
         for (int i = 0; i < enemies.size(); i++) {
             Entity entity = enemies.get(i);
             Enemy enemy = cg.getEnemy(entity);
@@ -42,6 +44,10 @@ public class ReturnToSpawnSystem extends EntitySystem {
             if (enemy.state == Enemy.States.RETURN) {
                 cg.getSteering(entity).steeringBehavior = returnToSpawn(entity);
             }
+        }
+        for (int i = 0; i < enemies.size(); i++) {
+            Entity entity = enemies.get(i);
+            cg.getSteering(entity).update(delta);
         }
     }
 
