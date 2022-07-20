@@ -206,7 +206,7 @@ public class MovementAndCollision extends EntitySystem {
     private void keepEntityInsideSpawnZone(Entity entity) {
         // this makes the enemy warp back to spawn since hunting is set back to false when player too far
         // need to move enemy back inside spawn point first
-        if (!cg.getEnemy(entity).hunting) {
+        if (cg.getEnemy(entity).state == Enemy.States.WANDER) {
             ID id = cg.getID(entity);
             Position pos = cg.getPosition(entity);
             Rectangle spawnZone = ((RectangleMapObject) spawnPoints.get(id.ID - 1)).getRectangle();
