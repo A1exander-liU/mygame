@@ -6,8 +6,8 @@ import com.badlogic.gdx.ai.steer.Steerable;
 import com.badlogic.gdx.ai.steer.SteeringAcceleration;
 import com.badlogic.gdx.ai.steer.SteeringBehavior;
 import com.badlogic.gdx.ai.utils.Location;
-import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.game.GameLocation;
 
 public class Steering implements Component, Steerable<Vector2> {
     public Vector2 linearVelocity = new Vector2(5, 5);
@@ -16,14 +16,14 @@ public class Steering implements Component, Steerable<Vector2> {
     public boolean tagged;
     public float zeroLinearSpeedThreshold = 0.1f;
     public float maxLinearSpeed = 5f;
-    public float maxLinearAcceleration;
-    public float maxAngularSpeed;
-    public float maxAngularAcceleration;
-    public Vector2 position;
+    public float maxLinearAcceleration = 5f;
+    public float maxAngularSpeed = 5f;
+    public float maxAngularAcceleration = 5f;
+    public Vector2 position = new Vector2();
     public float orientation;
     public boolean independentFacing = false;
     public SteeringBehavior<Vector2> steeringBehavior;
-    public static final SteeringAcceleration<Vector2> steeringAcceleration =
+    private static final SteeringAcceleration<Vector2> steeringAcceleration =
             new SteeringAcceleration<>(new Vector2());
     // store reference to access
     public Entity entity;
@@ -124,12 +124,14 @@ public class Steering implements Component, Steerable<Vector2> {
 
     @Override
     public float vectorToAngle(Vector2 vector) {
-        return 0;
+        return (float)Math.atan2(-vector.x, vector.y);
     }
 
     @Override
     public Vector2 angleToVector(Vector2 outVector, float angle) {
-        return null;
+        outVector.x = -(float)Math.sin(angle);
+        outVector.y = (float)Math.cos(angle);
+        return outVector;
     }
 
     @Override
@@ -148,7 +150,7 @@ public class Steering implements Component, Steerable<Vector2> {
         this.position.mulAdd(linearVelocity, time);
         this.linearVelocity.mulAdd(steeringAcceleration.linear, time).limit(this.getMaxLinearSpeed());
         if (!independentFacing) {
-            
+
         }
     }
 }
