@@ -59,4 +59,12 @@ public class SeekingSystem extends EntitySystem {
         }
     }
 
+    private Arrive<Vector2> setToArrive(Steering steering) {
+        return new Arrive<>(steering)
+                .setArrivalTolerance(3f)
+                .setDecelerationRadius(10f)
+                .setTimeToTarget(0.1f)
+                .setTarget(cg.getSteering(player));
+    }
+    
 }
