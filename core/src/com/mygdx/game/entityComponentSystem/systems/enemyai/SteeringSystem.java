@@ -3,7 +3,6 @@ package com.mygdx.game.entityComponentSystem.systems.enemyai;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
-import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.ai.GdxAI;
 import com.badlogic.gdx.ai.steer.behaviors.Arrive;
@@ -12,7 +11,6 @@ import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.entityComponentSystem.ComponentGrabber;
 import com.mygdx.game.entityComponentSystem.Families;
-import com.mygdx.game.entityComponentSystem.components.Enemy;
 import com.mygdx.game.entityComponentSystem.components.Position;
 import com.mygdx.game.entityComponentSystem.components.Spawn;
 
@@ -24,6 +22,7 @@ public class SteeringSystem extends EntitySystem {
     Entity player;
 
     public SteeringSystem(ComponentGrabber cg, MyGame root, GameMapProperties gameMapProperties) {
+        super(10);
         this.cg = cg;
         this.root = root;
         this.gameMapProperties = gameMapProperties;
@@ -41,13 +40,13 @@ public class SteeringSystem extends EntitySystem {
         for (int i = 0; i < enemies.size(); i++) {
             Entity entity = enemies.get(i);
             switch (cg.getEnemy(entity).state) {
-                case WANDER:
-                    break;
                 case PURSUE:
                     setPursueBehavior(entity);
                     break;
                 case RETURN:
                     setReturnBehavior(entity);
+                    break;
+                default:
                     break;
             }
         }
