@@ -8,34 +8,20 @@ import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.maps.MapLayer;
-import com.badlogic.gdx.maps.objects.TextureMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.mygdx.game.entityComponentSystem.ComponentGrabber;
 import com.mygdx.game.MapObjectDrawer;
 import com.mygdx.game.MyGame;
-import com.mygdx.game.Player;
 import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.entityComponentSystem.EntityFactory;
 import com.mygdx.game.entityComponentSystem.EntityToMapAdder;
 import com.mygdx.game.entityComponentSystem.MobEntity;
 import com.mygdx.game.entityComponentSystem.PlayerEntity;
-import com.mygdx.game.entityComponentSystem.components.Sprite;
-import com.mygdx.game.entityComponentSystem.components.Health;
-import com.mygdx.game.entityComponentSystem.components.ID;
-import com.mygdx.game.entityComponentSystem.components.Position;
-import com.mygdx.game.entityComponentSystem.components.Size;
-import com.mygdx.game.entityComponentSystem.components.Speed;
-import com.mygdx.game.entityComponentSystem.systems.CollisionSystem;
 import com.mygdx.game.entityComponentSystem.systems.EnemySpawningSystem;
 import com.mygdx.game.entityComponentSystem.systems.MovementAndCollision;
-import com.mygdx.game.entityComponentSystem.systems.MovementSystem;
 import com.mygdx.game.entityComponentSystem.systems.SpawnZoneDetectionSystem;
-import com.mygdx.game.entityComponentSystem.systems.enemyai.SeekingSystem;
 import com.mygdx.game.entityComponentSystem.systems.enemyai.SteeringSystem;
 
 public class GameScreen implements Screen {
@@ -49,11 +35,6 @@ public class GameScreen implements Screen {
     GameMapProperties gameMapProperties;
     TiledMap testMap;
     MapObjectDrawer tiledMapRenderer;
-
-    MapLayer objectLayer;
-    TextureRegion textureRegion;
-
-    Player player;
 
     ComponentGrabber cg;
     EntityToMapAdder entityToMapAdder;
@@ -80,17 +61,17 @@ public class GameScreen implements Screen {
         *  the systems like movement)*/
         // parent.engine.getSystem(MovementSystem.class).setProcessing(false);
         // the engine: center of the framework
-        Entity enemy = new Entity();
+//        Entity enemy = new Entity();
         // need to add entities to the engine (can also remove entities)
         // to add components to an entity
-        enemy.add(new Health());
-        enemy.add(new Position());
-        enemy.add(new Speed());
-        enemy.add(new Size());
-        enemy.add(new Sprite());
-        enemy.add(new ID());
-        Sprite enemySprite = cg.getSprite(enemy);
-        enemySprite.texture = new Texture(Gdx.files.internal("testPlayer.png"));
+//        enemy.add(new Health());
+//        enemy.add(new Position());
+//        enemy.add(new Speed());
+//        enemy.add(new Size());
+//        enemy.add(new Sprite());
+//        enemy.add(new ID());
+//        Sprite enemySprite = cg.getSprite(enemy);
+//        enemySprite.texture = new Texture(Gdx.files.internal("testPlayer.png"));
 //        parent.engine.addEntity(enemy);
 //        entityToMapAdder.addEntityToMap(testMap, enemy);
 
@@ -105,30 +86,13 @@ public class GameScreen implements Screen {
         // to display the map as orthogonal (top down)
         tiledMapRenderer = new MapObjectDrawer(testMap);
 
-        player = new Player(Gdx.files.internal("testPlayer.png"), "player");
-
-        objectLayer = testMap.getLayers().get("Object Layer 1");
-        textureRegion = new TextureRegion(player.getPlayerSprite(), player.playerSprite.getWidth(), player.playerSprite.getHeight());
-
-        TextureMapObject tmo = new TextureMapObject(textureRegion);
-        tmo.setX(0);
-        tmo.setY(0);
-        tmo.setName(player.playerName);
-//        objectLayer.getObjects().add(tmo);
-
         MovementAndCollision movementAndCollision = new MovementAndCollision(cg, parent, gameMapProperties);
-        MovementSystem movementSystem = new MovementSystem(cg, parent);
-        CollisionSystem collisionSystem = new CollisionSystem(cg, parent, gameMapProperties);
         EnemySpawningSystem enemySpawningSystem = new EnemySpawningSystem(cg, parent, gameMapProperties);
         SpawnZoneDetectionSystem spawnZoneDetectionSystem = new SpawnZoneDetectionSystem(cg, parent, gameMapProperties);
-        SeekingSystem seekingSystem = new SeekingSystem(cg, parent, gameMapProperties);
         SteeringSystem steeringSystem = new SteeringSystem(cg, parent, gameMapProperties);
         parent.engine.addSystem(movementAndCollision);
-//        parent.engine.addSystem(movementSystem);
-//        parent.engine.addSystem(collisionSystem);
         parent.engine.addSystem(enemySpawningSystem);
         parent.engine.addSystem(spawnZoneDetectionSystem);
-//        parent.engine.addSystem(seekingSystem);
         parent.engine.addSystem(steeringSystem);
     }
 
