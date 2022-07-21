@@ -51,13 +51,10 @@ public class SpawnZoneDetectionSystem extends EntitySystem {
             Polygon spawnZone = getEntityArea((RectangleMapObject) spawnZones.get(i));
             boolean crossedSpawnZone = Intersector.overlapConvexPolygons(playerArea, spawnZone);
             if (crossedSpawnZone) {
-                int id = i + 1;
-                Entity entity = cg.findEntity(id);
-                Enemy enemy = cg.getEnemy(entity);
-                if (enemy != null) {
-                    enemy.state = Enemy.States.PURSUE;
+                Entity entity = searchForEntity(spawnZones.get(i));
+                if (cg.getEnemy(entity).state != Enemy.States.RETURN) {
+                    cg.getEnemy(entity).state = Enemy.States.PURSUE;
                 }
-
             }
         }
 
@@ -136,5 +133,21 @@ public class SpawnZoneDetectionSystem extends EntitySystem {
         Position pos = cg.getPosition(player);
         Vector2 playerPosition = new Vector2(pos.x, pos.y);
         return playerPosition.dst(spawnZoneCenter);
+    }
+
+    private Entity searchForEntity(MapObject spawnZone) {
+        // based on using the spawn component
+        // calculates the spawn area's center
+        // uses center to find the entity
+        Rectangle spawnArea = ((RectangleMapObject) spawnZone).getRectangle();
+        float spawnCenterX = spawnArea.x + spawnArea.width / 2;
+        float spawnCenterY = spawnArea.y + spawnArea.height / 2;
+        for (int i = 0; i < enemies.size(); i++) {
+            Entity entity = enemies.get(i);
+            Spawn spawn = cg.getSpawn(entity);
+            if (spawn.spawnPosX == spawnCenterX && spawn.spawnPosY == spawnCenterY)
+                return enemies.get(i);
+        }
+        return null;
     }
 }
