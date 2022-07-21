@@ -4,8 +4,6 @@ import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.utils.ImmutableArray;
-import com.badlogic.gdx.ai.steer.behaviors.Arrive;
-import com.badlogic.gdx.ai.utils.Location;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
@@ -13,7 +11,6 @@ import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.GameLocation;
 import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.entityComponentSystem.ComponentGrabber;
@@ -48,49 +45,29 @@ public class SpawnZoneDetectionSystem extends EntitySystem {
 
     @Override
     public void update(float delta) {
-        // need centralized system
-        /* steering system will build all the steering behaviors */
-        // then assign behavior based on the state
-        // then it will update all steering ai
         Polygon playerArea = getEntityArea(player);
         for (int i = 0; i < spawnZones.getCount(); i++) {
             // spawn zones are all rectangles
             Polygon spawnZone = getEntityArea((RectangleMapObject) spawnZones.get(i));
             boolean crossedSpawnZone = Intersector.overlapConvexPolygons(playerArea, spawnZone);
             if (crossedSpawnZone) {
-                System.out.println("entered spawn zone");
-                // id is for the enemy
                 int id = i + 1;
                 Entity entity = cg.findEntity(id);
                 Enemy enemy = cg.getEnemy(entity);
                 if (enemy != null) {
-                    enemy.hunting = true;
                     enemy.state = Enemy.States.PURSUE;
                 }
 
             }
         }
+
         for (int i = 0; i < spawnZones.getCount(); i++) {
             int id = i + 1;
             Entity entity = cg.findEntity(id);
             if (cg.getEnemy(entity).state == Enemy.States.PURSUE) {
-//                System.out.println(distanceFromSpawnZone(spawnZones.get(i)));
                 if (distanceFromSpawnZone(spawnZones.get(i)) > 400) {
                     System.out.println("too far");
                     cg.getEnemy(entity).state = Enemy.States.RETURN;
-//                    cg.getEnemy(entity).hunting = false;
-                    // to far from spawn make enemy stop hunting
-                    // now we need to make the enemy move back to their spawn
-                    // need to make sure the enemy is back at spawn before changing hunting
-                    GameLocation spawnPoint = new GameLocation();
-                    spawnPoint.setPosition(
-                            cg.getSpawn(entity).spawnPosX,
-                            cg.getSpawn(entity).spawnPosY);
-                    cg.getSteering(entity).steeringBehavior = new Arrive<>(cg.getSteering(entity), spawnPoint)
-                            .setArrivalTolerance(3f)
-                            .setDecelerationRadius(10f)
-                            .setTimeToTarget(0.1f);
-//                    cg.getEnemy(entity).hunting = false;
                 }
             }
         }
