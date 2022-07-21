@@ -48,6 +48,10 @@ public class SpawnZoneDetectionSystem extends EntitySystem {
 
     @Override
     public void update(float delta) {
+        // need centralized system
+        /* steering system will build all the steering behaviors */
+        // then assign behavior based on the state
+        // then it will update all steering ai
         Polygon playerArea = getEntityArea(player);
         for (int i = 0; i < spawnZones.getCount(); i++) {
             // spawn zones are all rectangles
@@ -69,7 +73,7 @@ public class SpawnZoneDetectionSystem extends EntitySystem {
         for (int i = 0; i < spawnZones.getCount(); i++) {
             int id = i + 1;
             Entity entity = cg.findEntity(id);
-            if (cg.getEnemy(entity).hunting) {
+            if (cg.getEnemy(entity).state == Enemy.States.PURSUE) {
 //                System.out.println(distanceFromSpawnZone(spawnZones.get(i)));
                 if (distanceFromSpawnZone(spawnZones.get(i)) > 400) {
                     System.out.println("too far");
