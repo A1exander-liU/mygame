@@ -66,7 +66,7 @@ public class GameMapProperties {
 
     private void makeEntitiesFromCollisions() {
         // will only account for non enemies
-        MapObjects collisions = getMapLayer(GameMapProperties.COLLISIONS).getObjects();
+        MapObjects collisions = getMapLayer(COLLISIONS).getObjects();
         for (int i = 0; i < collisions.getCount(); i++) {
             // note: texture map objects are enemies everything else is obstacle
             // the rectangle map objects are the collision boxes defined initially in the tiled map
