@@ -31,7 +31,7 @@ public class EntityToMapAdder {
         System.out.println(size.width + " " + size.height);
         System.out.println("(" + pos.x + ", " + pos.y + ")");
         System.out.println(id.ID);
-        TextureRegion textureRegion = new TextureRegion(entitySprite.texture, size.width, size.height);
+        TextureRegion textureRegion = new TextureRegion(entitySprite.texture, (int)size.width, (int)size.height);
         TextureMapObject textureMapObject = new TextureMapObject(textureRegion);
         textureMapObject.setName("" + id.ID);
         textureMapObject.setX(pos.x);
