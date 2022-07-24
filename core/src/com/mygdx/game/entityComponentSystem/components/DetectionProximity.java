@@ -60,8 +60,6 @@ public class DetectionProximity implements Component, Proximity<Vector2> {
         neighbourCount = 0;
         queryForNeighbors();
         this.callback = null;
-//        getCharViewArea();
-//        callback.reportNeighbor(owner);
         // need to go through all the neighbours here
         // determine all potential overlaps (broad phase detection)
         // all objects in the character view area
@@ -80,39 +78,7 @@ public class DetectionProximity implements Component, Proximity<Vector2> {
                 size.width + detectionRadius*2,
                 size.height + detectionRadius*2
         );
-        // cg.getSteering(entity)
-        // cg.getProximity(entity)
     }
-
-    // determine the most imminent collision from all the neighbours
-//    @Override
-//    public boolean reportNeighbor(Steerable<Vector2> neighbor) {
-//        // to determine potential overlaps in the world (like broad phase)
-//        // need to only check nearby stuff
-//        // check to see if anything overlaps this guy
-//        // to determine the nearby neighbours
-//        Steering owner = (Steering) neighbor;
-//        Position pos  = owner.entity.getComponent(Position.class);
-//        Size size = owner.entity.getComponent(Size.class);
-//
-//        Rectangle detectionArea = getCharViewArea();
-//        Rectangle ownerArea = new Rectangle(
-//                pos.x, pos.y, size.width, size.height
-//        );
-//        // not valid neighbour is itself, don't consider the owner itself
-//
-//        // if not itself check if it overlaps if it does, increase neighbour coont
-//        // and return true since it's valid
-//        if (owner != this.owner) {
-//            // seeing if it overlaps the detection area
-//            // if it overlaps that means this neighbour is nearby
-//            if (detectionArea.overlaps(ownerArea)) {
-//                neighbourCount++;
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
 
     private void queryForNeighbors() {
         ImmutableArray<Entity> obstacles = root.engine.getEntitiesFor(Families.obstacles);
