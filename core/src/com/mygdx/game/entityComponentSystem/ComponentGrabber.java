@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.mygdx.game.MyGame;
+import com.mygdx.game.entityComponentSystem.components.DetectionProximity;
 import com.mygdx.game.entityComponentSystem.components.Steering;
 import com.mygdx.game.entityComponentSystem.components.Camera;
 import com.mygdx.game.entityComponentSystem.components.Enemy;
@@ -27,6 +28,11 @@ public class ComponentGrabber {
     public Camera getCamera(Entity entity) {
         ComponentMapper<Camera> camera = ComponentMapper.getFor(Camera.class);
         return camera.get(entity);
+    }
+
+    public DetectionProximity getDetectionProximity(Entity entity) {
+        ComponentMapper<DetectionProximity> detectionProximity = ComponentMapper.getFor(DetectionProximity.class);
+        return detectionProximity.get(entity);
     }
 
     public Enemy getEnemy(Entity entity) {
