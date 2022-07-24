@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.MyGame;
+import com.mygdx.game.entityComponentSystem.components.DetectionProximity;
 import com.mygdx.game.entityComponentSystem.components.Enemy;
 import com.mygdx.game.entityComponentSystem.components.Spawn;
 import com.mygdx.game.entityComponentSystem.components.Sprite;
@@ -40,6 +41,7 @@ public class MobEntity extends Entity {
         super.add(new Size());
         super.add(new Speed());
         super.add(new Steering(this));
+        super.add(new DetectionProximity(this, 20, root));
     }
 
     private void modifyComponentValues() {
