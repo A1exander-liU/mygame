@@ -120,6 +120,11 @@ public class DetectionProximity implements Component, Proximity<Vector2> {
         for (int i = 0; i < obstacles.size(); i++) {
             Entity obstacle = obstacles.get(i);
             Rectangle obstacleArea = makeRectangle(obstacle);
+            if (AABB.overlaps(obstacleArea)) {
+                System.out.println("obstacle detected");
+                if (callback.reportNeighbor(obstacle.getComponent(Steering.class)))
+                    neighbourCount++;
+            }
         }
     }
 
