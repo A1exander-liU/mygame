@@ -7,7 +7,6 @@ import com.badlogic.gdx.ai.steer.Proximity;
 import com.badlogic.gdx.ai.steer.Steerable;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.World;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.entityComponentSystem.Families;
 
@@ -33,6 +32,9 @@ public class DetectionProximity implements Component, Proximity<Vector2> {
     // Proximity
     // build a box around the character and see if it overlaps with anything
 
+    // collision avoidance calls findNeighbors method of the passed proximity
+    //
+
     public DetectionProximity(Entity entity, float detectionRadius, MyGame root) {
         this.entity = entity;
         this.detectionRadius = detectionRadius;
@@ -54,13 +56,9 @@ public class DetectionProximity implements Component, Proximity<Vector2> {
     // collisionAvoidance uses our findNeighbours implementation
     @Override
     public int findNeighbors(ProximityCallback<Vector2> callback) {
-        ImmutableArray<Entity> obstacles = root.engine.getEntitiesFor(Families.obstacles);
         this.callback = callback;
         neighbourCount = 0;
-        queryForNeighbors(obstacles);
-        for (int i = 0; i < obstacles.size(); i++) {
-            Steering steering = obstacles.get(i).getComponent(Steering.class);
-        }
+        queryForNeighbors();
         this.callback = null;
 //        getCharViewArea();
 //        callback.reportNeighbor(owner);
@@ -116,7 +114,18 @@ public class DetectionProximity implements Component, Proximity<Vector2> {
 //        return false;
 //    }
 
-    private void queryForNeighbors(ImmutableArray<Entity> obstacles) {
-        
+    private void queryForNeighbors() {
+        ImmutableArray<Entity> obstacles = root.engine.getEntitiesFor(Families.obstacles);
+        Rectangle AABB = getCharViewArea();
+        for (int i = 0; i < obstacles.size(); i++) {
+            Entity obstacle = obstacles.get(i);
+            Rectangle obstacleArea = makeRectangle(obstacle);
+        }
+    }
+
+    private Rectangle makeRectangle(Entity entity) {
+        Position pos = entity.getComponent(Position.class);
+        Size size = entity.getComponent(Size.class);
+        return new Rectangle(pos.x, pos.y, size.width, size.height);
     }
 }
