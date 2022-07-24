@@ -9,6 +9,7 @@ import com.badlogic.gdx.ai.GdxAI;
 import com.badlogic.gdx.ai.steer.behaviors.Arrive;
 import com.badlogic.gdx.ai.steer.behaviors.CollisionAvoidance;
 import com.badlogic.gdx.ai.steer.behaviors.PrioritySteering;
+import com.badlogic.gdx.ai.steer.behaviors.Seek;
 import com.badlogic.gdx.ai.steer.behaviors.Wander;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.GameLocation;
@@ -107,21 +108,12 @@ public class SteeringSystem extends EntitySystem {
                 cg.getSteering(entity),
                 cg.getDetectionProximity(entity));
 
-        Arrive<Vector2> arrive = new Arrive<>(cg.getSteering(entity))
-                .setArrivalTolerance(3)
-                .setDecelerationRadius(10)
-                .setTimeToTarget(0.1f)
-                .setTarget(spawnPosition);
-
-        cg.getSteering(entity).steeringBehavior = new Arrive<>(cg.getSteering(entity))
-                .setArrivalTolerance(3f)
-                .setDecelerationRadius(10f)
-                .setTimeToTarget(0.1f)
+        Seek<Vector2> seek = new Seek<>(cg.getSteering(entity))
                 .setTarget(spawnPosition);
 
         PrioritySteering<Vector2> prioritySteering = new PrioritySteering<>(cg.getSteering(entity));
         prioritySteering.add(collisionAvoidance);
-        prioritySteering.add(arrive);
+        prioritySteering.add(seek);
 
         cg.getSteering(entity).steeringBehavior = prioritySteering;
     }
