@@ -25,9 +25,6 @@
   <object id="18" x="351.333" y="420" width="67.3333" height="18.6667"/>
   <object id="19" x="222.667" y="520" width="68" height="18.6667"/>
   <object id="20" x="219.333" y="163.333" width="75.3333" height="22"/>
-  <object id="52" x="0" y="0">
-   <polyline points="960,0 960,640 0,640 0,0"/>
-  </object>
   <object id="53" x="320" y="0" width="32"/>
   <object id="56" x="0" y="0" height="640"/>
   <object id="58" x="0" y="640" width="960"/>
