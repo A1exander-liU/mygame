@@ -30,6 +30,8 @@ public class Steering implements Component, Steerable<Vector2> {
 
     public Steering(Entity entity) {
         this.entity = entity;
+        position.x = entity.getComponent(Position.class).x;
+        position.y = entity.getComponent(Position.class).y;
     }
 
     @Override
