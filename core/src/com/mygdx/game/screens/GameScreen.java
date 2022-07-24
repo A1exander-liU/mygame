@@ -41,10 +41,10 @@ public class GameScreen implements Screen {
 
     public GameScreen(MyGame parent) {
         testMap = new TmxMapLoader().load("untitled.tmx");
-        gameMapProperties = new GameMapProperties(testMap);
         this.parent = parent;
         parent.engine = new Engine();
         cg = new ComponentGrabber(parent);
+        gameMapProperties = new GameMapProperties(testMap, parent);
         entityToMapAdder = new EntityToMapAdder(testMap, cg);
         EntityFactory entityFactory = new EntityFactory(cg, parent);
         for (int i = 0; i < 3; i++) {
