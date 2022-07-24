@@ -95,12 +95,6 @@ public class SteeringSystem extends EntitySystem {
         prioritySteering.add(collisionAvoidance);
         prioritySteering.add(arrive);
         cg.getSteering(entity).steeringBehavior = prioritySteering;
-
-//        cg.getSteering(entity).steeringBehavior = new Arrive<>(cg.getSteering(entity))
-//                .setArrivalTolerance(3f)
-//                .setDecelerationRadius(10f)
-//                .setTimeToTarget(0.1f)
-//                .setTarget(cg.getSteering(player));
     }
 
     private void setReturnBehavior(Entity entity) {
