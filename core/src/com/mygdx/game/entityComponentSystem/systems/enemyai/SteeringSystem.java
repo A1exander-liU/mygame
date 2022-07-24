@@ -55,6 +55,9 @@ public class SteeringSystem extends EntitySystem {
                 case RETURN:
                     setReturnBehavior(entity);
                     break;
+                case WANDER:
+                    setWanderBehavior(entity);
+                    break;
                 default:
                     break;
             }
@@ -116,5 +119,9 @@ public class SteeringSystem extends EntitySystem {
         prioritySteering.add(seek);
 
         cg.getSteering(entity).steeringBehavior = prioritySteering;
+    }
+
+    private void setWanderBehavior(Entity entity) {
+
     }
 }
