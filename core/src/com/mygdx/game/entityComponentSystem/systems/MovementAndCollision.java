@@ -3,6 +3,7 @@ package com.mygdx.game.entityComponentSystem.systems;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
+import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -25,6 +26,7 @@ import com.mygdx.game.entityComponentSystem.Families;
 import com.mygdx.game.entityComponentSystem.components.Camera;
 import com.mygdx.game.entityComponentSystem.components.Enemy;
 import com.mygdx.game.entityComponentSystem.components.ID;
+import com.mygdx.game.entityComponentSystem.components.Player;
 import com.mygdx.game.entityComponentSystem.components.Position;
 import com.mygdx.game.entityComponentSystem.components.Size;
 import com.mygdx.game.entityComponentSystem.components.Speed;
@@ -51,7 +53,7 @@ public class MovementAndCollision extends EntitySystem {
 
     @Override
     public void addedToEngine(Engine engine) {
-        entities = root.engine.getEntities();
+        entities = root.engine.getEntitiesFor(Family.one(Enemy.class, Player.class).get());
         enemies = root.engine.getEntitiesFor(Families.enemies);
         // there is only one player hence we just get index 0
         player = root.engine.getEntitiesFor(Families.player).get(0);
@@ -88,12 +90,14 @@ public class MovementAndCollision extends EntitySystem {
         playerMovement();
         // now we can detect and resolve any collisions
         // *will need to implement broad phase detection in future*
-        for (int i = 0; i < entities.size(); i++) {
-            Entity entity = entities.get(i);
+        for (int i = 0; i < enemies.size(); i++) {
+            Entity entity = enemies.get(i);
             if (cg.getEnemy(entity) != null)
                 keepEntityInsideSpawnZone(entity);
-            handleCollisions(entity);
+            updateEntityInMap(entity);
+//            handleCollisions(entity);
         }
+        handlePlayerCollisions();
         updatePlayerCamPosition();
     }
 
@@ -190,6 +194,7 @@ public class MovementAndCollision extends EntitySystem {
         Position pos = cg.getPosition(entity);
         Size size = cg.getSize(entity);
         // checks if future move is legal or not
+
         if (pos.futureX < 0)
             pos.x = 0;
         if (pos.futureX + size.width > gameMapProperties.mapWidth)
@@ -271,6 +276,7 @@ public class MovementAndCollision extends EntitySystem {
                 if (mapObjects.get(i) instanceof TextureMapObject) {
                     // better to get the location they are currently at
                     collisionSpace = getEntityArea(mapObjects.get(i));
+//                    collisionSpace = null;
 
                     // this is getting the enemies future move
 //                    int enemyID = Integer.parseInt(mapObjects.get(i).getName());
@@ -280,13 +286,16 @@ public class MovementAndCollision extends EntitySystem {
                 if (mapObjects.get(i) instanceof PolylineMapObject) {
                     wall = ((PolylineMapObject) mapObjects.get(i)).getPolyline();
                 }
-                boolean intersected = Intersector.overlapConvexPolygons(playerArea, collisionSpace);
+
+                boolean intersected = false;
+                intersected = Intersector.overlapConvexPolygons(playerArea, collisionSpace);
 
                 if (intersected) {
                     System.out.println("intersected");
                     pos.x = pos.oldX;
                     pos.y = pos.oldY;
                 }
+
                 if (wall != null) {
                     intersected = checkWallCollisions(wall, playerArea);
                     if (intersected) {
