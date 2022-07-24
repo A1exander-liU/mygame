@@ -34,7 +34,7 @@ public class SpawnZoneDetectionSystem extends EntitySystem {
         this.root = root;
         this.gameMapProperties = gameMapProperties;
         player = root.engine.getEntitiesFor(Families.player).get(0);
-        spawnZones = gameMapProperties.getMapLayer(GameMapProperties.ENEMY_SPAWNS).getObjects();
+        spawnZones = gameMapProperties.getMapLayer(gameMapProperties.ENEMY_SPAWNS).getObjects();
         enemies = root.engine.getEntitiesFor(Families.enemies);
     }
 

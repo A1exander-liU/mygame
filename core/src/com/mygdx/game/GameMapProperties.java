@@ -25,10 +25,10 @@ public class GameMapProperties {
     public int mapHeight;
     public int tileWidth;
     public int tileHeight;
-    public static String GROUND_LAYER;
-    public static String ENEMY_SPAWNS;
-    public static String COLLISIONS;
-    public static String OBSTACLE_LAYER;
+    public String GROUND_LAYER;
+    public String ENEMY_SPAWNS;
+    public String COLLISIONS;
+    public String OBSTACLE_LAYER;
     MyGame root;
     // all the collision boxes on the map
     public ImmutableArray<Entity> staticObstacles;
@@ -78,7 +78,7 @@ public class GameMapProperties {
                 setPosition(obstacle, area);
                 setSize(obstacle, area);
                 obstacle.add(new Steering(obstacle));
-                obstacle.add(new DetectionProximity(obstacle, 20, root));
+//                obstacle.add(new DetectionProximity(obstacle, 20, root));
                 root.engine.addEntity(obstacle);
             }
         }

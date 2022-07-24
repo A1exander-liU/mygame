@@ -35,8 +35,8 @@ public class EnemySpawningSystem extends EntitySystem {
         this.cg = cg;
         this.root = root;
         this.gameMapProperties = gameMapProperties;
-        spawnPoints = gameMapProperties.getMapLayer(GameMapProperties.ENEMY_SPAWNS).getObjects();
-        objects = gameMapProperties.getMapLayer(GameMapProperties.COLLISIONS).getObjects();
+        spawnPoints = gameMapProperties.getMapLayer(gameMapProperties.ENEMY_SPAWNS).getObjects();
+        objects = gameMapProperties.getMapLayer(gameMapProperties.COLLISIONS).getObjects();
     }
 
     @Override
