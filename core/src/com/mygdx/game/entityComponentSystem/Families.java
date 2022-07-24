@@ -8,6 +8,7 @@ public class Families {
 
     public static final Family enemies = Family.all(Enemy.class).get();
     public static final Family player = Family.all(Player.class).get();
+    public static final Family obstacles = Family.exclude(Enemy.class, Player.class).get();
 
     public Families() {}
 
