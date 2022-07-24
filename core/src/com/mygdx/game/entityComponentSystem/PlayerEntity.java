@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.entityComponentSystem.components.Camera;
+import com.mygdx.game.entityComponentSystem.components.DetectionProximity;
 import com.mygdx.game.entityComponentSystem.components.Sprite;
 import com.mygdx.game.entityComponentSystem.components.Health;
 import com.mygdx.game.entityComponentSystem.components.ID;
@@ -50,6 +51,7 @@ public class PlayerEntity extends Entity {
         super.add(new Size());
         super.add(new Speed());
         super.add(new Steering(this));
+        super.add(new DetectionProximity(this, 20, root));
     }
 
     private void modifyComponentValues(String playerName) {
