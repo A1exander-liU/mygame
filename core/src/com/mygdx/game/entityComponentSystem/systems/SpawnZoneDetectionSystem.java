@@ -60,7 +60,8 @@ public class SpawnZoneDetectionSystem extends EntitySystem {
 
         for (int i = 0; i < spawnZones.getCount(); i++) {
             int id = i + 1;
-            Entity entity = cg.findEntity(id);
+            Rectangle rect = ((RectangleMapObject) spawnZones.get(i)).getRectangle();
+            Entity entity = findEntity(rect);
             if (cg.getEnemy(entity).state == Enemy.States.PURSUE) {
                 if (distanceFromSpawnZone(spawnZones.get(i)) > 400) {
                     System.out.println("too far");
@@ -147,6 +148,18 @@ public class SpawnZoneDetectionSystem extends EntitySystem {
             Spawn spawn = cg.getSpawn(entity);
             if (spawn.spawnPosX == spawnCenterX && spawn.spawnPosY == spawnCenterY)
                 return enemies.get(i);
+        }
+        return null;
+    }
+
+    private Entity findEntity(Rectangle rect) {
+        float spawnX = rect.x + (rect.width / 2);
+        float spawnY = rect.y + (rect.height / 2);
+        for (int i = 0; i < enemies.size(); i++) {
+            Entity entity = enemies.get(i);
+            Spawn spawn = cg.getSpawn(entity);
+            if (spawnX == spawn.spawnPosX && spawnY == spawn.spawnPosY)
+                return entity;
         }
         return null;
     }
