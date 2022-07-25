@@ -144,12 +144,28 @@ public class SteeringSystem extends EntitySystem {
     }
 
     private float randomX(Entity entity) {
-
+        Size size = cg.getSize(entity);
+        Position pos = cg.getPosition(entity);
+        Rectangle spawnArea = getSpawnArea(cg.getSpawn(entity));
         return 0;
     }
 
     private float randomY(Entity entity) {
 
         return 0;
+    }
+
+    private Rectangle getSpawnArea(Spawn spawn) {
+        float enemySpawnX = spawn.spawnPosX;
+        float enemySpawnY = spawn.spawnPosY;
+        MapObjects spawns = gameMapProperties.getMapLayer(gameMapProperties.ENEMY_SPAWNS).getObjects();
+        for (int i = 0; i < spawns.getCount(); i++) {
+            Rectangle spawnArea = ((RectangleMapObject) spawns.get(i)).getRectangle();
+            float spawnCenterX = spawnArea.x + (spawnArea.width / 2);
+            float spawnCenterY = spawnArea.y + (spawnArea.height / 2);
+            if (spawnCenterX == enemySpawnX && spawnCenterY == enemySpawnY)
+                return spawnArea;
+        }
+        return null;
     }
 }
