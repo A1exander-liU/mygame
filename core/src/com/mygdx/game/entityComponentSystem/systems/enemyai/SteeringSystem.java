@@ -116,6 +116,17 @@ public class SteeringSystem extends EntitySystem {
     }
 
     private void setWanderBehavior(Entity entity) {
-
+        Spawn spawn = cg.getSpawn(entity);
+        GameLocation spawnPosition = new GameLocation(spawn.spawnPosX, spawn.spawnPosY);
+        Wander<Vector2> wander = new Wander<>(cg.getSteering(entity))
+                .setAlignTolerance(1)
+                .setDecelerationRadius(10)
+                .setFaceEnabled(false)
+                .setTarget(spawnPosition)
+                .setTimeToTarget(0.1f)
+                .setWanderOffset(3f)
+                .setWanderRadius(1)
+                .setWanderRate(1);
+        cg.getSteering(entity).steeringBehavior = wander;
     }
 }
