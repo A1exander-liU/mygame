@@ -139,7 +139,7 @@ public class SteeringSystem extends EntitySystem {
 //                .setWanderRate(1);
         Seek<Vector2> seek = new Seek<>(cg.getSteering(entity));
         if (time >= 2) {
-            Vector2 newSpot = new Vector2(randomX(entity), randomY(entity));
+            Vector2 newSpot = generateRandomPosition(entity);
             GameLocation random = new GameLocation(newSpot);
             seek.setTarget(random);
         }
@@ -187,5 +187,15 @@ public class SteeringSystem extends EntitySystem {
         // max is not included
         Random random = new Random();
         return random.nextInt((int) (max - min)) + min;
+    }
+
+    private Vector2 generateRandomPosition(Entity entity) {
+        Position pos = cg.getPosition(entity);
+        Vector2 enemyPos = new Vector2(pos.x, pos.y);
+        Vector2 newSpot = new Vector2(randomX(entity), randomY(entity));
+        while (newSpot.dst(enemyPos) < 50) {
+            newSpot = new Vector2(randomX(entity), randomY(entity));
+        }
+        return newSpot;
     }
 }
