@@ -25,6 +25,8 @@ import com.mygdx.game.entityComponentSystem.components.Position;
 import com.mygdx.game.entityComponentSystem.components.Size;
 import com.mygdx.game.entityComponentSystem.components.Spawn;
 
+import java.util.Random;
+
 public class SteeringSystem extends EntitySystem {
     ComponentGrabber cg;
     MyGame root;
@@ -147,11 +149,21 @@ public class SteeringSystem extends EntitySystem {
         Size size = cg.getSize(entity);
         Position pos = cg.getPosition(entity);
         Rectangle spawnArea = getSpawnArea(cg.getSpawn(entity));
+        if (spawnArea != null) {
+            float max = (spawnArea.x + spawnArea.width) - size.width;
+            return generateRandom(spawnArea.x, max);
+        }
         return 0;
     }
 
     private float randomY(Entity entity) {
-
+        Size size = cg.getSize(entity);
+        Position pos = cg.getPosition(entity);
+        Rectangle spawnArea = getSpawnArea(cg.getSpawn(entity));
+        if (spawnArea != null) {
+            float max = (spawnArea.y + spawnArea.height) - size.height;
+            return generateRandom(spawnArea.y, max);
+        }
         return 0;
     }
 
@@ -167,5 +179,12 @@ public class SteeringSystem extends EntitySystem {
                 return spawnArea;
         }
         return null;
+    }
+
+    private float generateRandom(float min, float max) {
+        // range: [min,max)
+        // max is not included
+        Random random = new Random();
+        return random.nextInt((int) (max - min)) + min;
     }
 }
