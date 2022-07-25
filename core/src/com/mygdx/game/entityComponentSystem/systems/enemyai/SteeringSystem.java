@@ -139,7 +139,8 @@ public class SteeringSystem extends EntitySystem {
 //                .setWanderRate(1);
         Seek<Vector2> seek = new Seek<>(cg.getSteering(entity));
         if (time >= 2) {
-            GameLocation random = new GameLocation(randomX(entity), randomY(entity));
+            Vector2 newSpot = new Vector2(randomX(entity), randomY(entity));
+            GameLocation random = new GameLocation(newSpot);
             seek.setTarget(random);
         }
         cg.getSteering(entity).steeringBehavior = seek;
