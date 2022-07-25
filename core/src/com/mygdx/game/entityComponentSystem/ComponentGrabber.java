@@ -5,6 +5,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.entityComponentSystem.components.DetectionProximity;
+import com.mygdx.game.entityComponentSystem.components.MovementBehavior;
 import com.mygdx.game.entityComponentSystem.components.Steering;
 import com.mygdx.game.entityComponentSystem.components.Camera;
 import com.mygdx.game.entityComponentSystem.components.Enemy;
@@ -54,6 +55,11 @@ public class ComponentGrabber {
     public ID getID(Entity entity) {
         ComponentMapper<ID> id = ComponentMapper.getFor(ID.class);
         return id.get(entity);
+    }
+
+    public MovementBehavior getMovementBehavior(Entity entity) {
+        ComponentMapper<MovementBehavior> movementBehavior = ComponentMapper.getFor(MovementBehavior.class);
+        return movementBehavior.get(entity);
     }
 
     public Name getName(Entity entity) {
