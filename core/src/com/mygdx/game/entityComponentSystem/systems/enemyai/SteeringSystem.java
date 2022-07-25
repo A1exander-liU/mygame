@@ -24,7 +24,9 @@ import com.mygdx.game.entityComponentSystem.components.Player;
 import com.mygdx.game.entityComponentSystem.components.Position;
 import com.mygdx.game.entityComponentSystem.components.Size;
 import com.mygdx.game.entityComponentSystem.components.Spawn;
+import com.mygdx.game.entityComponentSystem.systems.TimeSystem;
 
+import java.sql.Time;
 import java.util.Random;
 
 public class SteeringSystem extends EntitySystem {
@@ -34,7 +36,7 @@ public class SteeringSystem extends EntitySystem {
     ImmutableArray<Entity> enemies;
     ImmutableArray<Entity> entities;
     Entity player;
-    float time = 0;
+    float elapsed = 0;
 
     public SteeringSystem(ComponentGrabber cg, MyGame root, GameMapProperties gameMapProperties) {
         super(10);
@@ -53,7 +55,6 @@ public class SteeringSystem extends EntitySystem {
 
     @Override
     public void update(float delta) {
-        time += delta;
         for (int i = 0; i < enemies.size(); i++) {
             Entity entity = enemies.get(i);
             switch (cg.getEnemy(entity).state) {
@@ -70,8 +71,6 @@ public class SteeringSystem extends EntitySystem {
                     break;
             }
         }
-        if (time >= 2)
-            time = 0;
         GdxAI.getTimepiece().update(delta);
         for (int i = 0; i < enemies.size(); i++) {
             Entity entity = enemies.get(i);
@@ -139,8 +138,7 @@ public class SteeringSystem extends EntitySystem {
 //                .setWanderRate(1);
         // create component to store different steering behaviors
         Seek<Vector2> seek = new Seek<>(cg.getSteering(entity));
-        if (time >= 2) {
-            System.out.println("2 seconds elapsed");
+        if (TimeSystem.second % 2 == 0) {
             Vector2 newSpot = generateRandomPosition(entity);
             GameLocation random = new GameLocation(newSpot);
             cg.getMovementBehavior(entity).wander.setTarget(random);
