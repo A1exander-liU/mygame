@@ -82,8 +82,10 @@ public class MovementAndCollision extends EntitySystem {
         // get enemy move
         for (int i = 0; i < enemies.size(); i++) {
             Entity enemy = enemies.get(i);
-            if (cg.getEnemy(enemy).state == Enemy.States.WANDER)
-                moveEnemy(getRandomDirection(), enemy);
+            if (cg.getEnemy(enemy).state == Enemy.States.WANDER) {
+
+            }
+//                moveEnemy(getRandomDirection(), enemy);
         }
         // get player move
         // at this point each enemy and player has their future move
