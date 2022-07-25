@@ -137,12 +137,12 @@ public class SteeringSystem extends EntitySystem {
 //                .setWanderOffset(3f);
 //                .setWanderRadius(1);
 //                .setWanderRate(1);
+        // create component to store different steering behaviors
         Seek<Vector2> seek = new Seek<>(cg.getSteering(entity));
-        if (time >= 2) {
-            Vector2 newSpot = generateRandomPosition(entity);
-            GameLocation random = new GameLocation(newSpot);
-            seek.setTarget(random);
-        }
+        Vector2 newSpot = generateRandomPosition(entity);
+        GameLocation random = new GameLocation(newSpot);
+        seek.setTarget(random);
+
         cg.getSteering(entity).steeringBehavior = seek;
     }
 
@@ -193,9 +193,9 @@ public class SteeringSystem extends EntitySystem {
         Position pos = cg.getPosition(entity);
         Vector2 enemyPos = new Vector2(pos.x, pos.y);
         Vector2 newSpot = new Vector2(randomX(entity), randomY(entity));
-        while (newSpot.dst(enemyPos) < 50) {
-            newSpot = new Vector2(randomX(entity), randomY(entity));
-        }
+//        while (newSpot.dst(enemyPos) < 50) {
+//            newSpot = new Vector2(randomX(entity), randomY(entity));
+//        }
         return newSpot;
     }
 }
