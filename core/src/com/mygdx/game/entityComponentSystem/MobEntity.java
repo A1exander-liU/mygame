@@ -7,6 +7,7 @@ import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.entityComponentSystem.components.DetectionProximity;
 import com.mygdx.game.entityComponentSystem.components.Enemy;
+import com.mygdx.game.entityComponentSystem.components.MovementBehavior;
 import com.mygdx.game.entityComponentSystem.components.Spawn;
 import com.mygdx.game.entityComponentSystem.components.Sprite;
 import com.mygdx.game.entityComponentSystem.components.Health;
@@ -42,6 +43,7 @@ public class MobEntity extends Entity {
         super.add(new Speed());
         super.add(new Steering(this));
         super.add(new DetectionProximity(this, 32, root));
+        super.add(new MovementBehavior(this));
     }
 
     private void modifyComponentValues() {
