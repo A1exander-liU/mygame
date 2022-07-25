@@ -8,9 +8,9 @@ import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.GameLocation;
 
 public class MovementBehavior implements Component {
-    Arrive<Vector2> pursue;
-    Seek<Vector2> back;
-    Seek<Vector2> wander;
+    public Arrive<Vector2> pursue;
+    public Seek<Vector2> back;
+    public Seek<Vector2> wander;
 
     public MovementBehavior(Entity entity) {
         Steering steering = entity.getComponent(Steering.class);
