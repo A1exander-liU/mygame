@@ -11,6 +11,9 @@ import com.badlogic.gdx.ai.steer.behaviors.CollisionAvoidance;
 import com.badlogic.gdx.ai.steer.behaviors.PrioritySteering;
 import com.badlogic.gdx.ai.steer.behaviors.Seek;
 import com.badlogic.gdx.ai.steer.behaviors.Wander;
+import com.badlogic.gdx.maps.MapObjects;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.GameLocation;
 import com.mygdx.game.GameMapProperties;
@@ -19,6 +22,7 @@ import com.mygdx.game.entityComponentSystem.ComponentGrabber;
 import com.mygdx.game.entityComponentSystem.Families;
 import com.mygdx.game.entityComponentSystem.components.Player;
 import com.mygdx.game.entityComponentSystem.components.Position;
+import com.mygdx.game.entityComponentSystem.components.Size;
 import com.mygdx.game.entityComponentSystem.components.Spawn;
 
 public class SteeringSystem extends EntitySystem {
@@ -28,6 +32,7 @@ public class SteeringSystem extends EntitySystem {
     ImmutableArray<Entity> enemies;
     ImmutableArray<Entity> entities;
     Entity player;
+    float time = 0;
 
     public SteeringSystem(ComponentGrabber cg, MyGame root, GameMapProperties gameMapProperties) {
         super(10);
@@ -46,6 +51,7 @@ public class SteeringSystem extends EntitySystem {
 
     @Override
     public void update(float delta) {
+        time += delta;
         for (int i = 0; i < enemies.size(); i++) {
             Entity entity = enemies.get(i);
             switch (cg.getEnemy(entity).state) {
@@ -62,6 +68,8 @@ public class SteeringSystem extends EntitySystem {
                     break;
             }
         }
+        if (time >= 2)
+            time = 0;
         GdxAI.getTimepiece().update(delta);
         for (int i = 0; i < enemies.size(); i++) {
             Entity entity = enemies.get(i);
@@ -118,15 +126,30 @@ public class SteeringSystem extends EntitySystem {
     private void setWanderBehavior(Entity entity) {
         Spawn spawn = cg.getSpawn(entity);
         GameLocation spawnPosition = new GameLocation(spawn.spawnPosX, spawn.spawnPosY);
-        Wander<Vector2> wander = new Wander<>(cg.getSteering(entity))
-                .setAlignTolerance(1)
-                .setDecelerationRadius(10)
-                .setFaceEnabled(false)
-                .setTarget(spawnPosition)
-                .setTimeToTarget(0.1f)
-                .setWanderOffset(3f)
-                .setWanderRadius(1)
-                .setWanderRate(1);
-        cg.getSteering(entity).steeringBehavior = wander;
+        Wander<Vector2> wander = new Wander<>(cg.getSteering(entity));
+//                .setAlignTolerance(1);
+//                .setDecelerationRadius(10);
+//                .setFaceEnabled(false);
+//                .setTarget(spawnPosition);
+//                .setTimeToTarget(0.1f);
+//                .setWanderOffset(3f);
+//                .setWanderRadius(1);
+//                .setWanderRate(1);
+        Seek<Vector2> seek = new Seek<>(cg.getSteering(entity));
+        if (time >= 2) {
+            GameLocation random = new GameLocation(randomX(entity), randomY(entity));
+            seek.setTarget(random);
+        }
+        cg.getSteering(entity).steeringBehavior = seek;
+    }
+
+    private float randomX(Entity entity) {
+
+        return 0;
+    }
+
+    private float randomY(Entity entity) {
+
+        return 0;
     }
 }
