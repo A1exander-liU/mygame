@@ -1,0 +1,19 @@
+#
+# Enemy movement tree
+#
+
+# Alias definitions
+import isAlive?:"com.mygdx.game.ai.tasks"
+import isWandering?:"com.mygdx.game.ai.tasks.enemy.steering.isWandering"
+
+if enemy is not alive, there's no need to go through the tree
+
+# Tree definition
+root
+  selector
+    isAlive?
+    selector
+      sequence
+        isWandering?
+      sequence
+      sequence
