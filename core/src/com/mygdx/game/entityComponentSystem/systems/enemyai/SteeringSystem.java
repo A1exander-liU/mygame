@@ -5,6 +5,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ai.GdxAI;
 import com.badlogic.gdx.ai.steer.behaviors.Arrive;
 import com.badlogic.gdx.ai.steer.behaviors.CollisionAvoidance;
@@ -20,12 +21,14 @@ import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.entityComponentSystem.ComponentGrabber;
 import com.mygdx.game.entityComponentSystem.Families;
+import com.mygdx.game.entityComponentSystem.MobEntity;
 import com.mygdx.game.entityComponentSystem.components.Player;
 import com.mygdx.game.entityComponentSystem.components.Position;
 import com.mygdx.game.entityComponentSystem.components.Size;
 import com.mygdx.game.entityComponentSystem.components.Spawn;
 import com.mygdx.game.entityComponentSystem.systems.TimeSystem;
 
+import java.io.Reader;
 import java.sql.Time;
 import java.util.Random;
 
@@ -38,6 +41,8 @@ public class SteeringSystem extends EntitySystem {
     Entity player;
     float elapsed = 0;
 
+    Reader reader = null;
+
     public SteeringSystem(ComponentGrabber cg, MyGame root, GameMapProperties gameMapProperties) {
         super(10);
         this.cg = cg;
@@ -46,6 +51,7 @@ public class SteeringSystem extends EntitySystem {
         enemies = root.engine.getEntitiesFor(Families.enemies);
         player = root.engine.getEntitiesFor(Families.player).get(0);
         entities = root.engine.getEntitiesFor(Family.exclude(Player.class).get());
+        reader = Gdx.files.absolute("").reader();
     }
 
     @Override
@@ -71,6 +77,15 @@ public class SteeringSystem extends EntitySystem {
                     break;
             }
         }
+        // steps through the behavior tree, basically just goes through the whole tree
+        // and performs the updating going through all the composite and leaf tasks
+        for (int i = 0; i < enemies.size(); i++) {
+            Entity entity = enemies.get(i);
+            MobEntity enemy = (MobEntity) entity;
+            enemy.getBehaviorTree().step();
+        }
+        // the states and behaviors got updated in the behavior tree
+        // and are ready to be 
         GdxAI.getTimepiece().update(delta);
         for (int i = 0; i < enemies.size(); i++) {
             Entity entity = enemies.get(i);
