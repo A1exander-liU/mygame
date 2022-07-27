@@ -66,6 +66,9 @@ public class MobEntity extends Entity {
         size.height = 32;
         speed.xSpeed = 2;
         speed.ySpeed = 2;
+
+        behaviorTree = new BehaviorTree<>();
+        behaviorTree.setObject(this);
     }
 
     public BehaviorTree<MobEntity> getBehaviorTree() {
