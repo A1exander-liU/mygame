@@ -23,7 +23,7 @@ public class setToWander extends LeafTask<MobEntity> {
 
     @Override
     protected Task<MobEntity> copyTo(Task<MobEntity> task) {
-        return null;
+        return task;
     }
 
     private void setToWanderBehavior(Entity entity) {
