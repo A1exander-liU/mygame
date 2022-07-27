@@ -4,9 +4,32 @@
 
 # Alias definitions
 import isAlive?:"com.mygdx.game.ai.tasks"
-import isWandering?:"com.mygdx.game.ai.tasks.enemy.steering.isWandering"
 
-if enemy is not alive, there's no need to go through the tree
+import isWandering?:"com.mygdx.game.ai.tasks.enemy.steering.isWandering"
+import isReturning?:"com.mygdx.game.ai.tasks.enemy.steering.isReturning"
+import isPursuing?:"com.mygdx.game.ai.tasks.enemy.steering.isPursuing"
+
+import isWanderSteering?:"com.mygdx.game.ai.tasks.enemy.steering.isWanderSteering"
+import isReturnSteering?:"com.mygdx.game.ai.tasks.enemy.steering.isReturnSteering"
+import isPursueSteering?:"com.mygdx.game.ai.tasks.enemy.steering.isPursueSteering"
+
+import setToWander:"com.mygdx.game.ai.tasks.enemy.steering.setToWander"
+import setToReturn:"com.mygdx.game.ai.tasks.enemy.steering.setToReturn"
+import setToPursue:"com.mygdx.game.ai.tasks.enemy.steering.setToPursue"
+
+import changeWanderTarget:"com.mygdx.game.ai.tasks.enemy.steering.ChangeTarget"
+
+check if enemy is alive first to terminate the tree early
+use checks to determine current state of the enemy
+status success if one of the sequence returns success
+determine current state
+
+if their state is wander
+- need to check if there behavior is already wander
+- if its already wander, don't need to set to wander (use selector with the check
+to behavior and setting the behavior, that way if the check to behavior fails it will
+go ahead and set the behavior which always return a success)
+- then finally you update the target to wander to
 
 # Tree definition
 root
@@ -15,5 +38,17 @@ root
     selector
       sequence
         isWandering?
+          selector
+            isWanderSteering?
+            setToWander
+        changeWanderTarget
       sequence
+        isReturning?
+          selector
+            isReturnSteering;
+            setToReturn
       sequence
+        isPursuing?
+          selector
+            isPursueSteering?
+            setToPursue
