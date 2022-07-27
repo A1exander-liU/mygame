@@ -2,6 +2,8 @@ package com.mygdx.game.entityComponentSystem;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.ai.btree.BehaviorTree;
+import com.badlogic.gdx.ai.btree.Task;
 import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.MyGame;
@@ -19,9 +21,11 @@ import com.mygdx.game.entityComponentSystem.components.Speed;
 import com.mygdx.game.entityComponentSystem.components.Steering;
 
 public class MobEntity extends Entity {
+    // have method to get and change to behavior tree to use
     ComponentGrabber cg;
     MyGame root;
     GameMapProperties gameMapProperties;
+    BehaviorTree<MobEntity> behaviorTree;
 
     public MobEntity(ComponentGrabber cg, MyGame root, GameMapProperties gameMapProperties) {
         this.cg = cg;
@@ -29,6 +33,10 @@ public class MobEntity extends Entity {
         this.gameMapProperties = gameMapProperties;
         addRequiredComponents();
         modifyComponentValues();
+        // leaf task: overall behavior
+        // Leaf Task: Hunt
+        behaviorTree = new BehaviorTree<>();
+        behaviorTree.setObject(this);
     }
 
     private void addRequiredComponents() {
@@ -58,5 +66,13 @@ public class MobEntity extends Entity {
         size.height = 32;
         speed.xSpeed = 2;
         speed.ySpeed = 2;
+    }
+
+    public BehaviorTree<MobEntity> getBehaviorTree() {
+        return behaviorTree;
+    }
+
+    public void setBehaviorTree(BehaviorTree<MobEntity> behaviorTree) {
+        this.behaviorTree = behaviorTree;
     }
 }
