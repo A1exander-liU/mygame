@@ -35,8 +35,10 @@ public class ChangeTarget extends LeafTask<MobEntity> {
     @Override
     public Status execute() {
         MobEntity enemy = getObject();
-        if (elapsedTimePassesInterval(enemy))
+        if (elapsedTimePassesInterval(enemy)) {
+            setRandomTarget(enemy);
             return Status.SUCCEEDED;
+        }
         return Status.FAILED;
     }
 
@@ -50,15 +52,9 @@ public class ChangeTarget extends LeafTask<MobEntity> {
     }
 
     private boolean elapsedTimePassesInterval(Entity entity) {
-        Steering steering = entity.getComponent(Steering.class);
         MovementBehavior movementBehavior = entity.getComponent(MovementBehavior.class);
-        Vector2 newPosition;
-        if (TimeSystem.time - movementBehavior.previousTargetUpdate >= interval) {
-            newPosition = generateRandomPosition(entity);
-            movementBehavior.wander.setTarget(new GameLocation(newPosition));
-            return true;
-        }
-        return false;
+        return TimeSystem.time - movementBehavior.previousTargetUpdate >= interval;
+
     }
 
     private Vector2 generateRandomPosition(Entity entity) {
@@ -105,5 +101,11 @@ public class ChangeTarget extends LeafTask<MobEntity> {
     private float generateRandom(float min, float max) {
         Random random = new Random();
         return random.nextInt((int) (max - min)) + min;
+    }
+
+    private void setRandomTarget(Entity entity) {
+        MovementBehavior movementBehavior = entity.getComponent(MovementBehavior.class);
+        Vector2 newPosition = generateRandomPosition(entity);
+        movementBehavior.wander.setTarget(new GameLocation(newPosition));
     }
 }
