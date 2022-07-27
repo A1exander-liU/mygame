@@ -13,6 +13,7 @@ public class MovementBehavior implements Component {
     public Seek<Vector2> back;
     public Seek<Vector2> wander;
     public CollisionAvoidance<Vector2> collisionAvoidance;
+    public float previousTargetUpdate = 0;
 
     public MovementBehavior(Entity entity) {
         Steering steering = entity.getComponent(Steering.class);
