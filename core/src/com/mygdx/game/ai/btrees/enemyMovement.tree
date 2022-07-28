@@ -1,9 +1,5 @@
-#
-# Enemy movement tree
-#
-
-# Alias definitions
 import isAlive?:"com.mygdx.game.ai.tasks"
+import changeWanderTarget:"com.mygdx.game.ai.tasks.enemy.steering.ChangeTarget"
 
 import isWandering?:"com.mygdx.game.ai.tasks.enemy.steering.isWandering"
 import isReturning?:"com.mygdx.game.ai.tasks.enemy.steering.isReturning"
@@ -16,8 +12,6 @@ import isPursueSteering?:"com.mygdx.game.ai.tasks.enemy.steering.isPursueSteerin
 import setToWander:"com.mygdx.game.ai.tasks.enemy.steering.setToWander"
 import setToReturn:"com.mygdx.game.ai.tasks.enemy.steering.setToReturn"
 import setToPursue:"com.mygdx.game.ai.tasks.enemy.steering.setToPursue"
-
-import changeWanderTarget:"com.mygdx.game.ai.tasks.enemy.steering.ChangeTarget"
 
 subtree name:"useWanderBehavior"  #name is for referencing
   selector  #return success when first child returns success (execute children to get first success)
