@@ -1,4 +1,4 @@
-package com.mygdx.game.ai.tasks.enemy.steering;
+package com.mygdx.game.aiTasks.enemy.steering;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.ai.btree.LeafTask;

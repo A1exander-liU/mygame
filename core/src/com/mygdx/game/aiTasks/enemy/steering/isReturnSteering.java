@@ -1,4 +1,4 @@
-package com.mygdx.game.ai.tasks.enemy.steering;
+package com.mygdx.game.aiTasks.enemy.steering;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.ai.btree.LeafTask;
@@ -7,14 +7,14 @@ import com.mygdx.game.entityComponentSystem.MobEntity;
 import com.mygdx.game.entityComponentSystem.components.MovementBehavior;
 import com.mygdx.game.entityComponentSystem.components.Steering;
 
-public class isPursueSteering extends LeafTask<MobEntity> {
+public class isReturnSteering extends LeafTask<MobEntity> {
 
-    public isPursueSteering() {}
+    public isReturnSteering() {}
 
     @Override
     public Status execute() {
         MobEntity enemy = getObject();
-        if (enemySteeringIsPursue(enemy))
+        if (enemySteeringIsReturn(enemy))
             return Status.SUCCEEDED;
         return Status.FAILED;
     }
@@ -24,8 +24,8 @@ public class isPursueSteering extends LeafTask<MobEntity> {
         return task;
     }
 
-    private boolean enemySteeringIsPursue(Entity entity) {
+    private boolean enemySteeringIsReturn(Entity entity) {
         return entity.getComponent(Steering.class).steeringBehavior
-                == entity.getComponent(MovementBehavior.class).pursue;
+                == entity.getComponent(MovementBehavior.class).back;
     }
 }

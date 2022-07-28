@@ -1,4 +1,4 @@
-package com.mygdx.game.ai.tasks.enemy.steering;
+package com.mygdx.game.aiTasks.enemy.steering;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.ai.btree.LeafTask;
@@ -7,15 +7,16 @@ import com.mygdx.game.entityComponentSystem.MobEntity;
 import com.mygdx.game.entityComponentSystem.components.MovementBehavior;
 import com.mygdx.game.entityComponentSystem.components.Steering;
 
-public class setToWander extends LeafTask<MobEntity> {
+public class isWanderSteering extends LeafTask<MobEntity> {
 
-    public setToWander() {}
+    public isWanderSteering() {}
 
     @Override
     public Status execute() {
         MobEntity enemy = getObject();
-        setToWanderBehavior(enemy);
-        return Status.SUCCEEDED;
+        if (enemySteeringIsWander(enemy))
+            return Status.SUCCEEDED;
+        return Status.FAILED;
     }
 
     @Override
@@ -23,9 +24,8 @@ public class setToWander extends LeafTask<MobEntity> {
         return task;
     }
 
-    private void setToWanderBehavior(Entity entity) {
-        Steering steering = entity.getComponent(Steering.class);
-        MovementBehavior movementBehavior = entity.getComponent(MovementBehavior.class);
-        steering.steeringBehavior = movementBehavior.wander;
+    private boolean enemySteeringIsWander(Entity entity) {
+        return entity.getComponent(Steering.class).steeringBehavior
+                == entity.getComponent(MovementBehavior.class).wander;
     }
 }
