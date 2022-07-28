@@ -40,6 +40,12 @@ public class GameMapProperties {
         makeEntitiesFromCollisions();
     }
 
+    public GameMapProperties(TiledMap tiledMap) {
+        this.tiledMap = tiledMap;
+        setMapProperties();
+        makeEntitiesFromCollisions();
+    }
+
     private void setMapProperties() {
         MapProperties mapProps = tiledMap.getProperties();
         int xCells = mapProps.get("width", Integer.class);
