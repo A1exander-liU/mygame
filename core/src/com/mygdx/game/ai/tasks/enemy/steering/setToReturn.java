@@ -14,10 +14,8 @@ import com.mygdx.game.entityComponentSystem.components.Spawn;
 import com.mygdx.game.entityComponentSystem.components.Steering;
 
 public class setToReturn extends LeafTask<MobEntity> {
-    private Entity player;
 
-    public setToReturn(Entity player) {
-        this.player = player;
+    public setToReturn() {
     }
 
     @Override
