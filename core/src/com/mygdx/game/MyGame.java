@@ -24,6 +24,7 @@ public class MyGame extends Game {
 
 	public SpriteBatch batch;
 	public static Engine engine;
+	public static GameMapProperties gameMapProperties;
 
 	public StoredPreferences getStoredPreferences() {
 		return storedPreferences;
