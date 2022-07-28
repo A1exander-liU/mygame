@@ -19,8 +19,8 @@ import setToPursue:"com.mygdx.game.ai.tasks.enemy.steering.setToPursue"
 
 import changeWanderTarget:"com.mygdx.game.ai.tasks.enemy.steering.ChangeTarget"
 
-subtree name:"useWanderBehavior"
-  selector
+subtree name:"useWanderBehavior"  #name is for referencing
+  selector  #return success when first child returns success (execute children to get first success)
     isWanderSteering?
     setToWander
   changeWanderTarget
@@ -35,8 +35,8 @@ subtree name:"usePursueBehavior"
     isPursueSteering?
     setToPursue
 
-root
-  dynamicGuardSelector
-    (isWandering?) $useWanderBehavior
+root  #start of btree
+  dynamicGuardSelector  #actively checks guards and executes child of first passed guard
+    (isWandering?) $useWanderBehavior  #executes the subtree if guard is true
     (isReturning?) $useReturnBehavior
     (isPursuing?)  $usePursueBehavior
