@@ -18,11 +18,11 @@ import com.mygdx.game.entityComponentSystem.systems.TimeSystem;
 
 import java.util.Random;
 
-public class ChangeTarget extends LeafTask<MobEntity> {
+public class changeTarget extends LeafTask<MobEntity> {
     private float interval = 2;
     private GameMapProperties gameMapProperties;
 
-    public ChangeTarget(GameMapProperties gameMapProperties) {
+    public changeTarget(GameMapProperties gameMapProperties) {
         this.gameMapProperties = gameMapProperties;
     }
 
