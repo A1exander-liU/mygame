@@ -23,7 +23,7 @@ public class MyGame extends Game {
 	public static final int LOADING_SCREEN = 3;
 
 	public SpriteBatch batch;
-	public Engine engine;
+	public static Engine engine;
 
 	public StoredPreferences getStoredPreferences() {
 		return storedPreferences;
