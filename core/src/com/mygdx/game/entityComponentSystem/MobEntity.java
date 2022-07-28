@@ -4,6 +4,10 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ai.btree.BehaviorTree;
 import com.badlogic.gdx.ai.btree.Task;
+import com.badlogic.gdx.ai.btree.utils.BehaviorTreeLibrary;
+import com.badlogic.gdx.ai.btree.utils.BehaviorTreeLoader;
+import com.badlogic.gdx.ai.btree.utils.BehaviorTreeParser;
+import com.badlogic.gdx.ai.btree.utils.BehaviorTreeReader;
 import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.MyGame;
@@ -20,6 +24,8 @@ import com.mygdx.game.entityComponentSystem.components.Size;
 import com.mygdx.game.entityComponentSystem.components.Speed;
 import com.mygdx.game.entityComponentSystem.components.Steering;
 
+import java.io.Reader;
+
 public class MobEntity extends Entity {
     // have method to get and change to behavior tree to use
     ComponentGrabber cg;
@@ -33,10 +39,12 @@ public class MobEntity extends Entity {
         this.gameMapProperties = gameMapProperties;
         addRequiredComponents();
         modifyComponentValues();
-        // leaf task: overall behavior
-        // Leaf Task: Hunt
         behaviorTree = new BehaviorTree<>();
         behaviorTree.setObject(this);
+        Reader reader = null;
+        reader = Gdx.files.internal("btrees/enemyMovement.tree").reader();
+        BehaviorTreeParser<MobEntity> behaviorTreeParser = new BehaviorTreeParser<>(BehaviorTreeParser.DEBUG_HIGH);
+        behaviorTree = behaviorTreeParser.parse(reader, this);
     }
 
     private void addRequiredComponents() {
@@ -66,9 +74,7 @@ public class MobEntity extends Entity {
         size.height = 32;
         speed.xSpeed = 2;
         speed.ySpeed = 2;
-
-        behaviorTree = new BehaviorTree<>();
-        behaviorTree.setObject(this);
+//        behaviorTree.setObject(this);
     }
 
     public BehaviorTree<MobEntity> getBehaviorTree() {
