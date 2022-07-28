@@ -1,5 +1,5 @@
 import isAlive?:"com.mygdx.game.aiTasks.isAlive"
-import changeWanderTarget:"com.mygdx.game.aiTasks.enemy.steering.ChangeTarget"
+import changeWanderTarget:"com.mygdx.game.aiTasks.enemy.steering.changeTarget"
 
 import isWandering?:"com.mygdx.game.aiTasks.enemy.steering.isWandering"
 import isReturning?:"com.mygdx.game.aiTasks.enemy.steering.isReturning"
