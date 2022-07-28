@@ -19,36 +19,24 @@ import setToPursue:"com.mygdx.game.ai.tasks.enemy.steering.setToPursue"
 
 import changeWanderTarget:"com.mygdx.game.ai.tasks.enemy.steering.ChangeTarget"
 
-check if enemy is alive first to terminate the tree early
-use checks to determine current state of the enemy
-status success if one of the sequence returns success
-determine current state
-
-if their state is wander
-- need to check if there behavior is already wander
-- if its already wander, don't need to set to wander (use selector with the check
-to behavior and setting the behavior, that way if the check to behavior fails it will
-go ahead and set the behavior which always return a success)
-- then finally you update the target to wander to
-
-# Tree definition
-root
+subtree name:"useWanderBehavior"
   selector
-    isAlive?
-    selector
-      sequence
-        isWandering?
-          selector
-            isWanderSteering?
-            setToWander
-        changeWanderTarget
-      sequence
-        isReturning?
-          selector
-            isReturnSteering;
-            setToReturn
-      sequence
-        isPursuing?
-          selector
-            isPursueSteering?
-            setToPursue
+    isWanderSteering?
+    setToWander
+  changeWanderTarget
+
+subtree name:"useReturnBehavior"
+  selector
+    isReturnSteering?
+    setToReturn
+
+subtree name:"usePursueBehavior"
+  selector
+    isPursueSteering?
+    setToPursue
+
+root
+  dynamicGuardSelector
+    (isWandering?) $useWanderBehavior
+    (isReturning?) $useReturnBehavior
+    (isPursuing?)  $usePursueBehavior
