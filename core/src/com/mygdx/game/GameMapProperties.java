@@ -56,11 +56,11 @@ public class GameMapProperties {
         OBSTACLE_LAYER = tiledMap.getLayers().get(3).getName();
     }
 
-    public MapLayer getMapLayer(String name) {
+    public static MapLayer getMapLayer(String name) {
         return tiledMap.getLayers().get(name);
     }
 
-    public MapLayer getMapLayer(int index) {
+    public static MapLayer getMapLayer(int index) {
         return tiledMap.getLayers().get(index);
     }
 
