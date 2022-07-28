@@ -1,17 +1,17 @@
-import isAlive?:"com.mygdx.game.ai.tasks"
-import changeWanderTarget:"com.mygdx.game.ai.tasks.enemy.steering.ChangeTarget"
+import isAlive?:"com.mygdx.game.aiTasks.isAlive"
+import changeWanderTarget:"com.mygdx.game.aiTasks.enemy.steering.ChangeTarget"
 
-import isWandering?:"com.mygdx.game.ai.tasks.enemy.steering.isWandering"
-import isReturning?:"com.mygdx.game.ai.tasks.enemy.steering.isReturning"
-import isPursuing?:"com.mygdx.game.ai.tasks.enemy.steering.isPursuing"
+import isWandering?:"com.mygdx.game.aiTasks.enemy.steering.isWandering"
+import isReturning?:"com.mygdx.game.aiTasks.enemy.steering.isReturning"
+import isPursuing?:"com.mygdx.game.aiTasks.enemy.steering.isPursuing"
 
-import isWanderSteering?:"com.mygdx.game.ai.tasks.enemy.steering.isWanderSteering"
-import isReturnSteering?:"com.mygdx.game.ai.tasks.enemy.steering.isReturnSteering"
-import isPursueSteering?:"com.mygdx.game.ai.tasks.enemy.steering.isPursueSteering"
+import isWanderSteering?:"com.mygdx.game.aiTasks.enemy.steering.isWanderSteering"
+import isReturnSteering?:"com.mygdx.game.aiTasks.enemy.steering.isReturnSteering"
+import isPursueSteering?:"com.mygdx.game.aiTasks.enemy.steering.isPursueSteering"
 
-import setToWander:"com.mygdx.game.ai.tasks.enemy.steering.setToWander"
-import setToReturn:"com.mygdx.game.ai.tasks.enemy.steering.setToReturn"
-import setToPursue:"com.mygdx.game.ai.tasks.enemy.steering.setToPursue"
+import setToWander:"com.mygdx.game.aiTasks.enemy.steering.setToWander"
+import setToReturn:"com.mygdx.game.aiTasks.enemy.steering.setToReturn"
+import setToPursue:"com.mygdx.game.aiTasks.enemy.steering.setToPursue"
 
 subtree name:"useWanderBehavior"  #name is for referencing
   selector  #return success when first child returns success (execute children to get first success)
