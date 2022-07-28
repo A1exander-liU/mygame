@@ -1,4 +1,4 @@
-package com.mygdx.game.ai.tasks;
+package com.mygdx.game.aiTasks;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.ai.btree.LeafTask;

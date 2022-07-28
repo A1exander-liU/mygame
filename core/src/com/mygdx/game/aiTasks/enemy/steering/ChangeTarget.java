@@ -1,4 +1,4 @@
-package com.mygdx.game.ai.tasks.enemy.steering;
+package com.mygdx.game.aiTasks.enemy.steering;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.ai.btree.LeafTask;
@@ -14,7 +14,6 @@ import com.mygdx.game.entityComponentSystem.components.MovementBehavior;
 import com.mygdx.game.entityComponentSystem.components.Position;
 import com.mygdx.game.entityComponentSystem.components.Size;
 import com.mygdx.game.entityComponentSystem.components.Spawn;
-import com.mygdx.game.entityComponentSystem.components.Steering;
 import com.mygdx.game.entityComponentSystem.systems.TimeSystem;
 
 import java.util.Random;
