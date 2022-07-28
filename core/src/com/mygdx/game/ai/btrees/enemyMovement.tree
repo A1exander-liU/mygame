@@ -31,6 +31,6 @@ subtree name:"usePursueBehavior"
 
 root  #start of btree
   dynamicGuardSelector  #actively checks guards and executes child of first passed guard
-    (isWandering?) $useWanderBehavior  #executes the subtree if guard is true
-    (isReturning?) $useReturnBehavior
-    (isPursuing?)  $usePursueBehavior
+    (isAlive?) (isWandering?) $useWanderBehavior  #executes the subtree if guard is true
+    (isAlive?) (isReturning?) $useReturnBehavior
+    (isAlive?) (isPursuing?)  $usePursueBehavior
