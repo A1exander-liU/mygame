@@ -8,11 +8,8 @@ import com.mygdx.game.entityComponentSystem.components.MovementBehavior;
 import com.mygdx.game.entityComponentSystem.components.Steering;
 
 public class setToWander extends LeafTask<MobEntity> {
-    private Entity player;
 
-    public setToWander(Entity player) {
-        this.player = player;
-    }
+    public setToWander() {}
 
     @Override
     public Status execute() {
