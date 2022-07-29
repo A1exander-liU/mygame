@@ -8,11 +8,9 @@ import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.GameLocation;
-import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.entityComponentSystem.MobEntity;
 import com.mygdx.game.entityComponentSystem.components.MovementBehavior;
-import com.mygdx.game.entityComponentSystem.components.Position;
 import com.mygdx.game.entityComponentSystem.components.Size;
 import com.mygdx.game.entityComponentSystem.components.Spawn;
 import com.mygdx.game.entityComponentSystem.systems.TimeSystem;
@@ -50,13 +48,11 @@ public class ChangeTarget extends LeafTask<MobEntity> {
     }
 
     private Vector2 generateRandomPosition(Entity entity) {
-        Position pos = entity.getComponent(Position.class);
         return new Vector2(randomX(entity), randomY(entity));
     }
 
     private float randomX(Entity entity) {
         Size size = entity.getComponent(Size.class);
-        Position pos = entity.getComponent(Position.class);
         Rectangle spawnArea = getSpawnArea(entity.getComponent(Spawn.class));
         if (spawnArea != null) {
             float max = (spawnArea.x + spawnArea.width) - size.width;
@@ -67,7 +63,6 @@ public class ChangeTarget extends LeafTask<MobEntity> {
 
     private float randomY(Entity entity) {
         Size size = entity.getComponent(Size.class);
-        Position pos = entity.getComponent(Position.class);
         Rectangle spawnArea = getSpawnArea(entity.getComponent(Spawn.class));
         if (spawnArea != null) {
             float max = (spawnArea.y + spawnArea.height) - size.height;
