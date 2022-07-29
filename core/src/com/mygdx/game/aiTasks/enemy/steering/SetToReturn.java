@@ -12,10 +12,9 @@ import com.mygdx.game.entityComponentSystem.components.MovementBehavior;
 import com.mygdx.game.entityComponentSystem.components.Spawn;
 import com.mygdx.game.entityComponentSystem.components.Steering;
 
-public class setToReturn extends LeafTask<MobEntity> {
+public class SetToReturn extends LeafTask<MobEntity> {
 
-    public setToReturn() {
-    }
+    public SetToReturn() {}
 
     @Override
     public Status execute() {

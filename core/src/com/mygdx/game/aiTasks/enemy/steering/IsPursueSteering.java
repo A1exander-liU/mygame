@@ -7,9 +7,9 @@ import com.mygdx.game.entityComponentSystem.MobEntity;
 import com.mygdx.game.entityComponentSystem.components.MovementBehavior;
 import com.mygdx.game.entityComponentSystem.components.Steering;
 
-public class isPursueSteering extends LeafTask<MobEntity> {
+public class IsPursueSteering extends LeafTask<MobEntity> {
 
-    public isPursueSteering() {}
+    public IsPursueSteering() {}
 
     @Override
     public Status execute() {

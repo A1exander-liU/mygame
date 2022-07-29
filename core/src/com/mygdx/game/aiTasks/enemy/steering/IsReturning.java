@@ -6,9 +6,9 @@ import com.badlogic.gdx.ai.btree.Task;
 import com.mygdx.game.entityComponentSystem.MobEntity;
 import com.mygdx.game.entityComponentSystem.components.Enemy;
 
-public class isReturning extends LeafTask<MobEntity> {
+public class IsReturning extends LeafTask<MobEntity> {
 
-    public isReturning() {}
+    public IsReturning() {}
 
     @Override
     public Status execute() {

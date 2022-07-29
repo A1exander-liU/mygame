@@ -7,9 +7,9 @@ import com.mygdx.game.entityComponentSystem.MobEntity;
 import com.mygdx.game.entityComponentSystem.components.MovementBehavior;
 import com.mygdx.game.entityComponentSystem.components.Steering;
 
-public class isWanderSteering extends LeafTask<MobEntity> {
+public class IsWanderSteering extends LeafTask<MobEntity> {
 
-    public isWanderSteering() {}
+    public IsWanderSteering() {}
 
     @Override
     public Status execute() {

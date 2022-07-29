@@ -6,9 +6,9 @@ import com.badlogic.gdx.ai.btree.Task;
 import com.mygdx.game.entityComponentSystem.MobEntity;
 import com.mygdx.game.entityComponentSystem.components.Enemy;
 
-public class isPursuing extends LeafTask<MobEntity> {
+public class IsPursuing extends LeafTask<MobEntity> {
 
-    public isPursuing() {}
+    public IsPursuing() {}
 
     @Override
     public Status execute() {

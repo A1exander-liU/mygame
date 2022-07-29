@@ -6,9 +6,9 @@ import com.badlogic.gdx.ai.btree.Task;
 import com.mygdx.game.entityComponentSystem.MobEntity;
 import com.mygdx.game.entityComponentSystem.components.Enemy;
 
-public class isAlive extends LeafTask<MobEntity> {
+public class IsAlive extends LeafTask<MobEntity> {
 
-    public isAlive() {}
+    public IsAlive() {}
 
     @Override
     public Status execute() {

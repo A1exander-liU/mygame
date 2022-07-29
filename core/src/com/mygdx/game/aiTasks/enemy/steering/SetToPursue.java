@@ -12,10 +12,10 @@ import com.mygdx.game.entityComponentSystem.components.MovementBehavior;
 import com.mygdx.game.entityComponentSystem.components.Position;
 import com.mygdx.game.entityComponentSystem.components.Steering;
 
-public class setToPursue extends LeafTask<MobEntity> {
+public class SetToPursue extends LeafTask<MobEntity> {
     private Entity player;
 
-    public setToPursue() {}
+    public SetToPursue() {}
 
     @Override
     public void start() {
