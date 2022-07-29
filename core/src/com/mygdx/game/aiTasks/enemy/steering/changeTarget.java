@@ -9,6 +9,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.GameLocation;
 import com.mygdx.game.GameMapProperties;
+import com.mygdx.game.MyGame;
 import com.mygdx.game.entityComponentSystem.MobEntity;
 import com.mygdx.game.entityComponentSystem.components.MovementBehavior;
 import com.mygdx.game.entityComponentSystem.components.Position;
@@ -20,10 +21,12 @@ import java.util.Random;
 
 public class changeTarget extends LeafTask<MobEntity> {
     private float interval = 2;
-    private GameMapProperties gameMapProperties;
 
-    public changeTarget(GameMapProperties gameMapProperties) {
-        this.gameMapProperties = gameMapProperties;
+    public changeTarget() {}
+
+    @Override
+    public void start() {
+
     }
 
     @Override
@@ -44,7 +47,6 @@ public class changeTarget extends LeafTask<MobEntity> {
     private boolean elapsedTimePassesInterval(Entity entity) {
         MovementBehavior movementBehavior = entity.getComponent(MovementBehavior.class);
         return TimeSystem.time - movementBehavior.previousTargetUpdate >= interval;
-
     }
 
     private Vector2 generateRandomPosition(Entity entity) {
@@ -77,7 +79,7 @@ public class changeTarget extends LeafTask<MobEntity> {
     private Rectangle getSpawnArea(Spawn spawn) {
         float enemySpawnX = spawn.spawnPosX;
         float enemySpawnY = spawn.spawnPosY;
-        MapObjects spawns = gameMapProperties.getMapLayer(gameMapProperties.ENEMY_SPAWNS).getObjects();
+        MapObjects spawns = MyGame.gameMapProperties.getMapLayer(MyGame.gameMapProperties.ENEMY_SPAWNS).getObjects();
         for (int i = 0; i < spawns.getCount(); i++) {
             Rectangle spawnArea = ((RectangleMapObject) spawns.get(i)).getRectangle();
             float spawnCenterX = spawnArea.x + (spawnArea.width / 2);
