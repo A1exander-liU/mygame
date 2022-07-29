@@ -19,14 +19,14 @@ import com.mygdx.game.entityComponentSystem.systems.TimeSystem;
 
 import java.util.Random;
 
-public class changeTarget extends LeafTask<MobEntity> {
-    private float interval = 2;
+public class ChangeTarget extends LeafTask<MobEntity> {
+    private float interval;
 
-    public changeTarget() {}
+    public ChangeTarget() {}
 
     @Override
     public void start() {
-
+        interval = 2;
     }
 
     @Override
@@ -41,7 +41,7 @@ public class changeTarget extends LeafTask<MobEntity> {
 
     @Override
     protected Task<MobEntity> copyTo(Task<MobEntity> task) {
-        return null;
+        return task;
     }
 
     private boolean elapsedTimePassesInterval(Entity entity) {
