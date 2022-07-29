@@ -94,5 +94,6 @@ public class ChangeTarget extends LeafTask<MobEntity> {
         MovementBehavior movementBehavior = entity.getComponent(MovementBehavior.class);
         Vector2 newPosition = generateRandomPosition(entity);
         movementBehavior.wander.setTarget(new GameLocation(newPosition));
+        movementBehavior.previousTargetUpdate = TimeSystem.time;
     }
 }
