@@ -13,6 +13,7 @@ import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.entityComponentSystem.components.DetectionProximity;
 import com.mygdx.game.entityComponentSystem.components.Enemy;
+import com.mygdx.game.entityComponentSystem.components.EnemyStateMachine;
 import com.mygdx.game.entityComponentSystem.components.MovementBehavior;
 import com.mygdx.game.entityComponentSystem.components.Spawn;
 import com.mygdx.game.entityComponentSystem.components.Sprite;
@@ -22,6 +23,7 @@ import com.mygdx.game.entityComponentSystem.components.Name;
 import com.mygdx.game.entityComponentSystem.components.Position;
 import com.mygdx.game.entityComponentSystem.components.Size;
 import com.mygdx.game.entityComponentSystem.components.Speed;
+import com.mygdx.game.entityComponentSystem.components.StateComponent;
 import com.mygdx.game.entityComponentSystem.components.Steering;
 
 import java.io.Reader;
@@ -60,6 +62,8 @@ public class MobEntity extends Entity {
         super.add(new Steering(this));
         super.add(new DetectionProximity(this, 32, root));
         super.add(new MovementBehavior(this));
+        super.add(new StateComponent());
+        super.add(new EnemyStateMachine(this));
     }
 
     private void modifyComponentValues() {
