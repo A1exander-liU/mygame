@@ -76,6 +76,14 @@ public class StateSystem extends EntitySystem {
         // loop to determine if enemy should be idling
         for (int i = 0; i < enemies.size(); i++) {
             Entity entity = enemies.get(i);
+            EnemyStateMachine stateMachine = cg.getStateMachine(entity);
+            // can only be idling if they are inside spawn
+            // when enemy is returning
+            // check distance from spawn is a small number
+            if (stateMachine.getCurrentState() == EnemyState.FLEE) {
+                if (enemyNearSpawn(entity))
+                    stateMachine.changeState(EnemyState.IDLE);
+            }
         }
     }
 
@@ -121,5 +129,13 @@ public class StateSystem extends EntitySystem {
         Vector2 enemyPos = new Vector2(pos.x, pos.y);
         Vector2 spawnPos = new Vector2(spawn.spawnPosX, spawn.spawnPosY);
         return spawnPos.dst(enemyPos) >= 400;
+    }
+
+    private boolean enemyNearSpawn(Entity entity) {
+        Position pos = cg.getPosition(entity);
+        Spawn spawn = cg.getSpawn(entity);
+        Vector2 enemyPos = new Vector2(pos.x, pos.y);
+        Vector2 spawnPos = new Vector2(spawn.spawnPosX, spawn.spawnPosY);
+        return spawnPos.dst(enemyPos) <= 10;
     }
 }
