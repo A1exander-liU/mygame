@@ -11,6 +11,7 @@ import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.entityComponentSystem.ComponentGrabber;
@@ -49,12 +50,32 @@ public class StateSystem extends EntitySystem {
 
     @Override
     public void update(float delta) {
+        // loop to determine if enemy should be hunting
         for (int i = 0; i < enemies.size(); i++) {
             Entity entity = enemies.get(i);
             if (enemyAggravated(entity)) {
                 EnemyStateMachine stateMachine = cg.getStateMachine(entity);
                 stateMachine.changeState(EnemyState.HUNT);
             }
+        }
+
+        // loop to determine if enemy should be fleeing
+        for (int i = 0; i < enemies.size(); i++) {
+            Entity entity = enemies.get(i);
+            EnemyStateMachine stateMachine = cg.getStateMachine(entity);
+            if (stateMachine.getCurrentState() == EnemyState.HUNT) {
+                if (enemyTooFarAway(entity))
+                    stateMachine.changeState(EnemyState.FLEE);
+            }
+            // flee means returning back to spawn
+            // can only flee if enemy is far from spawn
+            // enemy can only flee if they are currently hunting
+
+        }
+
+        // loop to determine if enemy should be idling
+        for (int i = 0; i < enemies.size(); i++) {
+            Entity entity = enemies.get(i);
         }
     }
 
@@ -92,5 +113,13 @@ public class StateSystem extends EntitySystem {
         Position pos = cg.getPosition(entity);
         Size size = cg.getSize(entity);
         return new Rectangle(pos.x, pos.y, size.width, size.height);
+    }
+
+    private boolean enemyTooFarAway(Entity entity) {
+        Position pos = cg.getPosition(entity);
+        Spawn spawn = cg.getSpawn(entity);
+        Vector2 enemyPos = new Vector2(pos.x, pos.y);
+        Vector2 spawnPos = new Vector2(spawn.spawnPosX, spawn.spawnPosY);
+        return spawnPos.dst(enemyPos) >= 400;
     }
 }
