@@ -1,11 +1,14 @@
 package com.mygdx.game.entityComponentSystem;
 
+import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.entityComponentSystem.components.DetectionProximity;
+import com.mygdx.game.entityComponentSystem.components.EnemyStateMachine;
 import com.mygdx.game.entityComponentSystem.components.MovementBehavior;
+import com.mygdx.game.entityComponentSystem.components.StateComponent;
 import com.mygdx.game.entityComponentSystem.components.Steering;
 import com.mygdx.game.entityComponentSystem.components.Camera;
 import com.mygdx.game.entityComponentSystem.components.Enemy;
@@ -39,6 +42,11 @@ public class ComponentGrabber {
     public Enemy getEnemy(Entity entity) {
         ComponentMapper<Enemy> enemy = ComponentMapper.getFor(Enemy.class);
         return enemy.get(entity);
+    }
+
+    public EnemyStateMachine getStateMachine(Entity entity) {
+        ComponentMapper<EnemyStateMachine> enemyStateMachine = ComponentMapper.getFor(EnemyStateMachine.class);
+        return enemyStateMachine.get(entity);
     }
 
     public Sprite getSprite(Entity entity) {
@@ -77,19 +85,24 @@ public class ComponentGrabber {
         return pos.get(entity);
     }
 
-    public Spawn getSpawn(Entity entity) {
-        ComponentMapper<Spawn> spawn = ComponentMapper.getFor(Spawn.class);
-        return spawn.get(entity);
-    }
-
     public Size getSize(Entity entity) {
         ComponentMapper<Size> size = ComponentMapper.getFor(Size.class);
         return size.get(entity);
     }
 
+    public Spawn getSpawn(Entity entity) {
+        ComponentMapper<Spawn> spawn = ComponentMapper.getFor(Spawn.class);
+        return spawn.get(entity);
+    }
+
     public Speed getSpeed(Entity entity) {
         ComponentMapper<Speed> speed = ComponentMapper.getFor(Speed.class);
         return speed.get(entity);
+    }
+
+    public StateComponent getStateComponent(Entity entity) {
+        ComponentMapper<StateComponent> stateComponent = ComponentMapper.getFor(StateComponent.class);
+        return stateComponent.get(entity);
     }
 
     public Steering getSteering(Entity entity) {
