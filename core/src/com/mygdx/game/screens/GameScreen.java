@@ -43,14 +43,15 @@ public class GameScreen implements Screen {
     public GameScreen(MyGame parent) {
         testMap = new TmxMapLoader().load("untitled.tmx");
         this.parent = parent;
-        parent.engine = new Engine();
+        MyGame.engine = new Engine();
         cg = new ComponentGrabber(parent);
+        MyGame.gameMapProperties = new GameMapProperties(testMap);
         gameMapProperties = new GameMapProperties(testMap, parent);
         entityToMapAdder = new EntityToMapAdder(testMap, cg);
         EntityFactory entityFactory = new EntityFactory(cg, parent);
         for (int i = 0; i < 3; i++) {
             MobEntity entity = new MobEntity(cg, parent, gameMapProperties);
-            parent.engine.addEntity(entity);
+            MyGame.engine.addEntity(entity);
             entityToMapAdder.addEntityToMap(testMap, entity);
         }
         PlayerEntity playerEntity = new PlayerEntity(cg, parent, gameMapProperties, "player");
@@ -92,11 +93,11 @@ public class GameScreen implements Screen {
         SpawnZoneDetectionSystem spawnZoneDetectionSystem = new SpawnZoneDetectionSystem(cg, parent, gameMapProperties);
         SteeringSystem steeringSystem = new SteeringSystem(cg, parent, gameMapProperties);
         TimeSystem timeSystem = new TimeSystem(parent);
-        parent.engine.addSystem(movementAndCollision);
-        parent.engine.addSystem(enemySpawningSystem);
-        parent.engine.addSystem(spawnZoneDetectionSystem);
-        parent.engine.addSystem(steeringSystem);
-        parent.engine.addSystem(timeSystem);
+        MyGame.engine.addSystem(movementAndCollision);
+        MyGame.engine.addSystem(enemySpawningSystem);
+        MyGame.engine.addSystem(spawnZoneDetectionSystem);
+        MyGame.engine.addSystem(steeringSystem);
+        MyGame.engine.addSystem(timeSystem);
     }
 
     @Override
@@ -110,9 +111,9 @@ public class GameScreen implements Screen {
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 //        player.movePlayer(gameMapProperties);
-        Entity entity = parent.engine.getEntitiesFor(Family.all(com.mygdx.game.entityComponentSystem.components.Player.class).get()).get(0);
+        Entity entity = MyGame.engine.getEntitiesFor(Family.all(com.mygdx.game.entityComponentSystem.components.Player.class).get()).get(0);
         tiledMapRenderer.setView(cg.getCamera(entity).camera);
-        parent.engine.update(delta);
+        MyGame.engine.update(delta);
         tiledMapRenderer.render();
     }
 
@@ -143,14 +144,14 @@ public class GameScreen implements Screen {
     }
 
     private void pauseSystems() {
-        ImmutableArray<EntitySystem> systems = parent.engine.getSystems();
+        ImmutableArray<EntitySystem> systems = MyGame.engine.getSystems();
         for (EntitySystem system : systems) {
             system.setProcessing(false);
         }
     }
 
     private void resumeSystems() {
-        ImmutableArray<EntitySystem> systems = parent.engine.getSystems();
+        ImmutableArray<EntitySystem> systems = MyGame.engine.getSystems();
         for (EntitySystem system : systems) {
             system.setProcessing(true);
         }
