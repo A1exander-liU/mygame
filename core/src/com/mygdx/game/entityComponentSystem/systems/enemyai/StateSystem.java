@@ -51,7 +51,10 @@ public class StateSystem extends EntitySystem {
     public void update(float delta) {
         for (int i = 0; i < enemies.size(); i++) {
             Entity entity = enemies.get(i);
-
+            if (enemyAggravated(entity)) {
+                EnemyStateMachine stateMachine = cg.getStateMachine(entity);
+                stateMachine.changeState(EnemyState.HUNT);
+            }
         }
     }
 
