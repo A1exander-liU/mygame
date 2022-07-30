@@ -25,10 +25,10 @@ public class GameMapProperties {
     public int mapHeight;
     public int tileWidth;
     public int tileHeight;
-    public String GROUND_LAYER;
-    public String ENEMY_SPAWNS;
-    public String COLLISIONS;
-    public String OBSTACLE_LAYER;
+    public static String GROUND_LAYER;
+    public static String ENEMY_SPAWNS;
+    public static String COLLISIONS;
+    public static String OBSTACLE_LAYER;
     MyGame root;
     // all the collision boxes on the map
     public ImmutableArray<Entity> staticObstacles;
