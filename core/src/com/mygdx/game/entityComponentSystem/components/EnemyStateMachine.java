@@ -34,6 +34,11 @@ public class EnemyStateMachine extends StackStateMachine<MobEntity, EnemyState> 
     @Override
     public void setGlobalState(EnemyState state) {}
 
+
+    public EnemyState getCurrentState() {
+        return stateComponent.state;
+    }
+
     @Override
     public boolean isInState(EnemyState state) {
         return stateComponent.state == state;
