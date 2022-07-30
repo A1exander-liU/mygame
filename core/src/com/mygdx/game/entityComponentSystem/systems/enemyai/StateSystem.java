@@ -53,9 +53,10 @@ public class StateSystem extends EntitySystem {
         // loop to determine if enemy should be hunting
         for (int i = 0; i < enemies.size(); i++) {
             Entity entity = enemies.get(i);
-            if (enemyAggravated(entity)) {
-                EnemyStateMachine stateMachine = cg.getStateMachine(entity);
-                stateMachine.changeState(EnemyState.HUNT);
+            EnemyStateMachine stateMachine = cg.getStateMachine(entity);
+            if (stateMachine.getCurrentState() == EnemyState.IDLE) {
+                if (enemyAggravated(entity))
+                    stateMachine.changeState(EnemyState.HUNT);
             }
         }
 
@@ -96,12 +97,9 @@ public class StateSystem extends EntitySystem {
     }
 
     private boolean enemyAggravated(Entity entity) {
-        if (cg.getStateMachine(entity).getCurrentState() == EnemyState.IDLE) {
-            Rectangle enemySpawn = buildSpawnArea(entity);
-            Rectangle playerRect = buildEntityArea(player);
-            return playerRect.overlaps(enemySpawn);
-        }
-        return false;
+        Rectangle enemySpawn = buildSpawnArea(entity);
+        Rectangle playerRect = buildEntityArea(player);
+        return playerRect.overlaps(enemySpawn);
     }
 
     private Rectangle buildSpawnArea(Entity entity) {
