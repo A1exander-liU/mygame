@@ -20,18 +20,20 @@ import com.mygdx.game.GameLocation;
 import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.entityComponentSystem.ComponentGrabber;
+import com.mygdx.game.entityComponentSystem.EnemyState;
 import com.mygdx.game.entityComponentSystem.Families;
 import com.mygdx.game.entityComponentSystem.MobEntity;
 import com.mygdx.game.entityComponentSystem.components.Player;
 import com.mygdx.game.entityComponentSystem.components.Position;
 import com.mygdx.game.entityComponentSystem.components.Size;
 import com.mygdx.game.entityComponentSystem.components.Spawn;
+import com.mygdx.game.entityComponentSystem.components.StateComponent;
 import com.mygdx.game.entityComponentSystem.systems.TimeSystem;
 
 import java.io.Reader;
 import java.sql.Time;
 import java.util.Random;
-
+// 3 states: idle(random walk), hunting(pursue and attack player), flee(return)
 public class SteeringSystem extends EntitySystem {
     ComponentGrabber cg;
     MyGame root;
@@ -48,41 +50,51 @@ public class SteeringSystem extends EntitySystem {
         this.cg = cg;
         this.root = root;
         this.gameMapProperties = gameMapProperties;
-        enemies = root.engine.getEntitiesFor(Families.enemies);
-        player = root.engine.getEntitiesFor(Families.player).get(0);
-        entities = root.engine.getEntitiesFor(Family.exclude(Player.class).get());
-        reader = Gdx.files.absolute("").reader();
+        enemies = MyGame.engine.getEntitiesFor(Families.enemies);
+        player = MyGame.engine.getEntitiesFor(Families.player).get(0);
+        entities = MyGame.engine.getEntitiesFor(Family.exclude(Player.class).get());
     }
 
     @Override
     public Engine getEngine() {
-        return root.engine;
+        return MyGame.engine;
     }
 
     @Override
     public void update(float delta) {
-        for (int i = 0; i < enemies.size(); i++) {
-            Entity entity = enemies.get(i);
-            switch (cg.getEnemy(entity).state) {
-                case PURSUE:
-                    setPursueBehavior(entity);
-                    break;
-                case RETURN:
-                    setReturnBehavior(entity);
-                    break;
-                case WANDER:
-                    setWanderBehavior(entity);
-                    break;
-                default:
-                    break;
-            }
-        }
+//        for (int i = 0; i < enemies.size(); i++) {
+//            Entity entity = enemies.get(i);
+//            switch (cg.getEnemy(entity).state) {
+//                case PURSUE:
+//                    setPursueBehavior(entity);
+//                    break;
+//                case RETURN:
+//                    setReturnBehavior(entity);
+//                    break;
+//                case WANDER:
+//                    setWanderBehavior(entity);
+//                    break;
+//                default:
+//                    break;
+//            }
+//        }
         // steps through the behavior tree, basically just goes through the whole tree
         // and performs the updating going through all the composite and leaf tasks
+//        for (int i = 0; i < enemies.size(); i++) {
+//            Entity entity = enemies.get(i);
+//            MobEntity enemy = (MobEntity) entity;
+//            if (enemy.getBehaviorTree() != null)
+//                enemy.getBehaviorTree().step();
+//        }
         for (int i = 0; i < enemies.size(); i++) {
             Entity entity = enemies.get(i);
-            MobEntity enemy = (MobEntity) entity;
-            enemy.getBehaviorTree().step();
+            StateComponent stateComponent = cg.getStateComponent(entity);
+            if (stateComponent.state == EnemyState.IDLE)
+                setWanderBehavior(entity);
+            else if (stateComponent.state == EnemyState.HUNT)
+                setPursueBehavior(entity);
+            else if (stateComponent.state == EnemyState.FLEE)
+                setReturnBehavior(entity);
         }
         // the states and behaviors got updated in the behavior tree
         // and are ready to be 
