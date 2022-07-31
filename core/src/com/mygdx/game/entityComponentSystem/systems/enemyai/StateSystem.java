@@ -48,11 +48,13 @@ public class StateSystem extends EntitySystem {
 
     @Override
     public void update(float delta) {
+        // now StateComponent state gets updated
+        // now need system process logic based on current state
         for (int i = 0; i < enemies.size(); i++) {
             Entity entity = enemies.get(i);
-            checkForEnemiesHunting(entity);
-            checkForEnemiesFleeing(entity);
-            checkForEnemiesIdling(entity);
+            checkEnemyCanHunt(entity);
+            checkEnemyCanFlee(entity);
+            checkEnemyCanIdle(entity);
         }
     }
 
@@ -60,7 +62,7 @@ public class StateSystem extends EntitySystem {
         for (int i = 0; i < enemies.size(); i++) {
             Entity entity = enemies.get(i);
             EnemyStateMachine stateMachine = cg.getStateMachine(entity);
-            stateMachine.setInitialState(EnemyState.IDLE);
+            stateMachine.changeState(EnemyState.IDLE);
         }
     }
 
@@ -105,16 +107,18 @@ public class StateSystem extends EntitySystem {
         return spawnPos.dst(enemyPos) <= 10;
     }
 
-    private void checkForEnemiesHunting(Entity entity) {
+    private void checkEnemyCanHunt(Entity entity) {
+        // entity is passed and its state machine used
         EnemyStateMachine stateMachine = cg.getStateMachine(entity);
+        // can only go to hunt from idle state
         if (stateMachine.getCurrentState() == EnemyState.IDLE) {
+            // determines if player is inside spawn area
             if (enemyAggravated(entity))
                 stateMachine.changeState(EnemyState.HUNT);
         }
-
     }
 
-    private void checkForEnemiesFleeing(Entity entity) {
+    private void checkEnemyCanFlee(Entity entity) {
         EnemyStateMachine stateMachine = cg.getStateMachine(entity);
         if (stateMachine.getCurrentState() == EnemyState.HUNT) {
             if (enemyTooFarAway(entity))
@@ -122,12 +126,11 @@ public class StateSystem extends EntitySystem {
         }
     }
 
-    private void checkForEnemiesIdling(Entity entity) {
+    private void checkEnemyCanIdle(Entity entity) {
         EnemyStateMachine stateMachine = cg.getStateMachine(entity);
         if (stateMachine.getCurrentState() == EnemyState.FLEE) {
             if (enemyNearSpawn(entity))
                 stateMachine.changeState(EnemyState.IDLE);
         }
-
     }
 }
