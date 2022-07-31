@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ai.btree.BehaviorTree;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.utils.JsonValue;
 import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.components.DetectionProximity;
@@ -29,12 +30,12 @@ public class MobEntity extends Entity {
     GameMapProperties gameMapProperties;
     BehaviorTree<MobEntity> behaviorTree;
 
-    public MobEntity(ComponentGrabber cg, MyGame root, GameMapProperties gameMapProperties) {
+    public MobEntity(ComponentGrabber cg, MyGame root, GameMapProperties gameMapProperties, String name) {
         this.cg = cg;
         this.root = root;
         this.gameMapProperties = gameMapProperties;
         addRequiredComponents();
-        modifyComponentValues();
+        modifyComponentValues(name);
     }
 
     private void addRequiredComponents() {
@@ -55,19 +56,29 @@ public class MobEntity extends Entity {
         super.add(new ParameterComponent());
     }
 
-    private void modifyComponentValues() {
+    private void modifyComponentValues(String name) {
         Sprite entitySprite = cg.getSprite(this);
         ID id = cg.getID(this);
-        Name name = cg.getName(this);
+        Name enemyName = cg.getName(this);
         Size size = cg.getSize(this);
         Speed speed = cg.getSpeed(this);
+        fillParameters(name);
         entitySprite.texture = new Texture(Gdx.files.internal("testPlayer.png"));
-        name.name = "" + id.ID;
+        enemyName.name = name;
         size.width = 32;
         size.height = 32;
         speed.xSpeed = 2;
         speed.ySpeed = 2;
 //        behaviorTree.setObject(this);
+    }
+
+    private void fillParameters(String name) {
+        // sets all the parameters of the enemy
+        ParameterComponent parameters = cg.getParameters(this);
+        JsonValue enemy = root.jsonSearcher.findByEnemyName(name);
+        parameters.damage = enemy.getInt("DMG");
+        parameters.health.maxHealth = enemy.getInt("HP");
+        parameters.health.maxHealth = enemy.getInt("HP");
     }
 
     public BehaviorTree<MobEntity> getBehaviorTree() {
