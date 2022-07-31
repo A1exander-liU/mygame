@@ -41,12 +41,6 @@ public class MobEntity extends Entity {
         this.gameMapProperties = gameMapProperties;
         addRequiredComponents();
         modifyComponentValues();
-        behaviorTree = new BehaviorTree<>();
-        behaviorTree.setObject(this);
-        Reader reader = null;
-        reader = Gdx.files.internal("btrees/enemyMovement.tree").reader();
-        BehaviorTreeParser<MobEntity> behaviorTreeParser = new BehaviorTreeParser<>(BehaviorTreeParser.DEBUG_HIGH);
-        behaviorTree = behaviorTreeParser.parse(reader, this);
     }
 
     private void addRequiredComponents() {
