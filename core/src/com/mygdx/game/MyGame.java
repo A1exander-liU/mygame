@@ -26,7 +26,7 @@ public class MyGame extends Game {
 	public SpriteBatch batch;
 	public static Engine engine;
 	public static GameMapProperties gameMapProperties;
-	public JsonSearcher jsonSearcher = new JsonSearcher(Gdx.files.internal("gameData/enemies.json"));
+	public JsonSearcher jsonSearcher;
 
 	public StoredPreferences getStoredPreferences() {
 		return storedPreferences;
