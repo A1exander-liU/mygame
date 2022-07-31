@@ -1,8 +1,8 @@
 {
  "enemies":
  [
-   {"name": "slime", "HP": 10},
-   {"name": "skeleton", "HP": 20},
-   {"name": "bat", "HP": 5}
+   {"name": "slime", "HP": 10, "DMG": 2},
+   {"name": "skeleton", "HP": 20, "DMG": 3},
+   {"name": "bat", "HP": 5, "DMG": 1}
  ]
 }
