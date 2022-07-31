@@ -1,0 +1,8 @@
+{
+ "enemies":
+ [
+   {"name": "slime", "HP": 10},
+   {"name": "skeleton", "HP": 20},
+   {"name": "bat", "HP": 5}
+ ]
+}
