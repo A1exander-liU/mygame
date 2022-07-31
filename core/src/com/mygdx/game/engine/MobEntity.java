@@ -10,6 +10,7 @@ import com.mygdx.game.engine.components.DetectionProximity;
 import com.mygdx.game.engine.components.Enemy;
 import com.mygdx.game.engine.components.EnemyStateMachine;
 import com.mygdx.game.engine.components.MovementBehavior;
+import com.mygdx.game.engine.components.ParameterComponent;
 import com.mygdx.game.engine.components.Spawn;
 import com.mygdx.game.engine.components.Sprite;
 import com.mygdx.game.engine.components.Health;
@@ -51,6 +52,7 @@ public class MobEntity extends Entity {
         super.add(new MovementBehavior(this));
         super.add(new StateComponent());
         super.add(new EnemyStateMachine(this));
+        super.add(new ParameterComponent());
     }
 
     private void modifyComponentValues() {
