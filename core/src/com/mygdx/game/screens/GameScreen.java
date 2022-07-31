@@ -23,6 +23,7 @@ import com.mygdx.game.entityComponentSystem.systems.EnemySpawningSystem;
 import com.mygdx.game.entityComponentSystem.systems.MovementAndCollision;
 import com.mygdx.game.entityComponentSystem.systems.SpawnZoneDetectionSystem;
 import com.mygdx.game.entityComponentSystem.systems.TimeSystem;
+import com.mygdx.game.entityComponentSystem.systems.enemyai.StateSystem;
 import com.mygdx.game.entityComponentSystem.systems.enemyai.SteeringSystem;
 
 public class GameScreen implements Screen {
@@ -93,11 +94,13 @@ public class GameScreen implements Screen {
         SpawnZoneDetectionSystem spawnZoneDetectionSystem = new SpawnZoneDetectionSystem(cg, parent, gameMapProperties);
         SteeringSystem steeringSystem = new SteeringSystem(cg, parent, gameMapProperties);
         TimeSystem timeSystem = new TimeSystem(parent);
+        StateSystem stateSystem = new StateSystem(cg, gameMapProperties);
         MyGame.engine.addSystem(movementAndCollision);
         MyGame.engine.addSystem(enemySpawningSystem);
         MyGame.engine.addSystem(spawnZoneDetectionSystem);
         MyGame.engine.addSystem(steeringSystem);
         MyGame.engine.addSystem(timeSystem);
+        MyGame.engine.addSystem(stateSystem);
     }
 
     @Override
