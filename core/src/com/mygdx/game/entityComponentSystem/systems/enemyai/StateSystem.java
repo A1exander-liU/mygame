@@ -24,8 +24,6 @@ import com.mygdx.game.entityComponentSystem.components.Size;
 import com.mygdx.game.entityComponentSystem.components.Spawn;
 import com.mygdx.game.entityComponentSystem.components.StateComponent;
 
-import javax.swing.SizeSequence;
-
 
 public class StateSystem extends EntitySystem {
     ComponentGrabber cg;
@@ -50,41 +48,11 @@ public class StateSystem extends EntitySystem {
 
     @Override
     public void update(float delta) {
-        // loop to determine if enemy should be hunting
         for (int i = 0; i < enemies.size(); i++) {
             Entity entity = enemies.get(i);
-            EnemyStateMachine stateMachine = cg.getStateMachine(entity);
-            if (stateMachine.getCurrentState() == EnemyState.IDLE) {
-                if (enemyAggravated(entity))
-                    stateMachine.changeState(EnemyState.HUNT);
-            }
-        }
-
-        // loop to determine if enemy should be fleeing
-        for (int i = 0; i < enemies.size(); i++) {
-            Entity entity = enemies.get(i);
-            EnemyStateMachine stateMachine = cg.getStateMachine(entity);
-            if (stateMachine.getCurrentState() == EnemyState.HUNT) {
-                if (enemyTooFarAway(entity))
-                    stateMachine.changeState(EnemyState.FLEE);
-            }
-            // flee means returning back to spawn
-            // can only flee if enemy is far from spawn
-            // enemy can only flee if they are currently hunting
-
-        }
-
-        // loop to determine if enemy should be idling
-        for (int i = 0; i < enemies.size(); i++) {
-            Entity entity = enemies.get(i);
-            EnemyStateMachine stateMachine = cg.getStateMachine(entity);
-            // can only be idling if they are inside spawn
-            // when enemy is returning
-            // check distance from spawn is a small number
-            if (stateMachine.getCurrentState() == EnemyState.FLEE) {
-                if (enemyNearSpawn(entity))
-                    stateMachine.changeState(EnemyState.IDLE);
-            }
+            checkForEnemiesHunting(entity);
+            checkForEnemiesFleeing(entity);
+            checkForEnemiesIdling(entity);
         }
     }
 
@@ -135,5 +103,31 @@ public class StateSystem extends EntitySystem {
         Vector2 enemyPos = new Vector2(pos.x, pos.y);
         Vector2 spawnPos = new Vector2(spawn.spawnPosX, spawn.spawnPosY);
         return spawnPos.dst(enemyPos) <= 10;
+    }
+
+    private void checkForEnemiesHunting(Entity entity) {
+        EnemyStateMachine stateMachine = cg.getStateMachine(entity);
+        if (stateMachine.getCurrentState() == EnemyState.IDLE) {
+            if (enemyAggravated(entity))
+                stateMachine.changeState(EnemyState.HUNT);
+        }
+
+    }
+
+    private void checkForEnemiesFleeing(Entity entity) {
+        EnemyStateMachine stateMachine = cg.getStateMachine(entity);
+        if (stateMachine.getCurrentState() == EnemyState.HUNT) {
+            if (enemyTooFarAway(entity))
+                stateMachine.changeState(EnemyState.FLEE);
+        }
+    }
+
+    private void checkForEnemiesIdling(Entity entity) {
+        EnemyStateMachine stateMachine = cg.getStateMachine(entity);
+        if (stateMachine.getCurrentState() == EnemyState.FLEE) {
+            if (enemyNearSpawn(entity))
+                stateMachine.changeState(EnemyState.IDLE);
+        }
+
     }
 }
