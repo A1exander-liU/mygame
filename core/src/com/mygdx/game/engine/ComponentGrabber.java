@@ -7,6 +7,7 @@ import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.components.DetectionProximity;
 import com.mygdx.game.engine.components.EnemyStateMachine;
 import com.mygdx.game.engine.components.MovementBehavior;
+import com.mygdx.game.engine.components.ParameterComponent;
 import com.mygdx.game.engine.components.StateComponent;
 import com.mygdx.game.engine.components.Steering;
 import com.mygdx.game.engine.components.Camera;
@@ -72,6 +73,11 @@ public class ComponentGrabber {
     public Name getName(Entity entity) {
         ComponentMapper<Name> name = ComponentMapper.getFor(Name.class);
         return name.get(entity);
+    }
+
+    public ParameterComponent getParameters(Entity entity) {
+        ComponentMapper<ParameterComponent> parameterComponent = ComponentMapper.getFor(ParameterComponent.class);
+        return parameterComponent.get(entity);
     }
 
     public Player getPlayer(Entity entity) {
