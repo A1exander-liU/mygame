@@ -2,6 +2,7 @@ package com.mygdx.game;
 
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.screens.GameScreen;
@@ -25,6 +26,7 @@ public class MyGame extends Game {
 	public SpriteBatch batch;
 	public static Engine engine;
 	public static GameMapProperties gameMapProperties;
+	public JsonSearcher jsonSearcher = new JsonSearcher(Gdx.files.internal("gameData/enemies.json"));
 
 	public StoredPreferences getStoredPreferences() {
 		return storedPreferences;
