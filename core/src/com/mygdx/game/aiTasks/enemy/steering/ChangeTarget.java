@@ -9,11 +9,11 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.GameLocation;
 import com.mygdx.game.MyGame;
-import com.mygdx.game.entityComponentSystem.MobEntity;
-import com.mygdx.game.entityComponentSystem.components.MovementBehavior;
-import com.mygdx.game.entityComponentSystem.components.Size;
-import com.mygdx.game.entityComponentSystem.components.Spawn;
-import com.mygdx.game.entityComponentSystem.systems.TimeSystem;
+import com.mygdx.game.engine.MobEntity;
+import com.mygdx.game.engine.components.MovementBehavior;
+import com.mygdx.game.engine.components.Size;
+import com.mygdx.game.engine.components.Spawn;
+import com.mygdx.game.engine.systems.TimeSystem;
 
 import java.util.Random;
 

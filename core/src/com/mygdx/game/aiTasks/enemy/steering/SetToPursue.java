@@ -6,11 +6,11 @@ import com.badlogic.gdx.ai.btree.Task;
 import com.badlogic.gdx.ai.steer.behaviors.PrioritySteering;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.MyGame;
-import com.mygdx.game.entityComponentSystem.Families;
-import com.mygdx.game.entityComponentSystem.MobEntity;
-import com.mygdx.game.entityComponentSystem.components.MovementBehavior;
-import com.mygdx.game.entityComponentSystem.components.Position;
-import com.mygdx.game.entityComponentSystem.components.Steering;
+import com.mygdx.game.engine.Families;
+import com.mygdx.game.engine.MobEntity;
+import com.mygdx.game.engine.components.MovementBehavior;
+import com.mygdx.game.engine.components.Position;
+import com.mygdx.game.engine.components.Steering;
 
 public class SetToPursue extends LeafTask<MobEntity> {
     private Entity player;

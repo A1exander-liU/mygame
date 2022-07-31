@@ -3,21 +3,15 @@ package com.mygdx.game;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.maps.MapLayer;
-import com.badlogic.gdx.maps.MapLayers;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.Rectangle;
-import com.mygdx.game.entityComponentSystem.Families;
-import com.mygdx.game.entityComponentSystem.components.DetectionProximity;
-import com.mygdx.game.entityComponentSystem.components.ID;
-import com.mygdx.game.entityComponentSystem.components.Position;
-import com.mygdx.game.entityComponentSystem.components.Size;
-import com.mygdx.game.entityComponentSystem.components.Steering;
-
-import java.util.Iterator;
+import com.mygdx.game.engine.Families;
+import com.mygdx.game.engine.components.Position;
+import com.mygdx.game.engine.components.Size;
+import com.mygdx.game.engine.components.Steering;
 
 public class GameMapProperties {
     public TiledMap tiledMap;
