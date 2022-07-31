@@ -35,13 +35,13 @@ public class EnemySpawningSystem extends EntitySystem {
         this.cg = cg;
         this.root = root;
         this.gameMapProperties = gameMapProperties;
-        spawnPoints = gameMapProperties.getMapLayer(gameMapProperties.ENEMY_SPAWNS).getObjects();
-        objects = gameMapProperties.getMapLayer(gameMapProperties.COLLISIONS).getObjects();
+        spawnPoints = gameMapProperties.getMapLayer(GameMapProperties.ENEMY_SPAWNS).getObjects();
+        objects = gameMapProperties.getMapLayer(GameMapProperties.COLLISIONS).getObjects();
     }
 
     @Override
     public void addedToEngine(Engine engine) {
-        entities = root.engine.getEntitiesFor(Family.all(
+        entities = MyGame.engine.getEntitiesFor(Family.all(
                 Enemy.class, Sprite.class, Health.class, ID.class,
                 Name.class, Position.class, Size.class, Speed.class).get());
     }
