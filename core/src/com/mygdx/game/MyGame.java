@@ -5,6 +5,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.game.engine.EntityToMapAdder;
 import com.mygdx.game.screens.GameScreen;
 import com.mygdx.game.screens.LoadingScreen;
 import com.mygdx.game.screens.MainMenuScreen;
@@ -27,6 +28,7 @@ public class MyGame extends Game {
 	public static Engine engine;
 	public static GameMapProperties gameMapProperties;
 	public JsonSearcher jsonSearcher;
+	public EntityToMapAdder entityToMapAdder;
 
 	public StoredPreferences getStoredPreferences() {
 		return storedPreferences;

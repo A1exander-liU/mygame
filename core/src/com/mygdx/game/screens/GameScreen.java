@@ -40,7 +40,6 @@ public class GameScreen implements Screen {
     MapObjectDrawer tiledMapRenderer;
 
     ComponentGrabber cg;
-    EntityToMapAdder entityToMapAdder;
 
     public GameScreen(MyGame parent) {
         parent.jsonSearcher = new JsonSearcher(Gdx.files.internal("gameData/enemies.json"));
@@ -50,13 +49,13 @@ public class GameScreen implements Screen {
         cg = new ComponentGrabber(parent);
         MyGame.gameMapProperties = new GameMapProperties(testMap);
         gameMapProperties = new GameMapProperties(testMap, parent);
-        entityToMapAdder = new EntityToMapAdder(testMap, cg);
+        parent.entityToMapAdder = new EntityToMapAdder(testMap, cg);
         EntityFactory entityFactory = new EntityFactory(cg, parent);
-        for (int i = 0; i < 3; i++) {
-            MobEntity entity = new MobEntity(cg, parent, gameMapProperties);
-            MyGame.engine.addEntity(entity);
-            entityToMapAdder.addEntityToMap(testMap, entity);
-        }
+//        for (int i = 0; i < 3; i++) {
+//            MobEntity entity = new MobEntity(cg, parent, gameMapProperties);
+//            MyGame.engine.addEntity(entity);
+//            entityToMapAdder.addEntityToMap(testMap, entity);
+//        }
         PlayerEntity playerEntity = new PlayerEntity(cg, parent, gameMapProperties, "player");
 
         // to add system (now all allowed entities will move every frame)
