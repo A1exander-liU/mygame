@@ -6,21 +6,23 @@ import com.badlogic.gdx.ai.fsm.StackStateMachine;
 import com.mygdx.game.entityComponentSystem.EnemyState;
 import com.mygdx.game.entityComponentSystem.MobEntity;
 
-public class EnemyStateMachine extends StackStateMachine<MobEntity, EnemyState> implements Component {
-    private Entity enemy;
-    StateComponent stateComponent;
+public class EnemyStateMachine extends StackStateMachine<Entity, EnemyState> implements Component {
+    public Entity entity;
     // provides logic to modify state of entity
 
     public EnemyStateMachine(Entity entity) {
-        enemy = entity;
-        stateComponent = entity.getComponent(StateComponent.class);
+        super(entity, EnemyState.IDLE);
     }
 
     @Override
-    public void update() {}
+    public void update() {
+        // call update and call update of current state to run current state
+        getCurrentState().update((MobEntity) super.owner);
+    }
 
     public void changeState(EnemyState newState) {
-        stateComponent.state = newState;
+        StateComponent stateCom = super.owner.getComponent(StateComponent.class);
+        stateCom.state = newState;
     }
 
     @Override
@@ -28,7 +30,8 @@ public class EnemyStateMachine extends StackStateMachine<MobEntity, EnemyState> 
 
     @Override
     public void setInitialState(EnemyState state) {
-        stateComponent.state = state;
+        StateComponent stateCom = super.owner.getComponent(StateComponent.class);
+        stateCom.state = state;
     }
 
     @Override
@@ -36,11 +39,13 @@ public class EnemyStateMachine extends StackStateMachine<MobEntity, EnemyState> 
 
 
     public EnemyState getCurrentState() {
+        StateComponent stateComponent = super.owner.getComponent(StateComponent.class);
         return stateComponent.state;
     }
 
     @Override
     public boolean isInState(EnemyState state) {
+        StateComponent stateComponent = super.owner.getComponent(StateComponent.class);
         return stateComponent.state == state;
     }
 }
