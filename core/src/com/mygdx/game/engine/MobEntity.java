@@ -4,12 +4,14 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ai.btree.BehaviorTree;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.JsonValue;
 import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.components.DetectionProximity;
 import com.mygdx.game.engine.components.Enemy;
 import com.mygdx.game.engine.components.EnemyStateMachine;
+import com.mygdx.game.engine.components.MapChar;
 import com.mygdx.game.engine.components.MovementBehavior;
 import com.mygdx.game.engine.components.ParameterComponent;
 import com.mygdx.game.engine.components.Spawn;
@@ -56,6 +58,7 @@ public class MobEntity extends Entity {
         super.add(new StateComponent());
         super.add(new EnemyStateMachine(this));
         super.add(new ParameterComponent());
+        super.add(new MapChar());
     }
 
     private void modifyComponentValues(String name) {
@@ -64,6 +67,7 @@ public class MobEntity extends Entity {
         Name enemyName = cg.getName(this);
         Size size = cg.getSize(this);
         Speed speed = cg.getSpeed(this);
+        MapChar mapChar = cg.getMapChar(this);
         fillParameters(name);
         entitySprite.texture = new Texture(Gdx.files.internal("testPlayer.png"));
         enemyName.name = name;
@@ -71,6 +75,8 @@ public class MobEntity extends Entity {
         size.height = 32;
         speed.xSpeed = 2;
         speed.ySpeed = 2;
+        TextureRegion textureRegion = new TextureRegion(entitySprite.texture, (int)size.width, (int)size.height);
+        mapChar.setTextureRegion(textureRegion);
 //        behaviorTree.setObject(this);
     }
 
@@ -96,6 +102,7 @@ public class MobEntity extends Entity {
     }
 
     private void addToMap() {
+        // creating a texture map object, which resides on the map locally
         root.entityToMapAdder.addEntityToMap(this);
     }
 }
