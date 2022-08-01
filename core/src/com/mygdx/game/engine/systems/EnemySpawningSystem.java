@@ -204,7 +204,7 @@ public class EnemySpawningSystem extends EntitySystem {
             size.height = spawn.height;
             spawnAreaComponent.xCenter = spawn.x + (spawn.width / 2);
             spawnAreaComponent.yCenter = spawn.y + (spawn.height / 2);
-            
+            MyGame.engine.addEntity(spawnArea);
         }
     }
 }
