@@ -1,5 +1,6 @@
 package com.mygdx.game.engine;
 
+import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.utils.ImmutableArray;
@@ -9,6 +10,7 @@ import com.mygdx.game.engine.components.EnemyStateMachine;
 import com.mygdx.game.engine.components.MapChar;
 import com.mygdx.game.engine.components.MovementBehavior;
 import com.mygdx.game.engine.components.ParameterComponent;
+import com.mygdx.game.engine.components.SpawnArea;
 import com.mygdx.game.engine.components.StateComponent;
 import com.mygdx.game.engine.components.Steering;
 import com.mygdx.game.engine.components.Camera;
@@ -103,6 +105,11 @@ public class ComponentGrabber {
     public Spawn getSpawn(Entity entity) {
         ComponentMapper<Spawn> spawn = ComponentMapper.getFor(Spawn.class);
         return spawn.get(entity);
+    }
+
+    public SpawnArea getSpawnArea(Entity entity) {
+        ComponentMapper<SpawnArea> spawnArea = ComponentMapper.getFor(SpawnArea.class);
+        return spawnArea.get(entity);
     }
 
     public Speed getSpeed(Entity entity) {
