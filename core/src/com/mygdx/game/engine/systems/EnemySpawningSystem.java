@@ -53,6 +53,8 @@ public class EnemySpawningSystem extends EntitySystem {
         this.gameMapProperties = gameMapProperties;
         spawnPoints = gameMapProperties.getMapLayer(GameMapProperties.ENEMY_SPAWNS).getObjects();
         objects = gameMapProperties.getMapLayer(GameMapProperties.COLLISIONS).getObjects();
+        // create a enemy and place at each spawn point
+        // spawns are named to determine the enemy to spawn
         initialSpawn();
     }
 
@@ -102,6 +104,7 @@ public class EnemySpawningSystem extends EntitySystem {
         textureMapObject.setX(pos.x);
         textureMapObject.setY(pos.y);
     }
+    // now need to reference the texture map object MapChar of entity
 
     private void initialSpawn() {
         // first time when loading spawns all enemies
@@ -110,14 +113,18 @@ public class EnemySpawningSystem extends EntitySystem {
         // build all the enemies in the world first
         // to determine what to spawn need to check if the enemy name
         // and spawn area are the same spawn area are the same
+
+        // go through each spawn
         for (int i = 0; i < spawnPoints.getCount(); i++) {
             // the name of enemy to spawn
             String name = spawnPoints.get(i).getName();
+            // the name determines the stats it will have when built
             // building the enemy, the parameters are set too
+            // all enemy entities are built
+            // this also adds the entity to the map (the textureMapObject to the map)
             MobEntity mobEntity = new MobEntity(cg, root, gameMapProperties, name);
         }
         spawnEnemies();
-        restoreObjects();
     }
 
     private void spawnEnemies() {
@@ -130,6 +137,8 @@ public class EnemySpawningSystem extends EntitySystem {
         // if they are the same
         // after setting remove from the objects
         // after spawning all enemies, restore the original objects
+
+        //
         for (int i = 0; i < spawnPoints.getCount(); i++) {
             MapObject spawn = spawnPoints.get(i);
             spawn(spawn);
@@ -138,30 +147,17 @@ public class EnemySpawningSystem extends EntitySystem {
 
     private void spawn(MapObject spawn) {
         for (int i = 0; i < objects.getCount(); i++) {
-            if (Objects.equals(objects.get(i).getName(), spawn.getName())) {
-                // how to get the entity for update purposes
-                // need TextureMapObject component?
-                // just need to update the texture map object component
-                // spawn area family needs to new param to know who owns it
-                Rectangle spawnArea = ((RectangleMapObject) objects.get(i)).getRectangle();
-                float xCenter = spawnArea.x + (spawnArea.width / 2);
-                float yCenter = spawnArea.y + (spawnArea.height / 2);
-                setEntityValues(xCenter, yCenter, objects.get(i).getName());
-                TextureMapObject textureMapObject = (TextureMapObject) objects.get(i);
-                textureMapObject.setX(xCenter);
-                textureMapObject.setY(yCenter);
-                // remove so we don't use the same texture map object
-                Entity entity = entities.get(1);
-                objects.remove(i);
-            }
+
         }
     }
 
-    private void restoreObjects() {
-        objects = gameMapProperties.getMapLayer(GameMapProperties.COLLISIONS).getObjects();
-    }
-
     private void setEntityValues(float xCenter, float yCenter, String spawnName) {
+        // can't do this, enemies can have the same name
+        // there can be multiple of the same enemy
+        // sol'n: extend TextureMapObject and add those to map instead
+        // extended will have owner attribute to reference which entity it is part of
+        // then when you retrieve it cast back to the subclass and grab the owner
+        //
         for (int i = 0; i < entities.size(); i++) {
             Entity entity = entities.get(i);
             Name name = cg.getName(entity);
