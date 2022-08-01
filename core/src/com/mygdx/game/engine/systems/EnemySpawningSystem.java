@@ -198,6 +198,13 @@ public class EnemySpawningSystem extends EntitySystem {
             Position pos = cg.getPosition(spawnArea);
             Size size = cg.getSize(spawnArea);
             SpawnArea spawnAreaComponent = cg.getSpawnArea(spawnArea);
+            pos.x = spawn.x;
+            pos.y = spawn.y;
+            size.width = spawn.width;
+            size.height = spawn.height;
+            spawnAreaComponent.xCenter = spawn.x + (spawn.width / 2);
+            spawnAreaComponent.yCenter = spawn.y + (spawn.height / 2);
+            
         }
     }
 }
