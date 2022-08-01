@@ -36,7 +36,8 @@ public class MobEntity extends Entity {
         this.gameMapProperties = gameMapProperties;
         addRequiredComponents();
         modifyComponentValues(name);
-
+        addToEngine();
+        addToMap();
     }
 
     private void addRequiredComponents() {
