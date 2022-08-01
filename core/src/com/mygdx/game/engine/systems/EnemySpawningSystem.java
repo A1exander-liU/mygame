@@ -27,6 +27,7 @@ import com.mygdx.game.engine.components.Name;
 import com.mygdx.game.engine.components.Position;
 import com.mygdx.game.engine.components.Size;
 import com.mygdx.game.engine.components.Speed;
+import com.mygdx.game.utils.EntityTextureObject;
 
 import java.util.Objects;
 
@@ -147,7 +148,10 @@ public class EnemySpawningSystem extends EntitySystem {
 
     private void spawn(MapObject spawn) {
         for (int i = 0; i < objects.getCount(); i++) {
-
+            Rectangle spawnArea = ((RectangleMapObject) spawn).getRectangle();
+            if (objects.get(i) instanceof EntityTextureObject) {
+                
+            }
         }
     }
 
