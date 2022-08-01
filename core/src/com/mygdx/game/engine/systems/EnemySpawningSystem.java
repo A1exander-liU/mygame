@@ -35,6 +35,7 @@ public class EnemySpawningSystem extends EntitySystem {
     private ImmutableArray<Entity> entities;
     private MapObjects spawnPoints;
     private MapObjects objects;
+    private MapObjects temp;
     ComponentGrabber cg;
     MyGame root;
     GameMapProperties gameMapProperties;
@@ -68,18 +69,18 @@ public class EnemySpawningSystem extends EntitySystem {
 
     @Override
     public void update(float deltaTime) {
-        for (int i = 0; i < entities.size(); i++) {
-            Entity entity = entities.get(i);
-            Enemy enemy = cg.getEnemy(entity);
-            if (!enemy.spawned) {
-                spawnEnemy(entity);
-                // when spawned start of as wander
-                // once player enterred spawn, change to pursise
-                // if player too far, change to return
-                // once returned back to spawn switch back to wander
-                enemy.state = Enemy.States.WANDER;
-            }
-        }
+//        for (int i = 0; i < entities.size(); i++) {
+//            Entity entity = entities.get(i);
+//            Enemy enemy = cg.getEnemy(entity);
+//            if (!enemy.spawned) {
+//                spawnEnemy(entity);
+//                // when spawned start of as wander
+//                // once player enterred spawn, change to pursise
+//                // if player too far, change to return
+//                // once returned back to spawn switch back to wander
+//                enemy.state = Enemy.States.WANDER;
+//            }
+//        }
         // assign enemy to
     }
 
@@ -126,6 +127,7 @@ public class EnemySpawningSystem extends EntitySystem {
             MobEntity mobEntity = new MobEntity(cg, root, gameMapProperties, name);
         }
         spawnEnemies();
+        addBack();
     }
 
     private void spawnEnemies() {
@@ -144,7 +146,6 @@ public class EnemySpawningSystem extends EntitySystem {
             MapObject spawn = spawnPoints.get(i);
             spawn(spawn);
         }
-        objects = gameMapProperties.getMapLayer(GameMapProperties.COLLISIONS).getObjects();
     }
 
     private void spawn(MapObject spawn) {
@@ -157,6 +158,7 @@ public class EnemySpawningSystem extends EntitySystem {
                     EntityTextureObject textureObject = (EntityTextureObject) objects.get(i);
                     textureObject.setX(xCenter);
                     textureObject.setY(yCenter);
+                    temp.add(objects.get(i));
                     objects.remove(i);
                     break;
                 }
@@ -185,6 +187,13 @@ public class EnemySpawningSystem extends EntitySystem {
                 spawn.spawnPosX = xCenter;
                 spawn.spawnPosY = yCenter;
             }
+        }
+    }
+
+    private void addBack() {
+        for (MapObject mapObject : temp) {
+            objects.add(mapObject);
+            temp.remove(mapObject);
         }
     }
 }
