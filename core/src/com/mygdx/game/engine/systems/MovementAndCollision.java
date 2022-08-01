@@ -26,6 +26,7 @@ import com.mygdx.game.engine.Families;
 import com.mygdx.game.engine.components.Camera;
 import com.mygdx.game.engine.components.Enemy;
 import com.mygdx.game.engine.components.ID;
+import com.mygdx.game.engine.components.Name;
 import com.mygdx.game.engine.components.Player;
 import com.mygdx.game.engine.components.Position;
 import com.mygdx.game.engine.components.Size;
@@ -266,12 +267,14 @@ public class MovementAndCollision extends EntitySystem {
 
     private void handlePlayerCollisions() {
         // in player movement, future was recorded
-        ID id = cg.getID(player);
+        Name name = cg.getName(player);
         Position pos = cg.getPosition(player);
         MapObjects mapObjects = gameMapProperties.tiledMap.getLayers().get("Object Layer 1").getObjects();
         Polygon playerArea = getEntityArea(player);
         for (int i = 0; i < mapObjects.getCount(); i++) {
-            if (!Objects.equals(mapObjects.get(i).getName(), "" + id.ID)) {
+            // not using id anymore, need to check something else
+            // check if they are the same entity
+            if (!Objects.equals(mapObjects.get(i).getName(), name.name)) {
                 Polygon collisionSpace = new Polygon();
                 Polyline wall = null;
                 if (mapObjects.get(i) instanceof RectangleMapObject)
@@ -438,7 +441,6 @@ public class MovementAndCollision extends EntitySystem {
             textureObject.setX(pos.x);
             textureObject.setY(pos.y);
         }
-
     }
 
     private EntityTextureObject findSameOwner(Entity entity) {
