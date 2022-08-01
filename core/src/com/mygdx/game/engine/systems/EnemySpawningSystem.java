@@ -57,6 +57,7 @@ public class EnemySpawningSystem extends EntitySystem {
         objects = gameMapProperties.getMapLayer(GameMapProperties.COLLISIONS).getObjects();
         // create a enemy and place at each spawn point
         // spawns are named to determine the enemy to spawn
+        temp = new MapObjects();
         initialSpawn();
     }
 
