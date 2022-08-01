@@ -5,6 +5,7 @@ import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.objects.TextureMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.mygdx.game.engine.components.Name;
 import com.mygdx.game.engine.components.Sprite;
 import com.mygdx.game.engine.components.ID;
 import com.mygdx.game.engine.components.Position;
@@ -24,16 +25,10 @@ public class EntityToMapAdder {
         Sprite entitySprite = cg.getSprite(entity);
         Size size = cg.getSize(entity);
         Position pos = cg.getPosition(entity);
-        ID id = cg.getID(entity);
-//        entity.getComponent(ID.class).
-//        id.ID = ++totalEntities;
-        System.out.println(entitySprite.texture);
-        System.out.println(size.width + " " + size.height);
-        System.out.println("(" + pos.x + ", " + pos.y + ")");
-        System.out.println(id.ID);
+        Name name = cg.getName(entity);
         TextureRegion textureRegion = new TextureRegion(entitySprite.texture, (int)size.width, (int)size.height);
         TextureMapObject textureMapObject = new TextureMapObject(textureRegion);
-        textureMapObject.setName("" + id.ID);
+        textureMapObject.setName(name.name);
         textureMapObject.setX(pos.x);
         textureMapObject.setY(pos.y);
         tiledMap.getLayers().get("Object Layer 1").getObjects().add(textureMapObject);
