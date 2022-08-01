@@ -55,15 +55,15 @@ public class MovementAndCollision extends EntitySystem {
 
     @Override
     public void addedToEngine(Engine engine) {
-        entities = root.engine.getEntitiesFor(Family.one(Enemy.class, Player.class).get());
-        enemies = root.engine.getEntitiesFor(Families.enemies);
+        entities = MyGame.engine.getEntitiesFor(Family.one(Enemy.class, Player.class).get());
+        enemies = MyGame.engine.getEntitiesFor(Families.enemies);
         // there is only one player hence we just get index 0
-        player = root.engine.getEntitiesFor(Families.player).get(0);
+        player = MyGame.engine.getEntitiesFor(Families.player).get(0);
     }
 
     @Override
     public Engine getEngine() {
-        return root.engine;
+        return MyGame.engine;
     }
 
     @Override
