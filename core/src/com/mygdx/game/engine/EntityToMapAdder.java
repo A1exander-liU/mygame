@@ -10,6 +10,7 @@ import com.mygdx.game.engine.components.Sprite;
 import com.mygdx.game.engine.components.ID;
 import com.mygdx.game.engine.components.Position;
 import com.mygdx.game.engine.components.Size;
+import com.mygdx.game.utils.EntityTextureObject;
 
 public class EntityToMapAdder {
 //    public static int totalEntities = 0;
@@ -26,12 +27,16 @@ public class EntityToMapAdder {
         Size size = cg.getSize(entity);
         Position pos = cg.getPosition(entity);
         Name name = cg.getName(entity);
+        // creating the texture region
         TextureRegion textureRegion = new TextureRegion(entitySprite.texture, (int)size.width, (int)size.height);
-        TextureMapObject textureMapObject = new TextureMapObject(textureRegion);
-        textureMapObject.setName(name.name);
-        textureMapObject.setX(pos.x);
-        textureMapObject.setY(pos.y);
-        tiledMap.getLayers().get("Object Layer 1").getObjects().add(textureMapObject);
+        // use the EntityTextureMap object
+        EntityTextureObject textureObject = new EntityTextureObject(textureRegion, entity);
+        // setting the attributes
+        textureObject.setName(name.name);
+        textureObject.setX(pos.x);
+        textureObject.setY(pos.y);
+        // adding to the map
+        tiledMap.getLayers().get("Object Layer 1").getObjects().add(textureObject);
     }
 
     public void addEntitiesToMap(TiledMap tiledMap, ImmutableArray<Entity> entities) {
