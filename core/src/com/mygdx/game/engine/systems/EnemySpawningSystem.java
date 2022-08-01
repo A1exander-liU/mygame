@@ -142,9 +142,11 @@ public class EnemySpawningSystem extends EntitySystem {
                 // how to get the entity for update purposes
                 // need TextureMapObject component?
                 // just need to update the texture map object component
+                // spawn area family needs to new param to know who owns it
                 Rectangle spawnArea = ((RectangleMapObject) objects.get(i)).getRectangle();
                 float xCenter = spawnArea.x + (spawnArea.width / 2);
                 float yCenter = spawnArea.y + (spawnArea.height / 2);
+                setEntityValues(xCenter, yCenter, objects.get(i).getName());
                 TextureMapObject textureMapObject = (TextureMapObject) objects.get(i);
                 textureMapObject.setX(xCenter);
                 textureMapObject.setY(yCenter);
@@ -157,5 +159,23 @@ public class EnemySpawningSystem extends EntitySystem {
 
     private void restoreObjects() {
         objects = gameMapProperties.getMapLayer(GameMapProperties.COLLISIONS).getObjects();
+    }
+
+    private void setEntityValues(float xCenter, float yCenter, String spawnName) {
+        for (int i = 0; i < entities.size(); i++) {
+            Entity entity = entities.get(i);
+            Name name = cg.getName(entity);
+            Spawn spawn = cg.getSpawn(entity);
+            Position pos = cg.getPosition(entity);
+            if (Objects.equals(name.name, spawnName) && spawn.spawnPosX == 0 && spawn.spawnPosY == 0) {
+                // checking if they are zero (if they are zero it means a spawn was already set)
+                pos.x = xCenter;
+                pos.y = yCenter;
+                pos.oldX = pos.x;
+                pos.oldY = pos.y;
+                spawn.spawnPosX = xCenter;
+                spawn.spawnPosY = yCenter;
+            }
+        }
     }
 }
