@@ -98,7 +98,7 @@ public class GameScreen implements Screen {
         StateSystem stateSystem = new StateSystem(cg, gameMapProperties);
         MyGame.engine.addSystem(movementAndCollision);
         MyGame.engine.addSystem(enemySpawningSystem);
-        MyGame.engine.addSystem(spawnZoneDetectionSystem);
+//        MyGame.engine.addSystem(spawnZoneDetectionSystem);
         MyGame.engine.addSystem(steeringSystem);
         MyGame.engine.addSystem(timeSystem);
         MyGame.engine.addSystem(stateSystem);
