@@ -30,6 +30,7 @@ import com.mygdx.game.engine.components.Player;
 import com.mygdx.game.engine.components.Position;
 import com.mygdx.game.engine.components.Size;
 import com.mygdx.game.engine.components.Speed;
+import com.mygdx.game.utils.EntityTextureObject;
 
 import java.util.Objects;
 import java.util.Random;
@@ -430,11 +431,25 @@ public class MovementAndCollision extends EntitySystem {
     }
 
     private void updateEntityInMap(Entity entity) {
-        ID id = cg.getID(entity);
+        // not referenced by id anymore
         Position pos = cg.getPosition(entity);
-        TextureMapObject textureMapObject = (TextureMapObject) gameMapProperties.tiledMap
-                .getLayers().get("Object Layer 1").getObjects().get("" + id.ID);
-        textureMapObject.setX(pos.x);
-        textureMapObject.setY(pos.y);
+        EntityTextureObject textureObject = findSameOwner(entity);
+        if (textureObject != null) {
+            textureObject.setX(pos.x);
+            textureObject.setY(pos.y);
+        }
+
+    }
+
+    private EntityTextureObject findSameOwner(Entity entity) {
+        MapObjects collisions = gameMapProperties.getMapLayer(GameMapProperties.COLLISIONS).getObjects();
+        for (int i = 0; i < collisions.getCount(); i++) {
+            if (collisions.get(i) instanceof EntityTextureObject) {
+                EntityTextureObject textureObject = (EntityTextureObject) collisions.get(i);
+                if (textureObject.getOwner() == entity)
+                    return textureObject;
+            }
+        }
+        return null;
     }
 }
