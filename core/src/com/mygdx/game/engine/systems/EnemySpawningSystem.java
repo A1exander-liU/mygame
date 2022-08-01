@@ -13,6 +13,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.ComponentGrabber;
+import com.mygdx.game.engine.Families;
 import com.mygdx.game.engine.MobEntity;
 import com.mygdx.game.engine.components.Enemy;
 import com.mygdx.game.engine.components.Spawn;
@@ -155,6 +156,8 @@ public class EnemySpawningSystem extends EntitySystem {
                     // adding to temp to keep a copy
                     temp.add(objects.get(i));
                     objects.remove(i);
+                    // getting the spawn area and setting the owner
+                    setSpawnAreaOwner(enemy);
                     break;
                 }
             }
@@ -205,6 +208,13 @@ public class EnemySpawningSystem extends EntitySystem {
             spawnAreaComponent.xCenter = spawn.x + (spawn.width / 2);
             spawnAreaComponent.yCenter = spawn.y + (spawn.height / 2);
             MyGame.engine.addEntity(spawnArea);
+        }
+    }
+
+    private void setSpawnAreaOwner(Entity entity) {
+        ImmutableArray<Entity> spawns = MyGame.engine.getEntitiesFor(Families.spawns);
+        for (int i = 0; i < spawns.size(); i++) {
+            
         }
     }
 }
