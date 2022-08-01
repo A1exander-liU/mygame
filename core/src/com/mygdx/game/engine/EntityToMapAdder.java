@@ -20,7 +20,7 @@ public class EntityToMapAdder {
         this.cg = cg;
     }
 
-    public void addEntityToMap(TiledMap tiledMap, Entity entity) {
+    public void addEntityToMap(Entity entity) {
         Sprite entitySprite = cg.getSprite(entity);
         Size size = cg.getSize(entity);
         Position pos = cg.getPosition(entity);
@@ -42,7 +42,7 @@ public class EntityToMapAdder {
     public void addEntitiesToMap(TiledMap tiledMap, ImmutableArray<Entity> entities) {
         for (int i = 0; i < entities.size(); i++) {
             Entity entity = entities.get(i);
-            addEntityToMap(tiledMap, entity);
+            addEntityToMap(entity);
         }
     }
 }
