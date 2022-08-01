@@ -194,7 +194,7 @@ public class EnemySpawningSystem extends EntitySystem {
     private void addBack() {
         for (MapObject mapObject : temp) {
             objects.add(mapObject);
-            temp.remove(mapObject);
         }
+        temp = new MapObjects();
     }
 }
