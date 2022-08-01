@@ -37,7 +37,7 @@ public class PlayerEntity extends Entity {
         playerBox = new Rectangle(pos.x, pos.y, size.width, size.height);
         root.engine.addEntity(this);
         EntityToMapAdder entityToMapAdder = new EntityToMapAdder(gameMapProperties.tiledMap, cg);
-        entityToMapAdder.addEntityToMap(gameMapProperties.tiledMap, this);
+        root.entityToMapAdder.addEntityToMap(this);
     }
 
     private void addRequiredComponents() {
