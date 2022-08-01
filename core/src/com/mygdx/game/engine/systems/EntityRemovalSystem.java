@@ -7,12 +7,14 @@ import com.badlogic.ashley.utils.ImmutableArray;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.ComponentGrabber;
 import com.mygdx.game.engine.Families;
+import com.mygdx.game.engine.components.Enemy;
 
 public class EntityRemovalSystem extends EntitySystem {
     ComponentGrabber cg;
     ImmutableArray<Entity> enemies;
 
     public EntityRemovalSystem(ComponentGrabber cg) {
+        super(9);
         this.cg = cg;
     }
 
@@ -25,7 +27,10 @@ public class EntityRemovalSystem extends EntitySystem {
     public void update(float delta) {
         enemies = getEnemies();
         for (int i = 0; i < enemies.size(); i++) {
-            
+            Entity entity = enemies.get(i);
+            Enemy enemy = cg.getEnemy(entity);
+            if (!enemy.isAlive)
+                MyGame.engine.removeEntity(entity);
         }
     }
 
