@@ -16,6 +16,7 @@ import com.mygdx.game.engine.ComponentGrabber;
 import com.mygdx.game.engine.MobEntity;
 import com.mygdx.game.engine.components.Enemy;
 import com.mygdx.game.engine.components.Spawn;
+import com.mygdx.game.engine.components.SpawnArea;
 import com.mygdx.game.engine.components.Sprite;
 import com.mygdx.game.engine.components.Health;
 import com.mygdx.game.engine.components.ID;
@@ -46,6 +47,7 @@ public class EnemySpawningSystem extends EntitySystem {
         // create a enemy and place at each spawn point
         // spawns are named to determine the enemy to spawn
         temp = new MapObjects();
+        makeSpawnAreaEntities();
         initialSpawn();
     }
 
@@ -58,6 +60,21 @@ public class EnemySpawningSystem extends EntitySystem {
 
     @Override
     public void update(float deltaTime) {
+        // this will be for future spawns when an enemy dies
+        // once enemy dies they need to be removed from:
+        // the engine (the entity)
+        // the map (the entity texture object)
+
+        // need spawn area to owner (the enemy spawned here)
+        // when enemy dies, new one has to spawn back after certain time
+
+        // make entities from spawn points
+        // components: size, pos, and new component which will hold owner
+        // owner is the entity that is spawned at that location
+        // idea: loop through spawn area entities and check for ones w/o owner
+        // if there is no owner that means it was removed (dead)
+        // then create a timer and once it ends spawn a new enemy at the spot
+        // set owner to newly spawned enemy
 
     }
 
@@ -169,5 +186,18 @@ public class EnemySpawningSystem extends EntitySystem {
         }
         // clear the collection
         temp = new MapObjects();
+    }
+
+    private void makeSpawnAreaEntities() {
+        for (int i = 0; i < spawnPoints.getCount(); i++) {
+            Rectangle spawn = ((RectangleMapObject) spawnPoints.get(i)).getRectangle();
+            Entity spawnArea = new Entity();
+            spawnArea.add(new Position());
+            spawnArea.add(new Size());
+            spawnArea.add(new SpawnArea());
+            Position pos = cg.getPosition(spawnArea);
+            Size size = cg.getSize(spawnArea);
+            SpawnArea spawnAreaComponent = cg.getSpawnArea(spawnArea);
+        }
     }
 }
