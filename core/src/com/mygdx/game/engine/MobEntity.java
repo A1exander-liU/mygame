@@ -36,6 +36,7 @@ public class MobEntity extends Entity {
         this.gameMapProperties = gameMapProperties;
         addRequiredComponents();
         modifyComponentValues(name);
+
     }
 
     private void addRequiredComponents() {
@@ -87,5 +88,13 @@ public class MobEntity extends Entity {
 
     public void setBehaviorTree(BehaviorTree<MobEntity> behaviorTree) {
         this.behaviorTree = behaviorTree;
+    }
+
+    private void addToEngine() {
+        MyGame.engine.addEntity(this);
+    }
+
+    private void addToMap() {
+        root.entityToMapAdder.addEntityToMap(this);
     }
 }
