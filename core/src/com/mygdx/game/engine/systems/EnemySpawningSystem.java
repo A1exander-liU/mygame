@@ -144,13 +144,22 @@ public class EnemySpawningSystem extends EntitySystem {
             MapObject spawn = spawnPoints.get(i);
             spawn(spawn);
         }
+        objects = gameMapProperties.getMapLayer(GameMapProperties.COLLISIONS).getObjects();
     }
 
     private void spawn(MapObject spawn) {
         for (int i = 0; i < objects.getCount(); i++) {
             Rectangle spawnArea = ((RectangleMapObject) spawn).getRectangle();
             if (objects.get(i) instanceof EntityTextureObject) {
-                
+                if (Objects.equals(spawn.getName(), objects.get(i).getName())) {
+                    float xCenter = spawnArea.x + (spawnArea.width / 2);
+                    float yCenter = spawnArea.y + (spawnArea.height / 2);
+                    EntityTextureObject textureObject = (EntityTextureObject) objects.get(i);
+                    textureObject.setX(xCenter);
+                    textureObject.setY(yCenter);
+                    objects.remove(i);
+                    break;
+                }
             }
         }
     }
