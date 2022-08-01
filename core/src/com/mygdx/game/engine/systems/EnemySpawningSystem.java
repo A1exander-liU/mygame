@@ -6,6 +6,7 @@ import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.objects.TextureMapObject;
@@ -26,6 +27,8 @@ import com.mygdx.game.engine.components.Name;
 import com.mygdx.game.engine.components.Position;
 import com.mygdx.game.engine.components.Size;
 import com.mygdx.game.engine.components.Speed;
+
+import java.util.Objects;
 
 public class EnemySpawningSystem extends EntitySystem {
     private ImmutableArray<Entity> entities;
@@ -110,9 +113,49 @@ public class EnemySpawningSystem extends EntitySystem {
         for (int i = 0; i < spawnPoints.getCount(); i++) {
             // the name of enemy to spawn
             String name = spawnPoints.get(i).getName();
-            // have the enemy object (have all stats related to it)
-            JsonValue enemy = root.jsonSearcher.findByEnemyName(name);
+            // building the enemy, the parameters are set too
             MobEntity mobEntity = new MobEntity(cg, root, gameMapProperties, name);
         }
+        spawnEnemies();
+        restoreObjects();
+    }
+
+    private void spawnEnemies() {
+        // since the enemies are already added to the map
+        // no need to make more texture map objects
+        // just need to set their X and Y values to their spawn
+        // loop through all spawn points
+        // loop through the objects
+        // check if the name of the spawn point and object are the same
+        // if they are the same
+        // after setting remove from the objects
+        // after spawning all enemies, restore the original objects
+        for (int i = 0; i < spawnPoints.getCount(); i++) {
+            MapObject spawn = spawnPoints.get(i);
+            spawn(spawn);
+        }
+    }
+
+    private void spawn(MapObject spawn) {
+        for (int i = 0; i < objects.getCount(); i++) {
+            if (Objects.equals(objects.get(i).getName(), spawn.getName())) {
+                // how to get the entity for update purposes
+                // need TextureMapObject component?
+                // just need to update the texture map object component
+                Rectangle spawnArea = ((RectangleMapObject) objects.get(i)).getRectangle();
+                float xCenter = spawnArea.x + (spawnArea.width / 2);
+                float yCenter = spawnArea.y + (spawnArea.height / 2);
+                TextureMapObject textureMapObject = (TextureMapObject) objects.get(i);
+                textureMapObject.setX(xCenter);
+                textureMapObject.setY(yCenter);
+                // remove so we don't use the same texture map object
+                Entity entity = entities.get(1);
+                objects.remove(i);
+            }
+        }
+    }
+
+    private void restoreObjects() {
+        objects = gameMapProperties.getMapLayer(GameMapProperties.COLLISIONS).getObjects();
     }
 }
