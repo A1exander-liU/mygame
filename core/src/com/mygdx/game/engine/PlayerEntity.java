@@ -35,7 +35,7 @@ public class PlayerEntity extends Entity {
         Position pos = cg.getPosition(this);
         Size size = cg.getSize(this);
         playerBox = new Rectangle(pos.x, pos.y, size.width, size.height);
-        root.engine.addEntity(this);
+        MyGame.engine.addEntity(this);
         EntityToMapAdder entityToMapAdder = new EntityToMapAdder(gameMapProperties.tiledMap, cg);
         root.entityToMapAdder.addEntityToMap(this);
     }
