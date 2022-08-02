@@ -64,6 +64,12 @@ public class SimulationSystem extends EntitySystem {
 
             // userdata here is the entity itself
             Response.Result result = world.move(item.item, pos.x, pos.y, CollisionFilter.defaultFilter);
+            for (int j = 0; j < result.projectedCollisions.size(); j++) {
+                Collision collision = result.projectedCollisions.get(i);
+                if (collision.overlaps)
+                    System.out.println("collided");
+            }
+
         }
     }
 }
