@@ -82,7 +82,7 @@ public class EnemySpawningSystem extends EntitySystem {
             if (spawnArea.owner == null) {
                 System.out.println("no owner");
                 if (TimeSystem.time - spawnArea.lastTimeOfDeath >= 90) {
-                    
+
                 }
                 // can now perform the spawning need to set a timer
                 // or in spawn area, add field to determine when they died
@@ -215,15 +215,18 @@ public class EnemySpawningSystem extends EntitySystem {
             spawnArea.add(new Position());
             spawnArea.add(new Size());
             spawnArea.add(new SpawnArea());
+            spawnArea.add(new Name());
             Position pos = cg.getPosition(spawnArea);
             Size size = cg.getSize(spawnArea);
             SpawnArea spawnAreaComponent = cg.getSpawnArea(spawnArea);
+            Name name = cg.getName(spawnArea);
             pos.x = spawn.x;
             pos.y = spawn.y;
             size.width = spawn.width;
             size.height = spawn.height;
             spawnAreaComponent.xCenter = spawn.x + (spawn.width / 2);
             spawnAreaComponent.yCenter = spawn.y + (spawn.height / 2);
+            name.name = spawnPoints.get(i).getName();
             MyGame.engine.addEntity(spawnArea);
         }
     }
