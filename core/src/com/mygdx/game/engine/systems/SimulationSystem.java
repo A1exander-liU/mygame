@@ -3,10 +3,12 @@ package com.mygdx.game.engine.systems;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.utils.ImmutableArray;
+import com.badlogic.gdx.maps.MapObjects;
 import com.dongbat.jbump.Collision;
 import com.dongbat.jbump.CollisionFilter;
 import com.dongbat.jbump.Collisions;
 import com.dongbat.jbump.Item;
+import com.dongbat.jbump.Rect;
 import com.dongbat.jbump.Response;
 import com.dongbat.jbump.World;
 import com.mygdx.game.GameMapProperties;
@@ -15,8 +17,10 @@ import com.mygdx.game.engine.ComponentGrabber;
 import com.mygdx.game.engine.Families;
 import com.mygdx.game.engine.MobEntity;
 import com.mygdx.game.engine.PlayerEntity;
+import com.mygdx.game.engine.components.Camera;
 import com.mygdx.game.engine.components.Position;
 import com.mygdx.game.engine.components.Size;
+import com.mygdx.game.utils.EntityTextureObject;
 
 public class SimulationSystem extends EntitySystem {
     ComponentGrabber cg;
@@ -67,6 +71,9 @@ public class SimulationSystem extends EntitySystem {
                     // only enemies and players can collide into objects
                     // there is no obstacle to obstacle collision here (all obstacles are static anyway)
                     Entity itemData = (Entity) item.userData;
+
+                    // if the item moving is a enemy or player
+                    // only enemies and player can move
                     if (itemData instanceof MobEntity || itemData instanceof PlayerEntity) {
                         return Response.slide;
                     }
@@ -78,14 +85,40 @@ public class SimulationSystem extends EntitySystem {
 
             Response.Result result = world.move(item.item, pos.x, pos.y, obstacleCollisionFilter);
             if (result.projectedCollisions.size() < 1) {
-                System.out.println("no collisions");
+//                System.out.println("no collisions");
                 continue;
             }
             for (int j = 0; j < result.projectedCollisions.size(); j++) {
                 Collision collision = result.projectedCollisions.get(j);
-                if (collision.overlaps)
-                    System.out.println("collided");
+                Rect rect = world.getRect(collision.item);
+                Entity dynamic = (Entity) collision.item.userData;
+                Position itemPos = cg.getPosition(dynamic);
+                itemPos.x = rect.x;
+                itemPos.y = rect.y;
+                updateEntityInMap(dynamic);
             }
         }
+    }
+
+    private void updateEntityInMap(Entity entity) {
+        // not referenced by id anymore
+        Position pos = cg.getPosition(entity);
+        EntityTextureObject textureObject = findSameOwner(entity);
+        if (textureObject != null) {
+            textureObject.setX(pos.x);
+            textureObject.setY(pos.y);
+        }
+    }
+
+    private EntityTextureObject findSameOwner(Entity entity) {
+        MapObjects collisions = gameMapProperties.getMapLayer(GameMapProperties.COLLISIONS).getObjects();
+        for (int i = 0; i < collisions.getCount(); i++) {
+            if (collisions.get(i) instanceof EntityTextureObject) {
+                EntityTextureObject textureObject = (EntityTextureObject) collisions.get(i);
+                if (textureObject.getOwner() == entity)
+                    return textureObject;
+            }
+        }
+        return null;
     }
 }
