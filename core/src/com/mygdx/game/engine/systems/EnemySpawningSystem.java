@@ -35,6 +35,7 @@ public class EnemySpawningSystem extends EntitySystem {
     private MapObjects spawnPoints;
     private MapObjects objects;
     private MapObjects temp;
+    private final float RESPAWN_TIME = 90;
     ComponentGrabber cg;
     MyGame root;
     GameMapProperties gameMapProperties;
@@ -76,12 +77,10 @@ public class EnemySpawningSystem extends EntitySystem {
         // then create a timer and once it ends spawn a new enemy at the spot
         // set owner to newly spawned enemy
         for (int i = 0; i < spawns.size(); i++) {
-            ImmutableArray<Entity> enemies = MyGame.engine.getEntitiesFor(Families.enemies);
             Entity spawn = spawns.get(i);
             SpawnArea spawnArea = cg.getSpawnArea(spawn);
             if (spawnArea.owner == null) {
-                System.out.println("no owner");
-                if (TimeSystem.time - spawnArea.lastTimeOfDeath >= 90) {
+                if (TimeSystem.time - spawnArea.lastTimeOfDeath >= RESPAWN_TIME) {
                     spawn(spawn);
                 }
                 // can now perform the spawning need to set a timer
@@ -91,7 +90,6 @@ public class EnemySpawningSystem extends EntitySystem {
                 // probably add this in spawn area component
                 // then spawn back an enemy, (might want to add name comp to spawn
                 // to know what enemy to spawn back instead of looking at map)
-
             }
         }
     }
