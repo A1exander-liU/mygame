@@ -91,29 +91,6 @@ public class EnemySpawningSystem extends EntitySystem {
         }
     }
 
-    private void spawnEnemy(Entity entity) {
-        ID id = cg.getID(entity);
-        Enemy enemy = cg.getEnemy(entity);
-        Position pos = cg.getPosition(entity);
-        Spawn spawn = cg.getSpawn(entity);
-        enemy.spawned = true;
-        gameMapProperties.tiledMap.getLayers().get("Object Layer 1").getObjects().get(0);
-        Rectangle spawnArea = ((RectangleMapObject) spawnPoints.get(id.ID - 1)).getRectangle();
-        float xCenter = spawnArea.x + (spawnArea.width / 2f);
-        float yCenter = spawnArea.y + (spawnArea.height / 2f);
-        pos.x = xCenter;
-        pos.y = yCenter;
-        spawn.spawnPosX = xCenter;
-        spawn.spawnPosY = yCenter;
-        pos.futureX = pos.x;
-        pos.futureY = pos.y;
-        pos.position.x = pos.x;
-        pos.position.y = pos.y;
-        TextureMapObject textureMapObject = (TextureMapObject) objects.get("" + id.ID);
-        textureMapObject.setX(pos.x);
-        textureMapObject.setY(pos.y);
-    }
-
     private void initialSpawn() {
         for (int i = 0; i < spawnPoints.getCount(); i++) {
             // the name of enemy to spawn
