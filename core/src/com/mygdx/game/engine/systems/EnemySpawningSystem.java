@@ -31,6 +31,7 @@ import java.util.Objects;
 
 public class EnemySpawningSystem extends EntitySystem {
     private ImmutableArray<Entity> entities;
+    private ImmutableArray<Entity> spawns;
     private MapObjects spawnPoints;
     private MapObjects objects;
     private MapObjects temp;
@@ -76,7 +77,14 @@ public class EnemySpawningSystem extends EntitySystem {
         // if there is no owner that means it was removed (dead)
         // then create a timer and once it ends spawn a new enemy at the spot
         // set owner to newly spawned enemy
+        spawns = MyGame.engine.getEntitiesFor(Families.spawns);
+        for (int i = 0; i < spawns.size(); i++) {
+            Entity spawn = spawns.get(i);
+            SpawnArea spawnArea = cg.getSpawnArea(spawn);
+            if (spawnArea.owner == null) {
 
+            }
+        }
     }
 
     private void spawnEnemy(Entity entity) {
