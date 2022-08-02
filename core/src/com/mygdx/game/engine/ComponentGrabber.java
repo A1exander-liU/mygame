@@ -7,6 +7,7 @@ import com.badlogic.ashley.utils.ImmutableArray;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.components.DetectionProximity;
 import com.mygdx.game.engine.components.EnemyStateMachine;
+import com.mygdx.game.engine.components.Item;
 import com.mygdx.game.engine.components.MapChar;
 import com.mygdx.game.engine.components.MovementBehavior;
 import com.mygdx.game.engine.components.ParameterComponent;
@@ -66,6 +67,11 @@ public class ComponentGrabber {
     public ID getID(Entity entity) {
         ComponentMapper<ID> id = ComponentMapper.getFor(ID.class);
         return id.get(entity);
+    }
+
+    public Item getItem(Entity entity) {
+        ComponentMapper<Item> item = ComponentMapper.getFor(Item.class);
+        return item.get(entity);
     }
 
     public MapChar getMapChar(Entity entity) {
