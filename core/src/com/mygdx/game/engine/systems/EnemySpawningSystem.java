@@ -54,9 +54,6 @@ public class EnemySpawningSystem extends EntitySystem {
         temp = new MapObjects();
         makeSpawnAreaEntities();
         initialSpawn();
-        Entity entity = entities.get(0);
-        Enemy enemy = cg.getEnemy(entity);
-        enemy.isAlive = false;
     }
 
     @Override
