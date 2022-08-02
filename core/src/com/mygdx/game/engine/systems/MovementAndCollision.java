@@ -19,6 +19,7 @@ import com.badlogic.gdx.math.Polyline;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import com.dongbat.jbump.World;
 import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.ComponentGrabber;
@@ -44,6 +45,7 @@ public class MovementAndCollision extends EntitySystem {
     ComponentGrabber cg;
     MyGame root;
     GameMapProperties gameMapProperties;
+    World<Entity> world;
 
     public MovementAndCollision(ComponentGrabber cg, MyGame root, GameMapProperties gameMapProperties) {
         super(2);
@@ -51,10 +53,11 @@ public class MovementAndCollision extends EntitySystem {
         this.root = root;
         this.gameMapProperties = gameMapProperties;
         spawnPoints = gameMapProperties.tiledMap.getLayers().get("Enemy Spawns").getObjects();
-        entities = MyGame.engine.getEntities();
         enemies = MyGame.engine.getEntitiesFor(Families.enemies);
         // there is only one player hence we just get index 0
         player = MyGame.engine.getEntitiesFor(Families.player).get(0);
+        world = new World<>(32);
+
     }
 
     @Override
