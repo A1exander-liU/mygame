@@ -7,6 +7,7 @@ public class SpawnArea implements Component {
     public Entity owner;
     public float xCenter;
     public float yCenter;
+    public float lastTimeOfDeath;
 
     public SpawnArea() {}
 }
