@@ -213,8 +213,13 @@ public class EnemySpawningSystem extends EntitySystem {
 
     private void setSpawnAreaOwner(Entity entity) {
         ImmutableArray<Entity> spawns = MyGame.engine.getEntitiesFor(Families.spawns);
+        Spawn spawnPoint = cg.getSpawn(entity);
         for (int i = 0; i < spawns.size(); i++) {
-            
+            Entity spawn = spawns.get(i);
+            SpawnArea spawnArea = cg.getSpawnArea(spawn);
+            if (spawnPoint.spawnPosX == spawnArea.xCenter && spawnPoint.spawnPosY == spawnArea.yCenter) {
+                
+            }
         }
     }
 }
