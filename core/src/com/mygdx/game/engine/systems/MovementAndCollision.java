@@ -51,10 +51,6 @@ public class MovementAndCollision extends EntitySystem {
         this.root = root;
         this.gameMapProperties = gameMapProperties;
         spawnPoints = gameMapProperties.tiledMap.getLayers().get("Enemy Spawns").getObjects();
-    }
-
-    @Override
-    public void addedToEngine(Engine engine) {
         entities = MyGame.engine.getEntitiesFor(Family.one(Enemy.class, Player.class).get());
         enemies = MyGame.engine.getEntitiesFor(Families.enemies);
         // there is only one player hence we just get index 0
