@@ -5,6 +5,7 @@ import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.dongbat.jbump.Collision;
 import com.dongbat.jbump.CollisionFilter;
+import com.dongbat.jbump.Collisions;
 import com.dongbat.jbump.Item;
 import com.dongbat.jbump.Response;
 import com.dongbat.jbump.World;
@@ -76,8 +77,12 @@ public class SimulationSystem extends EntitySystem {
             };
 
             Response.Result result = world.move(item.item, pos.x, pos.y, obstacleCollisionFilter);
+            if (result.projectedCollisions.size() < 1) {
+                System.out.println("no collisions");
+                continue;
+            }
             for (int j = 0; j < result.projectedCollisions.size(); j++) {
-                Collision collision = result.projectedCollisions.get(i);
+                Collision collision = result.projectedCollisions.get(j);
                 if (collision.overlaps)
                     System.out.println("collided");
             }
