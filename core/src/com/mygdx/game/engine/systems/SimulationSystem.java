@@ -12,15 +12,10 @@ import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.ComponentGrabber;
 import com.mygdx.game.engine.Families;
+import com.mygdx.game.engine.MobEntity;
+import com.mygdx.game.engine.PlayerEntity;
 import com.mygdx.game.engine.components.Position;
 import com.mygdx.game.engine.components.Size;
-
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.print.attribute.SetOfIntegerSyntax;
-
-import jdk.javadoc.internal.doclets.toolkit.taglets.SeeTaglet;
 
 public class SimulationSystem extends EntitySystem {
     ComponentGrabber cg;
@@ -31,6 +26,7 @@ public class SimulationSystem extends EntitySystem {
     World<Entity> world;
 
     public SimulationSystem(ComponentGrabber cg, GameMapProperties gameMapProperties) {
+        super(11);
         this.cg = cg;
         this.gameMapProperties = gameMapProperties;
         collisions = MyGame.engine.getEntitiesFor(Families.collisions);
@@ -63,13 +59,28 @@ public class SimulationSystem extends EntitySystem {
             // add the item value of item component to world
 
             // userdata here is the entity itself
-            Response.Result result = world.move(item.item, pos.x, pos.y, CollisionFilter.defaultFilter);
+
+            CollisionFilter obstacleCollisionFilter = new CollisionFilter() {
+                @Override
+                public Response filter(Item item, Item other) {
+                    // only enemies and players can collide into objects
+                    // there is no obstacle to obstacle collision here (all obstacles are static anyway)
+                    Entity itemData = (Entity) item.userData;
+                    if (itemData instanceof MobEntity || itemData instanceof PlayerEntity) {
+                        return Response.slide;
+                    }
+                    else {
+                        return null;
+                    }
+                }
+            };
+
+            Response.Result result = world.move(item.item, pos.x, pos.y, obstacleCollisionFilter);
             for (int j = 0; j < result.projectedCollisions.size(); j++) {
                 Collision collision = result.projectedCollisions.get(i);
                 if (collision.overlaps)
                     System.out.println("collided");
             }
-
         }
     }
 }
