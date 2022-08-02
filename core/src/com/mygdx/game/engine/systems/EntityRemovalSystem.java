@@ -10,6 +10,7 @@ import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.ComponentGrabber;
 import com.mygdx.game.engine.Families;
 import com.mygdx.game.engine.components.Enemy;
+import com.mygdx.game.engine.components.SpawnArea;
 import com.mygdx.game.utils.EntityTextureObject;
 
 public class EntityRemovalSystem extends EntitySystem {
@@ -37,6 +38,7 @@ public class EntityRemovalSystem extends EntitySystem {
             Entity entity = enemies.get(i);
             Enemy enemy = cg.getEnemy(entity);
             if (!enemy.isAlive) {
+                removeOwner(entity);
                 MyGame.engine.removeEntity(entity);
                 removeFromMap(entity);
             }
@@ -56,6 +58,16 @@ public class EntityRemovalSystem extends EntitySystem {
                     collisions.remove(collisions.get(i));
                     break;
                 }
+            }
+        }
+    }
+
+    private void removeOwner(Entity entity) {
+        for (int i = 0; i < spawns.size(); i++) {
+            Entity spawn = spawns.get(i);
+            SpawnArea spawnArea = cg.getSpawnArea(spawn);
+            if (spawnArea.owner == entity) {
+                spawnArea.owner = null;
             }
         }
     }
