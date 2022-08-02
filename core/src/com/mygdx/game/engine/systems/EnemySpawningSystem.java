@@ -168,24 +168,6 @@ public class EnemySpawningSystem extends EntitySystem {
         spawnArea.owner = enemy;
     }
 
-    private void setEntityValues(float xCenter, float yCenter, String spawnName) {
-        for (int i = 0; i < entities.size(); i++) {
-            Entity entity = entities.get(i);
-            Name name = cg.getName(entity);
-            Spawn spawn = cg.getSpawn(entity);
-            Position pos = cg.getPosition(entity);
-            if (Objects.equals(name.name, spawnName) && spawn.spawnPosX == 0 && spawn.spawnPosY == 0) {
-                // checking if they are zero (if they are zero it means a spawn was already set)
-                pos.x = xCenter;
-                pos.y = yCenter;
-                pos.oldX = pos.x;
-                pos.oldY = pos.y;
-                spawn.spawnPosX = xCenter;
-                spawn.spawnPosY = yCenter;
-            }
-        }
-    }
-
     private void addBack() {
         // add back the enemies now
         for (MapObject mapObject : temp) {
