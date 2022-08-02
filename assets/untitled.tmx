@@ -9,7 +9,7 @@
  <objectgroup id="5" name="Enemy Spawns">
   <object id="37" name="slime" x="511.5" y="388.5" width="83" height="79"/>
   <object id="38" name="slime" x="438.5" y="77.8333" width="83" height="79"/>
-  <object id="39" name="slime" x="44" y="415" width="100" height="83.3333"/>
+  <object id="39" name="slime" x="64" y="448" width="96.5" height="95.75"/>
  </objectgroup>
  <objectgroup id="4" name="Object Layer 1">
   <object id="3" x="846.751" y="515.98" width="35.5" height="24.7706"/>
@@ -23,7 +23,7 @@
   <object id="16" x="673" y="159.5" width="62.5" height="25"/>
   <object id="17" x="443.667" y="547" width="70.6667" height="31"/>
   <object id="18" x="351.333" y="420" width="67.3333" height="18.6667"/>
-  <object id="19" x="222.667" y="520" width="68" height="18.6667"/>
+  <object id="19" x="224" y="512" width="68" height="31.9167"/>
   <object id="20" x="219.333" y="163.333" width="75.3333" height="22"/>
   <object id="53" x="320" y="0" width="32"/>
   <object id="56" x="0" y="0" height="640"/>
