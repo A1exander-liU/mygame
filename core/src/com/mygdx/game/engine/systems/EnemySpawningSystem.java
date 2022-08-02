@@ -82,7 +82,7 @@ public class EnemySpawningSystem extends EntitySystem {
             if (spawnArea.owner == null) {
                 System.out.println("no owner");
                 if (TimeSystem.time - spawnArea.lastTimeOfDeath >= 90) {
-
+                    spawn(spawn);
                 }
                 // can now perform the spawning need to set a timer
                 // or in spawn area, add field to determine when they died
@@ -179,6 +179,29 @@ public class EnemySpawningSystem extends EntitySystem {
                 }
             }
         }
+    }
+
+    private void spawn(Entity entity) {
+        Name name = cg.getName(entity);
+        SpawnArea spawnArea = cg.getSpawnArea(entity);
+        MobEntity mobEntity = new MobEntity(cg, root, gameMapProperties, name.name);
+        // since it was just added, it will be the last element
+        EntityTextureObject textureObject = (EntityTextureObject) objects.get(objects.getCount() - 1);
+        Entity enemy = textureObject.getOwner();
+
+        Position pos = cg.getPosition(enemy);
+        Spawn spawnPoint = cg.getSpawn(enemy);
+        // setting the enemy position values
+        pos.x = spawnArea.xCenter;
+        pos.y = spawnArea.yCenter;
+        pos.oldX = pos.x;
+        pos.oldY = pos.y;
+        // setting their spawn point so they can move back here
+        spawnPoint.spawnPosX = pos.x;
+        spawnPoint.spawnPosY = pos.y;
+        textureObject.setX(pos.x);
+        textureObject.setY(pos.y);
+        spawnArea.owner = enemy;
     }
 
     private void setEntityValues(float xCenter, float yCenter, String spawnName) {
