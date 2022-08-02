@@ -100,5 +100,6 @@ project(":core") {
         api "com.badlogicgames.box2dlights:box2dlights:$box2DLightsVersion"
         api "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
         api 'com.github.raeleus.TenPatch:tenpatch:5.2.3'
+        api 'com.github.tommyettinger:jbump:v1.0.1'
     }
 }
