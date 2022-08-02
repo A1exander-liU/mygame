@@ -16,11 +16,14 @@ public class EntityRemovalSystem extends EntitySystem {
     ComponentGrabber cg;
     GameMapProperties gameMapProperties;
     ImmutableArray<Entity> enemies;
+    ImmutableArray<Entity> spawns;
 
     public EntityRemovalSystem(ComponentGrabber cg, GameMapProperties gameMapProperties) {
         super(9);
         this.cg = cg;
         this.gameMapProperties = gameMapProperties;
+        enemies = MyGame.engine.getEntitiesFor(Families.enemies);
+        spawns = MyGame.engine.getEntitiesFor(Families.spawns);
     }
 
     @Override
@@ -30,7 +33,6 @@ public class EntityRemovalSystem extends EntitySystem {
 
     @Override
     public void update(float delta) {
-        enemies = getEnemies();
         for (int i = 0; i < enemies.size(); i++) {
             Entity entity = enemies.get(i);
             Enemy enemy = cg.getEnemy(entity);
