@@ -44,6 +44,8 @@ public class EnemySpawningSystem extends EntitySystem {
         this.cg = cg;
         this.root = root;
         this.gameMapProperties = gameMapProperties;
+        entities = MyGame.engine.getEntitiesFor(Families.enemies);
+        spawns = MyGame.engine.getEntitiesFor(Families.spawns);
         spawnPoints = gameMapProperties.getMapLayer(GameMapProperties.ENEMY_SPAWNS).getObjects();
         objects = gameMapProperties.getMapLayer(GameMapProperties.COLLISIONS).getObjects();
         // create a enemy and place at each spawn point
@@ -51,12 +53,9 @@ public class EnemySpawningSystem extends EntitySystem {
         temp = new MapObjects();
         makeSpawnAreaEntities();
         initialSpawn();
-
-    }
-
-    @Override
-    public void addedToEngine(Engine engine) {
-        entities = MyGame.engine.getEntitiesFor(Families.enemies);
+        Entity entity = entities.get(0);
+        Enemy enemy = cg.getEnemy(entity);
+        enemy.isAlive = false;
     }
 
     @Override
@@ -76,8 +75,8 @@ public class EnemySpawningSystem extends EntitySystem {
         // if there is no owner that means it was removed (dead)
         // then create a timer and once it ends spawn a new enemy at the spot
         // set owner to newly spawned enemy
-        spawns = MyGame.engine.getEntitiesFor(Families.spawns);
         for (int i = 0; i < spawns.size(); i++) {
+            ImmutableArray<Entity> enemies = MyGame.engine.getEntitiesFor(Families.enemies);
             Entity spawn = spawns.get(i);
             SpawnArea spawnArea = cg.getSpawnArea(spawn);
             if (spawnArea.owner == null) {
