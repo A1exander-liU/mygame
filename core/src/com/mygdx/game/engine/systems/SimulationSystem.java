@@ -50,5 +50,20 @@ public class SimulationSystem extends EntitySystem {
 
     @Override
     public void update(float delta) {
+        for (int i = 0; i < collisions.size(); i++) {
+            Entity entity = collisions.get(i);
+            com.mygdx.game.engine.components.Item item = cg.getItem(entity);
+            Position pos = cg.getPosition(entity);
+            // simulate movement through the world
+            // later need to add item removal code in entity removal system:
+            // remove from world and dereference the item of the entity
+
+            // in spawn system:
+            // need to create new entity with item component
+            // add the item value of item component to world
+
+            // userdata here is the entity itself
+            Response.Result result = world.move(item.item, pos.x, pos.y, CollisionFilter.defaultFilter);
+        }
     }
 }
