@@ -218,7 +218,7 @@ public class EnemySpawningSystem extends EntitySystem {
             Entity spawn = spawns.get(i);
             SpawnArea spawnArea = cg.getSpawnArea(spawn);
             if (spawnPoint.spawnPosX == spawnArea.xCenter && spawnPoint.spawnPosY == spawnArea.yCenter) {
-                
+                spawnArea.owner = entity;
             }
         }
     }
