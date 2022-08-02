@@ -21,6 +21,7 @@ import com.mygdx.game.engine.EntityToMapAdder;
 import com.mygdx.game.engine.MobEntity;
 import com.mygdx.game.engine.PlayerEntity;
 import com.mygdx.game.engine.systems.EnemySpawningSystem;
+import com.mygdx.game.engine.systems.EntityRemovalSystem;
 import com.mygdx.game.engine.systems.MovementAndCollision;
 import com.mygdx.game.engine.systems.SpawnZoneDetectionSystem;
 import com.mygdx.game.engine.systems.TimeSystem;
@@ -96,12 +97,14 @@ public class GameScreen implements Screen {
         SteeringSystem steeringSystem = new SteeringSystem(cg, parent, gameMapProperties);
         TimeSystem timeSystem = new TimeSystem(parent);
         StateSystem stateSystem = new StateSystem(cg, gameMapProperties);
+        EntityRemovalSystem entityRemovalSystem = new EntityRemovalSystem(cg, gameMapProperties);
         MyGame.engine.addSystem(movementAndCollision);
         MyGame.engine.addSystem(enemySpawningSystem);
 //        MyGame.engine.addSystem(spawnZoneDetectionSystem);
         MyGame.engine.addSystem(steeringSystem);
         MyGame.engine.addSystem(timeSystem);
         MyGame.engine.addSystem(stateSystem);
+        MyGame.engine.addSystem(entityRemovalSystem);
     }
 
     @Override
