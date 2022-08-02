@@ -81,6 +81,17 @@ public class EnemySpawningSystem extends EntitySystem {
             SpawnArea spawnArea = cg.getSpawnArea(spawn);
             if (spawnArea.owner == null) {
                 System.out.println("no owner");
+                if (TimeSystem.time - spawnArea.lastTimeOfDeath >= 90) {
+                    
+                }
+                // can now perform the spawning need to set a timer
+                // or in spawn area, add field to determine when they died
+                // then determine if tne time passed since death is >= interval
+                // use time system to get elapsed time
+                // probably add this in spawn area component
+                // then spawn back an enemy, (might want to add name comp to spawn
+                // to know what enemy to spawn back instead of looking at map)
+
             }
         }
     }
