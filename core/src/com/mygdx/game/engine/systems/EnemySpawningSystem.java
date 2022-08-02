@@ -51,13 +51,12 @@ public class EnemySpawningSystem extends EntitySystem {
         temp = new MapObjects();
         makeSpawnAreaEntities();
         initialSpawn();
+
     }
 
     @Override
     public void addedToEngine(Engine engine) {
-        entities = MyGame.engine.getEntitiesFor(Family.all(
-                Enemy.class, Sprite.class, Health.class, ID.class,
-                Name.class, Position.class, Size.class, Speed.class).get());
+        entities = MyGame.engine.getEntitiesFor(Families.enemies);
     }
 
     @Override
@@ -82,7 +81,7 @@ public class EnemySpawningSystem extends EntitySystem {
             Entity spawn = spawns.get(i);
             SpawnArea spawnArea = cg.getSpawnArea(spawn);
             if (spawnArea.owner == null) {
-
+                System.out.println("no owner");
             }
         }
     }
