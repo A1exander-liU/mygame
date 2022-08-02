@@ -1,30 +1,22 @@
 package com.mygdx.game.engine.systems;
 
-import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
-import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
-import com.badlogic.gdx.maps.objects.TextureMapObject;
 import com.badlogic.gdx.math.Rectangle;
 import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.ComponentGrabber;
 import com.mygdx.game.engine.Families;
 import com.mygdx.game.engine.MobEntity;
-import com.mygdx.game.engine.components.Enemy;
 import com.mygdx.game.engine.components.Spawn;
 import com.mygdx.game.engine.components.SpawnArea;
-import com.mygdx.game.engine.components.Sprite;
-import com.mygdx.game.engine.components.Health;
-import com.mygdx.game.engine.components.ID;
 import com.mygdx.game.engine.components.Name;
 import com.mygdx.game.engine.components.Position;
 import com.mygdx.game.engine.components.Size;
-import com.mygdx.game.engine.components.Speed;
 import com.mygdx.game.utils.EntityTextureObject;
 
 import java.util.Objects;
