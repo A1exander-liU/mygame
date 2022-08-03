@@ -22,6 +22,7 @@ import com.mygdx.game.engine.MobEntity;
 import com.mygdx.game.engine.PlayerEntity;
 import com.mygdx.game.engine.systems.EnemySpawningSystem;
 import com.mygdx.game.engine.systems.EntityRemovalSystem;
+import com.mygdx.game.engine.systems.MapUpdateSystem;
 import com.mygdx.game.engine.systems.MovementAndCollision;
 import com.mygdx.game.engine.systems.SimulationSystem;
 import com.mygdx.game.engine.systems.SpawnZoneDetectionSystem;
@@ -100,6 +101,7 @@ public class GameScreen implements Screen {
         StateSystem stateSystem = new StateSystem(cg, gameMapProperties);
         EntityRemovalSystem entityRemovalSystem = new EntityRemovalSystem(cg, gameMapProperties);
         SimulationSystem simulationSystem = new SimulationSystem(cg, gameMapProperties);
+        MapUpdateSystem mapUpdateSystem = new MapUpdateSystem(cg, gameMapProperties);
         MyGame.engine.addSystem(movementAndCollision);
         MyGame.engine.addSystem(enemySpawningSystem);
 //        MyGame.engine.addSystem(spawnZoneDetectionSystem);
@@ -108,6 +110,7 @@ public class GameScreen implements Screen {
         MyGame.engine.addSystem(stateSystem);
         MyGame.engine.addSystem(entityRemovalSystem);
         MyGame.engine.addSystem(simulationSystem);
+        MyGame.engine.addSystem(mapUpdateSystem);
     }
 
     @Override
