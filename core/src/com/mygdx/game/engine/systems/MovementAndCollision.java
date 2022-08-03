@@ -80,22 +80,16 @@ public class MovementAndCollision extends EntitySystem {
         pos.oldX = pos.x;
         pos.oldY = pos.y;
         if (Gdx.input.isKeyPressed(Input.Keys.W)) {
-
             pos.y += speed.ySpeed;
-//            pos.oldY = pos.y - speed.ySpeed;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.D)) {
-
             pos.x += speed.xSpeed;
-//            pos.oldX = pos.x - speed.xSpeed;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.S)) {
             pos.y -= speed.ySpeed;
-//            pos.oldY = pos.y + speed.ySpeed;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.A)) {
             pos.x -= speed.xSpeed;
-//            pos.oldX = pos.x + speed.xSpeed;
         }
     }
 
