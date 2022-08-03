@@ -85,20 +85,10 @@ public class SteeringSystem extends EntitySystem {
         cg.getSteering(player).position.y = pos.y;
         // constructor(owner-steering, owner-proximity)
 
-        CollisionAvoidance<Vector2> collisionAvoidance = new CollisionAvoidance<>(
-                cg.getSteering(entity),cg.getDetectionProximity(entity));
-
-        Arrive<Vector2> arrive = new Arrive<>(cg.getSteering(entity))
+        cg.getSteering(entity).steeringBehavior = new Arrive<>(cg.getSteering(entity))
                 .setArrivalTolerance(47)
                 .setTimeToTarget(0.1f)
                 .setTarget(cg.getSteering(player));
-        PrioritySteering<Vector2> prioritySteering = new PrioritySteering<>(cg.getSteering(entity));
-        // priority order of the iteration
-        // returns the steering output of the first non-zero steering
-        // collision avoidance is put first so
-        prioritySteering.add(collisionAvoidance);
-        prioritySteering.add(arrive);
-        cg.getSteering(entity).steeringBehavior = prioritySteering;
     }
 
     private void setReturnBehavior(Entity entity) {
