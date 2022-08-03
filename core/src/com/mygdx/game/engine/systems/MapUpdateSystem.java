@@ -8,6 +8,8 @@ import com.badlogic.gdx.maps.MapObjects;
 import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.ComponentGrabber;
+import com.mygdx.game.engine.Families;
+import com.mygdx.game.engine.components.Camera;
 import com.mygdx.game.engine.components.Enemy;
 import com.mygdx.game.engine.components.Player;
 import com.mygdx.game.engine.components.Position;
@@ -17,12 +19,14 @@ public class MapUpdateSystem extends EntitySystem {
     ComponentGrabber cg;
     GameMapProperties gameMapProperties;
     ImmutableArray<Entity> characters;
+    Entity player;
 
     public MapUpdateSystem(ComponentGrabber cg, GameMapProperties gameMapProperties) {
         super(12);
         this.cg = cg;
         this.gameMapProperties = gameMapProperties;
         characters = MyGame.engine.getEntitiesFor(Family.one(Player.class, Enemy.class).get());
+        player = MyGame.engine.getEntitiesFor(Families.player).get(0);
     }
 
     @Override
@@ -31,6 +35,7 @@ public class MapUpdateSystem extends EntitySystem {
             Entity entity = characters.get(i);
             updateEntityInMap(entity);
         }
+        updatePlayerCamPosition();
     }
 
     private void updateEntityInMap(Entity entity) {
@@ -56,5 +61,13 @@ public class MapUpdateSystem extends EntitySystem {
             }
         }
         return null;
+    }
+
+    private void updatePlayerCamPosition() {
+        Camera camera = cg.getCamera(player);
+        Position pos = cg.getPosition(player);
+        camera.camera.update();
+        camera.camera.position.x = pos.x;
+        camera.camera.position.y = pos.y;
     }
 }
