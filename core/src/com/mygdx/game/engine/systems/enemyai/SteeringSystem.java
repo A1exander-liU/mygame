@@ -38,9 +38,6 @@ public class SteeringSystem extends EntitySystem {
     ImmutableArray<Entity> enemies;
     ImmutableArray<Entity> entities;
     Entity player;
-    float elapsed = 0;
-
-    Reader reader = null;
 
     public SteeringSystem(ComponentGrabber cg, MyGame root, GameMapProperties gameMapProperties) {
         super(10);
