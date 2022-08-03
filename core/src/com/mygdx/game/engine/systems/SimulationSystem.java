@@ -3,10 +3,8 @@ package com.mygdx.game.engine.systems;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.utils.ImmutableArray;
-import com.badlogic.gdx.maps.MapObjects;
 import com.dongbat.jbump.Collision;
 import com.dongbat.jbump.CollisionFilter;
-import com.dongbat.jbump.Collisions;
 import com.dongbat.jbump.Item;
 import com.dongbat.jbump.Rect;
 import com.dongbat.jbump.Response;
@@ -20,7 +18,6 @@ import com.mygdx.game.engine.PlayerEntity;
 import com.mygdx.game.engine.components.Camera;
 import com.mygdx.game.engine.components.Position;
 import com.mygdx.game.engine.components.Size;
-import com.mygdx.game.utils.EntityTextureObject;
 
 public class SimulationSystem extends EntitySystem {
     ComponentGrabber cg;
