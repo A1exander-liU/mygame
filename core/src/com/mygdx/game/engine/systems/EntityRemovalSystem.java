@@ -13,8 +13,6 @@ import com.mygdx.game.engine.components.Enemy;
 import com.mygdx.game.engine.components.SpawnArea;
 import com.mygdx.game.utils.EntityTextureObject;
 
-import java.sql.Time;
-
 public class EntityRemovalSystem extends EntitySystem {
     ComponentGrabber cg;
     GameMapProperties gameMapProperties;
@@ -45,10 +43,6 @@ public class EntityRemovalSystem extends EntitySystem {
                 removeFromMap(entity);
             }
         }
-    }
-
-    private ImmutableArray<Entity> getEnemies() {
-        return MyGame.engine.getEntitiesFor(Families.enemies);
     }
 
     private void removeFromMap(Entity entity) {
