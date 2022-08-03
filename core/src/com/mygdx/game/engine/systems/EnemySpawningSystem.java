@@ -22,7 +22,6 @@ import com.mygdx.game.utils.EntityTextureObject;
 import java.util.Objects;
 
 public class EnemySpawningSystem extends EntitySystem {
-    private ImmutableArray<Entity> entities;
     private ImmutableArray<Entity> spawns;
     private MapObjects spawnPoints;
     private MapObjects objects;
@@ -37,7 +36,6 @@ public class EnemySpawningSystem extends EntitySystem {
         this.cg = cg;
         this.root = root;
         this.gameMapProperties = gameMapProperties;
-        entities = MyGame.engine.getEntitiesFor(Families.enemies);
         spawns = MyGame.engine.getEntitiesFor(Families.spawns);
         spawnPoints = gameMapProperties.getMapLayer(GameMapProperties.ENEMY_SPAWNS).getObjects();
         objects = gameMapProperties.getMapLayer(GameMapProperties.COLLISIONS).getObjects();
