@@ -20,7 +20,7 @@ public class EntityRemovalSystem extends EntitySystem {
     ImmutableArray<Entity> spawns;
 
     public EntityRemovalSystem(ComponentGrabber cg, GameMapProperties gameMapProperties) {
-        super(9);
+        super(99);
         this.cg = cg;
         this.gameMapProperties = gameMapProperties;
         enemies = MyGame.engine.getEntitiesFor(Families.enemies);

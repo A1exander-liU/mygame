@@ -38,7 +38,7 @@ public class SteeringSystem extends EntitySystem {
     Entity player;
 
     public SteeringSystem(ComponentGrabber cg, MyGame root, GameMapProperties gameMapProperties) {
-        super(10);
+        super(5);
         this.cg = cg;
         this.root = root;
         this.gameMapProperties = gameMapProperties;

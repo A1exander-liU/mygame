@@ -32,7 +32,7 @@ public class EnemySpawningSystem extends EntitySystem {
     GameMapProperties gameMapProperties;
 
     public EnemySpawningSystem(ComponentGrabber cg, MyGame root, GameMapProperties gameMapProperties) {
-        super(1);
+        super(2);
         this.cg = cg;
         this.root = root;
         this.gameMapProperties = gameMapProperties;

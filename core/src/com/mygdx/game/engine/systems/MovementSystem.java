@@ -27,7 +27,7 @@ public class MovementSystem extends EntitySystem {
     GameMapProperties gameMapProperties;
 
     public MovementSystem(ComponentGrabber cg, MyGame root, GameMapProperties gameMapProperties) {
-        super(2);
+        super(3);
         this.cg = cg;
         this.root = root;
         this.gameMapProperties = gameMapProperties;

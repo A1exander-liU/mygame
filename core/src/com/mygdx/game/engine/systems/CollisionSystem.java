@@ -28,7 +28,7 @@ public class CollisionSystem extends EntitySystem implements EntityListener {
     World<Entity> world;
 
     public CollisionSystem(ComponentGrabber cg, GameMapProperties gameMapProperties) {
-        super(11);
+        super(6);
         this.cg = cg;
         this.gameMapProperties = gameMapProperties;
         collisions = MyGame.engine.getEntitiesFor(Families.collisions);

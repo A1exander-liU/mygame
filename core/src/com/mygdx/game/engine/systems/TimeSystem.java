@@ -10,6 +10,7 @@ public class TimeSystem extends EntitySystem {
     public static int second = 0;
 
     public TimeSystem(MyGame root) {
+        super(1);
         this.root = root;
     }
 

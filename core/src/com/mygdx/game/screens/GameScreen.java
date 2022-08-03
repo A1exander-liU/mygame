@@ -86,6 +86,16 @@ public class GameScreen implements Screen {
         // to display the map as orthogonal (top down)
         tiledMapRenderer = new MapObjectDrawer(testMap);
 
+        // system priority:
+        // timeSystem: 1
+        // spawnSystem: 2
+        // movementSystem: 3
+        // stateSystem: 4
+        // steeringSystem: 5
+        // collisionSystem: 6
+        // mapUpdateSystem: 98
+        // removalSystem: 99
+
         MovementSystem movementAndCollision = new MovementSystem(cg, parent, gameMapProperties);
         EnemySpawningSystem enemySpawningSystem = new EnemySpawningSystem(cg, parent, gameMapProperties);
         SteeringSystem steeringSystem = new SteeringSystem(cg, parent, gameMapProperties);

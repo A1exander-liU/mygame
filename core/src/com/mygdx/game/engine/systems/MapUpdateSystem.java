@@ -22,7 +22,7 @@ public class MapUpdateSystem extends EntitySystem {
     Entity player;
 
     public MapUpdateSystem(ComponentGrabber cg, GameMapProperties gameMapProperties) {
-        super(12);
+        super(98);
         this.cg = cg;
         this.gameMapProperties = gameMapProperties;
         characters = MyGame.engine.getEntitiesFor(Family.one(Player.class, Enemy.class).get());

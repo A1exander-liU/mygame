@@ -27,7 +27,7 @@ public class StateSystem extends EntitySystem {
     Entity player;
 
     public StateSystem(ComponentGrabber cg, GameMapProperties gameMapProperties) {
-        super(5);
+        super(4);
         this.cg = cg;
         this.gameMapProperties = gameMapProperties;
         enemies = MyGame.engine.getEntitiesFor(Families.enemies);
