@@ -10,7 +10,6 @@ import com.badlogic.gdx.ai.steer.behaviors.Arrive;
 import com.badlogic.gdx.ai.steer.behaviors.CollisionAvoidance;
 import com.badlogic.gdx.ai.steer.behaviors.PrioritySteering;
 import com.badlogic.gdx.ai.steer.behaviors.Seek;
-import com.badlogic.gdx.ai.steer.behaviors.Wander;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.Rectangle;
@@ -28,7 +27,6 @@ import com.mygdx.game.engine.components.Spawn;
 import com.mygdx.game.engine.components.StateComponent;
 import com.mygdx.game.engine.systems.TimeSystem;
 
-import java.io.Reader;
 import java.util.Random;
 // 3 states: idle(random walk), hunting(pursue and attack player), flee(return)
 public class SteeringSystem extends EntitySystem {
@@ -122,11 +120,6 @@ public class SteeringSystem extends EntitySystem {
     }
 
     private void setWanderBehavior(Entity entity) {
-        Spawn spawn = cg.getSpawn(entity);
-        GameLocation spawnPosition = new GameLocation(spawn.spawnPosX, spawn.spawnPosY);
-        Wander<Vector2> wander = new Wander<>(cg.getSteering(entity));
-        // create component to store different steering behaviors
-        Seek<Vector2> seek = new Seek<>(cg.getSteering(entity));
         if (TimeSystem.second % 2 == 0) {
             Vector2 newSpot = generateRandomPosition(entity);
             GameLocation random = new GameLocation(newSpot);
