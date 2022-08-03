@@ -18,7 +18,7 @@ import com.mygdx.game.engine.components.ID;
 import com.mygdx.game.engine.components.Position;
 import com.mygdx.game.engine.components.Speed;
 
-public class MovementAndCollision extends EntitySystem {
+public class MovementSystem extends EntitySystem {
     private ImmutableArray<Entity> entities;
     private ImmutableArray<Entity> enemies;
     private MapObjects spawnPoints;
@@ -27,7 +27,7 @@ public class MovementAndCollision extends EntitySystem {
     MyGame root;
     GameMapProperties gameMapProperties;
 
-    public MovementAndCollision(ComponentGrabber cg, MyGame root, GameMapProperties gameMapProperties) {
+    public MovementSystem(ComponentGrabber cg, MyGame root, GameMapProperties gameMapProperties) {
         super(2);
         this.cg = cg;
         this.root = root;

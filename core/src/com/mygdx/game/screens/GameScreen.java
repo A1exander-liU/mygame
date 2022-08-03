@@ -18,12 +18,11 @@ import com.mygdx.game.MyGame;
 import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.engine.EntityFactory;
 import com.mygdx.game.engine.EntityToMapAdder;
-import com.mygdx.game.engine.MobEntity;
 import com.mygdx.game.engine.PlayerEntity;
 import com.mygdx.game.engine.systems.EnemySpawningSystem;
 import com.mygdx.game.engine.systems.EntityRemovalSystem;
 import com.mygdx.game.engine.systems.MapUpdateSystem;
-import com.mygdx.game.engine.systems.MovementAndCollision;
+import com.mygdx.game.engine.systems.MovementSystem;
 import com.mygdx.game.engine.systems.SimulationSystem;
 import com.mygdx.game.engine.systems.SpawnZoneDetectionSystem;
 import com.mygdx.game.engine.systems.TimeSystem;
@@ -93,7 +92,7 @@ public class GameScreen implements Screen {
         // to display the map as orthogonal (top down)
         tiledMapRenderer = new MapObjectDrawer(testMap);
 
-        MovementAndCollision movementAndCollision = new MovementAndCollision(cg, parent, gameMapProperties);
+        MovementSystem movementAndCollision = new MovementSystem(cg, parent, gameMapProperties);
         EnemySpawningSystem enemySpawningSystem = new EnemySpawningSystem(cg, parent, gameMapProperties);
         SpawnZoneDetectionSystem spawnZoneDetectionSystem = new SpawnZoneDetectionSystem(cg, parent, gameMapProperties);
         SteeringSystem steeringSystem = new SteeringSystem(cg, parent, gameMapProperties);
