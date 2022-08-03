@@ -66,10 +66,6 @@ public class MovementAndCollision extends EntitySystem {
         // makes a pretend move and checks if that spot is ok
         // if spot is ok, the actual x and y is set to future x and y
         // if spot is not ok. nothing happens to the x and y
-//        for (int i = 0; i < enemies.size(); i++) {
-//            Entity entity = enemies.get(i);
-//            moveEnemy(getRandomDirection(), entity);
-//        }
         // once char moves update their x and y
         // 200, 200
         // 200, 205 (0,5)
@@ -84,12 +80,7 @@ public class MovementAndCollision extends EntitySystem {
             Entity entity = enemies.get(i);
             if (cg.getEnemy(entity) != null)
                 keepEntityInsideSpawnZone(entity);
-//            updateEntityInMap(entity);
-//            handleCollisions(entity);
         }
-//        updateEntityInMap(player);
-//        handlePlayerCollisions();
-//        updatePlayerCamPosition();
     }
 
     private void moveEnemy(String direction, Entity entity) {
