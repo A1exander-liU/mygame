@@ -94,7 +94,6 @@ public class GameScreen implements Screen {
 
         MovementSystem movementAndCollision = new MovementSystem(cg, parent, gameMapProperties);
         EnemySpawningSystem enemySpawningSystem = new EnemySpawningSystem(cg, parent, gameMapProperties);
-        SpawnZoneDetectionSystem spawnZoneDetectionSystem = new SpawnZoneDetectionSystem(cg, parent, gameMapProperties);
         SteeringSystem steeringSystem = new SteeringSystem(cg, parent, gameMapProperties);
         TimeSystem timeSystem = new TimeSystem(parent);
         StateSystem stateSystem = new StateSystem(cg, gameMapProperties);
@@ -103,7 +102,6 @@ public class GameScreen implements Screen {
         MapUpdateSystem mapUpdateSystem = new MapUpdateSystem(cg, gameMapProperties);
         MyGame.engine.addSystem(movementAndCollision);
         MyGame.engine.addSystem(enemySpawningSystem);
-//        MyGame.engine.addSystem(spawnZoneDetectionSystem);
         MyGame.engine.addSystem(steeringSystem);
         MyGame.engine.addSystem(timeSystem);
         MyGame.engine.addSystem(stateSystem);
