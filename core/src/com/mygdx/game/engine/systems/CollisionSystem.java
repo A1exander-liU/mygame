@@ -25,7 +25,7 @@ public class CollisionSystem extends EntitySystem implements EntityListener {
     ImmutableArray<Entity> collisions;
     ImmutableArray<Entity> enemies;
     Entity player;
-    World<Entity> world;
+    public static World<Entity> world;
 
     public CollisionSystem(ComponentGrabber cg, GameMapProperties gameMapProperties) {
         super(6);
