@@ -15,7 +15,7 @@ public class TimeSystem extends EntitySystem {
 
     @Override
     public Engine getEngine() {
-        return root.engine;
+        return MyGame.engine;
     }
 
     @Override
