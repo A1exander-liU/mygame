@@ -93,21 +93,6 @@ public class MovementAndCollision extends EntitySystem {
         }
     }
 
-    private void keepEntityInsideMap(Entity entity) {
-        Position pos = cg.getPosition(entity);
-        Size size = cg.getSize(entity);
-        // checks if future move is legal or not
-
-        if (pos.futureX < 0)
-            pos.x = 0;
-        if (pos.futureX + size.width > gameMapProperties.mapWidth)
-            pos.x = gameMapProperties.mapWidth - size.width;
-        if (pos.futureY < 0)
-            pos.y = 0;
-        if (pos.futureY + size.height > gameMapProperties.mapHeight)
-            pos.y = gameMapProperties.mapHeight - size.height;
-    }
-
     private void keepEntityInsideSpawnZone(Entity entity) {
         // this makes the enemy warp back to spawn since hunting is set back to false when player too far
         // need to move enemy back inside spawn point first
