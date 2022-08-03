@@ -112,6 +112,7 @@ public class GameScreen implements Screen {
         MyGame.engine.addSystem(entityRemovalSystem);
         MyGame.engine.addSystem(simulationSystem);
         MyGame.engine.addSystem(mapUpdateSystem);
+        checkPriorities();
     }
 
     @Override
@@ -167,6 +168,13 @@ public class GameScreen implements Screen {
         ImmutableArray<EntitySystem> systems = MyGame.engine.getSystems();
         for (EntitySystem system : systems) {
             system.setProcessing(true);
+        }
+    }
+
+    private void checkPriorities() {
+        ImmutableArray<EntitySystem> systems = MyGame.engine.getSystems();
+        for (EntitySystem system : systems) {
+            System.out.println(system.getClass() + ": " + system.priority);
         }
     }
 }
