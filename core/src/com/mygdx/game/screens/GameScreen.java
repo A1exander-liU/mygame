@@ -122,7 +122,6 @@ public class GameScreen implements Screen {
         Gdx.gl.glClearColor(1f, 0f, 0f, 1);
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-//        player.movePlayer(gameMapProperties);
         Entity entity = MyGame.engine.getEntitiesFor(Family.all(com.mygdx.game.engine.components.Player.class).get()).get(0);
         tiledMapRenderer.setView(cg.getCamera(entity).camera);
         MyGame.engine.update(delta);
