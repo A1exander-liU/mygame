@@ -6,33 +6,17 @@ import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
-import com.badlogic.gdx.maps.objects.PolylineMapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
-import com.badlogic.gdx.maps.objects.TextureMapObject;
-import com.badlogic.gdx.math.Intersector;
-import com.badlogic.gdx.math.Polygon;
-import com.badlogic.gdx.math.Polyline;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.ComponentGrabber;
 import com.mygdx.game.engine.Families;
-import com.mygdx.game.engine.components.Camera;
 import com.mygdx.game.engine.components.Enemy;
 import com.mygdx.game.engine.components.ID;
-import com.mygdx.game.engine.components.Name;
 import com.mygdx.game.engine.components.Position;
-import com.mygdx.game.engine.components.Size;
 import com.mygdx.game.engine.components.Speed;
-import com.mygdx.game.utils.EntityTextureObject;
-
-import java.util.Objects;
-import java.util.Random;
 
 public class MovementAndCollision extends EntitySystem {
     private ImmutableArray<Entity> entities;
