@@ -18,6 +18,7 @@ import com.mygdx.game.MyGame;
 import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.engine.EntityFactory;
 import com.mygdx.game.engine.EntityToMapAdder;
+import com.mygdx.game.engine.Families;
 import com.mygdx.game.engine.PlayerEntity;
 import com.mygdx.game.engine.systems.EnemySpawningSystem;
 import com.mygdx.game.engine.systems.EntityRemovalSystem;
@@ -115,7 +116,7 @@ public class GameScreen implements Screen {
         Gdx.gl.glClearColor(1f, 0f, 0f, 1);
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        Entity entity = MyGame.engine.getEntitiesFor(Family.all(com.mygdx.game.engine.components.Player.class).get()).get(0);
+        Entity entity = MyGame.engine.getEntitiesFor(Families.player).get(0);
         tiledMapRenderer.setView(cg.getCamera(entity).camera);
         MyGame.engine.update(delta);
         tiledMapRenderer.render();
