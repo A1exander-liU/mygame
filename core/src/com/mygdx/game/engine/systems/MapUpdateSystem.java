@@ -19,6 +19,7 @@ public class MapUpdateSystem extends EntitySystem {
     ImmutableArray<Entity> characters;
 
     public MapUpdateSystem(ComponentGrabber cg, GameMapProperties gameMapProperties) {
+        super(12);
         this.cg = cg;
         this.gameMapProperties = gameMapProperties;
         characters = MyGame.engine.getEntitiesFor(Family.one(Player.class, Enemy.class).get());
