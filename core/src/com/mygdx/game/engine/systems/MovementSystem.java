@@ -19,9 +19,9 @@ import com.mygdx.game.engine.components.Position;
 import com.mygdx.game.engine.components.Speed;
 
 public class MovementSystem extends EntitySystem {
-    private ImmutableArray<Entity> enemies;
-    private MapObjects spawnPoints;
-    private Entity player;
+    private final ImmutableArray<Entity> enemies;
+    private final MapObjects spawnPoints;
+    private final Entity player;
     ComponentGrabber cg;
     MyGame root;
     GameMapProperties gameMapProperties;
