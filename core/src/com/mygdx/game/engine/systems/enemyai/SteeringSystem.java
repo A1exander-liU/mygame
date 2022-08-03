@@ -140,7 +140,6 @@ public class SteeringSystem extends EntitySystem {
 
     private float randomX(Entity entity) {
         Size size = cg.getSize(entity);
-        Position pos = cg.getPosition(entity);
         Rectangle spawnArea = getSpawnArea(cg.getSpawn(entity));
         if (spawnArea != null) {
             float max = (spawnArea.x + spawnArea.width) - size.width;
@@ -151,7 +150,6 @@ public class SteeringSystem extends EntitySystem {
 
     private float randomY(Entity entity) {
         Size size = cg.getSize(entity);
-        Position pos = cg.getPosition(entity);
         Rectangle spawnArea = getSpawnArea(cg.getSpawn(entity));
         if (spawnArea != null) {
             float max = (spawnArea.y + spawnArea.height) - size.height;
