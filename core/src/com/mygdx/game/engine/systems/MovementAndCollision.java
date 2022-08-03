@@ -3,7 +3,6 @@ package com.mygdx.game.engine.systems;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
-import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -19,7 +18,6 @@ import com.badlogic.gdx.math.Polyline;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
-import com.dongbat.jbump.World;
 import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.ComponentGrabber;
@@ -28,7 +26,6 @@ import com.mygdx.game.engine.components.Camera;
 import com.mygdx.game.engine.components.Enemy;
 import com.mygdx.game.engine.components.ID;
 import com.mygdx.game.engine.components.Name;
-import com.mygdx.game.engine.components.Player;
 import com.mygdx.game.engine.components.Position;
 import com.mygdx.game.engine.components.Size;
 import com.mygdx.game.engine.components.Speed;
@@ -45,7 +42,6 @@ public class MovementAndCollision extends EntitySystem {
     ComponentGrabber cg;
     MyGame root;
     GameMapProperties gameMapProperties;
-    World<Entity> world;
 
     public MovementAndCollision(ComponentGrabber cg, MyGame root, GameMapProperties gameMapProperties) {
         super(2);
@@ -57,8 +53,6 @@ public class MovementAndCollision extends EntitySystem {
         enemies = MyGame.engine.getEntitiesFor(Families.enemies);
         // there is only one player hence we just get index 0
         player = MyGame.engine.getEntitiesFor(Families.player).get(0);
-        world = new World<>(32);
-
     }
 
     @Override
@@ -98,11 +92,12 @@ public class MovementAndCollision extends EntitySystem {
             Entity entity = enemies.get(i);
             if (cg.getEnemy(entity) != null)
                 keepEntityInsideSpawnZone(entity);
-            updateEntityInMap(entity);
+//            updateEntityInMap(entity);
 //            handleCollisions(entity);
         }
-        handlePlayerCollisions();
-        updatePlayerCamPosition();
+//        updateEntityInMap(player);
+//        handlePlayerCollisions();
+//        updatePlayerCamPosition();
     }
 
     private void moveEnemy(String direction, Entity entity) {
@@ -297,7 +292,6 @@ public class MovementAndCollision extends EntitySystem {
                 intersected = Intersector.overlapConvexPolygons(playerArea, collisionSpace);
 
                 if (intersected) {
-                    System.out.println("intersected");
                     pos.x = pos.oldX;
                     pos.y = pos.oldY;
                 }
@@ -305,7 +299,6 @@ public class MovementAndCollision extends EntitySystem {
                 if (wall != null) {
                     intersected = checkWallCollisions(wall, playerArea);
                     if (intersected) {
-                        System.out.println("intersected with wall");
                         pos.x = pos.oldX;
                         pos.y = pos.oldY;
                     }
