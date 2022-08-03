@@ -15,7 +15,6 @@ import com.mygdx.game.engine.ComponentGrabber;
 import com.mygdx.game.engine.Families;
 import com.mygdx.game.engine.MobEntity;
 import com.mygdx.game.engine.PlayerEntity;
-import com.mygdx.game.engine.components.Camera;
 import com.mygdx.game.engine.components.Position;
 import com.mygdx.game.engine.components.Size;
 
@@ -82,7 +81,6 @@ public class CollisionSystem extends EntitySystem {
 
             Response.Result result = world.move(item.item, pos.x, pos.y, obstacleCollisionFilter);
             if (result.projectedCollisions.size() < 1) {
-//                System.out.println("no collisions");
                 continue;
             }
             for (int j = 0; j < result.projectedCollisions.size(); j++) {
