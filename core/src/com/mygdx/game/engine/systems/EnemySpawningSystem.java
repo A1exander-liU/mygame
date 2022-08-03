@@ -22,9 +22,9 @@ import com.mygdx.game.utils.EntityTextureObject;
 import java.util.Objects;
 
 public class EnemySpawningSystem extends EntitySystem {
-    private ImmutableArray<Entity> spawns;
-    private MapObjects spawnPoints;
-    private MapObjects objects;
+    private final ImmutableArray<Entity> spawns;
+    private final MapObjects spawnPoints;
+    private final MapObjects objects;
     private MapObjects temp;
     private final float RESPAWN_TIME = 90;
     ComponentGrabber cg;
