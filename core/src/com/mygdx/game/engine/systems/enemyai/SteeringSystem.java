@@ -182,7 +182,6 @@ public class SteeringSystem extends EntitySystem {
     }
 
     private Vector2 generateRandomPosition(Entity entity) {
-        Position pos = cg.getPosition(entity);
         return new Vector2(randomX(entity), randomY(entity));
     }
 }
