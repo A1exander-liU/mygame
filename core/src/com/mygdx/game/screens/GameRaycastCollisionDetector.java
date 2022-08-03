@@ -24,12 +24,6 @@ public class GameRaycastCollisionDetector implements RaycastCollisionDetector<Ve
 
     @Override
     public boolean findCollision(Collision<Vector2> outputCollision, Ray<Vector2> inputRay) {
-        // ray is basically a line
-        // ray.end: end point of the ray, ray.start: start point of the array
-        Polyline ray = new Polyline(new float[] {
-                inputRay.start.x, inputRay.start.y,
-                inputRay.end.x, inputRay.end.y
-        });
         // need to look for possible overlaps against all map objects
         // the player
         // other enemies
@@ -41,7 +35,7 @@ public class GameRaycastCollisionDetector implements RaycastCollisionDetector<Ve
     private boolean thereIsCollision() {
         MapObjects collisions = gameMapProperties.getMapLayer(GameMapProperties.COLLISIONS).getObjects();
         for (int i = 0; i < collisions.getCount(); i++) {
-            
+
         }
         return false;
     }
