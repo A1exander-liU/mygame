@@ -109,5 +109,8 @@ public class CollisionSystem extends EntitySystem implements EntityListener {
         world.add(item, pos.x, pos.y, size.width, size.height);
     }
 
-    private void removeFromWorld(Entity entity) {}
+    private void removeFromWorld(Entity entity) {
+        com.mygdx.game.engine.components.Item item = cg.getItem(entity);
+        world.remove(item.item);
+    }
 }
