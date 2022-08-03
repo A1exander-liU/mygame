@@ -19,7 +19,7 @@ import com.mygdx.game.engine.components.Camera;
 import com.mygdx.game.engine.components.Position;
 import com.mygdx.game.engine.components.Size;
 
-public class SimulationSystem extends EntitySystem {
+public class CollisionSystem extends EntitySystem {
     ComponentGrabber cg;
     GameMapProperties gameMapProperties;
     ImmutableArray<Entity> collisions;
@@ -27,7 +27,7 @@ public class SimulationSystem extends EntitySystem {
     Entity player;
     World<Entity> world;
 
-    public SimulationSystem(ComponentGrabber cg, GameMapProperties gameMapProperties) {
+    public CollisionSystem(ComponentGrabber cg, GameMapProperties gameMapProperties) {
         super(11);
         this.cg = cg;
         this.gameMapProperties = gameMapProperties;
