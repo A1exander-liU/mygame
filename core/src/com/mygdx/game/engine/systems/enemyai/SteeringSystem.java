@@ -184,7 +184,6 @@ public class SteeringSystem extends EntitySystem {
     private Vector2 generateRandomPosition(Entity entity) {
         Position pos = cg.getPosition(entity);
         Vector2 enemyPos = new Vector2(pos.x, pos.y);
-        Vector2 newSpot = new Vector2(randomX(entity), randomY(entity));
-        return newSpot;
+        return new Vector2(randomX(entity), randomY(entity));
     }
 }
