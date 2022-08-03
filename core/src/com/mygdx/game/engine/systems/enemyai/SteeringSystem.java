@@ -9,7 +9,15 @@ import com.badlogic.gdx.ai.GdxAI;
 import com.badlogic.gdx.ai.steer.behaviors.Arrive;
 import com.badlogic.gdx.ai.steer.behaviors.CollisionAvoidance;
 import com.badlogic.gdx.ai.steer.behaviors.PrioritySteering;
+import com.badlogic.gdx.ai.steer.behaviors.RaycastObstacleAvoidance;
 import com.badlogic.gdx.ai.steer.behaviors.Seek;
+import com.badlogic.gdx.ai.steer.utils.RayConfiguration;
+import com.badlogic.gdx.ai.steer.utils.rays.CentralRayWithWhiskersConfiguration;
+import com.badlogic.gdx.ai.steer.utils.rays.RayConfigurationBase;
+import com.badlogic.gdx.ai.steer.utils.rays.SingleRayConfiguration;
+import com.badlogic.gdx.ai.utils.Collision;
+import com.badlogic.gdx.ai.utils.Ray;
+import com.badlogic.gdx.ai.utils.RaycastCollisionDetector;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.Rectangle;
@@ -26,6 +34,7 @@ import com.mygdx.game.engine.components.Size;
 import com.mygdx.game.engine.components.Spawn;
 import com.mygdx.game.engine.components.StateComponent;
 import com.mygdx.game.engine.systems.TimeSystem;
+import com.mygdx.game.screens.GameRaycastCollisionDetector;
 
 import java.util.Random;
 // 3 states: idle(random walk), hunting(pursue and attack player), flee(return)
@@ -85,6 +94,7 @@ public class SteeringSystem extends EntitySystem {
         cg.getSteering(player).position.y = pos.y;
         // constructor(owner-steering, owner-proximity)
 
+
         cg.getSteering(entity).steeringBehavior = new Arrive<>(cg.getSteering(entity))
                 .setArrivalTolerance(47)
                 .setTimeToTarget(0.1f)
@@ -95,6 +105,15 @@ public class SteeringSystem extends EntitySystem {
         Spawn spawn = cg.getSpawn(entity);
         GameLocation spawnPosition = new GameLocation(spawn.spawnPosX, spawn.spawnPosY);
 
+        RaycastObstacleAvoidance<Vector2> avoidance = new RaycastObstacleAvoidance<>(cg.getSteering(entity));
+
+        RaycastCollisionDetector<Vector2> detector = new GameRaycastCollisionDetector();
+        avoidance.setRayConfiguration(
+                new CentralRayWithWhiskersConfiguration<>(cg.getSteering(entity), 10f, 10f, 10f)
+        );
+        avoidance.setRaycastCollisionDetector(detector);
+        avoidance.setDistanceFromBoundary(5f);
+
         CollisionAvoidance<Vector2> collisionAvoidance = new CollisionAvoidance<>(
                 cg.getSteering(entity),
                 cg.getDetectionProximity(entity));
@@ -103,7 +122,8 @@ public class SteeringSystem extends EntitySystem {
                 .setTarget(spawnPosition);
 
         PrioritySteering<Vector2> prioritySteering = new PrioritySteering<>(cg.getSteering(entity));
-        prioritySteering.add(collisionAvoidance);
+//        prioritySteering.add(collisionAvoidance);
+        prioritySteering.add(avoidance);
         prioritySteering.add(seek);
 
         cg.getSteering(entity).steeringBehavior = prioritySteering;
