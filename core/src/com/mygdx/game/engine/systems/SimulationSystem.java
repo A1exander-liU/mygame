@@ -95,30 +95,7 @@ public class SimulationSystem extends EntitySystem {
                 Position itemPos = cg.getPosition(dynamic);
                 itemPos.x = rect.x;
                 itemPos.y = rect.y;
-                updateEntityInMap(dynamic);
             }
         }
-    }
-
-    private void updateEntityInMap(Entity entity) {
-        // not referenced by id anymore
-        Position pos = cg.getPosition(entity);
-        EntityTextureObject textureObject = findSameOwner(entity);
-        if (textureObject != null) {
-            textureObject.setX(pos.x);
-            textureObject.setY(pos.y);
-        }
-    }
-
-    private EntityTextureObject findSameOwner(Entity entity) {
-        MapObjects collisions = gameMapProperties.getMapLayer(GameMapProperties.COLLISIONS).getObjects();
-        for (int i = 0; i < collisions.getCount(); i++) {
-            if (collisions.get(i) instanceof EntityTextureObject) {
-                EntityTextureObject textureObject = (EntityTextureObject) collisions.get(i);
-                if (textureObject.getOwner() == entity)
-                    return textureObject;
-            }
-        }
-        return null;
     }
 }
