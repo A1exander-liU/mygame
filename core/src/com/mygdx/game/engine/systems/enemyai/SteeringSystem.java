@@ -163,7 +163,7 @@ public class SteeringSystem extends EntitySystem {
     private Rectangle getSpawnArea(Spawn spawn) {
         float enemySpawnX = spawn.spawnPosX;
         float enemySpawnY = spawn.spawnPosY;
-        MapObjects spawns = gameMapProperties.getMapLayer(gameMapProperties.ENEMY_SPAWNS).getObjects();
+        MapObjects spawns = gameMapProperties.getMapLayer(GameMapProperties.ENEMY_SPAWNS).getObjects();
         for (int i = 0; i < spawns.getCount(); i++) {
             Rectangle spawnArea = ((RectangleMapObject) spawns.get(i)).getRectangle();
             float spawnCenterX = spawnArea.x + (spawnArea.width / 2);
