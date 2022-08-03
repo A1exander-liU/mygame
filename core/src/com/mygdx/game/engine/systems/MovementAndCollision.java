@@ -62,17 +62,7 @@ public class MovementAndCollision extends EntitySystem {
 
     @Override
     public void update(float delta) {
-        // does not actually move
-        // makes a pretend move and checks if that spot is ok
-        // if spot is ok, the actual x and y is set to future x and y
-        // if spot is not ok. nothing happens to the x and y
-        // once char moves update their x and y
-        // 200, 200
-        // 200, 205 (0,5)
-        // (200,200) - (0,5) = (200,200)
-
         // get player move
-        // at this point each enemy and player has their future move
         playerMovement();
         // now we can detect and resolve any collisions
         // *will need to implement broad phase detection in future*
@@ -81,69 +71,6 @@ public class MovementAndCollision extends EntitySystem {
             if (cg.getEnemy(entity) != null)
                 keepEntityInsideSpawnZone(entity);
         }
-    }
-
-    private void moveEnemy(String direction, Entity entity) {
-        Position pos = cg.getPosition(entity);
-        Speed speed = cg.getSpeed(entity);
-//        if (Gdx.input.isKeyPressed(Input.Keys.UP))
-//            pos.y += speed.ySpeed;
-//        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT))
-//            pos.x += speed.xSpeed;
-//        if (Gdx.input.isKeyPressed(Input.Keys.DOWN))
-//            pos.y -= speed.ySpeed;
-//        if (Gdx.input.isKeyPressed(Input.Keys.LEFT))
-//            pos.x -= speed.xSpeed;
-        pos.oldX = pos.x;
-        pos.oldY = pos.y;
-        switch (direction) {
-            case "N":
-                pos.y += speed.ySpeed;
-//                pos.oldY = pos.y - speed.ySpeed;
-                break;
-            case "NE":
-                pos.x += speed.xSpeed;
-                pos.y += speed.ySpeed;
-//                pos.oldX = pos.x - speed.xSpeed;
-//                pos.oldY = pos.y - speed.ySpeed;
-                break;
-            case "E":
-                pos.x += speed.xSpeed;
-//                pos.oldX = pos.x - speed.xSpeed;
-                break;
-            case "SE":
-                pos.x += speed.xSpeed;
-                pos.y -= speed.ySpeed;
-//                pos.oldX = pos.x - speed.xSpeed;
-//                pos.oldY = pos.y + speed.ySpeed;
-                break;
-            case "S":
-                pos.y -= speed.ySpeed;
-//                pos.oldY = pos.y + speed.ySpeed;
-                break;
-            case "SW":
-                pos.x -= speed.xSpeed;
-                pos.y -= speed.ySpeed;
-//                pos.oldX = pos.x + speed.xSpeed;
-//                pos.oldY = pos.y + speed.ySpeed;
-                break;
-            case "W":
-                pos.x -= speed.xSpeed;
-//                pos.oldX = pos.x + speed.xSpeed;
-                break;
-            case "NW":
-                pos.x -= speed.xSpeed;
-                pos.y += speed.ySpeed;
-//                pos.oldX = pos.x + speed.xSpeed;
-//                pos.oldY = pos.y - speed.ySpeed;
-                break;
-        }
-    }
-
-    private String getRandomDirection() {
-        String[] directions = {"N", "NE", "E", "SE", "S", "SW", "W", "NW"};
-        Random random = new Random();
-        return directions[random.nextInt(directions.length)];
     }
 
     private void playerMovement() {
