@@ -1,6 +1,7 @@
 package com.mygdx.game.engine.systems;
 
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.ashley.core.EntityListener;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.dongbat.jbump.Collision;
@@ -18,7 +19,7 @@ import com.mygdx.game.engine.PlayerEntity;
 import com.mygdx.game.engine.components.Position;
 import com.mygdx.game.engine.components.Size;
 
-public class CollisionSystem extends EntitySystem {
+public class CollisionSystem extends EntitySystem implements EntityListener {
     ComponentGrabber cg;
     GameMapProperties gameMapProperties;
     ImmutableArray<Entity> collisions;
@@ -36,12 +37,7 @@ public class CollisionSystem extends EntitySystem {
         world = new World<>();
         for (int i = 0; i < collisions.size(); i++) {
             Entity entity = collisions.get(i);
-            entity.add(new com.mygdx.game.engine.components.Item());
-            Position pos = cg.getPosition(entity);
-            Size size = cg.getSize(entity);
-            Item<Entity> item = new Item<>(entity);
-            cg.getItem(entity).item = item;
-            world.add(item, pos.x, pos.y, size.width, size.height);
+            addToWorld(entity);
         }
     }
 
@@ -93,4 +89,25 @@ public class CollisionSystem extends EntitySystem {
             }
         }
     }
+
+    @Override
+    public void entityAdded(Entity entity) {
+        addToWorld(entity);
+    }
+
+    @Override
+    public void entityRemoved(Entity entity) {
+        removeFromWorld(entity);
+    }
+
+    private void addToWorld(Entity entity) {
+        entity.add(new com.mygdx.game.engine.components.Item());
+        Position pos = cg.getPosition(entity);
+        Size size = cg.getSize(entity);
+        Item<Entity> item = new Item<>(entity);
+        cg.getItem(entity).item = item;
+        world.add(item, pos.x, pos.y, size.width, size.height);
+    }
+
+    private void removeFromWorld(Entity entity) {}
 }
