@@ -41,6 +41,7 @@ public class SteeringSystem extends EntitySystem {
     ImmutableArray<Entity> enemies;
     ImmutableArray<Entity> entities;
     Entity player;
+    MapObjects spawnPoints;
 
     public SteeringSystem(ComponentGrabber cg, MyGame root, GameMapProperties gameMapProperties) {
         super(5);
@@ -50,6 +51,7 @@ public class SteeringSystem extends EntitySystem {
         enemies = MyGame.engine.getEntitiesFor(Families.enemies);
         player = MyGame.engine.getEntitiesFor(Families.player).get(0);
         entities = MyGame.engine.getEntitiesFor(Family.exclude(Player.class).get());
+        spawnPoints = gameMapProperties.getMapLayer(GameMapProperties.ENEMY_SPAWNS).getObjects();
     }
 
     @Override
