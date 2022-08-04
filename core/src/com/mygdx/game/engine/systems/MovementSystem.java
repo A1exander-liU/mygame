@@ -7,14 +7,10 @@ import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.maps.MapObjects;
-import com.badlogic.gdx.maps.objects.RectangleMapObject;
-import com.badlogic.gdx.math.Rectangle;
 import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.ComponentGrabber;
 import com.mygdx.game.engine.Families;
-import com.mygdx.game.engine.components.Enemy;
-import com.mygdx.game.engine.components.ID;
 import com.mygdx.game.engine.components.Position;
 import com.mygdx.game.engine.components.Speed;
 
