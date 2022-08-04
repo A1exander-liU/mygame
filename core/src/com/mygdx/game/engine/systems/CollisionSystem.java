@@ -131,7 +131,6 @@ public class CollisionSystem extends EntitySystem implements EntityListener {
     private void keepEntityInsideSpawnZone(Entity entity) {
         // this makes the enemy warp back to spawn since hunting is set back to false when player too far
         // need to move enemy back inside spawn point first
-        Steering steering = cg.getSteering(entity);
         Position pos = cg.getPosition(entity);
         EnemyStateMachine stateMachine = cg.getStateMachine(entity);
         if (stateMachine.getCurrentState() == EnemyState.IDLE) {
