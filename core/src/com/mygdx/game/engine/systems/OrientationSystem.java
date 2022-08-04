@@ -13,6 +13,7 @@ public class OrientationSystem extends EntitySystem {
     Entity player;
 
     public OrientationSystem(ComponentGrabber cg) {
+        super(6);
         this.cg = cg;
         enemies = MyGame.engine.getEntitiesFor(Families.enemies);
         player = MyGame.engine.getEntitiesFor(Families.player).get(0);

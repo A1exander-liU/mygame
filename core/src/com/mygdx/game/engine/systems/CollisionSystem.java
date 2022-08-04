@@ -33,7 +33,7 @@ public class CollisionSystem extends EntitySystem implements EntityListener {
     public static World<Entity> world;
 
     public CollisionSystem(ComponentGrabber cg, GameMapProperties gameMapProperties) {
-        super(6);
+        super(7);
         this.cg = cg;
         this.gameMapProperties = gameMapProperties;
         collisions = MyGame.engine.getEntitiesFor(Families.collisions);
