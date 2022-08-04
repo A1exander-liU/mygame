@@ -64,17 +64,14 @@ public class SteeringSystem extends EntitySystem {
         for (int i = 0; i < enemies.size(); i++) {
             Entity entity = enemies.get(i);
             StateComponent stateComponent = cg.getStateComponent(entity);
-            if (stateComponent.state == EnemyState.IDLE)
+            if (stateComponent.state == EnemyState.IDLE) {
                 setWanderBehavior(entity);
-            else if (stateComponent.state == EnemyState.HUNT)
-                setPursueBehavior(entity);
-            else if (stateComponent.state == EnemyState.FLEE) {
-                setReturnBehavior(entity);
-                // now we can detect and resolve any collisions
-                // *will need to implement broad phase detection in future*
                 keepEntityInsideSpawnZone(entity);
             }
-
+            else if (stateComponent.state == EnemyState.HUNT)
+                setPursueBehavior(entity);
+            else if (stateComponent.state == EnemyState.FLEE)
+                setReturnBehavior(entity);
         }
         // the states and behaviors got updated in the behavior tree
         // and are ready to be 
