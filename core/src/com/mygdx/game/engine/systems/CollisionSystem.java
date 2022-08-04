@@ -14,13 +14,17 @@ import com.dongbat.jbump.World;
 import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.ComponentGrabber;
+import com.mygdx.game.engine.EnemyState;
 import com.mygdx.game.engine.Families;
 import com.mygdx.game.engine.MobEntity;
 import com.mygdx.game.engine.PlayerEntity;
 import com.mygdx.game.engine.components.Enemy;
+import com.mygdx.game.engine.components.EnemyStateMachine;
 import com.mygdx.game.engine.components.Position;
 import com.mygdx.game.engine.components.Size;
 import com.mygdx.game.engine.components.SpawnArea;
+import com.mygdx.game.engine.components.StateComponent;
+import com.mygdx.game.engine.components.Steering;
 
 public class CollisionSystem extends EntitySystem implements EntityListener {
     ComponentGrabber cg;
@@ -125,8 +129,13 @@ public class CollisionSystem extends EntitySystem implements EntityListener {
     private void keepEntityInsideSpawnZone(Entity entity) {
         // this makes the enemy warp back to spawn since hunting is set back to false when player too far
         // need to move enemy back inside spawn point first
-        if (cg.getEnemy(entity).state == Enemy.States.WANDER) {
-            Position pos = cg.getPosition(entity);
+        Steering steering = cg.getSteering(entity);
+        Position pos = cg.getPosition(entity);
+        StateComponent stateComponent = cg.getStateComponent(entity);
+        pos.x = steering.position.x;
+        pos.y = steering.position.y;
+        if (stateComponent.state == EnemyState.IDLE) {
+            System.out.println("idle");
             Rectangle spawnZone = findEnemySpawn(entity);
             assert spawnZone != null;
             if (pos.x < spawnZone.x)
