@@ -1,4 +1,4 @@
-package com.mygdx.game.screens;
+package com.mygdx.game.utils;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.ai.utils.Collision;
