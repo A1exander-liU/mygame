@@ -15,8 +15,6 @@ import com.mygdx.game.engine.components.Position;
 import com.mygdx.game.engine.components.Speed;
 
 public class MovementSystem extends EntitySystem {
-    private final ImmutableArray<Entity> enemies;
-    private final MapObjects spawnPoints;
     private final Entity player;
     ComponentGrabber cg;
     MyGame root;
@@ -27,8 +25,6 @@ public class MovementSystem extends EntitySystem {
         this.cg = cg;
         this.root = root;
         this.gameMapProperties = gameMapProperties;
-        spawnPoints = gameMapProperties.tiledMap.getLayers().get("Enemy Spawns").getObjects();
-        enemies = MyGame.engine.getEntitiesFor(Families.enemies);
         // there is only one player hence we just get index 0
         player = MyGame.engine.getEntitiesFor(Families.player).get(0);
     }
