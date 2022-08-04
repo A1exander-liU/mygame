@@ -66,5 +66,7 @@ public class GameRaycastCollisionDetector implements RaycastCollisionDetector<Ve
                 start.x, start.y, end.x, end.y,
                 rayFilter,
                 items);
+        // make sure there was a collision
+        return items.size() > 0;
     }
 }
