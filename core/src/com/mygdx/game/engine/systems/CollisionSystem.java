@@ -18,13 +18,10 @@ import com.mygdx.game.engine.EnemyState;
 import com.mygdx.game.engine.Families;
 import com.mygdx.game.engine.MobEntity;
 import com.mygdx.game.engine.PlayerEntity;
-import com.mygdx.game.engine.components.Enemy;
 import com.mygdx.game.engine.components.EnemyStateMachine;
 import com.mygdx.game.engine.components.Position;
 import com.mygdx.game.engine.components.Size;
 import com.mygdx.game.engine.components.SpawnArea;
-import com.mygdx.game.engine.components.StateComponent;
-import com.mygdx.game.engine.components.Steering;
 
 public class CollisionSystem extends EntitySystem implements EntityListener {
     ComponentGrabber cg;
