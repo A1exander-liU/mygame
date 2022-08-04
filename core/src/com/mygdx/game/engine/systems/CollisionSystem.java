@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntityListener;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.utils.ImmutableArray;
+import com.badlogic.gdx.math.Rectangle;
 import com.dongbat.jbump.Collision;
 import com.dongbat.jbump.CollisionFilter;
 import com.dongbat.jbump.Item;
@@ -16,8 +17,10 @@ import com.mygdx.game.engine.ComponentGrabber;
 import com.mygdx.game.engine.Families;
 import com.mygdx.game.engine.MobEntity;
 import com.mygdx.game.engine.PlayerEntity;
+import com.mygdx.game.engine.components.Enemy;
 import com.mygdx.game.engine.components.Position;
 import com.mygdx.game.engine.components.Size;
+import com.mygdx.game.engine.components.SpawnArea;
 
 public class CollisionSystem extends EntitySystem implements EntityListener {
     ComponentGrabber cg;
@@ -87,6 +90,9 @@ public class CollisionSystem extends EntitySystem implements EntityListener {
                 itemPos.x = rect.x;
                 itemPos.y = rect.y;
             }
+            if (entity instanceof MobEntity) {
+                keepEntityInsideSpawnZone(entity);
+            }
         }
     }
 
@@ -112,5 +118,36 @@ public class CollisionSystem extends EntitySystem implements EntityListener {
     private void removeFromWorld(Entity entity) {
         com.mygdx.game.engine.components.Item item = cg.getItem(entity);
         world.remove(item.item);
+    }
+
+    private void keepEntityInsideSpawnZone(Entity entity) {
+        // this makes the enemy warp back to spawn since hunting is set back to false when player too far
+        // need to move enemy back inside spawn point first
+        if (cg.getEnemy(entity).state == Enemy.States.WANDER) {
+            Position pos = cg.getPosition(entity);
+            Rectangle spawnZone = findEnemySpawn(entity);
+            assert spawnZone != null;
+            if (pos.x < spawnZone.x)
+                pos.x = spawnZone.x;
+            else if (pos.x > spawnZone.x + spawnZone.width)
+                pos.x = spawnZone.x + spawnZone.width;
+            else if (pos.y < spawnZone.y)
+                pos.y = spawnZone.y;
+            else if (pos.y > spawnZone.y + spawnZone.height)
+                pos.y = spawnZone.y + spawnZone.height;
+        }
+    }
+
+    private Rectangle findEnemySpawn(Entity entity) {
+        for (int i = 0; i < spawns.size(); i++) {
+            Entity spawn = spawns.get(i);
+            SpawnArea spawnArea = cg.getSpawnArea(spawn);
+            if (spawnArea.owner == entity) {
+                Position pos = cg.getPosition(spawn);
+                Size size = cg.getSize(spawn);
+                return new Rectangle(pos.x, pos.y, size.width, size.height);
+            }
+        }
+        return null;
     }
 }

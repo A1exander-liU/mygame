@@ -67,10 +67,8 @@ public class SteeringSystem extends EntitySystem {
         for (int i = 0; i < enemies.size(); i++) {
             Entity entity = enemies.get(i);
             StateComponent stateComponent = cg.getStateComponent(entity);
-            if (stateComponent.state == EnemyState.IDLE) {
+            if (stateComponent.state == EnemyState.IDLE)
                 setWanderBehavior(entity);
-                keepEntityInsideSpawnZone(entity);
-            }
             else if (stateComponent.state == EnemyState.HUNT)
                 setPursueBehavior(entity);
             else if (stateComponent.state == EnemyState.FLEE)
@@ -182,36 +180,5 @@ public class SteeringSystem extends EntitySystem {
 
     private Vector2 generateRandomPosition(Entity entity) {
         return new Vector2(randomX(entity), randomY(entity));
-    }
-
-    private void keepEntityInsideSpawnZone(Entity entity) {
-        // this makes the enemy warp back to spawn since hunting is set back to false when player too far
-        // need to move enemy back inside spawn point first
-        if (cg.getEnemy(entity).state == Enemy.States.WANDER) {
-            Position pos = cg.getPosition(entity);
-            Rectangle spawnZone = findEnemySpawn(entity);
-            assert spawnZone != null;
-            if (pos.x < spawnZone.x)
-                pos.x = spawnZone.x;
-            else if (pos.x > spawnZone.x + spawnZone.width)
-                pos.x = spawnZone.x + spawnZone.width;
-            else if (pos.y < spawnZone.y)
-                pos.y = spawnZone.y;
-            else if (pos.y > spawnZone.y + spawnZone.height)
-                pos.y = spawnZone.y + spawnZone.height;
-        }
-    }
-
-    private Rectangle findEnemySpawn(Entity entity) {
-        for (int i = 0; i < spawns.size(); i++) {
-            Entity spawn = spawns.get(i);
-            SpawnArea spawnArea = cg.getSpawnArea(spawn);
-            if (spawnArea.owner == entity) {
-                Position pos = cg.getPosition(spawn);
-                Size size = cg.getSize(spawn);
-                return new Rectangle(pos.x, pos.y, size.width, size.height);
-            }
-        }
-        return null;
     }
 }
