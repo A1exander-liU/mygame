@@ -56,6 +56,7 @@ public class CollisionSystem extends EntitySystem implements EntityListener {
             Entity entity = collisions.get(i);
             com.mygdx.game.engine.components.Item item = cg.getItem(entity);
             Position pos = cg.getPosition(entity);
+
             // simulate movement through the world
             // later need to add item removal code in entity removal system:
             // remove from world and dereference the item of the entity
@@ -84,6 +85,10 @@ public class CollisionSystem extends EntitySystem implements EntityListener {
                 }
             };
 
+            if (entity instanceof MobEntity) {
+                keepEntityInsideSpawnZone(entity);
+            }
+
             Response.Result result = world.move(item.item, pos.x, pos.y, obstacleCollisionFilter);
             if (result.projectedCollisions.size() < 1) {
                 continue;
@@ -95,9 +100,6 @@ public class CollisionSystem extends EntitySystem implements EntityListener {
                 Position itemPos = cg.getPosition(dynamic);
                 itemPos.x = rect.x;
                 itemPos.y = rect.y;
-            }
-            if (entity instanceof MobEntity) {
-                keepEntityInsideSpawnZone(entity);
             }
         }
     }
@@ -131,21 +133,19 @@ public class CollisionSystem extends EntitySystem implements EntityListener {
         // need to move enemy back inside spawn point first
         Steering steering = cg.getSteering(entity);
         Position pos = cg.getPosition(entity);
-        StateComponent stateComponent = cg.getStateComponent(entity);
-        pos.x = steering.position.x;
-        pos.y = steering.position.y;
-        if (stateComponent.state == EnemyState.IDLE) {
-            System.out.println("idle");
+        EnemyStateMachine stateMachine = cg.getStateMachine(entity);
+        if (stateMachine.getCurrentState() == EnemyState.IDLE) {
             Rectangle spawnZone = findEnemySpawn(entity);
-            assert spawnZone != null;
-            if (pos.x < spawnZone.x)
-                pos.x = spawnZone.x;
-            else if (pos.x > spawnZone.x + spawnZone.width)
-                pos.x = spawnZone.x + spawnZone.width;
-            else if (pos.y < spawnZone.y)
-                pos.y = spawnZone.y;
-            else if (pos.y > spawnZone.y + spawnZone.height)
-                pos.y = spawnZone.y + spawnZone.height;
+            if (spawnZone != null) {
+                if (pos.x < spawnZone.x)
+                    pos.x = spawnZone.x;
+                else if (pos.x > spawnZone.x + spawnZone.width)
+                    pos.x = spawnZone.x + spawnZone.width;
+                else if (pos.y < spawnZone.y)
+                    pos.y = spawnZone.y;
+                else if (pos.y > spawnZone.y + spawnZone.height)
+                    pos.y = spawnZone.y + spawnZone.height;
+            }
         }
     }
 
