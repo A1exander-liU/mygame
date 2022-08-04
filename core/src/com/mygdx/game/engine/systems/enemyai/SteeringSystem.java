@@ -40,6 +40,7 @@ public class SteeringSystem extends EntitySystem {
     GameMapProperties gameMapProperties;
     ImmutableArray<Entity> enemies;
     ImmutableArray<Entity> entities;
+    ImmutableArray<Entity> spawns;
     Entity player;
     MapObjects spawnPoints;
 
@@ -51,6 +52,7 @@ public class SteeringSystem extends EntitySystem {
         enemies = MyGame.engine.getEntitiesFor(Families.enemies);
         player = MyGame.engine.getEntitiesFor(Families.player).get(0);
         entities = MyGame.engine.getEntitiesFor(Family.exclude(Player.class).get());
+        spawns = MyGame.engine.getEntitiesFor(Families.spawns);
         spawnPoints = gameMapProperties.getMapLayer(GameMapProperties.ENEMY_SPAWNS).getObjects();
     }
 
@@ -197,5 +199,9 @@ public class SteeringSystem extends EntitySystem {
             else if (pos.y > spawnZone.y + spawnZone.height)
                 pos.y = spawnZone.y + spawnZone.height;
         }
+    }
+
+    private Rectangle findEnemySpawn(Entity entity) {
+
     }
 }
