@@ -13,7 +13,7 @@
  </objectgroup>
  <objectgroup id="4" name="Object Layer 1">
   <object id="3" x="846.751" y="515.98" width="35.5" height="24.7706"/>
-  <object id="9" x="797.806" y="417.863" width="35.7399" height="31.8464"/>
+  <object id="9" x="796.351" y="416.408" width="36.2172" height="31.8464"/>
   <object id="11" x="896" y="576" width="31.9389" height="31.9528"/>
   <object id="12" x="736" y="512" width="33" height="31.7742"/>
   <object id="13" x="675.5" y="417.5" width="59" height="25.5"/>
