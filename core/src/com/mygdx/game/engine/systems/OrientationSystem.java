@@ -46,9 +46,11 @@ public class OrientationSystem extends EntitySystem {
     }
 
     private Vector2 calcBaseDirection(Vector2 direction) {
-        return new Vector2(
-                direction.x / Math.abs(direction.x),
-                direction.y / Math.abs(direction.y)
-        );
+        Vector2 baseDirection = new Vector2();
+        if (direction.x != 0)
+            baseDirection.x = direction.x / Math.abs(direction.x);
+        if (direction.y != 0)
+            baseDirection.y = direction.y / Math.abs(direction.y);
+        return baseDirection;
     }
 }
