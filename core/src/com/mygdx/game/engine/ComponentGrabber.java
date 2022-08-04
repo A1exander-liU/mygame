@@ -10,6 +10,7 @@ import com.mygdx.game.engine.components.EnemyStateMachine;
 import com.mygdx.game.engine.components.Item;
 import com.mygdx.game.engine.components.MapChar;
 import com.mygdx.game.engine.components.MovementBehavior;
+import com.mygdx.game.engine.components.Orientation;
 import com.mygdx.game.engine.components.ParameterComponent;
 import com.mygdx.game.engine.components.SpawnArea;
 import com.mygdx.game.engine.components.StateComponent;
@@ -86,6 +87,11 @@ public class ComponentGrabber {
     public Name getName(Entity entity) {
         ComponentMapper<Name> name = ComponentMapper.getFor(Name.class);
         return name.get(entity);
+    }
+
+    public Orientation getOrientation(Entity entity) {
+        ComponentMapper<Orientation> orientation = ComponentMapper.getFor(Orientation.class);
+        return orientation.get(entity);
     }
 
     public ParameterComponent getParameters(Entity entity) {
