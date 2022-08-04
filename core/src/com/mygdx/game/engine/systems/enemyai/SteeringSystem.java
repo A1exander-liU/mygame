@@ -28,6 +28,7 @@ import com.mygdx.game.engine.components.Player;
 import com.mygdx.game.engine.components.Position;
 import com.mygdx.game.engine.components.Size;
 import com.mygdx.game.engine.components.Spawn;
+import com.mygdx.game.engine.components.SpawnArea;
 import com.mygdx.game.engine.components.StateComponent;
 import com.mygdx.game.engine.systems.TimeSystem;
 import com.mygdx.game.utils.GameRaycastCollisionDetector;
@@ -187,9 +188,9 @@ public class SteeringSystem extends EntitySystem {
         // this makes the enemy warp back to spawn since hunting is set back to false when player too far
         // need to move enemy back inside spawn point first
         if (cg.getEnemy(entity).state == Enemy.States.WANDER) {
-            ID id = cg.getID(entity);
             Position pos = cg.getPosition(entity);
-            Rectangle spawnZone = ((RectangleMapObject) spawnPoints.get(id.ID - 1)).getRectangle();
+            Rectangle spawnZone = findEnemySpawn(entity);
+            assert spawnZone != null;
             if (pos.x < spawnZone.x)
                 pos.x = spawnZone.x;
             else if (pos.x > spawnZone.x + spawnZone.width)
@@ -202,6 +203,15 @@ public class SteeringSystem extends EntitySystem {
     }
 
     private Rectangle findEnemySpawn(Entity entity) {
-
+        for (int i = 0; i < spawns.size(); i++) {
+            Entity spawn = spawns.get(i);
+            SpawnArea spawnArea = cg.getSpawnArea(spawn);
+            if (spawnArea.owner == entity) {
+                Position pos = cg.getPosition(spawn);
+                Size size = cg.getSize(spawn);
+                return new Rectangle(pos.x, pos.y, size.width, size.height);
+            }
+        }
+        return null;
     }
 }
