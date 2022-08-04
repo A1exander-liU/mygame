@@ -22,6 +22,8 @@ import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.ComponentGrabber;
 import com.mygdx.game.engine.EnemyState;
 import com.mygdx.game.engine.Families;
+import com.mygdx.game.engine.components.Enemy;
+import com.mygdx.game.engine.components.ID;
 import com.mygdx.game.engine.components.Player;
 import com.mygdx.game.engine.components.Position;
 import com.mygdx.game.engine.components.Size;
@@ -64,8 +66,13 @@ public class SteeringSystem extends EntitySystem {
                 setWanderBehavior(entity);
             else if (stateComponent.state == EnemyState.HUNT)
                 setPursueBehavior(entity);
-            else if (stateComponent.state == EnemyState.FLEE)
+            else if (stateComponent.state == EnemyState.FLEE) {
                 setReturnBehavior(entity);
+                // now we can detect and resolve any collisions
+                // *will need to implement broad phase detection in future*
+                keepEntityInsideSpawnZone(entity);
+            }
+
         }
         // the states and behaviors got updated in the behavior tree
         // and are ready to be 
@@ -173,5 +180,23 @@ public class SteeringSystem extends EntitySystem {
 
     private Vector2 generateRandomPosition(Entity entity) {
         return new Vector2(randomX(entity), randomY(entity));
+    }
+
+    private void keepEntityInsideSpawnZone(Entity entity) {
+        // this makes the enemy warp back to spawn since hunting is set back to false when player too far
+        // need to move enemy back inside spawn point first
+        if (cg.getEnemy(entity).state == Enemy.States.WANDER) {
+            ID id = cg.getID(entity);
+            Position pos = cg.getPosition(entity);
+            Rectangle spawnZone = ((RectangleMapObject) spawnPoints.get(id.ID - 1)).getRectangle();
+            if (pos.x < spawnZone.x)
+                pos.x = spawnZone.x;
+            else if (pos.x > spawnZone.x + spawnZone.width)
+                pos.x = spawnZone.x + spawnZone.width;
+            else if (pos.y < spawnZone.y)
+                pos.y = spawnZone.y;
+            else if (pos.y > spawnZone.y + spawnZone.height)
+                pos.y = spawnZone.y + spawnZone.height;
+        }
     }
 }

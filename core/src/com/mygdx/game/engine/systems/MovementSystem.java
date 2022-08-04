@@ -46,13 +46,6 @@ public class MovementSystem extends EntitySystem {
     public void update(float delta) {
         // get player move
         playerMovement();
-        // now we can detect and resolve any collisions
-        // *will need to implement broad phase detection in future*
-        for (int i = 0; i < enemies.size(); i++) {
-            Entity entity = enemies.get(i);
-            if (cg.getEnemy(entity) != null)
-                keepEntityInsideSpawnZone(entity);
-        }
     }
 
     private void playerMovement() {
@@ -72,24 +65,6 @@ public class MovementSystem extends EntitySystem {
         }
         if (Gdx.input.isKeyPressed(Input.Keys.A)) {
             pos.x -= speed.xSpeed;
-        }
-    }
-
-    private void keepEntityInsideSpawnZone(Entity entity) {
-        // this makes the enemy warp back to spawn since hunting is set back to false when player too far
-        // need to move enemy back inside spawn point first
-        if (cg.getEnemy(entity).state == Enemy.States.WANDER) {
-            ID id = cg.getID(entity);
-            Position pos = cg.getPosition(entity);
-            Rectangle spawnZone = ((RectangleMapObject) spawnPoints.get(id.ID - 1)).getRectangle();
-            if (pos.x < spawnZone.x)
-                pos.x = spawnZone.x;
-            else if (pos.x > spawnZone.x + spawnZone.width)
-                pos.x = spawnZone.x + spawnZone.width;
-            else if (pos.y < spawnZone.y)
-                pos.y = spawnZone.y;
-            else if (pos.y > spawnZone.y + spawnZone.height)
-                pos.y = spawnZone.y + spawnZone.height;
         }
     }
 }
