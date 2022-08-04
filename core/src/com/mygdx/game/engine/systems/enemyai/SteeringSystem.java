@@ -128,7 +128,7 @@ public class SteeringSystem extends EntitySystem {
     }
 
     private void setWanderBehavior(Entity entity) {
-        if (TimeSystem.second - cg.getMovementBehavior(entity).previousTargetUpdate >= 5) {
+        if (TimeSystem.second - cg.getMovementBehavior(entity).previousTargetUpdate >= 3) {
             cg.getMovementBehavior(entity).previousTargetUpdate = TimeSystem.second;
             Vector2 newSpot = generateRandomPosition(entity);
             GameLocation random = new GameLocation(newSpot);
