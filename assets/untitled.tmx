@@ -13,14 +13,14 @@
  </objectgroup>
  <objectgroup id="4" name="Object Layer 1">
   <object id="3" x="846.751" y="515.98" width="35.5" height="24.7706"/>
-  <object id="9" x="800.056" y="416.113" width="31.9899" height="31.8464"/>
+  <object id="9" x="797.806" y="417.863" width="35.7399" height="31.8464"/>
   <object id="11" x="896" y="576" width="31.9389" height="31.9528"/>
-  <object id="12" x="736" y="512.726" width="33" height="31.7742"/>
+  <object id="12" x="736" y="512" width="33" height="31.7742"/>
   <object id="13" x="675.5" y="417.5" width="59" height="25.5"/>
   <object id="14" x="898" y="268.5" width="30" height="19.5"/>
   <object id="15" x="892.5" y="140.5" width="37.5" height="18.5"/>
   <object id="16" x="673" y="159.5" width="62.5" height="25"/>
-  <object id="17" x="446.917" y="540" width="65.1667" height="31"/>
+  <object id="17" x="446.584" y="545.333" width="65.1667" height="26.3333"/>
   <object id="18" x="351.333" y="420" width="67.3333" height="18.6667"/>
   <object id="19" x="224" y="512" width="68" height="31.9167"/>
   <object id="20" x="219.333" y="163.333" width="75.3333" height="22"/>
