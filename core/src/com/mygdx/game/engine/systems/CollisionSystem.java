@@ -27,6 +27,7 @@ public class CollisionSystem extends EntitySystem implements EntityListener {
     GameMapProperties gameMapProperties;
     ImmutableArray<Entity> collisions;
     ImmutableArray<Entity> enemies;
+    ImmutableArray<Entity> spawns;
     Entity player;
     public static World<Entity> world;
 
@@ -36,6 +37,7 @@ public class CollisionSystem extends EntitySystem implements EntityListener {
         this.gameMapProperties = gameMapProperties;
         collisions = MyGame.engine.getEntitiesFor(Families.collisions);
         enemies = MyGame.engine.getEntitiesFor(Families.enemies);
+        spawns = MyGame.engine.getEntitiesFor(Families.spawns);
         player = MyGame.engine.getEntitiesFor(Families.player).get(0);
         world = new World<>();
         for (int i = 0; i < collisions.size(); i++) {
