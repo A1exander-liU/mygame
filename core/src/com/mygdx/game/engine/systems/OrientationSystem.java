@@ -42,5 +42,13 @@ public class OrientationSystem extends EntitySystem {
         Position pos = cg.getPosition(entity);
         direction.x = pos.x - pos.oldX;
         direction.y = pos.y - pos.oldY;
+        Vector2 baseDirection = calcBaseDirection(direction);
+    }
+
+    private Vector2 calcBaseDirection(Vector2 direction) {
+        return new Vector2(
+                direction.x / Math.abs(direction.x),
+                direction.y / Math.abs(direction.y)
+        );
     }
 }
