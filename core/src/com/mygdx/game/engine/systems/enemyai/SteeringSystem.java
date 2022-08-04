@@ -22,6 +22,7 @@ import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.World;
 import com.mygdx.game.GameLocation;
 import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.MyGame;
@@ -105,25 +106,25 @@ public class SteeringSystem extends EntitySystem {
         Spawn spawn = cg.getSpawn(entity);
         GameLocation spawnPosition = new GameLocation(spawn.spawnPosX, spawn.spawnPosY);
 
+        // create new ray cast collision avoidance
         RaycastObstacleAvoidance<Vector2> avoidance = new RaycastObstacleAvoidance<>(cg.getSteering(entity));
-
-        RaycastCollisionDetector<Vector2> detector = new GameRaycastCollisionDetector();
+        // creating the collision detector
+        RaycastCollisionDetector<Vector2> detector = new GameRaycastCollisionDetector(gameMapProperties, entity);
+        // set the ray configs
         avoidance.setRayConfiguration(
                 new CentralRayWithWhiskersConfiguration<>(cg.getSteering(entity), 10f, 10f, 10f)
         );
+        // setting the collision detector
         avoidance.setRaycastCollisionDetector(detector);
+        // set min distance to start avoiding the collision
         avoidance.setDistanceFromBoundary(5f);
-
-        CollisionAvoidance<Vector2> collisionAvoidance = new CollisionAvoidance<>(
-                cg.getSteering(entity),
-                cg.getDetectionProximity(entity));
 
         Seek<Vector2> seek = new Seek<>(cg.getSteering(entity))
                 .setTarget(spawnPosition);
 
         PrioritySteering<Vector2> prioritySteering = new PrioritySteering<>(cg.getSteering(entity));
-//        prioritySteering.add(collisionAvoidance);
         prioritySteering.add(avoidance);
+
         prioritySteering.add(seek);
 
         cg.getSteering(entity).steeringBehavior = prioritySteering;
@@ -136,6 +137,7 @@ public class SteeringSystem extends EntitySystem {
             cg.getMovementBehavior(entity).wander.setTarget(random);
         }
         cg.getSteering(entity).steeringBehavior = cg.getMovementBehavior(entity).wander;
+
     }
 
     private float randomX(Entity entity) {
