@@ -6,6 +6,7 @@ import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.ComponentGrabber;
+import com.mygdx.game.engine.Direction;
 import com.mygdx.game.engine.Families;
 import com.mygdx.game.engine.components.Position;
 
@@ -43,6 +44,22 @@ public class OrientationSystem extends EntitySystem {
         direction.x = pos.x - pos.oldX;
         direction.y = pos.y - pos.oldY;
         Vector2 baseDirection = calcBaseDirection(direction);
+        if (vectorsEqual(baseDirection, Direction.NORTH.direction))
+            cg.getOrientation(entity).orientation = Direction.NORTH;
+        else if (vectorsEqual(baseDirection, Direction.NORTHEAST.direction))
+            cg.getOrientation(entity).orientation = Direction.NORTHEAST;
+        else if (vectorsEqual(baseDirection, Direction.EAST.direction))
+            cg.getOrientation(entity).orientation = Direction.EAST;
+        else if (vectorsEqual(baseDirection, Direction.SOUTHEAST.direction))
+            cg.getOrientation(entity).orientation = Direction.SOUTHEAST;
+        else if (vectorsEqual(baseDirection, Direction.SOUTH.direction))
+            cg.getOrientation(entity).orientation = Direction.SOUTH;
+        else if (vectorsEqual(baseDirection, Direction.SOUTHWEST.direction))
+            cg.getOrientation(entity).orientation = Direction.SOUTHWEST;
+        else if (vectorsEqual(baseDirection, Direction.WEST.direction))
+            cg.getOrientation(entity).orientation = Direction.WEST;
+        else if (vectorsEqual(baseDirection, Direction.NORTHWEST.direction))
+            cg.getOrientation(entity).orientation = Direction.NORTHWEST;
     }
 
     private Vector2 calcBaseDirection(Vector2 direction) {
