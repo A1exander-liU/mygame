@@ -4,15 +4,12 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.ai.utils.Collision;
 import com.badlogic.gdx.ai.utils.Ray;
 import com.badlogic.gdx.ai.utils.RaycastCollisionDetector;
-import com.badlogic.gdx.maps.MapObjects;
-import com.badlogic.gdx.math.Polyline;
 import com.badlogic.gdx.math.Vector2;
 import com.dongbat.jbump.CollisionFilter;
 import com.dongbat.jbump.Item;
 import com.dongbat.jbump.ItemInfo;
 import com.dongbat.jbump.Response;
 import com.mygdx.game.GameMapProperties;
-import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.MobEntity;
 import com.mygdx.game.engine.systems.CollisionSystem;
 
