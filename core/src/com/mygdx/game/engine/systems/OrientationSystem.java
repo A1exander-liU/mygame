@@ -3,6 +3,7 @@ package com.mygdx.game.engine.systems;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.utils.ImmutableArray;
+import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.ComponentGrabber;
 import com.mygdx.game.engine.Families;
@@ -12,12 +13,14 @@ public class OrientationSystem extends EntitySystem {
     ComponentGrabber cg;
     ImmutableArray<Entity> enemies;
     Entity player;
+    Vector2 direction;
 
     public OrientationSystem(ComponentGrabber cg) {
         super(6);
         this.cg = cg;
         enemies = MyGame.engine.getEntitiesFor(Families.enemies);
         player = MyGame.engine.getEntitiesFor(Families.player).get(0);
+        direction = new Vector2();
     }
 
     @Override
@@ -36,6 +39,8 @@ public class OrientationSystem extends EntitySystem {
     }
 
     private void updateOrientation(Entity entity) {
-
+        Position pos = cg.getPosition(entity);
+        direction.x = pos.x - pos.oldX;
+        direction.y = pos.y - pos.oldY;
     }
 }
