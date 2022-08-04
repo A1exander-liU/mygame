@@ -9,8 +9,6 @@ public class Position implements Component {
     public float y;
     public float oldX;
     public float oldY;
-    public float futureX;
-    public float futureY;
     public Vector2 position = new Vector2();
     public Vector2 oldPosition = new Vector2();
 }
