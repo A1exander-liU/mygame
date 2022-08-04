@@ -66,6 +66,13 @@ public class GameRaycastCollisionDetector implements RaycastCollisionDetector<Ve
                 start.x, start.y, end.x, end.y,
                 rayFilter,
                 items);
+
+        for (int i = 0; i < items.size(); i++) {
+            ItemInfo info = items.get(i);
+            Vector2 point = new Vector2(info.ti1, info.ti2);
+            Vector2 normal = new Vector2(info.x1, info.y1);
+            outputCollision.set(point, normal);
+        }
         // make sure there was a collision
         return items.size() > 0;
     }
