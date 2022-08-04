@@ -26,13 +26,16 @@ public class OrientationSystem extends EntitySystem {
     }
 
     private void updatePlayerOrientation() {
-        Position pos = cg.getPosition(player);
-        if (playerMoved(pos)) {
-            
+        if (playerMoved(cg.getPosition(player))) {
+            updateOrientation(player);
         }
     }
 
     private boolean playerMoved(Position pos) {
         return pos.oldX != pos.x || pos.oldY != pos.y;
+    }
+
+    private void updateOrientation(Entity entity) {
+
     }
 }
