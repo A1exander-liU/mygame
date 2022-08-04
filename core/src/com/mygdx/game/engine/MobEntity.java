@@ -68,6 +68,7 @@ public class MobEntity extends Entity {
         Size size = cg.getSize(this);
         Speed speed = cg.getSpeed(this);
         MapChar mapChar = cg.getMapChar(this);
+        StateComponent stateComponent = cg.getStateComponent(this);
         fillParameters(name);
         entitySprite.texture = new Texture(Gdx.files.internal("testPlayer.png"));
         enemyName.name = name;
@@ -77,6 +78,7 @@ public class MobEntity extends Entity {
         speed.ySpeed = 2;
         TextureRegion textureRegion = new TextureRegion(entitySprite.texture, (int)size.width, (int)size.height);
         mapChar.setTextureRegion(textureRegion);
+        stateComponent.state = EnemyState.IDLE;
 //        behaviorTree.setObject(this);
     }
 
