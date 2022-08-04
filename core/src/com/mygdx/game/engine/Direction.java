@@ -12,7 +12,7 @@ public enum Direction {
     WEST      (new Vector2(-1, 0)),
     NORTHWEST (new Vector2(-1, 1));
 
-    Vector2 direction;
+    public Vector2 direction;
     Direction(Vector2 direction) {
         this.direction = direction;
     }
