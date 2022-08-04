@@ -93,8 +93,6 @@ public class SteeringSystem extends EntitySystem {
         Position pos = cg.getPosition(player);
         cg.getSteering(player).position.x = pos.x;
         cg.getSteering(player).position.y = pos.y;
-        // constructor(owner-steering, owner-proximity)
-
 
         cg.getSteering(entity).steeringBehavior = new Arrive<>(cg.getSteering(entity))
                 .setArrivalTolerance(47)
@@ -112,19 +110,18 @@ public class SteeringSystem extends EntitySystem {
         RaycastCollisionDetector<Vector2> detector = new GameRaycastCollisionDetector(gameMapProperties, entity);
         // set the ray configs
         avoidance.setRayConfiguration(
-                new CentralRayWithWhiskersConfiguration<>(cg.getSteering(entity), 10f, 10f, 10f)
+                new CentralRayWithWhiskersConfiguration<>(cg.getSteering(entity), 10f, 5f, 30f)
         );
         // setting the collision detector
         avoidance.setRaycastCollisionDetector(detector);
         // set min distance to start avoiding the collision
-        avoidance.setDistanceFromBoundary(5f);
+        avoidance.setDistanceFromBoundary(10f);
 
         Seek<Vector2> seek = new Seek<>(cg.getSteering(entity))
                 .setTarget(spawnPosition);
 
         PrioritySteering<Vector2> prioritySteering = new PrioritySteering<>(cg.getSteering(entity));
         prioritySteering.add(avoidance);
-
         prioritySteering.add(seek);
 
         cg.getSteering(entity).steeringBehavior = prioritySteering;
