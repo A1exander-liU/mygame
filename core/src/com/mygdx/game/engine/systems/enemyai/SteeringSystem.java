@@ -110,12 +110,12 @@ public class SteeringSystem extends EntitySystem {
         RaycastCollisionDetector<Vector2> detector = new GameRaycastCollisionDetector(gameMapProperties, entity);
         // set the ray configs
         avoidance.setRayConfiguration(
-                new CentralRayWithWhiskersConfiguration<>(cg.getSteering(entity), 10f, 5f, 30f)
+                new CentralRayWithWhiskersConfiguration<>(cg.getSteering(entity), 10f, 10f, 25f)
         );
         // setting the collision detector
         avoidance.setRaycastCollisionDetector(detector);
         // set min distance to start avoiding the collision
-        avoidance.setDistanceFromBoundary(10f);
+        avoidance.setDistanceFromBoundary(15f);
 
         Seek<Vector2> seek = new Seek<>(cg.getSteering(entity))
                 .setTarget(spawnPosition);
