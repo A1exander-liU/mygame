@@ -1,5 +1,6 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
@@ -16,9 +17,9 @@ import java.util.Objects;
 public class JsonEnemyFinder extends JsonReader {
     private final JsonValue enemies;
 
-    public JsonEnemyFinder(FileHandle fileHandle) {
+    public JsonEnemyFinder() {
         super();
-        enemies = super.parse(fileHandle).get("enemies");
+        enemies = super.parse(Gdx.files.internal("gameData/enemies.json")).get("enemies");
     }
 
     public JsonValue getEnemies() {
