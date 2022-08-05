@@ -27,15 +27,16 @@ public class OrientationSystem extends EntitySystem {
     @Override
     public void update(float delta) {
         updateEntityOrientation(player);
-//        for (int i = 0; i < enemies.size(); i++) {
-//            Entity entity = enemies.get(i);
-//            updateEntityOrientation(entity);
-//        }
+        for (int i = 0; i < enemies.size(); i++) {
+            Entity entity = enemies.get(i);
+            updateEntityOrientation(entity);
+        }
     }
 
     private void updateEntityOrientation(Entity entity) {
         if (entityMoved(cg.getPosition(entity))) {
             updateOrientation(entity);
+            System.out.println(cg.getOrientation(entity).orientation);
         }
     }
 
