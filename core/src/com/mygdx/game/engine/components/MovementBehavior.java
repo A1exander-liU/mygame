@@ -6,12 +6,9 @@ import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.ai.steer.behaviors.Arrive;
 import com.badlogic.gdx.ai.steer.behaviors.CollisionAvoidance;
 import com.badlogic.gdx.ai.steer.behaviors.Seek;
-import com.badlogic.gdx.maps.MapObjects;
-import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.GameLocation;
-import com.mygdx.game.GameMapProperties;
+import com.mygdx.game.utils.GameLocation;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.Families;
 

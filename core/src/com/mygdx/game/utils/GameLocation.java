@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.game.utils;
 
 import com.badlogic.gdx.ai.utils.Location;
 import com.badlogic.gdx.math.Vector2;
