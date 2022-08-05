@@ -13,6 +13,7 @@ import com.mygdx.game.engine.components.Enemy;
 import com.mygdx.game.engine.components.EnemyStateMachine;
 import com.mygdx.game.engine.components.MapChar;
 import com.mygdx.game.engine.components.MovementBehavior;
+import com.mygdx.game.engine.components.Orientation;
 import com.mygdx.game.engine.components.ParameterComponent;
 import com.mygdx.game.engine.components.Spawn;
 import com.mygdx.game.engine.components.Sprite;
@@ -59,6 +60,7 @@ public class MobEntity extends Entity {
         super.add(new EnemyStateMachine(this));
         super.add(new ParameterComponent());
         super.add(new MapChar());
+        super.add(new Orientation());
     }
 
     private void modifyComponentValues(String name) {

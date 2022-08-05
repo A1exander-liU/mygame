@@ -9,6 +9,7 @@ import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.components.Camera;
 import com.mygdx.game.engine.components.DetectionProximity;
+import com.mygdx.game.engine.components.Orientation;
 import com.mygdx.game.engine.components.Sprite;
 import com.mygdx.game.engine.components.Health;
 import com.mygdx.game.engine.components.ID;
@@ -52,6 +53,7 @@ public class PlayerEntity extends Entity {
         super.add(new Speed());
         super.add(new Steering(this));
         super.add(new DetectionProximity(this, 20, root));
+        super.add(new Orientation());
     }
 
     private void modifyComponentValues(String playerName) {
