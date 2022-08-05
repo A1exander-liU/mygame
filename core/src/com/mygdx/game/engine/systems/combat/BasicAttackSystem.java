@@ -15,6 +15,7 @@ public class BasicAttackSystem extends EntitySystem {
     Entity player;
 
     public BasicAttackSystem(ComponentGrabber cg, GameMapProperties gameMapProperties) {
+        super(8);
         this.cg = cg;
         this.gameMapProperties = gameMapProperties;
         player = MyGame.engine.getEntitiesFor(Families.player).get(0);
