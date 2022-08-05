@@ -15,11 +15,9 @@ import com.mygdx.game.engine.components.Speed;
 
 public class EntityFactory {
     ComponentGrabber cg;
-    MyGame root;
 
-    public EntityFactory(ComponentGrabber cg, MyGame root) {
+    public EntityFactory(ComponentGrabber cg) {
         this.cg = cg;
-        this.root = root;
     }
 
     public Entity makeEnemy(String name, int width, int height, float xSpeed, float ySpeed,
@@ -27,7 +25,7 @@ public class EntityFactory {
         Entity enemy = new Entity();
         addEnemyComponents(enemy);
         modifyComponentValues(enemy, name, width, height, xSpeed, ySpeed, maxHealth, pathToImg);
-        root.engine.addEntity(enemy);
+        MyGame.engine.addEntity(enemy);
         return enemy;
     }
 
