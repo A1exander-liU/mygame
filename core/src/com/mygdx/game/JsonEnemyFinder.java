@@ -13,10 +13,10 @@ import java.util.Objects;
 //        System.out.println(enemy.getString("name"));
 //        }
 
-public class JsonSearcher extends JsonReader {
+public class JsonEnemyFinder extends JsonReader {
     private final JsonValue enemies;
 
-    public JsonSearcher(FileHandle fileHandle) {
+    public JsonEnemyFinder(FileHandle fileHandle) {
         super();
         enemies = super.parse(fileHandle).get("enemies");
     }
