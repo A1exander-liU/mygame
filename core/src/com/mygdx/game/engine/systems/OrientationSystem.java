@@ -68,12 +68,9 @@ public class OrientationSystem extends EntitySystem {
         Position pos = cg.getPosition(entity);
         direction.x = pos.x - pos.oldX;
         direction.y = pos.y - pos.oldY;
-        // add a "tolerance" so enemies can update their orientation to:
-        // north, east, south, and west
-        if (direction.x <= 10)
-            direction.x = 0;
-        if (direction.y <= 10)
-            direction.y = 0;
+
+        System.out.println(direction);
+
         Vector2 baseDirection = calcBaseDirection(direction);
         // enemy doesn't go in 4 cardinal directions
         if (vectorsEqual(baseDirection, Direction.NORTH.direction))
@@ -96,6 +93,12 @@ public class OrientationSystem extends EntitySystem {
 
     private Vector2 calcBaseDirection(Vector2 direction) {
         Vector2 baseDirection = new Vector2();
+        // enemy movement direction always ends up with a small value when
+        // the enemy looks like it is moving in a straight line
+        if (direction.x > 0 && direction.x < 1)
+            direction.x = 0;
+        if (direction.y > 0 && direction.y < 1)
+            direction.y = 0;
         // divide by the absolute value of itself so the value does not change
         // so you just end up with 0, -1, or 1
         if (direction.x != 0)
