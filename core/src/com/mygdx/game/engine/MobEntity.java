@@ -6,7 +6,6 @@ import com.badlogic.gdx.ai.btree.BehaviorTree;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.JsonValue;
-import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.components.DetectionProximity;
 import com.mygdx.game.engine.components.Enemy;
@@ -30,13 +29,11 @@ public class MobEntity extends Entity {
     // have method to get and change to behavior tree to use
     ComponentGrabber cg;
     MyGame root;
-    GameMapProperties gameMapProperties;
     BehaviorTree<MobEntity> behaviorTree;
 
-    public MobEntity(ComponentGrabber cg, MyGame root, GameMapProperties gameMapProperties, String name) {
+    public MobEntity(ComponentGrabber cg, MyGame root, String name) {
         this.cg = cg;
         this.root = root;
-        this.gameMapProperties = gameMapProperties;
         addRequiredComponents();
         modifyComponentValues(name);
         addToEngine();
