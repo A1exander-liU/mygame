@@ -95,10 +95,15 @@ public class OrientationSystem extends EntitySystem {
         Vector2 baseDirection = new Vector2();
         // enemy movement direction always ends up with a small value when
         // the enemy looks like it is moving in a straight line
-        if (direction.x > 0 && direction.x < 1)
+        if (direction.x > 0 && direction.x < 0.9)
             direction.x = 0;
-        if (direction.y > 0 && direction.y < 1)
+        if (direction.y > 0 && direction.y < 0.9)
             direction.y = 0;
+        // 0.9 and greater is close enough to be considered not traveling straight
+        if (direction.x >= 0.9 && direction.x < 1)
+            direction.x = 1;
+        if (direction.y >= 0.9 && direction.y < 1)
+            direction.y = 1;
         // divide by the absolute value of itself so the value does not change
         // so you just end up with 0, -1, or 1
         if (direction.x != 0)
