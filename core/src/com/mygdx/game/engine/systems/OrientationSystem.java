@@ -44,20 +44,16 @@ public class OrientationSystem extends EntitySystem {
         direction.x = pos.x - pos.oldX;
         direction.y = pos.y - pos.oldY;
         Vector2 baseDirection = calcBaseDirection(direction);
-        if (vectorsEqual(baseDirection, Direction.NORTH.direction)) {
-            System.out.println("north");
+        if (vectorsEqual(baseDirection, Direction.NORTH.direction))
             cg.getOrientation(entity).orientation = Direction.NORTH;
-        }
         else if (vectorsEqual(baseDirection, Direction.NORTHEAST.direction))
             cg.getOrientation(entity).orientation = Direction.NORTHEAST;
         else if (vectorsEqual(baseDirection, Direction.EAST.direction))
             cg.getOrientation(entity).orientation = Direction.EAST;
         else if (vectorsEqual(baseDirection, Direction.SOUTHEAST.direction))
             cg.getOrientation(entity).orientation = Direction.SOUTHEAST;
-        else if (vectorsEqual(baseDirection, Direction.SOUTH.direction)) {
-            System.out.println("south");
+        else if (vectorsEqual(baseDirection, Direction.SOUTH.direction))
             cg.getOrientation(entity).orientation = Direction.SOUTH;
-        }
         else if (vectorsEqual(baseDirection, Direction.SOUTHWEST.direction))
             cg.getOrientation(entity).orientation = Direction.SOUTHWEST;
         else if (vectorsEqual(baseDirection, Direction.WEST.direction))
