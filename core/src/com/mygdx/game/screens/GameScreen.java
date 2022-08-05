@@ -24,6 +24,7 @@ import com.mygdx.game.engine.systems.EntityRemovalSystem;
 import com.mygdx.game.engine.systems.MapUpdateSystem;
 import com.mygdx.game.engine.systems.MovementSystem;
 import com.mygdx.game.engine.systems.CollisionSystem;
+import com.mygdx.game.engine.systems.OrientationSystem;
 import com.mygdx.game.engine.systems.TimeSystem;
 import com.mygdx.game.engine.systems.enemyai.StateSystem;
 import com.mygdx.game.engine.systems.enemyai.SteeringSystem;
@@ -104,6 +105,7 @@ public class GameScreen implements Screen {
         EntityRemovalSystem entityRemovalSystem = new EntityRemovalSystem(cg, gameMapProperties);
         CollisionSystem simulationSystem = new CollisionSystem(cg, gameMapProperties);
         MapUpdateSystem mapUpdateSystem = new MapUpdateSystem(cg, gameMapProperties);
+        OrientationSystem orientationSystem = new OrientationSystem(cg);
         MyGame.engine.addSystem(movementAndCollision);
         MyGame.engine.addSystem(enemySpawningSystem);
         MyGame.engine.addSystem(steeringSystem);
@@ -112,6 +114,7 @@ public class GameScreen implements Screen {
         MyGame.engine.addSystem(entityRemovalSystem);
         MyGame.engine.addSystem(simulationSystem);
         MyGame.engine.addSystem(mapUpdateSystem);
+        MyGame.engine.addSystem(orientationSystem);
         checkPriorities();
     }
 
