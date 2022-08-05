@@ -65,8 +65,6 @@ public class PlayerEntity extends Entity {
         cg.getPosition(this).y = 200;
         cg.getPosition(this).oldX = cg.getPosition(this).x;
         cg.getPosition(this).oldY = cg.getPosition(this).y;
-        cg.getPosition(this).futureX = cg.getPosition(this).x;
-        cg.getPosition(this).futureY = cg.getPosition(this).y;
         cg.getPosition(this).position.x = cg.getPosition(this).x;
         cg.getPosition(this).position.y = cg.getPosition(this).y;
         cg.getPosition(this).oldPosition.x = cg.getPosition(this).x;
