@@ -26,17 +26,12 @@ public class OrientationSystem extends EntitySystem {
 
     @Override
     public void update(float delta) {
-        updateEntityOrientation(player);
+        if (entityMoved(cg.getPosition(player)))
+            updatePlayerOrientation(player);
         for (int i = 0; i < enemies.size(); i++) {
             Entity entity = enemies.get(i);
-            updateEntityOrientation(entity);
-        }
-    }
-
-    private void updateEntityOrientation(Entity entity) {
-        if (entityMoved(cg.getPosition(entity))) {
-            updateOrientation(entity);
-            System.out.println(cg.getOrientation(entity).orientation);
+            if (entityMoved(cg.getPosition(entity)))
+                updateEnemyOrientation(entity);
         }
     }
 
@@ -44,27 +39,40 @@ public class OrientationSystem extends EntitySystem {
         return pos.oldX != pos.x || pos.oldY != pos.y;
     }
 
-    private void updateOrientation(Entity entity) {
+    private void updatePlayerOrientation(Entity entity) {
         Position pos = cg.getPosition(entity);
         direction.x = pos.x - pos.oldX;
         direction.y = pos.y - pos.oldY;
         Vector2 baseDirection = calcBaseDirection(direction);
-        if (vectorsEqual(baseDirection, Direction.NORTH.direction))
+        if (vectorsEqual(baseDirection, Direction.NORTH.direction)) {
+            System.out.println("north");
             cg.getOrientation(entity).orientation = Direction.NORTH;
+        }
         else if (vectorsEqual(baseDirection, Direction.NORTHEAST.direction))
             cg.getOrientation(entity).orientation = Direction.NORTHEAST;
         else if (vectorsEqual(baseDirection, Direction.EAST.direction))
             cg.getOrientation(entity).orientation = Direction.EAST;
         else if (vectorsEqual(baseDirection, Direction.SOUTHEAST.direction))
             cg.getOrientation(entity).orientation = Direction.SOUTHEAST;
-        else if (vectorsEqual(baseDirection, Direction.SOUTH.direction))
+        else if (vectorsEqual(baseDirection, Direction.SOUTH.direction)) {
+            System.out.println("south");
             cg.getOrientation(entity).orientation = Direction.SOUTH;
+        }
         else if (vectorsEqual(baseDirection, Direction.SOUTHWEST.direction))
             cg.getOrientation(entity).orientation = Direction.SOUTHWEST;
         else if (vectorsEqual(baseDirection, Direction.WEST.direction))
             cg.getOrientation(entity).orientation = Direction.WEST;
         else if (vectorsEqual(baseDirection, Direction.NORTHWEST.direction))
             cg.getOrientation(entity).orientation = Direction.NORTHWEST;
+    }
+
+    private void updateEnemyOrientation(Entity entity) {
+        Position pos = cg.getPosition(entity);
+        direction.x = pos.x - pos.oldX;
+        direction.y = pos.y - pos.oldY;
+        Vector2 baseDirection = calcBaseDirection(direction);
+        // enemy doesn't go in 4 cardinal directions
+
     }
 
     private Vector2 calcBaseDirection(Vector2 direction) {
