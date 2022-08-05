@@ -10,7 +10,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
-import com.mygdx.game.JsonSearcher;
+import com.mygdx.game.JsonEnemyFinder;
 import com.mygdx.game.engine.ComponentGrabber;
 import com.mygdx.game.MapObjectDrawer;
 import com.mygdx.game.MyGame;
@@ -44,7 +44,7 @@ public class GameScreen implements Screen {
     ComponentGrabber cg;
 
     public GameScreen(MyGame parent) {
-        parent.jsonSearcher = new JsonSearcher(Gdx.files.internal("gameData/enemies.json"));
+        parent.jsonSearcher = new JsonEnemyFinder();
         testMap = new TmxMapLoader().load("untitled.tmx");
         this.parent = parent;
         MyGame.engine = new Engine();
