@@ -11,6 +11,7 @@ import com.mygdx.game.engine.components.Camera;
 import com.mygdx.game.engine.components.DetectionProximity;
 import com.mygdx.game.engine.components.Item;
 import com.mygdx.game.engine.components.Orientation;
+import com.mygdx.game.engine.components.ParameterComponent;
 import com.mygdx.game.engine.components.Sprite;
 import com.mygdx.game.engine.components.Health;
 import com.mygdx.game.engine.components.ID;
@@ -54,6 +55,7 @@ public class PlayerEntity extends Entity {
         super.add(new Item());
         super.add(new Name());
         super.add(new Orientation());
+        super.add(new ParameterComponent());
         super.add(new Player());
         super.add(new Position());
         super.add(new Size());
