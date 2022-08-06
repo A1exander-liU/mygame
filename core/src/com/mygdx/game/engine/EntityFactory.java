@@ -3,19 +3,18 @@ package com.mygdx.game.engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.components.EnemyStateMachine;
-import com.mygdx.game.engine.components.ID;
-import com.mygdx.game.engine.components.MapChar;
 import com.mygdx.game.engine.components.Name;
 import com.mygdx.game.engine.components.Size;
 import com.mygdx.game.engine.components.Speed;
 import com.mygdx.game.engine.components.Sprite;
-import com.mygdx.game.engine.components.StateComponent;
 
 public class EntityFactory {
     ComponentGrabber cg;
+    MyGame root;
 
-    public EntityFactory(ComponentGrabber cg) {
+    public EntityFactory(ComponentGrabber cg, MyGame root) {
         this.cg = cg;
     }
 
@@ -43,5 +42,9 @@ public class EntityFactory {
         speed.ySpeed = 2;
         entitySprite.texture = new Texture(Gdx.files.internal("testPlayer.png"));
         stateMachine.setInitialState(EnemyState.IDLE);
+    }
+
+    private void fillParameterValues(Entity entity, String name) {
+
     }
 }
