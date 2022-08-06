@@ -10,5 +10,4 @@ public class Enemy implements Component {
     public States state;
     public boolean spawned = false;
     public boolean isAlive = true;
-    public boolean hunting = false;
 }
