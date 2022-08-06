@@ -81,10 +81,10 @@ public class GameMapProperties {
                 obstacle.add(new Steering(obstacle));
                 obstacle.add(new Item());
 //                obstacle.add(new DetectionProximity(obstacle, 20, root));
-                root.engine.addEntity(obstacle);
+                MyGame.engine.addEntity(obstacle);
             }
         }
-        staticObstacles = root.engine.getEntitiesFor(Families.obstacles);
+        staticObstacles = MyGame.engine.getEntitiesFor(Families.obstacles);
     }
 
     private void setPosition(Entity entity, Rectangle area) {
