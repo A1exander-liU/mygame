@@ -49,8 +49,8 @@ public class GameScreen implements Screen {
         this.parent = parent;
         MyGame.engine = new Engine();
         cg = new ComponentGrabber(parent);
-        MyGame.gameMapProperties = new GameMapProperties(testMap);
-        gameMapProperties = new GameMapProperties(testMap, parent);
+        MyGame.gameMapProperties = new GameMapProperties(testMap, entityFactory);
+        gameMapProperties = new GameMapProperties(testMap, entityFactory);
         parent.entityToMapAdder = new EntityToMapAdder(testMap, cg);
         entityFactory = new EntityFactory(cg, parent);
         entityFactory.makePlayer("player");
