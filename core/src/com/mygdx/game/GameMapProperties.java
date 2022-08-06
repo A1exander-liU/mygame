@@ -73,18 +73,4 @@ public class GameMapProperties {
         }
         staticObstacles = MyGame.engine.getEntitiesFor(Families.obstacles);
     }
-
-    private void setPosition(Entity entity, Rectangle area) {
-        Position pos = entity.getComponent(Position.class);
-        pos.x = area.x;
-        pos.y = area.y;
-        pos.oldX = area.x;
-        pos.oldY = area.y;
-    }
-
-    private void setSize(Entity entity, Rectangle area) {
-        Size size = entity.getComponent(Size.class);
-        size.width = area.width;
-        size.height = area.height;
-    }
 }
