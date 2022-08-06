@@ -101,7 +101,7 @@ public class GameScreen implements Screen {
         EnemySpawningSystem enemySpawningSystem = new EnemySpawningSystem(cg, entityFactory);
         SteeringSystem steeringSystem = new SteeringSystem(cg);
         TimeSystem timeSystem = new TimeSystem();
-        StateSystem stateSystem = new StateSystem(cg, gameMapProperties);
+        StateSystem stateSystem = new StateSystem(cg);
         EntityRemovalSystem entityRemovalSystem = new EntityRemovalSystem(cg, gameMapProperties);
         CollisionSystem simulationSystem = new CollisionSystem(cg, gameMapProperties);
         MapUpdateSystem mapUpdateSystem = new MapUpdateSystem(cg, gameMapProperties);

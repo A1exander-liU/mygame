@@ -21,15 +21,13 @@ import com.mygdx.game.engine.components.Spawn;
 
 public class StateSystem extends EntitySystem {
     ComponentGrabber cg;
-    GameMapProperties gameMapProperties;
 
     ImmutableArray<Entity> enemies;
     Entity player;
 
-    public StateSystem(ComponentGrabber cg, GameMapProperties gameMapProperties) {
+    public StateSystem(ComponentGrabber cg) {
         super(4);
         this.cg = cg;
-        this.gameMapProperties = gameMapProperties;
         enemies = MyGame.engine.getEntitiesFor(Families.enemies);
         player = MyGame.engine.getEntitiesFor(Families.player).get(0);
         setStateToIdle();
@@ -68,7 +66,7 @@ public class StateSystem extends EntitySystem {
 
     private Rectangle buildSpawnArea(Entity entity) {
         Spawn enemy = cg.getSpawn(entity);
-        MapObjects spawns = gameMapProperties.getMapLayer(GameMapProperties.ENEMY_SPAWNS).getObjects();
+        MapObjects spawns = MyGame.gameMapProperties.getMapLayer(GameMapProperties.ENEMY_SPAWNS).getObjects();
         for (int i = 0; i < spawns.getCount(); i++) {
             Rectangle spawn = ((RectangleMapObject) spawns.get(i)).getRectangle();
             float spawnX = spawn.x + (spawn.width / 2);
