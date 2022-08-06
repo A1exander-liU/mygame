@@ -52,7 +52,7 @@ public class PlayerEntity extends Entity {
         super.add(new Size());
         super.add(new Speed());
         super.add(new Steering(this));
-        super.add(new DetectionProximity(this, 20, root));
+        super.add(new DetectionProximity(this, 20));
         super.add(new Orientation());
     }
 
