@@ -27,18 +27,16 @@ public class EnemySpawningSystem extends EntitySystem {
     private MapObjects temp;
     private final float RESPAWN_TIME = 90;
     ComponentGrabber cg;
-    GameMapProperties gameMapProperties;
     EntityFactory entityFactory;
 
-    public EnemySpawningSystem(ComponentGrabber cg, GameMapProperties gameMapProperties,
+    public EnemySpawningSystem(ComponentGrabber cg,
     EntityFactory entityFactory) {
         super(2);
         this.cg = cg;
-        this.gameMapProperties = gameMapProperties;
         this.entityFactory = entityFactory;
         spawns = MyGame.engine.getEntitiesFor(Families.spawns);
-        spawnPoints = gameMapProperties.getMapLayer(GameMapProperties.ENEMY_SPAWNS).getObjects();
-        objects = gameMapProperties.getMapLayer(GameMapProperties.COLLISIONS).getObjects();
+        spawnPoints = MyGame.gameMapProperties.getMapLayer(GameMapProperties.ENEMY_SPAWNS).getObjects();
+        objects = MyGame.gameMapProperties.getMapLayer(GameMapProperties.COLLISIONS).getObjects();
         // create a enemy and place at each spawn point
         // spawns are named to determine the enemy to spawn
         temp = new MapObjects();
