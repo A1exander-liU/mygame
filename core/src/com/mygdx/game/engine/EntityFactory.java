@@ -20,24 +20,13 @@ public class EntityFactory {
         this.cg = cg;
     }
 
-    public Entity makeEnemy(String name, int width, int height, float xSpeed, float ySpeed,
-                          int maxHealth, String pathToImg) {
-        Entity enemy = new Entity();
-        addEnemyComponents(enemy);
-        modifyComponentValues(enemy, name, width, height, xSpeed, ySpeed, maxHealth, pathToImg);
-        MyGame.engine.addEntity(enemy);
-        return enemy;
-    }
+    // also need method to create a player character
 
-    private void addEnemyComponents(Entity entity) {
-        entity.add(new Enemy());
-        entity.add(new Sprite());
-        entity.add(new Health());
-        entity.add(new ID());
-        entity.add(new Name());
-        entity.add(new Position());
-        entity.add(new Size());
-        entity.add(new Speed());
+    public void makeEnemy(String name) {
+        // name provided will determine the kind of enemy to create
+        // make mobEntity only add the components
+        // entityFactory will actually modify the component values
+        // will also add the entity to the map
     }
 
     private void modifyComponentValues
