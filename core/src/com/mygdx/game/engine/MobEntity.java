@@ -1,8 +1,6 @@
 package com.mygdx.game.engine;
 
 import com.badlogic.ashley.core.Entity;
-import com.badlogic.gdx.ai.btree.BehaviorTree;
-import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.components.DetectionProximity;
 import com.mygdx.game.engine.components.Enemy;
 import com.mygdx.game.engine.components.EnemyStateMachine;
@@ -22,10 +20,6 @@ import com.mygdx.game.engine.components.StateComponent;
 import com.mygdx.game.engine.components.Steering;
 
 public class MobEntity extends Entity {
-    // have method to get and change to behavior tree to use
-    ComponentGrabber cg;
-    MyGame root;
-    BehaviorTree<MobEntity> behaviorTree;
 
     public MobEntity() {
         addRequiredComponents();
