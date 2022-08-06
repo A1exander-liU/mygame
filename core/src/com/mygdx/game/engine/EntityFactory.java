@@ -3,15 +3,14 @@ package com.mygdx.game.engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.mygdx.game.MyGame;
-import com.mygdx.game.engine.components.Enemy;
-import com.mygdx.game.engine.components.Sprite;
-import com.mygdx.game.engine.components.Health;
+import com.mygdx.game.engine.components.EnemyStateMachine;
 import com.mygdx.game.engine.components.ID;
+import com.mygdx.game.engine.components.MapChar;
 import com.mygdx.game.engine.components.Name;
-import com.mygdx.game.engine.components.Position;
 import com.mygdx.game.engine.components.Size;
 import com.mygdx.game.engine.components.Speed;
+import com.mygdx.game.engine.components.Sprite;
+import com.mygdx.game.engine.components.StateComponent;
 
 public class EntityFactory {
     ComponentGrabber cg;
@@ -28,23 +27,21 @@ public class EntityFactory {
         // entityFactory will actually modify the component values
         // will also add the entity to the map
         MobEntity enemy = new MobEntity();
+        modifyComponentValues(enemy, name);
     }
 
-    private void modifyComponentValues
-            (Entity entity, String name, int width, int height,float xSpeed, float ySpeed,
-             int maxHealth, String pathToImg) {
-        Sprite enemyEntitySprite = cg.getSprite(entity);
-        Health enemyHealth = cg.getHealth(entity);
+    private void modifyComponentValues(Entity entity, String name) {
         Name enemyName = cg.getName(entity);
-        Size enemySize = cg.getSize(entity);
-        Speed enemySpeed = cg.getSpeed(entity);
+        Size size = cg.getSize(entity);
+        Speed speed = cg.getSpeed(entity);
+        Sprite entitySprite = cg.getSprite(entity);
+        EnemyStateMachine stateMachine = cg.getStateMachine(entity);
         enemyName.name = name;
-        enemySize.width = width;
-        enemySize.height = height;
-        enemySpeed.xSpeed = xSpeed;
-        enemySpeed.ySpeed = ySpeed;
-        enemyHealth.maxHealth = maxHealth;
-        enemyHealth.currentHealth = maxHealth;
-        enemyEntitySprite.texture = new Texture(Gdx.files.internal(pathToImg));
+        size.width = 32;
+        size.height = 32;
+        speed.xSpeed = 2;
+        speed.ySpeed = 2;
+        entitySprite.texture = new Texture(Gdx.files.internal("testPlayer.png"));
+        stateMachine.setInitialState(EnemyState.IDLE);
     }
 }
