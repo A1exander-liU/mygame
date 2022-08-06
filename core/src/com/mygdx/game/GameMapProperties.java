@@ -24,16 +24,8 @@ public class GameMapProperties {
     public static String ENEMY_SPAWNS;
     public static String COLLISIONS;
     public static String OBSTACLE_LAYER;
-    MyGame root;
     // all the collision boxes on the map
     public ImmutableArray<Entity> staticObstacles;
-
-    public GameMapProperties(TiledMap tiledMap, MyGame root) {
-        this.tiledMap = tiledMap;
-        this.root = root;
-        setMapProperties();
-        makeEntitiesFromCollisions();
-    }
 
     public GameMapProperties(TiledMap tiledMap) {
         this.tiledMap = tiledMap;
@@ -80,7 +72,6 @@ public class GameMapProperties {
                 setSize(obstacle, area);
                 obstacle.add(new Steering(obstacle));
                 obstacle.add(new Item());
-//                obstacle.add(new DetectionProximity(obstacle, 20, root));
                 MyGame.engine.addEntity(obstacle);
             }
         }
