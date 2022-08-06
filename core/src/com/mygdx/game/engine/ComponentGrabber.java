@@ -1,14 +1,10 @@
 package com.mygdx.game.engine;
 
-import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
-import com.badlogic.ashley.utils.ImmutableArray;
-import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.components.DetectionProximity;
 import com.mygdx.game.engine.components.EnemyStateMachine;
 import com.mygdx.game.engine.components.Item;
-import com.mygdx.game.engine.components.MapChar;
 import com.mygdx.game.engine.components.MovementBehavior;
 import com.mygdx.game.engine.components.Orientation;
 import com.mygdx.game.engine.components.ParameterComponent;
@@ -72,10 +68,6 @@ public class ComponentGrabber {
         return item.get(entity);
     }
 
-    public MapChar getMapChar(Entity entity) {
-        ComponentMapper<MapChar> mapChar = ComponentMapper.getFor(MapChar.class);
-        return mapChar.get(entity);
-    }
     public MovementBehavior getMovementBehavior(Entity entity) {
         ComponentMapper<MovementBehavior> movementBehavior = ComponentMapper.getFor(MovementBehavior.class);
         return movementBehavior.get(entity);
@@ -134,15 +126,5 @@ public class ComponentGrabber {
     public Steering getSteering(Entity entity) {
         ComponentMapper<Steering> steering = ComponentMapper.getFor(Steering.class);
         return steering.get(entity);
-    }
-
-    public Entity findEntity(int entityID) {
-        ImmutableArray<Entity> entities = MyGame.engine.getEntities();
-        for (Entity entity : entities) {
-            int id = getID(entity).ID;
-            if (id == entityID)
-                return entity;
-        }
-        return null;
     }
 }
