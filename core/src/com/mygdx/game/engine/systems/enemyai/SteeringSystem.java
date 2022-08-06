@@ -34,22 +34,20 @@ import java.util.Random;
 // 3 states: idle(random walk), hunting(pursue and attack player), flee(return)
 public class SteeringSystem extends EntitySystem {
     ComponentGrabber cg;
-    GameMapProperties gameMapProperties;
     ImmutableArray<Entity> enemies;
     ImmutableArray<Entity> entities;
     ImmutableArray<Entity> spawns;
     Entity player;
     MapObjects spawnPoints;
 
-    public SteeringSystem(ComponentGrabber cg, GameMapProperties gameMapProperties) {
+    public SteeringSystem(ComponentGrabber cg) {
         super(5);
         this.cg = cg;
-        this.gameMapProperties = gameMapProperties;
         enemies = MyGame.engine.getEntitiesFor(Families.enemies);
         player = MyGame.engine.getEntitiesFor(Families.player).get(0);
         entities = MyGame.engine.getEntitiesFor(Family.exclude(Player.class).get());
         spawns = MyGame.engine.getEntitiesFor(Families.spawns);
-        spawnPoints = gameMapProperties.getMapLayer(GameMapProperties.ENEMY_SPAWNS).getObjects();
+        spawnPoints = MyGame.gameMapProperties.getMapLayer(GameMapProperties.ENEMY_SPAWNS).getObjects();
     }
 
     @Override
@@ -102,7 +100,7 @@ public class SteeringSystem extends EntitySystem {
         // create new ray cast collision avoidance
         RaycastObstacleAvoidance<Vector2> avoidance = new RaycastObstacleAvoidance<>(cg.getSteering(entity));
         // creating the collision detector
-        RaycastCollisionDetector<Vector2> detector = new GameRaycastCollisionDetector(gameMapProperties, entity);
+        RaycastCollisionDetector<Vector2> detector = new GameRaycastCollisionDetector(MyGame.gameMapProperties, entity);
         // set the ray configs
         avoidance.setRayConfiguration(
                 new CentralRayWithWhiskersConfiguration<>(cg.getSteering(entity), 10f, 10f, 25f)
@@ -156,7 +154,7 @@ public class SteeringSystem extends EntitySystem {
     private Rectangle getSpawnArea(Spawn spawn) {
         float enemySpawnX = spawn.spawnPosX;
         float enemySpawnY = spawn.spawnPosY;
-        MapObjects spawns = gameMapProperties.getMapLayer(GameMapProperties.ENEMY_SPAWNS).getObjects();
+        MapObjects spawns = MyGame.gameMapProperties.getMapLayer(GameMapProperties.ENEMY_SPAWNS).getObjects();
         for (int i = 0; i < spawns.getCount(); i++) {
             Rectangle spawnArea = ((RectangleMapObject) spawns.get(i)).getRectangle();
             float spawnCenterX = spawnArea.x + (spawnArea.width / 2);
