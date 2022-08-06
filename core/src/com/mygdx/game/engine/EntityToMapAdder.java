@@ -4,6 +4,8 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.mygdx.game.GameMapProperties;
+import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.components.Name;
 import com.mygdx.game.engine.components.Sprite;
 import com.mygdx.game.engine.components.Position;
@@ -34,7 +36,7 @@ public class EntityToMapAdder {
         textureObject.setX(pos.x);
         textureObject.setY(pos.y);
         // adding to the map
-        tiledMap.getLayers().get("Object Layer 1").getObjects().add(textureObject);
+        MyGame.gameMapProperties.getMapLayer(GameMapProperties.COLLISIONS).getObjects().add(textureObject);
     }
 
     public void addEntitiesToMap(TiledMap tiledMap, ImmutableArray<Entity> entities) {
