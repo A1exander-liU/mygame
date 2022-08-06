@@ -68,15 +68,7 @@ public class GameMapProperties {
             // note: texture map objects are enemies everything else is obstacle
             // the rectangle map objects are the collision boxes defined initially in the tiled map
             if (collisions.get(i) instanceof RectangleMapObject) {
-                Rectangle area = ((RectangleMapObject) collisions.get(i)).getRectangle();
-                Entity obstacle = new Entity();
-                obstacle.add(new Position());
-                obstacle.add(new Size());
-                setPosition(obstacle, area);
-                setSize(obstacle, area);
-                obstacle.add(new Steering(obstacle));
-                obstacle.add(new Item());
-                MyGame.engine.addEntity(obstacle);
+                entityFactory.makeObstacle(((RectangleMapObject) collisions.get(i)).getRectangle());
             }
         }
         staticObstacles = MyGame.engine.getEntitiesFor(Families.obstacles);
