@@ -7,13 +7,8 @@ import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.math.Rectangle;
 import com.mygdx.game.engine.EntityFactory;
 import com.mygdx.game.engine.Families;
-import com.mygdx.game.engine.components.Item;
-import com.mygdx.game.engine.components.Position;
-import com.mygdx.game.engine.components.Size;
-import com.mygdx.game.engine.components.Steering;
 
 public class GameMapProperties {
     public TiledMap tiledMap;
