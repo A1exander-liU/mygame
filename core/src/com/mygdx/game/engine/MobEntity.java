@@ -32,15 +32,6 @@ public class MobEntity extends Entity {
     MyGame root;
     BehaviorTree<MobEntity> behaviorTree;
 
-    public MobEntity(ComponentGrabber cg, MyGame root, String name) {
-        this.cg = cg;
-        this.root = root;
-        addRequiredComponents();
-//        modifyComponentValues(name);
-//        addToEngine();
-//        addToMap();
-    }
-
     public MobEntity() {
         addRequiredComponents();
     }
