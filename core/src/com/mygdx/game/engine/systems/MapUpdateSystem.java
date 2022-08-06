@@ -17,14 +17,12 @@ import com.mygdx.game.utils.EntityTextureObject;
 
 public class MapUpdateSystem extends EntitySystem {
     ComponentGrabber cg;
-    GameMapProperties gameMapProperties;
     ImmutableArray<Entity> characters;
     Entity player;
 
-    public MapUpdateSystem(ComponentGrabber cg, GameMapProperties gameMapProperties) {
+    public MapUpdateSystem(ComponentGrabber cg) {
         super(98);
         this.cg = cg;
-        this.gameMapProperties = gameMapProperties;
         characters = MyGame.engine.getEntitiesFor(Family.one(Player.class, Enemy.class).get());
         player = MyGame.engine.getEntitiesFor(Families.player).get(0);
     }
@@ -48,7 +46,7 @@ public class MapUpdateSystem extends EntitySystem {
     }
 
     private EntityTextureObject findSameOwner(Entity entity) {
-        MapObjects collisions = gameMapProperties.getMapLayer(GameMapProperties.COLLISIONS).getObjects();
+        MapObjects collisions = MyGame.gameMapProperties.getMapLayer(GameMapProperties.COLLISIONS).getObjects();
         // going through each item in collision layer
         // check if it is EntityTextureMap object
         // check if the owner of it is same as the owner we are trying to find the texture for

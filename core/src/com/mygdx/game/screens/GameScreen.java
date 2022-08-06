@@ -104,7 +104,7 @@ public class GameScreen implements Screen {
         StateSystem stateSystem = new StateSystem(cg);
         EntityRemovalSystem entityRemovalSystem = new EntityRemovalSystem(cg);
         CollisionSystem collisionSystem = new CollisionSystem(cg);
-        MapUpdateSystem mapUpdateSystem = new MapUpdateSystem(cg, gameMapProperties);
+        MapUpdateSystem mapUpdateSystem = new MapUpdateSystem(cg);
         OrientationSystem orientationSystem = new OrientationSystem(cg);
         MyGame.engine.addSystem(movementSystem);
         MyGame.engine.addSystem(enemySpawningSystem);
