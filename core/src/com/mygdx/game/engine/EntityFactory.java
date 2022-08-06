@@ -31,6 +31,7 @@ public class EntityFactory {
         // will also add the entity to the map
         MobEntity enemy = new MobEntity();
         modifyComponentValues(enemy, name);
+        addToEngine(enemy);
     }
 
     private void modifyComponentValues(Entity entity, String name) {
@@ -55,5 +56,9 @@ public class EntityFactory {
         paramCom.health.maxHealth = enemy.getInt("HP");
         paramCom.health.currentHealth = enemy.getInt("HP");
         paramCom.damage = enemy.getInt("DMG");
+    }
+
+    private void addToEngine(Entity entity) {
+        MyGame.engine.addEntity(entity);
     }
 }
