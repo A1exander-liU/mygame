@@ -48,6 +48,7 @@ public class MobEntity extends Entity {
     private void addRequiredComponents() {
         super.add(new DetectionProximity(this, 32));
         super.add(new Enemy());
+        super.add(new StateComponent());
         super.add(new EnemyStateMachine(this));
         super.add(new Health());
         super.add(new ID());
@@ -61,7 +62,6 @@ public class MobEntity extends Entity {
         super.add(new Spawn());
         super.add(new Speed());
         super.add(new Sprite());
-        super.add(new StateComponent());
         super.add(new Steering(this));
     }
 
