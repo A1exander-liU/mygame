@@ -51,6 +51,7 @@ public class EntityFactory {
         Rectangle spawnArea = ((RectangleMapObject) spawn).getRectangle();
         Entity spawnEntity = new Entity();
         addRequiredSpawnComponents(spawnEntity);
+        modifySpawnComponentValues(spawnEntity, spawn);
     }
 
     private void addRequiredSpawnComponents(Entity entity) {
@@ -102,6 +103,21 @@ public class EntityFactory {
         speed.ySpeed = 5;
         sprite.texture = new Texture(Gdx.files.internal("testPlayer.png"));
         fillPlayerParameterValues(entity);
+    }
+
+    private void modifySpawnComponentValues(Entity entity, MapObject spawn) {
+        Rectangle spawnRect = ((RectangleMapObject) spawn).getRectangle();
+        Position pos = cg.getPosition(entity);
+        Size size = cg.getSize(entity);
+        SpawnArea spawnArea = cg.getSpawnArea(entity);
+        Name name = cg.getName(entity);
+        pos.x = spawnRect.x;
+        pos.y = spawnRect.y;
+        size.width = spawnRect.width;
+        size.height = spawnRect.height;
+        spawnArea.xCenter = spawnRect.x + (spawnRect.width / 2);
+        spawnArea.yCenter = spawnRect.y + (spawnRect.height / 2);
+        name.name = spawn.getName();
     }
 
     private void fillEnemyParameterValues(Entity entity, String name) {
