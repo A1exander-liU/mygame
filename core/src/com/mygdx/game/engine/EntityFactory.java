@@ -29,16 +29,17 @@ public class EntityFactory {
         // entityFactory will actually modify the component values
         // will also add the entity to the map
         MobEntity enemy = new MobEntity();
-        modifyComponentValues(enemy, name);
+        modifyEnemyComponentValues(enemy, name);
         addToEngine(enemy);
         addToMap(enemy);
     }
 
     public void makePlayer(String name) {
         PlayerEntity player = new PlayerEntity();
+
     }
 
-    private void modifyComponentValues(Entity entity, String name) {
+    private void modifyEnemyComponentValues(Entity entity, String name) {
         Name enemyName = cg.getName(entity);
         Size size = cg.getSize(entity);
         Speed speed = cg.getSpeed(entity);
