@@ -35,9 +35,9 @@ public class MobEntity extends Entity {
         this.cg = cg;
         this.root = root;
         addRequiredComponents();
-        modifyComponentValues(name);
-        addToEngine();
-        addToMap();
+//        modifyComponentValues(name);
+//        addToEngine();
+//        addToMap();
     }
 
     private void addRequiredComponents() {
@@ -56,7 +56,6 @@ public class MobEntity extends Entity {
         super.add(new StateComponent());
         super.add(new EnemyStateMachine(this));
         super.add(new ParameterComponent());
-        super.add(new MapChar());
         super.add(new Orientation());
     }
 
