@@ -15,8 +15,4 @@ public class EntityTextureObject extends TextureMapObject {
     public Entity getOwner() {
         return owner;
     }
-
-    public void setOwner(Entity entity) {
-        owner = entity;
-    }
 }
