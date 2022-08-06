@@ -35,8 +35,7 @@ public class GameScreen implements Screen {
     float screenHeight = Gdx.graphics.getHeight();
     final int worldWidth = 100;
     final int worldHeight = 120;
-
-    GameMapProperties gameMapProperties;
+    
     TiledMap testMap;
     MapObjectDrawer tiledMapRenderer;
     EntityFactory entityFactory;
@@ -51,7 +50,6 @@ public class GameScreen implements Screen {
         cg = new ComponentGrabber(parent);
         entityFactory = new EntityFactory(cg, parent);
         MyGame.gameMapProperties = new GameMapProperties(testMap, entityFactory);
-        gameMapProperties = new GameMapProperties(testMap, entityFactory);
         parent.entityToMapAdder = new EntityToMapAdder(testMap, cg);
         entityFactory.makePlayer("player");
 
