@@ -50,7 +50,6 @@ public class EntityFactory {
     }
 
     public void makeSpawn(MapObject spawn) {
-        Rectangle spawnArea = ((RectangleMapObject) spawn).getRectangle();
         Entity spawnEntity = new Entity();
         addRequiredSpawnComponents(spawnEntity);
         modifySpawnComponentValues(spawnEntity, spawn);
