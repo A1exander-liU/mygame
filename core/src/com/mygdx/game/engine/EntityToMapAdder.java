@@ -3,7 +3,6 @@ package com.mygdx.game.engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.components.Name;
@@ -13,12 +12,9 @@ import com.mygdx.game.engine.components.Size;
 import com.mygdx.game.utils.EntityTextureObject;
 
 public class EntityToMapAdder {
-//    public static int totalEntities = 0;
-    TiledMap tiledMap;
     ComponentGrabber cg;
 
-    public EntityToMapAdder(TiledMap tiledMap, ComponentGrabber cg) {
-        this.tiledMap = tiledMap;
+    public EntityToMapAdder(ComponentGrabber cg) {
         this.cg = cg;
     }
 
@@ -39,7 +35,7 @@ public class EntityToMapAdder {
         MyGame.gameMapProperties.getMapLayer(GameMapProperties.COLLISIONS).getObjects().add(textureObject);
     }
 
-    public void addEntitiesToMap(TiledMap tiledMap, ImmutableArray<Entity> entities) {
+    public void addEntitiesToMap(ImmutableArray<Entity> entities) {
         for (int i = 0; i < entities.size(); i++) {
             Entity entity = entities.get(i);
             addEntityToMap(entity);
