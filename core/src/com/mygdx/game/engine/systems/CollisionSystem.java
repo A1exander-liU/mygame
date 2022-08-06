@@ -112,7 +112,6 @@ public class CollisionSystem extends EntitySystem implements EntityListener {
     }
 
     private void addToWorld(Entity entity) {
-        entity.add(new com.mygdx.game.engine.components.Item());
         Position pos = cg.getPosition(entity);
         Size size = cg.getSize(entity);
         Item<Entity> item = new Item<>(entity);
