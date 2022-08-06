@@ -1,12 +1,6 @@
 package com.mygdx.game.engine;
 
 import com.badlogic.ashley.core.Entity;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.Rectangle;
-import com.mygdx.game.GameMapProperties;
-import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.components.Camera;
 import com.mygdx.game.engine.components.DetectionProximity;
 import com.mygdx.game.engine.components.Item;
@@ -23,11 +17,6 @@ import com.mygdx.game.engine.components.Speed;
 import com.mygdx.game.engine.components.Steering;
 
 public class PlayerEntity extends Entity {
-    ComponentGrabber cg;
-    MyGame root;
-    GameMapProperties gameMapProperties;
-
-    Rectangle playerBox;
 
     public PlayerEntity() {
         addRequiredComponents();
