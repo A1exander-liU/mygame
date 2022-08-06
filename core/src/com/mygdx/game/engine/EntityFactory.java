@@ -58,6 +58,7 @@ public class EntityFactory {
     public void makeObstacle(Rectangle collisionRegion) {
         Entity collision = new Entity();
         addRequiredObstacleComponents(collision);
+        modifyObstacleComponentValues(collision, collisionRegion);
     }
 
     private void addRequiredSpawnComponents(Entity entity) {
@@ -129,6 +130,15 @@ public class EntityFactory {
         spawnArea.xCenter = spawnRect.x + (spawnRect.width / 2);
         spawnArea.yCenter = spawnRect.y + (spawnRect.height / 2);
         name.name = spawn.getName();
+    }
+
+    private void modifyObstacleComponentValues(Entity entity, Rectangle collisionRegion) {
+        Position pos = cg.getPosition(entity);
+        Size size = cg.getSize(entity);
+        pos.x = collisionRegion.x;
+        pos.y = collisionRegion.y;
+        size.width = collisionRegion.width;
+        size.height = collisionRegion.height;
     }
 
     private void fillEnemyParameterValues(Entity entity, String name) {
