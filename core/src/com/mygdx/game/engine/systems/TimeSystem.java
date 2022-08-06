@@ -5,13 +5,11 @@ import com.badlogic.ashley.core.EntitySystem;
 import com.mygdx.game.MyGame;
 
 public class TimeSystem extends EntitySystem {
-    MyGame root;
     public static float time = 0;
     public static int second = 0;
 
-    public TimeSystem(MyGame root) {
+    public TimeSystem() {
         super(1);
-        this.root = root;
     }
 
     @Override
