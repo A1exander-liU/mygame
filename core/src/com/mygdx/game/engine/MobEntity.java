@@ -53,16 +53,16 @@ public class MobEntity extends Entity {
         super.add(new Health());
         super.add(new ID());
         super.add(new Item());
+        super.add(new Position());
+        super.add(new Steering(this));
         super.add(new MovementBehavior(this));
         super.add(new Name());
         super.add(new Orientation());
         super.add(new ParameterComponent());
-        super.add(new Position());
         super.add(new Size());
         super.add(new Spawn());
         super.add(new Speed());
         super.add(new Sprite());
-        super.add(new Steering(this));
     }
 
     private void modifyComponentValues(String name) {
