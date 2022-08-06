@@ -103,7 +103,7 @@ public class GameScreen implements Screen {
         TimeSystem timeSystem = new TimeSystem();
         StateSystem stateSystem = new StateSystem(cg);
         EntityRemovalSystem entityRemovalSystem = new EntityRemovalSystem(cg);
-        CollisionSystem collisionSystem = new CollisionSystem(cg, gameMapProperties);
+        CollisionSystem collisionSystem = new CollisionSystem(cg);
         MapUpdateSystem mapUpdateSystem = new MapUpdateSystem(cg, gameMapProperties);
         OrientationSystem orientationSystem = new OrientationSystem(cg);
         MyGame.engine.addSystem(movementSystem);

@@ -25,17 +25,15 @@ import com.mygdx.game.engine.components.SpawnArea;
 
 public class CollisionSystem extends EntitySystem implements EntityListener {
     ComponentGrabber cg;
-    GameMapProperties gameMapProperties;
     ImmutableArray<Entity> collisions;
     ImmutableArray<Entity> enemies;
     ImmutableArray<Entity> spawns;
     Entity player;
     public static World<Entity> world;
 
-    public CollisionSystem(ComponentGrabber cg, GameMapProperties gameMapProperties) {
+    public CollisionSystem(ComponentGrabber cg) {
         super(7);
         this.cg = cg;
-        this.gameMapProperties = gameMapProperties;
         collisions = MyGame.engine.getEntitiesFor(Families.collisions);
         enemies = MyGame.engine.getEntitiesFor(Families.enemies);
         spawns = MyGame.engine.getEntitiesFor(Families.spawns);
