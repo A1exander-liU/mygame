@@ -10,6 +10,7 @@ import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.components.DetectionProximity;
 import com.mygdx.game.engine.components.Enemy;
 import com.mygdx.game.engine.components.EnemyStateMachine;
+import com.mygdx.game.engine.components.Item;
 import com.mygdx.game.engine.components.MapChar;
 import com.mygdx.game.engine.components.MovementBehavior;
 import com.mygdx.game.engine.components.Orientation;
@@ -40,23 +41,28 @@ public class MobEntity extends Entity {
 //        addToMap();
     }
 
+    public MobEntity() {
+        addRequiredComponents();
+    }
+
     private void addRequiredComponents() {
+        super.add(new DetectionProximity(this, 32, root));
         super.add(new Enemy());
-        super.add(new Sprite());
+        super.add(new EnemyStateMachine(this));
         super.add(new Health());
         super.add(new ID());
-        super.add(new Name());
-        super.add(new Position());
-        super.add(new Spawn());
-        super.add(new Size());
-        super.add(new Speed());
-        super.add(new Steering(this));
-        super.add(new DetectionProximity(this, 32, root));
+        super.add(new Item());
         super.add(new MovementBehavior(this));
-        super.add(new StateComponent());
-        super.add(new EnemyStateMachine(this));
-        super.add(new ParameterComponent());
+        super.add(new Name());
         super.add(new Orientation());
+        super.add(new ParameterComponent());
+        super.add(new Position());
+        super.add(new Size());
+        super.add(new Spawn());
+        super.add(new Speed());
+        super.add(new Sprite());
+        super.add(new StateComponent());
+        super.add(new Steering(this));
     }
 
     private void modifyComponentValues(String name) {
