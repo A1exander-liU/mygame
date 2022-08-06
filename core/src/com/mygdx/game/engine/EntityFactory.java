@@ -25,8 +25,6 @@ public class EntityFactory {
         this.root = root;
     }
 
-    // also need method to create a player character
-
     public void makeEnemy(String name) {
         // name provided will determine the kind of enemy to create
         // make mobEntity only add the components
@@ -58,7 +56,7 @@ public class EntityFactory {
         speed.ySpeed = 2;
         entitySprite.texture = new Texture(Gdx.files.internal("testPlayer.png"));
         stateMachine.setInitialState(EnemyState.IDLE);
-        fillParameterValues(entity, name);
+        fillEnemyParameterValues(entity, name);
     }
 
     private void modifyPlayerComponentValues(Entity entity, String name) {
@@ -87,7 +85,7 @@ public class EntityFactory {
         sprite.texture = new Texture(Gdx.files.internal("testPlayer.png"));
     }
 
-    private void fillParameterValues(Entity entity, String name) {
+    private void fillEnemyParameterValues(Entity entity, String name) {
         JsonValue enemy = root.jsonSearcher.findByEnemyName(name);
         ParameterComponent paramCom = cg.getParameters(entity);
         paramCom.health.maxHealth = enemy.getInt("HP");
