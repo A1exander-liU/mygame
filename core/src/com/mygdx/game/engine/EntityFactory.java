@@ -83,6 +83,7 @@ public class EntityFactory {
         speed.xSpeed = 5;
         speed.ySpeed = 5;
         sprite.texture = new Texture(Gdx.files.internal("testPlayer.png"));
+        fillPlayerParameterValues(entity);
     }
 
     private void fillEnemyParameterValues(Entity entity, String name) {
@@ -91,6 +92,14 @@ public class EntityFactory {
         paramCom.health.maxHealth = enemy.getInt("HP");
         paramCom.health.currentHealth = enemy.getInt("HP");
         paramCom.damage = enemy.getInt("DMG");
+    }
+
+    private void fillPlayerParameterValues(Entity entity) {
+        ParameterComponent paramCom = cg.getParameters(entity);
+        Health health = cg.getHealth(entity);
+        paramCom.health.maxHealth = health.maxHealth;
+        paramCom.health.currentHealth = health.currentHealth;
+        paramCom.damage = 5;
     }
 
     private void addToEngine(Entity entity) {
