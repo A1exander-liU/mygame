@@ -55,11 +55,21 @@ public class EntityFactory {
         addToEngine(spawnEntity);
     }
 
+    public void makeObstacle(Rectangle collisionRegion) {
+        Entity collision = new Entity();
+        addRequiredObstacleComponents(collision);
+    }
+
     private void addRequiredSpawnComponents(Entity entity) {
         entity.add(new Position());
         entity.add(new Size());
         entity.add(new SpawnArea());
         entity.add(new Name());
+    }
+
+    private void addRequiredObstacleComponents(Entity entity) {
+        entity.add(new Position());
+        entity.add(new Size());
     }
 
     private void modifyEnemyComponentValues(Entity entity, String name) {
