@@ -52,6 +52,7 @@ public class EntityFactory {
         Entity spawnEntity = new Entity();
         addRequiredSpawnComponents(spawnEntity);
         modifySpawnComponentValues(spawnEntity, spawn);
+        addToEngine(spawnEntity);
     }
 
     private void addRequiredSpawnComponents(Entity entity) {
