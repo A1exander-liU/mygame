@@ -59,6 +59,7 @@ public class EntityFactory {
         Entity collision = new Entity();
         addRequiredObstacleComponents(collision);
         modifyObstacleComponentValues(collision, collisionRegion);
+        addToEngine(collision);
     }
 
     private void addRequiredSpawnComponents(Entity entity) {
