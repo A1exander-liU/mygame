@@ -54,7 +54,8 @@ public class EntityFactory {
         size.height = 32;
         speed.xSpeed = 2;
         speed.ySpeed = 2;
-        entitySprite.texture = new Texture(Gdx.files.internal("testPlayer.png"));
+        String path = root.jsonSearcher.findByEnemyName(enemyName.name).getString("SPRITE");
+        entitySprite.texture = new Texture(Gdx.files.internal(path));
         stateMachine.setInitialState(EnemyState.IDLE);
         fillEnemyParameterValues(entity, name);
     }
