@@ -12,7 +12,6 @@ import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.ComponentGrabber;
 import com.mygdx.game.engine.EntityFactory;
 import com.mygdx.game.engine.Families;
-import com.mygdx.game.engine.MobEntity;
 import com.mygdx.game.engine.components.Spawn;
 import com.mygdx.game.engine.components.SpawnArea;
 import com.mygdx.game.engine.components.Name;
@@ -86,7 +85,7 @@ public class EnemySpawningSystem extends EntitySystem {
             // building the enemy, the parameters are set too
             // all enemy entities are built
             // this also adds the entity to the map (the textureMapObject to the map)
-            MobEntity mobEntity = new MobEntity(cg, root, gameMapProperties, name);
+            entityFactory.makeEnemy(name);
         }
         // placing the enemy on the map
         spawnEnemies();
@@ -143,7 +142,7 @@ public class EnemySpawningSystem extends EntitySystem {
     private void spawn(Entity entity) {
         Name name = cg.getName(entity);
         SpawnArea spawnArea = cg.getSpawnArea(entity);
-        MobEntity mobEntity = new MobEntity(cg, root, gameMapProperties, name.name);
+        entityFactory.makeEnemy(name.name);
         // since it was just added, it will be the last element
         EntityTextureObject textureObject = (EntityTextureObject) objects.get(objects.getCount() - 1);
         Entity enemy = textureObject.getOwner();
