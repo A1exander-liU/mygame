@@ -27,6 +27,7 @@ public class EntityFactory {
         // make mobEntity only add the components
         // entityFactory will actually modify the component values
         // will also add the entity to the map
+        MobEntity enemy = new MobEntity();
     }
 
     private void modifyComponentValues
