@@ -9,6 +9,7 @@ import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
 import com.mygdx.game.engine.Families;
+import com.mygdx.game.engine.components.Item;
 import com.mygdx.game.engine.components.Position;
 import com.mygdx.game.engine.components.Size;
 import com.mygdx.game.engine.components.Steering;
@@ -78,6 +79,7 @@ public class GameMapProperties {
                 setPosition(obstacle, area);
                 setSize(obstacle, area);
                 obstacle.add(new Steering(obstacle));
+                obstacle.add(new Item());
 //                obstacle.add(new DetectionProximity(obstacle, 20, root));
                 root.engine.addEntity(obstacle);
             }
