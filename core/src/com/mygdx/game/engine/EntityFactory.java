@@ -4,6 +4,9 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.JsonValue;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.components.Camera;
@@ -13,6 +16,7 @@ import com.mygdx.game.engine.components.Name;
 import com.mygdx.game.engine.components.ParameterComponent;
 import com.mygdx.game.engine.components.Position;
 import com.mygdx.game.engine.components.Size;
+import com.mygdx.game.engine.components.SpawnArea;
 import com.mygdx.game.engine.components.Speed;
 import com.mygdx.game.engine.components.Sprite;
 
@@ -41,6 +45,19 @@ public class EntityFactory {
         modifyPlayerComponentValues(player, name);
         addToEngine(player);
         addToMap(player);
+    }
+
+    public void makeSpawn(MapObject spawn) {
+        Rectangle spawnArea = ((RectangleMapObject) spawn).getRectangle();
+        Entity spawnEntity = new Entity();
+        addRequiredSpawnComponents(spawnEntity);
+    }
+
+    private void addRequiredSpawnComponents(Entity entity) {
+        entity.add(new Position());
+        entity.add(new Size());
+        entity.add(new SpawnArea());
+        entity.add(new Name());
     }
 
     private void modifyEnemyComponentValues(Entity entity, String name) {
