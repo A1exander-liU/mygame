@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.JsonValue;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.components.EnemyStateMachine;
-import com.mygdx.game.engine.components.Health;
 import com.mygdx.game.engine.components.Name;
 import com.mygdx.game.engine.components.ParameterComponent;
 import com.mygdx.game.engine.components.Size;
@@ -32,6 +31,7 @@ public class EntityFactory {
         MobEntity enemy = new MobEntity();
         modifyComponentValues(enemy, name);
         addToEngine(enemy);
+        addToMap(enemy);
     }
 
     private void modifyComponentValues(Entity entity, String name) {
@@ -60,5 +60,9 @@ public class EntityFactory {
 
     private void addToEngine(Entity entity) {
         MyGame.engine.addEntity(entity);
+    }
+
+    private void addToMap(Entity entity) {
+        root.entityToMapAdder.addEntityToMap(entity);
     }
 }
