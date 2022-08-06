@@ -10,6 +10,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.ComponentGrabber;
+import com.mygdx.game.engine.EntityFactory;
 import com.mygdx.game.engine.Families;
 import com.mygdx.game.engine.MobEntity;
 import com.mygdx.game.engine.components.Spawn;
@@ -30,12 +31,15 @@ public class EnemySpawningSystem extends EntitySystem {
     ComponentGrabber cg;
     MyGame root;
     GameMapProperties gameMapProperties;
+    EntityFactory entityFactory;
 
-    public EnemySpawningSystem(ComponentGrabber cg, MyGame root, GameMapProperties gameMapProperties) {
+    public EnemySpawningSystem(ComponentGrabber cg, MyGame root, GameMapProperties gameMapProperties,
+    EntityFactory entityFactory) {
         super(2);
         this.cg = cg;
         this.root = root;
         this.gameMapProperties = gameMapProperties;
+        this.entityFactory = entityFactory;
         spawns = MyGame.engine.getEntitiesFor(Families.spawns);
         spawnPoints = gameMapProperties.getMapLayer(GameMapProperties.ENEMY_SPAWNS).getObjects();
         objects = gameMapProperties.getMapLayer(GameMapProperties.COLLISIONS).getObjects();
