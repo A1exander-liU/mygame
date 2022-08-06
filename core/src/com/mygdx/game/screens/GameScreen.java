@@ -102,7 +102,7 @@ public class GameScreen implements Screen {
         SteeringSystem steeringSystem = new SteeringSystem(cg);
         TimeSystem timeSystem = new TimeSystem();
         StateSystem stateSystem = new StateSystem(cg);
-        EntityRemovalSystem entityRemovalSystem = new EntityRemovalSystem(cg, gameMapProperties);
+        EntityRemovalSystem entityRemovalSystem = new EntityRemovalSystem(cg);
         CollisionSystem simulationSystem = new CollisionSystem(cg, gameMapProperties);
         MapUpdateSystem mapUpdateSystem = new MapUpdateSystem(cg, gameMapProperties);
         OrientationSystem orientationSystem = new OrientationSystem(cg);
