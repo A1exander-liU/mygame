@@ -46,7 +46,7 @@ public class MobEntity extends Entity {
     }
 
     private void addRequiredComponents() {
-        super.add(new DetectionProximity(this, 32, root));
+        super.add(new DetectionProximity(this, 32));
         super.add(new Enemy());
         super.add(new EnemyStateMachine(this));
         super.add(new Health());
