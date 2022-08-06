@@ -28,11 +28,8 @@ import com.mygdx.game.engine.components.Size;
 import com.mygdx.game.engine.components.Speed;
 
 public class ComponentGrabber {
-    MyGame root;
 
-    public ComponentGrabber(MyGame root) {
-        this.root = root;
-    }
+    public ComponentGrabber() {}
 
     public Camera getCamera(Entity entity) {
         ComponentMapper<Camera> camera = ComponentMapper.getFor(Camera.class);
@@ -140,7 +137,7 @@ public class ComponentGrabber {
     }
 
     public Entity findEntity(int entityID) {
-        ImmutableArray<Entity> entities = root.engine.getEntities();
+        ImmutableArray<Entity> entities = MyGame.engine.getEntities();
         for (Entity entity : entities) {
             int id = getID(entity).ID;
             if (id == entityID)
