@@ -18,7 +18,6 @@ import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.engine.EntityFactory;
 import com.mygdx.game.engine.EntityToMapAdder;
 import com.mygdx.game.engine.Families;
-import com.mygdx.game.engine.PlayerEntity;
 import com.mygdx.game.engine.systems.EnemySpawningSystem;
 import com.mygdx.game.engine.systems.EntityRemovalSystem;
 import com.mygdx.game.engine.systems.MapUpdateSystem;
@@ -40,6 +39,7 @@ public class GameScreen implements Screen {
     GameMapProperties gameMapProperties;
     TiledMap testMap;
     MapObjectDrawer tiledMapRenderer;
+    EntityFactory entityFactory;
 
     ComponentGrabber cg;
 
@@ -52,7 +52,7 @@ public class GameScreen implements Screen {
         MyGame.gameMapProperties = new GameMapProperties(testMap);
         gameMapProperties = new GameMapProperties(testMap, parent);
         parent.entityToMapAdder = new EntityToMapAdder(testMap, cg);
-        EntityFactory entityFactory = new EntityFactory(cg, parent);
+        entityFactory = new EntityFactory(cg, parent);
         entityFactory.makePlayer("player");
 
         // to add system (now all allowed entities will move every frame)
