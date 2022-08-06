@@ -34,6 +34,10 @@ public class EntityFactory {
         addToMap(enemy);
     }
 
+    public void makePlayer(String name) {
+        PlayerEntity player = new PlayerEntity();
+    }
+
     private void modifyComponentValues(Entity entity, String name) {
         Name enemyName = cg.getName(entity);
         Size size = cg.getSize(entity);
