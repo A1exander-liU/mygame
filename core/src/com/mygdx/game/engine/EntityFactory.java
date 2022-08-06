@@ -41,6 +41,8 @@ public class EntityFactory {
     public void makePlayer(String name) {
         PlayerEntity player = new PlayerEntity();
         modifyPlayerComponentValues(player, name);
+        addToEngine(player);
+        addToMap(player);
     }
 
     private void modifyEnemyComponentValues(Entity entity, String name) {
