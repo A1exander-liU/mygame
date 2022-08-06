@@ -53,7 +53,7 @@ public class GameScreen implements Screen {
         gameMapProperties = new GameMapProperties(testMap, parent);
         parent.entityToMapAdder = new EntityToMapAdder(testMap, cg);
         EntityFactory entityFactory = new EntityFactory(cg, parent);
-        PlayerEntity playerEntity = new PlayerEntity(cg, parent, gameMapProperties, "player");
+        entityFactory.makePlayer("player");
 
         // to add system (now all allowed entities will move every frame)
         // you can enable and disable a system temporarily
