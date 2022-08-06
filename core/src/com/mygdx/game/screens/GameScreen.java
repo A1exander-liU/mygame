@@ -97,7 +97,7 @@ public class GameScreen implements Screen {
         // mapUpdateSystem: 98
         // removalSystem: 99
 
-        MovementSystem movementSystem = new MovementSystem(cg, parent);
+        MovementSystem movementSystem = new MovementSystem(cg);
         EnemySpawningSystem enemySpawningSystem = new EnemySpawningSystem(cg, parent, gameMapProperties, entityFactory);
         SteeringSystem steeringSystem = new SteeringSystem(cg, parent, gameMapProperties);
         TimeSystem timeSystem = new TimeSystem(parent);

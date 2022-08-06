@@ -14,12 +14,10 @@ import com.mygdx.game.engine.components.Speed;
 public class MovementSystem extends EntitySystem {
     private final Entity player;
     ComponentGrabber cg;
-    MyGame root;
 
-    public MovementSystem(ComponentGrabber cg, MyGame root) {
+    public MovementSystem(ComponentGrabber cg) {
         super(3);
         this.cg = cg;
-        this.root = root;
         // there is only one player hence we just get index 0
         player = MyGame.engine.getEntitiesFor(Families.player).get(0);
     }
