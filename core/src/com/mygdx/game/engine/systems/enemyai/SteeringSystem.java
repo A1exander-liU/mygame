@@ -34,7 +34,6 @@ import java.util.Random;
 // 3 states: idle(random walk), hunting(pursue and attack player), flee(return)
 public class SteeringSystem extends EntitySystem {
     ComponentGrabber cg;
-    MyGame root;
     GameMapProperties gameMapProperties;
     ImmutableArray<Entity> enemies;
     ImmutableArray<Entity> entities;
@@ -42,10 +41,9 @@ public class SteeringSystem extends EntitySystem {
     Entity player;
     MapObjects spawnPoints;
 
-    public SteeringSystem(ComponentGrabber cg, MyGame root, GameMapProperties gameMapProperties) {
+    public SteeringSystem(ComponentGrabber cg, GameMapProperties gameMapProperties) {
         super(5);
         this.cg = cg;
-        this.root = root;
         this.gameMapProperties = gameMapProperties;
         enemies = MyGame.engine.getEntitiesFor(Families.enemies);
         player = MyGame.engine.getEntitiesFor(Families.player).get(0);
