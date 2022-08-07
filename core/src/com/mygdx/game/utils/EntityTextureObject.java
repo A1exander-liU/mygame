@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.objects.TextureMapObject;
 
 public class EntityTextureObject extends TextureMapObject {
-    private Entity owner;
+    private final Entity owner;
 
     public EntityTextureObject(TextureRegion textureRegion, Entity owner) {
         super(textureRegion);
