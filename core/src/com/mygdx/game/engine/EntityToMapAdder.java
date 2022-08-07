@@ -34,11 +34,4 @@ public class EntityToMapAdder {
         // adding to the map
         MyGame.gameMapProperties.getMapLayer(GameMapProperties.COLLISIONS).getObjects().add(textureObject);
     }
-
-    public void addEntitiesToMap(ImmutableArray<Entity> entities) {
-        for (int i = 0; i < entities.size(); i++) {
-            Entity entity = entities.get(i);
-            addEntityToMap(entity);
-        }
-    }
 }
