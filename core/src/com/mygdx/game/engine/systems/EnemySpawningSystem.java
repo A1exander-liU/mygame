@@ -25,7 +25,6 @@ public class EnemySpawningSystem extends EntitySystem {
     private final MapObjects spawnPoints;
     private final MapObjects objects;
     private MapObjects temp;
-    private final float RESPAWN_TIME = 90;
     ComponentGrabber cg;
     EntityFactory entityFactory;
 
@@ -65,6 +64,7 @@ public class EnemySpawningSystem extends EntitySystem {
             Entity spawn = spawns.get(i);
             SpawnArea spawnArea = cg.getSpawnArea(spawn);
             if (spawnArea.owner == null) {
+                float RESPAWN_TIME = 90;
                 if (TimeSystem.time - spawnArea.lastTimeOfDeath >= RESPAWN_TIME) {
                     spawn(spawn);
                 }
