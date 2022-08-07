@@ -1,7 +1,6 @@
 package com.mygdx.game.engine;
 
 import com.badlogic.ashley.core.Entity;
-import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.MyGame;
