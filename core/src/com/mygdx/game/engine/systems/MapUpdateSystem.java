@@ -6,6 +6,7 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.maps.MapObjects;
 import com.mygdx.game.GameMapProperties;
+import com.mygdx.game.MapObjectDrawer;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.ComponentGrabber;
 import com.mygdx.game.engine.Families;
@@ -20,9 +21,12 @@ public class MapUpdateSystem extends EntitySystem {
     ImmutableArray<Entity> characters;
     Entity player;
 
-    public MapUpdateSystem(ComponentGrabber cg) {
-        super(98);
+    MapObjectDrawer tiledMapRenderer;
+
+    public MapUpdateSystem(ComponentGrabber cg, MapObjectDrawer tiledMapRenderer) {
+        super(97);
         this.cg = cg;
+        this.tiledMapRenderer = tiledMapRenderer;
         characters = MyGame.engine.getEntitiesFor(Family.one(Player.class, Enemy.class).get());
         player = MyGame.engine.getEntitiesFor(Families.player).get(0);
     }
@@ -34,6 +38,8 @@ public class MapUpdateSystem extends EntitySystem {
             updateEntityInMap(entity);
         }
         updatePlayerCamPosition();
+        tiledMapRenderer.setView(cg.getCamera(player).camera);
+        tiledMapRenderer.render();
     }
 
     private void updateEntityInMap(Entity entity) {
