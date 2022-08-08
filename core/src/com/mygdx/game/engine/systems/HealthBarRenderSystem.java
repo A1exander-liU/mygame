@@ -4,7 +4,6 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Container;
 import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
@@ -13,6 +12,8 @@ import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.ComponentGrabber;
 import com.mygdx.game.engine.Families;
 import com.mygdx.game.engine.components.ParameterComponent;
+import com.mygdx.game.engine.components.Position;
+import com.mygdx.game.engine.components.Size;
 
 public class HealthBarRenderSystem extends EntitySystem {
     final float fullHealth = 100;
@@ -42,6 +43,8 @@ public class HealthBarRenderSystem extends EntitySystem {
             Entity entity = enemies.get(i);
             ProgressBar enemyHealthBar = new ProgressBar(0, 100, 1, false, skin, "progress-bar-enemy-health");
             ParameterComponent paramCom = cg.getParameters(entity);
+            Position pos = cg.getPosition(entity);
+            Size size = cg.getSize(entity);
             // knob-after
             // from 0 - 100
             // 0 is full hp and 100 is no hp
@@ -51,7 +54,10 @@ public class HealthBarRenderSystem extends EntitySystem {
             // because 0 is full hp setting to 20 will show their is only 80% left
             float percentageHealthDone = (paramCom.health.currentHealth / paramCom.health.maxHealth) * 100;
             enemyHealthBar.setValue((float) Math.floor(percentageHealthDone));
-            Container<ProgressBar> healthBarContainer = new Container<>(enemyHealthBar);
+            enemyHealthBar.setPosition(pos.x, pos.y);
+            enemyHealthBar.setWidth(size.width);
+//            Container<ProgressBar> healthBarContainer = new Container<>(enemyHealthBar);
+
         }
         stage.act(delta);
         stage.draw();
