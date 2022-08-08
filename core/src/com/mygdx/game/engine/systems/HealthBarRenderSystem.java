@@ -58,6 +58,7 @@ public class HealthBarRenderSystem extends EntitySystem {
             enemyHealthBar.setPosition(pos.x, pos.y);
             enemyHealthBar.setWidth(size.width);
 //            Container<ProgressBar> healthBarContainer = new Container<>(enemyHealthBar);
+            stage.addActor(enemyHealthBar);
         }
         stage.act(delta);
         stage.draw();
