@@ -20,6 +20,7 @@ import com.mygdx.game.engine.EntityToMapAdder;
 import com.mygdx.game.engine.Families;
 import com.mygdx.game.engine.systems.EnemySpawningSystem;
 import com.mygdx.game.engine.systems.EntityRemovalSystem;
+import com.mygdx.game.engine.systems.HealthBarRenderSystem;
 import com.mygdx.game.engine.systems.MapUpdateSystem;
 import com.mygdx.game.engine.systems.MovementSystem;
 import com.mygdx.game.engine.systems.CollisionSystem;
@@ -104,6 +105,7 @@ public class GameScreen implements Screen {
         CollisionSystem collisionSystem = new CollisionSystem(cg);
         MapUpdateSystem mapUpdateSystem = new MapUpdateSystem(cg);
         OrientationSystem orientationSystem = new OrientationSystem(cg);
+        HealthBarRenderSystem healthBarRenderSystem = new HealthBarRenderSystem(cg);
         MyGame.engine.addSystem(movementSystem);
         MyGame.engine.addSystem(enemySpawningSystem);
         MyGame.engine.addSystem(steeringSystem);
@@ -113,6 +115,7 @@ public class GameScreen implements Screen {
         MyGame.engine.addSystem(collisionSystem);
         MyGame.engine.addSystem(mapUpdateSystem);
         MyGame.engine.addSystem(orientationSystem);
+        MyGame.engine.addSystem(healthBarRenderSystem);
         checkPriorities();
     }
 
