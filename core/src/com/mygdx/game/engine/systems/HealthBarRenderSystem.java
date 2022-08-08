@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Container;
 import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.ComponentGrabber;
 import com.mygdx.game.engine.Families;
@@ -26,13 +27,13 @@ public class HealthBarRenderSystem extends EntitySystem {
     Stage stage;
 
     public HealthBarRenderSystem(ComponentGrabber cg) {
-        super(97);
+        super(98);
         this.cg = cg;
         player = MyGame.engine.getEntitiesFor(Families.player).get(0);
         enemies = MyGame.engine.getEntitiesFor(Families.enemies);
         characters = MyGame.engine.getEntitiesFor(Families.characters);
         skin = new Skin(Gdx.files.internal("Game_UI_Skin/Game_UI_Skin.json"));
-        stage = new Stage();
+        stage = new Stage(new ScreenViewport());
     }
 
     @Override
