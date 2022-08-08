@@ -52,7 +52,8 @@ public class HealthBarRenderSystem extends EntitySystem {
             float percentageHealthDone = (paramCom.health.currentHealth / paramCom.health.maxHealth) * 100;
             enemyHealthBar.setValue((float) Math.floor(percentageHealthDone));
             Container<ProgressBar> healthBarContainer = new Container<>(enemyHealthBar);
-            
         }
+        stage.act(delta);
+        stage.draw();
     }
 }
