@@ -17,6 +17,7 @@ import com.mygdx.game.engine.components.Position;
 import com.mygdx.game.engine.components.Size;
 
 public class HealthBarRenderSystem extends EntitySystem {
+    final float fullHealth = 100;
 
     ComponentGrabber cg;
     Entity player;
@@ -53,10 +54,13 @@ public class HealthBarRenderSystem extends EntitySystem {
             // convert to percent = 20%
             // then set value of health bar to that number
             // because 0 is full hp setting to 20 will show their is only 80% left
+
             float percentageHealthDone = (paramCom.health.currentHealth / paramCom.health.maxHealth) * 100;
-            enemyHealthBar.setValue((float) Math.floor(percentageHealthDone));
+            enemyHealthBar.setValue((float) Math.floor(fullHealth - percentageHealthDone));
+
             enemyHealthBar.setPosition(pos.x, pos.y + size.height +1);
             enemyHealthBar.setWidth(size.width);
+
 //            Container<ProgressBar> healthBarContainer = new Container<>(enemyHealthBar);
             stage.addActor(enemyHealthBar);
         }
