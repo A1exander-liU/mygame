@@ -16,7 +16,6 @@ import com.mygdx.game.engine.components.Position;
 import com.mygdx.game.engine.components.Size;
 
 public class HealthBarRenderSystem extends EntitySystem {
-    final float fullHealth = 100;
 
     ComponentGrabber cg;
     Entity player;
