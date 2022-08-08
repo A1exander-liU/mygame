@@ -51,19 +51,21 @@ public class HealthBarRenderSystem extends EntitySystem {
             // from 0 - 100
             // 0 is full hp and 100 is no hp
             // so if max hp is 10 and current hp is 8
-            // convert to percent = 20%
+            // convert to percent = 80%
             // then set value of health bar to that number
             // because 0 is full hp setting to 20 will show their is only 80% left
 
             float percentageHealthDone = (paramCom.health.currentHealth / paramCom.health.maxHealth) * 100;
             enemyHealthBar.setValue((float) Math.floor(fullHealth - percentageHealthDone));
 
-            enemyHealthBar.setPosition(pos.x, pos.y + size.height +1);
-            enemyHealthBar.setWidth(size.width);
-
-//            Container<ProgressBar> healthBarContainer = new Container<>(enemyHealthBar);
-            stage.addActor(enemyHealthBar);
+            Container<ProgressBar> healthBarContainer = new Container<>(enemyHealthBar);
+            healthBarContainer.setPosition(pos.x, pos.y + size.height);
+            healthBarContainer.setSize(size.width, 4);
+            healthBarContainer.clip();
+            
+            stage.addActor(healthBarContainer);
         }
+
         stage.act(delta);
         stage.draw();
     }
