@@ -24,8 +24,6 @@ public class HealthBarRenderSystem extends EntitySystem {
     Skin skin;
     Stage stage;
 
-    ProgressBar.ProgressBarStyle enemyHealthBarStyle;
-
     public HealthBarRenderSystem(ComponentGrabber cg) {
         super();
         this.cg = cg;
@@ -34,7 +32,6 @@ public class HealthBarRenderSystem extends EntitySystem {
         characters = MyGame.engine.getEntitiesFor(Families.characters);
         skin = new Skin(Gdx.files.internal("Game_UI_Skin/Game_UI_Skin.json"));
         stage = new Stage();
-        enemyHealthBarStyle = new ProgressBar.ProgressBarStyle(skin.get("progress-bar-enemy-health", ProgressBar.ProgressBarStyle.class));
     }
 
     @Override
@@ -42,7 +39,7 @@ public class HealthBarRenderSystem extends EntitySystem {
         // draw hp bar over enemy sprites, will be drawn over their head
         for (int i = 0; i < enemies.size(); i++) {
             Entity entity = enemies.get(i);
-            ProgressBar enemyHealthBar = new ProgressBar(0, 100, 1, false, enemyHealthBarStyle);
+            ProgressBar enemyHealthBar = new ProgressBar(0, 100, 1, false, skin, "progress-bar-enemy-health");
             ParameterComponent paramCom = cg.getParameters(entity);
             // knob-after
             // from 0 - 100
