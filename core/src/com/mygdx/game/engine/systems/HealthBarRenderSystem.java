@@ -55,7 +55,7 @@ public class HealthBarRenderSystem extends EntitySystem {
             // because 0 is full hp setting to 20 will show their is only 80% left
             float percentageHealthDone = (paramCom.health.currentHealth / paramCom.health.maxHealth) * 100;
             enemyHealthBar.setValue((float) Math.floor(percentageHealthDone));
-            enemyHealthBar.setPosition(pos.x, pos.y);
+            enemyHealthBar.setPosition(pos.x, pos.y + size.height +1);
             enemyHealthBar.setWidth(size.width);
 //            Container<ProgressBar> healthBarContainer = new Container<>(enemyHealthBar);
             stage.addActor(enemyHealthBar);
