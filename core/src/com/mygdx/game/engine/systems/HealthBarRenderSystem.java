@@ -6,6 +6,7 @@ import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Container;
 import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.mygdx.game.MyGame;
@@ -50,6 +51,8 @@ public class HealthBarRenderSystem extends EntitySystem {
             // because 0 is full hp setting to 20 will show their is only 80% left
             float percentageHealthDone = (paramCom.health.currentHealth / paramCom.health.maxHealth) * 100;
             enemyHealthBar.setValue((float) Math.floor(percentageHealthDone));
+            Container<ProgressBar> healthBarContainer = new Container<>(enemyHealthBar);
+            
         }
     }
 }
