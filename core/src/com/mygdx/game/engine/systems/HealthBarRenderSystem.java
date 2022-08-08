@@ -38,6 +38,7 @@ public class HealthBarRenderSystem extends EntitySystem {
 
     @Override
     public void update(float delta) {
+        stage.clear();
         // draw hp bar over enemy sprites, will be drawn over their head
         for (int i = 0; i < enemies.size(); i++) {
             Entity entity = enemies.get(i);
@@ -57,7 +58,6 @@ public class HealthBarRenderSystem extends EntitySystem {
             enemyHealthBar.setPosition(pos.x, pos.y);
             enemyHealthBar.setWidth(size.width);
 //            Container<ProgressBar> healthBarContainer = new Container<>(enemyHealthBar);
-
         }
         stage.act(delta);
         stage.draw();
