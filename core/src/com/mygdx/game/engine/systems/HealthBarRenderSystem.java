@@ -34,7 +34,7 @@ public class HealthBarRenderSystem extends EntitySystem {
         enemies = MyGame.engine.getEntitiesFor(Families.enemies);
         characters = MyGame.engine.getEntitiesFor(Families.characters);
         skin = new Skin(Gdx.files.internal("Game_UI_Skin/Game_UI_Skin.json"));
-        stage = new Stage(new ScreenViewport());
+        stage = new Stage();
     }
 
     @Override
@@ -45,7 +45,7 @@ public class HealthBarRenderSystem extends EntitySystem {
             Entity entity = enemies.get(i);
             ProgressBar enemyHealthBar = new ProgressBar(0, 100, 1, false, skin, "progress-bar-enemy-health");
             enemyHealthBar.setValue(calcRemainingHealthPercentage(entity));
-            stage.addActor(makeEnemyHealthBar(entity, enemyHealthBar));
+            stage.addActor(makeEnemyHealthBarContainer(entity, enemyHealthBar));
         }
         stage.act(delta);
         stage.draw();
@@ -64,7 +64,7 @@ public class HealthBarRenderSystem extends EntitySystem {
         return (float) Math.floor(fullHealth - ((paramCom.health.currentHealth / paramCom.health.maxHealth) * 100));
     }
 
-    private Container<ProgressBar> makeEnemyHealthBar(Entity entity, ProgressBar healthBar) {
+    private Container<ProgressBar> makeEnemyHealthBarContainer(Entity entity, ProgressBar healthBar) {
         Container<ProgressBar> healthBarContainer = new Container<>(healthBar);
         Position pos = cg.getPosition(entity);
         Size size = cg.getSize(entity);
