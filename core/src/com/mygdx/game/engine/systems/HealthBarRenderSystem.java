@@ -44,29 +44,33 @@ public class HealthBarRenderSystem extends EntitySystem {
         for (int i = 0; i < enemies.size(); i++) {
             Entity entity = enemies.get(i);
             ProgressBar enemyHealthBar = new ProgressBar(0, 100, 1, false, skin, "progress-bar-enemy-health");
-            ParameterComponent paramCom = cg.getParameters(entity);
-            Position pos = cg.getPosition(entity);
-            Size size = cg.getSize(entity);
-            // knob-after
-            // from 0 - 100
-            // 0 is full hp and 100 is no hp
-            // so if max hp is 10 and current hp is 8
-            // convert to percent = 80%
-            // then set value of health bar to that number
-            // because 0 is full hp setting to 20 will show their is only 80% left
-
-            float percentageHealthDone = (paramCom.health.currentHealth / paramCom.health.maxHealth) * 100;
-            enemyHealthBar.setValue((float) Math.floor(fullHealth - percentageHealthDone));
-
-            Container<ProgressBar> healthBarContainer = new Container<>(enemyHealthBar);
-            healthBarContainer.setPosition(pos.x, pos.y + size.height);
-            healthBarContainer.setSize(size.width, 4);
-            healthBarContainer.clip();
-            
-            stage.addActor(healthBarContainer);
+            enemyHealthBar.setValue(calcRemainingHealthPercentage(entity));
+            stage.addActor(makeEnemyHealthBar(entity, enemyHealthBar));
         }
-
         stage.act(delta);
         stage.draw();
     }
+
+    private float calcRemainingHealthPercentage(Entity entity) {
+        // knob-after
+        // from 0 - 100
+        // 0 is full hp and 100 is no hp
+        // so if max hp is 10 and current hp is 8
+        // convert to percent = 80%
+        // then set value of health bar to that number
+        // because 0 is full hp setting to 20 will show their is only 80% left
+        // then fullHealth - calculated % : (100 - 80) = 20
+        ParameterComponent paramCom = cg.getParameters(entity);
+        return (float) Math.floor(fullHealth - ((paramCom.health.currentHealth / paramCom.health.maxHealth) * 100));
+    }
+
+    private Container<ProgressBar> makeEnemyHealthBar(Entity entity, ProgressBar healthBar) {
+        Container<ProgressBar> healthBarContainer = new Container<>(healthBar);
+        Position pos = cg.getPosition(entity);
+        Size size = cg.getSize(entity);
+        healthBarContainer.setBounds(pos.x, pos.y + size.height + 2, size.width, 4);
+        healthBarContainer.clip();
+        return healthBarContainer;
+    }
+
 }
