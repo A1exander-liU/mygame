@@ -12,10 +12,10 @@ import com.mygdx.game.engine.Families;
 
 public class GameMapProperties {
     public TiledMap tiledMap;
-    public int mapWidth;
-    public int mapHeight;
-    public int tileWidth;
-    public int tileHeight;
+    public static int mapWidth;
+    public static int mapHeight;
+    public static int tileWidth;
+    public static int tileHeight;
     public static String GROUND_LAYER;
     public static String ENEMY_SPAWNS;
     public static String COLLISIONS;
