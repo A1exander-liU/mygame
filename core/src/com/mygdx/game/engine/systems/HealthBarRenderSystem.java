@@ -14,8 +14,10 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.ComponentGrabber;
+import com.mygdx.game.engine.EnemyState;
 import com.mygdx.game.engine.Families;
 import com.mygdx.game.engine.components.Camera;
+import com.mygdx.game.engine.components.EnemyStateMachine;
 import com.mygdx.game.engine.components.ParameterComponent;
 import com.mygdx.game.engine.components.Position;
 import com.mygdx.game.engine.components.Size;
@@ -47,9 +49,14 @@ public class HealthBarRenderSystem extends EntitySystem {
         // draw hp bar over enemy sprites, will be drawn over their head
         for (int i = 0; i < enemies.size(); i++) {
             Entity entity = enemies.get(i);
-            ProgressBar enemyHealthBar = new ProgressBar(0, 100, 1, false, skin, "progress-bar-enemy-health");
-            enemyHealthBar.setValue(calcRemainingHealthPercentage(entity));
-            stage.addActor(makeEnemyHealthBarContainer(entity, enemyHealthBar));
+            EnemyStateMachine stateMachine = cg.getStateMachine(entity);
+            // only draw the health bar of the enemy if they are "hunting"
+            // the player
+            if (stateMachine.getCurrentState() == EnemyState.HUNT) {
+                ProgressBar enemyHealthBar = new ProgressBar(0, 100, 1, false, skin, "progress-bar-enemy-health");
+                enemyHealthBar.setValue(calcRemainingHealthPercentage(entity));
+                stage.addActor(makeEnemyHealthBarContainer(entity, enemyHealthBar));
+            }
         }
         stage.act();
         stage.draw();
