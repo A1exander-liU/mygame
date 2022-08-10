@@ -121,8 +121,10 @@ public class StateSystem extends EntitySystem {
     private void checkEnemyCanIdle(Entity entity) {
         EnemyStateMachine stateMachine = cg.getStateMachine(entity);
         if (stateMachine.getCurrentState() == EnemyState.FLEE) {
-            if (enemyNearSpawn(entity))
+            if (enemyNearSpawn(entity)) {
                 stateMachine.changeState(EnemyState.IDLE);
+                cg.getParameters(entity).health.currentHealth = cg.getParameters(entity).health.maxHealth;
+            }
         }
     }
 }
