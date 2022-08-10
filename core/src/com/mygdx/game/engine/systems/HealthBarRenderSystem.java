@@ -5,10 +5,13 @@ import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Container;
 import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.ComponentGrabber;
 import com.mygdx.game.engine.Families;
@@ -36,6 +39,7 @@ public class HealthBarRenderSystem extends EntitySystem {
         characters = MyGame.engine.getEntitiesFor(Families.characters);
         skin = new Skin(Gdx.files.internal("Game_UI_Skin/Game_UI_Skin.json"));
         stage = new Stage();
+        test();
     }
 
     @Override
@@ -48,7 +52,7 @@ public class HealthBarRenderSystem extends EntitySystem {
             enemyHealthBar.setValue(calcRemainingHealthPercentage(entity));
             stage.addActor(makeEnemyHealthBarContainer(entity, enemyHealthBar));
         }
-        stage.act(delta);
+        stage.act();
         stage.draw();
     }
 
@@ -87,9 +91,17 @@ public class HealthBarRenderSystem extends EntitySystem {
         Vector3 screenCoordinates = camera.camera.project(worldCoordinates);
         // set bounds in order to render properly
         healthBarContainer.setBounds(screenCoordinates.x, screenCoordinates.y, size.width, 4);
-        // health bar will be cut to fit inside container
+        healthBarContainer.width(size.width);
+        healthBarContainer.height(4);
         healthBarContainer.clip();
-        healthBarContainer.setPosition(screenCoordinates.x, screenCoordinates.y);
         return healthBarContainer;
+    }
+
+    private void test() {
+        for (int i = 0; i < enemies.size(); i++) {
+            Entity entity = enemies.get(i);
+            ParameterComponent paramCom = cg.getParameters(entity);
+            paramCom.health.currentHealth -= 2;
+        }
     }
 }
