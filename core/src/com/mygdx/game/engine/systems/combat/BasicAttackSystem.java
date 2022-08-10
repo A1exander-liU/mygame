@@ -8,6 +8,9 @@ import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.ComponentGrabber;
 import com.mygdx.game.engine.Families;
+import com.mygdx.game.engine.components.Orientation;
+import com.mygdx.game.engine.components.Position;
+import com.mygdx.game.engine.components.Size;
 
 public class BasicAttackSystem extends EntitySystem {
     ComponentGrabber cg;
@@ -27,8 +30,20 @@ public class BasicAttackSystem extends EntitySystem {
         // attack: arc, sweeping motion
         // check if the sweeping motion collides with an enemy
         // if they collide the enemy takes some dmg
+        // different weapon type will have different attack:
+        // slash, pierce
+        // slash will perform a sweeping motion
+        // pierce will extend outwards
         if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) {
-            System.out.println("perform attack");
+            // attack in current facing direction (use orientation)
+            performSlash();
         }
+    }
+
+    private void performSlash() {
+        Orientation orientation = cg.getOrientation(player);
+        Position pos = cg.getPosition(player);
+        Size size = cg.getSize(player);
+        
     }
 }
