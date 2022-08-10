@@ -39,7 +39,6 @@ public class HealthBarRenderSystem extends EntitySystem {
         characters = MyGame.engine.getEntitiesFor(Families.characters);
         skin = new Skin(Gdx.files.internal("Game_UI_Skin/Game_UI_Skin.json"));
         stage = new Stage();
-        test();
     }
 
     @Override
