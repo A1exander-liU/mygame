@@ -11,7 +11,6 @@ import com.dongbat.jbump.Item;
 import com.dongbat.jbump.Rect;
 import com.dongbat.jbump.Response;
 import com.dongbat.jbump.World;
-import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.ComponentGrabber;
 import com.mygdx.game.engine.EnemyState;
@@ -25,17 +24,15 @@ import com.mygdx.game.engine.components.SpawnArea;
 
 public class CollisionSystem extends EntitySystem implements EntityListener {
     ComponentGrabber cg;
-    GameMapProperties gameMapProperties;
     ImmutableArray<Entity> collisions;
     ImmutableArray<Entity> enemies;
     ImmutableArray<Entity> spawns;
     Entity player;
     public static World<Entity> world;
 
-    public CollisionSystem(ComponentGrabber cg, GameMapProperties gameMapProperties) {
+    public CollisionSystem(ComponentGrabber cg) {
         super(7);
         this.cg = cg;
-        this.gameMapProperties = gameMapProperties;
         collisions = MyGame.engine.getEntitiesFor(Families.collisions);
         enemies = MyGame.engine.getEntitiesFor(Families.enemies);
         spawns = MyGame.engine.getEntitiesFor(Families.spawns);
@@ -112,7 +109,6 @@ public class CollisionSystem extends EntitySystem implements EntityListener {
     }
 
     private void addToWorld(Entity entity) {
-        entity.add(new com.mygdx.game.engine.components.Item());
         Position pos = cg.getPosition(entity);
         Size size = cg.getSize(entity);
         Item<Entity> item = new Item<>(entity);

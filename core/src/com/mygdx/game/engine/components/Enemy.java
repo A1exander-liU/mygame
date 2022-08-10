@@ -8,7 +8,5 @@ public class Enemy implements Component {
     // return: moving back to spawn point
     public enum States {WANDER, PURSUE, RETURN};
     public States state;
-    public boolean spawned = false;
     public boolean isAlive = true;
-    public boolean hunting = false;
 }

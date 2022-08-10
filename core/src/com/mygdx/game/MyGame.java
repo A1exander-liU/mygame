@@ -2,8 +2,6 @@ package com.mygdx.game;
 
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.engine.EntityToMapAdder;
 import com.mygdx.game.screens.GameScreen;
@@ -27,7 +25,7 @@ public class MyGame extends Game {
 	public SpriteBatch batch;
 	public static Engine engine;
 	public static GameMapProperties gameMapProperties;
-	public JsonSearcher jsonSearcher;
+	public JsonEnemyFinder jsonSearcher;
 	public EntityToMapAdder entityToMapAdder;
 
 	public StoredPreferences getStoredPreferences() {

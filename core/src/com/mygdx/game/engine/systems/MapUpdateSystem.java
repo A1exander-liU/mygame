@@ -6,6 +6,7 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.maps.MapObjects;
 import com.mygdx.game.GameMapProperties;
+import com.mygdx.game.MapObjectDrawer;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.ComponentGrabber;
 import com.mygdx.game.engine.Families;
@@ -17,14 +18,15 @@ import com.mygdx.game.utils.EntityTextureObject;
 
 public class MapUpdateSystem extends EntitySystem {
     ComponentGrabber cg;
-    GameMapProperties gameMapProperties;
     ImmutableArray<Entity> characters;
     Entity player;
 
-    public MapUpdateSystem(ComponentGrabber cg, GameMapProperties gameMapProperties) {
-        super(98);
+    MapObjectDrawer tiledMapRenderer;
+
+    public MapUpdateSystem(ComponentGrabber cg, MapObjectDrawer tiledMapRenderer) {
+        super(97);
         this.cg = cg;
-        this.gameMapProperties = gameMapProperties;
+        this.tiledMapRenderer = tiledMapRenderer;
         characters = MyGame.engine.getEntitiesFor(Family.one(Player.class, Enemy.class).get());
         player = MyGame.engine.getEntitiesFor(Families.player).get(0);
     }
@@ -36,6 +38,8 @@ public class MapUpdateSystem extends EntitySystem {
             updateEntityInMap(entity);
         }
         updatePlayerCamPosition();
+        tiledMapRenderer.setView(cg.getCamera(player).camera);
+        tiledMapRenderer.render();
     }
 
     private void updateEntityInMap(Entity entity) {
@@ -48,7 +52,7 @@ public class MapUpdateSystem extends EntitySystem {
     }
 
     private EntityTextureObject findSameOwner(Entity entity) {
-        MapObjects collisions = gameMapProperties.getMapLayer(GameMapProperties.COLLISIONS).getObjects();
+        MapObjects collisions = MyGame.gameMapProperties.getMapLayer(GameMapProperties.COLLISIONS).getObjects();
         // going through each item in collision layer
         // check if it is EntityTextureMap object
         // check if the owner of it is same as the owner we are trying to find the texture for

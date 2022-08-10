@@ -5,7 +5,6 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.ComponentGrabber;
 import com.mygdx.game.engine.Families;
@@ -15,14 +14,10 @@ import com.mygdx.game.engine.components.Speed;
 public class MovementSystem extends EntitySystem {
     private final Entity player;
     ComponentGrabber cg;
-    MyGame root;
-    GameMapProperties gameMapProperties;
 
-    public MovementSystem(ComponentGrabber cg, MyGame root, GameMapProperties gameMapProperties) {
+    public MovementSystem(ComponentGrabber cg) {
         super(3);
         this.cg = cg;
-        this.root = root;
-        this.gameMapProperties = gameMapProperties;
         // there is only one player hence we just get index 0
         player = MyGame.engine.getEntitiesFor(Families.player).get(0);
     }

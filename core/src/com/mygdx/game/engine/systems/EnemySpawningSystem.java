@@ -10,13 +10,12 @@ import com.badlogic.gdx.math.Rectangle;
 import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.ComponentGrabber;
+import com.mygdx.game.engine.EntityFactory;
 import com.mygdx.game.engine.Families;
-import com.mygdx.game.engine.MobEntity;
 import com.mygdx.game.engine.components.Spawn;
 import com.mygdx.game.engine.components.SpawnArea;
 import com.mygdx.game.engine.components.Name;
 import com.mygdx.game.engine.components.Position;
-import com.mygdx.game.engine.components.Size;
 import com.mygdx.game.utils.EntityTextureObject;
 
 import java.util.Objects;
@@ -26,19 +25,17 @@ public class EnemySpawningSystem extends EntitySystem {
     private final MapObjects spawnPoints;
     private final MapObjects objects;
     private MapObjects temp;
-    private final float RESPAWN_TIME = 90;
     ComponentGrabber cg;
-    MyGame root;
-    GameMapProperties gameMapProperties;
+    EntityFactory entityFactory;
 
-    public EnemySpawningSystem(ComponentGrabber cg, MyGame root, GameMapProperties gameMapProperties) {
+    public EnemySpawningSystem(ComponentGrabber cg,
+    EntityFactory entityFactory) {
         super(2);
         this.cg = cg;
-        this.root = root;
-        this.gameMapProperties = gameMapProperties;
+        this.entityFactory = entityFactory;
         spawns = MyGame.engine.getEntitiesFor(Families.spawns);
-        spawnPoints = gameMapProperties.getMapLayer(GameMapProperties.ENEMY_SPAWNS).getObjects();
-        objects = gameMapProperties.getMapLayer(GameMapProperties.COLLISIONS).getObjects();
+        spawnPoints = MyGame.gameMapProperties.getMapLayer(GameMapProperties.ENEMY_SPAWNS).getObjects();
+        objects = MyGame.gameMapProperties.getMapLayer(GameMapProperties.COLLISIONS).getObjects();
         // create a enemy and place at each spawn point
         // spawns are named to determine the enemy to spawn
         temp = new MapObjects();
@@ -67,6 +64,7 @@ public class EnemySpawningSystem extends EntitySystem {
             Entity spawn = spawns.get(i);
             SpawnArea spawnArea = cg.getSpawnArea(spawn);
             if (spawnArea.owner == null) {
+                float RESPAWN_TIME = 90;
                 if (TimeSystem.time - spawnArea.lastTimeOfDeath >= RESPAWN_TIME) {
                     spawn(spawn);
                 }
@@ -82,7 +80,7 @@ public class EnemySpawningSystem extends EntitySystem {
             // building the enemy, the parameters are set too
             // all enemy entities are built
             // this also adds the entity to the map (the textureMapObject to the map)
-            MobEntity mobEntity = new MobEntity(cg, root, gameMapProperties, name);
+            entityFactory.makeEnemy(name);
         }
         // placing the enemy on the map
         spawnEnemies();
@@ -139,7 +137,7 @@ public class EnemySpawningSystem extends EntitySystem {
     private void spawn(Entity entity) {
         Name name = cg.getName(entity);
         SpawnArea spawnArea = cg.getSpawnArea(entity);
-        MobEntity mobEntity = new MobEntity(cg, root, gameMapProperties, name.name);
+        entityFactory.makeEnemy(name.name);
         // since it was just added, it will be the last element
         EntityTextureObject textureObject = (EntityTextureObject) objects.get(objects.getCount() - 1);
         Entity enemy = textureObject.getOwner();
@@ -170,24 +168,7 @@ public class EnemySpawningSystem extends EntitySystem {
 
     private void makeSpawnAreaEntities() {
         for (int i = 0; i < spawnPoints.getCount(); i++) {
-            Rectangle spawn = ((RectangleMapObject) spawnPoints.get(i)).getRectangle();
-            Entity spawnArea = new Entity();
-            spawnArea.add(new Position());
-            spawnArea.add(new Size());
-            spawnArea.add(new SpawnArea());
-            spawnArea.add(new Name());
-            Position pos = cg.getPosition(spawnArea);
-            Size size = cg.getSize(spawnArea);
-            SpawnArea spawnAreaComponent = cg.getSpawnArea(spawnArea);
-            Name name = cg.getName(spawnArea);
-            pos.x = spawn.x;
-            pos.y = spawn.y;
-            size.width = spawn.width;
-            size.height = spawn.height;
-            spawnAreaComponent.xCenter = spawn.x + (spawn.width / 2);
-            spawnAreaComponent.yCenter = spawn.y + (spawn.height / 2);
-            name.name = spawnPoints.get(i).getName();
-            MyGame.engine.addEntity(spawnArea);
+            entityFactory.makeSpawn(spawnPoints.get(i));
         }
     }
 

@@ -7,7 +7,8 @@ import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.GameLocation;
+import com.mygdx.game.GameMapProperties;
+import com.mygdx.game.utils.GameLocation;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.MobEntity;
 import com.mygdx.game.engine.components.MovementBehavior;
@@ -74,7 +75,7 @@ public class ChangeTarget extends LeafTask<MobEntity> {
     private Rectangle getSpawnArea(Spawn spawn) {
         float enemySpawnX = spawn.spawnPosX;
         float enemySpawnY = spawn.spawnPosY;
-        MapObjects spawns = MyGame.gameMapProperties.getMapLayer(MyGame.gameMapProperties.ENEMY_SPAWNS).getObjects();
+        MapObjects spawns = MyGame.gameMapProperties.getMapLayer(GameMapProperties.ENEMY_SPAWNS).getObjects();
         for (int i = 0; i < spawns.getCount(); i++) {
             Rectangle spawnArea = ((RectangleMapObject) spawns.get(i)).getRectangle();
             float spawnCenterX = spawnArea.x + (spawnArea.width / 2);

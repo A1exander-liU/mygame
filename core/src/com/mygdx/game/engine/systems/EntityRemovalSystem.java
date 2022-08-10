@@ -15,14 +15,12 @@ import com.mygdx.game.utils.EntityTextureObject;
 
 public class EntityRemovalSystem extends EntitySystem {
     ComponentGrabber cg;
-    GameMapProperties gameMapProperties;
     ImmutableArray<Entity> enemies;
     ImmutableArray<Entity> spawns;
 
-    public EntityRemovalSystem(ComponentGrabber cg, GameMapProperties gameMapProperties) {
+    public EntityRemovalSystem(ComponentGrabber cg) {
         super(99);
         this.cg = cg;
-        this.gameMapProperties = gameMapProperties;
         enemies = MyGame.engine.getEntitiesFor(Families.enemies);
         spawns = MyGame.engine.getEntitiesFor(Families.spawns);
     }
@@ -46,7 +44,7 @@ public class EntityRemovalSystem extends EntitySystem {
     }
 
     private void removeFromMap(Entity entity) {
-        MapObjects collisions = gameMapProperties.getMapLayer(GameMapProperties.COLLISIONS).getObjects();
+        MapObjects collisions = MyGame.gameMapProperties.getMapLayer(GameMapProperties.COLLISIONS).getObjects();
         for (int i = 0; i < collisions.getCount(); i++) {
             if (collisions.get(i) instanceof EntityTextureObject) {
                 EntityTextureObject textureObject = (EntityTextureObject) collisions.get(i);

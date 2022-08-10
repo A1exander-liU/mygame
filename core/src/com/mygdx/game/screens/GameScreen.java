@@ -1,7 +1,6 @@
 package com.mygdx.game.screens;
 
 import com.badlogic.ashley.core.Engine;
-import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
@@ -10,17 +9,16 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
-import com.mygdx.game.JsonSearcher;
+import com.mygdx.game.JsonEnemyFinder;
 import com.mygdx.game.engine.ComponentGrabber;
 import com.mygdx.game.MapObjectDrawer;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.engine.EntityFactory;
 import com.mygdx.game.engine.EntityToMapAdder;
-import com.mygdx.game.engine.Families;
-import com.mygdx.game.engine.PlayerEntity;
 import com.mygdx.game.engine.systems.EnemySpawningSystem;
 import com.mygdx.game.engine.systems.EntityRemovalSystem;
+import com.mygdx.game.engine.systems.HealthBarRenderSystem;
 import com.mygdx.game.engine.systems.MapUpdateSystem;
 import com.mygdx.game.engine.systems.MovementSystem;
 import com.mygdx.game.engine.systems.CollisionSystem;
@@ -38,23 +36,22 @@ public class GameScreen implements Screen {
     final int worldWidth = 100;
     final int worldHeight = 120;
 
-    GameMapProperties gameMapProperties;
     TiledMap testMap;
     MapObjectDrawer tiledMapRenderer;
+    EntityFactory entityFactory;
 
     ComponentGrabber cg;
 
     public GameScreen(MyGame parent) {
-        parent.jsonSearcher = new JsonSearcher(Gdx.files.internal("gameData/enemies.json"));
+        parent.jsonSearcher = new JsonEnemyFinder();
         testMap = new TmxMapLoader().load("untitled.tmx");
         this.parent = parent;
         MyGame.engine = new Engine();
-        cg = new ComponentGrabber(parent);
-        MyGame.gameMapProperties = new GameMapProperties(testMap);
-        gameMapProperties = new GameMapProperties(testMap, parent);
-        parent.entityToMapAdder = new EntityToMapAdder(testMap, cg);
-        EntityFactory entityFactory = new EntityFactory(cg, parent);
-        PlayerEntity playerEntity = new PlayerEntity(cg, parent, gameMapProperties, "player");
+        cg = new ComponentGrabber();
+        entityFactory = new EntityFactory(cg, parent);
+        MyGame.gameMapProperties = new GameMapProperties(testMap, entityFactory);
+        parent.entityToMapAdder = new EntityToMapAdder(cg);
+        entityFactory.makePlayer("player");
 
         // to add system (now all allowed entities will move every frame)
         // you can enable and disable a system temporarily
@@ -98,26 +95,28 @@ public class GameScreen implements Screen {
         // mapUpdateSystem: 98
         // removalSystem: 99
 
-        MovementSystem movementAndCollision = new MovementSystem(cg, parent, gameMapProperties);
-        EnemySpawningSystem enemySpawningSystem = new EnemySpawningSystem(cg, parent, gameMapProperties);
-        SteeringSystem steeringSystem = new SteeringSystem(cg, parent, gameMapProperties);
-        TimeSystem timeSystem = new TimeSystem(parent);
-        StateSystem stateSystem = new StateSystem(cg, gameMapProperties);
-        EntityRemovalSystem entityRemovalSystem = new EntityRemovalSystem(cg, gameMapProperties);
-        CollisionSystem simulationSystem = new CollisionSystem(cg, gameMapProperties);
-        MapUpdateSystem mapUpdateSystem = new MapUpdateSystem(cg, gameMapProperties);
+        MovementSystem movementSystem = new MovementSystem(cg);
+        EnemySpawningSystem enemySpawningSystem = new EnemySpawningSystem(cg, entityFactory);
+        SteeringSystem steeringSystem = new SteeringSystem(cg);
+        TimeSystem timeSystem = new TimeSystem();
+        StateSystem stateSystem = new StateSystem(cg);
+        EntityRemovalSystem entityRemovalSystem = new EntityRemovalSystem(cg);
+        CollisionSystem collisionSystem = new CollisionSystem(cg);
+        MapUpdateSystem mapUpdateSystem = new MapUpdateSystem(cg, tiledMapRenderer);
         OrientationSystem orientationSystem = new OrientationSystem(cg);
-        BasicAttackSystem basicAttackSystem = new BasicAttackSystem(cg, gameMapProperties);
-        MyGame.engine.addSystem(movementAndCollision);
+        BasicAttackSystem basicAttackSystem = new BasicAttackSystem(cg, MyGame.gameMapProperties);
+        HealthBarRenderSystem healthBarRenderSystem = new HealthBarRenderSystem(cg);
+        MyGame.engine.addSystem(movementSystem);
         MyGame.engine.addSystem(enemySpawningSystem);
         MyGame.engine.addSystem(steeringSystem);
         MyGame.engine.addSystem(timeSystem);
         MyGame.engine.addSystem(stateSystem);
         MyGame.engine.addSystem(entityRemovalSystem);
-        MyGame.engine.addSystem(simulationSystem);
+        MyGame.engine.addSystem(collisionSystem);
         MyGame.engine.addSystem(mapUpdateSystem);
         MyGame.engine.addSystem(orientationSystem);
         MyGame.engine.addSystem(basicAttackSystem);
+        MyGame.engine.addSystem(healthBarRenderSystem);
         checkPriorities();
     }
 
@@ -131,10 +130,7 @@ public class GameScreen implements Screen {
         Gdx.gl.glClearColor(1f, 0f, 0f, 1);
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        Entity entity = MyGame.engine.getEntitiesFor(Families.player).get(0);
-        tiledMapRenderer.setView(cg.getCamera(entity).camera);
         MyGame.engine.update(delta);
-        tiledMapRenderer.render();
     }
 
     @Override

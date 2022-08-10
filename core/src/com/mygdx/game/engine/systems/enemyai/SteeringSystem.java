@@ -16,19 +16,16 @@ import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.GameLocation;
+import com.mygdx.game.utils.GameLocation;
 import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.ComponentGrabber;
 import com.mygdx.game.engine.EnemyState;
 import com.mygdx.game.engine.Families;
-import com.mygdx.game.engine.components.Enemy;
-import com.mygdx.game.engine.components.ID;
 import com.mygdx.game.engine.components.Player;
 import com.mygdx.game.engine.components.Position;
 import com.mygdx.game.engine.components.Size;
 import com.mygdx.game.engine.components.Spawn;
-import com.mygdx.game.engine.components.SpawnArea;
 import com.mygdx.game.engine.components.StateComponent;
 import com.mygdx.game.engine.systems.TimeSystem;
 import com.mygdx.game.utils.GameRaycastCollisionDetector;
@@ -37,24 +34,20 @@ import java.util.Random;
 // 3 states: idle(random walk), hunting(pursue and attack player), flee(return)
 public class SteeringSystem extends EntitySystem {
     ComponentGrabber cg;
-    MyGame root;
-    GameMapProperties gameMapProperties;
     ImmutableArray<Entity> enemies;
     ImmutableArray<Entity> entities;
     ImmutableArray<Entity> spawns;
     Entity player;
     MapObjects spawnPoints;
 
-    public SteeringSystem(ComponentGrabber cg, MyGame root, GameMapProperties gameMapProperties) {
+    public SteeringSystem(ComponentGrabber cg) {
         super(5);
         this.cg = cg;
-        this.root = root;
-        this.gameMapProperties = gameMapProperties;
         enemies = MyGame.engine.getEntitiesFor(Families.enemies);
         player = MyGame.engine.getEntitiesFor(Families.player).get(0);
         entities = MyGame.engine.getEntitiesFor(Family.exclude(Player.class).get());
         spawns = MyGame.engine.getEntitiesFor(Families.spawns);
-        spawnPoints = gameMapProperties.getMapLayer(GameMapProperties.ENEMY_SPAWNS).getObjects();
+        spawnPoints = MyGame.gameMapProperties.getMapLayer(GameMapProperties.ENEMY_SPAWNS).getObjects();
     }
 
     @Override
@@ -107,7 +100,7 @@ public class SteeringSystem extends EntitySystem {
         // create new ray cast collision avoidance
         RaycastObstacleAvoidance<Vector2> avoidance = new RaycastObstacleAvoidance<>(cg.getSteering(entity));
         // creating the collision detector
-        RaycastCollisionDetector<Vector2> detector = new GameRaycastCollisionDetector(gameMapProperties, entity);
+        RaycastCollisionDetector<Vector2> detector = new GameRaycastCollisionDetector(entity);
         // set the ray configs
         avoidance.setRayConfiguration(
                 new CentralRayWithWhiskersConfiguration<>(cg.getSteering(entity), 10f, 10f, 25f)
@@ -161,7 +154,7 @@ public class SteeringSystem extends EntitySystem {
     private Rectangle getSpawnArea(Spawn spawn) {
         float enemySpawnX = spawn.spawnPosX;
         float enemySpawnY = spawn.spawnPosY;
-        MapObjects spawns = gameMapProperties.getMapLayer(GameMapProperties.ENEMY_SPAWNS).getObjects();
+        MapObjects spawns = MyGame.gameMapProperties.getMapLayer(GameMapProperties.ENEMY_SPAWNS).getObjects();
         for (int i = 0; i < spawns.getCount(); i++) {
             Rectangle spawnArea = ((RectangleMapObject) spawns.get(i)).getRectangle();
             float spawnCenterX = spawnArea.x + (spawnArea.width / 2);

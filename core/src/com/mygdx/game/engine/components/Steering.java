@@ -7,7 +7,7 @@ import com.badlogic.gdx.ai.steer.SteeringAcceleration;
 import com.badlogic.gdx.ai.steer.SteeringBehavior;
 import com.badlogic.gdx.ai.utils.Location;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.GameLocation;
+import com.mygdx.game.utils.GameLocation;
 
 public class Steering implements Component, Steerable<Vector2> {
     public Vector2 linearVelocity = new Vector2(75, 75);

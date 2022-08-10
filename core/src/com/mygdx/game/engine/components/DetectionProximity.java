@@ -19,7 +19,6 @@ public class DetectionProximity implements Component, Proximity<Vector2> {
     // centered at the characters position
     public float detectionRadius;
     public int neighbourCount = 0;
-    MyGame root;
 
     // finds agents in the immediate area
     // the agents found are passed to reportNeighbour of the specified callback
@@ -35,12 +34,11 @@ public class DetectionProximity implements Component, Proximity<Vector2> {
     // collision avoidance calls findNeighbors method of the passed proximity
     //
 
-    public DetectionProximity(Entity entity, float detectionRadius, MyGame root) {
+    public DetectionProximity(Entity entity, float detectionRadius) {
         this.entity = entity;
         this.detectionRadius = detectionRadius;
         owner = entity.getComponent(Steering.class);
         this.callback = null;
-        this.root = root;
     }
 
     @Override
@@ -81,7 +79,7 @@ public class DetectionProximity implements Component, Proximity<Vector2> {
     }
 
     private void queryForNeighbors() {
-        ImmutableArray<Entity> obstacles = root.engine.getEntitiesFor(Families.obstacles);
+        ImmutableArray<Entity> obstacles = MyGame.engine.getEntitiesFor(Families.obstacles);
         Rectangle AABB = getCharViewArea();
         for (int i = 0; i < obstacles.size(); i++) {
             Entity obstacle = obstacles.get(i);

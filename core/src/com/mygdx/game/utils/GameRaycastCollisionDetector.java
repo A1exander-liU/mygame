@@ -9,18 +9,15 @@ import com.dongbat.jbump.CollisionFilter;
 import com.dongbat.jbump.Item;
 import com.dongbat.jbump.ItemInfo;
 import com.dongbat.jbump.Response;
-import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.engine.MobEntity;
 import com.mygdx.game.engine.systems.CollisionSystem;
 
 import java.util.ArrayList;
 
 public class GameRaycastCollisionDetector implements RaycastCollisionDetector<Vector2> {
-    GameMapProperties gameMapProperties;
     Entity owner;
 
-    public GameRaycastCollisionDetector(GameMapProperties gameMapProperties, Entity owner) {
-        this.gameMapProperties = gameMapProperties;
+    public GameRaycastCollisionDetector(Entity owner) {
         this.owner = owner;
     }
 

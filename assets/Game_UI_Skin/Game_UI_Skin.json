@@ -14,6 +14,12 @@
 		"b": 0,
 		"a": 1
 	},
+	"green": {
+		"r": 0,
+		"g": 0.84705883,
+		"b": 0.12941177,
+		"a": 1
+	},
 	"hp-red": {
 		"r": 1,
 		"g": 0,
@@ -48,6 +54,10 @@
 	"cursor-black": {
 		"name": "white-pixel",
 		"color": "black"
+	},
+	"konb-after-enemy-hp": {
+		"name": "white-pixel",
+		"color": "green"
 	}
 },
 "com.ray3k.tenpatch.TenPatchDrawable": {
@@ -550,6 +560,46 @@
 		"regions": [],
 		"playMode": 2,
 		"crushMode": 0
+	},
+	"progress-bar-enemy-hp": {
+		"region": "pixil-frame-0 (2)",
+		"horizontalStretchAreas": [ 0, 63 ],
+		"verticalStretchAreas": [ 28, 39 ],
+		"tiling": false,
+		"minWidth": 64,
+		"minHeight": 64,
+		"rightWidth": 0,
+		"leftWidth": 0,
+		"bottomHeight": 28,
+		"topHeight": 24,
+		"offsetX": 0,
+		"offsetY": 0,
+		"offsetXspeed": 0,
+		"offsetYspeed": 0,
+		"frameDuration": 0.03,
+		"regions": [],
+		"playMode": 2,
+		"crushMode": 0
+	},
+	"knob-after-enemy-full": {
+		"region": "pixil-frame-0 (3)",
+		"horizontalStretchAreas": [ 0, 63 ],
+		"verticalStretchAreas": [ 28, 39 ],
+		"tiling": false,
+		"minWidth": 64,
+		"minHeight": 64,
+		"rightWidth": 0,
+		"leftWidth": 0,
+		"bottomHeight": 28,
+		"topHeight": 24,
+		"offsetX": 0,
+		"offsetY": 0,
+		"offsetXspeed": 0,
+		"offsetYspeed": 0,
+		"frameDuration": 0.03,
+		"regions": [],
+		"playMode": 2,
+		"crushMode": 0
 	}
 },
 "com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle": {
@@ -557,6 +607,9 @@
 		"up": "button-up",
 		"down": "text-button-down",
 		"over": "text-button-over"
+	},
+	"UI-BG": {
+		"up": "button-up"
 	}
 },
 "com.badlogic.gdx.scenes.scene2d.ui.CheckBox$CheckBoxStyle": {
@@ -592,9 +645,9 @@
 		"background": "progress-bar-bg",
 		"knobBefore": "knob-before-experience"
 	},
-	"enemy-health": {
-		"background": "progress-bar-bg",
-		"knobAfter": "knob-after-health"
+	"progress-bar-enemy-health": {
+		"background": "progress-bar-enemy-hp",
+		"knobAfter": "knob-after-enemy-full"
 	}
 },
 "com.badlogic.gdx.scenes.scene2d.ui.ScrollPane$ScrollPaneStyle": {

@@ -12,6 +12,7 @@ public class Families {
     public static final Family obstacles = Family.exclude(Enemy.class, Player.class, SpawnArea.class).get();
     public static final Family spawns = Family.all(SpawnArea.class).get();
     public static final Family collisions = Family.exclude(SpawnArea.class).get();
+    public static final Family characters = Family.one(Player.class, Enemy.class).get();
 
     public Families() {}
     

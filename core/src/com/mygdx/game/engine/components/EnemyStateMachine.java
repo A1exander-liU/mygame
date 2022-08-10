@@ -17,7 +17,7 @@ public class EnemyStateMachine extends StackStateMachine<Entity, EnemyState> imp
     @Override
     public void update() {
         // call update and call update of current state to run current state
-        getCurrentState().update((MobEntity) super.owner);
+        getCurrentState().update(super.owner);
     }
 
     public void changeState(EnemyState newState) {
