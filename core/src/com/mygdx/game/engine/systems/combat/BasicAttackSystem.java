@@ -4,10 +4,13 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.ComponentGrabber;
+import com.mygdx.game.engine.Direction;
 import com.mygdx.game.engine.Families;
+import com.mygdx.game.engine.components.AttackRange;
 import com.mygdx.game.engine.components.Orientation;
 import com.mygdx.game.engine.components.Position;
 import com.mygdx.game.engine.components.Size;
@@ -26,24 +29,20 @@ public class BasicAttackSystem extends EntitySystem {
 
     @Override
     public void update(float delta) {
-        // click mouse button or some key, does an attack
-        // attack: arc, sweeping motion
-        // check if the sweeping motion collides with an enemy
-        // if they collide the enemy takes some dmg
-        // different weapon type will have different attack:
-        // slash, pierce
-        // slash will perform a sweeping motion
-        // pierce will extend outwards
-        if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) {
-            // attack in current facing direction (use orientation)
+        if (Gdx.input.isButtonJustPressed(Input.Keys.SPACE)) {
             performSlash();
         }
     }
 
     private void performSlash() {
         Orientation orientation = cg.getOrientation(player);
-        Position pos = cg.getPosition(player);
-        Size size = cg.getSize(player);
+        Entity attack = makeAttackAreaEntity();
         
+    }
+
+    private Entity makeAttackAreaEntity() {
+        return new Entity()
+                .add(new Position())
+                .add(new AttackRange());
     }
 }
