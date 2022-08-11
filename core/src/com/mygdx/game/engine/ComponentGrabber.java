@@ -2,6 +2,7 @@ package com.mygdx.game.engine;
 
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
+import com.mygdx.game.engine.components.AttackRange;
 import com.mygdx.game.engine.components.DetectionProximity;
 import com.mygdx.game.engine.components.EnemyStateMachine;
 import com.mygdx.game.engine.components.Item;
@@ -26,6 +27,11 @@ import com.mygdx.game.engine.components.Speed;
 public class ComponentGrabber {
 
     public ComponentGrabber() {}
+
+    public AttackRange getAttackRange(Entity entity) {
+        ComponentMapper<AttackRange> attackRange = ComponentMapper.getFor(AttackRange.class);
+        return attackRange.get(entity);
+    }
 
     public Camera getCamera(Entity entity) {
         ComponentMapper<Camera> camera = ComponentMapper.getFor(Camera.class);
