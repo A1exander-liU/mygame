@@ -8,6 +8,6 @@ public class AttackRange implements Component {
     // base will be 1 which be adjusted depending on the weapon
     // player can attack in multiple directions so the range of the attack
     // will not extend in one axis
-    public float xRange = 1;
-    public float yRange = 1;
+    public float xRange = 0;
+    public float yRange = 0;
 }
