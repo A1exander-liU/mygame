@@ -73,7 +73,9 @@ public class BasicAttackSystem extends EntitySystem {
     private boolean attackLanded(Ray<Vector2> attackRay, Entity owner) {
         for (int i = 0; i < enemies.size(); i++) {
             Entity entity = enemies.get(i);
-            return checkCollisions(attackRay, entity);
+            boolean collisionDetected = checkCollisions(attackRay, entity);
+            if (collisionDetected)
+                return true;
         }
 
         return false;
