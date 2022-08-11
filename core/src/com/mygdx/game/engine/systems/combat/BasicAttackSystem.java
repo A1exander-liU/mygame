@@ -5,7 +5,9 @@ import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.ai.utils.Collision;
 import com.badlogic.gdx.ai.utils.Ray;
+import com.badlogic.gdx.ai.utils.RaycastCollisionDetector;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -19,6 +21,7 @@ import com.mygdx.game.engine.components.AttackRange;
 import com.mygdx.game.engine.components.Orientation;
 import com.mygdx.game.engine.components.Position;
 import com.mygdx.game.engine.components.Size;
+import com.mygdx.game.utils.GameRaycastCollisionDetector;
 
 public class BasicAttackSystem extends EntitySystem {
     ComponentGrabber cg;
@@ -36,7 +39,7 @@ public class BasicAttackSystem extends EntitySystem {
 
     @Override
     public void update(float delta) {
-        if (Gdx.input.isButtonJustPressed(Input.Keys.SPACE)) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
             performSlash();
         }
     }
@@ -54,9 +57,9 @@ public class BasicAttackSystem extends EntitySystem {
                     pos.y + (size.height / 2));
             Vector2 end = new Vector2(start.x + attackRange.range, start.y);
             Ray<Vector2> ray = new Ray<>(start, end);
-            if (attackLanded(ray)) {
+            if (attackLanded(ray, attack)) {
                 // do the dmg and update the health  here
-                
+                System.out.println("landed");
             }
         }
     }
@@ -67,7 +70,7 @@ public class BasicAttackSystem extends EntitySystem {
                 .add(new AttackRange());
     }
 
-    private boolean attackLanded(Ray<Vector2> attackRay) {
+    private boolean attackLanded(Ray<Vector2> attackRay, Entity owner) {
         for (int i = 0; i < enemies.size(); i++) {
             Entity entity = enemies.get(i);
             return checkCollisions(attackRay, entity);
