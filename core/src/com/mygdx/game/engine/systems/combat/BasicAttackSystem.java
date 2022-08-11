@@ -50,18 +50,20 @@ public class BasicAttackSystem extends EntitySystem {
         Size size = cg.getSize(player);
         Entity attack = makeAttackAreaEntity();
         AttackRange attackRange = cg.getAttackRange(attack);
-        attackRange.range = 16;
         if (orientation.orientation == Direction.EAST) {
+            attackRange.xRange = 16;
             Vector2 start = new Vector2(
                     pos.x + size.width,
                     pos.y + (size.height / 2));
-            Vector2 end = new Vector2(start.x + attackRange.range, start.y);
+            Vector2 end = new Vector2(start.x + attackRange.xRange, start.y);
             Ray<Vector2> ray = new Ray<>(start, end);
-            if (attackLanded(ray, attack)) {
+            if (attackLanded(ray)) {
                 // do the dmg and update the health  here
                 System.out.println("landed");
+
             }
         }
+        MyGame.engine.removeEntity(attack);
     }
 
     private Entity makeAttackAreaEntity() {
@@ -70,14 +72,13 @@ public class BasicAttackSystem extends EntitySystem {
                 .add(new AttackRange());
     }
 
-    private boolean attackLanded(Ray<Vector2> attackRay, Entity owner) {
+    private boolean attackLanded(Ray<Vector2> attackRay) {
         for (int i = 0; i < enemies.size(); i++) {
             Entity entity = enemies.get(i);
             boolean collisionDetected = checkCollisions(attackRay, entity);
             if (collisionDetected)
                 return true;
         }
-
         return false;
     }
 
