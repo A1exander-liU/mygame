@@ -9,7 +9,6 @@ import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.ComponentGrabber;
 import com.mygdx.game.engine.Families;
-import com.mygdx.game.engine.components.Enemy;
 import com.mygdx.game.engine.components.SpawnArea;
 import com.mygdx.game.utils.EntityTextureObject;
 
@@ -69,5 +68,4 @@ public class EntityRemovalSystem extends EntitySystem {
     private boolean notAlive(Entity enemy) {
         return cg.getParameters(enemy).health.currentHealth <= 0;
     }
-
 }
