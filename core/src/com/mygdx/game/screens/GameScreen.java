@@ -16,6 +16,7 @@ import com.mygdx.game.MyGame;
 import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.engine.EntityFactory;
 import com.mygdx.game.engine.EntityToMapAdder;
+import com.mygdx.game.engine.entityListeners.EnemyRemovalListener;
 import com.mygdx.game.engine.systems.EnemySpawningSystem;
 import com.mygdx.game.engine.systems.EntityRemovalSystem;
 import com.mygdx.game.engine.systems.HealthBarRenderSystem;
@@ -48,6 +49,7 @@ public class GameScreen implements Screen {
         this.parent = parent;
         MyGame.engine = new Engine();
         cg = new ComponentGrabber();
+        MyGame.engine.addEntityListener(new EnemyRemovalListener(cg));
         entityFactory = new EntityFactory(cg, parent);
         MyGame.gameMapProperties = new GameMapProperties(testMap, entityFactory);
         parent.entityToMapAdder = new EntityToMapAdder(cg);
