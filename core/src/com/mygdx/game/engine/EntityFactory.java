@@ -41,7 +41,6 @@ public class EntityFactory {
         modifyEnemyComponentValues(enemy, name);
         addToEngine(enemy);
         addToMap(enemy);
-        addToWorld(enemy);
         return enemy;
     }
 
@@ -50,7 +49,6 @@ public class EntityFactory {
         modifyPlayerComponentValues(player, name);
         addToEngine(player);
         addToMap(player);
-        addToWorld(player);
     }
 
     public void makeSpawn(MapObject spawn) {
@@ -175,12 +173,5 @@ public class EntityFactory {
 
     private void addToMap(Entity entity) {
         root.entityToMapAdder.addEntityToMap(entity);
-    }
-
-    private void addToWorld(Entity entity) {
-        Item item = cg.getItem(entity);
-        Position pos = cg.getPosition(entity);
-        Size size = cg.getSize(entity);
-        CollisionSystem.world.add(item.item, pos.x, pos.y, size.width, size.height);
     }
 }
