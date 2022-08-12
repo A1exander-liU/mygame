@@ -52,6 +52,7 @@ public class BasicAttackSystem extends EntitySystem {
         Entity attack = makeAttackAreaEntity();
         AttackRange attackRange = cg.getAttackRange(attack);
         Vector2 start = new Vector2();
+        Ray<Vector2> ray = new Ray<>(new Vector2(), new Vector2());
         if (orientation.orientation == Direction.EAST) {
             // set the range
             // create the start and end points for ray
@@ -64,7 +65,7 @@ public class BasicAttackSystem extends EntitySystem {
                     .scl(Direction.EAST.direction);
             Vector2 end = start.add(length);
 
-            Ray<Vector2> ray = new Ray<>(start, end);
+            ray = new Ray<>(start, end);
             Entity attackedEnemy = attackLandedWho(ray);
             if (someoneWasAttacked(attackedEnemy)) {
                 ParameterComponent playerParams = cg.getParameters(player);
@@ -79,7 +80,7 @@ public class BasicAttackSystem extends EntitySystem {
             Vector2 length = new Vector2(attackRange.xRange, attackRange.yRange)
                     .scl(Direction.SOUTH.direction);
             Vector2 end = start.add(length);
-            Ray<Vector2> ray = new Ray<>(start, end);
+            ray = new Ray<>(start, end);
 
         }
         else if (orientation.orientation == Direction.WEST) {
@@ -89,7 +90,7 @@ public class BasicAttackSystem extends EntitySystem {
             Vector2 length = new Vector2(attackRange.xRange, attackRange.yRange)
                     .scl(Direction.WEST.direction);
             Vector2 end = start.add(length);
-            Ray<Vector2> ray = new Ray<>(start, end);
+            ray = new Ray<>(start, end);
 
         }
         else if (orientation.orientation == Direction.NORTH) {
@@ -99,9 +100,10 @@ public class BasicAttackSystem extends EntitySystem {
             Vector2 length = new Vector2(attackRange.xRange, attackRange.yRange)
                     .scl(Direction.NORTH.direction);
             Vector2 end = start.add(length);
-            Ray<Vector2> ray = new Ray<>(start, end);
-
+            ray = new Ray<>(start, end);
         }
+        Entity attackedEnemy = attackLandedWho(ray);
+
         MyGame.engine.removeEntity(attack);
     }
 
