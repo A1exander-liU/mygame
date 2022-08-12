@@ -34,8 +34,7 @@ public class EntityRemovalSystem extends EntitySystem {
     public void update(float delta) {
         for (int i = 0; i < enemies.size(); i++) {
             Entity entity = enemies.get(i);
-            Enemy enemy = cg.getEnemy(entity);
-            if (!enemy.isAlive) {
+            if (notAlive(entity)) {
                 removeOwner(entity);
                 MyGame.engine.removeEntity(entity);
                 removeFromMap(entity);
@@ -65,6 +64,10 @@ public class EntityRemovalSystem extends EntitySystem {
                 spawnArea.lastTimeOfDeath = TimeSystem.time;
             }
         }
+    }
+
+    private boolean notAlive(Entity enemy) {
+        return cg.getParameters(enemy).health.currentHealth <= 0;
     }
 
 }
