@@ -51,11 +51,17 @@ public class BasicAttackSystem extends EntitySystem {
         Size size = cg.getSize(player);
         Entity attack = makeAttackAreaEntity();
         AttackRange attackRange = cg.getAttackRange(attack);
+        Vector2 start = new Vector2();
         if (orientation.orientation == Direction.EAST) {
+            // set the range
+            // create the start and end points for ray
+            // iterate through enemies to see if an enemy was hit
+            // apply damage if they were hit
+
             attackRange.xRange = 16;
-            Vector2 start = new Vector2(
-                    pos.x + size.width,
-                    pos.y + (size.height / 2));
+            start.x = pos.x + size.width;
+            start.y = pos.y + (size.height / 2);
+
             Vector2 end = new Vector2(start.x + attackRange.xRange, start.y);
             Ray<Vector2> ray = new Ray<>(start, end);
             Entity attackedEnemy = attackLandedWho(ray);
@@ -64,6 +70,24 @@ public class BasicAttackSystem extends EntitySystem {
                 ParameterComponent enemyParams = cg.getParameters(attackedEnemy);
                 enemyParams.health.currentHealth -= playerParams.damage;
             }
+        }
+        else if (orientation.orientation == Direction.SOUTH) {
+            attackRange.yRange = 16;
+            start.x = pos.x + (size.width / 2);
+            start.y = pos.y;
+
+        }
+        else if (orientation.orientation == Direction.WEST) {
+            attackRange.xRange = 16;
+            start.x = pos.x;
+            start.y = pos.y + (size.height / 2);
+
+        }
+        else if (orientation.orientation == Direction.NORTH) {
+            attackRange.yRange = 16;
+            start.x = pos.x + (size.width / 2);
+            start.y = pos.y + size.height;
+            
         }
         MyGame.engine.removeEntity(attack);
     }
