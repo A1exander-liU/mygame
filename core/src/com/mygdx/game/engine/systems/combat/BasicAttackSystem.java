@@ -64,14 +64,7 @@ public class BasicAttackSystem extends EntitySystem {
             Vector2 length = new Vector2(attackRange.xRange, attackRange.yRange)
                     .scl(Direction.EAST.direction);
             Vector2 end = start.add(length);
-
             ray = new Ray<>(start, end);
-            Entity attackedEnemy = attackLandedWho(ray);
-            if (someoneWasAttacked(attackedEnemy)) {
-                ParameterComponent playerParams = cg.getParameters(player);
-                ParameterComponent enemyParams = cg.getParameters(attackedEnemy);
-                enemyParams.health.currentHealth -= playerParams.damage;
-            }
         }
         else if (orientation.orientation == Direction.SOUTH) {
             attackRange.yRange = 16;
@@ -103,6 +96,11 @@ public class BasicAttackSystem extends EntitySystem {
             ray = new Ray<>(start, end);
         }
         Entity attackedEnemy = attackLandedWho(ray);
+        if (someoneWasAttacked(attackedEnemy)) {
+            ParameterComponent playerParams = cg.getParameters(player);
+            ParameterComponent enemyParams = cg.getParameters(attackedEnemy);
+            enemyParams.health.currentHealth -= playerParams.damage;
+        }
 
         MyGame.engine.removeEntity(attack);
     }
