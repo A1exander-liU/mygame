@@ -7,6 +7,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ai.utils.Ray;
 import com.badlogic.gdx.math.Intersector;
+import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.MyGame;
@@ -118,35 +119,22 @@ public class BasicAttackSystem extends EntitySystem {
     }
 
     private boolean checkCollisions(Ray<Vector2> ray, Entity enemy) {
-        Vector2 intersection = new Vector2();
-        Position pos = cg.getPosition(enemy);
-        Size size = cg.getSize(enemy);
-        boolean left = Intersector.intersectLines(
-                ray.start, ray.end,
-                new Vector2(pos.x, pos.y), new Vector2(pos.x, pos.y + size.height),
-                intersection
-        );
-        boolean top = Intersector.intersectLines(
-                ray.start, ray.end,
-                new Vector2(pos.x, pos.y + size.height), new Vector2(pos.x + size.width, pos.y + size.height),
-                intersection
-        );
-        boolean right = Intersector.intersectLines(
-                ray.start, ray.end,
-                new Vector2(pos.x + size.width, pos.y + size.height), new Vector2(pos.x + size.width, pos.y),
-                intersection
-        );
-        boolean bottom = Intersector.intersectLines(
-                ray.start, ray.end,
-                new Vector2(pos.x + size.width, pos.y), new Vector2(pos.x, pos.y),
-                intersection
-        );
-        if (left || top || right || bottom)
-            return true;
-        return false;
+        Polygon enemyRegion = makeEnemyRegion(enemy);
+        return Intersector.intersectLinePolygon(ray.start, ray.end, enemyRegion);
     }
 
     private boolean someoneWasAttacked(Entity enemy) {
         return enemy != null;
+    }
+
+    private Polygon makeEnemyRegion(Entity enemy) {
+        Position pos = cg.getPosition(enemy);
+        Size size = cg.getSize(enemy);
+        float[] vertices = {
+                pos.x, pos.y, pos.x, pos.y + size.height,
+                pos.x + size.width, pos.y + size.height,
+                pos.x + size.width, pos.y
+        };
+        return new Polygon(vertices);
     }
 }
