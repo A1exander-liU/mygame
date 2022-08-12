@@ -21,6 +21,7 @@ import com.mygdx.game.engine.components.SpawnArea;
 import com.mygdx.game.engine.components.Speed;
 import com.mygdx.game.engine.components.Sprite;
 import com.mygdx.game.engine.components.Steering;
+import com.mygdx.game.engine.systems.CollisionSystem;
 
 public class EntityFactory {
     ComponentGrabber cg;
@@ -40,6 +41,7 @@ public class EntityFactory {
         modifyEnemyComponentValues(enemy, name);
         addToEngine(enemy);
         addToMap(enemy);
+        addToWorld(enemy);
         return enemy;
     }
 
@@ -48,6 +50,7 @@ public class EntityFactory {
         modifyPlayerComponentValues(player, name);
         addToEngine(player);
         addToMap(player);
+        addToWorld(player);
     }
 
     public void makeSpawn(MapObject spawn) {
@@ -84,6 +87,8 @@ public class EntityFactory {
         Speed speed = cg.getSpeed(entity);
         Sprite entitySprite = cg.getSprite(entity);
         EnemyStateMachine stateMachine = cg.getStateMachine(entity);
+        Item item = cg.getItem(entity);
+        item.item = new com.dongbat.jbump.Item<>(entity);
         enemyName.name = name;
         size.width = 32;
         size.height = 32;
@@ -103,6 +108,8 @@ public class EntityFactory {
         Size size = cg.getSize(entity);
         Speed speed = cg.getSpeed(entity);
         Sprite sprite = cg.getSprite(entity);
+        Item item = cg.getItem(entity);
+        item.item = new com.dongbat.jbump.Item<>(entity);
         playerCamera.camera = new OrthographicCamera();
         playerCamera.camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         playerCamera.camera.position.x = Gdx.graphics.getWidth() / 2f;
@@ -168,5 +175,12 @@ public class EntityFactory {
 
     private void addToMap(Entity entity) {
         root.entityToMapAdder.addEntityToMap(entity);
+    }
+
+    private void addToWorld(Entity entity) {
+        Item item = cg.getItem(entity);
+        Position pos = cg.getPosition(entity);
+        Size size = cg.getSize(entity);
+        CollisionSystem.world.add(item.item, pos.x, pos.y, size.width, size.height);
     }
 }
