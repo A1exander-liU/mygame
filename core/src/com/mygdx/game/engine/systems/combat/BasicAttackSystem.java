@@ -63,7 +63,7 @@ public class BasicAttackSystem extends EntitySystem {
             start.y = pos.y + (size.height / 2);
             Vector2 length = new Vector2(attackRange.xRange, attackRange.yRange)
                     .scl(Direction.EAST.direction);
-            Vector2 end = start.add(length);
+            Vector2 end = add(start, length);
             ray = new Ray<>(start, end);
         }
         else if (orientation.orientation == Direction.SOUTH) {
