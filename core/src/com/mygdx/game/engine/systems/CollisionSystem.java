@@ -1,7 +1,6 @@
 package com.mygdx.game.engine.systems;
 
 import com.badlogic.ashley.core.Entity;
-import com.badlogic.ashley.core.EntityListener;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.math.Rectangle;
@@ -22,7 +21,7 @@ import com.mygdx.game.engine.components.Position;
 import com.mygdx.game.engine.components.Size;
 import com.mygdx.game.engine.components.SpawnArea;
 
-public class CollisionSystem extends EntitySystem implements EntityListener {
+public class CollisionSystem extends EntitySystem {
     ComponentGrabber cg;
     ImmutableArray<Entity> collisions;
     ImmutableArray<Entity> enemies;
@@ -96,16 +95,6 @@ public class CollisionSystem extends EntitySystem implements EntityListener {
                 itemPos.y = rect.y;
             }
         }
-    }
-
-    @Override
-    public void entityAdded(Entity entity) {
-        addToWorld(entity);
-    }
-
-    @Override
-    public void entityRemoved(Entity entity) {
-        removeFromWorld(entity);
     }
 
     private void addToWorld(Entity entity) {
