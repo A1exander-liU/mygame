@@ -12,6 +12,8 @@ import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.ComponentGrabber;
 import com.mygdx.game.engine.EntityFactory;
 import com.mygdx.game.engine.Families;
+import com.mygdx.game.engine.components.Item;
+import com.mygdx.game.engine.components.Size;
 import com.mygdx.game.engine.components.Spawn;
 import com.mygdx.game.engine.components.SpawnArea;
 import com.mygdx.game.engine.components.Name;
@@ -155,6 +157,7 @@ public class EnemySpawningSystem extends EntitySystem {
         textureObject.setX(pos.x);
         textureObject.setY(pos.y);
         spawnArea.owner = enemy;
+        addToWorld(enemy);
     }
 
     private void addBack() {
@@ -183,5 +186,12 @@ public class EnemySpawningSystem extends EntitySystem {
                 break;
             }
         }
+    }
+
+    private void addToWorld(Entity entity) {
+        Item item = cg.getItem(entity);
+        Position pos = cg.getPosition(entity);
+        Size size = cg.getSize(entity);
+        CollisionSystem.world.add(item.item, pos.x, pos.y, size.width, size.height);
     }
 }
