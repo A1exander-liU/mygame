@@ -19,6 +19,7 @@ import com.mygdx.game.engine.Direction;
 import com.mygdx.game.engine.Families;
 import com.mygdx.game.engine.components.AttackRange;
 import com.mygdx.game.engine.components.Orientation;
+import com.mygdx.game.engine.components.ParameterComponent;
 import com.mygdx.game.engine.components.Position;
 import com.mygdx.game.engine.components.Size;
 import com.mygdx.game.utils.GameRaycastCollisionDetector;
@@ -59,7 +60,9 @@ public class BasicAttackSystem extends EntitySystem {
             Ray<Vector2> ray = new Ray<>(start, end);
             Entity attackedEnemy = attackLandedWho(ray);
             if (someoneWasAttacked(attackedEnemy)) {
-                
+                ParameterComponent playerParams = cg.getParameters(player);
+                ParameterComponent enemyParams = cg.getParameters(attackedEnemy);
+                enemyParams.health.currentHealth -= playerParams.damage;
             }
         }
         MyGame.engine.removeEntity(attack);
