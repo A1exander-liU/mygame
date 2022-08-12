@@ -31,7 +31,7 @@ public class EntityFactory {
         this.root = root;
     }
 
-    public void makeEnemy(String name) {
+    public Entity makeEnemy(String name) {
         // name provided will determine the kind of enemy to create
         // make mobEntity only add the components
         // entityFactory will actually modify the component values
@@ -40,6 +40,7 @@ public class EntityFactory {
         modifyEnemyComponentValues(enemy, name);
         addToEngine(enemy);
         addToMap(enemy);
+        return enemy;
     }
 
     public void makePlayer(String name) {
