@@ -79,6 +79,7 @@ public class BasicAttackSystem extends EntitySystem {
             Vector2 length = new Vector2(attackRange.xRange, attackRange.yRange)
                     .scl(Direction.SOUTH.direction);
             Vector2 end = start.add(length);
+            Ray<Vector2> ray = new Ray<>(start, end);
 
         }
         else if (orientation.orientation == Direction.WEST) {
@@ -88,6 +89,7 @@ public class BasicAttackSystem extends EntitySystem {
             Vector2 length = new Vector2(attackRange.xRange, attackRange.yRange)
                     .scl(Direction.WEST.direction);
             Vector2 end = start.add(length);
+            Ray<Vector2> ray = new Ray<>(start, end);
 
         }
         else if (orientation.orientation == Direction.NORTH) {
@@ -97,6 +99,7 @@ public class BasicAttackSystem extends EntitySystem {
             Vector2 length = new Vector2(attackRange.xRange, attackRange.yRange)
                     .scl(Direction.NORTH.direction);
             Vector2 end = start.add(length);
+            Ray<Vector2> ray = new Ray<>(start, end);
 
         }
         MyGame.engine.removeEntity(attack);
