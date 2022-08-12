@@ -30,7 +30,6 @@ public class StateSystem extends EntitySystem {
         this.cg = cg;
         enemies = MyGame.engine.getEntitiesFor(Families.enemies);
         player = MyGame.engine.getEntitiesFor(Families.player).get(0);
-        setStateToIdle();
     }
 
     @Override
@@ -47,14 +46,6 @@ public class StateSystem extends EntitySystem {
             checkEnemyCanHunt(entity);
             checkEnemyCanFlee(entity);
             checkEnemyCanIdle(entity);
-        }
-    }
-
-    private void setStateToIdle() {
-        for (int i = 0; i < enemies.size(); i++) {
-            Entity entity = enemies.get(i);
-            EnemyStateMachine stateMachine = cg.getStateMachine(entity);
-            stateMachine.changeState(EnemyState.IDLE);
         }
     }
 
