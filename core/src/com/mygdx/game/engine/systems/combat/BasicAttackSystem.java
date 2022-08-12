@@ -57,11 +57,7 @@ public class BasicAttackSystem extends EntitySystem {
                     pos.y + (size.height / 2));
             Vector2 end = new Vector2(start.x + attackRange.xRange, start.y);
             Ray<Vector2> ray = new Ray<>(start, end);
-            if (attackLanded(ray)) {
-                // do the dmg and update the health  here
-                System.out.println("landed");
-
-            }
+            Entity attackedEnemy = attackLandedWho(ray);
         }
         MyGame.engine.removeEntity(attack);
     }
@@ -72,14 +68,14 @@ public class BasicAttackSystem extends EntitySystem {
                 .add(new AttackRange());
     }
 
-    private boolean attackLanded(Ray<Vector2> attackRay) {
+    private Entity attackLandedWho(Ray<Vector2> attackRay) {
         for (int i = 0; i < enemies.size(); i++) {
             Entity entity = enemies.get(i);
             boolean collisionDetected = checkCollisions(attackRay, entity);
             if (collisionDetected)
-                return true;
+                return entity;
         }
-        return false;
+        return null;
     }
 
     private boolean checkCollisions(Ray<Vector2> ray, Entity entity) {
