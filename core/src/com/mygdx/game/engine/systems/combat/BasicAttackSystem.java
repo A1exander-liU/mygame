@@ -5,13 +5,9 @@ import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.ai.utils.Collision;
 import com.badlogic.gdx.ai.utils.Ray;
-import com.badlogic.gdx.ai.utils.RaycastCollisionDetector;
 import com.badlogic.gdx.math.Intersector;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.collision.BoundingBox;
 import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.ComponentGrabber;
@@ -22,7 +18,6 @@ import com.mygdx.game.engine.components.Orientation;
 import com.mygdx.game.engine.components.ParameterComponent;
 import com.mygdx.game.engine.components.Position;
 import com.mygdx.game.engine.components.Size;
-import com.mygdx.game.utils.GameRaycastCollisionDetector;
 
 public class BasicAttackSystem extends EntitySystem {
     ComponentGrabber cg;
@@ -63,7 +58,7 @@ public class BasicAttackSystem extends EntitySystem {
             start.y = pos.y + (size.height / 2);
             Vector2 length = new Vector2(attackRange.xRange, attackRange.yRange)
                     .scl(Direction.EAST.direction);
-            Vector2 end = add(start, length);
+            Vector2 end = length.add(start);
             ray = new Ray<>(start, end);
         }
         else if (orientation.orientation == Direction.SOUTH) {
@@ -72,7 +67,7 @@ public class BasicAttackSystem extends EntitySystem {
             start.y = pos.y;
             Vector2 length = new Vector2(attackRange.xRange, attackRange.yRange)
                     .scl(Direction.SOUTH.direction);
-            Vector2 end = add(start, length);
+            Vector2 end = length.add(start);
             ray = new Ray<>(start, end);
 
         }
@@ -82,7 +77,7 @@ public class BasicAttackSystem extends EntitySystem {
             start.y = pos.y + (size.height / 2);
             Vector2 length = new Vector2(attackRange.xRange, attackRange.yRange)
                     .scl(Direction.WEST.direction);
-            Vector2 end = add(start, length);
+            Vector2 end = length.add(start);
             ray = new Ray<>(start, end);
 
         }
@@ -92,11 +87,12 @@ public class BasicAttackSystem extends EntitySystem {
             start.y = pos.y + size.height;
             Vector2 length = new Vector2(attackRange.xRange, attackRange.yRange)
                     .scl(Direction.NORTH.direction);
-            Vector2 end = add(start, length);
+            Vector2 end = length.add(start);
             ray = new Ray<>(start, end);
         }
         Entity attackedEnemy = attackLandedWho(ray);
         if (someoneWasAttacked(attackedEnemy)) {
+            System.out.println("smacked");
             ParameterComponent playerParams = cg.getParameters(player);
             ParameterComponent enemyParams = cg.getParameters(attackedEnemy);
             enemyParams.health.currentHealth -= playerParams.damage;
@@ -152,9 +148,5 @@ public class BasicAttackSystem extends EntitySystem {
 
     private boolean someoneWasAttacked(Entity enemy) {
         return enemy != null;
-    }
-
-    private Vector2 add(Vector2 a, Vector2 b) {
-        return new Vector2(a.x + b.x, a.y + b.y);
     }
 }
