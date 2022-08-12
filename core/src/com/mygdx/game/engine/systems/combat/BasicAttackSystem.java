@@ -84,14 +84,33 @@ public class BasicAttackSystem extends EntitySystem {
         return null;
     }
 
-    private boolean checkCollisions(Ray<Vector2> ray, Entity entity) {
-        Rectangle rayRect = new Rectangle(
-                ray.start.x, ray.start.y, 16, 1
+    private boolean checkCollisions(Ray<Vector2> ray, Entity enemy) {
+        Vector2 intersection = new Vector2();
+        Position pos = cg.getPosition(enemy);
+        Size size = cg.getSize(enemy);
+        boolean left = Intersector.intersectLines(
+                ray.start, ray.end,
+                new Vector2(pos.x, pos.y), new Vector2(pos.x, pos.y + size.height),
+                intersection
         );
-        Position pos = cg.getPosition(entity);
-        Size size = cg.getSize(entity);
-        Rectangle entityRect = new Rectangle(pos.x, pos.y, size.width, size.height);
-        return rayRect.overlaps(entityRect);
+        boolean top = Intersector.intersectLines(
+                ray.start, ray.end,
+                new Vector2(pos.x, pos.y + size.height), new Vector2(pos.x + size.width, pos.y + size.height),
+                intersection
+        );
+        boolean right = Intersector.intersectLines(
+                ray.start, ray.end,
+                new Vector2(pos.x + size.width, pos.y + size.height), new Vector2(pos.x + size.width, pos.y),
+                intersection
+        );
+        boolean bottom = Intersector.intersectLines(
+                ray.start, ray.end,
+                new Vector2(pos.x + size.width, pos.y), new Vector2(pos.x, pos.y),
+                intersection
+        );
+        if (left || top || right || bottom)
+            return true;
+        return false;
     }
 
     private boolean someoneWasAttacked(Entity enemy) {
