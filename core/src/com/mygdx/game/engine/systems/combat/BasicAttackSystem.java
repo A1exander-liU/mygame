@@ -57,10 +57,11 @@ public class BasicAttackSystem extends EntitySystem {
             // create the start and end points for ray
             // iterate through enemies to see if an enemy was hit
             // apply damage if they were hit
-
             attackRange.xRange = 16;
             start.x = pos.x + size.width;
             start.y = pos.y + (size.height / 2);
+            Vector2 length = new Vector2(attackRange.xRange, attackRange.yRange)
+                    .scl(Direction.EAST.direction);
 
             Vector2 end = new Vector2(start.x + attackRange.xRange, start.y);
             Ray<Vector2> ray = new Ray<>(start, end);
@@ -75,19 +76,25 @@ public class BasicAttackSystem extends EntitySystem {
             attackRange.yRange = 16;
             start.x = pos.x + (size.width / 2);
             start.y = pos.y;
+            Vector2 length = new Vector2(attackRange.xRange, attackRange.yRange)
+                    .scl(Direction.SOUTH.direction);
 
         }
         else if (orientation.orientation == Direction.WEST) {
             attackRange.xRange = 16;
             start.x = pos.x;
             start.y = pos.y + (size.height / 2);
+            Vector2 length = new Vector2(attackRange.xRange, attackRange.yRange)
+                    .scl(Direction.WEST.direction);
 
         }
         else if (orientation.orientation == Direction.NORTH) {
             attackRange.yRange = 16;
             start.x = pos.x + (size.width / 2);
             start.y = pos.y + size.height;
-            
+            Vector2 length = new Vector2(attackRange.xRange, attackRange.yRange)
+                    .scl(Direction.NORTH.direction);
+
         }
         MyGame.engine.removeEntity(attack);
     }
