@@ -72,7 +72,7 @@ public class BasicAttackSystem extends EntitySystem {
             start.y = pos.y;
             Vector2 length = new Vector2(attackRange.xRange, attackRange.yRange)
                     .scl(Direction.SOUTH.direction);
-            Vector2 end = start.add(length);
+            Vector2 end = add(start, length);
             ray = new Ray<>(start, end);
 
         }
@@ -82,7 +82,7 @@ public class BasicAttackSystem extends EntitySystem {
             start.y = pos.y + (size.height / 2);
             Vector2 length = new Vector2(attackRange.xRange, attackRange.yRange)
                     .scl(Direction.WEST.direction);
-            Vector2 end = start.add(length);
+            Vector2 end = add(start, length);
             ray = new Ray<>(start, end);
 
         }
@@ -92,7 +92,7 @@ public class BasicAttackSystem extends EntitySystem {
             start.y = pos.y + size.height;
             Vector2 length = new Vector2(attackRange.xRange, attackRange.yRange)
                     .scl(Direction.NORTH.direction);
-            Vector2 end = start.add(length);
+            Vector2 end = add(start, length);
             ray = new Ray<>(start, end);
         }
         Entity attackedEnemy = attackLandedWho(ray);
@@ -152,5 +152,9 @@ public class BasicAttackSystem extends EntitySystem {
 
     private boolean someoneWasAttacked(Entity enemy) {
         return enemy != null;
+    }
+
+    private Vector2 add(Vector2 a, Vector2 b) {
+        return new Vector2(a.x + b.x, a.y + b.y);
     }
 }
