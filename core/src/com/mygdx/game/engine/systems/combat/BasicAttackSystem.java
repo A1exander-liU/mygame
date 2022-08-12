@@ -58,6 +58,9 @@ public class BasicAttackSystem extends EntitySystem {
             Vector2 end = new Vector2(start.x + attackRange.xRange, start.y);
             Ray<Vector2> ray = new Ray<>(start, end);
             Entity attackedEnemy = attackLandedWho(ray);
+            if (someoneWasAttacked(attackedEnemy)) {
+                
+            }
         }
         MyGame.engine.removeEntity(attack);
     }
@@ -88,4 +91,7 @@ public class BasicAttackSystem extends EntitySystem {
         return rayRect.overlaps(entityRect);
     }
 
+    private boolean someoneWasAttacked(Entity enemy) {
+        return enemy != null;
+    }
 }
