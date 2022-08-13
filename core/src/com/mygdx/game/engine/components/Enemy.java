@@ -9,4 +9,5 @@ public class Enemy implements Component {
     public enum States {WANDER, PURSUE, RETURN};
     public States state;
     public boolean isAlive = true;
+    public float timeOfLastAttack;
 }
