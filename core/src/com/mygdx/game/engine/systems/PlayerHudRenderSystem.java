@@ -19,6 +19,7 @@ public class PlayerHudRenderSystem extends EntitySystem {
     Skin skin;
 
     public PlayerHudRenderSystem(ComponentGrabber cg) {
+        super(98);
         this.cg = cg;
         player = MyGame.engine.getEntitiesFor(Families.player).get(0);
         playerHud = new Stage(new ScreenViewport());
