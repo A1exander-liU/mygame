@@ -64,7 +64,8 @@ public class BasicAttackSystem extends EntitySystem {
         Entity attack = makeAttackAreaEntity();
         AttackRange attackRange = cg.getAttackRange(attack);
         Vector2 start = new Vector2();
-        Ray<Vector2> ray = new Ray<>(new Vector2(), new Vector2());
+        Vector2 end = new Vector2();
+        Ray<Vector2> ray;
         if (orientation.orientation == Direction.EAST) {
             // set the range
             // create the start and end points for ray
@@ -75,8 +76,7 @@ public class BasicAttackSystem extends EntitySystem {
             start.y = pos.y + (size.height / 2);
             Vector2 length = new Vector2(attackRange.xRange, attackRange.yRange)
                     .scl(Direction.EAST.direction);
-            Vector2 end = length.add(start);
-            ray = new Ray<>(start, end);
+            end = length.add(start);
         }
         else if (orientation.orientation == Direction.SOUTH) {
             attackRange.yRange = 16;
@@ -84,9 +84,7 @@ public class BasicAttackSystem extends EntitySystem {
             start.y = pos.y;
             Vector2 length = new Vector2(attackRange.xRange, attackRange.yRange)
                     .scl(Direction.SOUTH.direction);
-            Vector2 end = length.add(start);
-            ray = new Ray<>(start, end);
-
+            end = length.add(start);
         }
         else if (orientation.orientation == Direction.WEST) {
             attackRange.xRange = 16;
@@ -94,9 +92,7 @@ public class BasicAttackSystem extends EntitySystem {
             start.y = pos.y + (size.height / 2);
             Vector2 length = new Vector2(attackRange.xRange, attackRange.yRange)
                     .scl(Direction.WEST.direction);
-            Vector2 end = length.add(start);
-            ray = new Ray<>(start, end);
-
+            end = length.add(start);
         }
         else if (orientation.orientation == Direction.NORTH) {
             attackRange.yRange = 16;
@@ -104,8 +100,7 @@ public class BasicAttackSystem extends EntitySystem {
             start.y = pos.y + size.height;
             Vector2 length = new Vector2(attackRange.xRange, attackRange.yRange)
                     .scl(Direction.NORTH.direction);
-            Vector2 end = length.add(start);
-            ray = new Ray<>(start, end);
+            end = length.add(start);
         }
         else if (orientation.orientation == Direction.NORTHEAST) {
             getDiagonalRange(attackRange, 16);
@@ -113,8 +108,7 @@ public class BasicAttackSystem extends EntitySystem {
             start.y = pos.y + size.height;
             Vector2 length = new Vector2(attackRange.xRange, attackRange.yRange)
                     .scl(Direction.NORTHEAST.direction);
-            Vector2 end = length.add(start);
-            ray = new Ray<>(start, end);
+            end = length.add(start);
         }
         else if (orientation.orientation == Direction.SOUTHEAST) {
             getDiagonalRange(attackRange, 16);
@@ -122,8 +116,7 @@ public class BasicAttackSystem extends EntitySystem {
             start.y = pos.y;
             Vector2 length = new Vector2(attackRange.xRange, attackRange.yRange)
                     .scl(Direction.SOUTHEAST.direction);
-            Vector2 end = length.add(start);
-            ray = new Ray<>(start, end);
+            end = length.add(start);
         }
         else if (orientation.orientation == Direction.SOUTHWEST) {
             getDiagonalRange(attackRange, 16);
@@ -131,8 +124,7 @@ public class BasicAttackSystem extends EntitySystem {
             start.y = pos.y;
             Vector2 length = new Vector2(attackRange.xRange, attackRange.yRange).
                     scl(Direction.SOUTHWEST.direction);
-            Vector2 end = length.add(start);
-            ray = new Ray<>(start, end);
+            end = length.add(start);
         }
         else if (orientation.orientation == Direction.NORTHWEST) {
             getDiagonalRange(attackRange, 16);
@@ -140,10 +132,9 @@ public class BasicAttackSystem extends EntitySystem {
             start.y = pos.y + size.height;
             Vector2 length = new Vector2(attackRange.xRange, attackRange.yRange).
                     scl(Direction.NORTHWEST.direction);
-            Vector2 end = length.add(start);
-            ray = new Ray<>(start, end);
+            end = length.add(start);
         }
-
+        ray = new Ray<>(start, end);
 
         Array<Entity> smackedEnemies = attackLandedWho(ray);
         applyDamageToEnemies(smackedEnemies);
