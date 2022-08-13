@@ -9,6 +9,7 @@ import com.badlogic.gdx.ai.utils.Ray;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.ComponentGrabber;
@@ -92,8 +93,7 @@ public class BasicAttackSystem extends EntitySystem {
             ray = new Ray<>(start, end);
         }
         else if (orientation.orientation == Direction.NORTHEAST) {
-            attackRange.xRange = 16;
-            attackRange.yRange = 16;
+            getDiagonalRange(attackRange, 16);
             start.x = pos.x + size.width;
             start.y = pos.y + size.height;
             Vector2 length = new Vector2(attackRange.xRange, attackRange.yRange)
@@ -102,8 +102,7 @@ public class BasicAttackSystem extends EntitySystem {
             ray = new Ray<>(start, end);
         }
         else if (orientation.orientation == Direction.SOUTHEAST) {
-            attackRange.xRange = 16;
-            attackRange.yRange = 16;
+            getDiagonalRange(attackRange, 16);
             start.x = pos.x + size.width;
             start.y = pos.y;
             Vector2 length = new Vector2(attackRange.xRange, attackRange.yRange)
@@ -112,8 +111,7 @@ public class BasicAttackSystem extends EntitySystem {
             ray = new Ray<>(start, end);
         }
         else if (orientation.orientation == Direction.SOUTHWEST) {
-            attackRange.xRange = 16;
-            attackRange.yRange = 16;
+            getDiagonalRange(attackRange, 16);
             start.x = pos.x;
             start.y = pos.y;
             Vector2 length = new Vector2(attackRange.xRange, attackRange.yRange).
@@ -122,8 +120,7 @@ public class BasicAttackSystem extends EntitySystem {
             ray = new Ray<>(start, end);
         }
         else if (orientation.orientation == Direction.NORTHWEST) {
-            attackRange.xRange = 16;
-            attackRange.yRange = 16;
+            getDiagonalRange(attackRange, 16);
             start.x = pos.x;
             start.y = pos.y + size.height;
             Vector2 length = new Vector2(attackRange.xRange, attackRange.yRange).
@@ -133,14 +130,8 @@ public class BasicAttackSystem extends EntitySystem {
         }
 
 
-        Entity attackedEnemy = attackLandedWho(ray);
-        if (someoneWasAttacked(attackedEnemy)) {
-            System.out.println("smacked");
-            ParameterComponent playerParams = cg.getParameters(player);
-            ParameterComponent enemyParams = cg.getParameters(attackedEnemy);
-            enemyParams.health.currentHealth -= playerParams.damage;
-        }
-
+        Array<Entity> smackedEnemies = attackLandedWho(ray);
+        applyDamageToEnemies(smackedEnemies);
         MyGame.engine.removeEntity(attack);
     }
 
@@ -150,14 +141,15 @@ public class BasicAttackSystem extends EntitySystem {
                 .add(new AttackRange());
     }
 
-    private Entity attackLandedWho(Ray<Vector2> attackRay) {
+    private Array<Entity> attackLandedWho(Ray<Vector2> attackRay) {
+        Array<Entity> smackedEnemies = new Array<>(0);
         for (int i = 0; i < enemies.size(); i++) {
             Entity entity = enemies.get(i);
             boolean collisionDetected = checkCollisions(attackRay, entity);
             if (collisionDetected)
-                return entity;
+                smackedEnemies.add(entity);
         }
-        return null;
+        return smackedEnemies;
     }
 
     private boolean checkCollisions(Ray<Vector2> ray, Entity enemy) {
@@ -178,5 +170,22 @@ public class BasicAttackSystem extends EntitySystem {
                 pos.x + size.width, pos.y
         };
         return new Polygon(vertices);
+    }
+
+    private void getDiagonalRange(AttackRange attackRange, float range) {
+        attackRange.xRange = range;
+        attackRange.yRange = range;
+    }
+
+    private void applyDamageToEnemies(Array<Entity> smackedEnemies) {
+        for (int i = 0; i < smackedEnemies.size; i++) {
+            Entity enemy = smackedEnemies.get(i);
+            if (someoneWasAttacked(enemy)) {
+                System.out.println("smacked");
+                ParameterComponent playerParams = cg.getParameters(player);
+                ParameterComponent enemyParams = cg.getParameters(enemy);
+                enemyParams.health.currentHealth -= playerParams.damage;
+            }
+        }
     }
 }
