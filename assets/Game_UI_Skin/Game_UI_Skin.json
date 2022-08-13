@@ -648,10 +648,15 @@
 	"progress-bar-enemy-health": {
 		"background": "progress-bar-enemy-hp",
 		"knobAfter": "knob-after-enemy-full"
+	},
+	"progress-bar-player-health": {
+		"background": "progress-bar-enemy-hp",
+		"knobBefore": "knob-after-enemy-full"
 	}
 },
 "com.badlogic.gdx.scenes.scene2d.ui.ScrollPane$ScrollPaneStyle": {
 	"default": {
+		"background": "button-up",
 		"hScrollKnob": "knob-horizontal",
 		"vScrollKnob": "knob-vertical"
 	}
