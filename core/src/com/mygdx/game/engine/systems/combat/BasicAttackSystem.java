@@ -38,11 +38,11 @@ public class BasicAttackSystem extends EntitySystem {
     @Override
     public void update(float delta) {
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-            performSlash();
+            performStab();
         }
     }
 
-    private void performSlash() {
+    private void performStab() {
         Orientation orientation = cg.getOrientation(player);
         Position pos = cg.getPosition(player);
         Size size = cg.getSize(player);
