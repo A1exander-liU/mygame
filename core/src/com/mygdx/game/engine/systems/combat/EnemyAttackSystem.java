@@ -5,6 +5,7 @@ import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.ComponentGrabber;
+import com.mygdx.game.engine.EnemyState;
 import com.mygdx.game.engine.Families;
 
 public class EnemyAttackSystem extends EntitySystem {
@@ -21,6 +22,9 @@ public class EnemyAttackSystem extends EntitySystem {
     public void update(float delta) {
         for (int i = 0; i < enemies.size(); i++) {
             Entity enemy = enemies.get(i);
+            if (cg.getStateMachine(enemy).getCurrentState() == EnemyState.HUNT) {
+
+            }
         }
     }
 }
