@@ -5,13 +5,10 @@ import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Container;
 import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.ComponentGrabber;
 import com.mygdx.game.engine.EnemyState;
@@ -101,13 +98,5 @@ public class HealthBarRenderSystem extends EntitySystem {
         healthBarContainer.height(4);
         healthBarContainer.clip();
         return healthBarContainer;
-    }
-
-    private void test() {
-        for (int i = 0; i < enemies.size(); i++) {
-            Entity entity = enemies.get(i);
-            ParameterComponent paramCom = cg.getParameters(entity);
-            paramCom.health.currentHealth -= 2;
-        }
     }
 }
