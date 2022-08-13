@@ -8,6 +8,7 @@ import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.ComponentGrabber;
 import com.mygdx.game.engine.EnemyState;
 import com.mygdx.game.engine.Families;
+import com.mygdx.game.engine.components.ParameterComponent;
 
 public class EnemyAttackSystem extends EntitySystem {
     ComponentGrabber cg;
@@ -26,7 +27,7 @@ public class EnemyAttackSystem extends EntitySystem {
         for (int i = 0; i < enemies.size(); i++) {
             Entity enemy = enemies.get(i);
             if (cg.getStateMachine(enemy).getCurrentState() == EnemyState.HUNT && closeToPlayer(enemy)) {
-
+                performAttack(enemy);
             }
         }
     }
@@ -35,5 +36,11 @@ public class EnemyAttackSystem extends EntitySystem {
         Vector2 playerPos = new Vector2(cg.getPosition(player).x, cg.getPosition(player).y);
         Vector2 enemyPos = new Vector2(cg.getPosition(enemy).x, cg.getPosition(enemy).y);
         return enemyPos.dst(playerPos) <= 60;
+    }
+
+    private void performAttack(Entity enemy) {
+        ParameterComponent playerParams = cg.getParameters(player);
+        ParameterComponent enemyParams = cg.getParameters(enemy);
+        playerParams.health.currentHealth -= enemyParams.damage;
     }
 }
