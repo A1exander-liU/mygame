@@ -91,6 +91,48 @@ public class BasicAttackSystem extends EntitySystem {
             Vector2 end = length.add(start);
             ray = new Ray<>(start, end);
         }
+        else if (orientation.orientation == Direction.NORTHEAST) {
+            attackRange.xRange = 16;
+            attackRange.yRange = 16;
+            start.x = pos.x + size.width;
+            start.y = pos.y + size.height;
+            Vector2 length = new Vector2(attackRange.xRange, attackRange.yRange)
+                    .scl(Direction.NORTHEAST.direction);
+            Vector2 end = length.add(start);
+            ray = new Ray<>(start, end);
+        }
+        else if (orientation.orientation == Direction.SOUTHEAST) {
+            attackRange.xRange = 16;
+            attackRange.yRange = 16;
+            start.x = pos.x + size.width;
+            start.y = pos.y;
+            Vector2 length = new Vector2(attackRange.xRange, attackRange.yRange)
+                    .scl(Direction.SOUTHEAST.direction);
+            Vector2 end = length.add(start);
+            ray = new Ray<>(start, end);
+        }
+        else if (orientation.orientation == Direction.SOUTHWEST) {
+            attackRange.xRange = 16;
+            attackRange.yRange = 16;
+            start.x = pos.x;
+            start.y = pos.y;
+            Vector2 length = new Vector2(attackRange.xRange, attackRange.yRange).
+                    scl(Direction.SOUTHWEST.direction);
+            Vector2 end = length.add(start);
+            ray = new Ray<>(start, end);
+        }
+        else if (orientation.orientation == Direction.NORTHWEST) {
+            attackRange.xRange = 16;
+            attackRange.yRange = 16;
+            start.x = pos.x;
+            start.y = pos.y + size.height;
+            Vector2 length = new Vector2(attackRange.xRange, attackRange.yRange).
+                    scl(Direction.NORTHWEST.direction);
+            Vector2 end = length.add(start);
+            ray = new Ray<>(start, end);
+        }
+
+
         Entity attackedEnemy = attackLandedWho(ray);
         if (someoneWasAttacked(attackedEnemy)) {
             System.out.println("smacked");
