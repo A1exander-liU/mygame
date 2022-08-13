@@ -24,6 +24,7 @@ import com.mygdx.game.engine.systems.MapUpdateSystem;
 import com.mygdx.game.engine.systems.MovementSystem;
 import com.mygdx.game.engine.systems.CollisionSystem;
 import com.mygdx.game.engine.systems.OrientationSystem;
+import com.mygdx.game.engine.systems.PlayerHudRenderSystem;
 import com.mygdx.game.engine.systems.TimeSystem;
 import com.mygdx.game.engine.systems.combat.BasicAttackSystem;
 import com.mygdx.game.engine.systems.combat.EnemyAttackSystem;
@@ -110,6 +111,7 @@ public class GameScreen implements Screen {
         BasicAttackSystem basicAttackSystem = new BasicAttackSystem(cg, MyGame.gameMapProperties);
         HealthBarRenderSystem healthBarRenderSystem = new HealthBarRenderSystem(cg);
         EnemyAttackSystem enemyAttackSystem = new EnemyAttackSystem(cg, parent);
+        PlayerHudRenderSystem playerHudRenderSystem = new PlayerHudRenderSystem(cg);
         MyGame.engine.addSystem(movementSystem);
         MyGame.engine.addSystem(enemySpawningSystem);
         MyGame.engine.addSystem(steeringSystem);
@@ -122,6 +124,7 @@ public class GameScreen implements Screen {
         MyGame.engine.addSystem(basicAttackSystem);
         MyGame.engine.addSystem(healthBarRenderSystem);
         MyGame.engine.addSystem(enemyAttackSystem);
+        MyGame.engine.addSystem(playerHudRenderSystem);
         checkPriorities();
     }
 

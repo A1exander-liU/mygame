@@ -31,6 +31,7 @@ public class PlayerHudRenderSystem extends EntitySystem {
         playerHud.clear();
         Table root = new Table();
         root.setSize(playerHud.getWidth(), playerHud.getHeight());
+        playerHud.addActor(root);
 
         Table playerHealth = new Table();
         playerHealth.setSize(root.getWidth() / 3, root.getHeight() / 5);
