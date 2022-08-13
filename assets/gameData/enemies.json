@@ -1,8 +1,8 @@
 {
  "enemies":
  [
-   {"name": "slime", "HP": 10, "DMG": 2, "SPRITE": "testPlayer.png"},
-   {"name": "skeleton", "HP": 20, "DMG": 3, "SPRITE": "testPlayer.png"},
-   {"name": "bat", "HP": 5, "DMG": 1, "SPRITE": "testPlayer.png"}
+   {"name": "slime", "HP": 10, "DMG": 2, "ATK_SPD": 1, "SPRITE": "testPlayer.png"},
+   {"name": "skeleton", "HP": 20, "DMG": 3, "ATK_SPD": 1, "SPRITE": "testPlayer.png"},
+   {"name": "bat", "HP": 5, "DMG": 1, "ATK_SPD": 1, "SPRITE": "testPlayer.png"}
  ]
 }
