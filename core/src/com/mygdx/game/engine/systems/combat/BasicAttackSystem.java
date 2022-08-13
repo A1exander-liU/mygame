@@ -38,6 +38,21 @@ public class BasicAttackSystem extends EntitySystem {
     @Override
     public void update(float delta) {
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+            // also need to think about inventory system
+
+            // have system for different melee attack styles
+            // have system for stab,slash,smash
+            // stab: use rays, fast, low dmg, small aoe
+            // slash: use arcs, average, average dmg, medium aoe
+            // smash: use circles, slow, high dmg, large aoe
+
+            // animation would be played here
+            // if player moves during the attack animation, attack animation and
+            // the attack is cancelled
+            // if (attackAnimationIsPlaying)
+            //    if (playerMoved)
+            //       cancelAnimation()
+            //       return (to prevent perform stab from happening)
             performStab();
         }
     }
