@@ -38,7 +38,7 @@ public class PlayerHudRenderSystem extends EntitySystem {
         Table playerHealth = new Table();
         playerHealth.setSize(root.getWidth() / 3, root.getHeight() / 5);
         playerHealth.setBackground(skin.getDrawable("button-up"));
-        root.add(playerHealth).expand().top().left().height(playerHealth.getHeight());
+        root.add(playerHealth).expand().top().left().height(playerHealth.getHeight()).width(playerHealth.getWidth());
 
         ProgressBar playerHealthBar = new ProgressBar(0, 100, 1, false, skin, "progress-bar-player-health");
         playerHealthBar.setValue(calcCurrentRemainingHealth());
