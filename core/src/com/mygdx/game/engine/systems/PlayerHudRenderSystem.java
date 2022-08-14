@@ -39,7 +39,7 @@ public class PlayerHudRenderSystem extends EntitySystem {
         playerHud.addActor(root);
         // create nested table to display player hp and exp for now
         Table playerLevel = new Table();
-        playerLevel.setDebug(false);
+        playerLevel.setDebug(true);
         // setting the table width and height
         playerLevel.setSize(root.getWidth() / 3, root.getHeight() / 6);
         // set table background
@@ -47,7 +47,7 @@ public class PlayerHudRenderSystem extends EntitySystem {
         // adding the table to the stage use expand, top, left to move table to top left corner
         root.add(playerLevel).expand().top().left().height(playerLevel.getHeight()).width(playerLevel.getWidth());
         // create and add level label to the table
-        Label playerLevelLabel = new Label("1", skin);
+        Label playerLevelLabel = new Label("" + cg.getLevel(player).level, skin);
         // center the text
         playerLevelLabel.setAlignment(0);
         playerLevel.add(playerLevelLabel).fill();
