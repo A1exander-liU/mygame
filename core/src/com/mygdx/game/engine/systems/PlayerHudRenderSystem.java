@@ -62,16 +62,27 @@ public class PlayerHudRenderSystem extends EntitySystem {
         ProgressBar healthBar = new ProgressBar(0, 100, 1, false, skin, "progress-bar-player-health");
         healthBar.setValue(calcCurrentRemainingHealth());
         playerHealthAndExp.add(healthBar);
-        // add new row (exp bar will be below health bar)
+        // add new row (mana bar will be below health bar)
         playerHealthAndExp.row();
+
+        // create mana bar
+        ProgressBar manaBar = new ProgressBar(0, 100, 1, false, skin, "progress-bar-player-mana");
+        manaBar.setValue(100); // will add a mana component later
+        playerHealthAndExp.add(manaBar);
+
+        // add new row
+        playerHealthAndExp.row();
+
         // create exp bar
         ProgressBar expBar = new ProgressBar(0, 100, 1, false, skin, "progress-bar-player-exp");
         playerHealthAndExp.add(expBar);
 
         // adjust exp and health bar cell sizes to move them closer together
         Cell<ProgressBar> healthBarCell = playerHealthAndExp.getCell(healthBar);
+        Cell<ProgressBar> manaBarCell = playerHealthAndExp.getCell(manaBar);
         Cell<ProgressBar> expBarCell = playerHealthAndExp.getCell(expBar);
         healthBarCell.height(playerLevel.getHeight() / 3);
+        manaBarCell.height(playerLevel.getHeight() / 3);
         expBarCell.height(playerLevel.getHeight() / 3);
 
         playerHud.act();
