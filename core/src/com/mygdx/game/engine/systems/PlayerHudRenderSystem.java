@@ -67,7 +67,7 @@ public class PlayerHudRenderSystem extends EntitySystem {
 
         // create mana bar
         ProgressBar manaBar = new ProgressBar(0, 100, 1, false, skin, "progress-bar-player-mana");
-        manaBar.setValue(100); // will add a mana component later
+        manaBar.setValue(calcRemainingMana()); // will add a mana component later
         playerHealthManaExp.add(manaBar);
 
         // add new row
@@ -92,6 +92,10 @@ public class PlayerHudRenderSystem extends EntitySystem {
     private float calcCurrentRemainingHealth() {
         return (cg.getParameters(player).health.currentHealth /
                 cg.getParameters(player).health.maxHealth * 100);
+    }
+
+    private float calcRemainingMana() {
+        return (cg.getMana(player).currentMana / cg.getMana(player).maxMana * 100);
     }
 
 }
