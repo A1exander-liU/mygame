@@ -39,9 +39,9 @@ public class PlayerHudRenderSystem extends EntitySystem {
         playerHud.addActor(root);
         // create nested table to display player hp and exp for now
         Table playerLevel = new Table();
-        playerLevel.setDebug(true);
+        playerLevel.setDebug(false);
         // setting the table width and height
-        playerLevel.setSize(root.getWidth() / 3, root.getHeight() / 5);
+        playerLevel.setSize(root.getWidth() / 3, root.getHeight() / 6);
         // set table background
         playerLevel.setBackground(skin.getDrawable("player-hud-bg-01"));
         // adding the table to the stage use expand, top, left to move table to top left corner
@@ -81,7 +81,7 @@ public class PlayerHudRenderSystem extends EntitySystem {
         Cell<ProgressBar> healthBarCell = playerHealthManaExp.getCell(healthBar);
         Cell<ProgressBar> manaBarCell = playerHealthManaExp.getCell(manaBar);
         Cell<ProgressBar> expBarCell = playerHealthManaExp.getCell(expBar);
-        healthBarCell.height(playerLevel.getHeight() / 3);
+        healthBarCell.height(playerLevel.getHeight() / 3).padTop(4);
         manaBarCell.height(playerLevel.getHeight() / 3);
         expBarCell.height(playerLevel.getHeight() / 3);
 
