@@ -97,7 +97,19 @@ public class PlayerHudRenderSystem extends EntitySystem {
         // create mana bar
         ProgressBar manaBar = new ProgressBar(0, 100, 1, false, skin, "progress-bar-player-mana");
         manaBar.setValue(calcRemainingMana()); // will add a mana component later
-        playerHealthManaExp.add(manaBar);
+//        playerHealthManaExp.add(manaBar);
+
+        // create label for mana bar
+        Label manaLabel = new Label(playerMana.currentMana
+                + "/" + playerMana.maxMana, skin);
+        manaLabel.setAlignment(Align.center);
+        manaLabel.setFontScale(0.6f);
+
+        // create stack for mana
+        Stack manaStack = new Stack();
+        manaStack.add(manaBar);
+        manaStack.add(manaLabel);
+        playerHealthManaExp.add(manaStack);
         // add new row
         playerHealthManaExp.row();
 
@@ -107,7 +119,7 @@ public class PlayerHudRenderSystem extends EntitySystem {
 
         // adjust exp and health bar cell sizes to move them closer together
         Cell<Stack> healthBarStackCell = playerHealthManaExp.getCell(healthStack);
-        Cell<ProgressBar> manaBarStackCell = playerHealthManaExp.getCell(manaBar);
+        Cell<Stack> manaBarStackCell = playerHealthManaExp.getCell(manaStack);
         Cell<ProgressBar> expBarStackCell = playerHealthManaExp.getCell(expBar);
         healthBarStackCell.height(playerLevel.getHeight() / 3).padTop(5);
         manaBarStackCell.height(playerLevel.getHeight() / 3);
