@@ -38,20 +38,20 @@ public class PlayerHudRenderSystem extends EntitySystem {
         // add root table to the stage
         playerHud.addActor(root);
         // create nested table to display player hp and exp for now
-        Table playerHealthAndExp = new Table();
-        playerHealthAndExp.setDebug(true);
+        Table playerLevel = new Table();
+        playerLevel.setDebug(true);
         // setting the table width and height
-        playerHealthAndExp.setSize(root.getWidth() / 3, root.getHeight() / 5);
+        playerLevel.setSize(root.getWidth() / 3, root.getHeight() / 5);
         // set table background
-        playerHealthAndExp.setBackground(skin.getDrawable("button-up"));
+        playerLevel.setBackground(skin.getDrawable("button-up"));
         // adding the table to the stage use expand, top, left to move table to top left corner
-        root.add(playerHealthAndExp).expand().top().left().height(playerHealthAndExp.getHeight()).width(playerHealthAndExp.getWidth());
+        root.add(playerLevel).expand().top().left().height(playerLevel.getHeight()).width(playerLevel.getWidth());
         // create and add level label to the table
         Label playerLevelLabel = new Label("1", skin);
         playerLevelLabel.setAlignment(0);
-        playerHealthAndExp.add(playerLevelLabel).fill();
-        Cell<Label> levelLabelCell = playerHealthAndExp.getCell(playerLevelLabel);
-        levelLabelCell.width(playerHealthAndExp.getWidth() / 3);
+        playerLevel.add(playerLevelLabel).fill();
+        Cell<Label> levelLabelCell = playerLevel.getCell(playerLevelLabel);
+        levelLabelCell.width(playerLevel.getWidth() / 3);
 
 
         playerHud.act();
