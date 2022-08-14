@@ -58,7 +58,14 @@ public class PlayerHudRenderSystem extends EntitySystem {
         Table playerHealthAndExp = new Table();
         playerLevel.add(playerHealthAndExp).width(playerLevel.getWidth() * (1.8f / 3));
 
-
+        // create health bar
+        ProgressBar healthBar = new ProgressBar(0, 100, 1, false, skin, "progress-bar-player-health");
+        playerHealthAndExp.add(healthBar);
+        // add new row (exp bar will be below health bar)
+        playerHealthAndExp.row();
+        // create exp bar
+        ProgressBar expBar = new ProgressBar(0, 100, 1, false, skin, "progress-bar-player-exp");
+        playerHealthAndExp.add(expBar);
 
         playerHud.act();
         playerHud.draw();
