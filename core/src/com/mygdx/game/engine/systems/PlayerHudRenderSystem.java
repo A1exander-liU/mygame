@@ -38,13 +38,14 @@ public class PlayerHudRenderSystem extends EntitySystem {
         playerHud.addActor(root);
 
         // create nested table to display player hp and exp for now
-        Table playerHealthAndLevel = new Table();
+        Table playerHealthAndExp = new Table();
+
         // setting the table width and height
-        playerHealthAndLevel.setSize(root.getWidth() / 3, root.getHeight() / 5);
+        playerHealthAndExp.setSize(root.getWidth() / 3, root.getHeight() / 5);
         // set table background
-        playerHealthAndLevel.setBackground(skin.getDrawable("button-up"));
+        playerHealthAndExp.setBackground(skin.getDrawable("button-up"));
         // adding the table to the stage use expand, top, left to move table to top left corner
-        root.add(playerHealthAndLevel).expand().top().left().height(playerHealthAndLevel.getHeight()).width(playerHealthAndLevel.getWidth());
+        root.add(playerHealthAndExp).expand().top().left().height(playerHealthAndExp.getHeight()).width(playerHealthAndExp.getWidth());
 
         // create player health bar
         ProgressBar playerHealthBar = new ProgressBar(0, 100, 1, false, skin, "progress-bar-player-health");
@@ -52,9 +53,9 @@ public class PlayerHudRenderSystem extends EntitySystem {
         playerHealthBar.setValue(calcCurrentRemainingHealth());
         playerHealthBar.setName("playerHealthBar");
         // adding to the nested table
-        playerHealthAndLevel.add(playerHealthBar);
+        playerHealthAndExp.add(playerHealthBar);
         // create new row to add exp bar under health bar
-        playerHealthAndLevel.row();
+        playerHealthAndExp.row();
 
         // create player exp bar
         ProgressBar playerExpBar = new ProgressBar(0, 100, 1, false, skin, "progress-bar-player-exp");
@@ -62,18 +63,18 @@ public class PlayerHudRenderSystem extends EntitySystem {
         playerExpBar.setValue(10);
         playerExpBar.setName("playerExpBar");
         // add to the nested table
-        playerHealthAndLevel.add(playerExpBar);
+        playerHealthAndExp.add(playerExpBar);
 
         // grabbing the cells to adjust their size
-        Cell<ProgressBar> healthBarCell = playerHealthAndLevel.getCell(playerHealthBar);
+        Cell<ProgressBar> healthBarCell = playerHealthAndExp.getCell(playerHealthBar);
         // adjust width and height to leave space for other ui
         // add padding to move the bars towards right edge of the table
-        healthBarCell.height(playerHealthAndLevel.getHeight() / 2);
-        healthBarCell.width(playerHealthAndLevel.getWidth() * 1.7f / 3);
+        healthBarCell.height(playerHealthAndExp.getHeight() / 2);
+        healthBarCell.width(playerHealthAndExp.getWidth() * 1.7f / 3);
         healthBarCell.pad(3, 65, 0, 0);
-        Cell<ProgressBar> expBarCell = playerHealthAndLevel.getCell(playerExpBar);
-        expBarCell.height(playerHealthAndLevel.getHeight() / 2);
-        expBarCell.width(playerHealthAndLevel.getWidth() * 1.7f / 3);
+        Cell<ProgressBar> expBarCell = playerHealthAndExp.getCell(playerExpBar);
+        expBarCell.height(playerHealthAndExp.getHeight() / 2);
+        expBarCell.width(playerHealthAndExp.getWidth() * 1.7f / 3);
         expBarCell.pad(0, 65, 0, 0);
 
         playerHud.act();
