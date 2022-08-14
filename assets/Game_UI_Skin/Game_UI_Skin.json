@@ -666,6 +666,26 @@
 		"regions": [],
 		"playMode": 2,
 		"crushMode": 0
+	},
+	"knob-before-player-mana": {
+		"region": "player-mana",
+		"horizontalStretchAreas": [ 0, 63 ],
+		"verticalStretchAreas": [ 28, 39 ],
+		"tiling": false,
+		"minWidth": 64,
+		"minHeight": 64,
+		"rightWidth": 0,
+		"leftWidth": 0,
+		"bottomHeight": 28,
+		"topHeight": 24,
+		"offsetX": 0,
+		"offsetY": 0,
+		"offsetXspeed": 0,
+		"offsetYspeed": 0,
+		"frameDuration": 0.03,
+		"regions": [],
+		"playMode": 2,
+		"crushMode": 0
 	}
 },
 "com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle": {
@@ -726,6 +746,10 @@
 	"progress-bar-player-exp": {
 		"background": "progress-bar-player-grey-bg",
 		"knobBefore": "knob-before-player-exp"
+	},
+	"progress-bar-player-mana": {
+		"background": "progress-bar-player-grey-bg",
+		"knobBefore": "knob-before-player-mana"
 	}
 },
 "com.badlogic.gdx.scenes.scene2d.ui.ScrollPane$ScrollPaneStyle": {
