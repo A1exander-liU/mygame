@@ -700,8 +700,8 @@
 		"knobAfter": "knob-after-enemy-full"
 	},
 	"progress-bar-player-health": {
-		"background": "progress-bar-enemy-hp",
-		"knobBefore": "knob-after-enemy-full"
+		"background": "progress-bar-player-grey-bg",
+		"knobBefore": "progress-bar-enemy-hp"
 	},
 	"progress-bar-player-exp": {
 		"background": "progress-bar-player-grey-bg",
