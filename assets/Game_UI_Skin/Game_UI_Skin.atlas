@@ -165,6 +165,13 @@ pixil-frame-34
   orig: 16, 22
   offset: 0, 0
   index: -1
+player-hud-bg-1
+  rotate: false
+  xy: 333, 292
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
 progress-bar-grey-bg
   rotate: false
   xy: 199, 260
