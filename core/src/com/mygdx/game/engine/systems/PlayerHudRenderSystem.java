@@ -30,29 +30,44 @@ public class PlayerHudRenderSystem extends EntitySystem {
     @Override
     public void update(float delta) {
         playerHud.clear();
+        // the root table
         Table root = new Table();
+        // make root table as big as the stage
         root.setSize(playerHud.getWidth(), playerHud.getHeight());
+        // add root table to the stage
         playerHud.addActor(root);
 
+        // create nested table to display player hp and exp for now
         Table playerHealth = new Table();
+        // setting the table width and height
         playerHealth.setSize(root.getWidth() / 3, root.getHeight() / 5);
+        // set table background
         playerHealth.setBackground(skin.getDrawable("button-up"));
+        // adding the table to the stage use expand, top, left to move table to top left corner
         root.add(playerHealth).expand().top().left().height(playerHealth.getHeight()).width(playerHealth.getWidth());
 
+        // create player health bar
         ProgressBar playerHealthBar = new ProgressBar(0, 100, 1, false, skin, "progress-bar-player-health");
+        // determine the hp percent to display
         playerHealthBar.setValue(calcCurrentRemainingHealth());
         playerHealthBar.setName("playerHealthBar");
+        // adding to the nested table
         playerHealth.add(playerHealthBar);
-
+        // create new row to add exp bar under health bar
         playerHealth.row();
 
+        // create player exp bar
         ProgressBar playerExpBar = new ProgressBar(0, 100, 1, false, skin, "progress-bar-player-exp");
         // value is for testing
         playerExpBar.setValue(10);
         playerExpBar.setName("playerExpBar");
+        // add to the nested table
         playerHealth.add(playerExpBar);
 
+        // grabbing the cells to adjust their size
         Cell<ProgressBar> healthBarCell = playerHealth.getCell(playerHealthBar);
+        // adjust width and height to leave space for other ui
+        // add padding to move the bars towards right edge of the table
         healthBarCell.height(playerHealth.getHeight() / 2);
         healthBarCell.width(playerHealth.getWidth() * 1.7f / 3);
         healthBarCell.pad(3, 65, 0, 0);
