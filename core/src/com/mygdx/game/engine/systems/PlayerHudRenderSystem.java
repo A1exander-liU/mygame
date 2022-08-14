@@ -43,7 +43,7 @@ public class PlayerHudRenderSystem extends EntitySystem {
         // setting the table width and height
         playerLevel.setSize(root.getWidth() / 3, root.getHeight() / 5);
         // set table background
-        playerLevel.setBackground(skin.getDrawable("button-up"));
+        playerLevel.setBackground(skin.getDrawable("player-hud-bg-01"));
         // adding the table to the stage use expand, top, left to move table to top left corner
         root.add(playerLevel).expand().top().left().height(playerLevel.getHeight()).width(playerLevel.getWidth());
         // create and add level label to the table
@@ -52,11 +52,11 @@ public class PlayerHudRenderSystem extends EntitySystem {
         playerLevelLabel.setAlignment(0);
         playerLevel.add(playerLevelLabel).fill();
         Cell<Label> levelLabelCell = playerLevel.getCell(playerLevelLabel);
-        levelLabelCell.width(playerLevel.getWidth() / 3);
+        levelLabelCell.width(playerLevel.getWidth() / 4);
 
         // nested table for health and exp
         Table playerHealthAndExp = new Table();
-        playerLevel.add(playerHealthAndExp).width(playerLevel.getWidth() * (1.8f / 3));
+        playerLevel.add(playerHealthAndExp).width(playerLevel.getWidth() * (3f / 4)).pad(0, 0, 0, 0);
 
         // create health bar
         ProgressBar healthBar = new ProgressBar(0, 100, 1, false, skin, "progress-bar-player-health");
