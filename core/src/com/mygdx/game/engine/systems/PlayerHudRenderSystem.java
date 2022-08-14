@@ -60,12 +60,15 @@ public class PlayerHudRenderSystem extends EntitySystem {
 
         // create health bar
         ProgressBar healthBar = new ProgressBar(0, 100, 1, false, skin, "progress-bar-player-health");
+        healthBar.setValue(calcCurrentRemainingHealth());
         playerHealthAndExp.add(healthBar);
         // add new row (exp bar will be below health bar)
         playerHealthAndExp.row();
         // create exp bar
         ProgressBar expBar = new ProgressBar(0, 100, 1, false, skin, "progress-bar-player-exp");
         playerHealthAndExp.add(expBar);
+
+        // adjust exp and health bar cell sizes to move them closer together
 
         playerHud.act();
         playerHud.draw();
