@@ -56,9 +56,9 @@ public class PlayerHudRenderSystem extends EntitySystem {
 
         // nested table for health and exp
         Table playerHealthAndExp = new Table();
-        playerLevel.add(playerHealthAndExp);
+        playerLevel.add(playerHealthAndExp).width(playerLevel.getWidth() * (1.8f / 3));
 
-        
+
 
         playerHud.act();
         playerHud.draw();
