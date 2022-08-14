@@ -95,6 +95,10 @@ public class PlayerHudRenderSystem extends EntitySystem {
 
         playerHud.act();
         playerHud.draw();
+        // draw player hud, then draw the text so it appears on top
+        playerHud.getBatch().begin();
+        newFont.draw(playerHud.getBatch(), "10/10", healthBar.getX(), healthBar.getY());
+        playerHud.getBatch().end();
     }
 
     private float calcCurrentRemainingHealth() {
