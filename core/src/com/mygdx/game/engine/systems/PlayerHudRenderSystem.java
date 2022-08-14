@@ -3,6 +3,7 @@ package com.mygdx.game.engine.systems;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -10,11 +11,15 @@ import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.ComponentGrabber;
 import com.mygdx.game.engine.Families;
+import com.mygdx.game.engine.components.ManaComponent;
+import com.mygdx.game.engine.components.ParameterComponent;
 
 public class PlayerHudRenderSystem extends EntitySystem {
     ComponentGrabber cg;
@@ -24,6 +29,8 @@ public class PlayerHudRenderSystem extends EntitySystem {
     FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
     BitmapFont newFont;
 
+    ParameterComponent playerParams;
+    ManaComponent playerMana;
 
     public PlayerHudRenderSystem(ComponentGrabber cg) {
         super(98);
@@ -32,9 +39,11 @@ public class PlayerHudRenderSystem extends EntitySystem {
         playerHud = new Stage(new ScreenViewport());
         skin = new Skin(Gdx.files.internal("Game_UI_Skin/Game_UI_Skin.json"));
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/PressStart2P-Regular.ttf"));
-        parameter.size = 12;
+        parameter.size = 8;
         newFont = generator.generateFont(parameter);
         generator.dispose();
+        playerParams = cg.getParameters(player);
+        playerMana = cg.getMana(player);
     }
 
     @Override
@@ -70,7 +79,18 @@ public class PlayerHudRenderSystem extends EntitySystem {
         // create health bar
         ProgressBar healthBar = new ProgressBar(0, 100, 1, false, skin, "progress-bar-player-health");
         healthBar.setValue(calcCurrentRemainingHealth());
-        playerHealthManaExp.add(healthBar);
+//        playerHealthManaExp.add(healthBar);
+
+        Label healthLabel = new Label(playerParams.health.currentHealth
+                + "/" + playerParams.health.maxHealth, skin);
+        healthLabel.setAlignment(Align.center);
+        healthLabel.setFontScale(0.6f);
+
+        // create a stack to display health bar and health numbers on top
+        Stack healthStack = new Stack();
+        healthStack.add(healthBar);
+        healthStack.add(healthLabel);
+        playerHealthManaExp.add(healthStack);
         // add new row (mana bar will be below health bar)
         playerHealthManaExp.row();
 
@@ -86,18 +106,22 @@ public class PlayerHudRenderSystem extends EntitySystem {
         playerHealthManaExp.add(expBar);
 
         // adjust exp and health bar cell sizes to move them closer together
-        Cell<ProgressBar> healthBarCell = playerHealthManaExp.getCell(healthBar);
-        Cell<ProgressBar> manaBarCell = playerHealthManaExp.getCell(manaBar);
-        Cell<ProgressBar> expBarCell = playerHealthManaExp.getCell(expBar);
-        healthBarCell.height(playerLevel.getHeight() / 3).padTop(4);
-        manaBarCell.height(playerLevel.getHeight() / 3);
-        expBarCell.height(playerLevel.getHeight() / 3);
+        Cell<Stack> healthBarStackCell = playerHealthManaExp.getCell(healthStack);
+        Cell<ProgressBar> manaBarStackCell = playerHealthManaExp.getCell(manaBar);
+        Cell<ProgressBar> expBarStackCell = playerHealthManaExp.getCell(expBar);
+        healthBarStackCell.height(playerLevel.getHeight() / 3).padTop(5);
+        manaBarStackCell.height(playerLevel.getHeight() / 3);
+        expBarStackCell.height(playerLevel.getHeight() / 3);
 
         playerHud.act();
         playerHud.draw();
         // draw player hud, then draw the text so it appears on top
         playerHud.getBatch().begin();
-        newFont.draw(playerHud.getBatch(), "10/10", healthBar.getX(), healthBar.getY());
+        // draw health numbers: (115, 469)
+        float x = healthBar.getX(0);
+        float y = healthBar.getY(0);
+//        newFont.draw(playerHud.getBatch(), (int)playerParams.health.currentHealth
+//                + "/" + (int)playerParams.health.maxHealth, 115, 469);
         playerHud.getBatch().end();
     }
 
