@@ -48,41 +48,11 @@ public class PlayerHudRenderSystem extends EntitySystem {
         root.add(playerHealthAndExp).expand().top().left().height(playerHealthAndExp.getHeight()).width(playerHealthAndExp.getWidth());
         // create and add level label to the table
         Label playerLevelLabel = new Label("1", skin);
+        playerLevelLabel.setAlignment(0);
         playerHealthAndExp.add(playerLevelLabel).fill();
+        Cell<Label> levelLabelCell = playerHealthAndExp.getCell(playerLevelLabel);
+        levelLabelCell.width(playerHealthAndExp.getWidth() / 3);
 
-        // nests a table in this table to have a cell span multiple rows
-        Table playerLevel = new Table();
-        playerHealthAndExp.add(playerLevel);
-
-        // create player health bar
-        ProgressBar playerHealthBar = new ProgressBar(0, 100, 1, false, skin, "progress-bar-player-health");
-        // determine the hp percent to display
-        playerHealthBar.setValue(calcCurrentRemainingHealth());
-        playerHealthBar.setName("playerHealthBar");
-        // adding to the nested table
-        playerLevel.add(playerHealthBar);
-        // create new row to add exp bar under health bar
-        playerLevel.row();
-
-        // create player exp bar
-        ProgressBar playerExpBar = new ProgressBar(0, 100, 1, false, skin, "progress-bar-player-exp");
-        // value is for testing
-        playerExpBar.setValue(10);
-        playerExpBar.setName("playerExpBar");
-        // add to the nested table
-        playerLevel.add(playerExpBar);
-
-        // grabbing the cells to adjust their size
-        Cell<ProgressBar> healthBarCell = playerLevel.getCell(playerHealthBar);
-        // adjust width and height to leave space for other ui
-        // add padding to move the bars towards right edge of the table
-//        healthBarCell.height(playerLevel.getHeight() / 2);
-//        healthBarCell.width(playerLevel.getWidth() * 1.7f / 3);
-        healthBarCell.pad(3, 50, 0, 0);
-        Cell<ProgressBar> expBarCell = playerLevel.getCell(playerExpBar);
-//        expBarCell.height(playerLevel.getHeight() / 2);
-//        expBarCell.width(playerLevel.getWidth() * 1.7f / 3);
-        expBarCell.pad(0, 50, 0, 0);
 
         playerHud.act();
         playerHud.draw();
