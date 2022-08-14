@@ -55,32 +55,32 @@ public class PlayerHudRenderSystem extends EntitySystem {
         levelLabelCell.width(playerLevel.getWidth() / 4);
 
         // nested table for health and exp
-        Table playerHealthAndExp = new Table();
-        playerLevel.add(playerHealthAndExp).width(playerLevel.getWidth() * (3f / 4)).pad(0, 0, 0, 0);
+        Table playerHealthManaExp = new Table();
+        playerLevel.add(playerHealthManaExp).width(playerLevel.getWidth() * (3f / 4)).pad(0, 0, 0, 0);
 
         // create health bar
         ProgressBar healthBar = new ProgressBar(0, 100, 1, false, skin, "progress-bar-player-health");
         healthBar.setValue(calcCurrentRemainingHealth());
-        playerHealthAndExp.add(healthBar);
+        playerHealthManaExp.add(healthBar);
         // add new row (mana bar will be below health bar)
-        playerHealthAndExp.row();
+        playerHealthManaExp.row();
 
         // create mana bar
         ProgressBar manaBar = new ProgressBar(0, 100, 1, false, skin, "progress-bar-player-mana");
         manaBar.setValue(100); // will add a mana component later
-        playerHealthAndExp.add(manaBar);
+        playerHealthManaExp.add(manaBar);
 
         // add new row
-        playerHealthAndExp.row();
+        playerHealthManaExp.row();
 
         // create exp bar
         ProgressBar expBar = new ProgressBar(0, 100, 1, false, skin, "progress-bar-player-exp");
-        playerHealthAndExp.add(expBar);
+        playerHealthManaExp.add(expBar);
 
         // adjust exp and health bar cell sizes to move them closer together
-        Cell<ProgressBar> healthBarCell = playerHealthAndExp.getCell(healthBar);
-        Cell<ProgressBar> manaBarCell = playerHealthAndExp.getCell(manaBar);
-        Cell<ProgressBar> expBarCell = playerHealthAndExp.getCell(expBar);
+        Cell<ProgressBar> healthBarCell = playerHealthManaExp.getCell(healthBar);
+        Cell<ProgressBar> manaBarCell = playerHealthManaExp.getCell(manaBar);
+        Cell<ProgressBar> expBarCell = playerHealthManaExp.getCell(expBar);
         healthBarCell.height(playerLevel.getHeight() / 3);
         manaBarCell.height(playerLevel.getHeight() / 3);
         expBarCell.height(playerLevel.getHeight() / 3);
