@@ -44,6 +44,9 @@ public class PlayerHudRenderSystem extends EntitySystem {
         playerHealthBar.setName("playerHealthBar");
         playerHealth.add(playerHealthBar);
 
+        Cell<ProgressBar> cell = playerHealth.getCell(playerHealthBar);
+        cell.pad(-40, 10, 0, 0);
+
         playerHud.act();
         playerHud.draw();
     }
