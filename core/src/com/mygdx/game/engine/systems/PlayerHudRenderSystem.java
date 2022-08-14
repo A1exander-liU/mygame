@@ -48,11 +48,17 @@ public class PlayerHudRenderSystem extends EntitySystem {
         root.add(playerLevel).expand().top().left().height(playerLevel.getHeight()).width(playerLevel.getWidth());
         // create and add level label to the table
         Label playerLevelLabel = new Label("1", skin);
+        // center the text
         playerLevelLabel.setAlignment(0);
         playerLevel.add(playerLevelLabel).fill();
         Cell<Label> levelLabelCell = playerLevel.getCell(playerLevelLabel);
         levelLabelCell.width(playerLevel.getWidth() / 3);
 
+        // nested table for health and exp
+        Table playerHealthAndExp = new Table();
+        playerLevel.add(playerHealthAndExp);
+
+        
 
         playerHud.act();
         playerHud.draw();
