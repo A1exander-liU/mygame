@@ -44,7 +44,9 @@ public class PlayerHudRenderSystem extends EntitySystem {
         playerHealthBar.setValue(calcCurrentRemainingHealth());
         playerHealthBar.setName("playerHealthBar");
         playerHealth.add(playerHealthBar);
+
         playerHealth.row();
+
         ProgressBar playerExpBar = new ProgressBar(0, 100, 1, false, skin, "progress-bar-player-exp");
         // value is for testing
         playerExpBar.setValue(10);
@@ -52,9 +54,11 @@ public class PlayerHudRenderSystem extends EntitySystem {
         playerHealth.add(playerExpBar);
 
         Cell<ProgressBar> healthBarCell = playerHealth.getCell(playerHealthBar);
-        healthBarCell.pad(5, 40, 0, 0);
+        healthBarCell.height(playerHealth.getHeight() / 2);
+        healthBarCell.pad(3, 50, 0, 0);
         Cell<ProgressBar> expBarCell = playerHealth.getCell(playerExpBar);
-        expBarCell.pad(0, 40, 0, 0);
+        expBarCell.height(playerHealth.getHeight() / 2);
+        expBarCell.pad(0, 50, 0, 0);
 
         playerHud.act();
         playerHud.draw();
