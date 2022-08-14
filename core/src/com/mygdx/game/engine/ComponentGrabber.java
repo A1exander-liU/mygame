@@ -6,6 +6,7 @@ import com.mygdx.game.engine.components.AttackRange;
 import com.mygdx.game.engine.components.DetectionProximity;
 import com.mygdx.game.engine.components.EnemyStateMachine;
 import com.mygdx.game.engine.components.Item;
+import com.mygdx.game.engine.components.ManaComponent;
 import com.mygdx.game.engine.components.MovementBehavior;
 import com.mygdx.game.engine.components.Orientation;
 import com.mygdx.game.engine.components.ParameterComponent;
@@ -53,11 +54,6 @@ public class ComponentGrabber {
         return enemyStateMachine.get(entity);
     }
 
-    public Sprite getSprite(Entity entity) {
-        ComponentMapper<Sprite> img = ComponentMapper.getFor(Sprite.class);
-        return img.get(entity);
-    }
-
     // to retrieve components of an entity (faster than <Entity>.getComponent(<Component> class))
     public Health getHealth(Entity entity) {
         ComponentMapper<Health> hp = ComponentMapper.getFor(Health.class);
@@ -72,6 +68,11 @@ public class ComponentGrabber {
     public Item getItem(Entity entity) {
         ComponentMapper<Item> item = ComponentMapper.getFor(Item.class);
         return item.get(entity);
+    }
+
+    public ManaComponent getMana(Entity entity) {
+        ComponentMapper<ManaComponent> mana = ComponentMapper.getFor(ManaComponent.class);
+        return mana.get(entity);
     }
 
     public MovementBehavior getMovementBehavior(Entity entity) {
@@ -122,6 +123,11 @@ public class ComponentGrabber {
     public Speed getSpeed(Entity entity) {
         ComponentMapper<Speed> speed = ComponentMapper.getFor(Speed.class);
         return speed.get(entity);
+    }
+
+    public Sprite getSprite(Entity entity) {
+        ComponentMapper<Sprite> img = ComponentMapper.getFor(Sprite.class);
+        return img.get(entity);
     }
 
     public StateComponent getStateComponent(Entity entity) {
