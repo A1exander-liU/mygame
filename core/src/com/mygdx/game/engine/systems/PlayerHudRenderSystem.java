@@ -3,6 +3,8 @@ package com.mygdx.game.engine.systems;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -19,6 +21,9 @@ public class PlayerHudRenderSystem extends EntitySystem {
     Entity player;
     Stage playerHud;
     Skin skin;
+    FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+    BitmapFont newFont;
+
 
     public PlayerHudRenderSystem(ComponentGrabber cg) {
         super(98);
@@ -26,6 +31,10 @@ public class PlayerHudRenderSystem extends EntitySystem {
         player = MyGame.engine.getEntitiesFor(Families.player).get(0);
         playerHud = new Stage(new ScreenViewport());
         skin = new Skin(Gdx.files.internal("Game_UI_Skin/Game_UI_Skin.json"));
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/PressStart2P-Regular.ttf"));
+        parameter.size = 12;
+        newFont = generator.generateFont(parameter);
+        generator.dispose();
     }
 
     @Override
@@ -69,7 +78,6 @@ public class PlayerHudRenderSystem extends EntitySystem {
         ProgressBar manaBar = new ProgressBar(0, 100, 1, false, skin, "progress-bar-player-mana");
         manaBar.setValue(calcRemainingMana()); // will add a mana component later
         playerHealthManaExp.add(manaBar);
-
         // add new row
         playerHealthManaExp.row();
 
