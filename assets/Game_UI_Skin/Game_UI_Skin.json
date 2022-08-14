@@ -641,6 +641,10 @@
 		"background": "progress-bar-bg",
 		"knobBefore": "knob-before-health"
 	},
+	"default-vertical": {
+		"background": "progress-bar-enemy-hp",
+		"knobBefore": "konb-after-enemy-hp"
+	},
 	"player-experience": {
 		"background": "progress-bar-bg",
 		"knobBefore": "knob-before-experience"
@@ -703,6 +707,12 @@
 	"default": {
 		"label": "default",
 		"background": "text-tooltip-background"
+	}
+},
+"com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle": {
+	"window-player-health-bg": {
+		"titleFont": "advanced-pixel-small",
+		"stageBackground": "button-up"
 	}
 }
 }
