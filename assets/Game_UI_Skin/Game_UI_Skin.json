@@ -707,8 +707,8 @@
 },
 "com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle": {
 	"default": {
-		"font": "pixel2D",
-		"fontColor": "black"
+		"font": "advanced-pixel-small",
+		"fontColor": "white"
 	}
 },
 "com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle": {
