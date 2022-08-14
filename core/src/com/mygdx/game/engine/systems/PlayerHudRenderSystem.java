@@ -69,6 +69,10 @@ public class PlayerHudRenderSystem extends EntitySystem {
         playerHealthAndExp.add(expBar);
 
         // adjust exp and health bar cell sizes to move them closer together
+        Cell<ProgressBar> healthBarCell = playerHealthAndExp.getCell(healthBar);
+        Cell<ProgressBar> expBarCell = playerHealthAndExp.getCell(expBar);
+        healthBarCell.height(playerLevel.getHeight() / 3);
+        expBarCell.height(playerLevel.getHeight() / 3);
 
         playerHud.act();
         playerHud.draw();
