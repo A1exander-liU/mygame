@@ -55,10 +55,12 @@ public class PlayerHudRenderSystem extends EntitySystem {
 
         Cell<ProgressBar> healthBarCell = playerHealth.getCell(playerHealthBar);
         healthBarCell.height(playerHealth.getHeight() / 2);
-        healthBarCell.pad(3, 50, 0, 0);
+        healthBarCell.width(playerHealth.getWidth() * 1.7f / 3);
+        healthBarCell.pad(3, 65, 0, 0);
         Cell<ProgressBar> expBarCell = playerHealth.getCell(playerExpBar);
         expBarCell.height(playerHealth.getHeight() / 2);
-        expBarCell.pad(0, 50, 0, 0);
+        expBarCell.width(playerHealth.getWidth() * 1.7f / 3);
+        expBarCell.pad(0, 65, 0, 0);
 
         playerHud.act();
         playerHud.draw();
