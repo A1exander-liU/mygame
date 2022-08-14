@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.Entity;
 import com.mygdx.game.engine.components.Camera;
 import com.mygdx.game.engine.components.DetectionProximity;
 import com.mygdx.game.engine.components.Item;
+import com.mygdx.game.engine.components.ManaComponent;
 import com.mygdx.game.engine.components.Orientation;
 import com.mygdx.game.engine.components.ParameterComponent;
 import com.mygdx.game.engine.components.Sprite;
@@ -28,6 +29,7 @@ public class PlayerEntity extends Entity {
         super.add(new Health());
         super.add(new ID());
         super.add(new Item());
+        super.add(new ManaComponent());
         super.add(new Name());
         super.add(new Orientation());
         super.add(new ParameterComponent());
