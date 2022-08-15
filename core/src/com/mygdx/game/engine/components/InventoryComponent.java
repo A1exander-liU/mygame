@@ -3,6 +3,7 @@ package com.mygdx.game.engine.components;
 import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.utils.Array;
+import com.mygdx.game.MyGame;
 
 public class InventoryComponent implements Component {
     // how many unique items can be held
@@ -16,6 +17,7 @@ public class InventoryComponent implements Component {
     // NameComponent:
     // RarityComponent:
     // DescriptionComponent:
+    // SpriteComponent:
 
     // ONE:
     // EquipmentComponent: Will also have enum to determine the type
@@ -26,5 +28,13 @@ public class InventoryComponent implements Component {
     // QuantityComponent: for items where multiple can be obtained at once
     // like getting 3 wood for chopping a tree
 
+    public InventoryComponent() {
+        for (int i = 0; i < items.size; i++) {
+            Entity slot = new Entity();
+            slot.add(new InventorySlotComponent());
+            items.add(slot);
+            MyGame.engine.addEntity(slot);
+        }
+    }
 
 }
