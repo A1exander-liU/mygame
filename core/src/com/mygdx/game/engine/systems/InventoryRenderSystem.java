@@ -6,8 +6,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.ComponentGrabber;
@@ -64,7 +67,7 @@ public class InventoryRenderSystem extends EntitySystem {
             stage.addActor(root);
 
             Table inventory = new Table();
-            inventory.setDebug(true);
+            inventory.setDebug(false);
             inventory.setBackground(skin.getDrawable("player-hud-bg-01"));
             inventory.setSize(root.getWidth() * 0.75f, root.getHeight() * 0.60f);
             root.add(inventory).expand().center().width(inventory.getWidth()).height(inventory.getHeight());
@@ -104,12 +107,13 @@ public class InventoryRenderSystem extends EntitySystem {
 
     private void addInventorySlots(Table inventory) {
         Table inventorySlots = new Table();
-        inventorySlots.setSize(inventory.getWidth() * 0.5f, inventory.getHeight());
+        inventorySlots.setDebug(true);
+        inventorySlots.setSize(inventory.getWidth() * 0.5f, inventory.getHeight() * 0.95f);
         inventory.add(inventorySlots).expand().width(inventorySlots.getWidth()).height(inventorySlots.getHeight()).right();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 5; j++) {
                 ImageButton slot = new ImageButton(skin);
-                inventorySlots.add(slot).space(5);
+                inventorySlots.add(slot).expand().fill().space(5);
             }
             inventorySlots.row();
         }
