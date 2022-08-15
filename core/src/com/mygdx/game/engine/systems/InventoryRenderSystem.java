@@ -5,6 +5,7 @@ import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
@@ -52,6 +53,7 @@ public class InventoryRenderSystem extends EntitySystem {
 
     @Override
     public void update(float delta) {
+
         toggleInventory();
         toggleMovements();
         if (inventoryOpened) {
@@ -66,6 +68,8 @@ public class InventoryRenderSystem extends EntitySystem {
             inventory.setBackground(skin.getDrawable("player-hud-bg-01"));
             inventory.setSize(root.getWidth() * 0.75f, root.getHeight() * 0.60f);
             root.add(inventory).expand().center().width(inventory.getWidth()).height(inventory.getHeight());
+
+            addInventorySlots(inventory);
 
             stage.act();
             stage.draw();
@@ -95,6 +99,19 @@ public class InventoryRenderSystem extends EntitySystem {
             MyGame.engine.getSystem(BasicAttackSystem.class).setProcessing(true);
             MyGame.engine.getSystem(EnemyAttackSystem.class).setProcessing(true);
             MyGame.engine.getSystem(TimeSystem.class).setProcessing(true);
+        }
+    }
+
+    private void addInventorySlots(Table inventory) {
+        Table inventorySlots = new Table();
+        inventorySlots.setSize(inventory.getWidth() * 0.5f, inventory.getHeight());
+        inventory.add(inventorySlots).expand().width(inventorySlots.getWidth()).height(inventorySlots.getHeight()).right();
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
+                ImageButton slot = new ImageButton(skin);
+                inventorySlots.add(slot).space(5);
+            }
+            inventorySlots.row();
         }
     }
 }
