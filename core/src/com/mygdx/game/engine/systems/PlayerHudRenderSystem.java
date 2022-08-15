@@ -73,9 +73,9 @@ public class PlayerHudRenderSystem extends EntitySystem {
         Table playerHealthManaExp = new Table();
         playerLevel.add(playerHealthManaExp).width(playerLevel.getWidth() * (3f / 4)).pad(0, 0, 0, 0);
 
-        Stack healthStack = createHealthStack(playerHealthManaExp);
-        Stack manaStack = createManaStack(playerHealthManaExp);
-        Stack expStack = createExpStack(playerHealthManaExp);
+        createHealthStack(playerHealthManaExp);
+        createManaStack(playerHealthManaExp);
+        createExpStack(playerHealthManaExp);
 
         adjustStackCellSizes(playerLevel, playerHealthManaExp);
 
@@ -108,7 +108,7 @@ public class PlayerHudRenderSystem extends EntitySystem {
         levelLabelCell.width(playerLevel.getWidth() / 4);
     }
 
-    private Stack createHealthStack(Table playerHealthManaExp) {
+    private void createHealthStack(Table playerHealthManaExp) {
         // create health bar
         ProgressBar healthBar = new ProgressBar(0, 100, 1, false, skin, "progress-bar-player-health");
         healthBar.setValue(calcCurrentRemainingHealth());
@@ -126,10 +126,9 @@ public class PlayerHudRenderSystem extends EntitySystem {
         playerHealthManaExp.add(healthStack);
         // add new row (mana bar will be below health bar)
         playerHealthManaExp.row();
-        return healthStack;
     }
 
-    private Stack createManaStack(Table playerHealthManaExp) {
+    private void createManaStack(Table playerHealthManaExp) {
         // create mana bar
         ProgressBar manaBar = new ProgressBar(0, 100, 1, false, skin, "progress-bar-player-mana");
         manaBar.setValue(calcRemainingMana()); // will add a mana component later
@@ -148,10 +147,9 @@ public class PlayerHudRenderSystem extends EntitySystem {
         playerHealthManaExp.add(manaStack);
         // add new row
         playerHealthManaExp.row();
-        return manaStack;
     }
 
-    private Stack createExpStack(Table playerHealthManaExp) {
+    private void createExpStack(Table playerHealthManaExp) {
         // create exp bar
         ProgressBar expBar = new ProgressBar(0, 100, 1, false, skin, "progress-bar-player-exp");
 
@@ -167,7 +165,6 @@ public class PlayerHudRenderSystem extends EntitySystem {
         expStack.add(expBar);
         expStack.add(expLabel);
         playerHealthManaExp.add(expStack);
-        return expStack;
     }
 
     private void adjustStackCellSizes(Table playerLevel, Table playerHealthManaExp) {
