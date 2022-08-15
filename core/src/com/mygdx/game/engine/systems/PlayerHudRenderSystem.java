@@ -87,7 +87,7 @@ public class PlayerHudRenderSystem extends EntitySystem {
         healthBar.setValue(calcCurrentRemainingHealth());
 
         Label healthLabel = new Label((int)playerParams.health.currentHealth
-                + "/" + (int)playerParams.health.maxHealth, skin, "pixel2D", Color.WHITE);
+                + "/" + (int)playerParams.health.maxHealth, skin, "pixel2D", Color.BLACK);
         healthLabel.setAlignment(Align.center);
         healthLabel.setFontScale(0.6f);
 
@@ -105,7 +105,7 @@ public class PlayerHudRenderSystem extends EntitySystem {
 
         // create label for mana bar
         Label manaLabel = new Label((int)playerMana.currentMana
-                + "/" + (int)playerMana.maxMana, skin, "pixel2D", Color.WHITE);
+                + "/" + (int)playerMana.maxMana, skin, "pixel2D", Color.BLACK);
         manaLabel.setAlignment(Align.center);
         manaLabel.setFontScale(0.6f);
 
@@ -121,7 +121,7 @@ public class PlayerHudRenderSystem extends EntitySystem {
         ProgressBar expBar = new ProgressBar(0, 100, 1, false, skin, "progress-bar-player-exp");
 
         // create exp label
-        Label expLabel = new Label("0/100", skin, "pixel2D", Color.WHITE);
+        Label expLabel = new Label("0/100", skin, "pixel2D", Color.BLACK);
         expLabel.setAlignment(Align.center);
         expLabel.setFontScale(0.6f);
 
