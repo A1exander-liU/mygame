@@ -705,6 +705,12 @@
 		"font": "advanced-pixel-small"
 	}
 },
+"com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle": {
+	"default": {
+		"up": "button-up",
+		"over": "text-button-over"
+	}
+},
 "com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle": {
 	"default": {
 		"font": "advanced-pixel-small",
