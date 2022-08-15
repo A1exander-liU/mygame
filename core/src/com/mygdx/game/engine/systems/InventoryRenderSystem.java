@@ -3,6 +3,7 @@ package com.mygdx.game.engine.systems;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -48,6 +49,7 @@ public class InventoryRenderSystem extends EntitySystem {
 
     @Override
     public void update(float delta) {
+        toggleInventory();
         if (inventoryOpened) {
             stage.clear();
 
@@ -64,5 +66,14 @@ public class InventoryRenderSystem extends EntitySystem {
             stage.act();
             stage.draw();
         }
+    }
+
+    private void toggleInventory() {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.E)
+                && !inventoryOpened)
+            inventoryOpened = true;
+        else if (Gdx.input.isKeyJustPressed(Input.Keys.E)
+                && inventoryOpened)
+            inventoryOpened = false;
     }
 }
