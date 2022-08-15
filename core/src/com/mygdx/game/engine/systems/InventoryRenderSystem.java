@@ -11,6 +11,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.ComponentGrabber;
 import com.mygdx.game.engine.Families;
+import com.mygdx.game.engine.systems.enemyai.SteeringSystem;
 
 public class InventoryRenderSystem extends EntitySystem {
     ComponentGrabber cg;
@@ -50,6 +51,7 @@ public class InventoryRenderSystem extends EntitySystem {
     @Override
     public void update(float delta) {
         toggleInventory();
+        toggleMovements();
         if (inventoryOpened) {
             stage.clear();
 
@@ -75,5 +77,16 @@ public class InventoryRenderSystem extends EntitySystem {
         else if (Gdx.input.isKeyJustPressed(Input.Keys.E)
                 && inventoryOpened)
             inventoryOpened = false;
+    }
+
+    private void toggleMovements() {
+        if (inventoryOpened) {
+            MyGame.engine.getSystem(MovementSystem.class).setProcessing(false);
+            MyGame.engine.getSystem(SteeringSystem.class).setProcessing(false);
+        }
+        else {
+            MyGame.engine.getSystem(MovementSystem.class).setProcessing(true);
+            MyGame.engine.getSystem(SteeringSystem.class).setProcessing(true);
+        }
     }
 }
