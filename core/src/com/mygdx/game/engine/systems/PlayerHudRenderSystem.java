@@ -67,9 +67,8 @@ public class PlayerHudRenderSystem extends EntitySystem {
         // create nested table to display player hp and exp for now
         Table playerLevel = new Table();
         playerLevel.setDebug(true);
+
         createLevelUiArea(root, playerLevel);
-
-
         // nested table for health and exp
         Table playerHealthManaExp = new Table();
         playerLevel.add(playerHealthManaExp).width(playerLevel.getWidth() * (3f / 4)).pad(0, 0, 0, 0);
@@ -78,13 +77,7 @@ public class PlayerHudRenderSystem extends EntitySystem {
         Stack manaStack = createManaStack(playerHealthManaExp);
         Stack expStack = createExpStack(playerHealthManaExp);
 
-        // adjust exp and health bar cell sizes to move them closer together
-        Cell<Stack> healthBarStackCell = playerHealthManaExp.getCell(healthStack);
-        Cell<Stack> manaBarStackCell = playerHealthManaExp.getCell(manaStack);
-        Cell<Stack> expBarStackCell = playerHealthManaExp.getCell(expStack);
-        healthBarStackCell.height(playerLevel.getHeight() / 3).padTop(5);
-        manaBarStackCell.height(playerLevel.getHeight() / 3);
-        expBarStackCell.height(playerLevel.getHeight() / 3);
+        adjustStackCellSizes(playerLevel, playerHealthManaExp);
 
         playerHud.act();
         playerHud.draw();
@@ -127,6 +120,7 @@ public class PlayerHudRenderSystem extends EntitySystem {
 
         // create a stack to display health bar and health numbers on top
         Stack healthStack = new Stack();
+        healthStack.setName("healthStack");
         healthStack.add(healthBar);
         healthStack.add(healthLabel);
         playerHealthManaExp.add(healthStack);
@@ -148,6 +142,7 @@ public class PlayerHudRenderSystem extends EntitySystem {
 
         // create stack for mana
         Stack manaStack = new Stack();
+        manaStack.setName("manaStack");
         manaStack.add(manaBar);
         manaStack.add(manaLabel);
         playerHealthManaExp.add(manaStack);
@@ -168,9 +163,19 @@ public class PlayerHudRenderSystem extends EntitySystem {
 
         // create stack for exp
         Stack expStack = new Stack();
+        expStack.setName("expStack");
         expStack.add(expBar);
         expStack.add(expLabel);
         playerHealthManaExp.add(expStack);
         return expStack;
+    }
+
+    private void adjustStackCellSizes(Table playerLevel, Table playerHealthManaExp) {
+        Cell<Stack> healthBarStackCell = playerHealthManaExp.getCell(playerHealthManaExp.<Stack>findActor("healthStack"));
+        Cell<Stack> manaBarStackCell = playerHealthManaExp.getCell(playerHealthManaExp.<Stack>findActor("manaStack"));
+        Cell<Stack> expBarStackCell = playerHealthManaExp.getCell(playerHealthManaExp.<Stack>findActor("expStack"));
+        healthBarStackCell.height(playerLevel.getHeight() / 3).padTop(5);
+        manaBarStackCell.height(playerLevel.getHeight() / 3);
+        expBarStackCell.height(playerLevel.getHeight() / 3);
     }
 }
