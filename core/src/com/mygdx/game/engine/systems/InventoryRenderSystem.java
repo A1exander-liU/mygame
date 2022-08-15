@@ -51,6 +51,7 @@ public class InventoryRenderSystem extends EntitySystem {
 
         Table root = new Table();
         root.setSize(stage.getWidth(), stage.getHeight());
+        stage.addActor(root);
 
         Table inventory = new Table();
         inventory.setDebug(true);
