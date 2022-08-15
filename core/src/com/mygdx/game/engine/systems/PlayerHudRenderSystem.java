@@ -75,24 +75,7 @@ public class PlayerHudRenderSystem extends EntitySystem {
         playerLevel.add(playerHealthManaExp).width(playerLevel.getWidth() * (3f / 4)).pad(0, 0, 0, 0);
 
         Stack healthStack = createHealthStack(playerHealthManaExp);
-
-        // create mana bar
-        ProgressBar manaBar = new ProgressBar(0, 100, 1, false, skin, "progress-bar-player-mana");
-        manaBar.setValue(calcRemainingMana()); // will add a mana component later
-
-        // create label for mana bar
-        Label manaLabel = new Label((int)playerMana.currentMana
-                + "/" + (int)playerMana.maxMana, skin, "pixel2D", Color.BLACK);
-        manaLabel.setAlignment(Align.center);
-        manaLabel.setFontScale(0.6f);
-
-        // create stack for mana
-        Stack manaStack = new Stack();
-        manaStack.add(manaBar);
-        manaStack.add(manaLabel);
-        playerHealthManaExp.add(manaStack);
-        // add new row
-        playerHealthManaExp.row();
+        Stack manaStack = createManaStack(playerHealthManaExp);
 
         // create exp bar
         ProgressBar expBar = new ProgressBar(0, 100, 1, false, skin, "progress-bar-player-exp");
@@ -166,4 +149,24 @@ public class PlayerHudRenderSystem extends EntitySystem {
         return healthStack;
     }
 
+    public Stack createManaStack(Table playerHealthManaExp) {
+        // create mana bar
+        ProgressBar manaBar = new ProgressBar(0, 100, 1, false, skin, "progress-bar-player-mana");
+        manaBar.setValue(calcRemainingMana()); // will add a mana component later
+
+        // create label for mana bar
+        Label manaLabel = new Label((int)playerMana.currentMana
+                + "/" + (int)playerMana.maxMana, skin, "pixel2D", Color.BLACK);
+        manaLabel.setAlignment(Align.center);
+        manaLabel.setFontScale(0.6f);
+
+        // create stack for mana
+        Stack manaStack = new Stack();
+        manaStack.add(manaBar);
+        manaStack.add(manaLabel);
+        playerHealthManaExp.add(manaStack);
+        // add new row
+        playerHealthManaExp.row();
+        return manaStack;
+    }
 }
