@@ -62,7 +62,7 @@ public class InventoryRenderSystem extends EntitySystem {
             Table inventory = new Table();
             inventory.setDebug(true);
             inventory.setBackground(skin.getDrawable("player-hud-bg-01"));
-            inventory.setSize(root.getWidth() * 0.75f, root.getHeight() * 0.8f);
+            inventory.setSize(root.getWidth() * 0.75f, root.getHeight() * 0.60f);
             root.add(inventory).expand().center().width(inventory.getWidth()).height(inventory.getHeight());
 
             stage.act();
