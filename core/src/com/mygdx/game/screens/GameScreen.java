@@ -20,6 +20,7 @@ import com.mygdx.game.engine.entityListeners.EnemyRemovalListener;
 import com.mygdx.game.engine.systems.EnemySpawningSystem;
 import com.mygdx.game.engine.systems.EntityRemovalSystem;
 import com.mygdx.game.engine.systems.HealthBarRenderSystem;
+import com.mygdx.game.engine.systems.InventoryRenderSystem;
 import com.mygdx.game.engine.systems.MapUpdateSystem;
 import com.mygdx.game.engine.systems.MovementSystem;
 import com.mygdx.game.engine.systems.CollisionSystem;
@@ -112,6 +113,7 @@ public class GameScreen implements Screen {
         HealthBarRenderSystem healthBarRenderSystem = new HealthBarRenderSystem(cg);
         EnemyAttackSystem enemyAttackSystem = new EnemyAttackSystem(cg, parent);
         PlayerHudRenderSystem playerHudRenderSystem = new PlayerHudRenderSystem(cg);
+        InventoryRenderSystem inventoryRenderSystem = new InventoryRenderSystem(cg);
         MyGame.engine.addSystem(movementSystem);
         MyGame.engine.addSystem(enemySpawningSystem);
         MyGame.engine.addSystem(steeringSystem);
@@ -125,6 +127,7 @@ public class GameScreen implements Screen {
         MyGame.engine.addSystem(healthBarRenderSystem);
         MyGame.engine.addSystem(enemyAttackSystem);
         MyGame.engine.addSystem(playerHudRenderSystem);
+        MyGame.engine.addSystem(inventoryRenderSystem);
         checkPriorities();
     }
 
