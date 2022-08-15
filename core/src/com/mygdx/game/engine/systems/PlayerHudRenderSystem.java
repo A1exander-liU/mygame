@@ -40,9 +40,9 @@ public class PlayerHudRenderSystem extends EntitySystem {
         skin = new Skin();
 
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/PressStart2P-Regular.ttf"));
-        parameter.size = 8;
+        parameter.size = 16;
         BitmapFont newFont = generator.generateFont(parameter);
-        skin.add("pixel", newFont);
+        skin.add("pixel2D", newFont);
         skin.addRegions(new TextureAtlas("Game_UI_Skin/Game_UI_Skin.atlas"));
         skin.load(Gdx.files.internal("Game_UI_Skin/Game_UI_Skin.json"));
 
@@ -88,7 +88,7 @@ public class PlayerHudRenderSystem extends EntitySystem {
 //        playerHealthManaExp.add(healthBar);
 
         Label healthLabel = new Label(playerParams.health.currentHealth
-                + "/" + playerParams.health.maxHealth, skin);
+                + "/" + playerParams.health.maxHealth, skin, "pixel2D", Color.WHITE);
         healthLabel.setAlignment(Align.center);
         healthLabel.setFontScale(0.6f);
 
@@ -107,7 +107,7 @@ public class PlayerHudRenderSystem extends EntitySystem {
 
         // create label for mana bar
         Label manaLabel = new Label(playerMana.currentMana
-                + "/" + playerMana.maxMana, skin);
+                + "/" + playerMana.maxMana, skin, "pixel2D", Color.WHITE);
         manaLabel.setAlignment(Align.center);
         manaLabel.setFontScale(0.6f);
 
