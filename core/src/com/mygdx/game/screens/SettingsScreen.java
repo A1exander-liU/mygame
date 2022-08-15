@@ -2,7 +2,11 @@ package com.mygdx.game.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
@@ -48,6 +52,16 @@ public class SettingsScreen implements Screen {
     @Override
     public void show() {
         stage.clear();
+
+        FreeTypeFontGenerator generator  = new FreeTypeFontGenerator(Gdx.files.internal("fonts/PressStart2P-Regular.ttf"));
+        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        parameter.size = 16;
+        parameter.color = Color.BLACK;
+        BitmapFont font = generator.generateFont(parameter);
+        skin.add("pixel2D", font);
+        skin.addRegions(new TextureAtlas("Game_UI_Skin/Game_UI_Skin.atlas"));
+        skin.load(Gdx.files.internal("Game_UI_Skin/Game_UI_Skin.json"));
+
         Gdx.input.setInputProcessor(stage);
         final Table table = new Table();
         table.setFillParent(true);
@@ -57,15 +71,15 @@ public class SettingsScreen implements Screen {
         settingsOptions = new List<>(skin);
         settingsOptions.setItems("Audio", "Graphics", "Game", "Controls", "Back");
 
-        audioTitleLabel = new Label("Audio", skin);
-        graphicsTitleLabel = new Label("Graphics", skin);
-        gameTitleLabel = new Label("Game", skin);
-        controlsTitleLabel = new Label("Controls", skin);
+        audioTitleLabel = new Label("Audio", skin, "pixel2D", Color.BLACK);
+        graphicsTitleLabel = new Label("Graphics", skin, "pixel2D", Color.BLACK);
+        gameTitleLabel = new Label("Game", skin, "pixel2D", Color.BLACK);
+        controlsTitleLabel = new Label("Controls", skin, "pixel2D", Color.BLACK);
 
-        musicVolumeLabel = new Label("Music Volume", skin);
-        soundVolumeLabel = new Label("Sound Volume", skin);
-        isMusicEnabledLabel = new Label("Music", skin);
-        isSoundEnabledLabel = new Label("Sound", skin);
+        musicVolumeLabel = new Label("Music Volume", skin, "pixel2D", Color.BLACK);
+        soundVolumeLabel = new Label("Sound Volume", skin, "pixel2D", Color.BLACK);
+        isMusicEnabledLabel = new Label("Music", skin, "pixel2D", Color.BLACK);
+        isSoundEnabledLabel = new Label("Sound", skin, "pixel2D", Color.BLACK);
 
 
         table.defaults().uniform().space(10);
