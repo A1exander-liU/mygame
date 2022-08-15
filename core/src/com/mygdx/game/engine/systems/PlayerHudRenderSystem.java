@@ -68,18 +68,8 @@ public class PlayerHudRenderSystem extends EntitySystem {
         Table playerLevel = new Table();
         playerLevel.setDebug(true);
         // setting the table width and height
-        playerLevel.setSize(root.getWidth() / 3, root.getHeight() / 6);
-        // set table background
-        playerLevel.setBackground(skin.getDrawable("player-hud-bg-01"));
-        // adding the table to the stage use expand, top, left to move table to top left corner
-        root.add(playerLevel).expand().top().left().height(playerLevel.getHeight()).width(playerLevel.getWidth());
-        // create and add level label to the table
-        Label playerLevelLabel = new Label("" + cg.getLevel(player).level, skin, "pixel2D", Color.BLACK);
-        // center the text
-        playerLevelLabel.setAlignment(0);
-        playerLevel.add(playerLevelLabel).fill();
-        Cell<Label> levelLabelCell = playerLevel.getCell(playerLevelLabel);
-        levelLabelCell.width(playerLevel.getWidth() / 4);
+        createLevelUiArea(root, playerLevel);
+
 
         // nested table for health and exp
         Table playerHealthManaExp = new Table();
@@ -156,6 +146,19 @@ public class PlayerHudRenderSystem extends EntitySystem {
         return (cg.getMana(player).currentMana / cg.getMana(player).maxMana * 100);
     }
 
-
+    public void createLevelUiArea(Table root, Table playerLevel) {
+        playerLevel.setSize(root.getWidth() / 3, root.getHeight() / 6);
+        // set table background
+        playerLevel.setBackground(skin.getDrawable("player-hud-bg-01"));
+        // adding the table to the stage use expand, top, left to move table to top left corner
+        root.add(playerLevel).expand().top().left().height(playerLevel.getHeight()).width(playerLevel.getWidth());
+        // create and add level label to the table
+        Label playerLevelLabel = new Label("" + cg.getLevel(player).level, skin, "pixel2D", Color.BLACK);
+        // center the text
+        playerLevelLabel.setAlignment(0);
+        playerLevel.add(playerLevelLabel).fill();
+        Cell<Label> levelLabelCell = playerLevel.getCell(playerLevelLabel);
+        levelLabelCell.width(playerLevel.getWidth() / 4);
+    }
 
 }
