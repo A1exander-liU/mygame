@@ -2,6 +2,7 @@ package com.mygdx.game.engine;
 
 import com.badlogic.ashley.core.Family;
 import com.mygdx.game.engine.components.Enemy;
+import com.mygdx.game.engine.components.InventoryItemComponent;
 import com.mygdx.game.engine.components.Player;
 import com.mygdx.game.engine.components.SpawnArea;
 
@@ -13,6 +14,7 @@ public class Families {
     public static final Family spawns = Family.all(SpawnArea.class).get();
     public static final Family collisions = Family.exclude(SpawnArea.class).get();
     public static final Family characters = Family.one(Player.class, Enemy.class).get();
+    public static final Family items = Family.all(InventoryItemComponent.class).get();
 
     public Families() {}
     
