@@ -76,21 +76,7 @@ public class PlayerHudRenderSystem extends EntitySystem {
 
         Stack healthStack = createHealthStack(playerHealthManaExp);
         Stack manaStack = createManaStack(playerHealthManaExp);
-
-        // create exp bar
-        ProgressBar expBar = new ProgressBar(0, 100, 1, false, skin, "progress-bar-player-exp");
-
-        // create exp label
-        Label expLabel = new Label(playerExp.currentExp
-                + "/" + playerExp.toNextLevel, skin, "pixel2D", Color.BLACK);
-        expLabel.setAlignment(Align.center);
-        expLabel.setFontScale(0.6f);
-
-        // create stack for exp
-        Stack expStack = new Stack();
-        expStack.add(expBar);
-        expStack.add(expLabel);
-        playerHealthManaExp.add(expStack);
+        Stack expStack = createExpStack(playerHealthManaExp);
 
         // adjust exp and health bar cell sizes to move them closer together
         Cell<Stack> healthBarStackCell = playerHealthManaExp.getCell(healthStack);
@@ -168,5 +154,23 @@ public class PlayerHudRenderSystem extends EntitySystem {
         // add new row
         playerHealthManaExp.row();
         return manaStack;
+    }
+
+    private Stack createExpStack(Table playerHealthManaExp) {
+        // create exp bar
+        ProgressBar expBar = new ProgressBar(0, 100, 1, false, skin, "progress-bar-player-exp");
+
+        // create exp label
+        Label expLabel = new Label(playerExp.currentExp
+                + "/" + playerExp.toNextLevel, skin, "pixel2D", Color.BLACK);
+        expLabel.setAlignment(Align.center);
+        expLabel.setFontScale(0.6f);
+
+        // create stack for exp
+        Stack expStack = new Stack();
+        expStack.add(expBar);
+        expStack.add(expLabel);
+        playerHealthManaExp.add(expStack);
+        return expStack;
     }
 }
