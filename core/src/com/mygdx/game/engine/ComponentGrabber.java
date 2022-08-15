@@ -8,6 +8,7 @@ import com.mygdx.game.engine.components.EnemyStateMachine;
 import com.mygdx.game.engine.components.ExpComponent;
 import com.mygdx.game.engine.components.InventoryComponent;
 import com.mygdx.game.engine.components.InventoryItemComponent;
+import com.mygdx.game.engine.components.InventorySlotComponent;
 import com.mygdx.game.engine.components.Item;
 import com.mygdx.game.engine.components.LevelComponent;
 import com.mygdx.game.engine.components.ManaComponent;
@@ -82,6 +83,11 @@ public class ComponentGrabber {
     public InventoryItemComponent getInventoryItem(Entity entity) {
         ComponentMapper<InventoryItemComponent> inventoryItem = ComponentMapper.getFor(InventoryItemComponent.class);
         return inventoryItem.get(entity);
+    }
+
+    public InventorySlotComponent getInventorySlot(Entity entity) {
+        ComponentMapper<InventorySlotComponent> inventorySlot = ComponentMapper.getFor(InventorySlotComponent.class);
+        return inventorySlot.get(entity);
     }
 
     public Item getItem(Entity entity) {
