@@ -87,8 +87,8 @@ public class PlayerHudRenderSystem extends EntitySystem {
         healthBar.setValue(calcCurrentRemainingHealth());
 //        playerHealthManaExp.add(healthBar);
 
-        Label healthLabel = new Label(playerParams.health.currentHealth
-                + "/" + playerParams.health.maxHealth, skin, "pixel2D", Color.WHITE);
+        Label healthLabel = new Label((int)playerParams.health.currentHealth
+                + "/" + (int)playerParams.health.maxHealth, skin, "pixel2D", Color.WHITE);
         healthLabel.setAlignment(Align.center);
         healthLabel.setFontScale(0.6f);
 
@@ -106,8 +106,8 @@ public class PlayerHudRenderSystem extends EntitySystem {
 //        playerHealthManaExp.add(manaBar);
 
         // create label for mana bar
-        Label manaLabel = new Label(playerMana.currentMana
-                + "/" + playerMana.maxMana, skin, "pixel2D", Color.WHITE);
+        Label manaLabel = new Label((int)playerMana.currentMana
+                + "/" + (int)playerMana.maxMana, skin, "pixel2D", Color.WHITE);
         manaLabel.setAlignment(Align.center);
         manaLabel.setFontScale(0.6f);
 
@@ -121,12 +121,23 @@ public class PlayerHudRenderSystem extends EntitySystem {
 
         // create exp bar
         ProgressBar expBar = new ProgressBar(0, 100, 1, false, skin, "progress-bar-player-exp");
-        playerHealthManaExp.add(expBar);
+//        playerHealthManaExp.add(expBar);
+
+        // create exp label
+        Label expLabel = new Label("0/100", skin, "pixel2D", Color.WHITE);
+        expLabel.setAlignment(Align.center);
+        expLabel.setFontScale(0.6f);
+
+        // create stack for exp
+        Stack expStack = new Stack();
+        expStack.add(expBar);
+        expStack.add(expLabel);
+        playerHealthManaExp.add(expStack);
 
         // adjust exp and health bar cell sizes to move them closer together
         Cell<Stack> healthBarStackCell = playerHealthManaExp.getCell(healthStack);
         Cell<Stack> manaBarStackCell = playerHealthManaExp.getCell(manaStack);
-        Cell<ProgressBar> expBarStackCell = playerHealthManaExp.getCell(expBar);
+        Cell<Stack> expBarStackCell = playerHealthManaExp.getCell(expStack);
         healthBarStackCell.height(playerLevel.getHeight() / 3).padTop(5);
         manaBarStackCell.height(playerLevel.getHeight() / 3);
         expBarStackCell.height(playerLevel.getHeight() / 3);
