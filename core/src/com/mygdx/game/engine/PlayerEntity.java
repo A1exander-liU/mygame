@@ -3,6 +3,7 @@ package com.mygdx.game.engine;
 import com.badlogic.ashley.core.Entity;
 import com.mygdx.game.engine.components.Camera;
 import com.mygdx.game.engine.components.DetectionProximity;
+import com.mygdx.game.engine.components.ExpComponent;
 import com.mygdx.game.engine.components.Item;
 import com.mygdx.game.engine.components.LevelComponent;
 import com.mygdx.game.engine.components.ManaComponent;
@@ -27,6 +28,7 @@ public class PlayerEntity extends Entity {
     private void addRequiredComponents() {
         super.add(new Camera());
         super.add(new DetectionProximity(this, 20));
+        super.add(new ExpComponent());
         super.add(new Health());
         super.add(new ID());
         super.add(new Item());
