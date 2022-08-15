@@ -71,7 +71,7 @@ public class PlayerHudRenderSystem extends EntitySystem {
         // adding the table to the stage use expand, top, left to move table to top left corner
         root.add(playerLevel).expand().top().left().height(playerLevel.getHeight()).width(playerLevel.getWidth());
         // create and add level label to the table
-        Label playerLevelLabel = new Label("" + cg.getLevel(player).level, skin);
+        Label playerLevelLabel = new Label("" + cg.getLevel(player).level, skin, "pixel2D", Color.BLACK);
         // center the text
         playerLevelLabel.setAlignment(0);
         playerLevel.add(playerLevelLabel).fill();
