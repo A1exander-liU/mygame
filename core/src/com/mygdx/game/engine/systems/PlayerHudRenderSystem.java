@@ -19,6 +19,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.ComponentGrabber;
 import com.mygdx.game.engine.Families;
+import com.mygdx.game.engine.components.ExpComponent;
 import com.mygdx.game.engine.components.ManaComponent;
 import com.mygdx.game.engine.components.ParameterComponent;
 
@@ -31,6 +32,7 @@ public class PlayerHudRenderSystem extends EntitySystem {
 
     ParameterComponent playerParams;
     ManaComponent playerMana;
+    ExpComponent playerExp;
 
     public PlayerHudRenderSystem(ComponentGrabber cg) {
         super(98);
@@ -50,6 +52,7 @@ public class PlayerHudRenderSystem extends EntitySystem {
 
         playerParams = cg.getParameters(player);
         playerMana = cg.getMana(player);
+        playerExp = cg.getExp(player);
     }
 
     @Override
@@ -121,7 +124,8 @@ public class PlayerHudRenderSystem extends EntitySystem {
         ProgressBar expBar = new ProgressBar(0, 100, 1, false, skin, "progress-bar-player-exp");
 
         // create exp label
-        Label expLabel = new Label("0/100", skin, "pixel2D", Color.BLACK);
+        Label expLabel = new Label(playerExp.currentExp
+                + "/" + playerExp.toNextLevel, skin, "pixel2D", Color.BLACK);
         expLabel.setAlignment(Align.center);
         expLabel.setFontScale(0.6f);
 
