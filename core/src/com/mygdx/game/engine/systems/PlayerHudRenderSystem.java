@@ -85,7 +85,6 @@ public class PlayerHudRenderSystem extends EntitySystem {
         // create health bar
         ProgressBar healthBar = new ProgressBar(0, 100, 1, false, skin, "progress-bar-player-health");
         healthBar.setValue(calcCurrentRemainingHealth());
-//        playerHealthManaExp.add(healthBar);
 
         Label healthLabel = new Label((int)playerParams.health.currentHealth
                 + "/" + (int)playerParams.health.maxHealth, skin, "pixel2D", Color.WHITE);
@@ -103,7 +102,6 @@ public class PlayerHudRenderSystem extends EntitySystem {
         // create mana bar
         ProgressBar manaBar = new ProgressBar(0, 100, 1, false, skin, "progress-bar-player-mana");
         manaBar.setValue(calcRemainingMana()); // will add a mana component later
-//        playerHealthManaExp.add(manaBar);
 
         // create label for mana bar
         Label manaLabel = new Label((int)playerMana.currentMana
@@ -121,7 +119,6 @@ public class PlayerHudRenderSystem extends EntitySystem {
 
         // create exp bar
         ProgressBar expBar = new ProgressBar(0, 100, 1, false, skin, "progress-bar-player-exp");
-//        playerHealthManaExp.add(expBar);
 
         // create exp label
         Label expLabel = new Label("0/100", skin, "pixel2D", Color.WHITE);
@@ -147,8 +144,6 @@ public class PlayerHudRenderSystem extends EntitySystem {
         // draw player hud, then draw the text so it appears on top
         playerHud.getBatch().begin();
         // draw health numbers: (115, 469)
-//        newFont.draw(playerHud.getBatch(), (int)playerParams.health.currentHealth
-//                + "/" + (int)playerParams.health.maxHealth, 115, 469);
         playerHud.getBatch().end();
     }
 
