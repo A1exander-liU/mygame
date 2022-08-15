@@ -67,7 +67,6 @@ public class PlayerHudRenderSystem extends EntitySystem {
         // create nested table to display player hp and exp for now
         Table playerLevel = new Table();
         playerLevel.setDebug(true);
-        // setting the table width and height
         createLevelUiArea(root, playerLevel);
 
 
@@ -75,22 +74,7 @@ public class PlayerHudRenderSystem extends EntitySystem {
         Table playerHealthManaExp = new Table();
         playerLevel.add(playerHealthManaExp).width(playerLevel.getWidth() * (3f / 4)).pad(0, 0, 0, 0);
 
-        // create health bar
-        ProgressBar healthBar = new ProgressBar(0, 100, 1, false, skin, "progress-bar-player-health");
-        healthBar.setValue(calcCurrentRemainingHealth());
-
-        Label healthLabel = new Label((int)playerParams.health.currentHealth
-                + "/" + (int)playerParams.health.maxHealth, skin, "pixel2D", Color.BLACK);
-        healthLabel.setAlignment(Align.center);
-        healthLabel.setFontScale(0.6f);
-
-        // create a stack to display health bar and health numbers on top
-        Stack healthStack = new Stack();
-        healthStack.add(healthBar);
-        healthStack.add(healthLabel);
-        playerHealthManaExp.add(healthStack);
-        // add new row (mana bar will be below health bar)
-        playerHealthManaExp.row();
+        Stack healthStack = createHealthStack(playerHealthManaExp);
 
         // create mana bar
         ProgressBar manaBar = new ProgressBar(0, 100, 1, false, skin, "progress-bar-player-mana");
@@ -147,6 +131,7 @@ public class PlayerHudRenderSystem extends EntitySystem {
     }
 
     public void createLevelUiArea(Table root, Table playerLevel) {
+        // setting the table width and height
         playerLevel.setSize(root.getWidth() / 3, root.getHeight() / 6);
         // set table background
         playerLevel.setBackground(skin.getDrawable("player-hud-bg-01"));
@@ -159,6 +144,26 @@ public class PlayerHudRenderSystem extends EntitySystem {
         playerLevel.add(playerLevelLabel).fill();
         Cell<Label> levelLabelCell = playerLevel.getCell(playerLevelLabel);
         levelLabelCell.width(playerLevel.getWidth() / 4);
+    }
+
+    public Stack createHealthStack(Table playerHealthManaExp) {
+        // create health bar
+        ProgressBar healthBar = new ProgressBar(0, 100, 1, false, skin, "progress-bar-player-health");
+        healthBar.setValue(calcCurrentRemainingHealth());
+
+        Label healthLabel = new Label((int)playerParams.health.currentHealth
+                + "/" + (int)playerParams.health.maxHealth, skin, "pixel2D", Color.BLACK);
+        healthLabel.setAlignment(Align.center);
+        healthLabel.setFontScale(0.6f);
+
+        // create a stack to display health bar and health numbers on top
+        Stack healthStack = new Stack();
+        healthStack.add(healthBar);
+        healthStack.add(healthLabel);
+        playerHealthManaExp.add(healthStack);
+        // add new row (mana bar will be below health bar)
+        playerHealthManaExp.row();
+        return healthStack;
     }
 
 }
