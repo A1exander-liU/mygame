@@ -113,7 +113,7 @@ public class PlayerHudRenderSystem extends EntitySystem {
         return (cg.getMana(player).currentMana / cg.getMana(player).maxMana * 100);
     }
 
-    public void createLevelUiArea(Table root, Table playerLevel) {
+    private void createLevelUiArea(Table root, Table playerLevel) {
         // setting the table width and height
         playerLevel.setSize(root.getWidth() / 3, root.getHeight() / 6);
         // set table background
@@ -129,7 +129,7 @@ public class PlayerHudRenderSystem extends EntitySystem {
         levelLabelCell.width(playerLevel.getWidth() / 4);
     }
 
-    public Stack createHealthStack(Table playerHealthManaExp) {
+    private Stack createHealthStack(Table playerHealthManaExp) {
         // create health bar
         ProgressBar healthBar = new ProgressBar(0, 100, 1, false, skin, "progress-bar-player-health");
         healthBar.setValue(calcCurrentRemainingHealth());
@@ -149,7 +149,7 @@ public class PlayerHudRenderSystem extends EntitySystem {
         return healthStack;
     }
 
-    public Stack createManaStack(Table playerHealthManaExp) {
+    private Stack createManaStack(Table playerHealthManaExp) {
         // create mana bar
         ProgressBar manaBar = new ProgressBar(0, 100, 1, false, skin, "progress-bar-player-mana");
         manaBar.setValue(calcRemainingMana()); // will add a mana component later
