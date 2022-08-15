@@ -6,6 +6,8 @@ import com.mygdx.game.engine.components.AttackRange;
 import com.mygdx.game.engine.components.DetectionProximity;
 import com.mygdx.game.engine.components.EnemyStateMachine;
 import com.mygdx.game.engine.components.ExpComponent;
+import com.mygdx.game.engine.components.InventoryComponent;
+import com.mygdx.game.engine.components.InventoryItemComponent;
 import com.mygdx.game.engine.components.Item;
 import com.mygdx.game.engine.components.LevelComponent;
 import com.mygdx.game.engine.components.ManaComponent;
@@ -70,6 +72,16 @@ public class ComponentGrabber {
     public ID getID(Entity entity) {
         ComponentMapper<ID> id = ComponentMapper.getFor(ID.class);
         return id.get(entity);
+    }
+
+    public InventoryComponent getInventory(Entity entity) {
+        ComponentMapper<InventoryComponent> inventory = ComponentMapper.getFor(InventoryComponent.class);
+        return inventory.get(entity);
+    }
+
+    public InventoryItemComponent getInventoryItem(Entity entity) {
+        ComponentMapper<InventoryItemComponent> inventoryItem = ComponentMapper.getFor(InventoryItemComponent.class);
+        return inventoryItem.get(entity);
     }
 
     public Item getItem(Entity entity) {
