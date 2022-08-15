@@ -24,7 +24,7 @@ public class MapUpdateSystem extends EntitySystem {
     MapObjectDrawer tiledMapRenderer;
 
     public MapUpdateSystem(ComponentGrabber cg, MapObjectDrawer tiledMapRenderer) {
-        super(97);
+        super(96);
         this.cg = cg;
         this.tiledMapRenderer = tiledMapRenderer;
         characters = MyGame.engine.getEntitiesFor(Family.one(Player.class, Enemy.class).get());

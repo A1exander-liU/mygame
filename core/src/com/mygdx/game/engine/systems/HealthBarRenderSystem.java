@@ -31,7 +31,7 @@ public class HealthBarRenderSystem extends EntitySystem {
     Stage stage;
 
     public HealthBarRenderSystem(ComponentGrabber cg) {
-        super(98);
+        super(97);
         this.cg = cg;
         player = MyGame.engine.getEntitiesFor(Families.player).get(0);
         enemies = MyGame.engine.getEntitiesFor(Families.enemies);

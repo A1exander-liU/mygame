@@ -18,6 +18,7 @@ public class InventoryRenderSystem extends EntitySystem {
     Skin skin;
 
     public InventoryRenderSystem(ComponentGrabber cg) {
+        super(99);
         this.cg = cg;
         player = MyGame.engine.getEntitiesFor(Families.player).get(0);
         stage = new Stage(new ScreenViewport());

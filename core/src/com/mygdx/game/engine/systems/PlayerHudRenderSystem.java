@@ -35,7 +35,7 @@ public class PlayerHudRenderSystem extends EntitySystem {
     ExpComponent playerExp;
 
     public PlayerHudRenderSystem(ComponentGrabber cg) {
-        super(98);
+        super(99);
         this.cg = cg;
         player = MyGame.engine.getEntitiesFor(Families.player).get(0);
         playerHud = new Stage(new ScreenViewport());
