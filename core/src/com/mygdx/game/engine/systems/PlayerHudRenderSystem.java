@@ -5,6 +5,7 @@ import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Cell;
@@ -27,7 +28,6 @@ public class PlayerHudRenderSystem extends EntitySystem {
     Stage playerHud;
     Skin skin;
     FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-    BitmapFont newFont;
 
     ParameterComponent playerParams;
     ManaComponent playerMana;
@@ -37,11 +37,17 @@ public class PlayerHudRenderSystem extends EntitySystem {
         this.cg = cg;
         player = MyGame.engine.getEntitiesFor(Families.player).get(0);
         playerHud = new Stage(new ScreenViewport());
-        skin = new Skin(Gdx.files.internal("Game_UI_Skin/Game_UI_Skin.json"));
+        skin = new Skin();
+
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/PressStart2P-Regular.ttf"));
         parameter.size = 8;
-        newFont = generator.generateFont(parameter);
+        BitmapFont newFont = generator.generateFont(parameter);
+        skin.add("pixel", newFont);
+        skin.addRegions(new TextureAtlas("Game_UI_Skin/Game_UI_Skin.atlas"));
+        skin.load(Gdx.files.internal("Game_UI_Skin/Game_UI_Skin.json"));
+
         generator.dispose();
+
         playerParams = cg.getParameters(player);
         playerMana = cg.getMana(player);
     }
@@ -130,8 +136,6 @@ public class PlayerHudRenderSystem extends EntitySystem {
         // draw player hud, then draw the text so it appears on top
         playerHud.getBatch().begin();
         // draw health numbers: (115, 469)
-        float x = healthBar.getX(0);
-        float y = healthBar.getY(0);
 //        newFont.draw(playerHud.getBatch(), (int)playerParams.health.currentHealth
 //                + "/" + (int)playerParams.health.maxHealth, 115, 469);
         playerHud.getBatch().end();
