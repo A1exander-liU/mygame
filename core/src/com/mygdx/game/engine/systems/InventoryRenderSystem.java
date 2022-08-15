@@ -16,6 +16,7 @@ public class InventoryRenderSystem extends EntitySystem {
     Entity player;
     Stage stage;
     Skin skin;
+    boolean inventoryOpened = false;
 
     public InventoryRenderSystem(ComponentGrabber cg) {
         super(99);
@@ -47,19 +48,21 @@ public class InventoryRenderSystem extends EntitySystem {
 
     @Override
     public void update(float delta) {
-        stage.clear();
+        if (inventoryOpened) {
+            stage.clear();
 
-        Table root = new Table();
-        root.setSize(stage.getWidth(), stage.getHeight());
-        stage.addActor(root);
+            Table root = new Table();
+            root.setSize(stage.getWidth(), stage.getHeight());
+            stage.addActor(root);
 
-        Table inventory = new Table();
-        inventory.setDebug(true);
-        inventory.setBackground(skin.getDrawable("player-hud-bg-01"));
-        inventory.setSize(root.getWidth() * 0.75f, root.getHeight() * 0.8f);
-        root.add(inventory).expand().center().width(inventory.getWidth()).height(inventory.getHeight());
+            Table inventory = new Table();
+            inventory.setDebug(true);
+            inventory.setBackground(skin.getDrawable("player-hud-bg-01"));
+            inventory.setSize(root.getWidth() * 0.75f, root.getHeight() * 0.8f);
+            root.add(inventory).expand().center().width(inventory.getWidth()).height(inventory.getHeight());
 
-        stage.act();
-        stage.draw();
+            stage.act();
+            stage.draw();
+        }
     }
 }
