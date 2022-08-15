@@ -145,10 +145,6 @@ public class PlayerHudRenderSystem extends EntitySystem {
 
         playerHud.act();
         playerHud.draw();
-        // draw player hud, then draw the text so it appears on top
-        playerHud.getBatch().begin();
-        // draw health numbers: (115, 469)
-        playerHud.getBatch().end();
     }
 
     private float calcCurrentRemainingHealth() {
@@ -159,5 +155,7 @@ public class PlayerHudRenderSystem extends EntitySystem {
     private float calcRemainingMana() {
         return (cg.getMana(player).currentMana / cg.getMana(player).maxMana * 100);
     }
+
+
 
 }
