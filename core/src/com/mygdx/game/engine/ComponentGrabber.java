@@ -5,6 +5,7 @@ import com.badlogic.ashley.core.Entity;
 import com.mygdx.game.engine.components.AttackRange;
 import com.mygdx.game.engine.components.DetectionProximity;
 import com.mygdx.game.engine.components.EnemyStateMachine;
+import com.mygdx.game.engine.components.ExpComponent;
 import com.mygdx.game.engine.components.Item;
 import com.mygdx.game.engine.components.LevelComponent;
 import com.mygdx.game.engine.components.ManaComponent;
@@ -53,6 +54,11 @@ public class ComponentGrabber {
     public EnemyStateMachine getStateMachine(Entity entity) {
         ComponentMapper<EnemyStateMachine> enemyStateMachine = ComponentMapper.getFor(EnemyStateMachine.class);
         return enemyStateMachine.get(entity);
+    }
+
+    public ExpComponent getExp(Entity entity) {
+        ComponentMapper<ExpComponent> exp = ComponentMapper.getFor(ExpComponent.class);
+        return exp.get(entity);
     }
 
     // to retrieve components of an entity (faster than <Entity>.getComponent(<Component> class))
