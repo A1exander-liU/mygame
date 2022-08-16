@@ -14,6 +14,8 @@ import com.mygdx.game.engine.components.InventorySlotComponent;
 import com.mygdx.game.engine.components.Name;
 import com.mygdx.game.engine.components.Sprite;
 
+import java.util.Objects;
+
 public class InventoryTest extends EntitySystem {
     ComponentGrabber cg;
     Entity player;
@@ -89,4 +91,26 @@ public class InventoryTest extends EntitySystem {
         MyGame.engine.addEntity(testItem);
     }
 
+    private void addToInventory(Entity entity) {
+        InventoryComponent inventory = cg.getInventory(player);
+        Name itemName = cg.getName(entity);
+        for (int i = 0; i < inventory.items.size; i++) {
+            Entity itemSlot = inventory.items.get(i);
+            InventorySlotComponent slot = cg.getInventorySlot(itemSlot);
+
+            Entity occupiedItem = slot.itemOccupied;
+            Name occupiedItemName = cg.getName(occupiedItem);
+            // if item already exists, add the quantity
+            if (Objects.equals(occupiedItemName.name, itemName.name)) {
+                slot.quantity++;
+                return;
+            }
+            // add item to first empty slot
+            else if (slot.itemOccupied == null) {
+                slot.itemOccupied = entity;
+                slot.quantity = 1; // need to add the relevant components later
+                return;
+            }
+        }
+    }
 }
