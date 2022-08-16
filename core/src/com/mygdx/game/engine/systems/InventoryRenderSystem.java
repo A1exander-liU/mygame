@@ -44,7 +44,7 @@ public class InventoryRenderSystem extends EntitySystem {
 
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/PressStart2P-Regular.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = 12;
+        parameter.size = 10;
         BitmapFont newFont = generator.generateFont(parameter);
         skin.add("pixel2D", newFont);
         skin.addRegions(new TextureAtlas("Game_UI_Skin/Game_UI_Skin.atlas"));
@@ -185,14 +185,14 @@ public class InventoryRenderSystem extends EntitySystem {
         Button slot = new Button(skin);
         // the label to display the amount (top-right corner)
         Label occupiedItemQuantity = new Label("" + quantity.quantity, skin, "pixel2D", Color.BLACK);
-        slot.add(occupiedItemQuantity).top().right();
+        slot.add(occupiedItemQuantity).expand().top().right();
         // new row to place the item sprite under the quantity number
         slot.row();
         // turn the image to drawable
         TextureRegionDrawable drawable = new TextureRegionDrawable(new Texture(Gdx.files.internal("testPlayer.png")));
         // use the drawable now to get an image
         Image occupiedItemSprite = new Image(drawable);
-        slot.add(occupiedItemSprite);
+        slot.add(occupiedItemSprite).grow();
 
         inventorySlots.add(slot).width(inventorySlots.getWidth() / 4).height(inventorySlots.getHeight() / 4);
     }
