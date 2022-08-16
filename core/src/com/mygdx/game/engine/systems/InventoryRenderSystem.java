@@ -160,12 +160,17 @@ public class InventoryRenderSystem extends EntitySystem {
         InventoryComponent inventoryComponent = cg.getInventory(player);
         for (int i = 0; i < inventoryComponent.items.size; i++) {
             // holds the quantity and occupied item
+            if (cols == 4) {
+                cols = 0;
+                inventorySlots.row();
+            }
             Entity inventorySlot = inventoryComponent.items.get(i);
             InventorySlotComponent slotComponent = cg.getInventorySlot(inventorySlot);
             // check if slot is occupied
             if (slotComponent.itemOccupied != null) {
 
             }
+            cols++;
         }
 
     }
