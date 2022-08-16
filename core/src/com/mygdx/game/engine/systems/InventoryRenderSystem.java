@@ -22,6 +22,7 @@ import com.mygdx.game.engine.ComponentGrabber;
 import com.mygdx.game.engine.Families;
 import com.mygdx.game.engine.components.inventory.InventoryComponent;
 import com.mygdx.game.engine.components.inventory.InventorySlotComponent;
+import com.mygdx.game.engine.components.inventory.items.shared.QuantityComponent;
 import com.mygdx.game.engine.systems.combat.BasicAttackSystem;
 import com.mygdx.game.engine.systems.combat.EnemyAttackSystem;
 import com.mygdx.game.engine.systems.enemyai.SteeringSystem;
@@ -137,24 +138,24 @@ public class InventoryRenderSystem extends EntitySystem {
         inventorySlots.setSize(inventory.getWidth() * 0.55f, inventory.getHeight() * 0.95f);
         inventory.add(inventorySlots).expand().width(inventorySlots.getWidth()).height(inventorySlots.getHeight()).right();
 
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
-                Button slot = new Button(skin);
-
-                Label random = new Label("99", skin, "pixel2D", Color.BLACK);
-                slot.add(random).expand().top().right();
-
-                slot.row();
-
-                TextureRegionDrawable drawable = new TextureRegionDrawable(new Texture(Gdx.files.internal("testPlayer.png")));
-                Image randomImg = new Image();
-                randomImg.setDrawable(drawable);
-                slot.add(randomImg);
-
-                inventorySlots.add(slot).expand().fill().space(5);
-            }
-            inventorySlots.row();
-        }
+//        for (int i = 0; i < 4; i++) {
+//            for (int j = 0; j < 4; j++) {
+//                Button slot = new Button(skin);
+//
+//                Label random = new Label("99", skin, "pixel2D", Color.BLACK);
+//                slot.add(random).expand().top().right();
+//
+//                slot.row();
+//
+//                TextureRegionDrawable drawable = new TextureRegionDrawable(new Texture(Gdx.files.internal("testPlayer.png")));
+//                Image randomImg = new Image();
+//                randomImg.setDrawable(drawable);
+//                slot.add(randomImg);
+//
+//                inventorySlots.add(slot).expand().fill().space(5);
+//            }
+//            inventorySlots.row();
+//        }
         int rows = 0;
         int cols = 0;
         InventoryComponent inventoryComponent = cg.getInventory(player);
@@ -168,10 +169,30 @@ public class InventoryRenderSystem extends EntitySystem {
             InventorySlotComponent slotComponent = cg.getInventorySlot(inventorySlot);
             // check if slot is occupied
             if (slotComponent.itemOccupied != null) {
-
+                placeItemInSlot(inventorySlots, slotComponent.itemOccupied);
             }
             cols++;
         }
+
+    }
+
+    private void placeItemInSlot(Table inventorySlots, Entity item) {
+        QuantityComponent quantity = cg.getQuantity(item);
+        // no actual sprite, just using the stick man for now
+        Button slot = new Button(skin);
+        // the label to display the amount (top-right corner)
+        Label occupiedItemQuantity = new Label("" + quantity.quantity, skin, "pixel2D", Color.BLACK);
+        slot.add(occupiedItemQuantity).top().right();
+        // new row to place the item sprite under the quantity number
+        slot.row();
+        // turn the image to drawable
+        TextureRegionDrawable drawable = new TextureRegionDrawable(new Texture(Gdx.files.internal("testPlayer.png")));
+        // use the drawable now to get an image
+        Image occupiedItemSprite = new Image(drawable);
+        slot.add(occupiedItemSprite);
+    }
+
+    private void placeEmptySlot(Table inventorySlots) {
 
     }
 }
