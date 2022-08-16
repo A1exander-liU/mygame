@@ -1,4 +1,6 @@
 package com.mygdx.game.engine.components;
 
-public class CollidableComponent {
+import com.badlogic.ashley.core.Component;
+
+public class CollidableComponent implements Component {
 }

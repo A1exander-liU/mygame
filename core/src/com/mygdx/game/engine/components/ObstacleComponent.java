@@ -1,4 +1,6 @@
 package com.mygdx.game.engine.components;
 
-public class ObstacleComponent {
+import com.badlogic.ashley.core.Component;
+
+public class ObstacleComponent implements Component {
 }
