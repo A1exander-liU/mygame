@@ -7,6 +7,7 @@ import com.mygdx.game.engine.components.DetectionProximity;
 import com.mygdx.game.engine.components.EnemyStateMachine;
 import com.mygdx.game.engine.components.ExpComponent;
 import com.mygdx.game.engine.components.inventory.InventoryComponent;
+import com.mygdx.game.engine.components.inventory.items.shared.DescriptionComponent;
 import com.mygdx.game.engine.components.inventory.items.shared.InventoryItemComponent;
 import com.mygdx.game.engine.components.inventory.InventorySlotComponent;
 import com.mygdx.game.engine.components.Item;
@@ -29,6 +30,8 @@ import com.mygdx.game.engine.components.Player;
 import com.mygdx.game.engine.components.Position;
 import com.mygdx.game.engine.components.Size;
 import com.mygdx.game.engine.components.Speed;
+import com.mygdx.game.engine.components.inventory.items.shared.QuantityComponent;
+import com.mygdx.game.engine.components.inventory.items.shared.RarityComponent;
 
 public class ComponentGrabber {
 
@@ -42,6 +45,11 @@ public class ComponentGrabber {
     public Camera getCamera(Entity entity) {
         ComponentMapper<Camera> camera = ComponentMapper.getFor(Camera.class);
         return camera.get(entity);
+    }
+
+    public DescriptionComponent getDescription(Entity entity) {
+        ComponentMapper<DescriptionComponent> description = ComponentMapper.getFor(DescriptionComponent.class);
+        return description.get(entity);
     }
 
     public DetectionProximity getDetectionProximity(Entity entity) {
@@ -133,6 +141,16 @@ public class ComponentGrabber {
     public Position getPosition(Entity entity) {
         ComponentMapper<Position> pos = ComponentMapper.getFor(Position.class);
         return pos.get(entity);
+    }
+
+    public QuantityComponent getQuantity(Entity entity) {
+        ComponentMapper<QuantityComponent> quantity = ComponentMapper.getFor(QuantityComponent.class);
+        return quantity.get(entity);
+    }
+
+    public RarityComponent getRarity(Entity entity) {
+        ComponentMapper<RarityComponent> rarity = ComponentMapper.getFor(RarityComponent.class);
+        return rarity.get(entity);
     }
 
     public Size getSize(Entity entity) {
