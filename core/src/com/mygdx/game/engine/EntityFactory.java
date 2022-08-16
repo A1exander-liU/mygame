@@ -14,6 +14,7 @@ import com.mygdx.game.engine.components.EnemyStateMachine;
 import com.mygdx.game.engine.components.Health;
 import com.mygdx.game.engine.components.Item;
 import com.mygdx.game.engine.components.Name;
+import com.mygdx.game.engine.components.ObstacleComponent;
 import com.mygdx.game.engine.components.ParameterComponent;
 import com.mygdx.game.engine.components.Position;
 import com.mygdx.game.engine.components.Size;
@@ -77,6 +78,7 @@ public class EntityFactory {
         entity.add(new Size());
         entity.add(new Steering(entity));
         entity.add(new Item());
+        entity.add(new ObstacleComponent());
     }
 
     private void modifyEnemyComponentValues(Entity entity, String name) {
