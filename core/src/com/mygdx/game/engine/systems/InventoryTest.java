@@ -7,6 +7,7 @@ import com.badlogic.gdx.Input;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.ComponentGrabber;
 import com.mygdx.game.engine.Families;
+import com.mygdx.game.engine.Rarity;
 import com.mygdx.game.engine.components.inventory.InventoryComponent;
 import com.mygdx.game.engine.components.inventory.items.shared.DescriptionComponent;
 import com.mygdx.game.engine.components.inventory.items.shared.InventoryItemComponent;
@@ -78,6 +79,7 @@ public class InventoryTest extends EntitySystem {
             InventorySlotComponent slotComponent = cg.getInventorySlot(slot);
             System.out.println(dividers);
             System.out.println("Slot " + (i + 1));
+            System.out.println((slotComponent.itemOccupied == null) ? "" : cg.getRarity(slotComponent.itemOccupied).rarity);
             System.out.println((slotComponent.itemOccupied == null) ? "empty": "Item: " + cg.getName(slotComponent.itemOccupied).name);
             System.out.println("Amount: " + slotComponent.quantity);
             System.out.println(dividers);
@@ -85,7 +87,9 @@ public class InventoryTest extends EntitySystem {
     }
 
     private void test() {
-        InventoryComponent inventory = cg.getInventory(player);
+        // items are defined from json too
+        //
+
         Entity testItem = new Entity();
         testItem.add(new InventoryItemComponent());
         testItem.add(new Name());
@@ -94,6 +98,9 @@ public class InventoryTest extends EntitySystem {
         testItem.add(new RarityComponent());
         testItem.add(new DescriptionComponent());
         cg.getName(testItem).name = "Wood";
+        cg.getQuantity(testItem).quantity = 10;
+        cg.getRarity(testItem).rarity = Rarity.COMMON;
+        cg.getDescription(testItem).description = "Abundant material used to craft many items";
         MyGame.engine.addEntity(testItem);
         addToInventory(testItem);
 
@@ -105,6 +112,9 @@ public class InventoryTest extends EntitySystem {
         diffItem.add(new RarityComponent());
         diffItem.add(new DescriptionComponent());
         cg.getName(diffItem).name = "Stone";
+        cg.getQuantity(diffItem).quantity = 7;
+        cg.getRarity(diffItem).rarity = Rarity.COMMON;
+        cg.getDescription(diffItem).description = "Found all over the world";
         MyGame.engine.addEntity(diffItem);
         addToInventory(diffItem);
 
@@ -116,14 +126,17 @@ public class InventoryTest extends EntitySystem {
         wood.add(new RarityComponent());
         wood.add(new DescriptionComponent());
         cg.getName(wood).name = "Wood";
+        cg.getQuantity(wood).quantity = 4;
+        cg.getRarity(wood).rarity = Rarity.COMMON;
+        cg.getDescription(wood).description = "Abundant item used to craft many items";
         MyGame.engine.addEntity(wood);
         addToInventory(wood);
-
     }
 
     private void addToInventory(Entity entity) {
         InventoryComponent inventory = cg.getInventory(player);
         Name itemName = cg.getName(entity);
+        QuantityComponent itemQuantity = cg.getQuantity(entity);
         for (int i = 0; i < inventory.items.size; i++) {
             Entity itemSlot = inventory.items.get(i);
             InventorySlotComponent slot = cg.getInventorySlot(itemSlot);
@@ -135,13 +148,13 @@ public class InventoryTest extends EntitySystem {
                 occupiedItemName = cg.getName(occupiedItem);
             // if item already exists, add the quantity
             if (occupiedItemName != null && Objects.equals(occupiedItemName.name, itemName.name)) {
-                slot.quantity++;
+                slot.quantity += itemQuantity.quantity;
                 return;
             }
             // add item to first empty slot
             else if (slot.itemOccupied == null) {
                 slot.itemOccupied = entity;
-                slot.quantity = 1; // need to add the relevant components later
+                slot.quantity = itemQuantity.quantity; // need to add the relevant components later
                 return;
             }
         }
