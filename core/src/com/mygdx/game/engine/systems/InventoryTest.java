@@ -4,21 +4,48 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.ComponentGrabber;
 import com.mygdx.game.engine.Families;
 import com.mygdx.game.engine.components.InventoryComponent;
+import com.mygdx.game.engine.components.InventoryItemComponent;
 import com.mygdx.game.engine.components.InventorySlotComponent;
+import com.mygdx.game.engine.components.Name;
+import com.mygdx.game.engine.components.Sprite;
 
 public class InventoryTest extends EntitySystem {
     ComponentGrabber cg;
     Entity player;
+    // current inventory design:
+
+    // inventory component which has:
+    // boolean to determine whether inventory is opened or not
+    // array of entities (which are inventory slots)
+
+    // inventory slot component has:
+    // item occupied (the item in this slot)
+    // quantity (amount of the item in this slot)
+
+    // item component has:
+    // Shared components:
+    // name, sprite, quantity, rarity, description
+    // individual components:
+    // equipment, consumable, material
+
+    // equipment:
+    // weapon, armor, accessories, off-hands
+    // various components for different stats
+
+    // consumable:
+    // hp, mana, clear statuses, buffs
+
 
     public InventoryTest(ComponentGrabber cg) {
         super(101);
         this.cg = cg;
         player = MyGame.engine.getEntitiesFor(Families.player).get(0);
-
+        test();
     }
 
     @Override
@@ -50,4 +77,16 @@ public class InventoryTest extends EntitySystem {
             System.out.println("----------");
         }
     }
+
+    private void test() {
+        InventoryComponent inventory = cg.getInventory(player);
+        Entity testItem = new Entity();
+        testItem.add(new InventoryItemComponent());
+        testItem.add(new Name());
+        testItem.add(new Sprite());
+        cg.getName(testItem).name = "Test";
+        cg.getSprite(testItem).texture = new Texture(Gdx.files.internal("testPlayer.png"));
+        MyGame.engine.addEntity(testItem);
+    }
+
 }
