@@ -171,6 +171,9 @@ public class InventoryRenderSystem extends EntitySystem {
             if (slotComponent.itemOccupied != null) {
                 placeItemInSlot(inventorySlots, slotComponent.itemOccupied);
             }
+            else {
+                placeEmptySlot(inventorySlots);
+            }
             cols++;
         }
 
@@ -191,10 +194,11 @@ public class InventoryRenderSystem extends EntitySystem {
         Image occupiedItemSprite = new Image(drawable);
         slot.add(occupiedItemSprite);
 
-        inventorySlots.add(slot).expand().fill().space(5);
+        inventorySlots.add(slot).width(inventorySlots.getWidth() / 4).height(inventorySlots.getHeight() / 4);
     }
 
     private void placeEmptySlot(Table inventorySlots) {
-
+        Button slot = new Button(skin);
+        inventorySlots.add(slot).width(inventorySlots.getWidth() / 4).height(inventorySlots.getHeight() / 4);
     }
 }
