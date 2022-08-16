@@ -74,7 +74,7 @@ public class InventoryTest extends EntitySystem {
             InventorySlotComponent slotComponent = cg.getInventorySlot(slot);
             System.out.println("----------");
             System.out.println("Slot " + (i + 1));
-            System.out.println((slotComponent.itemOccupied == null) ? "empty": slotComponent.itemOccupied);
+            System.out.println((slotComponent.itemOccupied == null) ? "empty": "Item: " + cg.getName(slotComponent.itemOccupied).name);
             System.out.println("Amount: " + slotComponent.quantity);
             System.out.println("----------");
         }
