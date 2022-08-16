@@ -7,7 +7,7 @@ import com.mygdx.game.MyGame;
 
 public class InventoryComponent implements Component {
     // how many unique items can be held
-    public int capacity = 20;
+    public int capacity = 16;
     public Array<Entity> items = new Array<>(capacity);
     public boolean opened = false;
     // each item will contain these components:
