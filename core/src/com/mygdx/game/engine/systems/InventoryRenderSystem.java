@@ -4,7 +4,11 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -33,7 +37,16 @@ public class InventoryRenderSystem extends EntitySystem {
         player = MyGame.engine.getEntitiesFor(Families.player).get(0);
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
-        skin = new Skin(Gdx.files.internal("Game_UI_Skin/Game_UI_Skin.json"));
+        skin = new Skin();
+
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/PressStart2P-Regular.ttf"));
+        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        parameter.size = 12;
+        BitmapFont newFont = generator.generateFont(parameter);
+        skin.add("pixel2D", newFont);
+        skin.addRegions(new TextureAtlas("Game_UI_Skin/Game_UI_Skin.atlas"));
+        skin.load(Gdx.files.internal("Game_UI_Skin/Game_UI_Skin.json"));
+
         // takes up inventory:
         // weapons, armor, accessories, materials, consumables
         // equipped items, currency, quest items don't take inventory
@@ -126,7 +139,7 @@ public class InventoryRenderSystem extends EntitySystem {
             for (int j = 0; j < 4; j++) {
                 Button slot = new Button(skin);
 
-                Label random = new Label("1", skin);
+                Label random = new Label("99", skin, "pixel2D", Color.BLACK);
                 slot.add(random).expand().top().right();
 
                 slot.row();
