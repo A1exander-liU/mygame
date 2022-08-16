@@ -86,10 +86,26 @@ public class InventoryTest extends EntitySystem {
         testItem.add(new InventoryItemComponent());
         testItem.add(new Name());
         testItem.add(new Sprite());
-        cg.getName(testItem).name = "Test";
-        cg.getSprite(testItem).texture = new Texture(Gdx.files.internal("testPlayer.png"));
+        cg.getName(testItem).name = "Wood";
         MyGame.engine.addEntity(testItem);
         addToInventory(testItem);
+
+        Entity diffItem = new Entity();
+        diffItem.add(new InventoryItemComponent());
+        diffItem.add(new Name());
+        diffItem.add(new Sprite());
+        cg.getName(diffItem).name = "Stone";
+        MyGame.engine.addEntity(diffItem);
+        addToInventory(diffItem);
+
+        Entity wood = new Entity();
+        wood.add(new InventoryItemComponent());
+        wood.add(new Name());
+        wood.add(new Sprite());
+        cg.getName(wood).name = "Wood";
+        MyGame.engine.addEntity(wood);
+        addToInventory(wood);
+
     }
 
     private void addToInventory(Entity entity) {
