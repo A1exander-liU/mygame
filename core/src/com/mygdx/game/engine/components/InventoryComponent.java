@@ -29,7 +29,7 @@ public class InventoryComponent implements Component {
     // like getting 3 wood for chopping a tree
 
     public InventoryComponent() {
-        for (int i = 0; i < items.size; i++) {
+        for (int i = 0; i < capacity; i++) {
             Entity slot = new Entity();
             slot.add(new InventorySlotComponent());
             items.add(slot);
