@@ -100,9 +100,12 @@ public class InventoryTest extends EntitySystem {
             InventorySlotComponent slot = cg.getInventorySlot(itemSlot);
 
             Entity occupiedItem = slot.itemOccupied;
-            Name occupiedItemName = cg.getName(occupiedItem);
+            // name can be null
+            Name occupiedItemName = null;
+            if (occupiedItem != null)
+                occupiedItemName = cg.getName(occupiedItem);
             // if item already exists, add the quantity
-            if (Objects.equals(occupiedItemName.name, itemName.name)) {
+            if (occupiedItemName != null && Objects.equals(occupiedItemName.name, itemName.name)) {
                 slot.quantity++;
                 return;
             }
