@@ -4,13 +4,14 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.ComponentGrabber;
@@ -31,6 +32,7 @@ public class InventoryRenderSystem extends EntitySystem {
         this.cg = cg;
         player = MyGame.engine.getEntitiesFor(Families.player).get(0);
         stage = new Stage(new ScreenViewport());
+        Gdx.input.setInputProcessor(stage);
         skin = new Skin(Gdx.files.internal("Game_UI_Skin/Game_UI_Skin.json"));
         // takes up inventory:
         // weapons, armor, accessories, materials, consumables
@@ -52,11 +54,19 @@ public class InventoryRenderSystem extends EntitySystem {
         // cure statuses: instant, status protection for fixed duration
         // buffs: fixed durations
 
+        // inventory component:
+        // hold an array of item entities
+        // each item entity will have components like:
+        // item: flag component to indicate the entity is an item
+        // stackable: can have multiple in single slot
+        // quantity: how much of one stackable item there is
+        // equipment: something can be equipped (have enum which has equipment type)
+        // rarity:
+
     }
 
     @Override
     public void update(float delta) {
-
         toggleInventory();
         toggleMovements();
         if (inventoryOpened) {
@@ -107,12 +117,25 @@ public class InventoryRenderSystem extends EntitySystem {
 
     private void addInventorySlots(Table inventory) {
         Table inventorySlots = new Table();
+
         inventorySlots.setDebug(true);
         inventorySlots.setSize(inventory.getWidth() * 0.5f, inventory.getHeight() * 0.95f);
         inventory.add(inventorySlots).expand().width(inventorySlots.getWidth()).height(inventorySlots.getHeight()).right();
+
         for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 5; j++) {
-                ImageButton slot = new ImageButton(skin);
+            for (int j = 0; j < 4; j++) {
+                Button slot = new Button(skin);
+
+                Label random = new Label("1", skin);
+                slot.add(random).expand().top().right();
+
+                slot.row();
+
+                TextureRegionDrawable drawable = new TextureRegionDrawable(new Texture(Gdx.files.internal("testPlayer.png")));
+                Image randomImg = new Image();
+                randomImg.setDrawable(drawable);
+                slot.add(randomImg);
+
                 inventorySlots.add(slot).expand().fill().space(5);
             }
             inventorySlots.row();
