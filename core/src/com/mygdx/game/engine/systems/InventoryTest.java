@@ -8,10 +8,13 @@ import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.ComponentGrabber;
 import com.mygdx.game.engine.Families;
 import com.mygdx.game.engine.components.inventory.InventoryComponent;
+import com.mygdx.game.engine.components.inventory.items.shared.DescriptionComponent;
 import com.mygdx.game.engine.components.inventory.items.shared.InventoryItemComponent;
 import com.mygdx.game.engine.components.inventory.InventorySlotComponent;
 import com.mygdx.game.engine.components.Name;
 import com.mygdx.game.engine.components.Sprite;
+import com.mygdx.game.engine.components.inventory.items.shared.QuantityComponent;
+import com.mygdx.game.engine.components.inventory.items.shared.RarityComponent;
 
 import java.util.Objects;
 
@@ -87,6 +90,9 @@ public class InventoryTest extends EntitySystem {
         testItem.add(new InventoryItemComponent());
         testItem.add(new Name());
         testItem.add(new Sprite());
+        testItem.add(new QuantityComponent());
+        testItem.add(new RarityComponent());
+        testItem.add(new DescriptionComponent());
         cg.getName(testItem).name = "Wood";
         MyGame.engine.addEntity(testItem);
         addToInventory(testItem);
@@ -95,6 +101,9 @@ public class InventoryTest extends EntitySystem {
         diffItem.add(new InventoryItemComponent());
         diffItem.add(new Name());
         diffItem.add(new Sprite());
+        diffItem.add(new QuantityComponent());
+        diffItem.add(new RarityComponent());
+        diffItem.add(new DescriptionComponent());
         cg.getName(diffItem).name = "Stone";
         MyGame.engine.addEntity(diffItem);
         addToInventory(diffItem);
@@ -103,6 +112,9 @@ public class InventoryTest extends EntitySystem {
         wood.add(new InventoryItemComponent());
         wood.add(new Name());
         wood.add(new Sprite());
+        wood.add(new QuantityComponent());
+        wood.add(new RarityComponent());
+        wood.add(new DescriptionComponent());
         cg.getName(wood).name = "Wood";
         MyGame.engine.addEntity(wood);
         addToInventory(wood);
