@@ -14,7 +14,10 @@ import com.mygdx.game.engine.components.InventorySlotComponent;
 import com.mygdx.game.engine.components.Name;
 import com.mygdx.game.engine.components.Sprite;
 
+import org.w3c.dom.ls.LSOutput;
+
 import java.util.Objects;
+import java.util.Scanner;
 
 public class InventoryTest extends EntitySystem {
     ComponentGrabber cg;
@@ -41,7 +44,7 @@ public class InventoryTest extends EntitySystem {
 
     // consumable:
     // hp, mana, clear statuses, buffs
-
+    int currentSlot = 1;
 
     public InventoryTest(ComponentGrabber cg) {
         super(101);
@@ -71,12 +74,13 @@ public class InventoryTest extends EntitySystem {
     private void getInventory(InventoryComponent inventory) {
         for (int i = 0; i < inventory.items.size; i++) {
             Entity slot = inventory.items.get(i);
+            String dividers = currentSlot == i + 1 ? "**********" : "----------";
             InventorySlotComponent slotComponent = cg.getInventorySlot(slot);
-            System.out.println("----------");
+            System.out.println(dividers);
             System.out.println("Slot " + (i + 1));
             System.out.println((slotComponent.itemOccupied == null) ? "empty": "Item: " + cg.getName(slotComponent.itemOccupied).name);
             System.out.println("Amount: " + slotComponent.quantity);
-            System.out.println("----------");
+            System.out.println(dividers);
         }
     }
 
