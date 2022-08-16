@@ -20,6 +20,8 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.ComponentGrabber;
 import com.mygdx.game.engine.Families;
+import com.mygdx.game.engine.components.inventory.InventoryComponent;
+import com.mygdx.game.engine.components.inventory.InventorySlotComponent;
 import com.mygdx.game.engine.systems.combat.BasicAttackSystem;
 import com.mygdx.game.engine.systems.combat.EnemyAttackSystem;
 import com.mygdx.game.engine.systems.enemyai.SteeringSystem;
@@ -132,7 +134,7 @@ public class InventoryRenderSystem extends EntitySystem {
         Table inventorySlots = new Table();
 
         inventorySlots.setDebug(true);
-        inventorySlots.setSize(inventory.getWidth() * 0.5f, inventory.getHeight() * 0.95f);
+        inventorySlots.setSize(inventory.getWidth() * 0.55f, inventory.getHeight() * 0.95f);
         inventory.add(inventorySlots).expand().width(inventorySlots.getWidth()).height(inventorySlots.getHeight()).right();
 
         for (int i = 0; i < 4; i++) {
@@ -153,5 +155,18 @@ public class InventoryRenderSystem extends EntitySystem {
             }
             inventorySlots.row();
         }
+        int rows = 0;
+        int cols = 0;
+        InventoryComponent inventoryComponent = cg.getInventory(player);
+        for (int i = 0; i < inventoryComponent.items.size; i++) {
+            // holds the quantity and occupied item
+            Entity inventorySlot = inventoryComponent.items.get(i);
+            InventorySlotComponent slotComponent = cg.getInventorySlot(inventorySlot);
+            // check if slot is occupied
+            if (slotComponent.itemOccupied != null) {
+
+            }
+        }
+
     }
 }
