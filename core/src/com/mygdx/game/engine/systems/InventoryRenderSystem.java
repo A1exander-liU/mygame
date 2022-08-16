@@ -190,6 +190,8 @@ public class InventoryRenderSystem extends EntitySystem {
         // use the drawable now to get an image
         Image occupiedItemSprite = new Image(drawable);
         slot.add(occupiedItemSprite);
+
+        inventorySlots.add(slot).expand().fill().space(5);
     }
 
     private void placeEmptySlot(Table inventorySlots) {
