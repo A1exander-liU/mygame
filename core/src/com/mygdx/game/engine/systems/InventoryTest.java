@@ -89,6 +89,7 @@ public class InventoryTest extends EntitySystem {
         cg.getName(testItem).name = "Test";
         cg.getSprite(testItem).texture = new Texture(Gdx.files.internal("testPlayer.png"));
         MyGame.engine.addEntity(testItem);
+        addToInventory(testItem);
     }
 
     private void addToInventory(Entity entity) {
