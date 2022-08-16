@@ -10,6 +10,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.JsonValue;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.components.Camera;
+import com.mygdx.game.engine.components.CollidableComponent;
 import com.mygdx.game.engine.components.EnemyStateMachine;
 import com.mygdx.game.engine.components.Health;
 import com.mygdx.game.engine.components.Item;
@@ -79,6 +80,7 @@ public class EntityFactory {
         entity.add(new Steering(entity));
         entity.add(new Item());
         entity.add(new ObstacleComponent());
+        entity.add(new CollidableComponent());
     }
 
     private void modifyEnemyComponentValues(Entity entity, String name) {
