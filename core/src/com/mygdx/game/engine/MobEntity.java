@@ -1,6 +1,7 @@
 package com.mygdx.game.engine;
 
 import com.badlogic.ashley.core.Entity;
+import com.mygdx.game.engine.components.CollidableComponent;
 import com.mygdx.game.engine.components.DetectionProximity;
 import com.mygdx.game.engine.components.Enemy;
 import com.mygdx.game.engine.components.EnemyStateMachine;
@@ -43,5 +44,6 @@ public class MobEntity extends Entity {
         super.add(new Spawn());
         super.add(new Speed());
         super.add(new Sprite());
+        super.add(new CollidableComponent());
     }
 }

@@ -2,6 +2,7 @@ package com.mygdx.game.engine;
 
 import com.badlogic.ashley.core.Entity;
 import com.mygdx.game.engine.components.Camera;
+import com.mygdx.game.engine.components.CollidableComponent;
 import com.mygdx.game.engine.components.DetectionProximity;
 import com.mygdx.game.engine.components.ExpComponent;
 import com.mygdx.game.engine.components.InventoryComponent;
@@ -45,5 +46,6 @@ public class PlayerEntity extends Entity {
         super.add(new Speed());
         super.add(new Sprite());
         super.add(new Steering(this));
+        super.add(new CollidableComponent());
     }
 }
