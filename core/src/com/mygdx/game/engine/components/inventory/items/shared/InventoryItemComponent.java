@@ -1,4 +1,4 @@
-package com.mygdx.game.engine.components.items.shared;
+package com.mygdx.game.engine.components.inventory.items.shared;
 
 import com.badlogic.ashley.core.Component;
 

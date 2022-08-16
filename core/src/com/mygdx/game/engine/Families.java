@@ -3,7 +3,7 @@ package com.mygdx.game.engine;
 import com.badlogic.ashley.core.Family;
 import com.mygdx.game.engine.components.CollidableComponent;
 import com.mygdx.game.engine.components.Enemy;
-import com.mygdx.game.engine.components.InventoryItemComponent;
+import com.mygdx.game.engine.components.inventory.items.shared.InventoryItemComponent;
 import com.mygdx.game.engine.components.ObstacleComponent;
 import com.mygdx.game.engine.components.Player;
 import com.mygdx.game.engine.components.SpawnArea;

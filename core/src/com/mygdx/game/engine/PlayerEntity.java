@@ -5,7 +5,7 @@ import com.mygdx.game.engine.components.Camera;
 import com.mygdx.game.engine.components.CollidableComponent;
 import com.mygdx.game.engine.components.DetectionProximity;
 import com.mygdx.game.engine.components.ExpComponent;
-import com.mygdx.game.engine.components.InventoryComponent;
+import com.mygdx.game.engine.components.inventory.InventoryComponent;
 import com.mygdx.game.engine.components.Item;
 import com.mygdx.game.engine.components.LevelComponent;
 import com.mygdx.game.engine.components.ManaComponent;

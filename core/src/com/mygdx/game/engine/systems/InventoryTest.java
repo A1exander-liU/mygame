@@ -4,20 +4,16 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.ComponentGrabber;
 import com.mygdx.game.engine.Families;
-import com.mygdx.game.engine.components.InventoryComponent;
-import com.mygdx.game.engine.components.InventoryItemComponent;
-import com.mygdx.game.engine.components.InventorySlotComponent;
+import com.mygdx.game.engine.components.inventory.InventoryComponent;
+import com.mygdx.game.engine.components.inventory.items.shared.InventoryItemComponent;
+import com.mygdx.game.engine.components.inventory.InventorySlotComponent;
 import com.mygdx.game.engine.components.Name;
 import com.mygdx.game.engine.components.Sprite;
 
-import org.w3c.dom.ls.LSOutput;
-
 import java.util.Objects;
-import java.util.Scanner;
 
 public class InventoryTest extends EntitySystem {
     ComponentGrabber cg;
@@ -44,7 +40,7 @@ public class InventoryTest extends EntitySystem {
 
     // consumable:
     // hp, mana, clear statuses, buffs
-    int currentSlot = 1;
+    int currentSlot = 20;
 
     public InventoryTest(ComponentGrabber cg) {
         super(101);
@@ -57,6 +53,7 @@ public class InventoryTest extends EntitySystem {
     public void update(float delta) {
         InventoryComponent inventory = cg.getInventory(player);
         toggleInventory(inventory);
+
     }
 
     private void toggleInventory(InventoryComponent inventory) {
@@ -136,5 +133,9 @@ public class InventoryTest extends EntitySystem {
                 return;
             }
         }
+    }
+
+    private void showMoreInfo() {
+
     }
 }
