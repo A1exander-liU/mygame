@@ -47,7 +47,7 @@ public class InventoryTest extends EntitySystem {
     int currentSlot = 20;
 
     public InventoryTest(ComponentGrabber cg) {
-        super(101);
+        super(99);
         this.cg = cg;
         player = MyGame.engine.getEntitiesFor(Families.player).get(0);
         test();

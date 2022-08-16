@@ -35,7 +35,7 @@ public class InventoryRenderSystem extends EntitySystem {
     boolean inventoryOpened = false;
 
     public InventoryRenderSystem(ComponentGrabber cg) {
-        super(99);
+        super(100);
         this.cg = cg;
         player = MyGame.engine.getEntitiesFor(Families.player).get(0);
         stage = new Stage(new ScreenViewport());
