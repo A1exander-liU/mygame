@@ -26,12 +26,13 @@ public class MainMenuScreen implements Screen {
         this.parent = parent;
 
         stage = new Stage(new ScreenViewport());
+        parent.inputMultiplexer.addProcessor(stage);
     }
 
     @Override
     public void show() {
         stage.clear();
-        Gdx.input.setInputProcessor(stage);
+        Gdx.input.setInputProcessor(parent.inputMultiplexer);
         Table table = new Table();
         table.setFillParent(true);
         table.setDebug(false);
