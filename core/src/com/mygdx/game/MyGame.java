@@ -16,7 +16,7 @@ public class MyGame extends Game {
 	SettingsScreen settingsScreen;
 	LoadingScreen loadingScreen;
 
-	InputMultiplexer inputMultiplexer;
+	public InputMultiplexer inputMultiplexer;
 
 	private StoredPreferences storedPreferences;
 
