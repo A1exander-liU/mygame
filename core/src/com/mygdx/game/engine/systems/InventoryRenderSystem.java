@@ -169,7 +169,7 @@ public class InventoryRenderSystem extends EntitySystem {
             InventorySlotComponent slotComponent = cg.getInventorySlot(inventorySlot);
             // check if slot is occupied
             if (slotComponent.itemOccupied != null) {
-                placeItemInSlot(inventorySlots, slotComponent.itemOccupied);
+                placeItemInSlot(inventorySlots, inventorySlot);
             }
             else {
                 placeEmptySlot(inventorySlots);
@@ -179,12 +179,12 @@ public class InventoryRenderSystem extends EntitySystem {
 
     }
 
-    private void placeItemInSlot(Table inventorySlots, Entity item) {
-        QuantityComponent quantity = cg.getQuantity(item);
+    private void placeItemInSlot(Table inventorySlots, Entity inventorySlot) {
+        int quantity = cg.getInventorySlot(inventorySlot).quantity;
         // no actual sprite, just using the stick man for now
         Button slot = new Button(skin);
         // the label to display the amount (top-right corner)
-        Label occupiedItemQuantity = new Label("" + quantity.quantity, skin, "pixel2D", Color.BLACK);
+        Label occupiedItemQuantity = new Label("" + quantity, skin, "pixel2D", Color.BLACK);
         slot.add(occupiedItemQuantity).expand().top().right();
         // new row to place the item sprite under the quantity number
         slot.row();
