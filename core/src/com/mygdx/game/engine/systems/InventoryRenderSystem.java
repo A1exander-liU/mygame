@@ -9,12 +9,14 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.MyGame;
@@ -22,26 +24,26 @@ import com.mygdx.game.engine.ComponentGrabber;
 import com.mygdx.game.engine.Families;
 import com.mygdx.game.engine.components.inventory.InventoryComponent;
 import com.mygdx.game.engine.components.inventory.InventorySlotComponent;
-import com.mygdx.game.engine.components.inventory.items.shared.QuantityComponent;
 import com.mygdx.game.engine.systems.combat.BasicAttackSystem;
 import com.mygdx.game.engine.systems.combat.EnemyAttackSystem;
 import com.mygdx.game.engine.systems.enemyai.SteeringSystem;
 
 public class InventoryRenderSystem extends EntitySystem {
     ComponentGrabber cg;
+    MyGame root;
     Entity player;
     Stage stage;
     Skin skin;
     boolean inventoryOpened = false;
 
-    public InventoryRenderSystem(ComponentGrabber cg) {
+    public InventoryRenderSystem(ComponentGrabber cg, MyGame root, Stage stage) {
         super(100);
         this.cg = cg;
+        this.root = root;
         player = MyGame.engine.getEntitiesFor(Families.player).get(0);
-        stage = new Stage(new ScreenViewport());
-        Gdx.input.setInputProcessor(stage);
-        skin = new Skin();
+        this.stage = stage;
 
+        skin = new Skin();
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/PressStart2P-Regular.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.size = 10;
@@ -134,7 +136,7 @@ public class InventoryRenderSystem extends EntitySystem {
     private void addInventorySlots(Table inventory) {
         Table inventorySlots = new Table();
 
-        inventorySlots.setDebug(true);
+        inventorySlots.setDebug(false);
         inventorySlots.setSize(inventory.getWidth() * 0.55f, inventory.getHeight() * 0.95f);
         inventory.add(inventorySlots).expand().width(inventorySlots.getWidth()).height(inventorySlots.getHeight()).right();
 
@@ -193,11 +195,26 @@ public class InventoryRenderSystem extends EntitySystem {
         Image occupiedItemSprite = new Image(drawable);
         slot.add(occupiedItemSprite).grow();
 
+        slot.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                System.out.println("occupied slot");
+            }
+        });
+
         inventorySlots.add(slot).width(inventorySlots.getWidth() / 4).height(inventorySlots.getHeight() / 4);
     }
 
     private void placeEmptySlot(Table inventorySlots) {
         Button slot = new Button(skin);
+
+        slot.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                System.out.println("empty slot");
+            }
+        });
+
         inventorySlots.add(slot).width(inventorySlots.getWidth() / 4).height(inventorySlots.getHeight() / 4);
     }
 }
