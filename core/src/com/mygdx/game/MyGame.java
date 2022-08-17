@@ -2,6 +2,7 @@ package com.mygdx.game;
 
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.engine.EntityToMapAdder;
 import com.mygdx.game.screens.GameScreen;
@@ -14,6 +15,8 @@ public class MyGame extends Game {
 	GameScreen gameScreen;
 	SettingsScreen settingsScreen;
 	LoadingScreen loadingScreen;
+
+	InputMultiplexer inputMultiplexer;
 
 	private StoredPreferences storedPreferences;
 
@@ -34,6 +37,7 @@ public class MyGame extends Game {
 
 	@Override
 	public void create() {
+		inputMultiplexer = new InputMultiplexer();
 		this.changeScreen(MyGame.MENU_SCREEN);
 
 		storedPreferences = new StoredPreferences();
