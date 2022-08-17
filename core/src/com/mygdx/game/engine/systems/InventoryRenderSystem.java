@@ -156,7 +156,6 @@ public class InventoryRenderSystem extends EntitySystem {
 //            }
 //            inventorySlots.row();
 //        }
-        int rows = 0;
         int cols = 0;
         InventoryComponent inventoryComponent = cg.getInventory(player);
         for (int i = 0; i < inventoryComponent.items.size; i++) {
