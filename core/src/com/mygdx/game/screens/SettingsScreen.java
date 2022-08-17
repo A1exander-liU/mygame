@@ -47,6 +47,8 @@ public class SettingsScreen implements Screen {
         this.parent = parent;
 
         stage = new Stage(new ScreenViewport());
+        parent.inputMultiplexer.addProcessor(stage);
+        Gdx.input.setInputProcessor(parent.inputMultiplexer);
     }
 
     @Override
@@ -62,7 +64,6 @@ public class SettingsScreen implements Screen {
         skin.addRegions(new TextureAtlas("Game_UI_Skin/Game_UI_Skin.atlas"));
         skin.load(Gdx.files.internal("Game_UI_Skin/Game_UI_Skin.json"));
 
-        Gdx.input.setInputProcessor(stage);
         final Table table = new Table();
         table.setFillParent(true);
         table.setDebug(false);
