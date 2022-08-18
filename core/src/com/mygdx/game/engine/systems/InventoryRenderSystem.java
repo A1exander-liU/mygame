@@ -207,7 +207,7 @@ public class InventoryRenderSystem extends EntitySystem {
         // no actual sprite, just using the stick man for now
         InventorySlot slot = new InventorySlot(skin);
         // set the reference of the inventory item
-        slot.setOccupiedItem(inventorySlot);
+        slot.setOccupiedItem(cg.getInventorySlot(inventorySlot).itemOccupied);
         // the label to display the amount (top-right corner)
         Label occupiedItemQuantity = new Label("" + quantity, skin, "pixel2D", Color.BLACK);
         slot.add(occupiedItemQuantity).expand().top().right();
@@ -223,7 +223,7 @@ public class InventoryRenderSystem extends EntitySystem {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 InventorySlot slot = (InventorySlot) actor;
-                Entity slotItem = cg.getInventorySlot(slot.getOccupiedItem()).itemOccupied;
+                Entity slotItem = slot.getOccupiedItem();
                 System.out.println("Name: " + cg.getName(slotItem).name);
                 System.out.println(cg.getRarity(slotItem).rarity);
                 System.out.println(cg.getDescription(slotItem).description);
