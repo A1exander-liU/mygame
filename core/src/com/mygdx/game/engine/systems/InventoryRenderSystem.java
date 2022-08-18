@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -12,12 +13,14 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.ComponentGrabber;
@@ -27,21 +30,24 @@ import com.mygdx.game.engine.components.inventory.InventorySlotComponent;
 import com.mygdx.game.engine.systems.combat.BasicAttackSystem;
 import com.mygdx.game.engine.systems.combat.EnemyAttackSystem;
 import com.mygdx.game.engine.systems.enemyai.SteeringSystem;
+import com.mygdx.game.screens.GameScreen;
 
 public class InventoryRenderSystem extends EntitySystem {
     ComponentGrabber cg;
-    MyGame root;
     Entity player;
     Stage stage;
     Skin skin;
     boolean inventoryOpened = false;
 
-    public InventoryRenderSystem(ComponentGrabber cg, MyGame root, Stage stage) {
+    boolean canDraw = false;
+
+    public InventoryRenderSystem(ComponentGrabber cg) {
         super(100);
         this.cg = cg;
-        this.root = root;
         player = MyGame.engine.getEntitiesFor(Families.player).get(0);
-        this.stage = stage;
+        stage = new Stage(new ScreenViewport());
+        InputMultiplexer inputMultiplexer = new InputMultiplexer(stage);
+        Gdx.input.setInputProcessor(stage);
 
         skin = new Skin();
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/PressStart2P-Regular.ttf"));
@@ -51,7 +57,7 @@ public class InventoryRenderSystem extends EntitySystem {
         skin.add("pixel2D", newFont);
         skin.addRegions(new TextureAtlas("Game_UI_Skin/Game_UI_Skin.atlas"));
         skin.load(Gdx.files.internal("Game_UI_Skin/Game_UI_Skin.json"));
-
+        generator.dispose();
         // takes up inventory:
         // weapons, armor, accessories, materials, consumables
         // equipped items, currency, quest items don't take inventory
@@ -81,16 +87,30 @@ public class InventoryRenderSystem extends EntitySystem {
         // equipment: something can be equipped (have enum which has equipment type)
         // rarity:
 
+
     }
 
     @Override
     public void update(float delta) {
+        // inventory button states don't work properly
+        // problem: might be b/c it is redrawing every frame, the button states
+        // are not registering
+
         toggleInventory();
         toggleMovements();
-        if (inventoryOpened) {
-            stage.clear();
 
+        // how to make it only draw once when inventory is opened?
+        // create a boolean to determine when the inventory can be drawn
+        // new condition is when inventory is opened and it can be drawn
+        // to make it draw only once, set the boolean to false when you draw it
+        // so future frames won't keep redrawing
+
+        if (inventoryOpened && canDraw) {
+            // immediately set to false so the inventory is only drawn once
+            // when it is opened once
+            canDraw = false;
             Table root = new Table();
+            root.setFillParent(true);
             root.setSize(stage.getWidth(), stage.getHeight());
             stage.addActor(root);
 
@@ -101,19 +121,25 @@ public class InventoryRenderSystem extends EntitySystem {
             root.add(inventory).expand().center().width(inventory.getWidth()).height(inventory.getHeight());
 
             addInventorySlots(inventory);
-
-            stage.act();
-            stage.draw();
         }
+        stage.act(delta);
+        stage.draw();
     }
 
     private void toggleInventory() {
         if (Gdx.input.isKeyJustPressed(Input.Keys.E)
-                && !inventoryOpened)
+                && !inventoryOpened) {
+            // set canDraw back to when you open the inventory again
+            canDraw = true;
             inventoryOpened = true;
+        }
         else if (Gdx.input.isKeyJustPressed(Input.Keys.E)
-                && inventoryOpened)
+                && inventoryOpened) {
             inventoryOpened = false;
+            // also clear stage so inventory wont be displayed
+            // (since all ui elements are removed from the stage)
+            stage.clear();
+        }
     }
 
     private void toggleMovements() {
@@ -140,24 +166,6 @@ public class InventoryRenderSystem extends EntitySystem {
         inventorySlots.setSize(inventory.getWidth() * 0.55f, inventory.getHeight() * 0.95f);
         inventory.add(inventorySlots).expand().width(inventorySlots.getWidth()).height(inventorySlots.getHeight()).right();
 
-//        for (int i = 0; i < 4; i++) {
-//            for (int j = 0; j < 4; j++) {
-//                Button slot = new Button(skin);
-//
-//                Label random = new Label("99", skin, "pixel2D", Color.BLACK);
-//                slot.add(random).expand().top().right();
-//
-//                slot.row();
-//
-//                TextureRegionDrawable drawable = new TextureRegionDrawable(new Texture(Gdx.files.internal("testPlayer.png")));
-//                Image randomImg = new Image();
-//                randomImg.setDrawable(drawable);
-//                slot.add(randomImg);
-//
-//                inventorySlots.add(slot).expand().fill().space(5);
-//            }
-//            inventorySlots.row();
-//        }
         int cols = 0;
         InventoryComponent inventoryComponent = cg.getInventory(player);
         for (int i = 0; i < inventoryComponent.items.size; i++) {
@@ -177,7 +185,6 @@ public class InventoryRenderSystem extends EntitySystem {
             }
             cols++;
         }
-
     }
 
     private void placeItemInSlot(Table inventorySlots, Entity inventorySlot) {
@@ -198,7 +205,15 @@ public class InventoryRenderSystem extends EntitySystem {
         slot.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                System.out.println("occupied slot");
+                Button slot = (Button) actor;
+                Array<Cell> cells = slot.getCells();
+                for (int i = 0; i < cells.size; i ++) {
+                    Cell cell = cells.get(i);
+                    if(cell.getActor() instanceof Label) {
+                        Label slotQuantity = (Label) cell.getActor();
+                        System.out.println("Quantity: " + slotQuantity.getText());
+                    }
+                }
             }
         });
 
