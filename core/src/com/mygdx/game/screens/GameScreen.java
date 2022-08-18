@@ -9,8 +9,6 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.JsonEnemyFinder;
 import com.mygdx.game.engine.ComponentGrabber;
 import com.mygdx.game.MapObjectDrawer;
@@ -102,11 +100,6 @@ public class GameScreen implements Screen {
         // collisionSystem: 6
         // mapUpdateSystem: 98
         // removalSystem: 99
-
-        Stage inventory = new Stage(new ScreenViewport());
-        parent.inputMultiplexer.addProcessor(inventory);
-        Gdx.input.setInputProcessor(inventory);
-
         MovementSystem movementSystem = new MovementSystem(cg);
         EnemySpawningSystem enemySpawningSystem = new EnemySpawningSystem(cg, entityFactory);
         SteeringSystem steeringSystem = new SteeringSystem(cg);
@@ -120,7 +113,7 @@ public class GameScreen implements Screen {
         HealthBarRenderSystem healthBarRenderSystem = new HealthBarRenderSystem(cg);
         EnemyAttackSystem enemyAttackSystem = new EnemyAttackSystem(cg, parent);
         PlayerHudRenderSystem playerHudRenderSystem = new PlayerHudRenderSystem(cg);
-        InventoryRenderSystem inventoryRenderSystem = new InventoryRenderSystem(cg, parent, inventory);
+        InventoryRenderSystem inventoryRenderSystem = new InventoryRenderSystem(cg);
         InventoryTest inventoryTest = new InventoryTest(cg);
         MyGame.engine.addSystem(movementSystem);
         MyGame.engine.addSystem(enemySpawningSystem);
