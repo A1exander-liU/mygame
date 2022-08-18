@@ -222,15 +222,12 @@ public class InventoryRenderSystem extends EntitySystem {
         slot.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                Button slot = (Button) actor;
-                Array<Cell> cells = slot.getCells();
-                for (int i = 0; i < cells.size; i ++) {
-                    Cell cell = cells.get(i);
-                    if(cell.getActor() instanceof Label) {
-                        Label slotQuantity = (Label) cell.getActor();
-                        System.out.println("Quantity: " + slotQuantity.getText());
-                    }
-                }
+                InventorySlot slot = (InventorySlot) actor;
+                Entity slotItem = cg.getInventorySlot(slot.getOccupiedItem()).itemOccupied;
+                System.out.println("Name: " + cg.getName(slotItem).name);
+                System.out.println(cg.getRarity(slotItem).rarity);
+                System.out.println(cg.getDescription(slotItem).description);
+                System.out.println("Quantity: " + cg.getQuantity(slotItem).quantity);
             }
         });
 
