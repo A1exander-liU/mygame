@@ -148,7 +148,8 @@ public class InventoryTest extends EntitySystem {
                 occupiedItemName = cg.getName(occupiedItem);
             // if item already exists, add the quantity
             if (occupiedItemName != null && Objects.equals(occupiedItemName.name, itemName.name)) {
-                slot.quantity += itemQuantity.quantity;
+                cg.getQuantity(slot.itemOccupied).quantity += itemQuantity.quantity;
+                MyGame.engine.removeEntity(entity);
                 return;
             }
             // add item to first empty slot
