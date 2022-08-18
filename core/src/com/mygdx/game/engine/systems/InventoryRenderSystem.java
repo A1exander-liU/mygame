@@ -18,9 +18,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.SnapshotArray;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.ComponentGrabber;
@@ -31,6 +34,7 @@ import com.mygdx.game.engine.systems.combat.BasicAttackSystem;
 import com.mygdx.game.engine.systems.combat.EnemyAttackSystem;
 import com.mygdx.game.engine.systems.enemyai.SteeringSystem;
 import com.mygdx.game.screens.GameScreen;
+import com.mygdx.game.utils.InventorySlot;
 
 public class InventoryRenderSystem extends EntitySystem {
     ComponentGrabber cg;
@@ -160,6 +164,17 @@ public class InventoryRenderSystem extends EntitySystem {
     }
 
     private void addInventorySlots(Table inventory) {
+        // Items can be dragged to a different slot
+        // inventory component needs to know this and update
+        // inventory right now is just an array of entities which represent
+        // the items
+        // use the index of the slots to determine the swapping
+
+        // ex. have an item in slot 1 and want to drag it to slot 5
+        // since inventory right now is 4 x 4, slot 5 is under slot 1
+        // once the drop is confirmed, inventory will need to update
+        // loop through all the inventory slots on the table
+        // set inventory array entities to each item of the table
         Table inventorySlots = new Table();
 
         inventorySlots.setDebug(false);
@@ -190,7 +205,9 @@ public class InventoryRenderSystem extends EntitySystem {
     private void placeItemInSlot(Table inventorySlots, Entity inventorySlot) {
         int quantity = cg.getInventorySlot(inventorySlot).quantity;
         // no actual sprite, just using the stick man for now
-        Button slot = new Button(skin);
+        InventorySlot slot = new InventorySlot(skin);
+        // set the reference of the inventory item
+        slot.setOccupiedItem(inventorySlot);
         // the label to display the amount (top-right corner)
         Label occupiedItemQuantity = new Label("" + quantity, skin, "pixel2D", Color.BLACK);
         slot.add(occupiedItemQuantity).expand().top().right();
