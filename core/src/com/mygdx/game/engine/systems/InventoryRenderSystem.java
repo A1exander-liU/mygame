@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Cell;
@@ -21,6 +22,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
@@ -45,6 +47,8 @@ public class InventoryRenderSystem extends EntitySystem {
     boolean inventoryOpened = false;
 
     boolean canDraw = false;
+
+    DragAndDrop dragAndDrop;
 
     public InventoryRenderSystem(ComponentGrabber cg) {
         super(100);
@@ -92,7 +96,7 @@ public class InventoryRenderSystem extends EntitySystem {
         // equipment: something can be equipped (have enum which has equipment type)
         // rarity:
 
-
+        dragAndDrop = new DragAndDrop();
     }
 
     @Override
@@ -242,6 +246,13 @@ public class InventoryRenderSystem extends EntitySystem {
                 System.out.println(cg.getRarity(slotItem).rarity);
                 System.out.println(cg.getDescription(slotItem).description);
                 System.out.println("Quantity: " + cg.getQuantity(slotItem).quantity);
+            }
+        });
+
+        dragAndDrop.addSource(new DragAndDrop.Source(itemStack) {
+            @Override
+            public DragAndDrop.Payload dragStart(InputEvent event, float x, float y, int pointer) {
+                return null;
             }
         });
 
