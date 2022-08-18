@@ -47,8 +47,7 @@ public class SettingsScreen implements Screen {
         this.parent = parent;
 
         stage = new Stage(new ScreenViewport());
-        parent.inputMultiplexer.addProcessor(stage);
-        Gdx.input.setInputProcessor(parent.inputMultiplexer);
+        Gdx.input.setInputProcessor(stage);
     }
 
     @Override
