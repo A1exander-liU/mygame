@@ -707,8 +707,7 @@
 },
 "com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle": {
 	"default": {
-		"up": "button-up",
-		"over": "text-button-over"
+		"up": "button-up"
 	}
 },
 "com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle": {
