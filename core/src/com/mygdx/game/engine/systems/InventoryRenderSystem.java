@@ -57,7 +57,7 @@ public class InventoryRenderSystem extends EntitySystem {
         skin = new Skin();
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/PressStart2P-Regular.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = 10;
+        parameter.size = 9;
         BitmapFont newFont = generator.generateFont(parameter);
         skin.add("pixel2D", newFont);
         skin.addRegions(new TextureAtlas("Game_UI_Skin/Game_UI_Skin.atlas"));
