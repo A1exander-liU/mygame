@@ -831,7 +831,7 @@
 "com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle": {
 	"default": {
 		"background": "window-bg",
-		"titleFont": "g"
+		"titleFont": "advanced-pixel-small"
 	},
 	"window-player-health-bg": {
 		"titleFont": "advanced-pixel-small",
