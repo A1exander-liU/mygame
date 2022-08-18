@@ -29,4 +29,11 @@ public class InventorySlot extends Button {
         inventorySlot.occupiedItem = thisItem;
     }
 
+    public void stack(InventorySlot inventorySlot) {
+        // if two items are similar stack them together
+        Mappers.quantity.get(occupiedItem).quantity += Mappers.quantity.get(inventorySlot.occupiedItem).quantity;
+        // since items are the same, the entity is no longer needed
+        MyGame.engine.removeEntity(inventorySlot.occupiedItem);
+        inventorySlot.occupiedItem = null;
+    }
 }
