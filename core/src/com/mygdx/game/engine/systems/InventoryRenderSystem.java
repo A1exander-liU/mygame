@@ -17,6 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -175,6 +176,12 @@ public class InventoryRenderSystem extends EntitySystem {
         // once the drop is confirmed, inventory will need to update
         // loop through all the inventory slots on the table
         // set inventory array entities to each item of the table
+
+        // need some inventory features:
+        // drag and drop:
+            // swapping items
+            // stacking
+            // splitting
         Table inventorySlots = new Table();
 
         inventorySlots.setDebug(false);
@@ -209,16 +216,22 @@ public class InventoryRenderSystem extends EntitySystem {
         InventorySlot slot = new InventorySlot(skin);
         // set the reference of the inventory item
         slot.setOccupiedItem(inventoryItem);
+        // for drag and drop operations b/c label and the image is separate
+        // need to have both when the item is being dragged
+        Stack itemStack = new Stack();
+
         // the label to display the amount (top-right corner)
         Label occupiedItemQuantity = new Label("" + quantity, skin, "pixel2D", Color.BLACK);
-        slot.add(occupiedItemQuantity).expand().top().right();
-        // new row to place the item sprite under the quantity number
-        slot.row();
+        occupiedItemQuantity.setAlignment(Align.topRight);
         // turn the image to drawable
         TextureRegionDrawable drawable = new TextureRegionDrawable(new Texture(Gdx.files.internal("testPlayer.png")));
         // use the drawable now to get an image
         Image occupiedItemSprite = new Image(drawable);
-        slot.add(occupiedItemSprite).grow();
+
+        itemStack.add(occupiedItemSprite);
+        itemStack.add(occupiedItemQuantity);
+
+        slot.add(itemStack).grow();
 
         slot.addListener(new ChangeListener() {
             @Override
