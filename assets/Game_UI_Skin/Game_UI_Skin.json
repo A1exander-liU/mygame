@@ -686,6 +686,26 @@
 		"regions": [],
 		"playMode": 2,
 		"crushMode": 0
+	},
+	"window-bg": {
+		"region": "pixil-frame-0",
+		"horizontalStretchAreas": [ 7, 24 ],
+		"verticalStretchAreas": [ 5, 26 ],
+		"tiling": false,
+		"minWidth": 32,
+		"minHeight": 32,
+		"rightWidth": 11,
+		"leftWidth": 11,
+		"bottomHeight": 2,
+		"topHeight": 27,
+		"offsetX": 0,
+		"offsetY": 0,
+		"offsetXspeed": 0,
+		"offsetYspeed": 0,
+		"frameDuration": 0.03,
+		"regions": [],
+		"playMode": 2,
+		"crushMode": 0
 	}
 },
 "com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle": {
@@ -809,6 +829,10 @@
 	}
 },
 "com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle": {
+	"default": {
+		"background": "window-bg",
+		"titleFont": "g"
+	},
 	"window-player-health-bg": {
 		"titleFont": "advanced-pixel-small",
 		"stageBackground": "button-up"
