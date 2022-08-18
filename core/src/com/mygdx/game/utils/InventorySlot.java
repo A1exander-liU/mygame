@@ -21,6 +21,10 @@ public class InventorySlot extends Button {
         return this.occupiedItem;
     }
 
+    public void setOccupiedItem(Entity occupiedItem) {
+        this.occupiedItem = occupiedItem;
+    }
+
     public void swap(InventorySlot inventorySlot) {
         // swap the items that are occupying the slot
         // will be used with drag and drop
