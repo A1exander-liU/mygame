@@ -47,15 +47,20 @@ public class InventorySlotSource extends DragAndDrop.Source {
             // get the item of the target (the area where drag actor was over)
             Entity targetItem = ((InventorySlot) target.getActor()).getOccupiedItem();
             InventorySlot targetSlot = (InventorySlot) target.getActor();
+            // check if both the dragged item and the target slot item are the same
             if (Objects.equals(Mappers.name.get(payLoadItem).name, Mappers.name.get(targetItem).name)) {
                 targetSlot.stack(sourceSlot);
             }
+            // if the target slot is empty
             else if (targetSlot.isEmpty()) {
                 // if the slot is empty, bring the item over
                 targetSlot.setOccupiedItem(payLoadItem);
                 // set to null since item was moved over to new slot
                 sourceSlot.setOccupiedItem(null);
+            // if the items are different, they will be swapped
+            } else {
+                sourceSlot.swap(targetSlot);
             }
-        } 
+        }
     }
 }
