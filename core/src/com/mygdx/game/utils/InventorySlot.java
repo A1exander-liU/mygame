@@ -42,6 +42,6 @@ public class InventorySlot extends Button {
     }
 
     public boolean isEmpty() {
-        return  occupiedItem == null || Mappers.quantity.get(occupiedItem).quantity <= 0;
+        return  occupiedItem == null;
     }
 }
