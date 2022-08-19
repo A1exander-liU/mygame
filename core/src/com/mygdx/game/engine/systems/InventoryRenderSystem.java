@@ -220,6 +220,8 @@ public class InventoryRenderSystem extends EntitySystem {
 
             inventorySlots.add(inventorySlot).width(inventorySlots.getWidth() / 4).height(inventorySlots.getHeight() / 4);
 
+            inventoryComponent.inventorySlots.set(i, inventorySlot);
+
             cols++;
         }
     }
