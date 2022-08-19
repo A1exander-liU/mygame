@@ -30,6 +30,9 @@ public class InventorySlotSource extends DragAndDrop.Source {
         // the Stack actor which holds the item sprite and label that shows
         // the item quantity
         payload.setDragActor(sourceSlot.getChildren().get(0));
+        payload.setValidDragActor(sourceSlot.getChildren().get(0));
+        payload.setInvalidDragActor(sourceSlot.getChildren().get(0));
+
         return null;
     }
 }
