@@ -6,6 +6,8 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 import com.mygdx.game.utils.InventorySlot;
 
+import java.util.Objects;
+
 public class InventorySlotSource extends DragAndDrop.Source {
 
     DragAndDrop dragAndDrop;
@@ -34,5 +36,19 @@ public class InventorySlotSource extends DragAndDrop.Source {
         payload.setInvalidDragActor(sourceSlot.getChildren().get(0));
 
         return payload;
+    }
+
+    @Override
+    public void dragStop(InputEvent event, float x, float y, int pointer,
+                         DragAndDrop.Payload payload, DragAndDrop.Target target) {
+        // grab the item back when drag stops
+        Entity payLoadItem = (Entity) payload.getObject();
+        if (target != null) {
+            // get the item of the target (the area where drag actor was over)
+            Entity targetItem = ((InventorySlot) target.getActor()).getOccupiedItem();
+            if (Objects.equals(Mappers.name.get(payLoadItem).name, Mappers.name.get(targetItem).name)) {
+
+            }
+        }
     }
 }
