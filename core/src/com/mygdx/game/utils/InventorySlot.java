@@ -11,7 +11,7 @@ import java.util.Objects;
 public class InventorySlot extends Button {
     // the item in this slot
     // this will be the full info
-    Entity occupiedItem;
+    Entity occupiedItem; // this is the slot (goes inside InventorySlot)
 
     public InventorySlot(Skin skin) {
         super(skin);
@@ -39,5 +39,9 @@ public class InventorySlot extends Button {
         // since items are the same, the entity is no longer needed
         MyGame.engine.removeEntity(inventorySlot.occupiedItem);
         inventorySlot.occupiedItem = null;
+    }
+
+    public boolean isEmpty() {
+        return  occupiedItem == null || Mappers.quantity.get(occupiedItem).quantity <= 0;
     }
 }
