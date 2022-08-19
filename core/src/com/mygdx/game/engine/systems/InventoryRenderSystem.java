@@ -249,18 +249,6 @@ public class InventoryRenderSystem extends EntitySystem {
             }
         });
 
-        dragAndDrop.addSource(new DragAndDrop.Source(itemStack) {
-            @Override
-            public DragAndDrop.Payload dragStart(InputEvent event, float x, float y, int pointer) {
-                DragAndDrop.Payload payload = new DragAndDrop.Payload();
-                // the actor that will be dragged
-                payload.setDragActor(getActor());
-
-                return payload;
-            }
-        });
-
-
         inventorySlots.add(slot).width(inventorySlots.getWidth() / 4).height(inventorySlots.getHeight() / 4);
     }
 
