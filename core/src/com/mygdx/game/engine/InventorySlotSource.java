@@ -23,5 +23,13 @@ public class InventorySlotSource extends DragAndDrop.Source {
     public DragAndDrop.Payload dragStart(InputEvent event, float x, float y, int pointer) {
         if (sourceSlot.isEmpty())
             return null;
+        DragAndDrop.Payload payload = new DragAndDrop.Payload();
+        // the item in the slot that is being dragged
+        payload.setObject(sourceItem);
+        // each InventorySlot only has one child:
+        // the Stack actor which holds the item sprite and label that shows
+        // the item quantity
+        payload.setDragActor(sourceSlot.getChildren().get(0));
+        return null;
     }
 }
