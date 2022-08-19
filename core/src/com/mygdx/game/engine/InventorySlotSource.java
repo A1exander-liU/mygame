@@ -21,6 +21,7 @@ public class InventorySlotSource extends DragAndDrop.Source {
 
     @Override
     public DragAndDrop.Payload dragStart(InputEvent event, float x, float y, int pointer) {
-        return null;
+        if (sourceSlot.isEmpty())
+            return null;
     }
 }
