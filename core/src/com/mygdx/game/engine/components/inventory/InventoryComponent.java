@@ -2,6 +2,8 @@ package com.mygdx.game.engine.components.inventory;
 
 import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.MyGame;
@@ -16,6 +18,7 @@ public class InventoryComponent implements Component {
     public Array<InventorySlot> inventorySlots = new Array<>(capacity);
     public boolean opened = false;
     public DragAndDrop dragAndDrop = new DragAndDrop();
+    Skin skin = new Skin(Gdx.files.internal("Game_UI_Skin/Game_UI_Skin.json"));
     // each item will contain these components:
     // ALL: all items must have, ONE: have one of the listed
     // ALL:
@@ -41,10 +44,11 @@ public class InventoryComponent implements Component {
             items.add(slot);
             MyGame.engine.addEntity(slot);
         }
-        for (int i = 0; i < inventorySlots.size; i++) {
-            InventorySlot inventorySlot = inventorySlots.get(i);
+        for (int i = 0; i < capacity; i++) {
+            InventorySlot inventorySlot = new InventorySlot(skin);
             dragAndDrop.addSource(new InventorySlotSource(inventorySlot, dragAndDrop));
             dragAndDrop.addTarget(new InventorySlotTarget(inventorySlot));
+            inventorySlots.add(inventorySlot);
         }
     }
 
