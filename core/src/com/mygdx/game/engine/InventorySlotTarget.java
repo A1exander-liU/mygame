@@ -32,7 +32,11 @@ public class InventorySlotTarget extends DragAndDrop.Target {
         Entity sourceItem = (Entity) payload.getObject();
         // if the item names are the same
         targetItem = targetSlot.getOccupiedItem();
-        if (Objects.equals(Mappers.name.get(sourceItem).name, Mappers.name.get(targetItem).name)) {
+        if (targetSlot.isEmpty()) {
+            System.out.println("assign");
+            targetSlot.setOccupiedItem(sourceItem);
+        }
+        else if (Objects.equals(Mappers.name.get(sourceItem).name, Mappers.name.get(targetItem).name)) {
             System.out.println("stack");
             // stack the items
             targetSlot.stack(sourceSlot);
@@ -40,10 +44,6 @@ public class InventorySlotTarget extends DragAndDrop.Target {
         } else if (!Objects.equals(Mappers.name.get(sourceItem).name, Mappers.name.get(targetItem).name)) {
             System.out.println("swap");
             targetSlot.swap(sourceSlot);
-        }
-        else if (targetSlot.isEmpty()) {
-            System.out.println("assign");
-            targetSlot.setOccupiedItem(sourceItem);
         }
     }
 }
