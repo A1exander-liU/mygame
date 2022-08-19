@@ -15,8 +15,8 @@ public class InventorySlotTarget extends DragAndDrop.Target {
 
     public InventorySlotTarget(InventorySlot actor) {
         super(actor);
-        targetItem = actor.getOccupiedItem();
         targetSlot = actor;
+        targetItem = actor.getOccupiedItem();
     }
 
     @Override
@@ -26,19 +26,23 @@ public class InventorySlotTarget extends DragAndDrop.Target {
 
     @Override
     public void drop(DragAndDrop.Source source, DragAndDrop.Payload payload, float x, float y, int pointer) {
-        // info of the item being dragged
-        Entity sourceItem = (Entity) payload.getObject();
         // the dragged actor
         InventorySlot sourceSlot = (InventorySlot) source.getActor();
+        // info of the item being dragged
+        Entity sourceItem = (Entity) payload.getObject();
         // if the item names are the same
+        targetItem = targetSlot.getOccupiedItem();
         if (Objects.equals(Mappers.name.get(sourceItem).name, Mappers.name.get(targetItem).name)) {
+            System.out.println("stack");
             // stack the items
             targetSlot.stack(sourceSlot);
         // if the names are not the same
         } else if (!Objects.equals(Mappers.name.get(sourceItem).name, Mappers.name.get(targetItem).name)) {
+            System.out.println("swap");
             targetSlot.swap(sourceSlot);
         }
         else if (targetSlot.isEmpty()) {
+            System.out.println("assign");
             targetSlot.setOccupiedItem(sourceItem);
         }
     }
