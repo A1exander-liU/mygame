@@ -27,7 +27,7 @@ public class InventorySlotSource extends DragAndDrop.Source {
             return null;
         DragAndDrop.Payload payload = new DragAndDrop.Payload();
         // the item in the slot that is being dragged
-        payload.setObject(sourceItem);
+        payload.setObject(sourceSlot.getOccupiedItem());
         // each InventorySlot only has one child:
         // the Stack actor which holds the item sprite and label that shows
         // the item quantity
@@ -43,27 +43,5 @@ public class InventorySlotSource extends DragAndDrop.Source {
                          DragAndDrop.Payload payload, DragAndDrop.Target target) {
        if (target == null)
            sourceSlot.add(payload.getDragActor());
-        // grab the item back when drag stops
-        Entity payLoadItem = (Entity) payload.getObject();
-        if (target != null) {
-            InventorySlot targetSlot = (InventorySlot) target.getActor();
-            // get the item of the target (the area where drag actor was over)
-            Entity targetItem = targetSlot.getOccupiedItem();
-            // check if both the dragged item and the target slot item are the same
-            if (Objects.equals(Mappers.name.get(payLoadItem).name, Mappers.name.get(targetItem).name)) {
-                // add the quantity from the sourceSlot(the dragged item) to targetSlot item
-                targetSlot.stack(sourceSlot);
-            }
-            // if the target slot is empty
-            else if (targetSlot.isEmpty()) {
-                // if the slot is empty, bring the item over
-                targetSlot.setOccupiedItem(payLoadItem);
-                // set to null since item was moved over to new slot
-                sourceSlot.setOccupiedItem(null);
-            // if the items are different, they will be swapped
-            } else {
-                sourceSlot.swap(targetSlot);
-            }
-        }
     }
 }
