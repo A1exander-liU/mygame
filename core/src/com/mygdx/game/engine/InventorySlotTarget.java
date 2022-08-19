@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 import com.mygdx.game.utils.InventorySlot;
 
+import java.util.Map;
 import java.util.Objects;
 
 public class InventorySlotTarget extends DragAndDrop.Target {
@@ -33,6 +34,9 @@ public class InventorySlotTarget extends DragAndDrop.Target {
         if (Objects.equals(Mappers.name.get(sourceItem).name, Mappers.name.get(targetItem).name)) {
             // stack the items
             targetSlot.stack(sourceSlot);
+        // if the names are not the same
+        } else if (!Objects.equals(Mappers.name.get(sourceItem).name, Mappers.name.get(targetItem).name)) {
+            targetSlot.swap(sourceSlot);
         }
     }
 }
