@@ -113,6 +113,7 @@ public class InventoryRenderSystem extends EntitySystem {
         // new condition is when inventory is opened and it can be drawn
         // to make it draw only once, set the boolean to false when you draw it
         // so future frames won't keep redrawing
+        InventoryComponent inventoryComponent = cg.getInventory(player);
 
         if (inventoryOpened && canDraw) {
             // immediately set to false so the inventory is only drawn once
@@ -169,23 +170,6 @@ public class InventoryRenderSystem extends EntitySystem {
     }
 
     private void addInventorySlots(Table inventory) {
-        // Items can be dragged to a different slot
-        // inventory component needs to know this and update
-        // inventory right now is just an array of entities which represent
-        // the items
-        // use the index of the slots to determine the swapping
-
-        // ex. have an item in slot 1 and want to drag it to slot 5
-        // since inventory right now is 4 x 4, slot 5 is under slot 1
-        // once the drop is confirmed, inventory will need to update
-        // loop through all the inventory slots on the table
-        // set inventory array entities to each item of the table
-
-        // need some inventory features:
-        // drag and drop:
-            // swapping items
-            // stacking
-            // splitting
         Table inventorySlots = new Table();
 
         inventorySlots.setDebug(false);
@@ -202,6 +186,10 @@ public class InventoryRenderSystem extends EntitySystem {
             InventorySlot inventorySlot = inventoryComponent.inventorySlots.get(i);
             inventorySlot.setOccupiedItem(cg.getInventorySlot(inventoryComponent.items.get(i)).itemOccupied);
             Entity inventoryItem = inventorySlot.getOccupiedItem();
+
+            if (inventorySlot.getChildren().size > 0) {
+                inventorySlot.getChildren().get(0).remove();
+            }
 
             Stack stack = new Stack();
             inventorySlot.add(stack);
