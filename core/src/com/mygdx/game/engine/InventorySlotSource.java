@@ -44,9 +44,9 @@ public class InventorySlotSource extends DragAndDrop.Source {
         // grab the item back when drag stops
         Entity payLoadItem = (Entity) payload.getObject();
         if (target != null) {
-            // get the item of the target (the area where drag actor was over)
-            Entity targetItem = ((InventorySlot) target.getActor()).getOccupiedItem();
             InventorySlot targetSlot = (InventorySlot) target.getActor();
+            // get the item of the target (the area where drag actor was over)
+            Entity targetItem = targetSlot.getOccupiedItem();
             // check if both the dragged item and the target slot item are the same
             if (Objects.equals(Mappers.name.get(payLoadItem).name, Mappers.name.get(targetItem).name)) {
                 targetSlot.stack(sourceSlot);
