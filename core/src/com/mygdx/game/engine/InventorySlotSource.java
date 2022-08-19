@@ -47,7 +47,8 @@ public class InventorySlotSource extends DragAndDrop.Source {
             // get the item of the target (the area where drag actor was over)
             Entity targetItem = ((InventorySlot) target.getActor()).getOccupiedItem();
             if (Objects.equals(Mappers.name.get(payLoadItem).name, Mappers.name.get(targetItem).name)) {
-
+                InventorySlot targetSlot = (InventorySlot) target.getActor();
+                targetSlot.stack(sourceSlot);
             }
         }
     }
