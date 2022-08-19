@@ -10,13 +10,11 @@ import java.util.Objects;
 
 public class InventorySlotTarget extends DragAndDrop.Target {
 
-    Entity targetItem;
     InventorySlot targetSlot;
 
     public InventorySlotTarget(InventorySlot actor) {
         super(actor);
         targetSlot = actor;
-        targetItem = actor.getOccupiedItem();
     }
 
     @Override
@@ -31,7 +29,7 @@ public class InventorySlotTarget extends DragAndDrop.Target {
         // info of the item being dragged
         Entity sourceItem = (Entity) payload.getObject();
         // if the item names are the same
-        targetItem = targetSlot.getOccupiedItem();
+        Entity targetItem = targetSlot.getOccupiedItem();
         if (targetSlot.isEmpty()) {
             System.out.println("assign");
             targetSlot.setOccupiedItem(sourceItem);

@@ -11,13 +11,11 @@ import java.util.Objects;
 public class InventorySlotSource extends DragAndDrop.Source {
 
     DragAndDrop dragAndDrop;
-    Entity sourceItem;
     InventorySlot sourceSlot;
 
     public InventorySlotSource(InventorySlot actor, DragAndDrop dragAndDrop) {
         super(actor);
         this.dragAndDrop = dragAndDrop;
-        sourceItem = actor.getOccupiedItem();
         sourceSlot = actor;
     }
 
