@@ -33,6 +33,6 @@ public class InventorySlotSource extends DragAndDrop.Source {
         payload.setValidDragActor(sourceSlot.getChildren().get(0));
         payload.setInvalidDragActor(sourceSlot.getChildren().get(0));
 
-        return null;
+        return payload;
     }
 }
