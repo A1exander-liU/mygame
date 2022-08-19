@@ -49,6 +49,7 @@ public class InventorySlotSource extends DragAndDrop.Source {
             Entity targetItem = targetSlot.getOccupiedItem();
             // check if both the dragged item and the target slot item are the same
             if (Objects.equals(Mappers.name.get(payLoadItem).name, Mappers.name.get(targetItem).name)) {
+                // add the quantity from the sourceSlot(the dragged item) to targetSlot item
                 targetSlot.stack(sourceSlot);
             }
             // if the target slot is empty
