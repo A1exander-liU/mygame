@@ -16,7 +16,7 @@ public class InventorySlotTarget extends DragAndDrop.Target {
 
     @Override
     public boolean drag(DragAndDrop.Source source, DragAndDrop.Payload payload, float x, float y, int pointer) {
-        return false;
+        return true;
     }
 
     @Override
