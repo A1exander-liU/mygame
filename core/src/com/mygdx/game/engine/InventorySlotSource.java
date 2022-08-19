@@ -41,6 +41,8 @@ public class InventorySlotSource extends DragAndDrop.Source {
     @Override
     public void dragStop(InputEvent event, float x, float y, int pointer,
                          DragAndDrop.Payload payload, DragAndDrop.Target target) {
+       if (target == null)
+           sourceSlot.add(payload.getDragActor());
         // grab the item back when drag stops
         Entity payLoadItem = (Entity) payload.getObject();
         if (target != null) {
