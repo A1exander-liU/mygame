@@ -38,5 +38,8 @@ public class InventorySlotTarget extends DragAndDrop.Target {
         } else if (!Objects.equals(Mappers.name.get(sourceItem).name, Mappers.name.get(targetItem).name)) {
             targetSlot.swap(sourceSlot);
         }
+        else if (targetSlot.isEmpty()) {
+            targetSlot.setOccupiedItem(sourceItem);
+        }
     }
 }
