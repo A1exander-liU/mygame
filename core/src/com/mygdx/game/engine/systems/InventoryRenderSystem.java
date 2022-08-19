@@ -194,21 +194,32 @@ public class InventoryRenderSystem extends EntitySystem {
 
         int cols = 0;
         InventoryComponent inventoryComponent = cg.getInventory(player);
-        for (int i = 0; i < inventoryComponent.items.size; i++) {
-            // holds the quantity and occupied item
+        for (int i = 0; i < inventoryComponent.inventorySlots.size; i++) {
             if (cols == 4) {
                 cols = 0;
                 inventorySlots.row();
             }
-            Entity inventorySlot = inventoryComponent.items.get(i);
-            InventorySlotComponent slotComponent = cg.getInventorySlot(inventorySlot);
-            // check if slot is occupied
-            if (slotComponent.itemOccupied != null) {
-                placeItemInSlot(inventorySlots, inventorySlot);
+            InventorySlot inventorySlot = inventoryComponent.inventorySlots.get(i);
+            inventorySlot.setOccupiedItem(cg.getInventorySlot(inventoryComponent.items.get(i)).itemOccupied);
+            Entity inventoryItem = inventorySlot.getOccupiedItem();
+
+            Stack stack = new Stack();
+            inventorySlot.add(stack);
+            if (!inventorySlot.isEmpty()) {
+                TextureRegionDrawable drawable = new TextureRegionDrawable(new Texture(Gdx.files.internal("testPlayer.png")));
+                Image image = new Image(drawable);
+
+                Label label = new Label("" + cg.getQuantity(inventoryItem).quantity, skin, "pixel2D", Color.BLACK);
+                label.setAlignment(Align.topRight);
+
+                stack.add(image);
+                stack.add(label);
             }
-            else {
-                placeEmptySlot(inventorySlots);
-            }
+
+            inventorySlot.add(stack).grow();
+
+            inventorySlots.add(inventorySlot).width(inventorySlots.getWidth() / 4).height(inventorySlots.getHeight() / 4);
+
             cols++;
         }
     }
