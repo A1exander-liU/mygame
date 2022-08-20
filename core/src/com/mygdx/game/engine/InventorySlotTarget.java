@@ -37,22 +37,24 @@ public class InventorySlotTarget extends DragAndDrop.Target {
         // if the item names are the same
         Entity targetItem = targetSlot.getOccupiedItem();
         // if target slot is empty
-        if (targetSlot.isEmpty()) {
-            System.out.println("assign");
-            inventoryUi.setItem(sourceSlot, targetSlot);
+        if (targetSlot.getAcceptedEquipType() == null) {
+            if (targetSlot.isEmpty()) {
+                System.out.println("assign");
+                inventoryUi.setItem(sourceSlot, targetSlot);
 //            targetSlot.setOccupiedItem(sourceItem);
-        }
-        else if (Objects.equals(Mappers.name.get(sourceItem).name, Mappers.name.get(targetItem).name)) {
-            System.out.println("stack");
-            // stack the items
-            inventoryUi.stackItems(sourceSlot, targetSlot);
+            }
+            else if (Objects.equals(Mappers.name.get(sourceItem).name, Mappers.name.get(targetItem).name)) {
+                System.out.println("stack");
+                // stack the items
+                inventoryUi.stackItems(sourceSlot, targetSlot);
 //            targetSlot.stack(sourceSlot);
-        }
-        // if the names are not the same
-        else if (!Objects.equals(Mappers.name.get(sourceItem).name, Mappers.name.get(targetItem).name)) {
-            System.out.println("swap");
-            inventoryUi.swapItems(sourceSlot, targetSlot);
+            }
+            // if the names are not the same
+            else if (!Objects.equals(Mappers.name.get(sourceItem).name, Mappers.name.get(targetItem).name)) {
+                System.out.println("swap");
+                inventoryUi.swapItems(sourceSlot, targetSlot);
 //            targetSlot.swap(sourceSlot);
+            }
         }
         Entity player = MyGame.engine.getEntitiesFor(Families.player).get(0);
         Array<InventorySlot> inventorySlots = Mappers.inventory.get(player).inventorySlots;
