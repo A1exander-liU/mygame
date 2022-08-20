@@ -249,6 +249,11 @@ public class InventoryRenderSystem extends EntitySystem {
         legLabel.setAlignment(Align.center);
         leg.add(legLabel);
 
+        Button feet = new Button(skin);
+        Label feetLabel = new Label("F", skin, "pixel2D", Color.BLACK);
+        feetLabel.setAlignment(Align.center);
+        feet.add(feetLabel);
+
         equipSlots.defaults().expand().width(equipSlots.getWidth() / 3).height(equipSlots.getHeight() / 4);
 
         equipSlots.add(head);
@@ -256,5 +261,7 @@ public class InventoryRenderSystem extends EntitySystem {
         equipSlots.add(torso);
         equipSlots.row();
         equipSlots.add(leg);
+        equipSlots.row();
+        equipSlots.add(feet);
     }
 }
