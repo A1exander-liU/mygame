@@ -264,16 +264,28 @@ public class InventoryRenderSystem extends EntitySystem {
         accessory2Label.setAlignment(Align.center);
         accessory2.add(accessory2Label);
 
+        Button main = new Button(skin);
+        Label mainLabel = new Label("M", skin, "pixel2D", Color.BLACK);
+        mainLabel.setAlignment(Align.center);
+        main.add(mainLabel);
+
+        Button off = new Button(skin);
+        Label offLabel = new Label("O", skin, "pixel2D", Color.BLACK);
+        offLabel.setAlignment(Align.center);
+        off.add(offLabel);
+
         equipSlots.defaults().expand().width(equipSlots.getWidth() / 3).height(equipSlots.getHeight() / 4);
 
-        equipSlots.add(accessory1);
         equipSlots.add(head);
-        equipSlots.add(accessory2);
         equipSlots.row();
+        equipSlots.add(main);
         equipSlots.add(torso);
+        equipSlots.add(off);
         equipSlots.row();
         equipSlots.add(leg);
         equipSlots.row();
+        equipSlots.add(accessory1);
         equipSlots.add(feet);
+        equipSlots.add(accessory2);
     }
 }
