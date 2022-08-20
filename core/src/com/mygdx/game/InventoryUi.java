@@ -34,5 +34,14 @@ public class InventoryUi {
         // dereference the stacker item
         inventorySlots.get(inventorySlots.indexOf(stacker, true)).setOccupiedItem(null);
     }
-    
+
+    public void setItem(InventorySlot source, InventorySlot target) {
+        // target is where source will be set to then source will be
+        // dereferenced
+        Array<InventorySlot> inventorySlots = Mappers.inventory.get(player).inventorySlots;
+        // set the item to the empty slot
+        inventorySlots.get(inventorySlots.indexOf(target, true)).setOccupiedItem(source.getOccupiedItem());
+        // dereference the source in its original slot
+        inventorySlots.get(inventorySlots.indexOf(source, true)).setOccupiedItem(null);
+    }
 }
