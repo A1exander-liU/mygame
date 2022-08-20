@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.mygdx.game.MyGame;
+import com.mygdx.game.engine.AcceptedEquipType;
 import com.mygdx.game.engine.Mappers;
 
 import java.util.Objects;
@@ -13,6 +14,7 @@ public class InventorySlot extends Button {
     // this will be the full info
     Entity occupiedItem; // this is the slot (goes inside InventorySlot)
     boolean isEquipSlot;
+    AcceptedEquipType acceptedEquipType;
 
     public InventorySlot(Skin skin, boolean isEquipSlot) {
         super(skin);
