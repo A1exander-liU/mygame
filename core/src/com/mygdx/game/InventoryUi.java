@@ -23,4 +23,15 @@ public class InventoryUi {
         inventorySlots.set(inventorySlots.indexOf(slot1, true), slot2);
         inventorySlots.set(inventorySlots.indexOf(slot2, true), slot1);
     }
+
+    public void stack(InventorySlot stacker, InventorySlot stack) {
+        // stacker value will be added to stack
+        // then dereference stacker occupied item since it was
+        // combined into the stack
+        Array<InventorySlot> inventorySlots = Mappers.inventory.get(player).inventorySlots;
+        // add the quantity
+        Mappers.quantity.get(stack.getOccupiedItem()).quantity += Mappers.quantity.get(stacker.getOccupiedItem()).quantity;
+        // dereference the stacker item
+        inventorySlots.get(inventorySlots.indexOf(stacker, true)).setOccupiedItem(null);
+    }
 }
