@@ -1,0 +1,13 @@
+{
+  "materials":
+  [
+    {
+      "name": "Wood", "sprite": "testPlayer.png","rarity": "COMMON",
+      "desc": "Common material used in construction and equipment"
+    },
+    {
+      "name": "Stone", "sprite": "testPlayer.png","rarity": "COMMON",
+      "desc": "Used in construction and equipment"
+    }
+  ]
+}
