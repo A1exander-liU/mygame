@@ -239,6 +239,15 @@ public class InventoryRenderSystem extends EntitySystem {
         headLabel.setAlignment(Align.center);
         head.add(headLabel);
 
-        equipSlots.add(head).expand().width(equipSlots.getWidth() / 3).height(equipSlots.getHeight() / 4).top();
+        Button torso = new Button(skin);
+        Label torsoLabel = new Label("T", skin, "pixel2D", Color.BLACK);
+        torsoLabel.setAlignment(Align.center);
+        torso.add(torsoLabel);
+
+        equipSlots.defaults().expand().width(equipSlots.getWidth() / 3).height(equipSlots.getHeight() / 4);
+
+        equipSlots.add(head);
+        equipSlots.row();
+        equipSlots.add(torso);
     }
 }
