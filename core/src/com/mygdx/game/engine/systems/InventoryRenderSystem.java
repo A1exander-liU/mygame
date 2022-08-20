@@ -276,13 +276,13 @@ public class InventoryRenderSystem extends EntitySystem {
 
         equipSlots.defaults().expand().width(equipSlots.getWidth() / 3).height(equipSlots.getHeight() / 4);
 
-        equipSlots.add(head);
+        equipSlots.add(head).colspan(3).center();
         equipSlots.row();
         equipSlots.add(main);
         equipSlots.add(torso);
         equipSlots.add(off);
         equipSlots.row();
-        equipSlots.add(leg);
+        equipSlots.add(leg).colspan(3).center();
         equipSlots.row();
         equipSlots.add(accessory1);
         equipSlots.add(feet);
