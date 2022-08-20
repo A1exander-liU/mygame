@@ -35,6 +35,10 @@ public class InventorySlot extends ImageButton {
         this.occupiedItem = occupiedItem;
     }
 
+    public AcceptedEquipType getAcceptedEquipType() {
+        return acceptedEquipType;
+    }
+
     public void swap(InventorySlot inventorySlot) {
         // swap the items that are occupying the slot
         // will be used with drag and drop
