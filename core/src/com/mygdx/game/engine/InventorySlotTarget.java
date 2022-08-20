@@ -3,6 +3,7 @@ package com.mygdx.game.engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
+import com.mygdx.game.InventoryUi;
 import com.mygdx.game.utils.InventorySlot;
 
 import java.util.Map;
@@ -11,10 +12,12 @@ import java.util.Objects;
 public class InventorySlotTarget extends DragAndDrop.Target {
 
     InventorySlot targetSlot;
+    InventoryUi inventoryUi;
 
     public InventorySlotTarget(InventorySlot actor) {
         super(actor);
         targetSlot = actor;
+        inventoryUi = new InventoryUi();
     }
 
     @Override
@@ -30,6 +33,7 @@ public class InventorySlotTarget extends DragAndDrop.Target {
         Entity sourceItem = (Entity) payload.getObject();
         // if the item names are the same
         Entity targetItem = targetSlot.getOccupiedItem();
+        // if target slot is empty
         if (targetSlot.isEmpty()) {
             System.out.println("assign");
             targetSlot.setOccupiedItem(sourceItem);
@@ -38,8 +42,9 @@ public class InventorySlotTarget extends DragAndDrop.Target {
             System.out.println("stack");
             // stack the items
             targetSlot.stack(sourceSlot);
+        }
         // if the names are not the same
-        } else if (!Objects.equals(Mappers.name.get(sourceItem).name, Mappers.name.get(targetItem).name)) {
+        else if (!Objects.equals(Mappers.name.get(sourceItem).name, Mappers.name.get(targetItem).name)) {
             System.out.println("swap");
             targetSlot.swap(sourceSlot);
         }
