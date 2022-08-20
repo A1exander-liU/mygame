@@ -29,7 +29,26 @@ public class ItemFactory {
         materialEntity.add(new QuantityComponent());
         Mappers.name.get(materialEntity).name = material.getString("name");
         Mappers.sprite.get(materialEntity).texture = new Texture(Gdx.files.internal(material.getString("sprite")));
-        
+
         Mappers.description.get(materialEntity).description = material.getString("desc");
+    }
+
+    private Rarity determineRarity(String rarity) {
+        switch (rarity) {
+            case "COMMON":
+                return Rarity.COMMON;
+            case "UNCOMMON":
+                return Rarity.UNCOMMON;
+            case "RARE":
+                return Rarity.RARE;
+            case "EPIC":
+                return Rarity.EPIC;
+            case "LEGENDARY":
+                return Rarity.LEGENDARY;
+            case "MYTHICAL":
+                return Rarity.MYTHICAL;
+            default:
+                return null;
+        }
     }
 }
