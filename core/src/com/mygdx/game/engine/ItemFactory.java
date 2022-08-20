@@ -9,6 +9,7 @@ import com.mygdx.game.JsonItemFinder;
 import com.mygdx.game.engine.components.Name;
 import com.mygdx.game.engine.components.Sprite;
 import com.mygdx.game.engine.components.inventory.items.shared.DescriptionComponent;
+import com.mygdx.game.engine.components.inventory.items.shared.InventoryItemComponent;
 import com.mygdx.game.engine.components.inventory.items.shared.QuantityComponent;
 import com.mygdx.game.engine.components.inventory.items.shared.RarityComponent;
 
@@ -27,10 +28,13 @@ public class ItemFactory {
         materialEntity.add(new RarityComponent());
         materialEntity.add(new DescriptionComponent());
         materialEntity.add(new QuantityComponent());
+        materialEntity.add(new InventoryItemComponent());
+
         Mappers.name.get(materialEntity).name = material.getString("name");
         Mappers.sprite.get(materialEntity).texture = new Texture(Gdx.files.internal(material.getString("sprite")));
         Mappers.rarity.get(materialEntity).rarity = determineRarity(material.getString("rarity"));
         Mappers.description.get(materialEntity).description = material.getString("desc");
+        Mappers.quantity.get(materialEntity).quantity = amount;
     }
 
     private Rarity determineRarity(String rarity) {
