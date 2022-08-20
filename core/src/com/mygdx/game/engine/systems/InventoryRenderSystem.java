@@ -182,10 +182,6 @@ public class InventoryRenderSystem extends EntitySystem {
         int cols = 0;
         InventoryComponent inventoryComponent = cg.getInventory(player);
         for (int i = 0; i < inventoryComponent.inventorySlots.size; i++) {
-            System.out.println("------------");
-            System.out.println(inventoryComponent.inventorySlots.get(0).getOccupiedItem());
-            System.out.println(inventoryComponent.inventorySlots.get(4).getOccupiedItem());
-            System.out.println("------------");
             if (cols == 4) {
                 cols = 0;
                 inventorySlots.row();
