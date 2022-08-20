@@ -175,6 +175,8 @@ public class InventoryRenderSystem extends EntitySystem {
     private void addInventorySlots(Table inventory) {
         Table inventorySlots = new Table();
 
+        addEquipSlots(inventory);
+
         inventorySlots.setDebug(false);
         inventorySlots.setSize(inventory.getWidth() * 0.55f, inventory.getHeight() * 0.95f);
         inventory.add(inventorySlots).expand().width(inventorySlots.getWidth()).height(inventorySlots.getHeight()).right();
@@ -223,5 +225,13 @@ public class InventoryRenderSystem extends EntitySystem {
 
             cols++;
         }
+    }
+
+    private void addEquipSlots(Table inventory) {
+        Table equipSlots = new Table();
+        equipSlots.setDebug(true);
+
+        equipSlots.setSize(inventory.getWidth() * 0.4f, inventory.getHeight() * 0.95f);
+        inventory.add(equipSlots).expand().width(equipSlots.getWidth()).height(equipSlots.getHeight());
     }
 }
