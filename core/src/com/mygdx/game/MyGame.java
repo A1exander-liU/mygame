@@ -29,6 +29,7 @@ public class MyGame extends Game {
 	public static Engine engine;
 	public static GameMapProperties gameMapProperties;
 	public JsonEnemyFinder jsonSearcher;
+	public JsonItemFinder itemFinder;
 	public EntityToMapAdder entityToMapAdder;
 
 	public StoredPreferences getStoredPreferences() {
