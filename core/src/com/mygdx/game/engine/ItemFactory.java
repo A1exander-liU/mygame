@@ -29,7 +29,7 @@ public class ItemFactory {
         materialEntity.add(new QuantityComponent());
         Mappers.name.get(materialEntity).name = material.getString("name");
         Mappers.sprite.get(materialEntity).texture = new Texture(Gdx.files.internal(material.getString("sprite")));
-
+        Mappers.rarity.get(materialEntity).rarity = determineRarity(material.getString("rarity"));
         Mappers.description.get(materialEntity).description = material.getString("desc");
     }
 
