@@ -3,7 +3,10 @@ package com.mygdx.game.engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
+import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.InventoryUi;
+import com.mygdx.game.MyGame;
+import com.mygdx.game.engine.components.inventory.InventoryComponent;
 import com.mygdx.game.utils.InventorySlot;
 
 import java.util.Map;
@@ -51,5 +54,9 @@ public class InventorySlotTarget extends DragAndDrop.Target {
             inventoryUi.swapItems(sourceSlot, targetSlot);
 //            targetSlot.swap(sourceSlot);
         }
+        Entity player = MyGame.engine.getEntitiesFor(Families.player).get(0);
+        Array<InventorySlot> inventorySlots = Mappers.inventory.get(player).inventorySlots;
+        System.out.println(inventorySlots.get(0).getOccupiedItem());
+        System.out.println(inventorySlots.get(4).getOccupiedItem());
     }
 }
