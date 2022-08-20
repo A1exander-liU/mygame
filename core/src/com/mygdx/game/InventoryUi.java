@@ -24,7 +24,7 @@ public class InventoryUi {
         inventorySlots.set(inventorySlots.indexOf(slot2, true), slot1);
     }
 
-    public void stack(InventorySlot stacker, InventorySlot stack) {
+    public void stackItems(InventorySlot stacker, InventorySlot stack) {
         // stacker value will be added to stack
         // then dereference stacker occupied item since it was
         // combined into the stack
@@ -34,4 +34,5 @@ public class InventoryUi {
         // dereference the stacker item
         inventorySlots.get(inventorySlots.indexOf(stacker, true)).setOccupiedItem(null);
     }
+    
 }
