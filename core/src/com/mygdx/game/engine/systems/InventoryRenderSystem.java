@@ -31,6 +31,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.ComponentGrabber;
 import com.mygdx.game.engine.Families;
+import com.mygdx.game.engine.InventorySlotSource;
 import com.mygdx.game.engine.Mappers;
 import com.mygdx.game.engine.components.inventory.InventoryComponent;
 import com.mygdx.game.engine.components.inventory.InventorySlotComponent;
@@ -228,48 +229,50 @@ public class InventoryRenderSystem extends EntitySystem {
     }
 
     private void addEquipSlots(Table inventory) {
+        InventoryComponent inventoryComponent = cg.getInventory(player);
         Table equipSlots = new Table();
-        equipSlots.setDebug(true);
+        equipSlots.setDebug(false);
 
         equipSlots.setSize(inventory.getWidth() * 0.4f, inventory.getHeight() * 0.95f);
         inventory.add(equipSlots).expand().width(equipSlots.getWidth()).height(equipSlots.getHeight());
 
-        Button head = new Button(skin);
+        InventorySlot head = new InventorySlot(skin);
         Label headLabel = new Label("H", skin, "pixel2D", Color.BLACK);
         headLabel.setAlignment(Align.center);
         head.add(headLabel);
 
-        Button torso = new Button(skin);
+
+        InventorySlot torso = new InventorySlot(skin);
         Label torsoLabel = new Label("T", skin, "pixel2D", Color.BLACK);
         torsoLabel.setAlignment(Align.center);
         torso.add(torsoLabel);
 
-        Button leg = new Button(skin);
+        InventorySlot leg = new InventorySlot(skin);
         Label legLabel = new Label("L", skin, "pixel2D", Color.BLACK);
         legLabel.setAlignment(Align.center);
         leg.add(legLabel);
 
-        Button feet = new Button(skin);
+        InventorySlot feet = new InventorySlot(skin);
         Label feetLabel = new Label("F", skin, "pixel2D", Color.BLACK);
         feetLabel.setAlignment(Align.center);
         feet.add(feetLabel);
 
-        Button accessory1 = new Button(skin);
+        InventorySlot accessory1 = new InventorySlot(skin);
         Label accessory1Label = new Label("A1", skin, "pixel2D", Color.BLACK);
         accessory1Label.setAlignment(Align.center);
         accessory1.add(accessory1Label);
 
-        Button accessory2 = new Button(skin);
+        InventorySlot accessory2 = new InventorySlot(skin);
         Label accessory2Label = new Label("A2", skin, "pixel2D", Color.BLACK);
         accessory2Label.setAlignment(Align.center);
         accessory2.add(accessory2Label);
 
-        Button main = new Button(skin);
+        InventorySlot main = new InventorySlot(skin);
         Label mainLabel = new Label("M", skin, "pixel2D", Color.BLACK);
         mainLabel.setAlignment(Align.center);
         main.add(mainLabel);
 
-        Button off = new Button(skin);
+        InventorySlot off = new InventorySlot(skin);
         Label offLabel = new Label("O", skin, "pixel2D", Color.BLACK);
         offLabel.setAlignment(Align.center);
         off.add(offLabel);
