@@ -56,9 +56,5 @@ public class InventorySlotTarget extends DragAndDrop.Target {
 //            targetSlot.swap(sourceSlot);
             }
         }
-        Entity player = MyGame.engine.getEntitiesFor(Families.player).get(0);
-        Array<InventorySlot> inventorySlots = Mappers.inventory.get(player).inventorySlots;
-        System.out.println(inventorySlots.get(0).getOccupiedItem());
-        System.out.println(inventorySlots.get(4).getOccupiedItem());
     }
 }
