@@ -6,6 +6,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.JsonValue;
 import com.mygdx.game.JsonItemFinder;
+import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.components.Name;
 import com.mygdx.game.engine.components.Sprite;
 import com.mygdx.game.engine.components.inventory.items.shared.DescriptionComponent;
@@ -35,6 +36,8 @@ public class ItemFactory {
         Mappers.rarity.get(materialEntity).rarity = determineRarity(material.getString("rarity"));
         Mappers.description.get(materialEntity).description = material.getString("desc");
         Mappers.quantity.get(materialEntity).quantity = amount;
+
+        addToEngine(materialEntity);
     }
 
     private Rarity determineRarity(String rarity) {
@@ -54,5 +57,9 @@ public class ItemFactory {
             default:
                 return null;
         }
+    }
+
+    private void addToEngine(Entity entity) {
+        MyGame.engine.addEntity(entity);
     }
 }
