@@ -10,12 +10,14 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.mygdx.game.JsonEnemyFinder;
+import com.mygdx.game.JsonItemFinder;
 import com.mygdx.game.engine.ComponentGrabber;
 import com.mygdx.game.MapObjectDrawer;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.engine.EntityFactory;
 import com.mygdx.game.engine.EntityToMapAdder;
+import com.mygdx.game.engine.ItemFactory;
 import com.mygdx.game.engine.entityListeners.EnemyRemovalListener;
 import com.mygdx.game.engine.systems.EnemySpawningSystem;
 import com.mygdx.game.engine.systems.EntityRemovalSystem;
@@ -49,6 +51,8 @@ public class GameScreen implements Screen {
 
     public GameScreen(MyGame parent) {
         parent.jsonSearcher = new JsonEnemyFinder();
+        parent.itemFinder = new JsonItemFinder();
+        ItemFactory itemFactory = new ItemFactory(parent.itemFinder);
         testMap = new TmxMapLoader().load("untitled.tmx");
         this.parent = parent;
         MyGame.engine = new Engine();
