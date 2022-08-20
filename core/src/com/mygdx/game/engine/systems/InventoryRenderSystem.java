@@ -31,6 +31,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.ComponentGrabber;
 import com.mygdx.game.engine.Families;
+import com.mygdx.game.engine.Mappers;
 import com.mygdx.game.engine.components.inventory.InventoryComponent;
 import com.mygdx.game.engine.components.inventory.InventorySlotComponent;
 import com.mygdx.game.engine.systems.combat.BasicAttackSystem;
@@ -38,6 +39,8 @@ import com.mygdx.game.engine.systems.combat.EnemyAttackSystem;
 import com.mygdx.game.engine.systems.enemyai.SteeringSystem;
 import com.mygdx.game.screens.GameScreen;
 import com.mygdx.game.utils.InventorySlot;
+
+import org.graalvm.compiler.debug.CSVUtil;
 
 public class InventoryRenderSystem extends EntitySystem {
     ComponentGrabber cg;
@@ -101,6 +104,7 @@ public class InventoryRenderSystem extends EntitySystem {
 
     @Override
     public void update(float delta) {
+//        stage.clear();
         // inventory button states don't work properly
         // problem: might be b/c it is redrawing every frame, the button states
         // are not registering
@@ -113,9 +117,8 @@ public class InventoryRenderSystem extends EntitySystem {
         // new condition is when inventory is opened and it can be drawn
         // to make it draw only once, set the boolean to false when you draw it
         // so future frames won't keep redrawing
-        InventoryComponent inventoryComponent = cg.getInventory(player);
 
-        if (inventoryOpened && canDraw) {
+        if (inventoryOpened) {
             // immediately set to false so the inventory is only drawn once
             // when it is opened once
             canDraw = false;
@@ -179,13 +182,17 @@ public class InventoryRenderSystem extends EntitySystem {
         int cols = 0;
         InventoryComponent inventoryComponent = cg.getInventory(player);
         for (int i = 0; i < inventoryComponent.inventorySlots.size; i++) {
+            System.out.println("------------");
+            System.out.println(inventoryComponent.inventorySlots.get(0).getOccupiedItem());
+            System.out.println(inventoryComponent.inventorySlots.get(4).getOccupiedItem());
+            System.out.println("------------");
             if (cols == 4) {
                 cols = 0;
                 inventorySlots.row();
             }
             InventorySlot inventorySlot = inventoryComponent.inventorySlots.get(i);
-            inventorySlot.setOccupiedItem(cg.getInventorySlot(inventoryComponent.items.get(i)).itemOccupied);
-            Entity inventoryItem = inventorySlot.getOccupiedItem();
+//            inventorySlot.setOccupiedItem(inventorySlot.getOccupiedItem());
+//            Entity inventoryItem = inventorySlot.getOccupiedItem();
 
             if (inventorySlot.getChildren().size > 0) {
                 inventorySlot.getChildren().get(0).remove();
@@ -197,7 +204,7 @@ public class InventoryRenderSystem extends EntitySystem {
                 TextureRegionDrawable drawable = new TextureRegionDrawable(new Texture(Gdx.files.internal("testPlayer.png")));
                 Image image = new Image(drawable);
 
-                Label label = new Label("" + cg.getQuantity(inventoryItem).quantity, skin, "pixel2D", Color.BLACK);
+                Label label = new Label("" + cg.getQuantity(inventorySlot.getOccupiedItem()).quantity, skin, "pixel2D", Color.BLACK);
                 label.setAlignment(Align.topRight);
 
                 stack.add(image);
@@ -206,9 +213,17 @@ public class InventoryRenderSystem extends EntitySystem {
 
             inventorySlot.add(stack).grow();
 
+            inventorySlot.addListener(new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+                    InventorySlot bagSlot = (InventorySlot) actor;
+                    System.out.println(bagSlot.getOccupiedItem());
+                }
+            });
+
             inventorySlots.add(inventorySlot).width(inventorySlots.getWidth() / 4).height(inventorySlots.getHeight() / 4);
 
-            inventoryComponent.inventorySlots.set(i, inventorySlot);
+//            inventoryComponent.inventorySlots.set(i, inventorySlot);
 
             cols++;
         }
