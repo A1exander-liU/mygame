@@ -13,12 +13,17 @@ public class InventorySlot extends Button {
     // the item in this slot
     // this will be the full info
     Entity occupiedItem; // this is the slot (goes inside InventorySlot)
-    boolean isEquipSlot;
+    boolean isEquipSlot = false;
     AcceptedEquipType acceptedEquipType;
 
-    public InventorySlot(Skin skin, boolean isEquipSlot) {
+    public InventorySlot(Skin skin) {
         super(skin);
-        this.isEquipSlot = isEquipSlot;
+    }
+
+    public InventorySlot(Skin skin, AcceptedEquipType acceptedEquipType) {
+        super(skin);
+        isEquipSlot = true;
+        this.acceptedEquipType = acceptedEquipType;
     }
 
     public Entity getOccupiedItem() {
