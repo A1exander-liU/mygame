@@ -120,6 +120,20 @@ public class InventoryTest extends EntitySystem {
         cg.getDescription(diffItem).description = "Found all over the world";
         MyGame.engine.addEntity(diffItem);
         addToInventorySlot(diffItem, 1);
+
+        Entity woodItem = new Entity();
+        woodItem.add(new InventoryItemComponent());
+        woodItem.add(new Name());
+        woodItem.add(new Sprite());
+        woodItem.add(new QuantityComponent());
+        woodItem.add(new RarityComponent());
+        woodItem.add(new DescriptionComponent());
+        cg.getName(woodItem).name = "Wood";
+        cg.getQuantity(woodItem).quantity = 8;
+        cg.getRarity(woodItem).rarity = Rarity.COMMON;
+        cg.getDescription(woodItem).description = "Abundant material used to craft many items";
+        MyGame.engine.addEntity(woodItem);
+        addToInventorySlot(woodItem, 2);
     }
 
     private void addToInventorySlot(Entity item, int slot) {
