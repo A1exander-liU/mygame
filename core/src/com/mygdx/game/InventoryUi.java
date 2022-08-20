@@ -9,14 +9,10 @@ import com.mygdx.game.utils.InventorySlot;
 public class InventoryUi {
     // will contain methods to manage the inventory
     // moving inventory items around
-
-    Entity player;
-
-    public InventoryUi() {
-        player = MyGame.engine.getEntitiesFor(Families.player).get(0);
-    }
+    public InventoryUi() {}
 
     public void swapItems(InventorySlot slot1, InventorySlot slot2) {
+        Entity player = MyGame.engine.getEntitiesFor(Families.player).get(0);
         // for dragging and dropping an item that is different
         Array<InventorySlot> inventorySlots = Mappers.inventory.get(player).inventorySlots;
         // set item in slot1 to item in slot2
@@ -26,6 +22,7 @@ public class InventoryUi {
     }
 
     public void stackItems(InventorySlot stacker, InventorySlot stack) {
+        Entity player = MyGame.engine.getEntitiesFor(Families.player).get(0);
         // stacker value will be added to stack
         // then dereference stacker occupied item since it was
         // combined into the stack
@@ -37,6 +34,7 @@ public class InventoryUi {
     }
 
     public void setItem(InventorySlot source, InventorySlot target) {
+        Entity player = MyGame.engine.getEntitiesFor(Families.player).get(0);
         // target is where source will be set to then source will be
         // dereferenced
         Array<InventorySlot> inventorySlots = Mappers.inventory.get(player).inventorySlots;
