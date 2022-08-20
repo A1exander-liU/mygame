@@ -128,36 +128,4 @@ public class InventoryTest extends EntitySystem {
             return;
         inventorySlots.get(slot).setOccupiedItem(item);
     }
-
-    private void addToInventory(Entity entity) {
-        InventoryComponent inventory = cg.getInventory(player);
-        Name itemName = cg.getName(entity);
-        QuantityComponent itemQuantity = cg.getQuantity(entity);
-        for (int i = 0; i < inventory.items.size; i++) {
-            Entity itemSlot = inventory.items.get(i);
-            InventorySlotComponent slot = cg.getInventorySlot(itemSlot);
-
-            Entity occupiedItem = slot.itemOccupied;
-            // name can be null
-            Name occupiedItemName = null;
-            if (occupiedItem != null)
-                occupiedItemName = cg.getName(occupiedItem);
-            // if item already exists, add the quantity
-            if (occupiedItemName != null && Objects.equals(occupiedItemName.name, itemName.name)) {
-                cg.getQuantity(slot.itemOccupied).quantity += itemQuantity.quantity;
-                MyGame.engine.removeEntity(entity);
-                return;
-            }
-            // add item to first empty slot
-            else if (slot.itemOccupied == null) {
-                slot.itemOccupied = entity;
-                slot.quantity = itemQuantity.quantity; // need to add the relevant components later
-                return;
-            }
-        }
-    }
-
-    private void showMoreInfo() {
-
-    }
 }
