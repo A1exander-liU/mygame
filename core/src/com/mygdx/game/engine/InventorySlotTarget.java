@@ -36,17 +36,20 @@ public class InventorySlotTarget extends DragAndDrop.Target {
         // if target slot is empty
         if (targetSlot.isEmpty()) {
             System.out.println("assign");
-            targetSlot.setOccupiedItem(sourceItem);
+            inventoryUi.setItem(sourceSlot, targetSlot);
+//            targetSlot.setOccupiedItem(sourceItem);
         }
         else if (Objects.equals(Mappers.name.get(sourceItem).name, Mappers.name.get(targetItem).name)) {
             System.out.println("stack");
             // stack the items
-            targetSlot.stack(sourceSlot);
+            inventoryUi.stackItems(sourceSlot, targetSlot);
+//            targetSlot.stack(sourceSlot);
         }
         // if the names are not the same
         else if (!Objects.equals(Mappers.name.get(sourceItem).name, Mappers.name.get(targetItem).name)) {
             System.out.println("swap");
-            targetSlot.swap(sourceSlot);
+            inventoryUi.swapItems(sourceSlot, targetSlot);
+//            targetSlot.swap(sourceSlot);
         }
     }
 }
