@@ -233,5 +233,12 @@ public class InventoryRenderSystem extends EntitySystem {
 
         equipSlots.setSize(inventory.getWidth() * 0.4f, inventory.getHeight() * 0.95f);
         inventory.add(equipSlots).expand().width(equipSlots.getWidth()).height(equipSlots.getHeight());
+
+        Button head = new Button(skin);
+        Label headLabel = new Label("H", skin, "pixel2D", Color.BLACK);
+        headLabel.setAlignment(Align.center);
+        head.add(headLabel);
+
+        equipSlots.add(head).expand().width(equipSlots.getWidth() / 3).height(equipSlots.getHeight() / 4).top();
     }
 }
