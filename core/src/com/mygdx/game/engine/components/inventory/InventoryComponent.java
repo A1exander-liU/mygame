@@ -14,8 +14,10 @@ import com.mygdx.game.utils.InventorySlot;
 public class InventoryComponent implements Component {
     // how many unique items can be held
     public int capacity = 16;
+    public int equipSize = 8;
     public Array<Entity> items = new Array<>(capacity);
     public Array<InventorySlot> inventorySlots = new Array<>(capacity);
+    public Array<InventorySlot> equipSlots = new Array<>(equipSize);
     public boolean opened = false;
     public DragAndDrop dragAndDrop = new DragAndDrop();
     Skin skin = new Skin(Gdx.files.internal("Game_UI_Skin/Game_UI_Skin.json"));
@@ -49,6 +51,12 @@ public class InventoryComponent implements Component {
             dragAndDrop.addSource(new InventorySlotSource(inventorySlot, dragAndDrop));
             dragAndDrop.addTarget(new InventorySlotTarget(inventorySlot));
             inventorySlots.add(inventorySlot);
+        }
+        for (int i = 0; i < equipSize; i++) {
+            InventorySlot equipSlot = new InventorySlot(skin, true);
+            dragAndDrop.addSource(new InventorySlotSource(equipSlot, dragAndDrop));
+            dragAndDrop.addTarget(new InventorySlotTarget(equipSlot));
+            equipSlots.add(equipSlot);
         }
     }
 
