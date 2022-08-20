@@ -4,9 +4,11 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.ComponentGrabber;
 import com.mygdx.game.engine.Families;
+import com.mygdx.game.engine.Mappers;
 import com.mygdx.game.engine.Rarity;
 import com.mygdx.game.engine.components.inventory.InventoryComponent;
 import com.mygdx.game.engine.components.inventory.items.shared.DescriptionComponent;
@@ -16,6 +18,7 @@ import com.mygdx.game.engine.components.Name;
 import com.mygdx.game.engine.components.Sprite;
 import com.mygdx.game.engine.components.inventory.items.shared.QuantityComponent;
 import com.mygdx.game.engine.components.inventory.items.shared.RarityComponent;
+import com.mygdx.game.utils.InventorySlot;
 
 import java.util.Objects;
 
@@ -98,11 +101,11 @@ public class InventoryTest extends EntitySystem {
         testItem.add(new RarityComponent());
         testItem.add(new DescriptionComponent());
         cg.getName(testItem).name = "Wood";
-        cg.getQuantity(testItem).quantity = 10;
+        cg.getQuantity(testItem).quantity = 14;
         cg.getRarity(testItem).rarity = Rarity.COMMON;
         cg.getDescription(testItem).description = "Abundant material used to craft many items";
         MyGame.engine.addEntity(testItem);
-        addToInventory(testItem);
+        addToInventorySlot(testItem, 0);
 
         Entity diffItem = new Entity();
         diffItem.add(new InventoryItemComponent());
@@ -116,21 +119,14 @@ public class InventoryTest extends EntitySystem {
         cg.getRarity(diffItem).rarity = Rarity.COMMON;
         cg.getDescription(diffItem).description = "Found all over the world";
         MyGame.engine.addEntity(diffItem);
-        addToInventory(diffItem);
+        addToInventorySlot(diffItem, 1);
+    }
 
-        Entity wood = new Entity();
-        wood.add(new InventoryItemComponent());
-        wood.add(new Name());
-        wood.add(new Sprite());
-        wood.add(new QuantityComponent());
-        wood.add(new RarityComponent());
-        wood.add(new DescriptionComponent());
-        cg.getName(wood).name = "Wood";
-        cg.getQuantity(wood).quantity = 4;
-        cg.getRarity(wood).rarity = Rarity.COMMON;
-        cg.getDescription(wood).description = "Abundant item used to craft many items";
-        MyGame.engine.addEntity(wood);
-        addToInventory(wood);
+    private void addToInventorySlot(Entity item, int slot) {
+        Array<InventorySlot> inventorySlots = Mappers.inventory.get(player).inventorySlots;
+        if (slot < 0 || slot >= inventorySlots.size)
+            return;
+        inventorySlots.get(slot).setOccupiedItem(item);
     }
 
     private void addToInventory(Entity entity) {
