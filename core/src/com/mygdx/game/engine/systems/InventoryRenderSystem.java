@@ -237,7 +237,7 @@ public class InventoryRenderSystem extends EntitySystem {
         equipSlots.setSize(inventory.getWidth() * 0.4f, inventory.getHeight() * 0.95f);
         inventory.add(equipSlots).expand().width(equipSlots.getWidth()).height(equipSlots.getHeight());
 
-        InventorySlot head = new InventorySlot(skin);
+        InventorySlot head = new InventorySlot(skin, true);
         Label headLabel = new Label("H", skin, "pixel2D", Color.BLACK);
         headLabel.setAlignment(Align.center);
         head.add(headLabel);
@@ -245,49 +245,49 @@ public class InventoryRenderSystem extends EntitySystem {
         inventoryComponent.dragAndDrop.addTarget(new InventorySlotTarget(head));
 
 
-        InventorySlot torso = new InventorySlot(skin);
+        InventorySlot torso = new InventorySlot(skin, true);
         Label torsoLabel = new Label("T", skin, "pixel2D", Color.BLACK);
         torsoLabel.setAlignment(Align.center);
         torso.add(torsoLabel);
         inventoryComponent.dragAndDrop.addSource(new InventorySlotSource(torso, dragAndDrop));
         inventoryComponent.dragAndDrop.addTarget(new InventorySlotTarget(torso));
 
-        InventorySlot leg = new InventorySlot(skin);
+        InventorySlot leg = new InventorySlot(skin, true);
         Label legLabel = new Label("L", skin, "pixel2D", Color.BLACK);
         legLabel.setAlignment(Align.center);
         leg.add(legLabel);
         inventoryComponent.dragAndDrop.addSource(new InventorySlotSource(leg, dragAndDrop));
         inventoryComponent.dragAndDrop.addTarget(new InventorySlotTarget(leg));
 
-        InventorySlot feet = new InventorySlot(skin);
+        InventorySlot feet = new InventorySlot(skin, true);
         Label feetLabel = new Label("F", skin, "pixel2D", Color.BLACK);
         feetLabel.setAlignment(Align.center);
         feet.add(feetLabel);
         inventoryComponent.dragAndDrop.addSource(new InventorySlotSource(feet, dragAndDrop));
         inventoryComponent.dragAndDrop.addTarget(new InventorySlotTarget(feet));
 
-        InventorySlot accessory1 = new InventorySlot(skin);
+        InventorySlot accessory1 = new InventorySlot(skin, true);
         Label accessory1Label = new Label("A1", skin, "pixel2D", Color.BLACK);
         accessory1Label.setAlignment(Align.center);
         accessory1.add(accessory1Label);
         inventoryComponent.dragAndDrop.addSource(new InventorySlotSource(accessory1, dragAndDrop));
         inventoryComponent.dragAndDrop.addTarget(new InventorySlotTarget(accessory1));
 
-        InventorySlot accessory2 = new InventorySlot(skin);
+        InventorySlot accessory2 = new InventorySlot(skin, true);
         Label accessory2Label = new Label("A2", skin, "pixel2D", Color.BLACK);
         accessory2Label.setAlignment(Align.center);
         accessory2.add(accessory2Label);
         inventoryComponent.dragAndDrop.addSource(new InventorySlotSource(accessory2, dragAndDrop));
         inventoryComponent.dragAndDrop.addTarget(new InventorySlotTarget(accessory2));
 
-        InventorySlot main = new InventorySlot(skin);
+        InventorySlot main = new InventorySlot(skin, true);
         Label mainLabel = new Label("M", skin, "pixel2D", Color.BLACK);
         mainLabel.setAlignment(Align.center);
         main.add(mainLabel);
         inventoryComponent.dragAndDrop.addSource(new InventorySlotSource(main, dragAndDrop));
         inventoryComponent.dragAndDrop.addTarget(new InventorySlotTarget(main));
 
-        InventorySlot off = new InventorySlot(skin);
+        InventorySlot off = new InventorySlot(skin, true);
         Label offLabel = new Label("O", skin, "pixel2D", Color.BLACK);
         offLabel.setAlignment(Align.center);
         off.add(offLabel);
