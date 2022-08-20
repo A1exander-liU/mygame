@@ -47,13 +47,13 @@ public class InventoryComponent implements Component {
             MyGame.engine.addEntity(slot);
         }
         for (int i = 0; i < capacity; i++) {
-            InventorySlot inventorySlot = new InventorySlot(skin, false);
+            InventorySlot inventorySlot = new InventorySlot(skin);
             dragAndDrop.addSource(new InventorySlotSource(inventorySlot, dragAndDrop));
             dragAndDrop.addTarget(new InventorySlotTarget(inventorySlot));
             inventorySlots.add(inventorySlot);
         }
         for (int i = 0; i < equipSize; i++) {
-            InventorySlot equipSlot = new InventorySlot(skin, true);
+            InventorySlot equipSlot = new InventorySlot(skin);
             dragAndDrop.addSource(new InventorySlotSource(equipSlot, dragAndDrop));
             dragAndDrop.addTarget(new InventorySlotTarget(equipSlot));
             equipSlots.add(equipSlot);
