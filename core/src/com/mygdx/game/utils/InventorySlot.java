@@ -2,6 +2,7 @@ package com.mygdx.game.utils;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.AcceptedEquipType;
@@ -9,7 +10,7 @@ import com.mygdx.game.engine.Mappers;
 
 import java.util.Objects;
 
-public class InventorySlot extends Button {
+public class InventorySlot extends ImageButton {
     // the item in this slot
     // this will be the full info
     Entity occupiedItem; // this is the slot (goes inside InventorySlot)
