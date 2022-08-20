@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.MyGame;
+import com.mygdx.game.engine.AcceptedEquipType;
 import com.mygdx.game.engine.InventorySlotSource;
 import com.mygdx.game.engine.InventorySlotTarget;
 import com.mygdx.game.utils.InventorySlot;
@@ -52,12 +53,39 @@ public class InventoryComponent implements Component {
             dragAndDrop.addTarget(new InventorySlotTarget(inventorySlot));
             inventorySlots.add(inventorySlot);
         }
-        for (int i = 0; i < equipSize; i++) {
-            InventorySlot equipSlot = new InventorySlot(skin);
-            dragAndDrop.addSource(new InventorySlotSource(equipSlot, dragAndDrop));
-            dragAndDrop.addTarget(new InventorySlotTarget(equipSlot));
-            equipSlots.add(equipSlot);
-        }
+        // build all equip slots
+        InventorySlot head = new InventorySlot(skin, AcceptedEquipType.HEAD);
+        InventorySlot torso = new InventorySlot(skin, AcceptedEquipType.TORSO);
+        InventorySlot leg = new InventorySlot(skin, AcceptedEquipType.LEG);
+        InventorySlot feet = new InventorySlot(skin, AcceptedEquipType.FEET);
+        InventorySlot main = new InventorySlot(skin, AcceptedEquipType.MAIN);
+        InventorySlot off = new InventorySlot(skin, AcceptedEquipType.OFF);
+        InventorySlot accessory1 = new InventorySlot(skin, AcceptedEquipType.ACCESSORY);
+        InventorySlot accessory2 = new InventorySlot(skin, AcceptedEquipType.ACCESSORY);
+        dragAndDrop.addSource(new InventorySlotSource(head, dragAndDrop));
+        dragAndDrop.addSource(new InventorySlotSource(torso, dragAndDrop));
+        dragAndDrop.addSource(new InventorySlotSource(leg, dragAndDrop));
+        dragAndDrop.addSource(new InventorySlotSource(feet, dragAndDrop));
+        dragAndDrop.addSource(new InventorySlotSource(main, dragAndDrop));
+        dragAndDrop.addSource(new InventorySlotSource(off, dragAndDrop));
+        dragAndDrop.addSource(new InventorySlotSource(accessory1, dragAndDrop));
+        dragAndDrop.addSource(new InventorySlotSource(accessory2, dragAndDrop));
+        dragAndDrop.addTarget(new InventorySlotTarget(head));
+        dragAndDrop.addTarget(new InventorySlotTarget(torso));
+        dragAndDrop.addTarget(new InventorySlotTarget(leg));
+        dragAndDrop.addTarget(new InventorySlotTarget(feet));
+        dragAndDrop.addTarget(new InventorySlotTarget(main));
+        dragAndDrop.addTarget(new InventorySlotTarget(off));
+        dragAndDrop.addTarget(new InventorySlotTarget(accessory1));
+        dragAndDrop.addTarget(new InventorySlotTarget(accessory2));
+        equipSlots.add(head);
+        equipSlots.add(torso);
+        equipSlots.add(leg);
+        equipSlots.add(feet);
+        equipSlots.add(main);
+        equipSlots.add(off);
+        equipSlots.add(accessory1);
+        equipSlots.add(accessory2);
     }
 
 }
