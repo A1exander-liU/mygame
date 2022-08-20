@@ -15,10 +15,12 @@ public class InventoryUi {
         Entity player = MyGame.engine.getEntitiesFor(Families.player).get(0);
         // for dragging and dropping an item that is different
         Array<InventorySlot> inventorySlots = Mappers.inventory.get(player).inventorySlots;
+        // store temp value to assign later
+        Entity tempSlot1Item = slot1.getOccupiedItem();
         // set item in slot1 to item in slot2
         inventorySlots.get(inventorySlots.indexOf(slot1, true)).setOccupiedItem(slot2.getOccupiedItem());
         // set item in slot2 to item in slot1
-        inventorySlots.get(inventorySlots.indexOf(slot2, true)).setOccupiedItem(slot1.getOccupiedItem());
+        inventorySlots.get(inventorySlots.indexOf(slot2, true)).setOccupiedItem(tempSlot1Item);
     }
 
     public void stackItems(InventorySlot stacker, InventorySlot stack) {
