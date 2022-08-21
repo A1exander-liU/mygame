@@ -63,7 +63,7 @@ public class InventoryComponent implements Component {
         InventorySlot feet = new InventorySlot(skin, AcceptedEquipType.FEET);
         InventorySlot main = new InventorySlot(skin, AcceptedEquipType.MAIN);
         InventorySlot off = new InventorySlot(skin, AcceptedEquipType.OFF);
-        final InventorySlot accessory1 = new InventorySlot(skin, AcceptedEquipType.ACCESSORY);
+        InventorySlot accessory1 = new InventorySlot(skin, AcceptedEquipType.ACCESSORY);
         InventorySlot accessory2 = new InventorySlot(skin, AcceptedEquipType.ACCESSORY);
         dragAndDrop.addSource(new InventorySlotSource(head, dragAndDrop));
         dragAndDrop.addSource(new InventorySlotSource(torso, dragAndDrop));
@@ -89,16 +89,6 @@ public class InventoryComponent implements Component {
         equipSlots.add(off);
         equipSlots.add(accessory1);
         equipSlots.add(accessory2);
-        for (int i = 0; i < equipSlots.size; i++) {
-            equipSlots.get(i).addListener(new ChangeListener() {
-                @Override
-                public void changed(ChangeEvent event, Actor actor) {
-                    InventorySlot inventorySlot = (InventorySlot) actor;
-                    if (inventorySlot.getOccupiedItem() != null)
-                        System.out.println(Mappers.name.get(inventorySlot.getOccupiedItem()).name);
-                }
-            });
-        }
     }
 
 }
