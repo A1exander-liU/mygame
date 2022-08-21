@@ -36,8 +36,9 @@ public class InventorySlotTarget extends DragAndDrop.Target {
         Entity sourceItem = (Entity) payload.getObject();
         // if the item names are the same
         Entity targetItem = targetSlot.getOccupiedItem();
-        // if target slot is empty
+        // check if null (if null, target slot can accept any item)
         if (targetSlot.getAcceptedEquipType() == null) {
+            // if target slot is empty
             if (targetSlot.isEmpty()) {
                 System.out.println("assign");
                 inventoryUi.setItem(sourceSlot, targetSlot);
@@ -54,6 +55,13 @@ public class InventorySlotTarget extends DragAndDrop.Target {
                 System.out.println("swap");
                 inventoryUi.swapItems(sourceSlot, targetSlot);
 //            targetSlot.swap(sourceSlot);
+            }
+        }
+        // means the target slot was an equip slot
+        else {
+            // check if the equipment was dropped on matching slot
+            if (sourceSlot.getAcceptedEquipType() == targetSlot.getAcceptedEquipType()) {
+                
             }
         }
     }
