@@ -43,10 +43,10 @@ public class InventoryChangeListener extends ClickListener {
         // check if inventory slot holds an item and is a material type
         if (!inventorySlot.isEmpty() && Mappers.inventoryItem.get(occupiedItem).itemType == ItemType.MATERIAL) {
             System.out.println(Mappers.name.get(occupiedItem).name);
-//            Window itemInfo = new Window("" + Mappers.name.get(occupiedItem).name, skin);
-//            stage.addActor(itemInfo);
-//            stage.act();
-//            stage.draw();
+            Window itemInfo = new Window("" + Mappers.name.get(occupiedItem).name, skin);
+            stage.addActor(itemInfo);
+            stage.act();
+            stage.draw();
         }
     }
 }
