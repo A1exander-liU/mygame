@@ -36,11 +36,15 @@ public class InventoryChangeListener extends ChangeListener {
 
     @Override
     public void changed(ChangeEvent event, Actor actor) {
+        stage.clear();
         InventorySlot inventorySlot = (InventorySlot) actor;
         Entity occupiedItem = inventorySlot.getOccupiedItem();
         // check if inventory slot holds an item and is a material type
         if (!inventorySlot.isEmpty() && Mappers.inventoryItem.get(occupiedItem).itemType == ItemType.MATERIAL) {
-    
+            Window itemInfo = new Window("" + Mappers.name.get(occupiedItem).name, skin);
+            stage.addActor(itemInfo);
         }
+        stage.act();
+        stage.draw();
     }
 }
