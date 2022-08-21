@@ -65,6 +65,10 @@ public class InventorySlotTarget extends DragAndDrop.Target {
                 if (targetSlot.isEmpty()) {
                     inventoryUi.equip(sourceSlot, targetSlot);
                 }
+                // check if an item is already equipped in the slot
+                else if (!targetSlot.isEmpty()) {
+
+                }
             }
         }
     }
