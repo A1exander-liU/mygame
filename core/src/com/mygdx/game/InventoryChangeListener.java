@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -40,13 +41,12 @@ public class InventoryChangeListener extends ClickListener {
     public void clicked(InputEvent event, float x, float y) {
         InventorySlot inventorySlot = (InventorySlot) event.getListenerActor();
         Entity occupiedItem = inventorySlot.getOccupiedItem();
+        stage = inventorySlot.getStage();
         // check if inventory slot holds an item and is a material type
         if (!inventorySlot.isEmpty() && Mappers.inventoryItem.get(occupiedItem).itemType == ItemType.MATERIAL) {
             System.out.println(Mappers.name.get(occupiedItem).name);
-            Window itemInfo = new Window("" + Mappers.name.get(occupiedItem).name, skin);
-            stage.addActor(itemInfo);
-            stage.act();
-            stage.draw();
+            Dialog itemInfo = new Dialog("" + Mappers.name.get(occupiedItem).name, skin);
+            itemInfo.show(stage);
         }
     }
 }
