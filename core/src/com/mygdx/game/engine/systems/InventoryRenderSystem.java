@@ -205,7 +205,9 @@ public class InventoryRenderSystem extends EntitySystem {
                 TextureRegionDrawable drawable = new TextureRegionDrawable(new Texture(Gdx.files.internal("testPlayer.png")));
                 Image image = new Image(drawable);
 
-                Label label = new Label("" + cg.getQuantity(inventorySlot.getOccupiedItem()).quantity, skin, "pixel2D", Color.BLACK);
+                Label label = new Label("", skin, "pixel2D", Color.BLACK);
+                if (cg.getQuantity(inventorySlot.getOccupiedItem()) != null)
+                    label.setText("" + cg.getQuantity(inventorySlot.getOccupiedItem()).quantity);
                 label.setAlignment(Align.topRight);
 
                 stack.add(image);
