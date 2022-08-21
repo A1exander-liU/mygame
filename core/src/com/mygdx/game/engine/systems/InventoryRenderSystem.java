@@ -28,6 +28,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.SnapshotArray;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.mygdx.game.InventoryChangeListener;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.AcceptedEquipType;
 import com.mygdx.game.engine.ComponentGrabber;
@@ -216,13 +217,7 @@ public class InventoryRenderSystem extends EntitySystem {
 
             inventorySlot.add(stack).grow();
 
-            inventorySlot.addListener(new ChangeListener() {
-                @Override
-                public void changed(ChangeEvent event, Actor actor) {
-                    InventorySlot bagSlot = (InventorySlot) actor;
-                    System.out.println(bagSlot.getOccupiedItem());
-                }
-            });
+            inventorySlot.addListener(new InventoryChangeListener());
 
             inventorySlots.add(inventorySlot).width(inventorySlots.getWidth() / 4).height(inventorySlots.getHeight() / 4);
 
@@ -253,6 +248,7 @@ public class InventoryRenderSystem extends EntitySystem {
                 Image image = new Image(drawable);
                 inventoryComponent.equipSlots.get(i).add(image).grow();
             }
+            inventoryComponent.equipSlots.get(i).addListener(new InventoryChangeListener());
         }
 
         equipSlots.add(inventoryComponent.equipSlots.get(0)).colspan(3).center();
