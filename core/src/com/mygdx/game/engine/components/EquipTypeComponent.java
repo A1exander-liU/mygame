@@ -1,8 +1,9 @@
 package com.mygdx.game.engine.components;
 
+import com.badlogic.ashley.core.Component;
 import com.mygdx.game.engine.AcceptedEquipType;
 
-public class EquipTypeComponent {
+public class EquipTypeComponent implements Component {
     public AcceptedEquipType acceptedEquipType;
 
     public EquipTypeComponent() {}
