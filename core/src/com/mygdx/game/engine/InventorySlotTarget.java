@@ -60,7 +60,7 @@ public class InventorySlotTarget extends DragAndDrop.Target {
         // means the target slot was an equip slot
         else {
             // check if the equipment was dropped on matching slot
-            if (sourceSlot.getAcceptedEquipType() == targetSlot.getAcceptedEquipType()) {
+            if (Mappers.equipType.get(sourceItem).acceptedEquipType == targetSlot.getAcceptedEquipType()) {
                 // check if equipment slot is empty
                 if (targetSlot.isEmpty()) {
                     System.out.println("equip item");
