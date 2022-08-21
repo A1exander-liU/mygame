@@ -67,7 +67,7 @@ public class InventorySlotTarget extends DragAndDrop.Target {
                 }
                 // check if an item is already equipped in the slot
                 else if (!targetSlot.isEmpty()) {
-
+                    inventoryUi.swapEquipment(sourceSlot, targetSlot);
                 }
             }
         }
