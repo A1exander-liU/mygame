@@ -2,16 +2,15 @@ package com.mygdx.game;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Window;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.engine.ItemType;
@@ -22,6 +21,8 @@ public class InventoryChangeListener extends ClickListener {
 
     Stage stage;
     Skin skin;
+
+    private Dialog lastPopUp;
 
     public InventoryChangeListener() {
         stage = new Stage(new ScreenViewport());
@@ -46,6 +47,8 @@ public class InventoryChangeListener extends ClickListener {
         if (!inventorySlot.isEmpty() && Mappers.inventoryItem.get(occupiedItem).itemType == ItemType.MATERIAL) {
             System.out.println(Mappers.name.get(occupiedItem).name);
             Dialog itemInfo = new Dialog("" + Mappers.name.get(occupiedItem).name, skin);
+            itemInfo.getTitleTable().center();
+            itemInfo.text(new Label(Mappers.description.get(occupiedItem).description, skin, "pixel2D", Color.BLACK));
             itemInfo.show(stage);
         }
     }
