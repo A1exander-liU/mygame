@@ -21,6 +21,7 @@ public class InventorySlotTarget extends DragAndDrop.Target {
         super(actor);
         targetSlot = actor;
         inventoryUi = new InventoryUi();
+
     }
 
     @Override
@@ -30,6 +31,12 @@ public class InventorySlotTarget extends DragAndDrop.Target {
 
     @Override
     public void drop(DragAndDrop.Source source, DragAndDrop.Payload payload, float x, float y, int pointer) {
+        // now need to display a tooltip window when clicking an item
+        // when dragging stackable item, have window appear to split amount:
+        // only appears if quantity is greater than 1
+        // will be slider with 1 to quantity
+        // defaults slider value at max (the quantity)
+
         // the dragged actor
         InventorySlot sourceSlot = (InventorySlot) source.getActor();
         // info of the item being dragged
@@ -44,6 +51,7 @@ public class InventorySlotTarget extends DragAndDrop.Target {
                 inventoryUi.setItem(sourceSlot, targetSlot);
 //            targetSlot.setOccupiedItem(sourceItem);
             }
+
             else if (Objects.equals(Mappers.name.get(sourceItem).name, Mappers.name.get(targetItem).name)) {
                 System.out.println("stack");
                 // stack the items
@@ -73,7 +81,7 @@ public class InventorySlotTarget extends DragAndDrop.Target {
                 }
             }
             // unequipping item
-            else {
+            else if (targetSlot.getAcceptedEquipType() == null){
                 inventoryUi.unequip(sourceSlot, targetSlot);
             }
         }
