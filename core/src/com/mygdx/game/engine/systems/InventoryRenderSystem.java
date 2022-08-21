@@ -217,7 +217,9 @@ public class InventoryRenderSystem extends EntitySystem {
 
             inventorySlot.add(stack).grow();
 
-            inventorySlot.addListener(new InventoryChangeListener());
+//            if (inventorySlot.getListeners().size > 0)
+//                inventorySlot.removeListener(inventorySlot.getListeners().get(0));
+//            inventorySlot.addListener(new InventoryChangeListener());
 
             inventorySlots.add(inventorySlot).width(inventorySlots.getWidth() / 4).height(inventorySlots.getHeight() / 4);
 
@@ -248,7 +250,10 @@ public class InventoryRenderSystem extends EntitySystem {
                 Image image = new Image(drawable);
                 inventoryComponent.equipSlots.get(i).add(image).grow();
             }
-            inventoryComponent.equipSlots.get(i).addListener(new InventoryChangeListener());
+
+//            if (inventoryComponent.equipSlots.size > 0)
+//                inventoryComponent.equipSlots.get(i).removeListener(inventoryComponent.equipSlots.get(i).getListeners().removeIndex(0));
+//            inventoryComponent.equipSlots.get(i).addListener(new InventoryChangeListener());
         }
 
         equipSlots.add(inventoryComponent.equipSlots.get(0)).colspan(3).center();
