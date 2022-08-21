@@ -242,6 +242,19 @@ public class InventoryRenderSystem extends EntitySystem {
 
         equipSlots.defaults().expand().width(equipSlots.getWidth() / 3).height(equipSlots.getHeight() / 4);
 
+        // need to add an image of equipped item sprite
+        for (int i = 0; i < inventoryComponent.equipSlots.size; i++) {
+            // check if an item is equipped
+            if (inventoryComponent.equipSlots.get(i).getChildren().size > 0) {
+                inventoryComponent.equipSlots.get(i).getChildren().get(0).remove();
+            }
+            if (inventoryComponent.equipSlots.get(i).getOccupiedItem() != null) {
+                TextureRegionDrawable drawable = new TextureRegionDrawable(cg.getSprite(inventoryComponent.equipSlots.get(i).getOccupiedItem()).texture);
+                Image image = new Image(drawable);
+                inventoryComponent.equipSlots.get(i).add(image).grow();
+            }
+        }
+
         equipSlots.add(inventoryComponent.equipSlots.get(0)).colspan(3).center();
         equipSlots.row();
         equipSlots.add(inventoryComponent.equipSlots.get(4));
