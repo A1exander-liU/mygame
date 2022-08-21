@@ -19,12 +19,14 @@ public class InventorySlot extends ImageButton {
 
     public InventorySlot(Skin skin) {
         super(skin);
+        addListener(new InventoryChangeListener());
     }
 
     public InventorySlot(Skin skin, AcceptedEquipType acceptedEquipType) {
         super(skin);
         isEquipSlot = true;
         this.acceptedEquipType = acceptedEquipType;
+        addListener(new InventoryChangeListener());
     }
 
     public Entity getOccupiedItem() {
