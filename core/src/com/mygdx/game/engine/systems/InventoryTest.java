@@ -154,6 +154,20 @@ public class InventoryTest extends EntitySystem {
         cg.getDescription(swordItem).description = "Common and cheap weapon";
         MyGame.engine.addEntity(swordItem);
         addToInventorySlot(swordItem, 3);
+
+        Entity swordItem2 = new Entity();
+        swordItem2.add(new InventoryItemComponent());
+        swordItem2.add(new Name());
+        swordItem2.add(new Sprite());
+        swordItem2.add(new RarityComponent());
+        swordItem2.add(new DescriptionComponent());
+        swordItem2.add(new EquipTypeComponent(AcceptedEquipType.MAIN));
+        cg.getName(swordItem2).name = "Steel Sword";
+        cg.getSprite(swordItem2).texture = new Texture(Gdx.files.internal("testPlayer.png"));
+        cg.getRarity(swordItem2).rarity = Rarity.COMMON;
+        cg.getDescription(swordItem2).description = "Common and cheap weapon";
+        MyGame.engine.addEntity(swordItem2);
+        addToInventorySlot(swordItem2, 4);
     }
 
     private void addToInventorySlot(Entity item, int slot) {
