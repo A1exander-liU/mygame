@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.AcceptedEquipType;
@@ -103,6 +104,7 @@ public class InventoryTest extends EntitySystem {
         testItem.add(new RarityComponent());
         testItem.add(new DescriptionComponent());
         cg.getName(testItem).name = "Wood";
+        cg.getSprite(testItem).texture = new Texture(Gdx.files.internal("testPlayer.png"));
         cg.getQuantity(testItem).quantity = 14;
         cg.getRarity(testItem).rarity = Rarity.COMMON;
         cg.getDescription(testItem).description = "Abundant material used to craft many items";
@@ -117,6 +119,7 @@ public class InventoryTest extends EntitySystem {
         diffItem.add(new RarityComponent());
         diffItem.add(new DescriptionComponent());
         cg.getName(diffItem).name = "Stone";
+        cg.getSprite(diffItem).texture = new Texture(Gdx.files.internal("testPlayer.png"));
         cg.getQuantity(diffItem).quantity = 7;
         cg.getRarity(diffItem).rarity = Rarity.COMMON;
         cg.getDescription(diffItem).description = "Found all over the world";
@@ -131,6 +134,7 @@ public class InventoryTest extends EntitySystem {
         woodItem.add(new RarityComponent());
         woodItem.add(new DescriptionComponent());
         cg.getName(woodItem).name = "Wood";
+        cg.getSprite(woodItem).texture = new Texture(Gdx.files.internal("testPlayer.png"));
         cg.getQuantity(woodItem).quantity = 8;
         cg.getRarity(woodItem).rarity = Rarity.COMMON;
         cg.getDescription(woodItem).description = "Abundant material used to craft many items";
@@ -145,6 +149,7 @@ public class InventoryTest extends EntitySystem {
         swordItem.add(new DescriptionComponent());
         swordItem.add(new EquipTypeComponent(AcceptedEquipType.MAIN));
         cg.getName(swordItem).name = "Iron Sword";
+        cg.getSprite(swordItem).texture = new Texture(Gdx.files.internal("testPlayer.png"));
         cg.getRarity(swordItem).rarity = Rarity.COMMON;
         cg.getDescription(swordItem).description = "Common and cheap weapon";
         MyGame.engine.addEntity(swordItem);
