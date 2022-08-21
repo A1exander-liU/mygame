@@ -6,10 +6,12 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.MyGame;
+import com.mygdx.game.engine.AcceptedEquipType;
 import com.mygdx.game.engine.ComponentGrabber;
 import com.mygdx.game.engine.Families;
 import com.mygdx.game.engine.Mappers;
 import com.mygdx.game.engine.Rarity;
+import com.mygdx.game.engine.components.EquipTypeComponent;
 import com.mygdx.game.engine.components.inventory.InventoryComponent;
 import com.mygdx.game.engine.components.inventory.items.shared.DescriptionComponent;
 import com.mygdx.game.engine.components.inventory.items.shared.InventoryItemComponent;
@@ -134,6 +136,19 @@ public class InventoryTest extends EntitySystem {
         cg.getDescription(woodItem).description = "Abundant material used to craft many items";
         MyGame.engine.addEntity(woodItem);
         addToInventorySlot(woodItem, 2);
+
+        Entity swordItem = new Entity();
+        swordItem.add(new InventoryItemComponent());
+        swordItem.add(new Name());
+        swordItem.add(new Sprite());
+        swordItem.add(new RarityComponent());
+        swordItem.add(new DescriptionComponent());
+        swordItem.add(new EquipTypeComponent(AcceptedEquipType.MAIN));
+        cg.getName(swordItem).name = "Iron Sword";
+        cg.getRarity(swordItem).rarity = Rarity.COMMON;
+        cg.getDescription(swordItem).description = "Common and cheap weapon";
+        MyGame.engine.addEntity(swordItem);
+        addToInventorySlot(swordItem, 3);
     }
 
     private void addToInventorySlot(Entity item, int slot) {
