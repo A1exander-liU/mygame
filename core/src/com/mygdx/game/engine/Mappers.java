@@ -7,6 +7,7 @@ import com.mygdx.game.engine.components.CollidableComponent;
 import com.mygdx.game.engine.components.DetectionProximity;
 import com.mygdx.game.engine.components.Enemy;
 import com.mygdx.game.engine.components.EnemyStateMachine;
+import com.mygdx.game.engine.components.EquipTypeComponent;
 import com.mygdx.game.engine.components.ExpComponent;
 import com.mygdx.game.engine.components.Health;
 import com.mygdx.game.engine.components.ID;
@@ -48,6 +49,7 @@ public class Mappers {
     public static final ComponentMapper<DetectionProximity> detectionProximity = ComponentMapper.getFor(DetectionProximity.class);
     public static final ComponentMapper<Enemy> enemy = ComponentMapper.getFor(Enemy.class);
     public static final ComponentMapper<EnemyStateMachine> enemyStateMachine = ComponentMapper.getFor(EnemyStateMachine.class);
+    public static final ComponentMapper<EquipTypeComponent> equipType = ComponentMapper.getFor(EquipTypeComponent.class);
     public static final ComponentMapper<ExpComponent> exp = ComponentMapper.getFor(ExpComponent.class);
     public static final ComponentMapper<Health> health = ComponentMapper.getFor(Health.class);
     public static final ComponentMapper<ID> id = ComponentMapper.getFor(ID.class);
