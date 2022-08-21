@@ -45,4 +45,15 @@ public class InventoryUi {
         // dereference the source in its original slot
         inventorySlots.get(inventorySlots.indexOf(source, true)).setOccupiedItem(null);
     }
+
+    public void equip(InventorySlot source, InventorySlot target) {
+        Entity player = MyGame.engine.getEntitiesFor(Families.player).get(0);
+        // equipment and inventory slots are separate arrays
+        Array<InventorySlot> inventorySlots = Mappers.inventory.get(player).inventorySlots;
+        Array<InventorySlot> equipSlots = Mappers.inventory.get(player).equipSlots;
+        // equip the item
+        equipSlots.get(equipSlots.indexOf(target, true)).setOccupiedItem(source.getOccupiedItem());
+        // dereference the equipment in the inventory
+        inventorySlots.get(inventorySlots.indexOf(source, true)).setOccupiedItem(null);
+    }
 }
