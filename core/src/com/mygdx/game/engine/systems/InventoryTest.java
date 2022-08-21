@@ -10,6 +10,7 @@ import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.AcceptedEquipType;
 import com.mygdx.game.engine.ComponentGrabber;
 import com.mygdx.game.engine.Families;
+import com.mygdx.game.engine.ItemType;
 import com.mygdx.game.engine.Mappers;
 import com.mygdx.game.engine.Rarity;
 import com.mygdx.game.engine.components.EquipTypeComponent;
@@ -97,7 +98,7 @@ public class InventoryTest extends EntitySystem {
         //
 
         Entity testItem = new Entity();
-        testItem.add(new InventoryItemComponent());
+        testItem.add(new InventoryItemComponent(ItemType.MATERIAL));
         testItem.add(new Name());
         testItem.add(new Sprite());
         testItem.add(new QuantityComponent());
@@ -112,7 +113,7 @@ public class InventoryTest extends EntitySystem {
         addToInventorySlot(testItem, 0);
 
         Entity diffItem = new Entity();
-        diffItem.add(new InventoryItemComponent());
+        diffItem.add(new InventoryItemComponent(ItemType.MATERIAL));
         diffItem.add(new Name());
         diffItem.add(new Sprite());
         diffItem.add(new QuantityComponent());
@@ -127,7 +128,7 @@ public class InventoryTest extends EntitySystem {
         addToInventorySlot(diffItem, 1);
 
         Entity woodItem = new Entity();
-        woodItem.add(new InventoryItemComponent());
+        woodItem.add(new InventoryItemComponent(ItemType.MATERIAL));
         woodItem.add(new Name());
         woodItem.add(new Sprite());
         woodItem.add(new QuantityComponent());
@@ -142,7 +143,7 @@ public class InventoryTest extends EntitySystem {
         addToInventorySlot(woodItem, 2);
 
         Entity swordItem = new Entity();
-        swordItem.add(new InventoryItemComponent());
+        swordItem.add(new InventoryItemComponent(ItemType.EQUIPMENT));
         swordItem.add(new Name());
         swordItem.add(new Sprite());
         swordItem.add(new RarityComponent());
@@ -156,7 +157,7 @@ public class InventoryTest extends EntitySystem {
         addToInventorySlot(swordItem, 3);
 
         Entity swordItem2 = new Entity();
-        swordItem2.add(new InventoryItemComponent());
+        swordItem2.add(new InventoryItemComponent(ItemType.EQUIPMENT));
         swordItem2.add(new Name());
         swordItem2.add(new Sprite());
         swordItem2.add(new RarityComponent());
