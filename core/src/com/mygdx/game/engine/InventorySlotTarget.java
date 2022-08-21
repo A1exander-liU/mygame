@@ -72,6 +72,10 @@ public class InventorySlotTarget extends DragAndDrop.Target {
                     inventoryUi.swapEquipment(sourceSlot, targetSlot);
                 }
             }
+            // unequipping item
+            else {
+                inventoryUi.unequip(sourceSlot, targetSlot);
+            }
         }
     }
 }
