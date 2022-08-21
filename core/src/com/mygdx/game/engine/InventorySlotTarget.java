@@ -61,7 +61,10 @@ public class InventorySlotTarget extends DragAndDrop.Target {
         else {
             // check if the equipment was dropped on matching slot
             if (sourceSlot.getAcceptedEquipType() == targetSlot.getAcceptedEquipType()) {
-                
+                // check if equipment slot is empty
+                if (targetSlot.isEmpty()) {
+                    
+                }
             }
         }
     }
