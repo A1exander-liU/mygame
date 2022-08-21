@@ -63,10 +63,12 @@ public class InventorySlotTarget extends DragAndDrop.Target {
             if (sourceSlot.getAcceptedEquipType() == targetSlot.getAcceptedEquipType()) {
                 // check if equipment slot is empty
                 if (targetSlot.isEmpty()) {
+                    System.out.println("equip item");
                     inventoryUi.equip(sourceSlot, targetSlot);
                 }
                 // check if an item is already equipped in the slot
                 else if (!targetSlot.isEmpty()) {
+                    System.out.println("swap equipment");
                     inventoryUi.swapEquipment(sourceSlot, targetSlot);
                 }
             }
