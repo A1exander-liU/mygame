@@ -202,7 +202,7 @@ public class InventoryRenderSystem extends EntitySystem {
             Stack stack = new Stack();
             inventorySlot.add(stack);
             if (!inventorySlot.isEmpty()) {
-                TextureRegionDrawable drawable = new TextureRegionDrawable(new Texture(Gdx.files.internal("testPlayer.png")));
+                TextureRegionDrawable drawable = new TextureRegionDrawable(cg.getSprite(inventorySlot.getOccupiedItem()).texture);
                 Image image = new Image(drawable);
 
                 Label label = new Label("", skin, "pixel2D", Color.BLACK);
