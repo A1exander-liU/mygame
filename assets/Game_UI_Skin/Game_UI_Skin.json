@@ -697,7 +697,7 @@
 		"rightWidth": 11,
 		"leftWidth": 11,
 		"bottomHeight": 2,
-		"topHeight": 27,
+		"topHeight": 28,
 		"offsetX": 0,
 		"offsetY": 0,
 		"offsetXspeed": 0,
@@ -727,8 +727,7 @@
 },
 "com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle": {
 	"default": {
-		"up": "button-up",
-		"over": "text-button-over"
+		"up": "button-up"
 	}
 },
 "com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle": {
