@@ -60,6 +60,7 @@ public class InventoryChangeListener extends ClickListener {
             stage = inventorySlot.getStage();
 
             Window itemInfo = new Window("", skin);
+            itemInfo.setName("itemWindow");
             itemInfo.getTitleLabel().setText(Mappers.name.get(occupiedItem).name + " x" + Mappers.quantity.get(occupiedItem).quantity);
 
             TextButton close = new TextButton("x", skin);
