@@ -3,17 +3,20 @@ package com.mygdx.game;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.engine.ItemType;
@@ -50,7 +53,7 @@ public class InventoryChangeListener extends ClickListener {
         if (!inventorySlot.isEmpty() && Mappers.inventoryItem.get(occupiedItem).itemType == ItemType.MATERIAL) {
 //            inventorySlot.setClicked(true);
             stage = inventorySlot.getStage();
-            
+
             Window itemInfo = new Window("", skin);
             itemInfo.getTitleLabel().setText(Mappers.name.get(occupiedItem).name + " x" + Mappers.quantity.get(occupiedItem).quantity);
 
@@ -62,6 +65,10 @@ public class InventoryChangeListener extends ClickListener {
             itemDesc.setWrap(true);
             itemDesc.setAlignment(Align.left);
 
+            Image itemSprite = new Image(new TextureRegionDrawable(Mappers.sprite.get(occupiedItem).texture));
+
+            itemInfo.add(itemSprite).grow();
+            itemInfo.row();
             itemInfo.add(itemRarity).grow();
             itemInfo.row();
             itemInfo.add(itemDesc).grow();
