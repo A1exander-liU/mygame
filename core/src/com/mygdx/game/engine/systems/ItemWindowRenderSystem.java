@@ -26,10 +26,14 @@ public class ItemWindowRenderSystem extends EntitySystem {
     @Override
     public void update(float delta) {
         for (int i = 0; i < inventorySlots.size; i++) {
+            if (inventorySlots.get(i).isClicked()) {
 
+            }
         }
         for (int i = 0; i < equipSlots.size; i++) {
-            
+            if (equipSlots.get(i).isClicked()) {
+                
+            }
         }
     }
 }
