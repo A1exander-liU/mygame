@@ -59,22 +59,6 @@ public class InventorySlot extends ImageButton {
         this.clicked = clicked;
     }
 
-    public void swap(InventorySlot inventorySlot) {
-        // swap the items that are occupying the slot
-        // will be used with drag and drop
-        Entity thisItem = occupiedItem;
-        this.occupiedItem = inventorySlot.occupiedItem;
-        inventorySlot.occupiedItem = thisItem;
-    }
-
-    public void stack(InventorySlot inventorySlot) {
-        // if two items are similar stack them together
-        Mappers.quantity.get(occupiedItem).quantity += Mappers.quantity.get(inventorySlot.occupiedItem).quantity;
-        // since items are the same, the entity is no longer needed
-        MyGame.engine.removeEntity(inventorySlot.occupiedItem);
-        inventorySlot.occupiedItem = null;
-    }
-
     public boolean isEmpty() {
         return  occupiedItem == null;
     }
