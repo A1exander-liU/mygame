@@ -21,6 +21,7 @@ import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.Families;
 import com.mygdx.game.engine.Mappers;
 import com.mygdx.game.engine.components.inventory.InventoryComponent;
+import com.mygdx.game.screens.GameScreen;
 import com.mygdx.game.utils.InventorySlot;
 
 import java.util.Objects;
@@ -45,6 +46,7 @@ public class ItemWindowRenderSystem extends EntitySystem {
         equipSlots = inventoryComponent.equipSlots;
 
         stage = new Stage(new ScreenViewport());
+        GameScreen.inventoryMultiplexer.addProcessor(stage);
 
         skin = new Skin();
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/PressStart2P-Regular.ttf"));
