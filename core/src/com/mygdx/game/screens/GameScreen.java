@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -18,12 +19,14 @@ import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.engine.EntityFactory;
 import com.mygdx.game.engine.EntityToMapAdder;
 import com.mygdx.game.engine.ItemFactory;
+import com.mygdx.game.engine.Mappers;
 import com.mygdx.game.engine.entityListeners.EnemyRemovalListener;
 import com.mygdx.game.engine.systems.EnemySpawningSystem;
 import com.mygdx.game.engine.systems.EntityRemovalSystem;
 import com.mygdx.game.engine.systems.HealthBarRenderSystem;
 import com.mygdx.game.engine.systems.InventoryRenderSystem;
 import com.mygdx.game.engine.systems.InventoryTest;
+import com.mygdx.game.engine.systems.ItemWindowRenderSystem;
 import com.mygdx.game.engine.systems.MapUpdateSystem;
 import com.mygdx.game.engine.systems.MovementSystem;
 import com.mygdx.game.engine.systems.CollisionSystem;
@@ -49,6 +52,8 @@ public class GameScreen implements Screen {
 
     ComponentGrabber cg;
 
+    public static InputMultiplexer inventoryMultiplexer;
+
     public GameScreen(MyGame parent) {
         parent.jsonSearcher = new JsonEnemyFinder();
         parent.itemFinder = new JsonItemFinder();
@@ -62,7 +67,7 @@ public class GameScreen implements Screen {
         MyGame.gameMapProperties = new GameMapProperties(testMap, entityFactory);
         parent.entityToMapAdder = new EntityToMapAdder(cg);
         entityFactory.makePlayer("player");
-
+        inventoryMultiplexer = new InputMultiplexer();
         // to add system (now all allowed entities will move every frame)
         // you can enable and disable a system temporarily
         /* disabled systems will not update (enemies will stop moving)
@@ -119,6 +124,7 @@ public class GameScreen implements Screen {
         PlayerHudRenderSystem playerHudRenderSystem = new PlayerHudRenderSystem(cg);
         InventoryRenderSystem inventoryRenderSystem = new InventoryRenderSystem(cg);
         InventoryTest inventoryTest = new InventoryTest(cg);
+        ItemWindowRenderSystem itemWindowRenderSystem = new ItemWindowRenderSystem();
         MyGame.engine.addSystem(movementSystem);
         MyGame.engine.addSystem(enemySpawningSystem);
         MyGame.engine.addSystem(steeringSystem);
@@ -134,6 +140,7 @@ public class GameScreen implements Screen {
         MyGame.engine.addSystem(playerHudRenderSystem);
         MyGame.engine.addSystem(inventoryRenderSystem);
         MyGame.engine.addSystem(inventoryTest);
+        MyGame.engine.addSystem(itemWindowRenderSystem);
         checkPriorities();
     }
 
