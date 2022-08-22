@@ -74,17 +74,6 @@ public class ItemWindowRenderSystem extends EntitySystem {
         }
     }
 
-    private Window makeItemWindow(Entity occupiedItem) {
-        Window dialog = new Window("" + Mappers.name.get(occupiedItem).name, skin);
-        dialog.setPosition(0, 0);
-        Label desc = new Label(Mappers.description.get(occupiedItem).description, skin, "pixel2D", Color.BLACK);
-        desc.setAlignment(Align.topLeft);
-        desc.setWrap(true);
-        dialog.setBackground(skin.getDrawable("window-bg"));
-        dialog.add(desc).grow();
-        return dialog;
-    }
-
     private void removePreviousWindows() {
         for (int i = 0; i < stage.getActors().size; i++) {
             if (Objects.equals(stage.getActors().get(i).getName(), "itemWindow"))
