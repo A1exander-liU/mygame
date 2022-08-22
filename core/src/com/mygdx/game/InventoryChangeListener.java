@@ -105,4 +105,8 @@ public class InventoryChangeListener extends ClickListener {
     public Window getRecentWindow() {
         return recentWindow;
     }
+
+    public void setRecentWindow(Window window) {
+        recentWindow = null;
+    }
 }
