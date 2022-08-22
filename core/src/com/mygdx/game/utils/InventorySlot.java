@@ -55,7 +55,7 @@ public class InventorySlot extends ImageButton {
         return clicked;
     }
 
-    public boolean setClicked(boolean clicked) {
+    public void setClicked(boolean clicked) {
         this.clicked = clicked;
     }
 
