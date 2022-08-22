@@ -18,6 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.engine.ItemType;
 import com.mygdx.game.engine.Mappers;
@@ -66,6 +67,7 @@ public class InventoryChangeListener extends ClickListener {
             itemDesc.setAlignment(Align.left);
 
             Image itemSprite = new Image(new TextureRegionDrawable(Mappers.sprite.get(occupiedItem).texture));
+            itemSprite.setScaling(Scaling.contain);
 
             itemInfo.add(itemSprite).grow();
             itemInfo.row();
