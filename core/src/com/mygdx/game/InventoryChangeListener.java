@@ -33,7 +33,7 @@ public class InventoryChangeListener extends ClickListener {
     Stage stage;
     Skin skin;
 
-    private Dialog lastPopUp;
+    private Window recentWindow;
 
     public InventoryChangeListener() {
         stage = new Stage(new ScreenViewport());
@@ -89,7 +89,8 @@ public class InventoryChangeListener extends ClickListener {
             itemInfo.row();
             itemInfo.add(itemDesc).grow();
 
-            stage.addActor(itemInfo);
+            recentWindow = itemInfo;
+//            stage.addActor(itemInfo);
 
 //            System.out.println(Mappers.name.get(occupiedItem).name);
 //            Dialog itemInfo = new Dialog("" + Mappers.name.get(occupiedItem).name, skin);
@@ -99,5 +100,9 @@ public class InventoryChangeListener extends ClickListener {
 //            itemInfo.setPosition(0, 0);
 //            itemInfo.show(stage);
         }
+    }
+
+    public Window getRecentWindow() {
+        return recentWindow;
     }
 }
