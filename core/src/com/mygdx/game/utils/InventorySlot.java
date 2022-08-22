@@ -17,6 +17,16 @@ public class InventorySlot extends ImageButton {
     boolean isEquipSlot = false;
     AcceptedEquipType acceptedEquipType;
 
+    boolean clicked = false;
+
+    // add boolean field to see if slot was clicked
+    // have system to run after inventory render to display pop up
+    // go through the slots and see which was clicked
+    // find the one that is clicked:
+    // set the field to false
+    // then check item type
+    // then display the formatted window
+
     public InventorySlot(Skin skin) {
         super(skin);
         addListener(new InventoryChangeListener());
@@ -39,6 +49,14 @@ public class InventorySlot extends ImageButton {
 
     public AcceptedEquipType getAcceptedEquipType() {
         return acceptedEquipType;
+    }
+
+    public boolean isClicked() {
+        return clicked;
+    }
+
+    public boolean setClicked(boolean clicked) {
+        this.clicked = clicked;
     }
 
     public void swap(InventorySlot inventorySlot) {
