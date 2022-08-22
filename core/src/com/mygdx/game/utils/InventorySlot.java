@@ -62,4 +62,12 @@ public class InventorySlot extends ImageButton {
     public boolean isEmpty() {
         return  occupiedItem == null;
     }
+
+    public InventoryChangeListener getItemWindowListener() {
+        for (int i = 0; i < getListeners().size; i++) {
+            if (getListeners().get(i) instanceof InventoryChangeListener)
+                return (InventoryChangeListener) getListeners().get(i);
+        }
+        return null;
+    }
 }
