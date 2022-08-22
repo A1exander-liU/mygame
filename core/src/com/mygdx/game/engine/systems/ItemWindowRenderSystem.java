@@ -2,6 +2,8 @@ package com.mygdx.game.engine.systems;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.Families;
@@ -27,12 +29,15 @@ public class ItemWindowRenderSystem extends EntitySystem {
     public void update(float delta) {
         for (int i = 0; i < inventorySlots.size; i++) {
             if (inventorySlots.get(i).isClicked()) {
-
+                inventorySlots.get(i).setClicked(false);
+                // add button to call dialog.hide to remove it
+                Stage stage = inventorySlots.get(i).getStage();
+                
             }
         }
         for (int i = 0; i < equipSlots.size; i++) {
             if (equipSlots.get(i).isClicked()) {
-                
+                equipSlots.get(i).setClicked(false);
             }
         }
     }
