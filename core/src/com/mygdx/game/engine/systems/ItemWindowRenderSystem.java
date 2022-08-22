@@ -23,6 +23,8 @@ import com.mygdx.game.engine.Mappers;
 import com.mygdx.game.engine.components.inventory.InventoryComponent;
 import com.mygdx.game.utils.InventorySlot;
 
+import java.util.Objects;
+
 import jdk.javadoc.internal.doclets.toolkit.taglets.UserTaglet;
 
 
@@ -60,6 +62,7 @@ public class ItemWindowRenderSystem extends EntitySystem {
         for (int i = 0; i < inventorySlots.size; i++) {
             if (inventorySlots.get(i).getItemWindowListener().getRecentWindow() != null) {
                 stage = inventorySlots.get(i).getStage();
+                removePreviousWindows();
                 stage.addActor(inventorySlots.get(i).getItemWindowListener().getRecentWindow());
                 inventorySlots.get(i).getItemWindowListener().setRecentWindow(null);
             }
@@ -82,5 +85,12 @@ public class ItemWindowRenderSystem extends EntitySystem {
         dialog.setBackground(skin.getDrawable("window-bg"));
         dialog.add(desc).grow();
         return dialog;
+    }
+
+    private void removePreviousWindows() {
+        for (int i = 0; i < stage.getActors().size; i++) {
+            if (Objects.equals(stage.getActors().get(i).getName(), "itemWindow"))
+                stage.getActors().removeIndex(i);
+        }
     }
 }
