@@ -104,6 +104,7 @@ public class InventoryTest extends EntitySystem {
         testItem.add(new QuantityComponent());
         testItem.add(new RarityComponent());
         testItem.add(new DescriptionComponent());
+        testItem.add(new EquipTypeComponent());
         cg.getName(testItem).name = "Wood";
         cg.getSprite(testItem).texture = new Texture(Gdx.files.internal("testPlayer.png"));
         cg.getQuantity(testItem).quantity = 14;
@@ -119,6 +120,7 @@ public class InventoryTest extends EntitySystem {
         diffItem.add(new QuantityComponent());
         diffItem.add(new RarityComponent());
         diffItem.add(new DescriptionComponent());
+        diffItem.add(new EquipTypeComponent());
         cg.getName(diffItem).name = "Stone";
         cg.getSprite(diffItem).texture = new Texture(Gdx.files.internal("testPlayer.png"));
         cg.getQuantity(diffItem).quantity = 7;
@@ -134,6 +136,7 @@ public class InventoryTest extends EntitySystem {
         woodItem.add(new QuantityComponent());
         woodItem.add(new RarityComponent());
         woodItem.add(new DescriptionComponent());
+        woodItem.add(new EquipTypeComponent());
         cg.getName(woodItem).name = "Wood";
         cg.getSprite(woodItem).texture = new Texture(Gdx.files.internal("testPlayer.png"));
         cg.getQuantity(woodItem).quantity = 8;
