@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
@@ -47,7 +48,26 @@ public class InventoryChangeListener extends ClickListener {
 //        stage = inventorySlot.getStage();
         // check if inventory slot holds an item and is a material type
         if (!inventorySlot.isEmpty() && Mappers.inventoryItem.get(occupiedItem).itemType == ItemType.MATERIAL) {
-            inventorySlot.setClicked(true);
+//            inventorySlot.setClicked(true);
+            stage = inventorySlot.getStage();
+            
+            Window itemInfo = new Window("", skin);
+            itemInfo.getTitleLabel().setText(Mappers.name.get(occupiedItem).name + " x" + Mappers.quantity.get(occupiedItem).quantity);
+
+            Label itemRarity = new Label("" + Mappers.rarity.get(occupiedItem).rarity, skin, "pixel2D", Color.BLACK);
+            itemRarity.setWrap(true);
+            itemRarity.setAlignment(Align.left);
+
+            Label itemDesc = new Label(Mappers.description.get(occupiedItem).description, skin, "pixel2D", Color.BLACK);
+            itemDesc.setWrap(true);
+            itemDesc.setAlignment(Align.left);
+
+            itemInfo.add(itemRarity).grow();
+            itemInfo.row();
+            itemInfo.add(itemDesc).grow();
+
+            stage.addActor(itemInfo);
+
 //            System.out.println(Mappers.name.get(occupiedItem).name);
 //            Dialog itemInfo = new Dialog("" + Mappers.name.get(occupiedItem).name, skin);
 //            itemInfo.getTitleTable().center();
