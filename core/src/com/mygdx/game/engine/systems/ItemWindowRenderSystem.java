@@ -72,8 +72,6 @@ public class ItemWindowRenderSystem extends EntitySystem {
                 equipSlots.get(i).setClicked(false);
             }
         }
-        stage.act();
-        stage.draw();
     }
 
     private Window makeItemWindow(Entity occupiedItem) {
