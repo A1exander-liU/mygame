@@ -63,7 +63,7 @@ public class InventoryRenderSystem extends EntitySystem {
         player = MyGame.engine.getEntitiesFor(Families.player).get(0);
         stage = new Stage(new ScreenViewport());
         GameScreen.inventoryMultiplexer.addProcessor(stage);
-        Gdx.input.setInputProcessor(GameScreen.inventoryMultiplexer);
+        Gdx.input.setInputProcessor(stage);
 
         skin = new Skin();
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/PressStart2P-Regular.ttf"));
@@ -131,6 +131,7 @@ public class InventoryRenderSystem extends EntitySystem {
             root.setSize(stage.getWidth(), stage.getHeight());
             stage.addActor(root);
             Table inventory = new Table();
+            inventory.setName("inventory");
             inventory.setDebug(false);
             inventory.setBackground(skin.getDrawable("player-hud-bg-01"));
             inventory.setSize(root.getWidth() * 0.75f, root.getHeight() * 0.60f);
@@ -228,6 +229,7 @@ public class InventoryRenderSystem extends EntitySystem {
     private void addEquipSlots(Table inventory) {
         InventoryComponent inventoryComponent = cg.getInventory(player);
         Table equipSlots = new Table();
+        equipSlots.setName("equipSlots");
         equipSlots.setDebug(false);
 
         equipSlots.setSize(inventory.getWidth() * 0.4f, inventory.getHeight() * 0.95f);
