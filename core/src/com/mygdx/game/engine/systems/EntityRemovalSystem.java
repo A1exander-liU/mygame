@@ -18,7 +18,7 @@ public class EntityRemovalSystem extends EntitySystem {
     ImmutableArray<Entity> spawns;
 
     public EntityRemovalSystem(ComponentGrabber cg) {
-        super(101);
+        super(102);
         this.cg = cg;
         enemies = MyGame.engine.getEntitiesFor(Families.enemies);
         spawns = MyGame.engine.getEntitiesFor(Families.spawns);

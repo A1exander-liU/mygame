@@ -28,7 +28,7 @@ public class ItemWindowRenderSystem extends EntitySystem {
     Skin skin;
 
     public ItemWindowRenderSystem() {
-
+        super(101);
         player = MyGame.engine.getEntitiesFor(Families.player).get(0);
         InventoryComponent inventoryComponent = Mappers.inventory.get(player);
         inventorySlots = inventoryComponent.inventorySlots;
