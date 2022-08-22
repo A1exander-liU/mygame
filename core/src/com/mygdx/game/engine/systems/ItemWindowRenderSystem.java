@@ -8,11 +8,13 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
@@ -46,7 +48,9 @@ public class ItemWindowRenderSystem extends EntitySystem {
         equipSlots = inventoryComponent.equipSlots;
 
         stage = new Stage(new ScreenViewport());
-        GameScreen.inventoryMultiplexer.addProcessor(stage);
+//        GameScreen.inventoryMultiplexer.addProcessor(stage);
+//        Gdx.input.setInputProcessor(GameScreen.inventoryMultiplexer);
+
 
         skin = new Skin();
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/PressStart2P-Regular.ttf"));
@@ -65,6 +69,7 @@ public class ItemWindowRenderSystem extends EntitySystem {
             if (inventorySlots.get(i).getItemWindowListener().getRecentWindow() != null) {
                 stage = inventorySlots.get(i).getStage();
                 removePreviousWindows();
+                Table inventory = (Table) stage.getActors().get(stage.getActors().size - 1);
                 stage.addActor(inventorySlots.get(i).getItemWindowListener().getRecentWindow());
                 inventorySlots.get(i).getItemWindowListener().setRecentWindow(null);
             }
@@ -74,6 +79,8 @@ public class ItemWindowRenderSystem extends EntitySystem {
                 equipSlots.get(i).setClicked(false);
             }
         }
+        stage.act();
+        stage.draw();
     }
 
     private void removePreviousWindows() {
@@ -82,4 +89,13 @@ public class ItemWindowRenderSystem extends EntitySystem {
                 stage.getActors().removeIndex(i);
         }
     }
+
+    private Actor find(String actorName) {
+        for (int i = 0; i < stage.getActors().size; i++) {
+            if (Objects.equals(stage.getActors().get(i).getName(), actorName))
+                return stage.getActors().get(i);
+        }
+        return null;
+    }
+
 }
