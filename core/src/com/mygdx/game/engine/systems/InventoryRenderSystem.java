@@ -232,6 +232,7 @@ public class InventoryRenderSystem extends EntitySystem {
                 ItemInfoDialog dialog = new ItemInfoDialog("", skin, inventorySlot);
                 dialog.getTitleLabel().setText(cg.getName(inventorySlot.getOccupiedItem()).name);
                 dialog.show(stage);
+                dialog.setWidth(200);
                 inventorySlot.getItemWindowListener().setRecentWindow(null);
             }
         }
