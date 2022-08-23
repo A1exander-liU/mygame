@@ -22,9 +22,11 @@ public class ItemInfoDialog extends Dialog {
 
     public ItemInfoDialog(String title, Skin skin, InventorySlot inventorySlot) {
         super(title, skin);
+        getTitleLabel().setAlignment(Align.center);
         this.inventorySlot = inventorySlot;
         item = inventorySlot.getOccupiedItem();
         baseDialog();
+        decideDialogToBuild();
     }
 
     public ItemInfoDialog(String title, Skin skin, String windowStyleName) {
@@ -49,7 +51,7 @@ public class ItemInfoDialog extends Dialog {
 
     private void baseDialog() {
         Label itemRarity = new Label("" + Mappers.rarity.get(item).rarity, getSkin(), "pixel2D", Color.BLACK);
-        itemRarity.setAlignment(Align.left);
+        itemRarity.setAlignment(Align.center);
         Image itemSprite = new Image(new TextureRegionDrawable(Mappers.sprite.get(item).texture));
         itemSprite.setScaling(Scaling.contain);
 
