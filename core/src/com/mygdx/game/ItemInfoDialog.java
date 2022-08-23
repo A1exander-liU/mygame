@@ -5,13 +5,17 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.Align;
 import com.mygdx.game.utils.InventorySlot;
 
 public class ItemInfoDialog extends Dialog {
 
-    public ItemInfoDialog(String title, Skin skin) {
+    InventorySlot inventorySlot;
+
+    public ItemInfoDialog(String title, Skin skin, InventorySlot inventorySlot) {
         super(title, skin);
+        this.inventorySlot = inventorySlot;
     }
 
     public ItemInfoDialog(String title, Skin skin, String windowStyleName) {
@@ -24,8 +28,15 @@ public class ItemInfoDialog extends Dialog {
     }
 
     {
+        Button button = new Button();
         Label label = new Label("Close?", getSkin(), "pixel2D", Color.BLACK);
+
         text(label);
+        button("Yes", "yes");
+        button("No", "no");
+
+        getContentTable().pad(5);
+        getButtonTable().pad(5);
     }
 
     @Override
