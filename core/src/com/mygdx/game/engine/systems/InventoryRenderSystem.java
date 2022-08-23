@@ -120,7 +120,6 @@ public class InventoryRenderSystem extends EntitySystem {
 
     @Override
     public void update(float delta) {
-//        stage.clear();
         // inventory button states don't work properly
         // problem: might be b/c it is redrawing every frame, the button states
         // are not registering
@@ -195,8 +194,6 @@ public class InventoryRenderSystem extends EntitySystem {
                 inventorySlots.row();
             }
             InventorySlot inventorySlot = inventoryComponent.inventorySlots.get(i);
-//            inventorySlot.setOccupiedItem(inventorySlot.getOccupiedItem());
-//            Entity inventoryItem = inventorySlot.getOccupiedItem();
 
             if (inventorySlot.getChildren().size > 0) {
                 inventorySlot.getChildren().get(0).remove();
@@ -220,8 +217,6 @@ public class InventoryRenderSystem extends EntitySystem {
             inventorySlot.add(stack).grow();
 
             inventorySlots.add(inventorySlot).width(inventorySlots.getWidth() / 4).height(inventorySlots.getHeight() / 4);
-
-//            inventoryComponent.inventorySlots.set(i, inventorySlot);
 
             cols++;
         }
