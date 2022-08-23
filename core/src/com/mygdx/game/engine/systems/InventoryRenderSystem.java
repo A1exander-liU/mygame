@@ -56,6 +56,8 @@ public class InventoryRenderSystem extends EntitySystem {
 
     DragAndDrop dragAndDrop;
 
+    Table inventory;
+
     public InventoryRenderSystem(ComponentGrabber cg) {
         super(100);
         this.cg = cg;
@@ -108,7 +110,7 @@ public class InventoryRenderSystem extends EntitySystem {
         root.setFillParent(true);
         root.setSize(stage.getWidth(), stage.getHeight());
         stage.addActor(root);
-        Table inventory = new Table();
+        inventory = new Table();
         inventory.setName("inventory");
         inventory.setDebug(false);
         inventory.setBackground(skin.getDrawable("player-hud-bg-01"));
@@ -136,9 +138,7 @@ public class InventoryRenderSystem extends EntitySystem {
             // immediately set to false so the inventory is only drawn once
             // when it is opened once
             canDraw = false;
-            stage.getActors();
-            // put inventory table here
-            addInventorySlots(new Table());
+            addInventorySlots(inventory);
             stage.act(delta);
             stage.draw();
         }
@@ -177,6 +177,7 @@ public class InventoryRenderSystem extends EntitySystem {
     }
 
     private void addInventorySlots(Table inventory) {
+        inventory.clearChildren();
         Table inventorySlots = new Table();
         inventorySlots.setName("inventorySlots");
 
