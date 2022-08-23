@@ -1,5 +1,6 @@
 package com.mygdx.game;
 
+import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
@@ -12,10 +13,12 @@ import com.mygdx.game.utils.InventorySlot;
 public class ItemInfoDialog extends Dialog {
 
     InventorySlot inventorySlot;
+    Entity item;
 
     public ItemInfoDialog(String title, Skin skin, InventorySlot inventorySlot) {
         super(title, skin);
         this.inventorySlot = inventorySlot;
+        item = inventorySlot.getOccupiedItem();
     }
 
     public ItemInfoDialog(String title, Skin skin, String windowStyleName) {
