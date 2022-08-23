@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Scaling;
+import com.mygdx.game.engine.ItemType;
 import com.mygdx.game.engine.Mappers;
 import com.mygdx.game.utils.InventorySlot;
 
@@ -60,6 +61,18 @@ public class ItemInfoDialog extends Dialog {
 
         getContentTable().padTop(5);
         getButtonTable().pad(5);
+    }
+
+    private void decideDialogToBuild() {
+        if (Mappers.inventoryItem.get(item).itemType == ItemType.MATERIAL) {
+
+        }
+        else if (Mappers.inventoryItem.get(item).itemType == ItemType.CONSUMABLE) {
+
+        }
+        else if (Mappers.inventoryItem.get(item).itemType == ItemType.EQUIPMENT) {
+            
+        }
     }
 
 }
