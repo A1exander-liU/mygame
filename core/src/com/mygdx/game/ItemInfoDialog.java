@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.Align;
+import com.mygdx.game.engine.Mappers;
 import com.mygdx.game.utils.InventorySlot;
 
 public class ItemInfoDialog extends Dialog {
@@ -19,6 +20,7 @@ public class ItemInfoDialog extends Dialog {
         super(title, skin);
         this.inventorySlot = inventorySlot;
         item = inventorySlot.getOccupiedItem();
+        baseDialog();
     }
 
     public ItemInfoDialog(String title, Skin skin, String windowStyleName) {
@@ -30,17 +32,6 @@ public class ItemInfoDialog extends Dialog {
 
     }
 
-    {
-        Label label = new Label("Close?", getSkin(), "pixel2D", Color.BLACK);
-
-        text(label);
-        button("Yes", "yes");
-        button("No", "no");
-
-        getContentTable().pad(5);
-        getButtonTable().pad(5);
-    }
-
     @Override
     protected void result(Object object) {
         if (object.equals("yes")) {
@@ -50,6 +41,17 @@ public class ItemInfoDialog extends Dialog {
             cancel();
         }
 
+    }
+
+    private void baseDialog() {
+        Label label = new Label(Mappers.name.get(item).name, getSkin(), "pixel2D", Color.BLACK);
+
+        text(label);
+        button("Yes", "yes");
+        button("No", "no");
+
+        getContentTable().pad(5);
+        getButtonTable().pad(5);
     }
 
 }
