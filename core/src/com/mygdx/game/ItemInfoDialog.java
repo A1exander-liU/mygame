@@ -79,8 +79,9 @@ public class ItemInfoDialog extends Dialog {
 
     private void addMaterialInfo() {
         Label desc = new Label(Mappers.description.get(item).description, getSkin(), "pixel2D", Color.BLACK);
+        desc.setWrap(true);
 
         getContentTable().row();
-        getContentTable().add(desc);
+        getContentTable().add(desc).grow();
     }
 }
