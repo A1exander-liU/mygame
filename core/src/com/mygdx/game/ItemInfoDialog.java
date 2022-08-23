@@ -65,14 +65,20 @@ public class ItemInfoDialog extends Dialog {
 
     private void decideDialogToBuild() {
         if (Mappers.inventoryItem.get(item).itemType == ItemType.MATERIAL) {
-
+            addMaterialInfo();
         }
         else if (Mappers.inventoryItem.get(item).itemType == ItemType.CONSUMABLE) {
 
         }
         else if (Mappers.inventoryItem.get(item).itemType == ItemType.EQUIPMENT) {
-            
+
         }
     }
 
+    private void addMaterialInfo() {
+        Label desc = new Label(Mappers.description.get(item).description, getSkin(), "pixel2D", Color.BLACK);
+
+        getContentTable().row();
+        getContentTable().add(desc);
+    }
 }
