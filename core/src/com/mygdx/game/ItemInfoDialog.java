@@ -28,7 +28,6 @@ public class ItemInfoDialog extends Dialog {
     }
 
     {
-        Button button = new Button();
         Label label = new Label("Close?", getSkin(), "pixel2D", Color.BLACK);
 
         text(label);
