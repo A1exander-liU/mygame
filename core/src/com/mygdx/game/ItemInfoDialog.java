@@ -50,7 +50,7 @@ public class ItemInfoDialog extends Dialog {
     }
 
     private void baseDialog() {
-        Label itemRarity = new Label("" + Mappers.rarity.get(item).rarity, getSkin(), "pixel2D", Color.BLACK);
+        Label itemRarity = new Label("" + Mappers.rarity.get(item).rarity, getSkin(), "pixel2D", RarityColour.getColour(Mappers.rarity.get(item).rarity));
         itemRarity.setAlignment(Align.center);
         Image itemSprite = new Image(new TextureRegionDrawable(Mappers.sprite.get(item).texture));
         itemSprite.setScaling(Scaling.contain);
