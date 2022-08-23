@@ -29,6 +29,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.SnapshotArray;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.InventoryChangeListener;
+import com.mygdx.game.ItemInfoDialog;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.AcceptedEquipType;
 import com.mygdx.game.engine.ComponentGrabber;
@@ -43,8 +44,6 @@ import com.mygdx.game.engine.systems.combat.EnemyAttackSystem;
 import com.mygdx.game.engine.systems.enemyai.SteeringSystem;
 import com.mygdx.game.screens.GameScreen;
 import com.mygdx.game.utils.InventorySlot;
-
-import org.graalvm.compiler.debug.CSVUtil;
 
 public class InventoryRenderSystem extends EntitySystem {
     ComponentGrabber cg;
@@ -104,6 +103,17 @@ public class InventoryRenderSystem extends EntitySystem {
         // rarity:
 
         dragAndDrop = new DragAndDrop();
+
+        Table root = new Table();
+        root.setFillParent(true);
+        root.setSize(stage.getWidth(), stage.getHeight());
+        stage.addActor(root);
+        Table inventory = new Table();
+        inventory.setName("inventory");
+        inventory.setDebug(false);
+        inventory.setBackground(skin.getDrawable("player-hud-bg-01"));
+        inventory.setSize(root.getWidth() * 0.75f, root.getHeight() * 0.60f);
+        root.add(inventory).expand().center().width(inventory.getWidth()).height(inventory.getHeight());
     }
 
     @Override
@@ -126,21 +136,12 @@ public class InventoryRenderSystem extends EntitySystem {
             // immediately set to false so the inventory is only drawn once
             // when it is opened once
             canDraw = false;
-            Table root = new Table();
-            root.setFillParent(true);
-            root.setSize(stage.getWidth(), stage.getHeight());
-            stage.addActor(root);
-            Table inventory = new Table();
-            inventory.setName("inventory");
-            inventory.setDebug(false);
-            inventory.setBackground(skin.getDrawable("player-hud-bg-01"));
-            inventory.setSize(root.getWidth() * 0.75f, root.getHeight() * 0.60f);
-            root.add(inventory).expand().center().width(inventory.getWidth()).height(inventory.getHeight());
-
-            addInventorySlots(inventory);
+            stage.getActors();
+            // put inventory table here
+            addInventorySlots(new Table());
+            stage.act(delta);
+            stage.draw();
         }
-        stage.act(delta);
-        stage.draw();
     }
 
     private void toggleInventory() {
@@ -155,7 +156,6 @@ public class InventoryRenderSystem extends EntitySystem {
             inventoryOpened = false;
             // also clear stage so inventory wont be displayed
             // (since all ui elements are removed from the stage)
-            stage.clear();
         }
     }
 
@@ -223,6 +223,18 @@ public class InventoryRenderSystem extends EntitySystem {
 //            inventoryComponent.inventorySlots.set(i, inventorySlot);
 
             cols++;
+        }
+
+        for (int i = 0; i < inventoryComponent.inventorySlots.size; i++) {
+            InventorySlot inventorySlot = inventoryComponent.inventorySlots.get(i);
+            if (inventorySlot.getItemWindowListener().getRecentWindow() != null) {
+//                inventorySlots.addActor(inventorySlot.getItemWindowListener().getRecentWindow());
+                ItemInfoDialog dialog = new ItemInfoDialog("", skin);
+                dialog.getTitleLabel().setText(cg.getName(inventorySlot.getOccupiedItem()).name);
+                dialog.pack();
+                inventorySlots.addActor(dialog);
+                inventorySlot.getItemWindowListener().setRecentWindow(null);
+            }
         }
     }
 
