@@ -99,8 +99,9 @@ public class ItemInfoDialog extends Dialog {
 
         Label desc = new Label(Mappers.description.get(item).description, getSkin(), "pixel2D", Color.BLACK);
 
+
         Table weaponStatTable = new Table();
-        weaponStatTable.defaults().expand().fill();
+        weaponStatTable.defaults().expand().fill().space(5);
         weaponStatTable.add(dmgTitle);
         weaponStatTable.add(dmg);
         weaponStatTable.row();
