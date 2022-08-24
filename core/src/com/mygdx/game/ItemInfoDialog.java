@@ -117,6 +117,6 @@ public class ItemInfoDialog extends Dialog {
         getContentTable().row();
         getContentTable().add(weaponStatTable);
         getContentTable().row();
-        getContentTable().add(desc);
+        getContentTable().add(desc).grow();
     }
 }
