@@ -24,7 +24,7 @@ public class ItemFactory {
         this.itemFinder = itemFinder;
     }
 
-    public void makeMaterial(String materialName, int amount) {
+    public Entity makeMaterial(String materialName, int amount) {
         JsonValue material = itemFinder.findMaterialByName(materialName);
         Entity materialEntity = new Entity();
         materialEntity.add(new Name());
@@ -43,6 +43,7 @@ public class ItemFactory {
         Mappers.inventoryItem.get(materialEntity).itemType = ItemType.MATERIAL;
 
         addToEngine(materialEntity);
+        return materialEntity;
     }
 
     public Entity makeWeapon(String weaponName) {
