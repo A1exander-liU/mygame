@@ -151,12 +151,13 @@ public class ItemInfoDialog extends Dialog {
     private void checkTargetEquipSlot() {
         InventorySlot equipSlot = getEquipSlot(Mappers.equipType.get(item).acceptedEquipType);
         if (equipSlot != null && equipSlot.isEmpty())
+            inventoryUi.swapEquipment(inventorySlot, equipSlot);
     }
 
     private InventorySlot getEquipSlot(AcceptedEquipType equipType) {
         Array<InventorySlot> equipSlots = Mappers.inventory.get(player).equipSlots;
         for (int i = 0; i < equipSlots.size; i++) {
-            if (Mappers.equipType.get(equipSlots.get(i).getOccupiedItem()).acceptedEquipType == equipType)
+            if (equipSlots.get(i).getAcceptedEquipType() == equipType)
                 return equipSlots.get(i);
         }
         return null;
