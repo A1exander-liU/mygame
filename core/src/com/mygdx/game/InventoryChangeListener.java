@@ -108,6 +108,6 @@ public class InventoryChangeListener extends ClickListener {
     }
 
     public void setRecentWindow(Window window) {
-        recentWindow = null;
+        recentWindow = window;
     }
 }
