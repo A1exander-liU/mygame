@@ -54,6 +54,9 @@ public class ItemInfoDialog extends Dialog {
         else if (object.equals("equip")) {
             checkTargetEquipSlot();
         }
+        else if (object.equals("unequip")) {
+            
+        }
         else {
             cancel();
         }
