@@ -76,7 +76,11 @@ public class ItemFactory {
         return weaponEntity;
     }
 
-    public Entity makeArmour(String name) {
+    public Entity makeArmour(String name, AcceptedEquipType armourType) {
+        JsonValue armour;
+        if (armourType == AcceptedEquipType.TORSO)
+            armour = itemFinder.findChestArmourByName(name);
+        
         Entity armourEntity = new Entity();
 
         return armourEntity;
