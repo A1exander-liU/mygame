@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Scaling;
@@ -72,7 +73,7 @@ public class ItemInfoDialog extends Dialog {
 
         }
         else if (Mappers.inventoryItem.get(item).itemType == ItemType.EQUIPMENT) {
-
+            addWeaponInfo();
         }
     }
 
@@ -96,6 +97,25 @@ public class ItemInfoDialog extends Dialog {
         Label critChance = new Label(weaponStat.critChance + "%", getSkin(), "pixel2D", Color.BLACK);
         Label critDmg = new Label(weaponStat.critDmg + "x", getSkin(), "pixel2D", Color.BLACK);
 
+        Label desc = new Label(Mappers.description.get(item).description, getSkin(), "pixel2D", Color.BLACK);
 
+        Table weaponStatTable = new Table();
+        weaponStatTable.defaults().expand().fill();
+        weaponStatTable.add(dmgTitle);
+        weaponStatTable.add(dmg);
+        weaponStatTable.row();
+        weaponStatTable.add(attackDelayTitle);
+        weaponStatTable.add(attackDelay);
+        weaponStatTable.row();
+        weaponStatTable.add(critTitle);
+        weaponStatTable.add(critChance);
+        weaponStatTable.row();
+        weaponStatTable.add(critDmgTitle);
+        weaponStatTable.add(critDmg);
+
+        getContentTable().row();
+        getContentTable().add(weaponStatTable);
+        getContentTable().row();
+        getContentTable().add(desc);
     }
 }
