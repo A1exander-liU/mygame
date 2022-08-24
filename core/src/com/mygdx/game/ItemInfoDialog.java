@@ -152,6 +152,8 @@ public class ItemInfoDialog extends Dialog {
         InventorySlot equipSlot = getEquipSlot(Mappers.equipType.get(item).acceptedEquipType);
         if (equipSlot != null && !equipSlot.isEmpty())
             inventoryUi.swapEquipment(inventorySlot, equipSlot);
+        else
+            inventoryUi.equip(inventorySlot, equipSlot);
     }
 
     private InventorySlot getEquipSlot(AcceptedEquipType equipType) {
