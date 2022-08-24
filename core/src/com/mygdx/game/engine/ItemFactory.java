@@ -42,7 +42,7 @@ public class ItemFactory {
         addToEngine(materialEntity);
     }
 
-    public void makeWeapon(String weaponName) {
+    public Entity makeWeapon(String weaponName) {
         JsonValue weapon = itemFinder.findWeaponByName(weaponName);
         Entity weaponEntity = new Entity();
         weaponEntity.add(new Name());
@@ -68,6 +68,7 @@ public class ItemFactory {
         weaponStat.critDmg = weapon.getFloat("critDmg");
 
         addToEngine(weaponEntity);
+        return weaponEntity;
     }
 
     private Rarity determineRarity(String rarity) {
