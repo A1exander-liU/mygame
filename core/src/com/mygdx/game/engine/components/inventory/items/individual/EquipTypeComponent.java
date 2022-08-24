@@ -1,4 +1,4 @@
-package com.mygdx.game.engine.components;
+package com.mygdx.game.engine.components.inventory.items.individual;
 
 import com.badlogic.ashley.core.Component;
 import com.mygdx.game.engine.AcceptedEquipType;

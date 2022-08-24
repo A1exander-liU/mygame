@@ -12,7 +12,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Scaling;
 import com.mygdx.game.engine.ItemType;
 import com.mygdx.game.engine.Mappers;
-import com.mygdx.game.engine.components.WeaponStatComponent;
+import com.mygdx.game.engine.components.inventory.items.individual.WeaponStatComponent;
 import com.mygdx.game.utils.InventorySlot;
 
 public class ItemInfoDialog extends Dialog {
