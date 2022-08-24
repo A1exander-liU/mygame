@@ -78,8 +78,9 @@ public class ItemInfoDialog extends Dialog {
     }
 
     private void addMaterialInfo() {
-        Label desc = new Label(Mappers.description.get(item).description, getSkin(), "pixel2D", Color.BLACK);
+        Label desc = new Label("\"" + Mappers.description.get(item).description + "\"", getSkin(), "pixel2D", Color.BLACK);
         desc.setWrap(true);
+        desc.setAlignment(Align.center);
 
         getContentTable().row();
         getContentTable().add(desc).grow();
@@ -97,7 +98,7 @@ public class ItemInfoDialog extends Dialog {
         Label critChance = new Label(weaponStat.critChance + "%", getSkin(), "pixel2D", Color.BLACK);
         Label critDmg = new Label(weaponStat.critDmg + "x", getSkin(), "pixel2D", Color.BLACK);
 
-        Label desc = new Label(Mappers.description.get(item).description, getSkin(), "pixel2D", Color.BLACK);
+        Label desc = new Label("\"" + Mappers.description.get(item).description + "\"", getSkin(), "pixel2D", Color.BLACK);
         desc.setAlignment(Align.center);
         desc.setWrap(true);
 
