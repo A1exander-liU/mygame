@@ -1,4 +1,6 @@
 package com.mygdx.game.engine.components.inventory.items.individual;
 
-public class StackableComponent {
+import com.badlogic.ashley.core.Component;
+
+public class StackableComponent implements Component {
 }
