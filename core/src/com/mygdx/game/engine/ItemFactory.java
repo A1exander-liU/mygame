@@ -78,7 +78,7 @@ public class ItemFactory {
     }
 
     public Entity makeArmour(String name, AcceptedEquipType armourType) {
-        JsonValue armour;
+        JsonValue armour = null;
         if (armourType == AcceptedEquipType.TORSO)
             armour = itemFinder.findChestArmourByName(name);
         Entity armourEntity = new Entity();
@@ -89,6 +89,13 @@ public class ItemFactory {
         armourEntity.add(new InventoryItemComponent());
         armourEntity.add(new EquipTypeComponent());
         armourEntity.add(new ArmourStatComponent());
+
+        Mappers.name.get(armourEntity).name = armour.getString("name");
+        Mappers.sprite.get(armourEntity).texture = new Texture(Gdx.files.internal(armour.getString("sprite")));
+        Mappers.rarity.get(armourEntity).rarity = determineRarity(armour.getString("rarity"));
+        Mappers.description.get(armourEntity).description = armour.getString("desc");
+        Mappers.inventoryItem.get(armourEntity).itemType = ItemType.EQUIPMENT;
+        Mappers.equipType.get(armourEntity).acceptedEquipType = AcceptedEquipType.TORSO;
 
         return armourEntity;
     }
