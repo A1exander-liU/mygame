@@ -51,7 +51,8 @@ public class InventoryChangeListener extends ClickListener {
 
     @Override
     public void clicked(InputEvent event, float x, float y) {
-        clickedItemSlot = (InventorySlot) event.getListenerActor();
+        if (((InventorySlot) event.getListenerActor()).getOccupiedItem() != null)
+            clickedItemSlot = (InventorySlot) event.getListenerActor();
     }
 
     public InventorySlot getClickedItemSlot() {
