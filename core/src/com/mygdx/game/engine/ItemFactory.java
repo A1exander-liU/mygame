@@ -10,6 +10,7 @@ import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.components.inventory.items.individual.EquipTypeComponent;
 import com.mygdx.game.engine.components.Name;
 import com.mygdx.game.engine.components.Sprite;
+import com.mygdx.game.engine.components.inventory.items.individual.StackableComponent;
 import com.mygdx.game.engine.components.inventory.items.individual.WeaponStatComponent;
 import com.mygdx.game.engine.components.inventory.items.shared.DescriptionComponent;
 import com.mygdx.game.engine.components.inventory.items.shared.InventoryItemComponent;
@@ -32,6 +33,7 @@ public class ItemFactory {
         materialEntity.add(new DescriptionComponent());
         materialEntity.add(new QuantityComponent());
         materialEntity.add(new InventoryItemComponent());
+        materialEntity.add(new StackableComponent());
 
         Mappers.name.get(materialEntity).name = material.getString("name");
         Mappers.sprite.get(materialEntity).texture = new Texture(Gdx.files.internal(material.getString("sprite")));
