@@ -10,6 +10,7 @@ import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.AcceptedEquipType;
 import com.mygdx.game.engine.ComponentGrabber;
 import com.mygdx.game.engine.Families;
+import com.mygdx.game.engine.ItemFactory;
 import com.mygdx.game.engine.ItemType;
 import com.mygdx.game.engine.Mappers;
 import com.mygdx.game.engine.Rarity;
@@ -29,6 +30,7 @@ import java.util.Objects;
 public class InventoryTest extends EntitySystem {
     ComponentGrabber cg;
     Entity player;
+    ItemFactory itemFactory;
     // current inventory design:
 
     // inventory component which has:
@@ -53,10 +55,11 @@ public class InventoryTest extends EntitySystem {
     // hp, mana, clear statuses, buffs
     int currentSlot = 20;
 
-    public InventoryTest(ComponentGrabber cg) {
+    public InventoryTest(ComponentGrabber cg, ItemFactory itemFactory) {
         super(99);
         this.cg = cg;
         player = MyGame.engine.getEntitiesFor(Families.player).get(0);
+        this.itemFactory = itemFactory;
         test();
     }
 

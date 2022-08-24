@@ -123,7 +123,7 @@ public class GameScreen implements Screen {
         EnemyAttackSystem enemyAttackSystem = new EnemyAttackSystem(cg, parent);
         PlayerHudRenderSystem playerHudRenderSystem = new PlayerHudRenderSystem(cg);
         InventoryRenderSystem inventoryRenderSystem = new InventoryRenderSystem(cg);
-        InventoryTest inventoryTest = new InventoryTest(cg);
+        InventoryTest inventoryTest = new InventoryTest(cg, itemFactory);
         ItemWindowRenderSystem itemWindowRenderSystem = new ItemWindowRenderSystem();
         MyGame.engine.addSystem(movementSystem);
         MyGame.engine.addSystem(enemySpawningSystem);
