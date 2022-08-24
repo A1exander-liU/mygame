@@ -9,6 +9,7 @@ import com.mygdx.game.JsonItemFinder;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.components.Name;
 import com.mygdx.game.engine.components.Sprite;
+import com.mygdx.game.engine.components.WeaponStatComponent;
 import com.mygdx.game.engine.components.inventory.items.shared.DescriptionComponent;
 import com.mygdx.game.engine.components.inventory.items.shared.InventoryItemComponent;
 import com.mygdx.game.engine.components.inventory.items.shared.QuantityComponent;
@@ -38,6 +39,19 @@ public class ItemFactory {
         Mappers.quantity.get(materialEntity).quantity = amount;
 
         addToEngine(materialEntity);
+    }
+
+    public void makeWeapon(String weaponName) {
+        JsonValue weapon = itemFinder.findWeaponByName(weaponName);
+        Entity weaponEntity = new Entity();
+        weaponEntity.add(new Name());
+        weaponEntity.add(new Sprite());
+        weaponEntity.add(new RarityComponent());
+        weaponEntity.add(new DescriptionComponent());
+        weaponEntity.add(new InventoryItemComponent());
+        weaponEntity.add(new WeaponStatComponent());
+
+        
     }
 
     private Rarity determineRarity(String rarity) {
