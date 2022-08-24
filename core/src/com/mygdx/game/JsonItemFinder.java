@@ -8,10 +8,12 @@ import java.util.Objects;
 
 public class JsonItemFinder extends JsonReader {
     private final JsonValue materials;
+    private final JsonValue weapons;
 
     public JsonItemFinder() {
         super();
         materials = super.parse(Gdx.files.internal("gameData/itemData/materials.json")).get("materials");
+        weapons = super.parse(Gdx.files.internal("gameData/itemData/weapons.json"));
     }
 
     public JsonValue findMaterialByName(String itemName) {
