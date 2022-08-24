@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.JsonValue;
 import com.mygdx.game.JsonItemFinder;
 import com.mygdx.game.MyGame;
+import com.mygdx.game.engine.components.inventory.items.individual.ArmourStatComponent;
 import com.mygdx.game.engine.components.inventory.items.individual.EquipTypeComponent;
 import com.mygdx.game.engine.components.Name;
 import com.mygdx.game.engine.components.Sprite;
@@ -80,8 +81,14 @@ public class ItemFactory {
         JsonValue armour;
         if (armourType == AcceptedEquipType.TORSO)
             armour = itemFinder.findChestArmourByName(name);
-        
         Entity armourEntity = new Entity();
+        armourEntity.add(new Name());
+        armourEntity.add(new Sprite());
+        armourEntity.add(new RarityComponent());
+        armourEntity.add(new DescriptionComponent());
+        armourEntity.add(new InventoryItemComponent());
+        armourEntity.add(new EquipTypeComponent());
+        armourEntity.add(new ArmourStatComponent());
 
         return armourEntity;
     }
