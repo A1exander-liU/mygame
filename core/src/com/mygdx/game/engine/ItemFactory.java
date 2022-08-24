@@ -34,6 +34,7 @@ public class ItemFactory {
         materialEntity.add(new QuantityComponent());
         materialEntity.add(new InventoryItemComponent());
         materialEntity.add(new StackableComponent());
+        materialEntity.add(new EquipTypeComponent());
 
         Mappers.name.get(materialEntity).name = material.getString("name");
         Mappers.sprite.get(materialEntity).texture = new Texture(Gdx.files.internal(material.getString("sprite")));
