@@ -17,6 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.ItemInfoDialog;
 import com.mygdx.game.MyGame;
@@ -184,10 +185,12 @@ public class InventoryRenderSystem extends EntitySystem {
             }
 
             Stack stack = new Stack();
+            stack.setDebug(true);
             inventorySlot.add(stack);
             if (!inventorySlot.isEmpty()) {
                 TextureRegionDrawable drawable = new TextureRegionDrawable(cg.getSprite(inventorySlot.getOccupiedItem()).texture);
                 Image image = new Image(drawable);
+                image.setScaling(Scaling.contain);
 
                 Label label = new Label("", skin, "pixel2D", Color.BLACK);
                 if (cg.getQuantity(inventorySlot.getOccupiedItem()) != null)
@@ -198,7 +201,7 @@ public class InventoryRenderSystem extends EntitySystem {
                 stack.add(label);
             }
 
-            inventorySlot.add(stack).grow();
+            inventorySlot.add(stack).expand().fill();
 
             inventorySlots.add(inventorySlot).width(inventorySlots.getWidth() / 4).height(inventorySlots.getHeight() / 4);
 
