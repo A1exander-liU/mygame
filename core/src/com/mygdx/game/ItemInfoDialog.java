@@ -23,6 +23,7 @@ public class ItemInfoDialog extends Dialog {
     InventorySlot inventorySlot;
     Entity item;
     Entity player;
+    InventoryUi inventoryUi;
 
     public ItemInfoDialog(String title, Skin skin, InventorySlot inventorySlot) {
         super(title, skin);
@@ -30,6 +31,7 @@ public class ItemInfoDialog extends Dialog {
         this.inventorySlot = inventorySlot;
         item = inventorySlot.getOccupiedItem();
         player = MyGame.engine.getEntitiesFor(Families.player).get(0);
+        inventoryUi = new InventoryUi();
         baseDialog();
         decideDialogToBuild();
     }
@@ -47,6 +49,9 @@ public class ItemInfoDialog extends Dialog {
     protected void result(Object object) {
         if (object.equals("close")) {
             hide();
+        }
+        else if (object.equals("equip")) {
+            
         }
         else {
             cancel();
