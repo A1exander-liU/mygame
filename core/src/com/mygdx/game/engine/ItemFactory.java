@@ -51,7 +51,11 @@ public class ItemFactory {
         weaponEntity.add(new InventoryItemComponent());
         weaponEntity.add(new WeaponStatComponent());
 
-        
+        Mappers.name.get(weaponEntity).name = weapon.getString("name");
+        Mappers.sprite.get(weaponEntity).texture = new Texture(Gdx.files.internal(weapon.getString("sprite")));
+        Mappers.rarity.get(weaponEntity).rarity = determineRarity(weapon.getString("rarity"));
+        Mappers.description.get(weaponEntity).description = weapon.getString("desc");
+        Mappers.inventoryItem.get(weaponEntity).itemType = ItemType.EQUIPMENT;
     }
 
     private Rarity determineRarity(String rarity) {
