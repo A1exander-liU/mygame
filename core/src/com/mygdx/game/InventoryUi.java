@@ -32,6 +32,9 @@ public class InventoryUi {
         // add the quantity
         Mappers.quantity.get(stack.getOccupiedItem()).quantity += Mappers.quantity.get(stacker.getOccupiedItem()).quantity;
         // dereference the stacker item
+        if (Mappers.quantity.get(stack.getOccupiedItem()).quantity > Mappers.stackable.get(stack.getOccupiedItem()).stackSize) {
+            
+        }
         inventorySlots.get(inventorySlots.indexOf(stacker, true)).setOccupiedItem(null);
     }
 
