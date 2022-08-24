@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.JsonValue;
 import com.mygdx.game.JsonItemFinder;
 import com.mygdx.game.MyGame;
+import com.mygdx.game.engine.components.EquipTypeComponent;
 import com.mygdx.game.engine.components.Name;
 import com.mygdx.game.engine.components.Sprite;
 import com.mygdx.game.engine.components.WeaponStatComponent;
@@ -49,6 +50,7 @@ public class ItemFactory {
         weaponEntity.add(new RarityComponent());
         weaponEntity.add(new DescriptionComponent());
         weaponEntity.add(new InventoryItemComponent());
+        weaponEntity.add(new EquipTypeComponent());
         weaponEntity.add(new WeaponStatComponent());
 
         Mappers.name.get(weaponEntity).name = weapon.getString("name");
@@ -56,6 +58,7 @@ public class ItemFactory {
         Mappers.rarity.get(weaponEntity).rarity = determineRarity(weapon.getString("rarity"));
         Mappers.description.get(weaponEntity).description = weapon.getString("desc");
         Mappers.inventoryItem.get(weaponEntity).itemType = ItemType.EQUIPMENT;
+        Mappers.equipType.get(weaponEntity).acceptedEquipType = AcceptedEquipType.MAIN;
     }
 
     private Rarity determineRarity(String rarity) {
