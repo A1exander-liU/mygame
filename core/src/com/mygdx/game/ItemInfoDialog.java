@@ -55,7 +55,7 @@ public class ItemInfoDialog extends Dialog {
             checkTargetEquipSlot();
         }
         else if (object.equals("unequip")) {
-            
+            InventorySlot inventorySlot = getFirstEmptyInventorySlot();
         }
         else {
             cancel();
@@ -164,6 +164,15 @@ public class ItemInfoDialog extends Dialog {
         for (int i = 0; i < equipSlots.size; i++) {
             if (equipSlots.get(i).getAcceptedEquipType() == equipType)
                 return equipSlots.get(i);
+        }
+        return null;
+    }
+
+    private InventorySlot getFirstEmptyInventorySlot() {
+        Array<InventorySlot> inventorySlots = Mappers.inventory.get(player).inventorySlots;
+        for (int i = 0; i < inventorySlots.size; i++) {
+            if (inventorySlots.get(i).isEmpty())
+                return inventorySlot;
         }
         return null;
     }
