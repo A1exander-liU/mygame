@@ -207,7 +207,7 @@ public class InventoryRenderSystem extends EntitySystem {
 
         for (int i = 0; i < inventoryComponent.inventorySlots.size; i++) {
             InventorySlot inventorySlot = inventoryComponent.inventorySlots.get(i);
-            if (inventorySlot.getItemWindowListener().getRecentWindow() != null) {
+            if (inventorySlot.getItemWindowListener().getClickedItemSlot() != null) {
                 ItemInfoDialog dialog = new ItemInfoDialog("", skin, inventorySlot);
                 dialog.getTitleLabel().setText(cg.getName(inventorySlot.getOccupiedItem()).name);
                 dialog.show(stage);
