@@ -28,6 +28,7 @@ import com.mygdx.game.engine.components.Speed;
 import com.mygdx.game.engine.components.Sprite;
 import com.mygdx.game.engine.components.StateComponent;
 import com.mygdx.game.engine.components.Steering;
+import com.mygdx.game.engine.components.inventory.items.individual.StackableComponent;
 import com.mygdx.game.engine.components.inventory.items.individual.WeaponStatComponent;
 import com.mygdx.game.engine.components.inventory.InventoryComponent;
 import com.mygdx.game.engine.components.inventory.InventorySlotComponent;
@@ -69,6 +70,7 @@ public class Mappers {
     public static final ComponentMapper<SpawnArea> spawnArea = ComponentMapper.getFor(SpawnArea.class);
     public static final ComponentMapper<Speed> speed = ComponentMapper.getFor(Speed.class);
     public static final ComponentMapper<Sprite> sprite = ComponentMapper.getFor(Sprite.class);
+    public static final ComponentMapper<StackableComponent> stackable = ComponentMapper.getFor(StackableComponent.class);
     public static final ComponentMapper<StateComponent> state = ComponentMapper.getFor(StateComponent.class);
     public static final ComponentMapper<Steering> steering = ComponentMapper.getFor(Steering.class);
     public static final ComponentMapper<WeaponStatComponent> weaponStat = ComponentMapper.getFor(WeaponStatComponent.class);
