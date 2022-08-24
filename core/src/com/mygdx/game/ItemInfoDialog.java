@@ -172,7 +172,7 @@ public class ItemInfoDialog extends Dialog {
         Array<InventorySlot> inventorySlots = Mappers.inventory.get(player).inventorySlots;
         for (int i = 0; i < inventorySlots.size; i++) {
             if (inventorySlots.get(i).isEmpty())
-                return inventorySlot;
+                return inventorySlots.get(i);
         }
         return null;
     }
