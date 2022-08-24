@@ -11,6 +11,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Scaling;
 import com.mygdx.game.engine.ItemType;
 import com.mygdx.game.engine.Mappers;
+import com.mygdx.game.engine.components.WeaponStatComponent;
 import com.mygdx.game.utils.InventorySlot;
 
 public class ItemInfoDialog extends Dialog {
@@ -81,5 +82,14 @@ public class ItemInfoDialog extends Dialog {
 
         getContentTable().row();
         getContentTable().add(desc).grow();
+    }
+
+    public void addWeaponInfo() {
+        WeaponStatComponent weaponStat = Mappers.weaponStat.get(item);
+        Label dmg = new Label(weaponStat.minDmg + "-" + weaponStat.maxDmg, getSkin(), "pixel2D", Color.BLACK);
+        Label attackDelay = new Label(weaponStat.attackDelay + "s", getSkin(), "pixel2D", Color.BLACK);
+        Label critChance = new Label(weaponStat.critChance + "%", getSkin(), "pixel2D", Color.BLACK);
+        Label critDmg = new Label(weaponStat.critDmg + "x", getSkin(), "pixel2D", Color.BLACK);
+
     }
 }
