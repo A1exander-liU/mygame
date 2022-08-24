@@ -2,6 +2,7 @@ package com.mygdx.game;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -9,7 +10,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Scaling;
+import com.mygdx.game.engine.Families;
 import com.mygdx.game.engine.ItemType;
 import com.mygdx.game.engine.Mappers;
 import com.mygdx.game.engine.components.inventory.items.individual.WeaponStatComponent;
@@ -19,12 +22,14 @@ public class ItemInfoDialog extends Dialog {
 
     InventorySlot inventorySlot;
     Entity item;
+    Entity player;
 
     public ItemInfoDialog(String title, Skin skin, InventorySlot inventorySlot) {
         super(title, skin);
         getTitleLabel().setAlignment(Align.center);
         this.inventorySlot = inventorySlot;
         item = inventorySlot.getOccupiedItem();
+        player = MyGame.engine.getEntitiesFor(Families.player).get(0);
         baseDialog();
         decideDialogToBuild();
     }
@@ -84,6 +89,7 @@ public class ItemInfoDialog extends Dialog {
 
         getContentTable().row();
         getContentTable().add(desc).grow();
+
     }
 
     public void addWeaponInfo() {
@@ -120,5 +126,19 @@ public class ItemInfoDialog extends Dialog {
         getContentTable().add(weaponStatTable);
         getContentTable().row();
         getContentTable().add(desc).grow().padTop(10);
+
+        if (equipped())
+            button("Unequip", "unequip");
+        else
+            button("Equip", "equip");
+    }
+
+    private boolean equipped() {
+        Array<InventorySlot> equipSlots = Mappers.inventory.get(player).equipSlots;
+        for (int i = 0; i < equipSlots.size; i++) {
+            if (inventorySlot == equipSlots.get(i))
+                return true;
+        }
+        return false;
     }
 }
