@@ -148,32 +148,10 @@ public class InventoryTest extends EntitySystem {
         MyGame.engine.addEntity(woodItem);
         addToInventorySlot(woodItem, 2);
 
-        Entity swordItem = new Entity();
-        swordItem.add(new InventoryItemComponent(ItemType.EQUIPMENT));
-        swordItem.add(new Name());
-        swordItem.add(new Sprite());
-        swordItem.add(new RarityComponent());
-        swordItem.add(new DescriptionComponent());
-        swordItem.add(new EquipTypeComponent(AcceptedEquipType.MAIN));
-        cg.getName(swordItem).name = "Iron Sword";
-        cg.getSprite(swordItem).texture = new Texture(Gdx.files.internal("testPlayer.png"));
-        cg.getRarity(swordItem).rarity = Rarity.COMMON;
-        cg.getDescription(swordItem).description = "Common and cheap weapon";
-        MyGame.engine.addEntity(swordItem);
+        Entity swordItem = itemFactory.makeWeapon("Iron Sword");
         addToInventorySlot(swordItem, 3);
 
-        Entity swordItem2 = new Entity();
-        swordItem2.add(new InventoryItemComponent(ItemType.EQUIPMENT));
-        swordItem2.add(new Name());
-        swordItem2.add(new Sprite());
-        swordItem2.add(new RarityComponent());
-        swordItem2.add(new DescriptionComponent());
-        swordItem2.add(new EquipTypeComponent(AcceptedEquipType.MAIN));
-        cg.getName(swordItem2).name = "Steel Sword";
-        cg.getSprite(swordItem2).texture = new Texture(Gdx.files.internal("testPlayer.png"));
-        cg.getRarity(swordItem2).rarity = Rarity.COMMON;
-        cg.getDescription(swordItem2).description = "Common and cheap weapon";
-        MyGame.engine.addEntity(swordItem2);
+        Entity swordItem2 = itemFactory.makeWeapon("Steel Sword");
         addToInventorySlot(swordItem2, 4);
     }
 
