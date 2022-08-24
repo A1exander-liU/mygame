@@ -7,6 +7,7 @@ import com.mygdx.game.engine.components.CollidableComponent;
 import com.mygdx.game.engine.components.DetectionProximity;
 import com.mygdx.game.engine.components.Enemy;
 import com.mygdx.game.engine.components.EnemyStateMachine;
+import com.mygdx.game.engine.components.inventory.items.individual.ArmourStatComponent;
 import com.mygdx.game.engine.components.inventory.items.individual.EquipTypeComponent;
 import com.mygdx.game.engine.components.ExpComponent;
 import com.mygdx.game.engine.components.Health;
@@ -39,6 +40,7 @@ import com.mygdx.game.engine.components.inventory.items.shared.RarityComponent;
 
 
 public class Mappers {
+    public static final ComponentMapper<ArmourStatComponent> armourStat = ComponentMapper.getFor(ArmourStatComponent.class);
     public static final ComponentMapper<DescriptionComponent> description = ComponentMapper.getFor(DescriptionComponent.class);
     public static final ComponentMapper<InventoryItemComponent> inventoryItem = ComponentMapper.getFor(InventoryItemComponent.class);
     public static final ComponentMapper<QuantityComponent> quantity = ComponentMapper.getFor(QuantityComponent.class);
