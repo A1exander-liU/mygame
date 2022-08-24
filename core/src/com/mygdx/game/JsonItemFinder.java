@@ -24,4 +24,12 @@ public class JsonItemFinder extends JsonReader {
         return null;
     }
 
+    public JsonValue findWeaponByName(String weaponName) {
+        for (JsonValue weapon : weapons) {
+            if (Objects.equals(weapon.getString("name"), weaponName))
+                return weapon;
+        }
+        return null;
+    }
+
 }
