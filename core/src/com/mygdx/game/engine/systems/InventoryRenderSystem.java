@@ -185,8 +185,7 @@ public class InventoryRenderSystem extends EntitySystem {
             }
 
             Stack stack = new Stack();
-            stack.setDebug(true);
-            inventorySlot.add(stack);
+            inventorySlot.add(stack).grow();
             if (!inventorySlot.isEmpty()) {
                 TextureRegionDrawable drawable = new TextureRegionDrawable(cg.getSprite(inventorySlot.getOccupiedItem()).texture);
                 Image image = new Image(drawable);
@@ -200,8 +199,6 @@ public class InventoryRenderSystem extends EntitySystem {
                 stack.add(image);
                 stack.add(label);
             }
-
-            inventorySlot.add(stack).expand().fill();
 
             inventorySlots.add(inventorySlot).width(inventorySlots.getWidth() / 4).height(inventorySlots.getHeight() / 4);
 
