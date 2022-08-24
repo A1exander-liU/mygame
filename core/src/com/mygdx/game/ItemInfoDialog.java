@@ -52,7 +52,7 @@ public class ItemInfoDialog extends Dialog {
             hide();
         }
         else if (object.equals("equip")) {
-
+            checkTargetEquipSlot();
         }
         else {
             cancel();
@@ -150,6 +150,7 @@ public class ItemInfoDialog extends Dialog {
 
     private void checkTargetEquipSlot() {
         InventorySlot equipSlot = getEquipSlot(Mappers.equipType.get(item).acceptedEquipType);
+        if (equipSlot != null && equipSlot.isEmpty())
     }
 
     private InventorySlot getEquipSlot(AcceptedEquipType equipType) {
