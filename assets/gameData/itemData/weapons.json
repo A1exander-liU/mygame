@@ -1,6 +1,15 @@
 {
   "weapons":
   [
-    {}
+    {
+      "name": "Iron Sword", "sprite": "testPlayer.png", "rarity": "COMMON",
+      "minDmg": 5, "maxDmg": 10, "attackDelay": 1, "critChance": 2,
+      "critDmg": 1.5
+    },
+    {
+      "name": "Steel Sword", "sprite": "testPlayer.png", "rarity": "COMMON",
+      "minDmg": 6, "maxDmg": 12, "attackDelay": 1, "critChance": 2,
+      "critCmg": 1.5
+    }
   ]
 }
