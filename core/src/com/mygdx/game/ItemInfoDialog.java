@@ -56,6 +56,7 @@ public class ItemInfoDialog extends Dialog {
         }
         else if (object.equals("unequip")) {
             InventorySlot inventorySlot = getFirstEmptyInventorySlot();
+            inventoryUi.unequip(this.inventorySlot, inventorySlot);
         }
         else {
             cancel();
