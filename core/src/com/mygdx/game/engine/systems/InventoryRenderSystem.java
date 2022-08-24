@@ -215,6 +215,16 @@ public class InventoryRenderSystem extends EntitySystem {
                 inventorySlot.getItemWindowListener().reset();
             }
         }
+        for (int i = 0; i < inventoryComponent.equipSlots.size; i++) {
+            InventorySlot inventorySlot = inventoryComponent.equipSlots.get(i);
+            if (inventorySlot.getItemWindowListener().getClickedItemSlot() != null) {
+                ItemInfoDialog dialog = new ItemInfoDialog("", skin, inventorySlot);
+                dialog.getTitleLabel().setText(cg.getName(inventorySlot.getOccupiedItem()).name);
+                dialog.show(stage);
+                dialog.setWidth(200);
+                inventorySlot.getItemWindowListener().reset();
+            }
+        }
     }
 
     private void addEquipSlots(Table inventory) {
