@@ -15,6 +15,7 @@ import com.mygdx.game.engine.Mappers;
 import com.mygdx.game.engine.Rarity;
 import com.mygdx.game.engine.components.inventory.items.individual.EquipTypeComponent;
 import com.mygdx.game.engine.components.inventory.InventoryComponent;
+import com.mygdx.game.engine.components.inventory.items.individual.StackableComponent;
 import com.mygdx.game.engine.components.inventory.items.shared.DescriptionComponent;
 import com.mygdx.game.engine.components.inventory.items.shared.InventoryItemComponent;
 import com.mygdx.game.engine.components.inventory.InventorySlotComponent;
@@ -97,52 +98,13 @@ public class InventoryTest extends EntitySystem {
         // items are defined from json too
         //
 
-        Entity testItem = new Entity();
-        testItem.add(new InventoryItemComponent(ItemType.MATERIAL));
-        testItem.add(new Name());
-        testItem.add(new Sprite());
-        testItem.add(new QuantityComponent());
-        testItem.add(new RarityComponent());
-        testItem.add(new DescriptionComponent());
-        testItem.add(new EquipTypeComponent());
-        cg.getName(testItem).name = "Wood";
-        cg.getSprite(testItem).texture = new Texture(Gdx.files.internal("testPlayer.png"));
-        cg.getQuantity(testItem).quantity = 14;
-        cg.getRarity(testItem).rarity = Rarity.COMMON;
-        cg.getDescription(testItem).description = "Abundant material used to craft many items";
-        MyGame.engine.addEntity(testItem);
+        Entity testItem = itemFactory.makeMaterial("Wood", 10);
         addToInventorySlot(testItem, 0);
 
-        Entity diffItem = new Entity();
-        diffItem.add(new InventoryItemComponent(ItemType.MATERIAL));
-        diffItem.add(new Name());
-        diffItem.add(new Sprite());
-        diffItem.add(new QuantityComponent());
-        diffItem.add(new RarityComponent());
-        diffItem.add(new DescriptionComponent());
-        diffItem.add(new EquipTypeComponent());
-        cg.getName(diffItem).name = "Stone";
-        cg.getSprite(diffItem).texture = new Texture(Gdx.files.internal("testPlayer.png"));
-        cg.getQuantity(diffItem).quantity = 7;
-        cg.getRarity(diffItem).rarity = Rarity.COMMON;
-        cg.getDescription(diffItem).description = "Found all over the world";
-        MyGame.engine.addEntity(diffItem);
+        Entity diffItem = itemFactory.makeMaterial("Stone", 7);
         addToInventorySlot(diffItem, 1);
 
-        Entity woodItem = new Entity();
-        woodItem.add(new InventoryItemComponent(ItemType.MATERIAL));
-        woodItem.add(new Name());
-        woodItem.add(new Sprite());
-        woodItem.add(new QuantityComponent());
-        woodItem.add(new RarityComponent());
-        woodItem.add(new DescriptionComponent());
-        woodItem.add(new EquipTypeComponent());
-        cg.getName(woodItem).name = "Wood";
-        cg.getSprite(woodItem).texture = new Texture(Gdx.files.internal("testPlayer.png"));
-        cg.getQuantity(woodItem).quantity = 8;
-        cg.getRarity(woodItem).rarity = Rarity.COMMON;
-        cg.getDescription(woodItem).description = "Abundant material used to craft many items";
-        MyGame.engine.addEntity(woodItem);
+        Entity woodItem = itemFactory.makeMaterial("Wood", 8);
         addToInventorySlot(woodItem, 2);
 
         Entity swordItem = itemFactory.makeWeapon("Iron Sword");
