@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Scaling;
+import com.mygdx.game.engine.AcceptedEquipType;
 import com.mygdx.game.engine.Families;
 import com.mygdx.game.engine.ItemType;
 import com.mygdx.game.engine.Mappers;
@@ -51,7 +52,7 @@ public class ItemInfoDialog extends Dialog {
             hide();
         }
         else if (object.equals("equip")) {
-            
+
         }
         else {
             cancel();
@@ -146,4 +147,18 @@ public class ItemInfoDialog extends Dialog {
         }
         return false;
     }
+
+    private void checkTargetEquipSlot() {
+        InventorySlot equipSlot = getEquipSlot(Mappers.equipType.get(item).acceptedEquipType);
+    }
+
+    private InventorySlot getEquipSlot(AcceptedEquipType equipType) {
+        Array<InventorySlot> equipSlots = Mappers.inventory.get(player).equipSlots;
+        for (int i = 0; i < equipSlots.size; i++) {
+            if (Mappers.equipType.get(equipSlots.get(i).getOccupiedItem()).acceptedEquipType == equipType)
+                return equipSlots.get(i);
+        }
+        return null;
+    }
+
 }
