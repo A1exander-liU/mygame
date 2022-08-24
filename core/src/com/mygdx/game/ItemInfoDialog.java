@@ -86,10 +86,16 @@ public class ItemInfoDialog extends Dialog {
 
     public void addWeaponInfo() {
         WeaponStatComponent weaponStat = Mappers.weaponStat.get(item);
+        Label dmgTitle = new Label("DMG", getSkin(), "pixel2D", Color.BLACK);
+        Label attackDelayTitle = new Label("Attack Delay", getSkin(), "pixel2D", Color.BLACK);
+        Label critTitle = new Label("Crit", getSkin(), "pixel2D", Color.BLACK);
+        Label critDmgTitle = new Label("CritDmg", getSkin(), "pixel2D", Color.BLACK);
+
         Label dmg = new Label(weaponStat.minDmg + "-" + weaponStat.maxDmg, getSkin(), "pixel2D", Color.BLACK);
         Label attackDelay = new Label(weaponStat.attackDelay + "s", getSkin(), "pixel2D", Color.BLACK);
         Label critChance = new Label(weaponStat.critChance + "%", getSkin(), "pixel2D", Color.BLACK);
         Label critDmg = new Label(weaponStat.critDmg + "x", getSkin(), "pixel2D", Color.BLACK);
+
 
     }
 }
