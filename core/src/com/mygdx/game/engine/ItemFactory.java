@@ -66,6 +66,8 @@ public class ItemFactory {
         weaponStat.attackDelay = weapon.getFloat("attackDelay");
         weaponStat.critChance = weapon.getFloat("critChance");
         weaponStat.critDmg = weapon.getFloat("critDmg");
+
+        addToEngine(weaponEntity);
     }
 
     private Rarity determineRarity(String rarity) {
