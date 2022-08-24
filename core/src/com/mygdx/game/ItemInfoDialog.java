@@ -98,7 +98,7 @@ public class ItemInfoDialog extends Dialog {
         Label critDmg = new Label(weaponStat.critDmg + "x", getSkin(), "pixel2D", Color.BLACK);
 
         Label desc = new Label(Mappers.description.get(item).description, getSkin(), "pixel2D", Color.BLACK);
-
+        desc.setWrap(true);
 
         Table weaponStatTable = new Table();
         weaponStatTable.defaults().expand().fill().space(5);
