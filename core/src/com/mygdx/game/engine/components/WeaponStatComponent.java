@@ -6,6 +6,6 @@ public class WeaponStatComponent implements Component {
     public int minDmg;
     public int MaxDmg;
     public float attackDelay;
-    public float criticalChance;
-    public float criticalDmg;
+    public float critChance;
+    public float critDmg;
 }
