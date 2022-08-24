@@ -40,6 +40,7 @@ public class ItemFactory {
         Mappers.rarity.get(materialEntity).rarity = determineRarity(material.getString("rarity"));
         Mappers.description.get(materialEntity).description = material.getString("desc");
         Mappers.quantity.get(materialEntity).quantity = amount;
+        Mappers.inventoryItem.get(materialEntity).itemType = ItemType.MATERIAL;
 
         addToEngine(materialEntity);
     }
