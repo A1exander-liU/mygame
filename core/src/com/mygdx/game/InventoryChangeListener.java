@@ -32,8 +32,7 @@ public class InventoryChangeListener extends ClickListener {
 
     Stage stage;
     Skin skin;
-
-    private Window recentWindow;
+    
     private InventorySlot clickedItemSlot;
 
     public InventoryChangeListener() {
@@ -55,15 +54,15 @@ public class InventoryChangeListener extends ClickListener {
         clickedItemSlot = (InventorySlot) event.getListenerActor();
     }
 
-    public Window getRecentWindow() {
-        return recentWindow;
+    public InventorySlot getClickedItemSlot() {
+        return clickedItemSlot;
     }
 
-    public void setRecentWindow(Window window) {
-        recentWindow = window;
+    public void setClickedItemSlot(InventorySlot inventorySlot) {
+        clickedItemSlot = inventorySlot;
     }
 
     public void reset() {
-        recentWindow = null;
+        clickedItemSlot = null;
     }
 }
