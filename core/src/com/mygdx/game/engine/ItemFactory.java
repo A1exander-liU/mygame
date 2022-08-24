@@ -59,6 +59,13 @@ public class ItemFactory {
         Mappers.description.get(weaponEntity).description = weapon.getString("desc");
         Mappers.inventoryItem.get(weaponEntity).itemType = ItemType.EQUIPMENT;
         Mappers.equipType.get(weaponEntity).acceptedEquipType = AcceptedEquipType.MAIN;
+
+        WeaponStatComponent weaponStat = Mappers.weaponStat.get(weaponEntity);
+        weaponStat.minDmg = weapon.getInt("minDmg");
+        weaponStat.maxDmg = weapon.getInt("maxDmg");
+        weaponStat.attackDelay = weapon.getFloat("attackDelay");
+        weaponStat.critChance = weapon.getFloat("critChance");
+        weaponStat.critDmg = weapon.getFloat("critDmg");
     }
 
     private Rarity determineRarity(String rarity) {
