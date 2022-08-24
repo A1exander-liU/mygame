@@ -29,16 +29,28 @@ public class InventoryUi {
         // then dereference stacker occupied item since it was
         // combined into the stack
         Array<InventorySlot> inventorySlots = Mappers.inventory.get(player).inventorySlots;
-        // add the quantity
-        Mappers.quantity.get(stack.getOccupiedItem()).quantity += Mappers.quantity.get(stacker.getOccupiedItem()).quantity;
-        // dereference the stacker item
-        if (Mappers.quantity.get(stack.getOccupiedItem()).quantity > Mappers.stackable.get(stack.getOccupiedItem()).stackSize) {
-            int extra = Mappers.quantity.get(stack.getOccupiedItem()).quantity - Mappers.stackable.get(stack.getOccupiedItem()).stackSize;
-            Mappers.quantity.get(stack.getOccupiedItem()).quantity = Mappers.stackable.get(stack.getOccupiedItem()).stackSize;
-            Mappers.quantity.get(stacker.getOccupiedItem()).quantity = extra;
+
+        // check if stack is already at max quantity
+        if (Mappers.quantity.get(stack.getOccupiedItem()).quantity == Mappers.stackable.get(stack.getOccupiedItem()).stackSize) {
+            swapItems(stacker, stack);
         }
-        else
-            inventorySlots.get(inventorySlots.indexOf(stacker, true)).setOccupiedItem(null);
+        // if item quantity is not at max
+        else {
+            // add the quantity
+            Mappers.quantity.get(stack.getOccupiedItem()).quantity += Mappers.quantity.get(stacker.getOccupiedItem()).quantity;
+            // check if stacking whet over stackSize of the item
+            if (Mappers.quantity.get(stack.getOccupiedItem()).quantity > Mappers.stackable.get(stack.getOccupiedItem()).stackSize) {
+                // get extra amount
+                int extra = Mappers.quantity.get(stack.getOccupiedItem()).quantity - Mappers.stackable.get(stack.getOccupiedItem()).stackSize;
+                // since stack went over stackSize, set it to it's stackSize
+                Mappers.quantity.get(stack.getOccupiedItem()).quantity = Mappers.stackable.get(stack.getOccupiedItem()).stackSize;
+                // extra becomes stacker's new quantity
+                Mappers.quantity.get(stacker.getOccupiedItem()).quantity = extra;
+            }
+            else
+                // dereference the stacker item
+                inventorySlots.get(inventorySlots.indexOf(stacker, true)).setOccupiedItem(null);
+        }
     }
 
     public void setItem(InventorySlot source, InventorySlot target) {
