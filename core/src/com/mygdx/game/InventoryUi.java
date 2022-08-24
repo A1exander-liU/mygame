@@ -34,6 +34,7 @@ public class InventoryUi {
         // dereference the stacker item
         if (Mappers.quantity.get(stack.getOccupiedItem()).quantity > Mappers.stackable.get(stack.getOccupiedItem()).stackSize) {
             int extra = Mappers.quantity.get(stack.getOccupiedItem()).quantity - Mappers.stackable.get(stack.getOccupiedItem()).stackSize;
+            Mappers.quantity.get(stack.getOccupiedItem()).quantity = Mappers.stackable.get(stack.getOccupiedItem()).stackSize;
             Mappers.quantity.get(stacker.getOccupiedItem()).quantity = extra;
         }
         else
