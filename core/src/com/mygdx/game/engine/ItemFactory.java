@@ -76,6 +76,12 @@ public class ItemFactory {
         return weaponEntity;
     }
 
+    public Entity makeArmour(String name) {
+        Entity armourEntity = new Entity();
+
+        return armourEntity;
+    }
+
     private Rarity determineRarity(String rarity) {
         switch (rarity) {
             case "COMMON":
