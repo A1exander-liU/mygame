@@ -34,6 +34,7 @@ public class InventoryChangeListener extends ClickListener {
     Skin skin;
 
     private Window recentWindow;
+    private InventorySlot clickedItemSlot;
 
     public InventoryChangeListener() {
         stage = new Stage(new ScreenViewport());
@@ -51,56 +52,7 @@ public class InventoryChangeListener extends ClickListener {
 
     @Override
     public void clicked(InputEvent event, float x, float y) {
-        InventorySlot inventorySlot = (InventorySlot) event.getListenerActor();
-        Entity occupiedItem = inventorySlot.getOccupiedItem();
-//        stage = inventorySlot.getStage();
-        // check if inventory slot holds an item and is a material type
-        if (!inventorySlot.isEmpty() && Mappers.inventoryItem.get(occupiedItem).itemType == ItemType.MATERIAL) {
-//            inventorySlot.setClicked(true);
-            stage = inventorySlot.getStage();
-
-            Window itemInfo = new Window("", skin);
-            itemInfo.setName("itemWindow");
-            itemInfo.getTitleLabel().setText(Mappers.name.get(occupiedItem).name + " x" + Mappers.quantity.get(occupiedItem).quantity);
-
-            TextButton close = new TextButton("x", skin);
-            close.addListener(new ChangeListener() {
-                @Override
-                public void changed(ChangeEvent event, Actor actor) {
-                    actor.getParent().getParent().remove();
-                }
-            });
-
-            itemInfo.getTitleTable().add(close);
-
-            Label itemRarity = new Label("" + Mappers.rarity.get(occupiedItem).rarity, skin, "pixel2D", Color.BLACK);
-            itemRarity.setWrap(true);
-            itemRarity.setAlignment(Align.left);
-
-            Label itemDesc = new Label(Mappers.description.get(occupiedItem).description, skin, "pixel2D", Color.BLACK);
-            itemDesc.setWrap(true);
-            itemDesc.setAlignment(Align.left);
-
-            Image itemSprite = new Image(new TextureRegionDrawable(Mappers.sprite.get(occupiedItem).texture));
-            itemSprite.setScaling(Scaling.contain);
-
-            itemInfo.add(itemSprite).grow();
-            itemInfo.row();
-            itemInfo.add(itemRarity).grow();
-            itemInfo.row();
-            itemInfo.add(itemDesc).grow();
-
-            recentWindow = itemInfo;
-//            stage.addActor(itemInfo);
-
-//            System.out.println(Mappers.name.get(occupiedItem).name);
-//            Dialog itemInfo = new Dialog("" + Mappers.name.get(occupiedItem).name, skin);
-//            itemInfo.getTitleTable().center();
-//            itemInfo.text(new Label(Mappers.description.get(occupiedItem).description, skin, "pixel2D", Color.BLACK));
-//            itemInfo.setBackground(skin.getDrawable("window-bg"));
-//            itemInfo.setPosition(0, 0);
-//            itemInfo.show(stage);
-        }
+        clickedItemSlot = (InventorySlot) event.getListenerActor();
     }
 
     public Window getRecentWindow() {
