@@ -34,4 +34,12 @@ public class JsonItemFinder extends JsonReader {
         return null;
     }
 
+    public JsonValue findChestArmourByName(String chestArmourName) {
+        for (JsonValue chestArmour : chestArmours) {
+            if (Objects.equals(chestArmour.getString("name"), chestArmourName))
+                return chestArmour;
+        }
+        return null;
+    }
+
 }
