@@ -156,6 +156,17 @@ public class ItemInfoDialog extends Dialog {
 
     private void addArmourInfo() {
         ArmourStatComponent armourStat = Mappers.armourStat.get(item);
+
+        Label pDefTitle = new Label("Phy.Def", getSkin(), "pixel2D", Color.BLACK);
+        Label mDefDelayTitle = new Label("Mag.Def", getSkin(), "pixel2D", Color.BLACK);
+        Label hpTitle = new Label("HP", getSkin(), "pixel2D", Color.BLACK);
+        Label hpDmgTitle = new Label("MP", getSkin(), "pixel2D", Color.BLACK);
+
+        Label pdef = new Label("" + armourStat.physicalDef, getSkin(), "pixel2D", Color.BLACK);
+        Label mDef = new Label("" + armourStat.magicalDef, getSkin(), "pixel2D", Color.BLACK);
+        Label hp = new Label("" + armourStat.hp, getSkin(), "pixel2D", Color.BLACK);
+        Label mp = new Label("" + armourStat.mp, getSkin(), "pixel2D", Color.BLACK);
+
     }
 
     private boolean equipped() {
