@@ -180,7 +180,6 @@ public class InventoryRenderSystem extends EntitySystem {
         inventorySlots.setSize(inventoryScroll.getWidth() * 0.75f, inventoryScroll.getHeight());
 //        inventory.add(inventorySlots).expand().width(inventorySlots.getWidth()).height(inventorySlots.getHeight()).right();
         inventory.add(inventoryScroll).expand().width(inventoryScroll.getWidth()).height(inventoryScroll.getHeight()).right();
-        
 
         int cols = 0;
         InventoryComponent inventoryComponent = cg.getInventory(player);
@@ -215,6 +214,8 @@ public class InventoryRenderSystem extends EntitySystem {
 
             cols++;
         }
+
+        inventoryScroll.validate();
 
         for (int i = 0; i < inventoryComponent.inventorySlots.size; i++) {
             InventorySlot inventorySlot = inventoryComponent.inventorySlots.get(i);
