@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -15,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
@@ -168,17 +170,21 @@ public class InventoryRenderSystem extends EntitySystem {
         Table inventorySlots = new Table();
         inventorySlots.setName("inventorySlots");
 
+
         addEquipSlots(inventory);
 
-        ScrollPane inventoryScroll = new ScrollPane(inventorySlots, skin, "scroll-pane-inventory");
+        final ScrollPane inventoryScroll = new ScrollPane(inventorySlots, skin, "scroll-pane-inventory");
         inventoryScroll.setDebug(false);
         inventoryScroll.setFadeScrollBars(false);
-        inventoryScroll.setFlickScroll(false);
+        inventoryScroll.setFlickScroll(true);
         inventoryScroll.setVariableSizeKnobs(false);
+        inventoryScroll.setOverscroll(false, false);
         inventoryScroll.setSize(inventory.getWidth() * 0.55f, inventory.getHeight() * 0.95f);
+        Table outerTable = new Table();
+        outerTable.add(inventoryScroll).width(inventory.getWidth() * 0.55f).height(inventory.getHeight() * 0.95f);
 
-        inventorySlots.setDebug(true);
-        inventory.add(inventoryScroll).expand().width(inventoryScroll.getWidth()).height(inventoryScroll.getHeight()).right();
+        inventorySlots.setDebug(false);
+        inventory.add(outerTable);
 
         int cols = 0;
         InventoryComponent inventoryComponent = cg.getInventory(player);
@@ -215,6 +221,9 @@ public class InventoryRenderSystem extends EntitySystem {
         }
 
         inventoryScroll.validate();
+//        inventoryScroll.layout();
+//        inventoryScroll.setScrollPercentY(1f);
+        inventoryScroll.updateVisualScroll();
 
         for (int i = 0; i < inventoryComponent.inventorySlots.size; i++) {
             InventorySlot inventorySlot = inventoryComponent.inventorySlots.get(i);
