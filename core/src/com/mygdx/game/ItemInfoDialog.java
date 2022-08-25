@@ -16,6 +16,7 @@ import com.mygdx.game.engine.AcceptedEquipType;
 import com.mygdx.game.engine.Families;
 import com.mygdx.game.engine.ItemType;
 import com.mygdx.game.engine.Mappers;
+import com.mygdx.game.engine.components.inventory.items.individual.ArmourStatComponent;
 import com.mygdx.game.engine.components.inventory.items.individual.WeaponStatComponent;
 import com.mygdx.game.utils.InventorySlot;
 
@@ -97,7 +98,7 @@ public class ItemInfoDialog extends Dialog {
 
             }
             else {
-                
+                addArmourInfo();
             }
         }
     }
@@ -151,6 +152,10 @@ public class ItemInfoDialog extends Dialog {
             button("Unequip", "unequip");
         else
             button("Equip", "equip");
+    }
+
+    private void addArmourInfo() {
+        ArmourStatComponent armourStat = Mappers.armourStat.get(item);
     }
 
     private boolean equipped() {
