@@ -1,0 +1,10 @@
+{
+  "feetArmours":
+  [
+    {
+      "name": "Scale Boots", "sprite": "testPlayer.png", "rarity": "COMMON",
+      "physicalDef": 5, "magicalDef": 5, "hp": 0, "mp": 0,
+      "desc": "Light-weight armour made from lizard scales, boasting high magical defense"
+    }
+  ]
+}

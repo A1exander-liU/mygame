@@ -1,0 +1,10 @@
+{
+  "legArmours":
+  [
+    {
+      "name": "Scale Pants", "sprite": "testPlayer.png", "rarity": "COMMON",
+      "physicalDef": 8, "magicalDef": 15, "hp": 0, "mp": 0,
+      "desc": "Light-weight armour made from lizard scales, boasting high magical defense"
+    }
+  ]
+}
