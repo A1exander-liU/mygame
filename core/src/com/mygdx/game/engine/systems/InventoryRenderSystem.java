@@ -172,13 +172,15 @@ public class InventoryRenderSystem extends EntitySystem {
 
         ScrollPane inventoryScroll = new ScrollPane(inventorySlots, skin, "scroll-pane-inventory");
         inventoryScroll.setDebug(true);
+        inventoryScroll.setFadeScrollBars(false);
+        inventoryScroll.setFlickScroll(false);
         inventoryScroll.setSize(inventory.getWidth() * 0.55f, inventory.getHeight() * 0.95f);
 
         inventorySlots.setDebug(false);
         inventorySlots.setSize(inventoryScroll.getWidth() * 0.75f, inventoryScroll.getHeight());
 //        inventory.add(inventorySlots).expand().width(inventorySlots.getWidth()).height(inventorySlots.getHeight()).right();
         inventory.add(inventoryScroll).expand().width(inventoryScroll.getWidth()).height(inventoryScroll.getHeight()).right();
-        ;
+        
 
         int cols = 0;
         InventoryComponent inventoryComponent = cg.getInventory(player);
