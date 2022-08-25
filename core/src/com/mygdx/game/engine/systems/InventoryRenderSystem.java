@@ -178,8 +178,6 @@ public class InventoryRenderSystem extends EntitySystem {
         inventoryScroll.setSize(inventory.getWidth() * 0.55f, inventory.getHeight() * 0.95f);
 
         inventorySlots.setDebug(true);
-//        inventorySlots.setWidth(inventoryScroll.getWidth() * 0.75f);
-//        inventory.add(inventorySlots).expand().width(inventorySlots.getWidth()).height(inventorySlots.getHeight()).right();
         inventory.add(inventoryScroll).expand().width(inventoryScroll.getWidth()).height(inventoryScroll.getHeight()).right();
 
         int cols = 0;
