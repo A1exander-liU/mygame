@@ -97,6 +97,13 @@ public class ItemFactory {
         Mappers.inventoryItem.get(armourEntity).itemType = ItemType.EQUIPMENT;
         Mappers.equipType.get(armourEntity).acceptedEquipType = AcceptedEquipType.TORSO;
 
+        ArmourStatComponent armourStat = Mappers.armourStat.get(armourEntity);
+        armourStat.physicalDef = armour.getInt("physicalDef");
+        armourStat.magicalDef = armour.getInt("magicalDef");
+        armourStat.hp = armour.getInt("hp");
+        armourStat.mp = armour.getInt("mp");
+
+        addToEngine(armourEntity);
         return armourEntity;
     }
 
