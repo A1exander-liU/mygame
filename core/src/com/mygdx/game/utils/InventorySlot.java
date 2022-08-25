@@ -2,8 +2,10 @@ package com.mygdx.game.utils;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.mygdx.game.InventoryChangeListener;
 import com.mygdx.game.MyGame;
@@ -70,4 +72,13 @@ public class InventorySlot extends ImageButton {
         }
         return null;
     }
+
+    public Stack getStackChild() {
+        return (Stack) getChildren().get(0);
+    }
+
+    public Image getItemImage() {
+        return (Image) getStackChild().getChildren().get(0);
+    }
+
 }
