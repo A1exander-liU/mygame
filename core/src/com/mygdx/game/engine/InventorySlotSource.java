@@ -46,7 +46,8 @@ public class InventorySlotSource extends DragAndDrop.Source {
         // sourceSlot
         sourceSlot.setOccupiedItem(null);
 
-//        dragAndDrop.setDragActorPosition(x, -y + getActor().getHeight());
+        // center the drag actor on the cursor
+        dragAndDrop.setDragActorPosition((sourceImage.getWidth() / 2), -(sourceImage.getHeight() / 2));
 
         return payload;
     }
