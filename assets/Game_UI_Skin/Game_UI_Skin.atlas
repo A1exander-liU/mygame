@@ -25,6 +25,27 @@ advanced_pixel-7(1)
   orig: 506, 76
   offset: 0, 0
   index: -1
+inv-knob
+  rotate: false
+  xy: 367, 292
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+inv-scroll
+  rotate: false
+  xy: 401, 292
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+inv-scroll-h
+  rotate: false
+  xy: 435, 292
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
 pixil-frame-0
   rotate: false
   xy: 1, 28
