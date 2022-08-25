@@ -39,6 +39,7 @@ public class InventorySlotTarget extends DragAndDrop.Target {
 
         // the dragged actor
         InventorySlot sourceSlot = (InventorySlot) source.getActor();
+        sourceSlot.setOccupiedItem((Entity) payload.getObject());
         // info of the item being dragged
         Entity sourceItem = (Entity) payload.getObject();
         // if the item names are the same
