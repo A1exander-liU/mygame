@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -101,6 +102,7 @@ public class InventoryRenderSystem extends EntitySystem {
         inventory.setBackground(skin.getDrawable("player-hud-bg-01"));
         inventory.setSize(root.getWidth() * 0.75f, root.getHeight() * 0.60f);
         root.add(inventory).expand().center().width(inventory.getWidth()).height(inventory.getHeight());
+
     }
 
     @Override
@@ -162,14 +164,21 @@ public class InventoryRenderSystem extends EntitySystem {
 
     private void addInventorySlots(Table inventory) {
         inventory.clearChildren();
+        inventory.setDebug(true);
         Table inventorySlots = new Table();
         inventorySlots.setName("inventorySlots");
 
         addEquipSlots(inventory);
 
+        ScrollPane inventoryScroll = new ScrollPane(inventorySlots, skin, "scroll-pane-inventory");
+        inventoryScroll.setDebug(true);
+        inventoryScroll.setSize(inventory.getWidth() * 0.55f, inventory.getHeight() * 0.95f);
+
         inventorySlots.setDebug(false);
-        inventorySlots.setSize(inventory.getWidth() * 0.55f, inventory.getHeight() * 0.95f);
-        inventory.add(inventorySlots).expand().width(inventorySlots.getWidth()).height(inventorySlots.getHeight()).right();
+        inventorySlots.setSize(inventoryScroll.getWidth() * 0.75f, inventoryScroll.getHeight());
+//        inventory.add(inventorySlots).expand().width(inventorySlots.getWidth()).height(inventorySlots.getHeight()).right();
+        inventory.add(inventoryScroll).expand().width(inventoryScroll.getWidth()).height(inventoryScroll.getHeight()).right();
+        ;
 
         int cols = 0;
         InventoryComponent inventoryComponent = cg.getInventory(player);
