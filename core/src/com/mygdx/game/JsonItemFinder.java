@@ -40,10 +40,34 @@ public class JsonItemFinder extends JsonReader {
         return null;
     }
 
+    public JsonValue findHeadArmourByName(String headArmourName) {
+        for (JsonValue headArmour : headArmours) {
+            if (Objects.equals(headArmour.getString("name"), headArmourName))
+                return headArmour;
+        }
+        return null;
+    }
+
     public JsonValue findChestArmourByName(String chestArmourName) {
         for (JsonValue chestArmour : chestArmours) {
             if (Objects.equals(chestArmour.getString("name"), chestArmourName))
                 return chestArmour;
+        }
+        return null;
+    }
+
+    public JsonValue findLegArmourByName(String legArmourName) {
+        for (JsonValue legArmour : legArmours) {
+            if (Objects.equals(legArmour.getString("name"), legArmourName))
+                return legArmour;
+        }
+        return null;
+    }
+
+    public JsonValue findFeetArmourByName(String feetArmourName) {
+        for (JsonValue feetArmour : feetArmours) {
+            if (Objects.equals(feetArmour.getString("name"), feetArmourName))
+                return feetArmour;
         }
         return null;
     }
