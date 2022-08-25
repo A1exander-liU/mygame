@@ -211,7 +211,7 @@ public class InventoryRenderSystem extends EntitySystem {
                 stack.add(label);
             }
 
-            inventorySlots.add(inventorySlot).width(inventoryScroll.getWidth() / 4).height(inventoryScroll.getHeight() / 4);
+            inventorySlots.add(inventorySlot).width(inventoryScroll.getWidth() / 4.6f).height(inventoryScroll.getHeight() / 4);
 
             cols++;
         }
