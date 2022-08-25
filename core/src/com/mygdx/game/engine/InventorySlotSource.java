@@ -42,6 +42,10 @@ public class InventorySlotSource extends DragAndDrop.Source {
 
         payload.setDragActor(sourceImage);
 
+        // remove the item so when dragging the item sprite will not appear in the
+        // sourceSlot
+        sourceSlot.setOccupiedItem(null);
+
 //        dragAndDrop.setDragActorPosition(x, -y + getActor().getHeight());
 
         return payload;
@@ -52,7 +56,6 @@ public class InventorySlotSource extends DragAndDrop.Source {
                          DragAndDrop.Payload payload, DragAndDrop.Target target) {
        if (target == null) {
            System.out.println("invalid");
-//           sourceSlot.add(payload.getDragActor());
        }
     }
 }
