@@ -56,6 +56,7 @@ public class InventorySlotSource extends DragAndDrop.Source {
                          DragAndDrop.Payload payload, DragAndDrop.Target target) {
        if (target == null) {
            System.out.println("invalid");
+           sourceSlot.setOccupiedItem((Entity) payload.getObject());
        }
     }
 }
