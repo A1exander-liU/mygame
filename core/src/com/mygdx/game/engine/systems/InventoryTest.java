@@ -7,6 +7,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.MyGame;
+import com.mygdx.game.engine.AcceptedEquipType;
 import com.mygdx.game.engine.ComponentGrabber;
 import com.mygdx.game.engine.Families;
 import com.mygdx.game.engine.ItemFactory;
@@ -98,7 +99,7 @@ public class InventoryTest extends EntitySystem {
         // items are defined from json too
         //
 
-        Entity testItem = itemFactory.makeMaterial("Wood", 10);
+        Entity testItem = itemFactory.makeMaterial("Wood", 94);
         addToInventorySlot(testItem, 0);
 
         Entity diffItem = itemFactory.makeMaterial("Stone", 7);
@@ -112,6 +113,18 @@ public class InventoryTest extends EntitySystem {
 
         Entity swordItem2 = itemFactory.makeWeapon("Steel Sword");
         addToInventorySlot(swordItem2, 4);
+
+        Entity head = itemFactory.makeArmour("Scale Helmet", AcceptedEquipType.HEAD);
+        addToInventorySlot(head, 5);
+
+        Entity torso = itemFactory.makeArmour("Scale Armour", AcceptedEquipType.TORSO);
+        addToInventorySlot(torso, 6);
+
+        Entity leg = itemFactory.makeArmour("Scale Pants", AcceptedEquipType.LEG);
+        addToInventorySlot(leg, 7);
+        
+        Entity feet = itemFactory.makeArmour("Scale Boots", AcceptedEquipType.FEET);
+        addToInventorySlot(feet, 8);
     }
 
     private void addToInventorySlot(Entity item, int slot) {
