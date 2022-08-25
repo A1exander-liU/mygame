@@ -17,7 +17,7 @@ import com.mygdx.game.utils.InventorySlot;
 
 public class InventoryComponent implements Component {
     // how many unique items can be held
-    public int capacity = 16;
+    public int capacity = 20;
     public int equipSize = 8;
     public Array<Entity> items = new Array<>(capacity);
     public Array<InventorySlot> inventorySlots = new Array<>(capacity);
