@@ -188,7 +188,7 @@ public class ItemInfoDialog extends Dialog {
         getContentTable().row();
         getContentTable().add(armourStatTable);
         getContentTable().row();
-        getContentTable().add(desc);
+        getContentTable().add(desc).grow();
 
         if (equipped())
             button("Unequip", "unequip");
