@@ -158,15 +158,42 @@ public class ItemInfoDialog extends Dialog {
         ArmourStatComponent armourStat = Mappers.armourStat.get(item);
 
         Label pDefTitle = new Label("Phy.Def", getSkin(), "pixel2D", Color.BLACK);
-        Label mDefDelayTitle = new Label("Mag.Def", getSkin(), "pixel2D", Color.BLACK);
+        Label mDefTitle = new Label("Mag.Def", getSkin(), "pixel2D", Color.BLACK);
         Label hpTitle = new Label("HP", getSkin(), "pixel2D", Color.BLACK);
-        Label hpDmgTitle = new Label("MP", getSkin(), "pixel2D", Color.BLACK);
+        Label mpTitle = new Label("MP", getSkin(), "pixel2D", Color.BLACK);
 
-        Label pdef = new Label("" + armourStat.physicalDef, getSkin(), "pixel2D", Color.BLACK);
+        Label pDef = new Label("" + armourStat.physicalDef, getSkin(), "pixel2D", Color.BLACK);
         Label mDef = new Label("" + armourStat.magicalDef, getSkin(), "pixel2D", Color.BLACK);
         Label hp = new Label("" + armourStat.hp, getSkin(), "pixel2D", Color.BLACK);
         Label mp = new Label("" + armourStat.mp, getSkin(), "pixel2D", Color.BLACK);
 
+        Label desc = new Label("\"" + Mappers.description.get(item).description + "\"", getSkin(), "pixel2D", Color.BLACK);
+        desc.setAlignment(Align.center);
+        desc.setWrap(true);
+
+        Table armourStatTable = new Table();
+        armourStatTable.defaults().expand().fill().space(5);
+        armourStatTable.add(pDefTitle);
+        armourStatTable.add(pDef);
+        armourStatTable.row();
+        armourStatTable.add(mDefTitle);
+        armourStatTable.add(mDef);
+        armourStatTable.row();
+        armourStatTable.add(hpTitle);
+        armourStatTable.add(hp);
+        armourStatTable.row();
+        armourStatTable.add(mpTitle);
+        armourStatTable.add(mp);
+
+        getContentTable().row();
+        getContentTable().add(armourStatTable);
+        getContentTable().row();
+        getContentTable().add(desc);
+
+        if (equipped())
+            button("Unequip", "unequip");
+        else
+            button("Equip", "equip");
     }
 
     private boolean equipped() {
