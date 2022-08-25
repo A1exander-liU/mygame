@@ -164,20 +164,21 @@ public class InventoryRenderSystem extends EntitySystem {
 
     private void addInventorySlots(Table inventory) {
         inventory.clearChildren();
-        inventory.setDebug(true);
+        inventory.setDebug(false);
         Table inventorySlots = new Table();
         inventorySlots.setName("inventorySlots");
 
         addEquipSlots(inventory);
 
         ScrollPane inventoryScroll = new ScrollPane(inventorySlots, skin, "scroll-pane-inventory");
-        inventoryScroll.setDebug(true);
+        inventoryScroll.setDebug(false);
         inventoryScroll.setFadeScrollBars(false);
         inventoryScroll.setFlickScroll(false);
+        inventoryScroll.setVariableSizeKnobs(false);
         inventoryScroll.setSize(inventory.getWidth() * 0.55f, inventory.getHeight() * 0.95f);
 
-        inventorySlots.setDebug(false);
-        inventorySlots.setSize(inventoryScroll.getWidth() * 0.75f, inventoryScroll.getHeight());
+        inventorySlots.setDebug(true);
+//        inventorySlots.setWidth(inventoryScroll.getWidth() * 0.75f);
 //        inventory.add(inventorySlots).expand().width(inventorySlots.getWidth()).height(inventorySlots.getHeight()).right();
         inventory.add(inventoryScroll).expand().width(inventoryScroll.getWidth()).height(inventoryScroll.getHeight()).right();
 
@@ -210,7 +211,7 @@ public class InventoryRenderSystem extends EntitySystem {
                 stack.add(label);
             }
 
-            inventorySlots.add(inventorySlot).width(inventorySlots.getWidth() / 4).height(inventorySlots.getHeight() / 4);
+            inventorySlots.add(inventorySlot).width(inventoryScroll.getWidth() / 4).height(inventoryScroll.getHeight() / 4);
 
             cols++;
         }
