@@ -88,7 +88,8 @@ public class ItemInfoDialog extends Dialog {
 
         }
         else if (Mappers.inventoryItem.get(item).itemType == ItemType.EQUIPMENT) {
-            addWeaponInfo();
+            if (Mappers.equipType.get(item).acceptedEquipType == AcceptedEquipType.MAIN)
+                addWeaponInfo();
         }
     }
 
