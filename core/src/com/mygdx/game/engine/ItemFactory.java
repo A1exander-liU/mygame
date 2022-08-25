@@ -79,8 +79,14 @@ public class ItemFactory {
 
     public Entity makeArmour(String name, AcceptedEquipType armourType) {
         JsonValue armour = null;
-        if (armourType == AcceptedEquipType.TORSO)
+        if (armourType == AcceptedEquipType.HEAD)
+            armour = itemFinder.findHeadArmourByName(name);
+        else if (armourType == AcceptedEquipType.TORSO)
             armour = itemFinder.findChestArmourByName(name);
+        else if (armourType == AcceptedEquipType.LEG)
+            armour = itemFinder.findLegArmourByName(name);
+        else if (armourType == AcceptedEquipType.FEET)
+            armour = itemFinder.findFeetArmourByName(name);
         Entity armourEntity = new Entity();
         armourEntity.add(new Name());
         armourEntity.add(new Sprite());
