@@ -101,7 +101,7 @@ public class ItemFactory {
         Mappers.rarity.get(armourEntity).rarity = determineRarity(armour.getString("rarity"));
         Mappers.description.get(armourEntity).description = armour.getString("desc");
         Mappers.inventoryItem.get(armourEntity).itemType = ItemType.EQUIPMENT;
-        Mappers.equipType.get(armourEntity).acceptedEquipType = AcceptedEquipType.TORSO;
+        Mappers.equipType.get(armourEntity).acceptedEquipType = armourType;
 
         ArmourStatComponent armourStat = Mappers.armourStat.get(armourEntity);
         armourStat.physicalDef = armour.getInt("physicalDef");
