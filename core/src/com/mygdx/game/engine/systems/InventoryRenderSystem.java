@@ -49,7 +49,6 @@ public class InventoryRenderSystem extends EntitySystem {
 
     Table inventory;
     Table equipSlots;
-    Table inventorySlots;
     Table outerTable;
     ScrollPane inventoryScroll;
 
@@ -117,9 +116,6 @@ public class InventoryRenderSystem extends EntitySystem {
         equipSlots = new Table();
         equipSlots.setName("equipSlots");
 
-        inventorySlots = new Table();
-        inventorySlots.setName("inventorySlots");
-
         // setting up the equipSlots table
         equipSlots.setSize(inventory.getWidth() * 0.4f, inventory.getHeight() * 0.95f);
         inventory.add(equipSlots).expand().width(equipSlots.getWidth()).height(equipSlots.getHeight());
@@ -127,7 +123,7 @@ public class InventoryRenderSystem extends EntitySystem {
         equipSlots.defaults().expand().width(equipSlots.getWidth() / 3).height(equipSlots.getHeight() / 4);
 
         // setting up the inventorySlots table
-        inventoryScroll = new ScrollPane(inventorySlots, skin, "scroll-pane-inventory");
+        inventoryScroll = new ScrollPane(new Table(), skin, "scroll-pane-inventory");
         inventoryScroll.layout();
         inventoryScroll.setDebug(false);
         inventoryScroll.setFadeScrollBars(false);
@@ -139,7 +135,6 @@ public class InventoryRenderSystem extends EntitySystem {
         outerTable.setDebug(false);
         outerTable.add(inventoryScroll).width(inventory.getWidth() * 0.55f).height(inventory.getHeight() * 0.95f).fill();
 
-        inventorySlots.setDebug(false);
         inventory.add(outerTable);
     }
 
@@ -203,10 +198,10 @@ public class InventoryRenderSystem extends EntitySystem {
 
     private void addInventorySlots(Table inventory) {
         equipSlots.clearChildren();
-        inventorySlots.clearChildren();
 //        inventory.clearChildren();
 //        inventory.setDebug(false);
         Table inventorySlots = new Table();
+        inventorySlots.clearChildren();
         inventoryScroll.setActor(inventorySlots);
 //        inventorySlots.setName("inventorySlots");
 
