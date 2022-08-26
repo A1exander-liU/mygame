@@ -272,6 +272,7 @@ public class InventoryRenderSystem extends EntitySystem {
             if (inventoryComponent.equipSlots.get(i).getOccupiedItem() != null) {
                 TextureRegionDrawable drawable = new TextureRegionDrawable(cg.getSprite(inventoryComponent.equipSlots.get(i).getOccupiedItem()).texture);
                 Image image = new Image(drawable);
+                image.setScaling(Scaling.contain);
                 inventoryComponent.equipSlots.get(i).add(image).grow();
             }
             
