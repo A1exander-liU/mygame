@@ -269,7 +269,7 @@ public class InventoryRenderSystem extends EntitySystem {
         equipSlots.add(equipSlotsInner).expand().fill();
         equipSlotsInner.clearChildren();
 
-        equipSlotsInner.defaults().expand().width(equipSlots.getWidth() / 3).height(equipSlots.getHeight() / 4);
+        equipSlotsInner.defaults().expand().width(equipSlots.getHeight() / 4.5f).height(equipSlots.getHeight() / 4.5f);
 
         // need to add an image of equipped item sprite
         for (int i = 0; i < inventoryComponent.equipSlots.size; i++) {
