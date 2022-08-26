@@ -175,16 +175,16 @@ public class InventoryRenderSystem extends EntitySystem {
         addEquipSlots(inventory);
 
         ScrollPane inventoryScroll = new ScrollPane(inventorySlots, skin, "scroll-pane-inventory");
-        inventoryScroll.setDebug(true);
+        inventoryScroll.layout();
+        inventoryScroll.setDebug(false);
         inventoryScroll.setFadeScrollBars(false);
-        inventoryScroll.setFlickScroll(true);
+        inventoryScroll.setFlickScroll(false);
         inventoryScroll.setVariableSizeKnobs(false);
-        inventoryScroll.setOverscroll(false, false);
 //        inventoryScroll.setSize(inventory.getWidth() * 0.55f, inventory.getHeight() * 0.95f);
 
         Table outerTable = new Table();
         outerTable.setDebug(false);
-        outerTable.add(inventoryScroll).grow();
+        outerTable.add(inventoryScroll).fill();
 
         inventorySlots.setDebug(false);
         inventory.add(outerTable).width(inventory.getWidth() * 0.55f).height(inventory.getHeight() * 0.95f);
@@ -197,10 +197,8 @@ public class InventoryRenderSystem extends EntitySystem {
                 inventorySlots.row();
             }
             InventorySlot inventorySlot = inventoryComponent.inventorySlots.get(i);
-
-            if (inventorySlot.getChildren().size > 0) {
-                inventorySlot.getChildren().get(0).remove();
-            }
+            
+            inventorySlot.clearChildren();
 
             Stack stack = new Stack();
             inventorySlot.add(stack).grow();
