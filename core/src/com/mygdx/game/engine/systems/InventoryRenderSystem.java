@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -16,7 +17,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
+import com.badlogic.gdx.scenes.scene2d.utils.DragScrollListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Scaling;
@@ -44,6 +48,7 @@ public class InventoryRenderSystem extends EntitySystem {
     DragAndDrop dragAndDrop;
 
     Table inventory;
+    Table equipSlots;
     Table outerTable;
     ScrollPane inventoryScroll;
 
@@ -106,9 +111,18 @@ public class InventoryRenderSystem extends EntitySystem {
         inventory.setSize(root.getWidth() * 0.75f, root.getHeight() * 0.60f);
         root.add(inventory).expand().center().width(inventory.getWidth()).height(inventory.getHeight());
 
+        // build the tables in constructor
+        // only slots will be cleared and added each frame
+        equipSlots = new Table();
+        equipSlots.setName("equipSlots");
 
-        // setting up inventoryScroll with new empty table
-        // needs to created outside of update for scrolling to work
+        // setting up the equipSlots table
+        equipSlots.setSize(inventory.getWidth() * 0.4f, inventory.getHeight() * 0.95f);
+        inventory.add(equipSlots).expand().width(equipSlots.getWidth()).height(equipSlots.getHeight());
+
+        equipSlots.defaults().expand().width(equipSlots.getWidth() / 3).height(equipSlots.getHeight() / 4);
+
+        // setting up the inventorySlots table
         inventoryScroll = new ScrollPane(new Table(), skin, "scroll-pane-inventory");
         inventoryScroll.layout();
         inventoryScroll.setDebug(false);
@@ -183,15 +197,11 @@ public class InventoryRenderSystem extends EntitySystem {
     }
 
     private void addInventorySlots(Table inventory) {
-        inventory.clearChildren();
-
         Table inventorySlots = new Table();
         inventorySlots.clearChildren();
         inventoryScroll.setActor(inventorySlots);
 
         addEquipSlots(inventory);
-
-        inventory.add(outerTable);
 
         int cols = 0;
         InventoryComponent inventoryComponent = cg.getInventory(player);
@@ -254,14 +264,12 @@ public class InventoryRenderSystem extends EntitySystem {
 
     private void addEquipSlots(Table inventory) {
         InventoryComponent inventoryComponent = cg.getInventory(player);
-        Table equipSlots = new Table();
-        equipSlots.setName("equipSlots");
-        equipSlots.setDebug(false);
+        equipSlots.clearChildren();
+        Table equipSlotsInner = new Table();
+        equipSlots.add(equipSlotsInner).expand().fill();
+        equipSlotsInner.clearChildren();
 
-        equipSlots.setSize(inventory.getWidth() * 0.4f, inventory.getHeight() * 0.95f);
-        inventory.add(equipSlots).expand().width(equipSlots.getWidth()).height(equipSlots.getHeight());
-
-        equipSlots.defaults().expand().width(equipSlots.getWidth() / 3).height(equipSlots.getHeight() / 4);
+        equipSlotsInner.defaults().expand().width(equipSlots.getWidth() / 3).height(equipSlots.getHeight() / 4);
 
         // need to add an image of equipped item sprite
         for (int i = 0; i < inventoryComponent.equipSlots.size; i++) {
@@ -278,16 +286,16 @@ public class InventoryRenderSystem extends EntitySystem {
             
         }
 
-        equipSlots.add(inventoryComponent.equipSlots.get(0)).colspan(3).center();
-        equipSlots.row();
-        equipSlots.add(inventoryComponent.equipSlots.get(4));
-        equipSlots.add(inventoryComponent.equipSlots.get(1));
-        equipSlots.add(inventoryComponent.equipSlots.get(5));
-        equipSlots.row();
-        equipSlots.add(inventoryComponent.equipSlots.get(2)).colspan(3).center();
-        equipSlots.row();
-        equipSlots.add(inventoryComponent.equipSlots.get(6));
-        equipSlots.add(inventoryComponent.equipSlots.get(3));
-        equipSlots.add(inventoryComponent.equipSlots.get(7));
+        equipSlotsInner.add(inventoryComponent.equipSlots.get(0)).colspan(3).center();
+        equipSlotsInner.row();
+        equipSlotsInner.add(inventoryComponent.equipSlots.get(4));
+        equipSlotsInner.add(inventoryComponent.equipSlots.get(1));
+        equipSlotsInner.add(inventoryComponent.equipSlots.get(5));
+        equipSlotsInner.row();
+        equipSlotsInner.add(inventoryComponent.equipSlots.get(2)).colspan(3).center();
+        equipSlotsInner.row();
+        equipSlotsInner.add(inventoryComponent.equipSlots.get(6));
+        equipSlotsInner.add(inventoryComponent.equipSlots.get(3));
+        equipSlotsInner.add(inventoryComponent.equipSlots.get(7));
     }
 }
