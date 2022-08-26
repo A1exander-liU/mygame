@@ -116,7 +116,7 @@ public class InventoryRenderSystem extends EntitySystem {
         // only slots will be cleared and added each frame
         equipSlots = new Table();
         equipSlots.setName("equipSlots");
-        
+
         inventorySlots = new Table();
         inventorySlots.setName("inventorySlots");
 
@@ -145,6 +145,7 @@ public class InventoryRenderSystem extends EntitySystem {
 
     @Override
     public void update(float delta) {
+        stage.getViewport().update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         // inventory button states don't work properly
         // problem: might be b/c it is redrawing every frame, the button states
         // are not registering
