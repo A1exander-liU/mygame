@@ -48,7 +48,6 @@ public class InventoryRenderSystem extends EntitySystem {
     DragAndDrop dragAndDrop;
 
     Table inventory;
-    Table equipSlots;
     Table outerTable;
     ScrollPane inventoryScroll;
 
@@ -111,18 +110,9 @@ public class InventoryRenderSystem extends EntitySystem {
         inventory.setSize(root.getWidth() * 0.75f, root.getHeight() * 0.60f);
         root.add(inventory).expand().center().width(inventory.getWidth()).height(inventory.getHeight());
 
-        // build the tables in constructor
-        // only slots will be cleared and added each frame
-        equipSlots = new Table();
-        equipSlots.setName("equipSlots");
 
-        // setting up the equipSlots table
-        equipSlots.setSize(inventory.getWidth() * 0.4f, inventory.getHeight() * 0.95f);
-        inventory.add(equipSlots).expand().width(equipSlots.getWidth()).height(equipSlots.getHeight());
-
-        equipSlots.defaults().expand().width(equipSlots.getWidth() / 3).height(equipSlots.getHeight() / 4);
-
-        // setting up the inventorySlots table
+        // setting up inventoryScroll with new empty table
+        // needs to created outside of update for scrolling to work
         inventoryScroll = new ScrollPane(new Table(), skin, "scroll-pane-inventory");
         inventoryScroll.layout();
         inventoryScroll.setDebug(false);
@@ -197,13 +187,15 @@ public class InventoryRenderSystem extends EntitySystem {
     }
 
     private void addInventorySlots(Table inventory) {
-        equipSlots.clearChildren();
+        inventory.clearChildren();
 
         Table inventorySlots = new Table();
         inventorySlots.clearChildren();
         inventoryScroll.setActor(inventorySlots);
 
         addEquipSlots(inventory);
+
+        inventory.add(outerTable);
 
         int cols = 0;
         InventoryComponent inventoryComponent = cg.getInventory(player);
@@ -266,14 +258,14 @@ public class InventoryRenderSystem extends EntitySystem {
 
     private void addEquipSlots(Table inventory) {
         InventoryComponent inventoryComponent = cg.getInventory(player);
-//        Table equipSlots = new Table();
-//        equipSlots.setName("equipSlots");
-//        equipSlots.setDebug(false);
-//
-//        equipSlots.setSize(inventory.getWidth() * 0.4f, inventory.getHeight() * 0.95f);
-//        inventory.add(equipSlots).expand().width(equipSlots.getWidth()).height(equipSlots.getHeight());
-//
-//        equipSlots.defaults().expand().width(equipSlots.getWidth() / 3).height(equipSlots.getHeight() / 4);
+        Table equipSlots = new Table();
+        equipSlots.setName("equipSlots");
+        equipSlots.setDebug(false);
+
+        equipSlots.setSize(inventory.getWidth() * 0.4f, inventory.getHeight() * 0.95f);
+        inventory.add(equipSlots).expand().width(equipSlots.getWidth()).height(equipSlots.getHeight());
+
+        equipSlots.defaults().expand().width(equipSlots.getWidth() / 3).height(equipSlots.getHeight() / 4);
 
         // need to add an image of equipped item sprite
         for (int i = 0; i < inventoryComponent.equipSlots.size; i++) {
@@ -301,6 +293,5 @@ public class InventoryRenderSystem extends EntitySystem {
         equipSlots.add(inventoryComponent.equipSlots.get(6));
         equipSlots.add(inventoryComponent.equipSlots.get(3));
         equipSlots.add(inventoryComponent.equipSlots.get(7));
-
     }
 }
