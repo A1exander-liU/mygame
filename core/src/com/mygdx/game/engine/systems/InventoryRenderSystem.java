@@ -198,28 +198,12 @@ public class InventoryRenderSystem extends EntitySystem {
 
     private void addInventorySlots(Table inventory) {
         equipSlots.clearChildren();
-//        inventory.clearChildren();
-//        inventory.setDebug(false);
+
         Table inventorySlots = new Table();
         inventorySlots.clearChildren();
         inventoryScroll.setActor(inventorySlots);
-//        inventorySlots.setName("inventorySlots");
 
         addEquipSlots(inventory);
-
-//        ScrollPane inventoryScroll = new ScrollPane(inventorySlots, skin, "scroll-pane-inventory");
-//        inventoryScroll.layout();
-//        inventoryScroll.setDebug(false);
-//        inventoryScroll.setFadeScrollBars(false);
-//        inventoryScroll.setFlickScroll(false);
-//        inventoryScroll.setVariableSizeKnobs(false);
-//
-//        Table outerTable = new Table();
-//        outerTable.setDebug(false);
-//        outerTable.add(inventoryScroll).width(inventory.getWidth() * 0.55f).height(inventory.getHeight() * 0.95f).fill();
-//
-//        inventorySlots.setDebug(false);
-//        inventory.add(outerTable);
 
         int cols = 0;
         InventoryComponent inventoryComponent = cg.getInventory(player);
@@ -250,14 +234,12 @@ public class InventoryRenderSystem extends EntitySystem {
 
             Cell<ScrollPane> scrollPaneCell = outerTable.getCell(inventoryScroll);
 
-//            float remainingSpace = inventory.getWidth() - inventory.getCells().get(0).getPrefWidth();
             inventorySlots.add(inventorySlot).width(scrollPaneCell.getPrefWidth() / 5).height(scrollPaneCell.getPrefHeight() / 5);
 
             cols++;
         }
 
         inventoryScroll.validate();
-//        inventoryScroll.setScrollPercentY(1f);
         inventoryScroll.updateVisualScroll();
 
         for (int i = 0; i < inventoryComponent.inventorySlots.size; i++) {
