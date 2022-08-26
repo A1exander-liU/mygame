@@ -97,6 +97,7 @@ public class InventoryRenderSystem extends EntitySystem {
         dragAndDrop = new DragAndDrop();
 
         Table root = new Table();
+        root.setName("root");
         root.setFillParent(true);
         root.setSize(stage.getWidth(), stage.getHeight());
         stage.addActor(root);
@@ -128,6 +129,7 @@ public class InventoryRenderSystem extends EntitySystem {
         inventoryScroll.setSmoothScrolling(true);
 
         outerTable = new Table();
+        outerTable.setName("outerTable");
         outerTable.setDebug(false);
         outerTable.add(inventoryScroll).width(inventory.getWidth() * 0.55f).height(inventory.getHeight() * 0.95f).fill();
 
