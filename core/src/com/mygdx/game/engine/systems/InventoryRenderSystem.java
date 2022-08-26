@@ -184,7 +184,7 @@ public class InventoryRenderSystem extends EntitySystem {
 
         Table outerTable = new Table();
         outerTable.setDebug(false);
-        outerTable.add(inventoryScroll).expand().fill();
+        outerTable.add(inventoryScroll).width(inventory.getWidth() * 0.55f).height(inventory.getHeight() * 0.95f).fill();
 
         inventorySlots.setDebug(false);
         inventory.add(outerTable);
@@ -216,8 +216,10 @@ public class InventoryRenderSystem extends EntitySystem {
                 stack.add(label);
             }
 
-            float remainingSpace = inventory.getWidth() - inventory.getCells().get(0).getPrefWidth();
-            inventorySlots.add(inventorySlot).width(remainingSpace / 5).height(remainingSpace / 5);
+            Cell<ScrollPane> scrollPaneCell = outerTable.getCell(inventoryScroll);
+
+//            float remainingSpace = inventory.getWidth() - inventory.getCells().get(0).getPrefWidth();
+            inventorySlots.add(inventorySlot).width(scrollPaneCell.getPrefWidth() / 5).height(scrollPaneCell.getPrefHeight() / 5);
 
             cols++;
         }
