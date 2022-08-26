@@ -17,8 +17,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
+import com.badlogic.gdx.scenes.scene2d.utils.DragScrollListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Scaling;
@@ -171,7 +173,6 @@ public class InventoryRenderSystem extends EntitySystem {
         Table inventorySlots = new Table();
         inventorySlots.setName("inventorySlots");
 
-
         addEquipSlots(inventory);
 
         ScrollPane inventoryScroll = new ScrollPane(inventorySlots, skin, "scroll-pane-inventory");
@@ -180,14 +181,13 @@ public class InventoryRenderSystem extends EntitySystem {
         inventoryScroll.setFadeScrollBars(false);
         inventoryScroll.setFlickScroll(false);
         inventoryScroll.setVariableSizeKnobs(false);
-//        inventoryScroll.setSize(inventory.getWidth() * 0.55f, inventory.getHeight() * 0.95f);
 
         Table outerTable = new Table();
         outerTable.setDebug(false);
-        outerTable.add(inventoryScroll).fill();
+        outerTable.add(inventoryScroll).expand().fill();
 
         inventorySlots.setDebug(false);
-        inventory.add(outerTable).width(inventory.getWidth() * 0.55f).height(inventory.getHeight() * 0.95f);
+        inventory.add(outerTable);
 
         int cols = 0;
         InventoryComponent inventoryComponent = cg.getInventory(player);
@@ -197,7 +197,7 @@ public class InventoryRenderSystem extends EntitySystem {
                 inventorySlots.row();
             }
             InventorySlot inventorySlot = inventoryComponent.inventorySlots.get(i);
-            
+
             inventorySlot.clearChildren();
 
             Stack stack = new Stack();
@@ -216,8 +216,8 @@ public class InventoryRenderSystem extends EntitySystem {
                 stack.add(label);
             }
 
-            Cell<Table> outerTableCell = inventory.getCell(outerTable);
-            inventorySlots.add(inventorySlot).width(outerTableCell.getMaxWidth() / 4.6f).height(outerTableCell.getMaxHeight() / 4.6f);
+            float remainingSpace = inventory.getWidth() - inventory.getCells().get(0).getPrefWidth();
+            inventorySlots.add(inventorySlot).width(remainingSpace / 5).height(remainingSpace / 5);
 
             cols++;
         }
