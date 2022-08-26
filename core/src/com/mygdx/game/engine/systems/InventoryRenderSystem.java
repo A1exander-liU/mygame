@@ -141,6 +141,8 @@ public class InventoryRenderSystem extends EntitySystem {
     @Override
     public void update(float delta) {
         stage.getViewport().update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        root.setSize(stage.getWidth(), stage.getHeight());
+        inventory.setSize(root.getWidth() * 0.75f, root.getHeight() * 0.60f);
 
         // inventory button states don't work properly
         // problem: might be b/c it is redrawing every frame, the button states
