@@ -158,7 +158,7 @@ public class InventoryRenderSystem extends EntitySystem {
             // immediately set to false so the inventory is only drawn once
             // when it is opened once
             canDraw = false;
-            addInventorySlots(inventory);
+            addInventorySlots();
             stage.act(delta);
             stage.draw();
         }
@@ -196,12 +196,12 @@ public class InventoryRenderSystem extends EntitySystem {
         }
     }
 
-    private void addInventorySlots(Table inventory) {
+    private void addInventorySlots() {
         Table inventorySlots = new Table();
         inventorySlots.clearChildren();
         inventoryScroll.setActor(inventorySlots);
 
-        addEquipSlots(inventory);
+        addEquipSlots();
 
         int cols = 0;
         InventoryComponent inventoryComponent = cg.getInventory(player);
@@ -262,7 +262,7 @@ public class InventoryRenderSystem extends EntitySystem {
         }
     }
 
-    private void addEquipSlots(Table inventory) {
+    private void addEquipSlots() {
         InventoryComponent inventoryComponent = cg.getInventory(player);
         equipSlots.clearChildren();
         Table equipSlotsInner = new Table();
