@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -43,6 +44,7 @@ public class InventoryRenderSystem extends EntitySystem {
 
     DragAndDrop dragAndDrop;
 
+    Table root;
     Table inventory;
     Table equipSlots;
     Table outerTable;
@@ -96,7 +98,7 @@ public class InventoryRenderSystem extends EntitySystem {
 
         dragAndDrop = new DragAndDrop();
 
-        Table root = new Table();
+        root = new Table();
         root.setName("root");
         root.setFillParent(true);
         root.setSize(stage.getWidth(), stage.getHeight());
