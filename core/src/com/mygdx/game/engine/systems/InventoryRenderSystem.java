@@ -206,7 +206,8 @@ public class InventoryRenderSystem extends EntitySystem {
         inventorySlots.clearChildren();
 //        inventory.clearChildren();
 //        inventory.setDebug(false);
-//        Table inventorySlots = new Table();
+        Table inventorySlots = new Table();
+        inventoryScroll.setActor(inventorySlots);
 //        inventorySlots.setName("inventorySlots");
 
         addEquipSlots(inventory);
