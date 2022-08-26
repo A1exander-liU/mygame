@@ -7,9 +7,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.InventoryChangeListener;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.AcceptedEquipType;
+import com.mygdx.game.engine.Families;
 import com.mygdx.game.engine.Mappers;
 
 public class InventorySlot extends ImageButton {
@@ -78,7 +80,12 @@ public class InventorySlot extends ImageButton {
     }
 
     public Image getItemImage() {
-        return (Image) getStackChild().getChildren().get(0);
+        Entity player = MyGame.engine.getEntitiesFor(Families.player).get(0);
+        Array<InventorySlot> equipSlots = Mappers.inventory.get(player).equipSlots;
+        if (equipSlots.contains(this, false))
+            return (Image) getChildren().get(0);
+        else
+            return (Image) getStackChild().getChildren().get(0);
     }
 
 }
