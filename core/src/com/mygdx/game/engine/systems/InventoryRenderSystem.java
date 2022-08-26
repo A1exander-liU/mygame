@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
@@ -174,7 +175,7 @@ public class InventoryRenderSystem extends EntitySystem {
         addEquipSlots(inventory);
 
         ScrollPane inventoryScroll = new ScrollPane(inventorySlots, skin, "scroll-pane-inventory");
-        inventoryScroll.setDebug(false);
+        inventoryScroll.setDebug(true);
         inventoryScroll.setFadeScrollBars(false);
         inventoryScroll.setFlickScroll(true);
         inventoryScroll.setVariableSizeKnobs(false);
@@ -182,7 +183,7 @@ public class InventoryRenderSystem extends EntitySystem {
 //        inventoryScroll.setSize(inventory.getWidth() * 0.55f, inventory.getHeight() * 0.95f);
 
         Table outerTable = new Table();
-        outerTable.setDebug(true);
+        outerTable.setDebug(false);
         outerTable.add(inventoryScroll).grow();
 
         inventorySlots.setDebug(false);
@@ -217,7 +218,8 @@ public class InventoryRenderSystem extends EntitySystem {
                 stack.add(label);
             }
 
-            inventorySlots.add(inventorySlot).width(inventoryScroll.getWidth() / 4.6f).height(inventoryScroll.getHeight() / 4);
+            Cell<Table> outerTableCell = inventory.getCell(outerTable);
+            inventorySlots.add(inventorySlot).width(outerTableCell.getMaxWidth() / 4.6f).height(outerTableCell.getMaxHeight() / 4.6f);
 
             cols++;
         }
