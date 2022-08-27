@@ -16,6 +16,7 @@ import com.mygdx.game.engine.AcceptedEquipType;
 import com.mygdx.game.engine.Families;
 import com.mygdx.game.engine.ItemType;
 import com.mygdx.game.engine.Mappers;
+import com.mygdx.game.engine.Type;
 import com.mygdx.game.engine.components.inventory.items.individual.ArmourStatComponent;
 import com.mygdx.game.engine.components.inventory.items.individual.WeaponStatComponent;
 import com.mygdx.game.utils.InventorySlot;
@@ -206,17 +207,17 @@ public class ItemInfoDialog extends Dialog {
     }
 
     private void checkTargetEquipSlot() {
-        InventorySlot equipSlot = getEquipSlot(Mappers.equipType.get(item).acceptedEquipType);
+        InventorySlot equipSlot = getEquipSlot(Mappers.equipType.get(item).acceptedType);
         if (equipSlot != null && !equipSlot.isEmpty())
             inventoryUi.swapEquipment(inventorySlot, equipSlot);
         else
             inventoryUi.equip(inventorySlot, equipSlot);
     }
 
-    private InventorySlot getEquipSlot(AcceptedEquipType equipType) {
+    private InventorySlot getEquipSlot(Type equipType) {
         Array<InventorySlot> equipSlots = Mappers.inventory.get(player).equipSlots;
         for (int i = 0; i < equipSlots.size; i++) {
-            if (equipSlots.get(i).getAcceptedEquipType() == equipType)
+            if (equipSlots.get(i).getAcceptedType() == equipType)
                 return equipSlots.get(i);
         }
         return null;
