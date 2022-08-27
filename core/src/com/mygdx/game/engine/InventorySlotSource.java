@@ -55,7 +55,7 @@ public class InventorySlotSource extends DragAndDrop.Source {
     @Override
     public void dragStop(InputEvent event, float x, float y, int pointer,
                          DragAndDrop.Payload payload, DragAndDrop.Target target) {
-       if (target == null) {
+       if (target == null || sourceSlot == target.getActor()) {
            System.out.println("invalid");
            sourceSlot.setOccupiedItem((Entity) payload.getObject());
        }
