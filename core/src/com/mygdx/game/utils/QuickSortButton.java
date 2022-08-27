@@ -12,6 +12,7 @@ import com.mygdx.game.engine.Mappers;
 import com.mygdx.game.engine.Rarity;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 public class QuickSortButton extends ImageButton {
     Entity player;
@@ -52,6 +53,9 @@ public class QuickSortButton extends ImageButton {
                     System.out.println("same item");
                     // check if nextItem has higher rarity
                     if (hasHigherRarity(nextItem, thisItem)) swapSlots(thisSlot, nextSlot);
+                    else if (sameItem(thisItem, nextItem)) {
+                        
+                    }
                 }
                 // check if the item types aren't the same
                 else if (!sameItemType(thisItem, nextItem)) {
@@ -82,5 +86,9 @@ public class QuickSortButton extends ImageButton {
 
     private boolean hasHigherPriority(Entity thisItem, Entity nextItem) {
         return Mappers.inventoryItem.get(thisItem).acceptedItemType.getRank() > Mappers.inventoryItem.get(nextItem).acceptedItemType.getRank();
+    }
+
+    private boolean sameItem(Entity thisItem, Entity nextItem) {
+        return Objects.equals(Mappers.name.get(thisItem).name, Mappers.name.get(nextItem).name);
     }
 }
