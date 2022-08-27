@@ -35,7 +35,7 @@ public class ItemFactory {
         materialEntity.add(new RarityComponent());
         materialEntity.add(new DescriptionComponent());
         materialEntity.add(new QuantityComponent());
-        materialEntity.add(new InventoryItemComponent());
+        materialEntity.add(new InventoryItemComponent(Type.MATERIAL));
         materialEntity.add(new StackableComponent());
         materialEntity.add(new EquipTypeComponent());
         materialEntity.add(new ItemTypeComponent(Type.MATERIAL));
@@ -58,7 +58,7 @@ public class ItemFactory {
         weaponEntity.add(new Sprite());
         weaponEntity.add(new RarityComponent());
         weaponEntity.add(new DescriptionComponent());
-        weaponEntity.add(new InventoryItemComponent());
+        weaponEntity.add(new InventoryItemComponent(Type.MAIN));
         weaponEntity.add(new EquipTypeComponent());
         weaponEntity.add(new WeaponStatComponent());
         weaponEntity.add(new ItemTypeComponent(Type.MAIN));
@@ -86,25 +86,28 @@ public class ItemFactory {
         JsonValue armour = null;
         if (armourType == AcceptedEquipType.HEAD) {
             armour = itemFinder.findHeadArmourByName(name);
+            armourEntity.add(new InventoryItemComponent(Type.HEAD));
             armourEntity.add(new ItemTypeComponent(Type.HEAD));
         }
         else if (armourType == AcceptedEquipType.TORSO) {
             armour = itemFinder.findChestArmourByName(name);
+            armourEntity.add(new InventoryItemComponent(Type.TORSO));
             armourEntity.add(new ItemTypeComponent(Type.TORSO));
         }
         else if (armourType == AcceptedEquipType.LEG) {
             armour = itemFinder.findLegArmourByName(name);
+            armourEntity.add(new InventoryItemComponent(Type.LEG));
             armourEntity.add(new ItemTypeComponent(Type.LEG));
         }
         else if (armourType == AcceptedEquipType.FEET) {
             armour = itemFinder.findFeetArmourByName(name);
+            armourEntity.add(new InventoryItemComponent(Type.FEET));
             armourEntity.add(new ItemTypeComponent(Type.FEET));
         }
         armourEntity.add(new Name());
         armourEntity.add(new Sprite());
         armourEntity.add(new RarityComponent());
         armourEntity.add(new DescriptionComponent());
-        armourEntity.add(new InventoryItemComponent());
         armourEntity.add(new EquipTypeComponent());
         armourEntity.add(new ArmourStatComponent());
 
