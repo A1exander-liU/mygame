@@ -44,6 +44,7 @@ public class InventorySlotTarget extends DragAndDrop.Target {
         Entity sourceItem = (Entity) payload.getObject();
         // if the item names are the same
         Entity targetItem = targetSlot.getOccupiedItem();
+        if (sourceSlot == targetSlot) return;
         // check if null (if null, target slot can accept any item)
         if (targetSlot.getAcceptedType() == null && sourceSlot.getAcceptedType() == null) {
             // if target slot is empty
