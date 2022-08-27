@@ -37,15 +37,12 @@ public class ItemFactory {
         materialEntity.add(new QuantityComponent());
         materialEntity.add(new InventoryItemComponent(Type.MATERIAL));
         materialEntity.add(new StackableComponent());
-        materialEntity.add(new EquipTypeComponent());
-        materialEntity.add(new ItemTypeComponent(Type.MATERIAL));
 
         Mappers.name.get(materialEntity).name = material.getString("name");
         Mappers.sprite.get(materialEntity).texture = new Texture(Gdx.files.internal(material.getString("sprite")));
         Mappers.rarity.get(materialEntity).rarity = determineRarity(material.getString("rarity"));
         Mappers.description.get(materialEntity).description = material.getString("desc");
         Mappers.quantity.get(materialEntity).quantity = amount;
-        Mappers.inventoryItem.get(materialEntity).itemType = ItemType.MATERIAL;
 
         addToEngine(materialEntity);
         return materialEntity;
@@ -59,16 +56,12 @@ public class ItemFactory {
         weaponEntity.add(new RarityComponent());
         weaponEntity.add(new DescriptionComponent());
         weaponEntity.add(new InventoryItemComponent(Type.MAIN));
-        weaponEntity.add(new EquipTypeComponent());
         weaponEntity.add(new WeaponStatComponent());
-        weaponEntity.add(new ItemTypeComponent(Type.MAIN));
 
         Mappers.name.get(weaponEntity).name = weapon.getString("name");
         Mappers.sprite.get(weaponEntity).texture = new Texture(Gdx.files.internal(weapon.getString("sprite")));
         Mappers.rarity.get(weaponEntity).rarity = determineRarity(weapon.getString("rarity"));
         Mappers.description.get(weaponEntity).description = weapon.getString("desc");
-        Mappers.inventoryItem.get(weaponEntity).itemType = ItemType.EQUIPMENT;
-        Mappers.equipType.get(weaponEntity).acceptedEquipType = AcceptedEquipType.MAIN;
 
         WeaponStatComponent weaponStat = Mappers.weaponStat.get(weaponEntity);
         weaponStat.minDmg = weapon.getInt("minDmg");
@@ -87,36 +80,29 @@ public class ItemFactory {
         if (armourType == AcceptedEquipType.HEAD) {
             armour = itemFinder.findHeadArmourByName(name);
             armourEntity.add(new InventoryItemComponent(Type.HEAD));
-            armourEntity.add(new ItemTypeComponent(Type.HEAD));
         }
         else if (armourType == AcceptedEquipType.TORSO) {
             armour = itemFinder.findChestArmourByName(name);
             armourEntity.add(new InventoryItemComponent(Type.TORSO));
-            armourEntity.add(new ItemTypeComponent(Type.TORSO));
         }
         else if (armourType == AcceptedEquipType.LEG) {
             armour = itemFinder.findLegArmourByName(name);
             armourEntity.add(new InventoryItemComponent(Type.LEG));
-            armourEntity.add(new ItemTypeComponent(Type.LEG));
         }
         else if (armourType == AcceptedEquipType.FEET) {
             armour = itemFinder.findFeetArmourByName(name);
             armourEntity.add(new InventoryItemComponent(Type.FEET));
-            armourEntity.add(new ItemTypeComponent(Type.FEET));
         }
         armourEntity.add(new Name());
         armourEntity.add(new Sprite());
         armourEntity.add(new RarityComponent());
         armourEntity.add(new DescriptionComponent());
-        armourEntity.add(new EquipTypeComponent());
         armourEntity.add(new ArmourStatComponent());
 
         Mappers.name.get(armourEntity).name = armour.getString("name");
         Mappers.sprite.get(armourEntity).texture = new Texture(Gdx.files.internal(armour.getString("sprite")));
         Mappers.rarity.get(armourEntity).rarity = determineRarity(armour.getString("rarity"));
         Mappers.description.get(armourEntity).description = armour.getString("desc");
-        Mappers.inventoryItem.get(armourEntity).itemType = ItemType.EQUIPMENT;
-        Mappers.equipType.get(armourEntity).acceptedEquipType = armourType;
 
         ArmourStatComponent armourStat = Mappers.armourStat.get(armourEntity);
         armourStat.physicalDef = armour.getInt("physicalDef");
