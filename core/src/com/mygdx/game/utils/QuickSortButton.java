@@ -38,7 +38,7 @@ public class QuickSortButton extends ImageButton {
                 InventorySlot thisSlot = inventorySlots.get(j);
                 InventorySlot nextSlot = inventorySlots.get(j + 1);
                 // if both slots are empty, don't need to sort
-                if (thisSlot.getOccupiedItem() == null && nextSlot == null) continue;
+                if (thisSlot.isEmpty() && nextSlot.isEmpty()) continue;
 
                 Entity thisItem = thisSlot.getOccupiedItem();
                 Entity nextItem = nextSlot.getOccupiedItem();
