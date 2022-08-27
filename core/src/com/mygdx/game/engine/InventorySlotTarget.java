@@ -45,7 +45,7 @@ public class InventorySlotTarget extends DragAndDrop.Target {
         // if the item names are the same
         Entity targetItem = targetSlot.getOccupiedItem();
         // check if null (if null, target slot can accept any item)
-        if (targetSlot.getAcceptedEquipType() == null && sourceSlot.getAcceptedEquipType() == null) {
+        if (targetSlot.getAcceptedType() == null && sourceSlot.getAcceptedType() == null) {
             // if target slot is empty
             if (targetSlot.isEmpty()) {
                 System.out.println("assign");
