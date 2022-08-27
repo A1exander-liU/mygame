@@ -48,6 +48,7 @@ public class InventoryRenderSystem extends EntitySystem {
     Table inventory;
     Table equipSlots;
     Table outerTable;
+    Table inventorySettings;
     ScrollPane inventoryScroll;
 
     public InventoryRenderSystem(ComponentGrabber cg) {
@@ -133,7 +134,10 @@ public class InventoryRenderSystem extends EntitySystem {
         outerTable = new Table();
         outerTable.setName("outerTable");
         outerTable.setDebug(false);
-        outerTable.add(inventoryScroll).width(inventory.getWidth() * 0.55f).height(inventory.getHeight() * 0.95f).fill();
+        inventorySettings = new Table();
+        outerTable.add(inventorySettings).width(inventory.getWidth() * 0.55f).height(inventory.getHeight() * 0.1f).fill();
+        outerTable.row();
+        outerTable.add(inventoryScroll).width(inventory.getWidth() * 0.55f).height(inventory.getHeight() * 0.85f).fill();
 
         inventory.add(outerTable);
     }
