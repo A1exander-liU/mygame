@@ -54,7 +54,8 @@ public class QuickSortButton extends ImageButton {
                 }
                 // check if the item types aren't the same
                 else if (!sameItemType(thisItem, nextItem)) {
-
+                    // if nextItem has higher item priority
+                    if (hasHigherPriority(nextItem, thisItem)) swapSlots(thisSlot, nextSlot);
                 }
             }
         }
@@ -72,5 +73,9 @@ public class QuickSortButton extends ImageButton {
 
     private boolean hasHigherRarity(Entity thisItem, Entity nextItem) {
         return Mappers.rarity.get(thisItem).rarity.getRank() > Mappers.rarity.get(nextItem).rarity.getRank();
+    }
+
+    private boolean hasHigherPriority(Entity thisItem, Entity nextItem) {
+        return Mappers.inventoryItem.get(thisItem).acceptedItemType.getRank() > Mappers.inventoryItem.get(nextItem).acceptedItemType.getRank();
     }
 }
