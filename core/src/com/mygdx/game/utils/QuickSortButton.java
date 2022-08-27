@@ -52,9 +52,7 @@ public class QuickSortButton extends ImageButton {
                 // check if item types are the same
                 else if (sameItemType(thisItem, nextItem)) {
                     // check if thisItem has higher rarity
-                    if (hasHigherRarity(thisItem, nextItem)) {
-
-                    }
+                    if (hasHigherRarity(thisItem, nextItem)) continue;
                 }
             }
         }
