@@ -45,8 +45,7 @@ public class QuickSortButton extends ImageButton {
 
                 // slots with items then slots w/o items
                 if (thisSlot.isEmpty()) {
-                    inventorySlots.set(j, nextSlot);
-                    inventorySlots.set(j + 1, thisSlot);
+                    swapSlots(thisSlot, nextSlot);
                 }
 
                 // check if item types are the same
@@ -55,12 +54,17 @@ public class QuickSortButton extends ImageButton {
                     if (hasHigherRarity(thisItem, nextItem)) continue;
                     // if nextItem has higher rarity -> swap the items
                     else if (hasHigherRarity(nextItem, thisItem)) {
-                        inventorySlots.set(j, nextSlot);
-                        inventorySlots.set(j + 1, thisSlot);
+                        swapSlots(thisSlot, nextSlot);
                     }
                 }
             }
         }
+    }
+
+    private void swapSlots(InventorySlot thisSlot, InventorySlot nextSlot) {
+        Array<InventorySlot> inventorySlots = Mappers.inventory.get(player).inventorySlots;
+        inventorySlots.set(inventorySlots.indexOf(thisSlot, true), nextSlot);
+        inventorySlots.set(inventorySlots.indexOf(nextSlot, true), thisSlot);
     }
 
     private boolean sameItemType(Entity thisItem, Entity nextItem) {
