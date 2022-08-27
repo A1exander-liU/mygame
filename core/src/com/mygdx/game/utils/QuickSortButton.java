@@ -32,7 +32,7 @@ public class QuickSortButton extends ImageButton {
         // sort by rarity descending (Mythical -> Common)
         // item order: main, off, armor, accessories, consumables, materials
         Array<InventorySlot> inventorySlots = Mappers.inventory.get(player).inventorySlots;
-        for (int i = 0; i < inventorySlots.size; i++) {
+        for (int i = 0; i < inventorySlots.size - 1; i++) {
             // last element has nothing to compare to
             for (int j = 0; j < inventorySlots.size - 1; j++) {
                 InventorySlot thisSlot = inventorySlots.get(j);
@@ -40,28 +40,36 @@ public class QuickSortButton extends ImageButton {
                 // if both slots are empty, don't need to sort
                 if (thisSlot.isEmpty() && nextSlot.isEmpty()) continue;
 
+                if (nextSlot.isEmpty()) continue;
+
                 Entity thisItem = thisSlot.getOccupiedItem();
                 Entity nextItem = nextSlot.getOccupiedItem();
 
                 // slots with items then slots w/o items
                 if (thisSlot.isEmpty() && !nextSlot.isEmpty()) swapSlots(thisSlot, nextSlot);
                 // check if item types are the same
-                else if (sameItemType(thisItem, nextItem))
+                else if (sameItemType(thisItem, nextItem)) {
+                    System.out.println("same item");
                     // check if nextItem has higher rarity
                     if (hasHigherRarity(nextItem, thisItem)) swapSlots(thisSlot, nextSlot);
+                }
                 // check if the item types aren't the same
-                else if (!sameItemType(thisItem, nextItem))
+                else if (!sameItemType(thisItem, nextItem)) {
+                    System.out.println("different item");
                     // if nextItem has higher item priority
                     if (hasHigherPriority(nextItem, thisItem)) swapSlots(thisSlot, nextSlot);
-
+                }
             }
         }
+
     }
 
     private void swapSlots(InventorySlot thisSlot, InventorySlot nextSlot) {
         Array<InventorySlot> inventorySlots = Mappers.inventory.get(player).inventorySlots;
-        inventorySlots.set(inventorySlots.indexOf(thisSlot, true), nextSlot);
-        inventorySlots.set(inventorySlots.indexOf(nextSlot, true), thisSlot);
+        int thisSlotIndex = inventorySlots.indexOf(thisSlot, true);
+        int nextSlotIndex = inventorySlots.indexOf(nextSlot, true);
+        inventorySlots.set(thisSlotIndex, nextSlot);
+        inventorySlots.set(nextSlotIndex, thisSlot);
     }
 
     private boolean sameItemType(Entity thisItem, Entity nextItem) {
