@@ -13,6 +13,7 @@ import com.mygdx.game.engine.AcceptedEquipType;
 import com.mygdx.game.engine.InventorySlotSource;
 import com.mygdx.game.engine.InventorySlotTarget;
 import com.mygdx.game.engine.Mappers;
+import com.mygdx.game.engine.Type;
 import com.mygdx.game.utils.InventorySlot;
 
 public class InventoryComponent implements Component {
@@ -57,14 +58,14 @@ public class InventoryComponent implements Component {
             inventorySlots.add(inventorySlot);
         }
         // build all equip slots
-        InventorySlot head = new InventorySlot(skin, AcceptedEquipType.HEAD);
-        InventorySlot torso = new InventorySlot(skin, AcceptedEquipType.TORSO);
-        InventorySlot leg = new InventorySlot(skin, AcceptedEquipType.LEG);
-        InventorySlot feet = new InventorySlot(skin, AcceptedEquipType.FEET);
-        InventorySlot main = new InventorySlot(skin, AcceptedEquipType.MAIN);
-        InventorySlot off = new InventorySlot(skin, AcceptedEquipType.OFF);
-        InventorySlot accessory1 = new InventorySlot(skin, AcceptedEquipType.ACCESSORY);
-        InventorySlot accessory2 = new InventorySlot(skin, AcceptedEquipType.ACCESSORY);
+        InventorySlot head = new InventorySlot(skin, Type.HEAD);
+        InventorySlot torso = new InventorySlot(skin, Type.TORSO);
+        InventorySlot leg = new InventorySlot(skin, Type.LEG);
+        InventorySlot feet = new InventorySlot(skin, Type.FEET);
+        InventorySlot main = new InventorySlot(skin, Type.MAIN);
+        InventorySlot off = new InventorySlot(skin, Type.OFF);
+        InventorySlot accessory1 = new InventorySlot(skin, Type.ACCESSORY);
+        InventorySlot accessory2 = new InventorySlot(skin, Type.ACCESSORY);
         dragAndDrop.addSource(new InventorySlotSource(head, dragAndDrop));
         dragAndDrop.addSource(new InventorySlotSource(torso, dragAndDrop));
         dragAndDrop.addSource(new InventorySlotSource(leg, dragAndDrop));
