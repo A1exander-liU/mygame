@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.JsonValue;
 import com.mygdx.game.JsonItemFinder;
 import com.mygdx.game.MyGame;
+import com.mygdx.game.engine.components.Item;
 import com.mygdx.game.engine.components.inventory.items.individual.ArmourStatComponent;
 import com.mygdx.game.engine.components.inventory.items.individual.EquipTypeComponent;
 import com.mygdx.game.engine.components.Name;
@@ -15,6 +16,7 @@ import com.mygdx.game.engine.components.inventory.items.individual.StackableComp
 import com.mygdx.game.engine.components.inventory.items.individual.WeaponStatComponent;
 import com.mygdx.game.engine.components.inventory.items.shared.DescriptionComponent;
 import com.mygdx.game.engine.components.inventory.items.shared.InventoryItemComponent;
+import com.mygdx.game.engine.components.inventory.items.shared.ItemTypeComponent;
 import com.mygdx.game.engine.components.inventory.items.shared.QuantityComponent;
 import com.mygdx.game.engine.components.inventory.items.shared.RarityComponent;
 
@@ -36,6 +38,7 @@ public class ItemFactory {
         materialEntity.add(new InventoryItemComponent());
         materialEntity.add(new StackableComponent());
         materialEntity.add(new EquipTypeComponent());
+        materialEntity.add(new ItemTypeComponent(Type.MATERIAL));
 
         Mappers.name.get(materialEntity).name = material.getString("name");
         Mappers.sprite.get(materialEntity).texture = new Texture(Gdx.files.internal(material.getString("sprite")));
@@ -58,6 +61,7 @@ public class ItemFactory {
         weaponEntity.add(new InventoryItemComponent());
         weaponEntity.add(new EquipTypeComponent());
         weaponEntity.add(new WeaponStatComponent());
+        weaponEntity.add(new ItemTypeComponent(Type.MAIN));
 
         Mappers.name.get(weaponEntity).name = weapon.getString("name");
         Mappers.sprite.get(weaponEntity).texture = new Texture(Gdx.files.internal(weapon.getString("sprite")));
@@ -78,16 +82,24 @@ public class ItemFactory {
     }
 
     public Entity makeArmour(String name, AcceptedEquipType armourType) {
-        JsonValue armour = null;
-        if (armourType == AcceptedEquipType.HEAD)
-            armour = itemFinder.findHeadArmourByName(name);
-        else if (armourType == AcceptedEquipType.TORSO)
-            armour = itemFinder.findChestArmourByName(name);
-        else if (armourType == AcceptedEquipType.LEG)
-            armour = itemFinder.findLegArmourByName(name);
-        else if (armourType == AcceptedEquipType.FEET)
-            armour = itemFinder.findFeetArmourByName(name);
         Entity armourEntity = new Entity();
+        JsonValue armour = null;
+        if (armourType == AcceptedEquipType.HEAD) {
+            armour = itemFinder.findHeadArmourByName(name);
+            armourEntity.add(new ItemTypeComponent(Type.HEAD));
+        }
+        else if (armourType == AcceptedEquipType.TORSO) {
+            armour = itemFinder.findChestArmourByName(name);
+            armourEntity.add(new ItemTypeComponent(Type.TORSO));
+        }
+        else if (armourType == AcceptedEquipType.LEG) {
+            armour = itemFinder.findLegArmourByName(name);
+            armourEntity.add(new ItemTypeComponent(Type.LEG));
+        }
+        else if (armourType == AcceptedEquipType.FEET) {
+            armour = itemFinder.findFeetArmourByName(name);
+            armourEntity.add(new ItemTypeComponent(Type.FEET));
+        }
         armourEntity.add(new Name());
         armourEntity.add(new Sprite());
         armourEntity.add(new RarityComponent());
