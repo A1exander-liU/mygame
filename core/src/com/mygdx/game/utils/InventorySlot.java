@@ -13,6 +13,7 @@ import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.AcceptedEquipType;
 import com.mygdx.game.engine.Families;
 import com.mygdx.game.engine.Mappers;
+import com.mygdx.game.engine.Type;
 
 public class InventorySlot extends ImageButton {
     // the item in this slot
@@ -20,6 +21,7 @@ public class InventorySlot extends ImageButton {
     Entity occupiedItem; // this is the slot (goes inside InventorySlot)
     boolean isEquipSlot = false;
     AcceptedEquipType acceptedEquipType;
+    Type acceptedType;
 
     boolean clicked = false;
 
@@ -43,6 +45,13 @@ public class InventorySlot extends ImageButton {
         addListener(new InventoryChangeListener());
     }
 
+    public InventorySlot(Skin skin, Type acceptedType) {
+        super(skin);
+        isEquipSlot = true;
+        this.acceptedType = acceptedType;
+        addListener(new InventoryChangeListener());
+    }
+
     public Entity getOccupiedItem() {
         return this.occupiedItem;
     }
@@ -53,6 +62,10 @@ public class InventorySlot extends ImageButton {
 
     public AcceptedEquipType getAcceptedEquipType() {
         return acceptedEquipType;
+    }
+
+    public Type getAcceptedType() {
+        return acceptedType;
     }
 
     public boolean isClicked() {
