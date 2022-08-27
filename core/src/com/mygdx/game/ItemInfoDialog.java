@@ -2,7 +2,6 @@ package com.mygdx.game;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -12,11 +11,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Scaling;
-import com.mygdx.game.engine.AcceptedEquipType;
 import com.mygdx.game.engine.Families;
-import com.mygdx.game.engine.ItemType;
 import com.mygdx.game.engine.Mappers;
-import com.mygdx.game.engine.Type;
+import com.mygdx.game.engine.ItemType;
 import com.mygdx.game.engine.components.inventory.items.individual.ArmourStatComponent;
 import com.mygdx.game.engine.components.inventory.items.individual.WeaponStatComponent;
 import com.mygdx.game.utils.InventorySlot;
@@ -83,19 +80,19 @@ public class ItemInfoDialog extends Dialog {
     }
 
     private void decideDialogToBuild() {
-        if (Mappers.inventoryItem.get(item).acceptedType == Type.MATERIAL) {
+        if (Mappers.inventoryItem.get(item).acceptedItemType == ItemType.MATERIAL) {
             addMaterialInfo();
         }
-        else if (Mappers.inventoryItem.get(item).acceptedType == Type.CONSUMABLE) {
+        else if (Mappers.inventoryItem.get(item).acceptedItemType == ItemType.CONSUMABLE) {
 
         }
         else {
-            if (Mappers.inventoryItem.get(item).acceptedType == Type.MAIN)
+            if (Mappers.inventoryItem.get(item).acceptedItemType == ItemType.MAIN)
                 addWeaponInfo();
-            else if (Mappers.inventoryItem.get(item).acceptedType == Type.OFF) {
+            else if (Mappers.inventoryItem.get(item).acceptedItemType == ItemType.OFF) {
 
             }
-            else if (Mappers.inventoryItem.get(item).acceptedType == Type.ACCESSORY) {
+            else if (Mappers.inventoryItem.get(item).acceptedItemType == ItemType.ACCESSORY) {
 
             }
             else {
@@ -207,17 +204,17 @@ public class ItemInfoDialog extends Dialog {
     }
 
     private void checkTargetEquipSlot() {
-        InventorySlot equipSlot = getEquipSlot(Mappers.inventoryItem.get(item).acceptedType);
+        InventorySlot equipSlot = getEquipSlot(Mappers.inventoryItem.get(item).acceptedItemType);
         if (equipSlot != null && !equipSlot.isEmpty())
             inventoryUi.swapEquipment(inventorySlot, equipSlot);
         else
             inventoryUi.equip(inventorySlot, equipSlot);
     }
 
-    private InventorySlot getEquipSlot(Type equipType) {
+    private InventorySlot getEquipSlot(ItemType equipItemType) {
         Array<InventorySlot> equipSlots = Mappers.inventory.get(player).equipSlots;
         for (int i = 0; i < equipSlots.size; i++) {
-            if (equipSlots.get(i).getAcceptedType() == equipType)
+            if (equipSlots.get(i).getAcceptedType() == equipItemType)
                 return equipSlots.get(i);
         }
         return null;
