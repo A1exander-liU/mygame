@@ -38,13 +38,6 @@ public class InventorySlot extends ImageButton {
         addListener(new InventoryChangeListener());
     }
 
-    public InventorySlot(Skin skin, AcceptedEquipType acceptedEquipType) {
-        super(skin);
-        isEquipSlot = true;
-        this.acceptedEquipType = acceptedEquipType;
-        addListener(new InventoryChangeListener());
-    }
-
     public InventorySlot(Skin skin, Type acceptedType) {
         super(skin);
         isEquipSlot = true;
