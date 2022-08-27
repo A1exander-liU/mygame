@@ -35,6 +35,28 @@ public class QuickSortButton extends ImageButton {
         }
     }
 
+    enum Type {
+        MAIN       (1),
+        OFF        (2),
+        ACCESSORY  (3),
+        HEAD       (4),
+        TORSO      (5),
+        LEG        (6),
+        FEET       (7),
+        CONSUMABLE (8),
+        MATERIAL   (9);
+
+        int value;
+
+        public int getValue() {
+            return value;
+        }
+
+        Type(int value) {
+            this.value = value;
+        }
+    }
+
     public QuickSortButton(Skin skin) {
         super(skin);
         player = MyGame.engine.getEntitiesFor(Families.player).get(0);
