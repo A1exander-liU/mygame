@@ -44,7 +44,7 @@ public class QuickSortButton extends ImageButton {
                 Entity nextItem = nextSlot.getOccupiedItem();
 
                 // slots with items then slots w/o items
-                if (thisSlot.isEmpty()) swapSlots(thisSlot, nextSlot);
+                if (thisSlot.isEmpty() && !nextSlot.isEmpty()) swapSlots(thisSlot, nextSlot);
                 // check if item types are the same
                 else if (sameItemType(thisItem, nextItem))
                     // check if nextItem has higher rarity
