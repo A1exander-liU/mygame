@@ -7,6 +7,7 @@ public enum ItemType {
     LEG        (4),
     TORSO      (5),
     HEAD       (6),
+    ACCESSORY  (7),
     OFF        (8),
     MAIN       (9);
 
