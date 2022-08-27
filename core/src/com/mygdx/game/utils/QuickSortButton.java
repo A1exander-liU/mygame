@@ -51,7 +51,10 @@ public class QuickSortButton extends ImageButton {
 
                 // check if item types are the same
                 else if (sameItemType(thisItem, nextItem)) {
-                    
+                    // check if thisItem has higher rarity
+                    if (hasHigherRarity(thisItem, nextItem)) {
+
+                    }
                 }
             }
         }
@@ -59,6 +62,10 @@ public class QuickSortButton extends ImageButton {
 
     private boolean sameItemType(Entity thisItem, Entity nextItem) {
         return Mappers.inventoryItem.get(thisItem).acceptedItemType == Mappers.inventoryItem.get(nextItem).acceptedItemType;
+    }
+
+    private boolean hasHigherRarity(Entity thisItem, Entity nextItem) {
+        return Mappers.rarity.get(thisItem).rarity.getRank() > Mappers.rarity.get(nextItem).rarity.getRank();
     }
 
 }
