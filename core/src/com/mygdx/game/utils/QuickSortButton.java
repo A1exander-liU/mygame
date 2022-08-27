@@ -37,13 +37,28 @@ public class QuickSortButton extends ImageButton {
             for (int j = 0; j < inventorySlots.size - 1; j++) {
                 InventorySlot thisSlot = inventorySlots.get(j);
                 InventorySlot nextSlot = inventorySlots.get(j + 1);
+                // if both slots are empty, don't need to sort
                 if (thisSlot.getOccupiedItem() == null && nextSlot == null) continue;
+
+                Entity thisItem = thisSlot.getOccupiedItem();
+                Entity nextItem = nextSlot.getOccupiedItem();
+
+                // slots with items then slots w/o items
                 if (thisSlot.isEmpty()) {
                     inventorySlots.set(j, nextSlot);
                     inventorySlots.set(j + 1, thisSlot);
                 }
+
+                // check if item types are the same
+                else if (sameItemType(thisItem, nextItem)) {
+                    
+                }
             }
         }
     }
-    
+
+    private boolean sameItemType(Entity thisItem, Entity nextItem) {
+        return Mappers.inventoryItem.get(thisItem).acceptedItemType == Mappers.inventoryItem.get(nextItem).acceptedItemType;
+    }
+
 }
