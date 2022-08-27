@@ -83,19 +83,19 @@ public class ItemInfoDialog extends Dialog {
     }
 
     private void decideDialogToBuild() {
-        if (Mappers.inventoryItem.get(item).itemType == ItemType.MATERIAL) {
+        if (Mappers.inventoryItem.get(item).acceptedType == Type.MATERIAL) {
             addMaterialInfo();
         }
-        else if (Mappers.inventoryItem.get(item).itemType == ItemType.CONSUMABLE) {
+        else if (Mappers.inventoryItem.get(item).acceptedType == Type.CONSUMABLE) {
 
         }
-        else if (Mappers.inventoryItem.get(item).itemType == ItemType.EQUIPMENT) {
-            if (Mappers.equipType.get(item).acceptedEquipType == AcceptedEquipType.MAIN)
+        else {
+            if (Mappers.inventoryItem.get(item).acceptedType == Type.MAIN)
                 addWeaponInfo();
-            else if (Mappers.equipType.get(item).acceptedEquipType == AcceptedEquipType.OFF) {
+            else if (Mappers.inventoryItem.get(item).acceptedType == Type.OFF) {
 
             }
-            else if (Mappers.equipType.get(item).acceptedEquipType == AcceptedEquipType.ACCESSORY) {
+            else if (Mappers.inventoryItem.get(item).acceptedType == Type.ACCESSORY) {
 
             }
             else {
