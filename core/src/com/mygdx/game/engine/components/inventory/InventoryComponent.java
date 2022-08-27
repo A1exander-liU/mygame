@@ -3,17 +3,13 @@ package com.mygdx.game.engine.components.inventory;
 import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.MyGame;
-import com.mygdx.game.engine.AcceptedEquipType;
 import com.mygdx.game.engine.InventorySlotSource;
 import com.mygdx.game.engine.InventorySlotTarget;
-import com.mygdx.game.engine.Mappers;
-import com.mygdx.game.engine.Type;
+import com.mygdx.game.engine.ItemType;
 import com.mygdx.game.utils.InventorySlot;
 
 public class InventoryComponent implements Component {
@@ -58,14 +54,14 @@ public class InventoryComponent implements Component {
             inventorySlots.add(inventorySlot);
         }
         // build all equip slots
-        InventorySlot head = new InventorySlot(skin, Type.HEAD);
-        InventorySlot torso = new InventorySlot(skin, Type.TORSO);
-        InventorySlot leg = new InventorySlot(skin, Type.LEG);
-        InventorySlot feet = new InventorySlot(skin, Type.FEET);
-        InventorySlot main = new InventorySlot(skin, Type.MAIN);
-        InventorySlot off = new InventorySlot(skin, Type.OFF);
-        InventorySlot accessory1 = new InventorySlot(skin, Type.ACCESSORY);
-        InventorySlot accessory2 = new InventorySlot(skin, Type.ACCESSORY);
+        InventorySlot head = new InventorySlot(skin, ItemType.HEAD);
+        InventorySlot torso = new InventorySlot(skin, ItemType.TORSO);
+        InventorySlot leg = new InventorySlot(skin, ItemType.LEG);
+        InventorySlot feet = new InventorySlot(skin, ItemType.FEET);
+        InventorySlot main = new InventorySlot(skin, ItemType.MAIN);
+        InventorySlot off = new InventorySlot(skin, ItemType.OFF);
+        InventorySlot accessory1 = new InventorySlot(skin, ItemType.ACCESSORY);
+        InventorySlot accessory2 = new InventorySlot(skin, ItemType.ACCESSORY);
         dragAndDrop.addSource(new InventorySlotSource(head, dragAndDrop));
         dragAndDrop.addSource(new InventorySlotSource(torso, dragAndDrop));
         dragAndDrop.addSource(new InventorySlotSource(leg, dragAndDrop));

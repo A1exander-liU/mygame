@@ -1,15 +1,10 @@
 package com.mygdx.game.engine;
 
 import com.badlogic.ashley.core.Entity;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
-import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.InventoryUi;
-import com.mygdx.game.MyGame;
-import com.mygdx.game.engine.components.inventory.InventoryComponent;
 import com.mygdx.game.utils.InventorySlot;
 
-import java.util.Map;
 import java.util.Objects;
 
 public class InventorySlotTarget extends DragAndDrop.Target {
@@ -70,7 +65,7 @@ public class InventorySlotTarget extends DragAndDrop.Target {
         // means the target slot was an equip slot
         else {
             // check if the equipment was dropped on matching slot
-            if (Mappers.inventoryItem.get(sourceItem).acceptedType == targetSlot.getAcceptedType()) {
+            if (Mappers.inventoryItem.get(sourceItem).acceptedItemType == targetSlot.getAcceptedType()) {
                 // check if equipment slot is empty
                 if (targetSlot.isEmpty()) {
                     System.out.println("equip item");

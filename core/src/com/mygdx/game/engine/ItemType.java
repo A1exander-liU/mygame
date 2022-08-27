@@ -1,6 +1,6 @@
 package com.mygdx.game.engine;
 
-public enum Type {
+public enum ItemType {
     MAIN       (1),
     OFF        (2),
     ACCESSORY  (3),
@@ -17,7 +17,7 @@ public enum Type {
         return rank;
     }
 
-    Type(int rank) {
+    ItemType(int rank) {
         this.rank = rank;
     }
 }

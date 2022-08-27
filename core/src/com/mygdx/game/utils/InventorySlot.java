@@ -1,19 +1,17 @@
 package com.mygdx.game.utils;
 
 import com.badlogic.ashley.core.Entity;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Stack;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.InventoryChangeListener;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.AcceptedEquipType;
 import com.mygdx.game.engine.Families;
 import com.mygdx.game.engine.Mappers;
-import com.mygdx.game.engine.Type;
+import com.mygdx.game.engine.ItemType;
 
 public class InventorySlot extends ImageButton {
     // the item in this slot
@@ -21,7 +19,7 @@ public class InventorySlot extends ImageButton {
     Entity occupiedItem; // this is the slot (goes inside InventorySlot)
     boolean isEquipSlot = false;
     AcceptedEquipType acceptedEquipType;
-    Type acceptedType;
+    ItemType acceptedItemType;
 
     boolean clicked = false;
 
@@ -38,10 +36,10 @@ public class InventorySlot extends ImageButton {
         addListener(new InventoryChangeListener());
     }
 
-    public InventorySlot(Skin skin, Type acceptedType) {
+    public InventorySlot(Skin skin, ItemType acceptedItemType) {
         super(skin);
         isEquipSlot = true;
-        this.acceptedType = acceptedType;
+        this.acceptedItemType = acceptedItemType;
         addListener(new InventoryChangeListener());
     }
 
@@ -57,8 +55,8 @@ public class InventorySlot extends ImageButton {
         return acceptedEquipType;
     }
 
-    public Type getAcceptedType() {
-        return acceptedType;
+    public ItemType getAcceptedType() {
+        return acceptedItemType;
     }
 
     public boolean isClicked() {

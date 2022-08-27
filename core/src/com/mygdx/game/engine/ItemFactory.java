@@ -7,16 +7,13 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.JsonValue;
 import com.mygdx.game.JsonItemFinder;
 import com.mygdx.game.MyGame;
-import com.mygdx.game.engine.components.Item;
 import com.mygdx.game.engine.components.inventory.items.individual.ArmourStatComponent;
-import com.mygdx.game.engine.components.inventory.items.individual.EquipTypeComponent;
 import com.mygdx.game.engine.components.Name;
 import com.mygdx.game.engine.components.Sprite;
 import com.mygdx.game.engine.components.inventory.items.individual.StackableComponent;
 import com.mygdx.game.engine.components.inventory.items.individual.WeaponStatComponent;
 import com.mygdx.game.engine.components.inventory.items.shared.DescriptionComponent;
 import com.mygdx.game.engine.components.inventory.items.shared.InventoryItemComponent;
-import com.mygdx.game.engine.components.inventory.items.shared.ItemTypeComponent;
 import com.mygdx.game.engine.components.inventory.items.shared.QuantityComponent;
 import com.mygdx.game.engine.components.inventory.items.shared.RarityComponent;
 
@@ -35,7 +32,7 @@ public class ItemFactory {
         materialEntity.add(new RarityComponent());
         materialEntity.add(new DescriptionComponent());
         materialEntity.add(new QuantityComponent());
-        materialEntity.add(new InventoryItemComponent(Type.MATERIAL));
+        materialEntity.add(new InventoryItemComponent(ItemType.MATERIAL));
         materialEntity.add(new StackableComponent());
 
         Mappers.name.get(materialEntity).name = material.getString("name");
@@ -55,7 +52,7 @@ public class ItemFactory {
         weaponEntity.add(new Sprite());
         weaponEntity.add(new RarityComponent());
         weaponEntity.add(new DescriptionComponent());
-        weaponEntity.add(new InventoryItemComponent(Type.MAIN));
+        weaponEntity.add(new InventoryItemComponent(ItemType.MAIN));
         weaponEntity.add(new WeaponStatComponent());
 
         Mappers.name.get(weaponEntity).name = weapon.getString("name");
@@ -79,19 +76,19 @@ public class ItemFactory {
         JsonValue armour = null;
         if (armourType == AcceptedEquipType.HEAD) {
             armour = itemFinder.findHeadArmourByName(name);
-            armourEntity.add(new InventoryItemComponent(Type.HEAD));
+            armourEntity.add(new InventoryItemComponent(ItemType.HEAD));
         }
         else if (armourType == AcceptedEquipType.TORSO) {
             armour = itemFinder.findChestArmourByName(name);
-            armourEntity.add(new InventoryItemComponent(Type.TORSO));
+            armourEntity.add(new InventoryItemComponent(ItemType.TORSO));
         }
         else if (armourType == AcceptedEquipType.LEG) {
             armour = itemFinder.findLegArmourByName(name);
-            armourEntity.add(new InventoryItemComponent(Type.LEG));
+            armourEntity.add(new InventoryItemComponent(ItemType.LEG));
         }
         else if (armourType == AcceptedEquipType.FEET) {
             armour = itemFinder.findFeetArmourByName(name);
-            armourEntity.add(new InventoryItemComponent(Type.FEET));
+            armourEntity.add(new InventoryItemComponent(ItemType.FEET));
         }
         armourEntity.add(new Name());
         armourEntity.add(new Sprite());
