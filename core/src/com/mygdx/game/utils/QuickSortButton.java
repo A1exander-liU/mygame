@@ -47,11 +47,14 @@ public class QuickSortButton extends ImageButton {
                 if (thisSlot.isEmpty()) {
                     swapSlots(thisSlot, nextSlot);
                 }
-
                 // check if item types are the same
                 else if (sameItemType(thisItem, nextItem)) {
                     // check if nextItem has higher rarity
                     if (hasHigherRarity(nextItem, thisItem)) swapSlots(thisSlot, nextSlot);
+                }
+                // check if the item types aren't the same
+                else if (!sameItemType(thisItem, nextItem)) {
+
                 }
             }
         }
