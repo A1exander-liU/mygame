@@ -81,11 +81,10 @@ public class QuickSortButton extends ImageButton {
             for (int j = 0; j < inventorySlots.size - 1; j++) {
                 InventorySlot thisSlot = inventorySlots.get(j);
                 InventorySlot nextSlot = inventorySlots.get(j + 1);
-                if (thisSlot.getOccupiedItem() == null) {
-
-                }
-                else {
-
+                if (thisSlot.getOccupiedItem() == null && nextSlot == null) continue;
+                if (thisSlot.isEmpty()) {
+                    inventorySlots.set(j, nextSlot);
+                    inventorySlots.set(j + 1, thisSlot);
                 }
             }
         }
