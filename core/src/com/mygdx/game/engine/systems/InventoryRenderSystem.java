@@ -32,6 +32,7 @@ import com.mygdx.game.engine.systems.combat.EnemyAttackSystem;
 import com.mygdx.game.engine.systems.enemyai.SteeringSystem;
 import com.mygdx.game.screens.GameScreen;
 import com.mygdx.game.utils.InventorySlot;
+import com.mygdx.game.utils.QuickSortButton;
 
 public class InventoryRenderSystem extends EntitySystem {
     ComponentGrabber cg;
@@ -134,7 +135,10 @@ public class InventoryRenderSystem extends EntitySystem {
         outerTable = new Table();
         outerTable.setName("outerTable");
         outerTable.setDebug(false);
+
         inventorySettings = new Table();
+        inventorySettings.add(new QuickSortButton(skin));
+
         outerTable.add(inventorySettings).width(inventory.getWidth() * 0.55f).height(inventory.getHeight() * 0.1f).fill();
         outerTable.row();
         outerTable.add(inventoryScroll).width(inventory.getWidth() * 0.55f).height(inventory.getHeight() * 0.85f).fill();
