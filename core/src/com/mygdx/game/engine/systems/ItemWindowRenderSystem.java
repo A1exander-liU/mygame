@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -19,6 +20,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.mygdx.game.ItemInfoDialog;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.Families;
 import com.mygdx.game.engine.Mappers;
@@ -61,25 +63,38 @@ public class ItemWindowRenderSystem extends EntitySystem {
         skin.addRegions(new TextureAtlas("Game_UI_Skin/Game_UI_Skin.atlas"));
         skin.load(Gdx.files.internal("Game_UI_Skin/Game_UI_Skin.json"));
         generator.dispose();
+
+//        ItemInfoDialog dialog = new ItemInfoDialog("T", skin);
+//        dialog.show(stage);
     }
 
     @Override
     public void update(float delta) {
+
         for (int i = 0; i < inventorySlots.size; i++) {
-            if (inventorySlots.get(i).getItemWindowListener().getRecentWindow() != null) {
-                stage = inventorySlots.get(i).getStage();
-                removePreviousWindows();
-                Table inventory = (Table) stage.getActors().get(stage.getActors().size - 1);
-                stage.addActor(inventorySlots.get(i).getItemWindowListener().getRecentWindow());
-                inventorySlots.get(i).getItemWindowListener().setRecentWindow(null);
-            }
+//            if (inventorySlots.get(i).getItemWindowListener().getRecentWindow() != null) {
+//
+//                stage = inventorySlots.get(i).getStage() == null ? new Stage(new ScreenViewport()) : inventorySlots.get(i).getStage();
+//
+//                removePreviousWindows();
+//
+//                Table root = (Table) stage.getActors().get(stage.getActors().size - 1);
+//                Table inventory = (Table) (root.getCells().get(0)).getActor();
+//
+//                stage.addActor(inventorySlots.get(i).getItemWindowListener().getRecentWindow());
+//                // set z indexes to overlap itemWindow on top
+//                inventorySlots.get(i).getItemWindowListener().getRecentWindow().setZIndex(2);
+//                inventorySlots.get(i).getItemWindowListener().setRecentWindow(null);
+//
+//            }
         }
         for (int i = 0; i < equipSlots.size; i++) {
-            if (equipSlots.get(i).isClicked()) {
-                equipSlots.get(i).setClicked(false);
+            if (equipSlots.get(i).getItemWindowListener().getClickedItemSlot() != null) {
+
             }
         }
-        stage.act();
+        // draw at end
+        stage.act(delta);
         stage.draw();
     }
 
@@ -94,6 +109,15 @@ public class ItemWindowRenderSystem extends EntitySystem {
         for (int i = 0; i < stage.getActors().size; i++) {
             if (Objects.equals(stage.getActors().get(i).getName(), actorName))
                 return stage.getActors().get(i);
+        }
+        return null;
+    }
+
+    private Actor find(Table table, String name) {
+        for (int i = 0; i < table.getChildren().size; i++) {
+            Actor actor = table.getChildren().get(i);
+            if (Objects.equals(actor.getName(), name))
+                return actor;
         }
         return null;
     }
