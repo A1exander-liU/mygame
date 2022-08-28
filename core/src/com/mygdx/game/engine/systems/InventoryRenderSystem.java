@@ -193,6 +193,9 @@ public class InventoryRenderSystem extends EntitySystem {
             inventoryOpened = false;
             // also clear stage so inventory wont be displayed
             // (since all ui elements are removed from the stage)
+
+            // set inventorySlots array in player back to original inventory
+            Mappers.inventory.get(player).inventorySlots = ((RarityFilterBox) inventorySettings.findActor("invRarityFilter")).getCurrentInventory();
         }
     }
 
