@@ -27,6 +27,19 @@ public class QuickSortButton extends ImageButton {
         });
     }
 
+    public QuickSortButton(Skin skin, String actorName) {
+        super(skin);
+        setName(actorName);
+        player = MyGame.engine.getEntitiesFor(Families.player).get(0);
+        addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                System.out.println("clicked");
+                quickSortInventory();
+            }
+        });
+    }
+
     private void quickSortInventory() {
         // sort by rarity descending (Mythical -> Common)
         // item order: main, off, armor (head -> feet), accessories, consumables, materials
