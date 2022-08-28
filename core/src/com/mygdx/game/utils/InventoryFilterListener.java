@@ -50,10 +50,12 @@ public class InventoryFilterListener extends ChangeListener {
     }
 
     private boolean matchesRarity(Entity item) {
+        if (rarityFilterBox.currentFilter == null) return true;
         return Mappers.rarity.get(item).rarity == rarityFilterBox.currentFilter;
     }
 
     private boolean matchesItemType(Entity item) {
+        if (itemFilterBox.currentFilter == null) return true;
         return Mappers.inventoryItem.get(item).acceptedItemType == itemFilterBox.currentFilter;
     }
 }
