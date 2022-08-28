@@ -27,11 +27,13 @@ import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.ComponentGrabber;
 import com.mygdx.game.engine.Families;
 import com.mygdx.game.engine.Mappers;
+import com.mygdx.game.engine.Rarity;
 import com.mygdx.game.engine.components.inventory.InventoryComponent;
 import com.mygdx.game.engine.systems.combat.BasicAttackSystem;
 import com.mygdx.game.engine.systems.combat.EnemyAttackSystem;
 import com.mygdx.game.engine.systems.enemyai.SteeringSystem;
 import com.mygdx.game.screens.GameScreen;
+import com.mygdx.game.utils.InventoryFilterListener;
 import com.mygdx.game.utils.InventorySlot;
 import com.mygdx.game.utils.ItemFilterBox;
 import com.mygdx.game.utils.QuickSortButton;
@@ -144,9 +146,15 @@ public class InventoryRenderSystem extends EntitySystem {
 
         outerTable.add(inventorySettings).width(inventory.getWidth() * 0.55f).height(inventory.getHeight() * 0.1f).fill();
 
+        RarityFilterBox rarityFilterBox = new RarityFilterBox(skin, "invRarityFilter");
+        ItemFilterBox itemFilterBox = new ItemFilterBox(skin, "invItemFilter");
+        InventoryFilterListener listener = new InventoryFilterListener(rarityFilterBox, itemFilterBox);
+        rarityFilterBox.addListener(listener);
+        itemFilterBox.addListener(listener);
+
         inventorySettings.defaults().space(5).width(outerTable.getCell(inventorySettings).getPrefWidth() / 3);
-        inventorySettings.add(new RarityFilterBox(skin, "invRarityFilter"));
-        inventorySettings.add(new ItemFilterBox(skin, "invItemFilter"));
+        inventorySettings.add(rarityFilterBox);
+        inventorySettings.add(itemFilterBox);
         inventorySettings.add(new QuickSortButton(skin, "invQuickSort"));
 
         outerTable.row();
@@ -191,6 +199,7 @@ public class InventoryRenderSystem extends EntitySystem {
             inventoryOpened = true;
             // set to original inventory when opening the inventory
             ((RarityFilterBox) inventorySettings.findActor("invRarityFilter")).setCurrentInventory(Mappers.inventory.get(player).inventorySlots);
+            ((ItemFilterBox) inventorySettings.findActor("invItemFilter")).setCurrentInventory(Mappers.inventory.get(player).inventorySlots);
         }
         else if (Gdx.input.isKeyJustPressed(Input.Keys.E) && inventoryOpened) {
             inventoryOpened = false;
@@ -201,6 +210,7 @@ public class InventoryRenderSystem extends EntitySystem {
             Mappers.inventory.get(player).inventorySlots = ((RarityFilterBox) inventorySettings.findActor("invRarityFilter")).getCurrentInventory();
             // set rarity filter item to "all"
             ((RarityFilterBox) inventorySettings.findActor("invRarityFilter")).setSelected("All");
+            ((ItemFilterBox) inventorySettings.findActor("invItemFilter")).setSelected("All");
         }
     }
 
