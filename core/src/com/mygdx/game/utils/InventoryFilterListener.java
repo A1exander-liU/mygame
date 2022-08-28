@@ -35,11 +35,16 @@ public class InventoryFilterListener extends ChangeListener {
         for (int i = 0; i < rarityFilterBox.currentInventory.size; i++) {
             InventorySlot slot = rarityFilterBox.currentInventory.get(i);
             // make sure slot is not empty and fits both rarity and item type criteria
-            if (!slot.isEmpty() && matchesRarity(slot.getOccupiedItem()))
+            if (!slot.isEmpty() && matchesRarity(slot.getOccupiedItem()) && matchesItemType(slot.getOccupiedItem()))
+                
         }
     }
 
     private boolean matchesRarity(Entity item) {
         return Mappers.rarity.get(item).rarity == rarityFilterBox.currentFilter;
+    }
+
+    private boolean matchesItemType(Entity item) {
+        return Mappers.inventoryItem.get(item).acceptedItemType == itemFilterBox.currentFilter;
     }
 }
