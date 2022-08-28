@@ -1,6 +1,7 @@
 package com.mygdx.game.utils;
 
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -60,6 +61,7 @@ public class QuickSortButton extends ImageButton {
                     else if (sameItem(thisItem, nextItem) && stackable(thisItem)) {
                         InventoryUi ui = new InventoryUi();
                         ui.stackItems(thisSlot, nextSlot);
+                        if (hasHigherQuantity(nextItem, thisItem)) swapSlots(thisSlot, nextSlot);
                     }
                 }
                 // check if the item types aren't the same
@@ -105,5 +107,9 @@ public class QuickSortButton extends ImageButton {
 
     private boolean stackable(Entity item) {
         return Mappers.quantity.get(item) != null;
+    }
+
+    private boolean hasHigherQuantity(Entity thisItem, Entity nextItem) {
+        return Mappers.quantity.get(thisItem).quantity > Mappers.quantity.get(nextItem).quantity;
     }
 }
