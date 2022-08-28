@@ -29,7 +29,7 @@ public class ItemFilterBox extends SelectBox<String> {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 determineItemFilter(getSelected());
-//                filter();
+                filter();
             }
         });
     }
@@ -45,8 +45,9 @@ public class ItemFilterBox extends SelectBox<String> {
         addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                System.out.println("called determineItemFilter");
                 determineItemFilter(getSelected());
-                filter();
+//                filter();
             }
         });
     }
