@@ -38,6 +38,13 @@ public class InventoryFilterListener extends ChangeListener {
             if (!slot.isEmpty() && matchesRarity(slot.getOccupiedItem()) && matchesItemType(slot.getOccupiedItem()))
                 filterd.add(slot);
         }
+
+        // add in all the empty slots afterwards
+        for (int i = 0; i < rarityFilterBox.currentInventory.size; i++) {
+            InventorySlot slot = rarityFilterBox.currentInventory.get(i);
+            if (slot.isEmpty())
+                filterd.add(slot);
+        }
     }
 
     private boolean matchesRarity(Entity item) {
