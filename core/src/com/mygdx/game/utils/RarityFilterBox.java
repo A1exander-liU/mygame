@@ -83,6 +83,7 @@ public class RarityFilterBox extends SelectBox<String> {
         // add in all the empty slots
         for (int i = 0; i < currentInventory.size; i++) {
             if (currentInventory.get(i).isEmpty())
+                filtered.add(currentInventory.get(i));
         }
 
     }
