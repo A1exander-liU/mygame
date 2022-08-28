@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Array;
+import com.mygdx.game.InventoryUi;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.Families;
 import com.mygdx.game.engine.Mappers;
@@ -57,7 +58,8 @@ public class QuickSortButton extends ImageButton {
                     if (hasHigherRarity(nextItem, thisItem)) swapSlots(thisSlot, nextSlot);
                     else if (earlierInAlphabet(nextItem, thisItem)) swapSlots(thisSlot, nextSlot);
                     else if (sameItem(thisItem, nextItem) && stackable(thisItem)) {
-
+                        InventoryUi ui = new InventoryUi();
+                        ui.stackItems(thisSlot, nextSlot);
                     }
                 }
                 // check if the item types aren't the same
