@@ -180,22 +180,22 @@ public class InventoryRenderSystem extends EntitySystem {
     }
 
     private void toggleInventory() {
-        if (Gdx.input.isKeyJustPressed(Input.Keys.E)
-                && !inventoryOpened) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.E) && !inventoryOpened) {
             // set canDraw back to when you open the inventory again
             canDraw = true;
             inventoryOpened = true;
             // set to original inventory when opening the inventory
             ((RarityFilterBox) inventorySettings.findActor("invRarityFilter")).setCurrentInventory(Mappers.inventory.get(player).inventorySlots);
         }
-        else if (Gdx.input.isKeyJustPressed(Input.Keys.E)
-                && inventoryOpened) {
+        else if (Gdx.input.isKeyJustPressed(Input.Keys.E) && inventoryOpened) {
             inventoryOpened = false;
             // also clear stage so inventory wont be displayed
             // (since all ui elements are removed from the stage)
 
             // set inventorySlots array in player back to original inventory
             Mappers.inventory.get(player).inventorySlots = ((RarityFilterBox) inventorySettings.findActor("invRarityFilter")).getCurrentInventory();
+            // set rarity filter item to "all"
+            ((RarityFilterBox) inventorySettings.findActor("invRarityFilter")).setSelected("All");
         }
     }
 
