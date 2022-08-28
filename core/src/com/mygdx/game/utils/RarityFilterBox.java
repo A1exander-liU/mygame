@@ -33,6 +33,22 @@ public class RarityFilterBox extends SelectBox<String> {
         });
     }
 
+    public RarityFilterBox(Skin skin, String actorName) {
+        super(skin);
+        setName(actorName);
+        player = MyGame.engine.getEntitiesFor(Families.player).get(0);
+        setItems("All", "Common", "Uncommon", "Rare", "Epic", "Legendary", "Mythical");
+        getList().setAlignment(Align.left);
+        getStyle().listStyle.font.getData().setScale(.8f);
+        addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                determineRarityFilter(getSelected());
+                filter();
+            }
+        });
+    }
+
     public Array<InventorySlot> getCurrentInventory() {
         return currentInventory;
     }
