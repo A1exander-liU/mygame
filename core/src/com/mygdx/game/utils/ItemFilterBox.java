@@ -17,12 +17,10 @@ public class ItemFilterBox extends SelectBox<String> {
     ItemType currentFilter;
     Entity player;
     Array<InventorySlot> currentInventory;
-    Array<InventorySlot> filtered;
 
     public ItemFilterBox(Skin skin) {
         super(skin);
         player = MyGame.engine.getEntitiesFor(Families.player).get(0);
-        filtered = new Array<>(0);
         setItems("All", "MainHand", "OffHand", "Accessory", "Head", "Torso", "Leg", "Feet",
                  "Consumable", "Material");
         getList().setAlignment(Align.left);
@@ -97,7 +95,7 @@ public class ItemFilterBox extends SelectBox<String> {
     }
 
     private void filter() {
-        filtered.clear();
+        Array<InventorySlot> filtered = new Array<>(0);
 
         if (currentFilter == null) {
             Mappers.inventory.get(player).inventorySlots = currentInventory;
