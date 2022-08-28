@@ -1,21 +1,15 @@
 package com.mygdx.game.utils;
 
 import com.badlogic.ashley.core.Entity;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Array;
-import com.mygdx.game.InventoryUi;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.Families;
 import com.mygdx.game.engine.Mappers;
-import com.mygdx.game.engine.Rarity;
-import com.mygdx.game.engine.components.inventory.items.shared.QuantityComponent;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
 
 public class QuickSortButton extends ImageButton {
@@ -75,7 +69,6 @@ public class QuickSortButton extends ImageButton {
                 }
             }
         }
-
     }
 
     private void swapSlots(InventorySlot thisSlot, InventorySlot nextSlot) {
