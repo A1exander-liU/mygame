@@ -183,6 +183,7 @@ public class InventoryRenderSystem extends EntitySystem {
         // so future frames won't keep redrawing
 
         if (inventoryOpened) {
+            stage.setScrollFocus(inventoryScroll);
             // immediately set to false so the inventory is only drawn once
             // when it is opened once
             canDraw = false;
