@@ -33,6 +33,14 @@ public class RarityFilterBox extends SelectBox<String> {
         });
     }
 
+    public Array<InventorySlot> getCurrentInventory() {
+        return currentInventory;
+    }
+
+    public void setCurrentInventory(Array<InventorySlot> currentInventory) {
+        this.currentInventory = currentInventory;
+    }
+
     private void determineRarityFilter(String selectedFilter) {
         switch (selectedFilter) {
             case "All":
