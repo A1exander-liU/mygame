@@ -23,6 +23,7 @@ public class RarityFilterBox extends SelectBox<String> {
         player = MyGame.engine.getEntitiesFor(Families.player).get(0);
         setItems("All", "Common", "Uncommon", "Rare", "Epic", "Legendary", "Mythical");
         getList().setAlignment(Align.left);
+        getStyle().listStyle.font.getData().setScale(.8f);
         addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -60,6 +61,7 @@ public class RarityFilterBox extends SelectBox<String> {
     }
 
     private void filter() {
+        System.out.println(getSelected());
         currentInventory = Mappers.inventory.get(player).inventorySlots;
         Array<InventorySlot> filtered = new Array<>(0);
         // use new array to store all filtered items
