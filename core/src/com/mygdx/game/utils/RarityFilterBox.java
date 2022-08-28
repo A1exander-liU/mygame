@@ -85,6 +85,8 @@ public class RarityFilterBox extends SelectBox<String> {
             if (currentInventory.get(i).isEmpty())
                 filtered.add(currentInventory.get(i));
         }
+        // set inventorySlots to filtered array to have it rendered
+        Mappers.inventory.get(player).inventorySlots = filtered;
 
     }
 
