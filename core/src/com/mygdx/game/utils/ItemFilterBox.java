@@ -9,9 +9,11 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.Families;
+import com.mygdx.game.engine.ItemType;
 
 public class ItemFilterBox extends SelectBox<String> {
 
+    ItemType currentFilter;
     Entity player;
     Array<InventorySlot> currentInventory;
 
@@ -25,7 +27,7 @@ public class ItemFilterBox extends SelectBox<String> {
         addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-
+                determineItemFilter(getSelected());
             }
         });
     }
@@ -52,5 +54,40 @@ public class ItemFilterBox extends SelectBox<String> {
 
     public void setCurrentInventory(Array<InventorySlot> currentInventory) {
         this.currentInventory = currentInventory;
+    }
+
+    private void determineItemFilter(String selectedFilter) {
+        switch (selectedFilter) {
+            case "All":
+                currentFilter = null;
+                break;
+            case "MainHand":
+                currentFilter = ItemType.MAIN;
+                break;
+            case "OffHand":
+                currentFilter = ItemType.OFF;
+                break;
+            case "Accessory":
+                currentFilter = ItemType.ACCESSORY;
+                break;
+            case "Head":
+                currentFilter = ItemType.HEAD;
+                break;
+            case "Torso":
+                currentFilter = ItemType.TORSO;
+                break;
+            case "Leg":
+                currentFilter = ItemType.LEG;
+                break;
+            case "Feet":
+                currentFilter = ItemType.FEET;
+                break;
+            case "Consumable":
+                currentFilter = ItemType.CONSUMABLE;
+                break;
+            case "Material":
+                currentFilter = ItemType.MATERIAL;
+                break;
+        }
     }
 }
