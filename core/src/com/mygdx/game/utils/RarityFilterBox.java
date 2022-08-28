@@ -17,10 +17,12 @@ public class RarityFilterBox extends SelectBox<String> {
     Rarity currentFilter;
     Entity player;
     Array<InventorySlot> currentInventory;
+    Array<InventorySlot> filtered;
 
     public RarityFilterBox(Skin skin) {
         super(skin);
         player = MyGame.engine.getEntitiesFor(Families.player).get(0);
+        filtered = new Array<>(0);
         setItems("All", "Common", "Uncommon", "Rare", "Epic", "Legendary", "Mythical");
         getList().setAlignment(Align.left);
         getStyle().listStyle.font.getData().setScale(.8f);
@@ -86,7 +88,7 @@ public class RarityFilterBox extends SelectBox<String> {
 
     private void filter() {
         System.out.println(getSelected());
-        Array<InventorySlot> filtered = new Array<>(0);
+        filtered.clear();
         // use new array to store all filtered items
         // once finished adding all filtered items (loop through currentInventory)
         // set inventorySlots in InventoryComponent to filteredArray
