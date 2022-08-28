@@ -59,8 +59,7 @@ public class QuickSortButton extends ImageButton {
                     if (hasHigherRarity(nextItem, thisItem)) swapSlots(thisSlot, nextSlot);
                     else if (earlierInAlphabet(nextItem, thisItem)) swapSlots(thisSlot, nextSlot);
                     else if (sameItem(thisItem, nextItem) && stackable(thisItem)) {
-                        InventoryUi ui = new InventoryUi();
-                        ui.stackItems(thisSlot, nextSlot);
+                        quickStack(thisSlot, nextSlot);
                         if (hasHigherQuantity(nextItem, thisItem)) swapSlots(thisSlot, nextSlot);
                     }
                 }
@@ -107,6 +106,22 @@ public class QuickSortButton extends ImageButton {
 
     private boolean stackable(Entity item) {
         return Mappers.quantity.get(item) != null;
+    }
+
+    private void quickStack(InventorySlot thisSlot, InventorySlot nextSlot) {
+        // add the quantity to thisSlot item
+        Mappers.quantity.get(thisSlot.getOccupiedItem()).quantity += Mappers.quantity.get(nextSlot.getOccupiedItem()).quantity;
+        // get leftOver since thisSlot item reached stackSize or not
+        int leftOver = Mappers.quantity.get(thisSlot.getOccupiedItem()).quantity % Mappers.stackable.get(thisSlot.getOccupiedItem()).stackSize;
+        // if there is no leftOver that means nextSlot item was "completely" stacked
+        // inside thisSlot item
+        if (leftOver == 0) nextSlot.setOccupiedItem(null);
+        // if there is leftOver, this remaining amount is what was not able to stack
+        else if (leftOver > 0) {
+            Mappers.quantity.get(nextSlot.getOccupiedItem()).quantity = leftOver;
+            // if there was leftover, then thisSlot item exceeded stackSize
+            Mappers.quantity.get(thisSlot.getOccupiedItem()).quantity = Mappers.stackable.get(thisSlot.getOccupiedItem()).stackSize;
+        }
     }
 
     private boolean hasHigherQuantity(Entity thisItem, Entity nextItem) {
