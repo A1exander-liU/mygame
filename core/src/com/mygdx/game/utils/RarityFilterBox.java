@@ -78,7 +78,7 @@ public class RarityFilterBox extends SelectBox<String> {
 
         for (int i = 0; i < currentInventory.size; i++) {
             if (Mappers.rarity.get(currentInventory.get(i).getOccupiedItem()).rarity == currentFilter)
-                
+                filtered.add(currentInventory.get(i));
         }
     }
 
