@@ -805,6 +805,12 @@
 		"down": "button-up",
 		"over": "button-up",
 		"background": "button-up"
+	},
+	"list-select-box": {
+		"font": "advanced-pixel-small",
+		"fontColorSelected": "black",
+		"fontColorUnselected": "black",
+		"selection": "button-up"
 	}
 },
 "com.badlogic.gdx.scenes.scene2d.ui.ProgressBar$ProgressBarStyle": {
@@ -856,7 +862,7 @@
 		"fontColor": "black",
 		"background": "button-up",
 		"scrollStyle": "default",
-		"listStyle": "default"
+		"listStyle": "list-select-box"
 	}
 },
 "com.badlogic.gdx.scenes.scene2d.ui.Slider$SliderStyle": {
