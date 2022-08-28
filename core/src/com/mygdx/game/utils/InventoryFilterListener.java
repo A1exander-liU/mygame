@@ -1,7 +1,9 @@
 package com.mygdx.game.utils;
 
+import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.engine.Mappers;
 
 public class InventoryFilterListener extends ChangeListener {
@@ -27,5 +29,17 @@ public class InventoryFilterListener extends ChangeListener {
             // both have the same player and current inventory so it doesn't matter
             Mappers.inventory.get(rarityFilterBox.player).inventorySlots = rarityFilterBox.currentInventory;
         }
+
+        Array<InventorySlot> filterd = new Array<>(0);
+
+        for (int i = 0; i < rarityFilterBox.currentInventory.size; i++) {
+            InventorySlot slot = rarityFilterBox.currentInventory.get(i);
+            // make sure slot is not empty and fits both rarity and item type criteria
+            if (!slot.isEmpty() && matchesRarity(slot.getOccupiedItem()))
+        }
+    }
+
+    private boolean matchesRarity(Entity item) {
+        return Mappers.rarity.get(item).rarity == rarityFilterBox.currentFilter;
     }
 }
