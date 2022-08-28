@@ -30,21 +30,23 @@ public class InventoryFilterListener extends ChangeListener {
             Mappers.inventory.get(rarityFilterBox.player).inventorySlots = rarityFilterBox.currentInventory;
         }
 
-        Array<InventorySlot> filterd = new Array<>(0);
+        Array<InventorySlot> filtered = new Array<>(0);
 
         for (int i = 0; i < rarityFilterBox.currentInventory.size; i++) {
             InventorySlot slot = rarityFilterBox.currentInventory.get(i);
             // make sure slot is not empty and fits both rarity and item type criteria
             if (!slot.isEmpty() && matchesRarity(slot.getOccupiedItem()) && matchesItemType(slot.getOccupiedItem()))
-                filterd.add(slot);
+                filtered.add(slot);
         }
 
         // add in all the empty slots afterwards
         for (int i = 0; i < rarityFilterBox.currentInventory.size; i++) {
             InventorySlot slot = rarityFilterBox.currentInventory.get(i);
             if (slot.isEmpty())
-                filterd.add(slot);
+                filtered.add(slot);
         }
+
+        Mappers.inventory.get(rarityFilterBox.player).inventorySlots = filtered;
     }
 
     private boolean matchesRarity(Entity item) {
