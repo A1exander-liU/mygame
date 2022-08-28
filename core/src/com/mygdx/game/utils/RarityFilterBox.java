@@ -68,6 +68,13 @@ public class RarityFilterBox extends SelectBox<String> {
         // once finished adding all filtered items (loop through currentInventory)
         // set inventorySlots in InventoryComponent to filteredArray
         // once inventory is exited or filter is back to all -> set with currentInventory
+
+        // return inventory back to normal and immediately return
+        // the filter will be under this if statement
+        if (currentFilter == null) {
+            Mappers.inventory.get(player).inventorySlots = currentInventory;
+            return;
+        }
     }
 
 }
