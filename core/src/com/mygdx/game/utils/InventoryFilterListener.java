@@ -15,6 +15,15 @@ public class InventoryFilterListener extends ChangeListener {
 
     @Override
     public void changed(ChangeEvent event, Actor actor) {
+        System.out.println("InventoryFilterListener");
+        System.out.println(rarityFilterBox.currentFilter);
+        System.out.println(itemFilterBox.currentFilter);
+        filter();
+    }
 
+    private void filter() {
+        if (rarityFilterBox.currentFilter == null && itemFilterBox.currentFilter == null) {
+            
+        }
     }
 }
