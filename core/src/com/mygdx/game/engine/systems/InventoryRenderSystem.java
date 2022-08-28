@@ -26,6 +26,7 @@ import com.mygdx.game.ItemInfoDialog;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.ComponentGrabber;
 import com.mygdx.game.engine.Families;
+import com.mygdx.game.engine.Mappers;
 import com.mygdx.game.engine.components.inventory.InventoryComponent;
 import com.mygdx.game.engine.systems.combat.BasicAttackSystem;
 import com.mygdx.game.engine.systems.combat.EnemyAttackSystem;
@@ -139,8 +140,8 @@ public class InventoryRenderSystem extends EntitySystem {
 
         inventorySettings = new Table();
         inventorySettings.defaults().expand().fill().space(5);
-        inventorySettings.add(new RarityFilterBox(skin));
-        inventorySettings.add(new QuickSortButton(skin));
+        inventorySettings.add(new RarityFilterBox(skin, "invRarityFilter"));
+        inventorySettings.add(new QuickSortButton(skin, "invQuickSort"));
 
         outerTable.add(inventorySettings).width(inventory.getWidth() * 0.55f).height(inventory.getHeight() * 0.1f).fill();
         outerTable.row();
@@ -184,6 +185,8 @@ public class InventoryRenderSystem extends EntitySystem {
             // set canDraw back to when you open the inventory again
             canDraw = true;
             inventoryOpened = true;
+            // set to original inventory when opening the inventory
+            ((RarityFilterBox) inventorySettings.findActor("invRarityFilter")).setCurrentInventory(Mappers.inventory.get(player).inventorySlots);
         }
         else if (Gdx.input.isKeyJustPressed(Input.Keys.E)
                 && inventoryOpened) {
