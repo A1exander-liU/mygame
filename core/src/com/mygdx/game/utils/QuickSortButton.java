@@ -55,8 +55,9 @@ public class QuickSortButton extends ImageButton {
                     System.out.println("same item");
                     // check if nextItem has higher rarity
                     if (hasHigherRarity(nextItem, thisItem)) swapSlots(thisSlot, nextSlot);
-                    else if (sameItem(thisItem, nextItem)) {
-                        if (earlierInAlphabet(nextItem, thisItem)) swapSlots(thisSlot, nextSlot);
+                    else if (earlierInAlphabet(nextItem, thisItem)) swapSlots(thisSlot, nextSlot);
+                    else if (sameItem(thisItem, nextItem) && stackable(thisItem)) {
+
                     }
                 }
                 // check if the item types aren't the same
@@ -98,5 +99,9 @@ public class QuickSortButton extends ImageButton {
         int thisItemCharValue = Mappers.name.get(thisItem).name.toCharArray()[0];
         int nextItemCharValue = Mappers.name.get(nextItem).name.toCharArray()[0];
         return thisItemCharValue < nextItemCharValue;
+    }
+
+    private boolean stackable(Entity item) {
+        return Mappers.quantity.get(item) != null;
     }
 }
