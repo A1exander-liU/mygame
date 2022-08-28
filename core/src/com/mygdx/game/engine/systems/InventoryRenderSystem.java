@@ -138,6 +138,7 @@ public class InventoryRenderSystem extends EntitySystem {
         outerTable.setDebug(false);
 
         inventorySettings = new Table();
+        inventorySettings.defaults().expand().fill().space(5);
         inventorySettings.add(new RarityFilterBox(skin));
         inventorySettings.add(new QuickSortButton(skin));
 
