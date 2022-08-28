@@ -44,7 +44,7 @@ public class RarityFilterBox extends SelectBox<String> {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 determineRarityFilter(getSelected());
-                filter();
+//                filter();
             }
         });
     }
