@@ -36,7 +36,7 @@ public class InventoryFilterListener extends ChangeListener {
             InventorySlot slot = rarityFilterBox.currentInventory.get(i);
             // make sure slot is not empty and fits both rarity and item type criteria
             if (!slot.isEmpty() && matchesRarity(slot.getOccupiedItem()) && matchesItemType(slot.getOccupiedItem()))
-                
+                filterd.add(slot);
         }
     }
 
