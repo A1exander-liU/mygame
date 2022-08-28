@@ -33,6 +33,7 @@ import com.mygdx.game.engine.systems.combat.EnemyAttackSystem;
 import com.mygdx.game.engine.systems.enemyai.SteeringSystem;
 import com.mygdx.game.screens.GameScreen;
 import com.mygdx.game.utils.InventorySlot;
+import com.mygdx.game.utils.ItemFilterBox;
 import com.mygdx.game.utils.QuickSortButton;
 import com.mygdx.game.utils.RarityFilterBox;
 
@@ -137,13 +138,17 @@ public class InventoryRenderSystem extends EntitySystem {
         outerTable = new Table();
         outerTable.setName("outerTable");
         outerTable.setDebug(false);
+        outerTable.defaults().space(5);
 
         inventorySettings = new Table();
-        inventorySettings.defaults().expand().fill().space(5);
-        inventorySettings.add(new RarityFilterBox(skin, "invRarityFilter"));
-        inventorySettings.add(new QuickSortButton(skin, "invQuickSort"));
 
         outerTable.add(inventorySettings).width(inventory.getWidth() * 0.55f).height(inventory.getHeight() * 0.1f).fill();
+
+        inventorySettings.defaults().space(5).width(outerTable.getCell(inventorySettings).getPrefWidth() / 3);
+        inventorySettings.add(new RarityFilterBox(skin, "invRarityFilter"));
+        inventorySettings.add(new ItemFilterBox(skin, "invItemFilter"));
+        inventorySettings.add(new QuickSortButton(skin, "invQuickSort"));
+
         outerTable.row();
         outerTable.add(inventoryScroll).width(inventory.getWidth() * 0.55f).height(inventory.getHeight() * 0.85f).fill();
 
