@@ -10,6 +10,7 @@ import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.Families;
 import com.mygdx.game.engine.ItemType;
+import com.mygdx.game.engine.Mappers;
 
 public class ItemFilterBox extends SelectBox<String> {
 
@@ -28,6 +29,7 @@ public class ItemFilterBox extends SelectBox<String> {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 determineItemFilter(getSelected());
+                filter();
             }
         });
     }
@@ -89,5 +91,16 @@ public class ItemFilterBox extends SelectBox<String> {
                 currentFilter = ItemType.MATERIAL;
                 break;
         }
+    }
+
+    private void filter() {
+        Array<InventorySlot> filtered = new Array<>(0);
+
+        if (currentFilter == null) {
+            Mappers.inventory.get(player).inventorySlots = currentInventory;
+            return;
+        }
+
+        
     }
 }
