@@ -35,7 +35,11 @@ public class QuickSortButton extends ImageButton {
 
     private void quickSortInventory() {
         // sort by rarity descending (Mythical -> Common)
-        // item order: main, off, armor, accessories, consumables, materials
+        // item order: main, off, armor (head -> feet), accessories, consumables, materials
+        // same items are sorted alphabetically
+        // if same items are stackable they are also:
+        // stacked together
+        // sorted by quantity
         Array<InventorySlot> inventorySlots = Mappers.inventory.get(player).inventorySlots;
         for (int i = 0; i < inventorySlots.size - 1; i++) {
             // last element has nothing to compare to
