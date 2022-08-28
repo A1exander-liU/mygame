@@ -75,11 +75,16 @@ public class RarityFilterBox extends SelectBox<String> {
             Mappers.inventory.get(player).inventorySlots = currentInventory;
             return;
         }
-
+        // check the rarity
         for (int i = 0; i < currentInventory.size; i++) {
             if (Mappers.rarity.get(currentInventory.get(i).getOccupiedItem()).rarity == currentFilter)
                 filtered.add(currentInventory.get(i));
         }
+        // add in all the empty slots
+        for (int i = 0; i < currentInventory.size; i++) {
+            if (currentInventory.get(i).isEmpty())
+        }
+
     }
 
 }
