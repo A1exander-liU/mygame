@@ -47,7 +47,7 @@ public class InventorySlotTarget extends DragAndDrop.Target {
             if (targetSlot.isEmpty()) {
                 if (Mappers.stackable.get(sourceItem) != null) {
                     System.out.println("stackable");
-                    ItemSplitDialog splitDialog = new ItemSplitDialog(Mappers.name.get(sourceItem).name, sourceSlot.getSkin(), sourceSlot);
+                    ItemSplitDialog splitDialog = new ItemSplitDialog(Mappers.name.get(sourceItem).name, sourceSlot.getSkin(), sourceSlot, targetSlot);
                     splitDialog.show(sourceSlot.getStage());
                     splitDialog.setWidth(200);
                 } else {
