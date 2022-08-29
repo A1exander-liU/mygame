@@ -12,6 +12,7 @@ import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.engine.Families;
 import com.mygdx.game.engine.ItemFactory;
 import com.mygdx.game.engine.Mappers;
+import com.mygdx.game.screens.GameScreen;
 import com.mygdx.game.utils.InventorySlot;
 
 public class ItemSplitDialog extends Dialog {
@@ -73,6 +74,8 @@ public class ItemSplitDialog extends Dialog {
             Slider quantitySlider = getContentTable().findActor("quantitySlider");
             if (quantitySlider.getValue() != 0) {
                 // make new entity and set it to the target slot
+                Entity splitItem = GameScreen.itemFactory.makeMaterial(Mappers.name.get(inventorySlot.getOccupiedItem()).name, (int) quantitySlider.getValue());
+                inventorySlots.get(inventorySlots.indexOf(targetSlot, true)).setOccupiedItem(splitItem);
 
                 // update the sourceSlot item quantity
                 int leftover = Mappers.quantity.get(inventorySlot.getOccupiedItem()).quantity - (int )quantitySlider.getValue();
