@@ -69,6 +69,12 @@ public class InventoryUi {
     public void splitItem(InventorySlot source, InventorySlot target, int amount) {
         // do nothing since no item was split over
         if (amount == 0) return;
+
+        Entity player = MyGame.engine.getEntitiesFor(Families.player).get(0);
+        Array<InventorySlot> inventorySlots = Mappers.inventory.get(player).inventorySlots;
+
+        // get leftover amount after split and set it as quantity of source item
+        int leftover = Mappers.quantity.get(source.getOccupiedItem()).quantity - amount;
         
     }
 
