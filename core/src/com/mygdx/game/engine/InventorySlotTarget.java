@@ -55,20 +55,17 @@ public class InventorySlotTarget extends DragAndDrop.Target {
                     inventoryUi.setItem(sourceSlot, targetSlot);
                 }
                 System.out.println("assign");
-//            targetSlot.setOccupiedItem(sourceItem);
             }
 
             else if (Objects.equals(Mappers.name.get(sourceItem).name, Mappers.name.get(targetItem).name)) {
                 System.out.println("stack");
                 // stack the items
                 inventoryUi.stackItems(sourceSlot, targetSlot);
-//            targetSlot.stack(sourceSlot);
             }
             // if the names are not the same
             else if (!Objects.equals(Mappers.name.get(sourceItem).name, Mappers.name.get(targetItem).name)) {
                 System.out.println("swap");
                 inventoryUi.swapItems(sourceSlot, targetSlot);
-//            targetSlot.swap(sourceSlot);
             }
         }
         // means the target slot was an equip slot
