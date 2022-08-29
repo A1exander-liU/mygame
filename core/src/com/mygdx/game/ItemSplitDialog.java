@@ -14,14 +14,16 @@ import com.mygdx.game.utils.InventorySlot;
 public class ItemSplitDialog extends Dialog {
 
     InventorySlot inventorySlot;
+    InventorySlot targetSlot;
     Entity item;
     Entity player;
     InventoryUi inventoryUi;
     int currentValue;
 
-    public ItemSplitDialog(String title, Skin skin, InventorySlot inventorySlot) {
+    public ItemSplitDialog(String title, Skin skin, InventorySlot inventorySlot, InventorySlot targetSlot) {
         super(title, skin);
         this.inventorySlot = inventorySlot;
+        this.targetSlot = targetSlot;
         item = inventorySlot.getOccupiedItem();
         player = MyGame.engine.getEntitiesFor(Families.player).get(0);
         inventoryUi = new InventoryUi();
