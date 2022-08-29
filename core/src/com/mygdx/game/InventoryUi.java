@@ -84,6 +84,9 @@ public class InventoryUi {
             Mappers.quantity.get(source.getOccupiedItem()).quantity = leftover;
         }
 
+        // add new item with split quantity and place in target slot
+        Entity item = GameScreen.itemFactory.makeMaterial(Mappers.name.get(source.getOccupiedItem()).name, amount);
+        target.setOccupiedItem(item);
     }
 
     public void equip(InventorySlot source, InventorySlot target) {
