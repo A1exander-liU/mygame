@@ -34,6 +34,7 @@ public class ItemSplitDialog extends Dialog {
     private void buildDialog() {
         // get the slider value to update
         final Slider itemQuantitySlider = new Slider(0, Mappers.quantity.get(item).quantity, 1, false, getSkin());
+        itemQuantitySlider.setName("quantitySlider");
         // set initial value to the full stack
         itemQuantitySlider.setValue(Mappers.quantity.get(inventorySlot.getOccupiedItem()).quantity);
         itemQuantitySlider.addListener(new ChangeListener() {
