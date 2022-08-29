@@ -49,7 +49,7 @@ public class InventorySlotTarget extends DragAndDrop.Target {
                     System.out.println("stackable");
                     ItemSplitDialog splitDialog = new ItemSplitDialog(Mappers.name.get(sourceItem).name, sourceSlot.getSkin(), sourceSlot);
                     splitDialog.show(sourceSlot.getStage());
-                    
+                    splitDialog.setWidth(200);
                 } else {
                     inventoryUi.setItem(sourceSlot, targetSlot);
                 }
