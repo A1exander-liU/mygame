@@ -77,7 +77,7 @@ public class InventoryUi {
         int leftover = Mappers.quantity.get(source.getOccupiedItem()).quantity - amount;
         // full stack was split over, so source is empty now
         if (amount == Mappers.quantity.get(source.getOccupiedItem()).quantity) {
-            source.setOccupiedItem(null);
+            inventorySlots.get(inventorySlots.indexOf(source, true)).setOccupiedItem(null);
         }
         // the split amount was between 0 and sourceItem quantity (there is still leftover)
         else {
