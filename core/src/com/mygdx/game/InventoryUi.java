@@ -75,7 +75,15 @@ public class InventoryUi {
 
         // get leftover amount after split and set it as quantity of source item
         int leftover = Mappers.quantity.get(source.getOccupiedItem()).quantity - amount;
-        
+        // full stack was split over, so source is empty now
+        if (amount == Mappers.quantity.get(source.getOccupiedItem()).quantity) {
+            source.setOccupiedItem(null);
+        }
+        // the split amount was between 0 and sourceItem quantity (there is still leftover)
+        else {
+            Mappers.quantity.get(source.getOccupiedItem()).quantity = leftover;
+        }
+
     }
 
     public void equip(InventorySlot source, InventorySlot target) {
