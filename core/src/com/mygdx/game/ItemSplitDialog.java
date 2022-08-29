@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.engine.Families;
 import com.mygdx.game.engine.ItemFactory;
 import com.mygdx.game.engine.Mappers;
@@ -66,6 +67,7 @@ public class ItemSplitDialog extends Dialog {
 
     @Override
     public void result(Object object) {
+        Array<InventorySlot> inventorySlots = Mappers.inventory.get(player).inventorySlots;
         if (object.equals("ok")) {
             // do the split
             Slider quantitySlider = getContentTable().findActor("quantitySlider");
@@ -74,7 +76,7 @@ public class ItemSplitDialog extends Dialog {
 
                 // update the sourceSlot item quantity
                 int leftover = Mappers.quantity.get(inventorySlot.getOccupiedItem()).quantity - (int )quantitySlider.getValue();
-                
+                Mappers.quantity.get(inventorySlots.get(inventorySlots.indexOf(inventorySlot, true)).getOccupiedItem()).quantity = leftover;
             }
         }
     }
