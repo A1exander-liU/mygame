@@ -51,8 +51,9 @@ public class ItemSplitDialog extends Dialog {
         itemQuantityLabel.setName("Quantity");
 
         getTitleLabel().setAlignment(Align.center);
-
+        
         getContentTable().defaults().space(5);
+        getButtonTable().defaults().pad(5);
 
         getContentTable().add(itemQuantitySlider);
         getContentTable().row();
