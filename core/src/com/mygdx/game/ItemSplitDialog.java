@@ -42,16 +42,16 @@ public class ItemSplitDialog extends Dialog {
                 // get slider value
                 currentValue = (int) itemQuantitySlider.getValue();
                 // update the label quantity value
-                ((Label) getContentTable().findActor("Quantity")).setText("" + currentValue);
+                ((Label) getContentTable().findActor("Quantity")).setText("Quantity: " + currentValue);
             }
         });
 
         // set initial text to full stack (since slider initial value is full stack)
-        Label itemQuantityLabel = new Label("" + Mappers.quantity.get(inventorySlot.getOccupiedItem()).quantity, getSkin());
+        Label itemQuantityLabel = new Label("Quantity: " + Mappers.quantity.get(inventorySlot.getOccupiedItem()).quantity, getSkin());
         itemQuantityLabel.setName("Quantity");
 
         getTitleLabel().setAlignment(Align.center);
-        
+
         getContentTable().defaults().space(5);
         getButtonTable().defaults().pad(5);
 
