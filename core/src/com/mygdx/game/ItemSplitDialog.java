@@ -33,6 +33,8 @@ public class ItemSplitDialog extends Dialog {
     private void buildDialog() {
         // get the slider value to update
         final Slider itemQuantitySlider = new Slider(0, Mappers.quantity.get(item).quantity, 1, false, getSkin());
+        // set initial value to the full stack
+        itemQuantitySlider.setValue(Mappers.quantity.get(inventorySlot.getOccupiedItem()).quantity);
         itemQuantitySlider.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -43,7 +45,8 @@ public class ItemSplitDialog extends Dialog {
             }
         });
 
-        Label itemQuantityLabel = new Label("", getSkin());
+        // set initial text to full stack (since slider initial value is full stack)
+        Label itemQuantityLabel = new Label("" + Mappers.quantity.get(inventorySlot.getOccupiedItem()).quantity, getSkin());
         itemQuantityLabel.setName("Quantity");
 
         getContentTable().add(itemQuantitySlider);
