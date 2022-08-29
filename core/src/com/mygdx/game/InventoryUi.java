@@ -3,7 +3,9 @@ package com.mygdx.game;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.engine.Families;
+import com.mygdx.game.engine.ItemFactory;
 import com.mygdx.game.engine.Mappers;
+import com.mygdx.game.screens.GameScreen;
 import com.mygdx.game.utils.InventorySlot;
 
 public class InventoryUi {
@@ -62,6 +64,10 @@ public class InventoryUi {
         inventorySlots.get(inventorySlots.indexOf(target, true)).setOccupiedItem(source.getOccupiedItem());
         // dereference the source in its original slot
         inventorySlots.get(inventorySlots.indexOf(source, true)).setOccupiedItem(null);
+    }
+
+    public void splitItem(InventorySlot source, InventorySlot target, int amount) {
+        
     }
 
     public void equip(InventorySlot source, InventorySlot target) {
