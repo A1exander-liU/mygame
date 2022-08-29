@@ -44,8 +44,12 @@ public class InventorySlotTarget extends DragAndDrop.Target {
         if (targetSlot.getAcceptedType() == null && sourceSlot.getAcceptedType() == null) {
             // if target slot is empty
             if (targetSlot.isEmpty()) {
+                if (Mappers.stackable.get(sourceItem) != null) {
+                    System.out.println("stackable");
+                } else {
+                    inventoryUi.setItem(sourceSlot, targetSlot);
+                }
                 System.out.println("assign");
-                inventoryUi.setItem(sourceSlot, targetSlot);
 //            targetSlot.setOccupiedItem(sourceItem);
             }
 
