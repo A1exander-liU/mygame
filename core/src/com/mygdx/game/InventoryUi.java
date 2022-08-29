@@ -82,6 +82,7 @@ public class InventoryUi {
         // the split amount was between 0 and sourceItem quantity (there is still leftover)
         else {
             Mappers.quantity.get(source.getOccupiedItem()).quantity = leftover;
+            inventorySlots.get(inventorySlots.indexOf(source, true)).setOccupiedItem(source.getOccupiedItem());
         }
 
         // add new item with split quantity and place in target slot
