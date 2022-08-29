@@ -24,5 +24,30 @@ public class ItemSplitDialog extends Dialog {
         item = inventorySlot.getOccupiedItem();
         player = MyGame.engine.getEntitiesFor(Families.player).get(0);
         inventoryUi = new InventoryUi();
+        buildDialog();
+    }
+
+    private void buildDialog() {
+        // get the slider value to update
+        Slider itemQuantitySlider = new Slider(0, Mappers.quantity.get(item).quantity, 1, false, getSkin());
+
+        Label itemQuantityLabel = new Label("", getSkin());
+        itemQuantityLabel.setName("Quantity");
+
+        getContentTable().add(itemQuantitySlider);
+        getContentTable().row();
+        getContentTable().add(itemQuantityLabel);
+
+        button("Ok", "ok");
+    }
+
+    @Override
+    public void result(Object object) {
+        if (object.equals("ok")) {
+            // do the split
+        }
+        else {
+            cancel();
+        }
     }
 }
