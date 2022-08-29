@@ -67,6 +67,8 @@ public class InventoryUi {
     }
 
     public void splitItem(InventorySlot source, InventorySlot target, int amount) {
+        // do nothing since no item was split over
+        if (amount == 0) return;
         
     }
 
