@@ -3,6 +3,7 @@ package com.mygdx.game.engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 import com.mygdx.game.InventoryUi;
+import com.mygdx.game.ItemSplitDialog;
 import com.mygdx.game.utils.InventorySlot;
 
 import java.util.Objects;
@@ -46,6 +47,9 @@ public class InventorySlotTarget extends DragAndDrop.Target {
             if (targetSlot.isEmpty()) {
                 if (Mappers.stackable.get(sourceItem) != null) {
                     System.out.println("stackable");
+                    ItemSplitDialog splitDialog = new ItemSplitDialog(Mappers.name.get(sourceItem).name, sourceSlot.getSkin(), sourceSlot);
+                    splitDialog.show(sourceSlot.getStage());
+                    
                 } else {
                     inventoryUi.setItem(sourceSlot, targetSlot);
                 }
