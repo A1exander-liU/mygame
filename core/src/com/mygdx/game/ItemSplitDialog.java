@@ -17,6 +17,7 @@ public class ItemSplitDialog extends Dialog {
     Entity item;
     Entity player;
     InventoryUi inventoryUi;
+    int currentValue;
 
     public ItemSplitDialog(String title, Skin skin, InventorySlot inventorySlot) {
         super(title, skin);
@@ -34,7 +35,7 @@ public class ItemSplitDialog extends Dialog {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 // get slider value
-                int currentValue = (int) itemQuantitySlider.getValue();
+                currentValue = (int) itemQuantitySlider.getValue();
                 // update the label quantity value
                 ((Label) getContentTable().findActor("Quantity")).setText("" + currentValue);
             }
