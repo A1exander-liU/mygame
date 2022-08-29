@@ -49,6 +49,8 @@ public class ItemSplitDialog extends Dialog {
         Label itemQuantityLabel = new Label("" + Mappers.quantity.get(inventorySlot.getOccupiedItem()).quantity, getSkin());
         itemQuantityLabel.setName("Quantity");
 
+        getContentTable().defaults().space(5);
+
         getContentTable().add(itemQuantitySlider);
         getContentTable().row();
         getContentTable().add(itemQuantityLabel);
