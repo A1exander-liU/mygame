@@ -4,26 +4,15 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.AcceptedEquipType;
 import com.mygdx.game.engine.ComponentGrabber;
 import com.mygdx.game.engine.Families;
 import com.mygdx.game.engine.ItemFactory;
-import com.mygdx.game.engine.ItemType;
 import com.mygdx.game.engine.Mappers;
-import com.mygdx.game.engine.Rarity;
-import com.mygdx.game.engine.components.inventory.items.individual.EquipTypeComponent;
 import com.mygdx.game.engine.components.inventory.InventoryComponent;
-import com.mygdx.game.engine.components.inventory.items.individual.StackableComponent;
-import com.mygdx.game.engine.components.inventory.items.shared.DescriptionComponent;
-import com.mygdx.game.engine.components.inventory.items.shared.InventoryItemComponent;
 import com.mygdx.game.engine.components.inventory.InventorySlotComponent;
-import com.mygdx.game.engine.components.Name;
-import com.mygdx.game.engine.components.Sprite;
-import com.mygdx.game.engine.components.inventory.items.shared.QuantityComponent;
-import com.mygdx.game.engine.components.inventory.items.shared.RarityComponent;
 import com.mygdx.game.utils.InventorySlot;
 
 public class InventoryTest extends EntitySystem {
@@ -122,7 +111,7 @@ public class InventoryTest extends EntitySystem {
 
         Entity leg = itemFactory.makeArmour("Scale Pants", AcceptedEquipType.LEG);
         addToInventorySlot(leg, 7);
-        
+
         Entity feet = itemFactory.makeArmour("Scale Boots", AcceptedEquipType.FEET);
         addToInventorySlot(feet, 8);
     }
