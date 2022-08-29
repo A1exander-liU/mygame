@@ -29,7 +29,16 @@ public class ItemSplitDialog extends Dialog {
 
     private void buildDialog() {
         // get the slider value to update
-        Slider itemQuantitySlider = new Slider(0, Mappers.quantity.get(item).quantity, 1, false, getSkin());
+        final Slider itemQuantitySlider = new Slider(0, Mappers.quantity.get(item).quantity, 1, false, getSkin());
+        itemQuantitySlider.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                // get slider value
+                int currentValue = (int) itemQuantitySlider.getValue();
+                // update the label quantity value
+                ((Label) getContentTable().findActor("Quantity")).setText("" + currentValue);
+            }
+        });
 
         Label itemQuantityLabel = new Label("", getSkin());
         itemQuantityLabel.setName("Quantity");
