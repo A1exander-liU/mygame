@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.utils.Align;
 import com.mygdx.game.engine.Families;
 import com.mygdx.game.engine.Mappers;
 import com.mygdx.game.utils.InventorySlot;
@@ -48,6 +49,8 @@ public class ItemSplitDialog extends Dialog {
         // set initial text to full stack (since slider initial value is full stack)
         Label itemQuantityLabel = new Label("" + Mappers.quantity.get(inventorySlot.getOccupiedItem()).quantity, getSkin());
         itemQuantityLabel.setName("Quantity");
+
+        getTitleLabel().setAlignment(Align.center);
 
         getContentTable().defaults().space(5);
 
