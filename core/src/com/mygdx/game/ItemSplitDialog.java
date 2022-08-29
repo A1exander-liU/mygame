@@ -55,9 +55,7 @@ public class ItemSplitDialog extends Dialog {
     public void result(Object object) {
         if (object.equals("ok")) {
             // do the split
-        }
-        else {
-            cancel();
+
         }
     }
 }
