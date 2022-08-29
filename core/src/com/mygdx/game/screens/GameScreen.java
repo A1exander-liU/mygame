@@ -46,6 +46,8 @@ public class GameScreen implements Screen {
     final int worldWidth = 100;
     final int worldHeight = 120;
 
+    public static ItemFactory itemFactory;
+
     TiledMap testMap;
     MapObjectDrawer tiledMapRenderer;
     EntityFactory entityFactory;
@@ -57,6 +59,7 @@ public class GameScreen implements Screen {
     public GameScreen(MyGame parent) {
         parent.jsonSearcher = new JsonEnemyFinder();
         parent.itemFinder = new JsonItemFinder();
+        itemFactory = new ItemFactory(parent.itemFinder);
         ItemFactory itemFactory = new ItemFactory(parent.itemFinder);
         testMap = new TmxMapLoader().load("untitled.tmx");
         this.parent = parent;
