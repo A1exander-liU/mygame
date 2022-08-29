@@ -71,16 +71,9 @@ public class ItemSplitDialog extends Dialog {
         Array<InventorySlot> inventorySlots = Mappers.inventory.get(player).inventorySlots;
         if (object.equals("ok")) {
             // do the split
+            InventoryUi inventoryUi = new InventoryUi();
             Slider quantitySlider = getContentTable().findActor("quantitySlider");
-            if (quantitySlider.getValue() != 0) {
-                // make new entity and set it to the target slot
-                Entity splitItem = GameScreen.itemFactory.makeMaterial(Mappers.name.get(inventorySlot.getOccupiedItem()).name, (int) quantitySlider.getValue());
-                inventorySlots.get(inventorySlots.indexOf(targetSlot, true)).setOccupiedItem(splitItem);
-
-                // update the sourceSlot item quantity
-                int leftover = Mappers.quantity.get(inventorySlot.getOccupiedItem()).quantity - (int )quantitySlider.getValue();
-                Mappers.quantity.get(inventorySlots.get(inventorySlots.indexOf(inventorySlot, true)).getOccupiedItem()).quantity = leftover;
-            }
+            inventoryUi.splitItem(inventorySlot, targetSlot, (int) quantitySlider.getValue());
         }
     }
 }
