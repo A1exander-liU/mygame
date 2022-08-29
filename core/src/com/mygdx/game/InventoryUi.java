@@ -75,6 +75,9 @@ public class InventoryUi {
 
         // get leftover amount after split and set it as quantity of source item
         int leftover = Mappers.quantity.get(source.getOccupiedItem()).quantity - amount;
+        
+        Entity item = GameScreen.itemFactory.makeMaterial(Mappers.name.get(source.getOccupiedItem()).name, amount);
+
         // full stack was split over, so source is empty now
         if (amount == Mappers.quantity.get(source.getOccupiedItem()).quantity) {
             inventorySlots.get(inventorySlots.indexOf(source, true)).setOccupiedItem(null);
@@ -86,7 +89,6 @@ public class InventoryUi {
         }
 
         // add new item with split quantity and place in target slot
-        Entity item = GameScreen.itemFactory.makeMaterial(Mappers.name.get(source.getOccupiedItem()).name, amount);
         inventorySlots.get(inventorySlots.indexOf(target, true)).setOccupiedItem(item);
     }
 
