@@ -12,11 +12,18 @@ public class LootSimulation {
         drops = reader.parse(Gdx.files.internal("gameData/dropTable.json"));
     }
 
+
     public void fightSlimes(int fights) {
-        JsonValue enemyLootTable;
+        float totalWeight = 0;
+
         for (int i = 0; i < drops.size; i++) {
+            // the object that holds name, always and chance
             JsonValue lootTable = drops.get(i);
-            System.out.println(lootTable);
+            // the object array that holds items that have a chance to drop
+            JsonValue chance = lootTable.get("chance");
+            // loop through chance item drops and add up the weights
+            for (JsonValue chanceDrop: chance)
+                totalWeight += chanceDrop.getFloat("weight");
         }
     }
 
