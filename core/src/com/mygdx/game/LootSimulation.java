@@ -21,12 +21,9 @@ public class LootSimulation {
         float totalWeight = 0;
         float[] weights = {};
 
-        JsonValue lootTable = null;
+        // get slime loot table object
+        JsonValue lootTable = getEnemyLootTable("slime");
 
-        for (JsonValue drop: drops) {
-            if (Objects.equals(drop.getString("name"), "slime"))
-                lootTable = drop;
-        }
         // the object array that holds items that have a chance to drop
         JsonValue chance = lootTable.get("chance");
         // loop through chance item drops and add up the weights
@@ -47,7 +44,6 @@ public class LootSimulation {
             float randomWeight = random.nextFloat() * totalWeight;
             float choice = 0;
             float runTotal = 0;
-
 
             for (int j = 0; j < weights.length; j++) {
                 runTotal += weights[j];
@@ -95,4 +91,10 @@ public class LootSimulation {
             System.out.println(item + ": " + totalLoot.get(item));
     }
 
+    private JsonValue getEnemyLootTable(String enemyName) {
+        for (JsonValue drop: drops) {
+            if (Objects.equals(drop.getString("item"), enemyName)) return drop;
+        }
+        return null;
+    }
 }
