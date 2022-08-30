@@ -41,8 +41,8 @@ public class LootSimulation {
 
         Random random = new Random();
 
+        HashMap<String, Integer> totalLoot = new HashMap<>();
         for (int i = 0; i < fights; i++) {
-            HashMap<String, Integer> totalLoot = new HashMap<>();
             // get a random weight
             float randomWeight = random.nextFloat() * totalWeight;
             float choice = 0;
@@ -91,6 +91,7 @@ public class LootSimulation {
                 }
             }
         }
+        
     }
 
 }
