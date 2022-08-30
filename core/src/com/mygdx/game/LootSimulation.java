@@ -91,7 +91,8 @@ public class LootSimulation {
                 }
             }
         }
-        
+        for (String item: totalLoot.keySet())
+            System.out.println(item + ": " + totalLoot.get(item));
     }
 
 }
