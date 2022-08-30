@@ -5,6 +5,7 @@ import com.mygdx.game.LootSimulation;
 
 public class LootingSystem extends EntitySystem {
     LootSimulation lootSimulation;
+    boolean stop = false;
 
     public LootingSystem() {
         lootSimulation = new LootSimulation();
@@ -12,6 +13,9 @@ public class LootingSystem extends EntitySystem {
 
     @Override
     public void update(float delta) {
-
+        if (!stop) {
+            lootSimulation.fightSlimes(1);
+            stop = true;
+        }
     }
 }
