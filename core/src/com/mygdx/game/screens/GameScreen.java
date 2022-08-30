@@ -27,6 +27,7 @@ import com.mygdx.game.engine.systems.HealthBarRenderSystem;
 import com.mygdx.game.engine.systems.InventoryRenderSystem;
 import com.mygdx.game.engine.systems.InventoryTest;
 import com.mygdx.game.engine.systems.ItemWindowRenderSystem;
+import com.mygdx.game.engine.systems.LootingSystem;
 import com.mygdx.game.engine.systems.MapUpdateSystem;
 import com.mygdx.game.engine.systems.MovementSystem;
 import com.mygdx.game.engine.systems.CollisionSystem;
@@ -128,6 +129,7 @@ public class GameScreen implements Screen {
         InventoryRenderSystem inventoryRenderSystem = new InventoryRenderSystem(cg);
         InventoryTest inventoryTest = new InventoryTest(cg, itemFactory);
         ItemWindowRenderSystem itemWindowRenderSystem = new ItemWindowRenderSystem();
+        LootingSystem lootingSystem = new LootingSystem();
         MyGame.engine.addSystem(movementSystem);
         MyGame.engine.addSystem(enemySpawningSystem);
         MyGame.engine.addSystem(steeringSystem);
@@ -144,6 +146,7 @@ public class GameScreen implements Screen {
         MyGame.engine.addSystem(inventoryRenderSystem);
         MyGame.engine.addSystem(inventoryTest);
         MyGame.engine.addSystem(itemWindowRenderSystem);
+        MyGame.engine.addSystem(lootingSystem);
         checkPriorities();
     }
 
