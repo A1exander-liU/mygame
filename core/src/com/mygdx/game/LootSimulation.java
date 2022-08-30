@@ -5,6 +5,7 @@ import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Objects;
 import java.util.Random;
 
@@ -15,7 +16,6 @@ public class LootSimulation {
         JsonReader reader = new JsonReader();
         drops = reader.parse(Gdx.files.internal("gameData/dropTable.json"));
     }
-
 
     public void fightSlimes(int fights) {
         float totalWeight = 0;
@@ -42,6 +42,7 @@ public class LootSimulation {
         Random random = new Random();
 
         for (int i = 0; i < fights; i++) {
+            HashMap<String, Integer> totalLoot = new HashMap<>();
             // get a random weight
             float randomWeight = random.nextFloat() * totalWeight;
             float choice = 0;
@@ -81,10 +82,14 @@ public class LootSimulation {
             // get the item with the weight
             for (JsonValue dropChance: chance) {
                 if (choice == dropChance.getFloat("weight")) {
-                    System.out.println(dropChance.getString("item"));
+                    if (totalLoot.containsKey(dropChance.getString("item"))) {
+                        totalLoot.put(dropChance.getString("item"), totalLoot.get(dropChance.getString("item")) + 1);
+                    }
+                    else {
+                        totalLoot.put(dropChance.getString("item"), 1);
+                    }
                 }
             }
-
         }
     }
 
