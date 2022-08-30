@@ -6,6 +6,7 @@ import com.badlogic.gdx.utils.JsonValue;
 
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.Random;
 
 public class LootSimulation {
     JsonValue drops;
@@ -37,6 +38,9 @@ public class LootSimulation {
             // copied array is same array with one new element at end
             weights[weights.length - 1] = chanceDrop.getFloat("weight");
         }
+
+        Random random = new Random();
+        float randomWeight = random.nextFloat() * totalWeight;
     }
 
 }
