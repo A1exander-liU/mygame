@@ -42,11 +42,49 @@ public class LootSimulation {
         Random random = new Random();
 
         for (int i = 0; i < fights; i++) {
+            // get a random weight
             float randomWeight = random.nextFloat() * totalWeight;
+            float choice = 0;
+            float runTotal = 0;
+
 
             for (int j = 0; j < weights.length; j++) {
-                
+                runTotal += weights[j];
+                // total = 61
+
+                // r = 32
+                // 10 -> if 32 < 10 no, keep adding
+                // 11 -> if 32 < 11, no keep adding
+                // 61 -> if 32 < 61, yes, choice is 50/nothing
+
+                // r = 1;
+                // 10 -> if 1 < 10
+
+                // when randomWeight is less than runTotal, then get item dropped
+                // with the weight of the last addition
+
+                // the individual weights = 1, 10, 50
+                // ex. to get nothing, you would have to end up adding
+                // its weight (50 for slime)
+                // if you loop through and add the other two (1, 10) that only gets 11
+                // so in order to get nothing the random weight has to be >= 11
+                // 12
+                // if 12 < 10 nope
+                // if 12 < 11 nope
+                // if 12 < 61 yes
+                if (randomWeight < runTotal) {
+                    choice = weights[j];
+                    break;
+                }
             }
+
+            // get the item with the weight
+            for (JsonValue dropChance: chance) {
+                if (choice == dropChance.getFloat("weight")) {
+                    System.out.println(dropChance.getString("item"));
+                }
+            }
+
         }
     }
 
