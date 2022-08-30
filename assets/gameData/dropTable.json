@@ -1,0 +1,12 @@
+[
+  {
+    "name": "slime",
+    "always": [{"item": "Wood"}],
+    "chance":
+    [
+      {"item": "Iron Sword", "weight": 10},
+      {"item": "Steel Sword", "weight": 1},
+      {"item": "nothing", "weight": 50}
+    ]
+  }
+]
