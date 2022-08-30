@@ -40,7 +40,14 @@ public class LootSimulation {
         }
 
         Random random = new Random();
-        float randomWeight = random.nextFloat() * totalWeight;
+
+        for (int i = 0; i < fights; i++) {
+            float randomWeight = random.nextFloat() * totalWeight;
+
+            for (int j = 0; j < weights.length; j++) {
+                
+            }
+        }
     }
 
 }
