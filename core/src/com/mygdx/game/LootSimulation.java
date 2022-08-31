@@ -145,6 +145,9 @@ public class LootSimulation {
 
         for (Rarity rarity: rarityWeights.keySet()) {
             runTotal += rarityWeights.get(rarity);
+            if (randomWeight < runTotal) {
+                
+            }
         }
 
     }
