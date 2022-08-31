@@ -3,6 +3,7 @@ package com.mygdx.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
+import com.mygdx.game.engine.Rarity;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -92,10 +93,25 @@ public class LootSimulation {
             System.out.println(item + ": " + totalLoot.get(item));
     }
 
+    public void equipmentGeneration(int amount) {
+        HashMap<Rarity, Integer> rarityWeights = generateRarityWeights();
+    }
+
     private JsonValue getEnemyLootTable(String enemyName) {
         for (JsonValue drop: drops) {
             if (Objects.equals(drop.getString("name"), enemyName)) return drop;
         }
         return null;
+    }
+
+    private HashMap<Rarity, Integer> generateRarityWeights() {
+        HashMap<Rarity, Integer> hashMap = new HashMap<>();
+        hashMap.put(Rarity.COMMON, 85);
+        hashMap.put(Rarity.UNCOMMON, 50);
+        hashMap.put(Rarity.RARE, 25);
+        hashMap.put(Rarity.EPIC, 10);
+        hashMap.put(Rarity.LEGENDARY, 3);
+        hashMap.put(Rarity.MYTHICAL, 1);
+        return hashMap;
     }
 }
