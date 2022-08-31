@@ -94,7 +94,9 @@ public class LootSimulation {
     }
 
     public void generateDrops(String enemyName) {
-
+        JsonValue enemyLootTable = getEnemyLootTable(enemyName);
+        if (enemyLootTable == null) return;
+        
     }
 
     public void equipmentGeneration(String equipmentName) {
