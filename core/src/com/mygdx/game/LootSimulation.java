@@ -96,7 +96,8 @@ public class LootSimulation {
     public void equipmentGeneration(String equipmentName) {
         HashMap<Rarity, Integer> rarityWeights = generateRarityWeights();
         JsonValue equipment = findEquipment(equipmentName);
-        Rarity randomRarity =
+        Rarity randomRarity = generateEquipmentRarity(rarityWeights);
+        float statBoost = getStatBoost(randomRarity);
     }
 
     private JsonValue getEnemyLootTable(String enemyName) {
@@ -151,5 +152,15 @@ public class LootSimulation {
             }
         }
         return randomRarity;
+    }
+
+    private float getStatBoost(Rarity rarity) {
+        if (rarity == Rarity.COMMON) return 1;
+        if (rarity == Rarity.UNCOMMON) return 1.2f;
+        if (rarity == Rarity.RARE) return 1.4f;
+        if (rarity == Rarity.EPIC) return 1.6f;
+        if (rarity == Rarity.LEGENDARY) return 1.8f;
+        if (rarity == Rarity.MYTHICAL) return 2;
+        return 0;
     }
 }
