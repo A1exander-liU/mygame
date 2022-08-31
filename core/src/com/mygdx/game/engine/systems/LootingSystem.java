@@ -14,7 +14,8 @@ public class LootingSystem extends EntitySystem {
     @Override
     public void update(float delta) {
         if (!stop) {
-            lootSimulation.fightSlimes(1);
+            lootSimulation.fightSlimes(100);
+            for (int i = 0; i < 100; i++) lootSimulation.equipmentGeneration("Steel Sword");
             stop = true;
         }
     }
