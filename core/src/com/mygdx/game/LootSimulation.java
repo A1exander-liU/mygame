@@ -93,8 +93,9 @@ public class LootSimulation {
             System.out.println(item + ": " + totalLoot.get(item));
     }
 
-    public void equipmentGeneration(int amount) {
+    public void equipmentGeneration(String equipmentName) {
         HashMap<Rarity, Integer> rarityWeights = generateRarityWeights();
+        JsonValue equipment = findEquipment(equipmentName);
     }
 
     private JsonValue getEnemyLootTable(String enemyName) {
@@ -113,5 +114,21 @@ public class LootSimulation {
         hashMap.put(Rarity.LEGENDARY, 3);
         hashMap.put(Rarity.MYTHICAL, 1);
         return hashMap;
+    }
+
+    private JsonValue findEquipment(String equipmentName) {
+        JsonItemFinder itemFinder = new JsonItemFinder();
+        JsonValue equipmentData = itemFinder.findWeaponByName(equipmentName);
+        if (equipmentData == null) equipmentData = itemFinder.findHeadArmourByName(equipmentName);
+        else return equipmentData;
+
+        if (equipmentData == null) equipmentData = itemFinder.findChestArmourByName(equipmentName);
+        else return equipmentData;
+
+        if (equipmentData == null) equipmentData = itemFinder.findLegArmourByName(equipmentName);
+        else return equipmentData;
+
+        if (equipmentData == null) equipmentData = itemFinder.findFeetArmourByName(equipmentName);
+        return equipmentData;
     }
 }
