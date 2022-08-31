@@ -137,6 +137,9 @@ public class LootSimulation {
         float totalWeight = 0;
         // sum up the weights
         for (Integer weight: rarityWeights.values()) totalWeight += weight;
+        Random random = new Random();
         
+        float randomWeight = random.nextFloat() * totalWeight;
+
     }
 }
