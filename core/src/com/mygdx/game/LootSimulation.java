@@ -106,6 +106,12 @@ public class LootSimulation {
 
         float randomWeight = generateRandomWeight(totalWeight);
         float runTotal = 0;
+
+        int choice = -1;
+
+        for (int i = 0; i < itemWeights.length; i++) {
+            runTotal += itemWeights[i];
+        }
     }
 
     private float calcTotalWeight(JsonValue chanceDrops) {
