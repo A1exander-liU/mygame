@@ -6,6 +6,7 @@ import com.badlogic.ashley.utils.ImmutableArray;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.Families;
 import com.mygdx.game.engine.Mappers;
+import com.mygdx.game.engine.components.RemovableComponent;
 
 public class EnemyDeathSystem extends EntitySystem {
 
@@ -20,7 +21,7 @@ public class EnemyDeathSystem extends EntitySystem {
     public void update(float delta) {
         for (int i = 0; i < enemies.size(); i++) {
             Entity enemy = enemies.get(i);
-            
+            if (enemyIsDead(enemy)) enemy.add(new RemovableComponent());
         }
     }
 
