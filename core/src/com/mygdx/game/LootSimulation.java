@@ -94,7 +94,7 @@ public class LootSimulation {
 
     private JsonValue getEnemyLootTable(String enemyName) {
         for (JsonValue drop: drops) {
-            if (Objects.equals(drop.getString("item"), enemyName)) return drop;
+            if (Objects.equals(drop.getString("name"), enemyName)) return drop;
         }
         return null;
     }
