@@ -7,6 +7,7 @@ import com.mygdx.game.engine.components.CollidableComponent;
 import com.mygdx.game.engine.components.DetectionProximity;
 import com.mygdx.game.engine.components.Enemy;
 import com.mygdx.game.engine.components.EnemyStateMachine;
+import com.mygdx.game.engine.components.RemovableComponent;
 import com.mygdx.game.engine.components.inventory.items.individual.ArmourStatComponent;
 import com.mygdx.game.engine.components.ExpComponent;
 import com.mygdx.game.engine.components.Health;
@@ -65,6 +66,7 @@ public class Mappers {
     public static final ComponentMapper<ParameterComponent> parameter = ComponentMapper.getFor(ParameterComponent.class);
     public static final ComponentMapper<Player> player = ComponentMapper.getFor(Player.class);
     public static final ComponentMapper<Position> position = ComponentMapper.getFor(Position.class);
+    public static final ComponentMapper<RemovableComponent> removable = ComponentMapper.getFor(RemovableComponent.class);
     public static final ComponentMapper<Size> size = ComponentMapper.getFor(Size.class);
     public static final ComponentMapper<Spawn> spawn = ComponentMapper.getFor(Spawn.class);
     public static final ComponentMapper<SpawnArea> spawnArea = ComponentMapper.getFor(SpawnArea.class);
