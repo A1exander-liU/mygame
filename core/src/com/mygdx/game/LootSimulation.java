@@ -98,6 +98,12 @@ public class LootSimulation {
         JsonValue equipment = findEquipment(equipmentName);
         Rarity randomRarity = generateEquipmentRarity(rarityWeights);
         float statBoost = getStatBoost(randomRarity);
+        System.out.println(randomRarity + " " + equipment.getString("name"));
+        System.out.println("minDmg: " + (int)(equipment.getInt("minDmg") * statBoost));
+        System.out.println("maxDmg: " + (int)(equipment.getInt("maxDMg") + statBoost));
+        System.out.println("attackDelay: " + equipment.getFloat("attackDelay"));
+        System.out.println("critDmg: " + equipment.getFloat("critDmg"));
+        System.out.println("critChance: " + equipment.getFloat("critChance"));
     }
 
     private JsonValue getEnemyLootTable(String enemyName) {
