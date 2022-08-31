@@ -11,6 +11,7 @@ public class EnemyDropSystem extends EntitySystem {
     ImmutableArray<Entity> enemies;
 
     public EnemyDropSystem() {
+        super(103);
         enemies = MyGame.engine.getEntitiesFor(Families.enemies);
     }
 
