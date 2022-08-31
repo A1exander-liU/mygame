@@ -107,10 +107,15 @@ public class LootSimulation {
         float randomWeight = generateRandomWeight(totalWeight);
         float runTotal = 0;
 
+        // the item dropped
         int choice = -1;
 
         for (int i = 0; i < itemWeights.length; i++) {
             runTotal += itemWeights[i];
+            if (randomWeight < runTotal) {
+                choice = i;
+                break;
+            }
         }
     }
 
