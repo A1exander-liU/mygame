@@ -93,6 +93,10 @@ public class LootSimulation {
             System.out.println(item + ": " + totalLoot.get(item));
     }
 
+    public void generateDrops(String enemyName) {
+
+    }
+
     public void equipmentGeneration(String equipmentName) {
         HashMap<Rarity, Integer> rarityWeights = generateRarityWeights();
         JsonValue equipment = findEquipment(equipmentName);
