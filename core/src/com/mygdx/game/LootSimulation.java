@@ -100,7 +100,16 @@ public class LootSimulation {
         JsonValue chanceDrops = enemyLootTable.get("chance");
         JsonValue alwaysDrops = enemyLootTable.get("always");
 
-        
+        // sum of all weight values of items with chance to drop
+        float totalWeight = calcTotalWeight(chanceDrops);
+    }
+
+    private float calcTotalWeight(JsonValue chanceDrops) {
+        float totalWeight = 0;
+        for (JsonValue chanceDrop: chanceDrops) {
+            totalWeight += chanceDrop.getFloat("weight");
+        }
+        return totalWeight;
     }
 
     public void equipmentGeneration(String equipmentName) {
