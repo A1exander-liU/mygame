@@ -9,6 +9,7 @@ import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.ComponentGrabber;
 import com.mygdx.game.engine.Families;
+import com.mygdx.game.engine.Mappers;
 import com.mygdx.game.engine.components.SpawnArea;
 import com.mygdx.game.utils.EntityTextureObject;
 
@@ -33,11 +34,16 @@ public class EntityRemovalSystem extends EntitySystem {
     public void update(float delta) {
         for (int i = 0; i < enemies.size(); i++) {
             Entity entity = enemies.get(i);
-            if (notAlive(entity)) {
+            if (Mappers.removable.get(entity) == null) {
                 removeOwner(entity);
                 MyGame.engine.removeEntity(entity);
                 removeFromMap(entity);
             }
+//            if (notAlive(entity)) {
+//                removeOwner(entity);
+//                MyGame.engine.removeEntity(entity);
+//                removeFromMap(entity);
+//            }
         }
     }
 
