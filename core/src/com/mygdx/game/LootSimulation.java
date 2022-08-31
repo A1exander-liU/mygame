@@ -103,6 +103,9 @@ public class LootSimulation {
         // sum of all weight values of items with chance to drop
         float totalWeight = calcTotalWeight(chanceDrops);
         float[] itemWeights = generateItemWeights(chanceDrops);
+
+        float randomWeight = generateRandomWeight(totalWeight);
+        float runTotal = 0;
     }
 
     private float calcTotalWeight(JsonValue chanceDrops) {
@@ -122,6 +125,11 @@ public class LootSimulation {
             itemWeights[itemWeights.length - 1] = chanceDrop.getFloat("weight");
         }
         return itemWeights;
+    }
+
+    private float generateRandomWeight(float totalWeight) {
+        Random random = new Random();
+        return random.nextFloat() * totalWeight;
     }
 
     public void equipmentGeneration(String equipmentName) {
