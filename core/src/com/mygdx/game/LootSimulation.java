@@ -102,6 +102,7 @@ public class LootSimulation {
 
         // sum of all weight values of items with chance to drop
         float totalWeight = calcTotalWeight(chanceDrops);
+        float[] itemWeights = generateItemWeights(chanceDrops);
     }
 
     private float calcTotalWeight(JsonValue chanceDrops) {
@@ -110,6 +111,17 @@ public class LootSimulation {
             totalWeight += chanceDrop.getFloat("weight");
         }
         return totalWeight;
+    }
+
+    private float[] generateItemWeights(JsonValue chanceDrops) {
+        float[] itemWeights = {};
+        for (JsonValue chanceDrop: chanceDrops) {
+            // need to update array size so create new copy with one extra size
+            itemWeights = Arrays.copyOf(itemWeights, itemWeights.length + 1);
+            // add weight to end of the array
+            itemWeights[itemWeights.length - 1] = chanceDrop.getFloat("weight");
+        }
+        return itemWeights;
     }
 
     public void equipmentGeneration(String equipmentName) {
