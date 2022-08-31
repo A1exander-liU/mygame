@@ -81,7 +81,7 @@ public class LootSimulation {
                 String name = item.getString("item");
                 int max = item.getInt("max");
                 // generate random material amount
-                int randomAmount = (random.nextInt() * max) + 1;
+                int randomAmount = (random.nextInt(max)) + 1;
                 // set or increment item count depending if it already exists
                 if (totalLoot.containsKey(name)) totalLoot.put(name, totalLoot.get(name) + randomAmount);
                 else totalLoot.put(name, randomAmount);
