@@ -26,6 +26,7 @@ public class LootSimulation {
 
         // the object array that holds items that have a chance to drop
         JsonValue chance = lootTable.get("chance");
+        JsonValue always = lootTable.get("always");
         // loop through chance item drops and add up the weights
         for (JsonValue chanceDrop: chance) {
             totalWeight += chanceDrop.getFloat("weight");
@@ -47,16 +48,6 @@ public class LootSimulation {
 
             for (int j = 0; j < weights.length; j++) {
                 runTotal += weights[j];
-                // total = 61
-
-                // r = 32
-                // 10 -> if 32 < 10 no, keep adding
-                // 11 -> if 32 < 11, no keep adding
-                // 61 -> if 32 < 61, yes, choice is 50/nothing
-
-                // r = 1;
-                // 10 -> if 1 < 10
-
                 // when randomWeight is less than runTotal, then get item dropped
                 // with the weight of the last addition
 
@@ -86,7 +77,17 @@ public class LootSimulation {
                     }
                 }
             }
+            for (JsonValue item: always) {
+                String name = item.getString("item");
+                int max = item.getInt("max");
+                // generate random material amount
+                int randomAmount = (random.nextInt() * max) + 1;
+                // set or increment item count depending if it already exists
+                if (totalLoot.containsKey(name)) totalLoot.put(name, totalLoot.get(name) + randomAmount);
+                else totalLoot.put(name, randomAmount);
+            }
         }
+        System.out.println("Spoils");
         for (String item: totalLoot.keySet())
             System.out.println(item + ": " + totalLoot.get(item));
     }
