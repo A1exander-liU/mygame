@@ -96,6 +96,7 @@ public class LootSimulation {
     public void equipmentGeneration(String equipmentName) {
         HashMap<Rarity, Integer> rarityWeights = generateRarityWeights();
         JsonValue equipment = findEquipment(equipmentName);
+        Rarity randomRarity =
     }
 
     private JsonValue getEnemyLootTable(String enemyName) {
@@ -130,5 +131,12 @@ public class LootSimulation {
 
         if (equipmentData == null) equipmentData = itemFinder.findFeetArmourByName(equipmentName);
         return equipmentData;
+    }
+
+    private Rarity generateEquipmentRarity(HashMap<Rarity, Integer> rarityWeights) {
+        float totalWeight = 0;
+        // sum up the weights
+        for (Integer weight: rarityWeights.values()) totalWeight += weight;
+        
     }
 }
