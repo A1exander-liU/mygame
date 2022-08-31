@@ -150,6 +150,6 @@ public class LootSimulation {
                 break;
             }
         }
-
+        return randomRarity;
     }
 }
