@@ -34,7 +34,7 @@ public class EntityRemovalSystem extends EntitySystem {
     public void update(float delta) {
         for (int i = 0; i < enemies.size(); i++) {
             Entity entity = enemies.get(i);
-            if (Mappers.removable.get(entity) == null) {
+            if (Mappers.removable.get(entity) != null) {
                 removeOwner(entity);
                 MyGame.engine.removeEntity(entity);
                 removeFromMap(entity);
