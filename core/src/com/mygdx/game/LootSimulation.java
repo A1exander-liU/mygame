@@ -103,7 +103,7 @@ public class LootSimulation {
         // roll to see which one of the items dropped
         JsonValue oneOf = enemyLootTable.get("oneOf");
         rollAnyOf(loot, anyOf);
-        rollOneOf();
+        rollOneOf(loot, oneOf);
     }
 
     private void rollAnyOf(HashMap<String, Integer> loot, JsonValue anyOf) {
@@ -116,8 +116,8 @@ public class LootSimulation {
         }
     }
 
-    private void rollOneOf() {
-
+    private void rollOneOf(HashMap<String, Integer> loot, JsonValue oneOf) {
+        float totalWeight = calcTotalWeight(oneOf);
     }
 
     private float rollForItem() {
@@ -140,11 +140,12 @@ public class LootSimulation {
         return random.nextInt(max) + min;
     }
 
-    private float calcTotalWeight(JsonValue chanceDrops) {
+    private float calcTotalWeight(JsonValue oneOf) {
         float totalWeight = 0;
-        for (JsonValue chanceDrop: chanceDrops) {
-            totalWeight += chanceDrop.getFloat("weight");
+        for (JsonValue item: oneOf) {
+            totalWeight += item.getFloat("chance");
         }
+        if (totalWeight != 100) totalWeight += (100 - totalWeight);
         return totalWeight;
     }
 
