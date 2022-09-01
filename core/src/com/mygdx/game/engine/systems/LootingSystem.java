@@ -1,22 +1,25 @@
 package com.mygdx.game.engine.systems;
 
 import com.badlogic.ashley.core.EntitySystem;
-import com.mygdx.game.LootSimulation;
+import com.mygdx.game.LootGenerator;
 
 public class LootingSystem extends EntitySystem {
-    LootSimulation lootSimulation;
+    LootGenerator lootGenerator;
     boolean stop = false;
 
     public LootingSystem() {
-        lootSimulation = new LootSimulation();
+        lootGenerator = new LootGenerator();
     }
 
     @Override
     public void update(float delta) {
-        if (!stop) {
-            lootSimulation.fightSlimes(100);
-            for (int i = 0; i < 100; i++) lootSimulation.equipmentGeneration("Steel Sword");
-            stop = true;
-        }
+//        if (!stop) {
+//            System.out.println("Fighting slimes...");
+//            lootSimulation.fightSlimes(100);
+//            System.out.println();
+//            for (int i = 0; i < 1; i++)
+//                lootSimulation.equipmentGeneration("Steel Sword");
+//            stop = true;
+//        }
     }
 }

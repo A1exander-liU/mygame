@@ -3,17 +3,16 @@ package com.mygdx.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
-import com.mygdx.game.engine.Rarity;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Objects;
 import java.util.Random;
 
-public class LootSimulation {
+public class LootGenerator {
     JsonValue drops;
 
-    public LootSimulation() {
+    public LootGenerator() {
         JsonReader reader = new JsonReader();
         drops = reader.parse(Gdx.files.internal("gameData/dropTable.json"));
     }
