@@ -8,6 +8,14 @@
     {
       "name": "Stone", "sprite": "testPlayer.png","rarity": "COMMON",
       "desc": "Used in construction and equipment"
+    },
+    {
+      "name": "Gel", "sprite": "testPlayer.png", "rarity": "COMMON",
+      "desc": "Useful ingredient in basic alchemy recipes"
+    },
+    {
+      "name": "Coin", "sprite": "testPlayer.png", "rarity": "COMMON",
+      "desc": "Currency"
     }
   ]
 }
