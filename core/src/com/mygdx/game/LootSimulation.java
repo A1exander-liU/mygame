@@ -118,6 +118,7 @@ public class LootSimulation {
 
     private void rollOneOf(HashMap<String, Integer> loot, JsonValue oneOf) {
         float totalWeight = calcTotalWeight(oneOf);
+        float[] itemWeights = generateItemWeights(oneOf);
     }
 
     private float rollForItem() {
@@ -145,17 +146,16 @@ public class LootSimulation {
         for (JsonValue item: oneOf) {
             totalWeight += item.getFloat("chance");
         }
-        if (totalWeight != 100) totalWeight += (100 - totalWeight);
         return totalWeight;
     }
 
-    private float[] generateItemWeights(JsonValue chanceDrops) {
+    private float[] generateItemWeights(JsonValue oneOf) {
         float[] itemWeights = {};
-        for (JsonValue chanceDrop: chanceDrops) {
+        for (JsonValue item: oneOf) {
             // need to update array size so create new copy with one extra size
             itemWeights = Arrays.copyOf(itemWeights, itemWeights.length + 1);
             // add weight to end of the array
-            itemWeights[itemWeights.length - 1] = chanceDrop.getFloat("weight");
+            itemWeights[itemWeights.length - 1] = item.getFloat("chance");
         }
         return itemWeights;
     }
