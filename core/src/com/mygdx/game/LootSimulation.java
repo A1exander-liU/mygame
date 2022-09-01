@@ -122,25 +122,7 @@ public class LootSimulation {
 
         float randomWeight = generateRandomWeight(totalWeight);
         float runTotal = 0;
-        float choice = -1;
-
-        for (int i = 0; i < itemWeights.length; i++) {
-            runTotal += itemWeights[i];
-            // 85, 10, 5
-
-            // r = 30
-            // 30 < 0
-            // 30 < 85 -> 85 is choice
-
-            // r = 90
-            // 90 < 0
-            // 90 < 85
-            // 90 < 95 -> 10 is choice
-            if (randomWeight < runTotal) {
-                choice = i;
-                break;
-            }
-        }
+        float choice = determineDroppedItem(randomWeight, itemWeights);
 
     }
 
@@ -186,6 +168,25 @@ public class LootSimulation {
     private float generateRandomWeight(float totalWeight) {
         Random random = new Random();
         return random.nextFloat() * totalWeight;
+    }
+
+    private float determineDroppedItem(float randomWeight, float[] itemWeights) {
+        float runTotal = 0;
+        for (int i = 0; i < itemWeights.length; i++) {
+            runTotal += itemWeights[i];
+            // 85, 10, 5
+
+            // r = 30
+            // 30 < 0
+            // 30 < 85 -> 85 is choice
+
+            // r = 90
+            // 90 < 0
+            // 90 < 85
+            // 90 < 95 -> 10 is choice
+            if (randomWeight < runTotal) return i;
+        }
+        return -1;
     }
 
     public void equipmentGeneration(String equipmentName) {
