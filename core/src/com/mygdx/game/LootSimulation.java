@@ -128,7 +128,7 @@ public class LootSimulation {
         choice = 1;
         if (!Objects.equals(oneOf.get((int) choice).getString("item"), "nothing")) {
             int amount = rollAmount(oneOf.get((int) choice));
-            
+            loot.put(oneOf.get((int) choice).getString("item"), amount);
         }
     }
 
