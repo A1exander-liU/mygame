@@ -93,10 +93,10 @@ public class LootSimulation {
             System.out.println(item + ": " + totalLoot.get(item));
     }
 
-    public HashMap<String, Integer> generateDrops(String enemyName) {
+    public HashMap<Integer, Integer> generateDrops(String enemyName) {
         JsonValue enemyLootTable = getEnemyLootTable(enemyName);
         if (enemyLootTable == null) return null;
-        HashMap<String, Integer> loot = new HashMap<>();
+        HashMap<Integer, Integer> loot = new HashMap<>();
         // roll for each item to see it dropped
         // roll random number, check if <= drop chance
         JsonValue anyOf = enemyLootTable.get("anyOf");
@@ -107,17 +107,17 @@ public class LootSimulation {
         return loot;
     }
 
-    private void rollAnyOf(HashMap<String, Integer> loot, JsonValue anyOf) {
+    private void rollAnyOf(HashMap<Integer, Integer> loot, JsonValue anyOf) {
         for (JsonValue item: anyOf) {
             float random = rollForItem();
             if (random <= item.getFloat("chance")) {
                 int amount = rollAmount(item);
-                loot.put(item.getString("item"), amount);
+                loot.put(item.getInt("itemId"), amount);
             }
         }
     }
 
-    private void rollOneOf(HashMap<String, Integer> loot, JsonValue oneOf) {
+    private void rollOneOf(HashMap<Integer, Integer> loot, JsonValue oneOf) {
         float totalWeight = calcTotalWeight(oneOf);
         float[] itemWeights = generateItemWeights(oneOf);
 
@@ -126,9 +126,9 @@ public class LootSimulation {
         // the index of the dropped item in the oneOf array
         float choice = determineDroppedItem(randomWeight, itemWeights);
         // chceck if dropped item to make sure it isn't nothing
-        if (!Objects.equals(oneOf.get((int) choice).getString("item"), "nothing")) {
+        if (oneOf.get((int) choice).getInt("itemId") != -1) {
             int amount = rollAmount(oneOf.get((int) choice));
-            loot.put(oneOf.get((int) choice).getString("item"), amount);
+            loot.put(oneOf.get((int) choice).getInt("itemId"), amount);
         }
     }
 
