@@ -126,7 +126,20 @@ public class LootSimulation {
 
         for (int i = 0; i < itemWeights.length; i++) {
             runTotal += itemWeights[i];
-            if (randomWeight < runTotal) choice = i;
+            // 85, 10, 5
+
+            // r = 30
+            // 30 < 0
+            // 30 < 85 -> 85 is choice
+
+            // r = 90
+            // 90 < 0
+            // 90 < 85
+            // 90 < 95 -> 10 is choice
+            if (randomWeight < runTotal) {
+                choice = i;
+                break;
+            }
         }
 
     }
