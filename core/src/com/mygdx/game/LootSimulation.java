@@ -123,6 +123,11 @@ public class LootSimulation {
         float randomWeight = generateRandomWeight(totalWeight);
         float runTotal = 0;
 
+        for (int i = 0; i < itemWeights.length; i++) {
+            runTotal += itemWeights[i];
+            
+        }
+
     }
 
     private float rollForItem() {
