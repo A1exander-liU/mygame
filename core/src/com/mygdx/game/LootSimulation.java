@@ -109,8 +109,8 @@ public class LootSimulation {
         for (JsonValue item: anyOf) {
             float random = rollForItem();
             if (random <= item.getFloat("chance")) {
-                float amount = rollAmount(item);
-
+                int amount = rollAmount(item);
+                loot.put(item.getString("name"), amount);
             }
         }
     }
@@ -120,7 +120,7 @@ public class LootSimulation {
         return random.nextFloat() * 100;
     }
 
-    private float rollAmount(JsonValue item) {
+    private int rollAmount(JsonValue item) {
         // if min and max amount is the same
         int min = item.get("amount").getInt(0);
         int max = item.get("amount").getInt(1);
