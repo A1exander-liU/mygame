@@ -97,26 +97,13 @@ public class LootSimulation {
         JsonValue enemyLootTable = getEnemyLootTable(enemyName);
         if (enemyLootTable == null) return;
 
-        JsonValue chanceDrops = enemyLootTable.get("chance");
-        JsonValue alwaysDrops = enemyLootTable.get("always");
+        // roll for each item to see it dropped
+        // roll random number, check if <= drop chance
+        JsonValue anyOf = enemyLootTable.get("anyOf");
+        // roll to see which one of the items dropped
+        JsonValue oneOf = enemyLootTable.get("oneOf");
 
-        // sum of all weight values of items with chance to drop
-        float totalWeight = calcTotalWeight(chanceDrops);
-        float[] itemWeights = generateItemWeights(chanceDrops);
 
-        float randomWeight = generateRandomWeight(totalWeight);
-        float runTotal = 0;
-
-        // the item dropped
-        int choice = -1;
-
-        for (int i = 0; i < itemWeights.length; i++) {
-            runTotal += itemWeights[i];
-            if (randomWeight < runTotal) {
-                choice = i;
-                break;
-            }
-        }
     }
 
     private float calcTotalWeight(JsonValue chanceDrops) {
