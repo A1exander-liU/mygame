@@ -8,6 +8,8 @@ import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.Families;
 import com.mygdx.game.engine.Mappers;
 
+import java.util.HashMap;
+
 public class EnemyDropSystem extends EntitySystem {
 
     ImmutableArray<Entity> enemies;
@@ -24,7 +26,7 @@ public class EnemyDropSystem extends EntitySystem {
             Entity enemy = enemies.get(i);
             if (Mappers.removable.get(enemy) != null) {
                 String deadEnemyName = Mappers.name.get(enemy).name;
-                lootSimulation.generateDrops(deadEnemyName);
+                HashMap<String, Integer> loot = lootSimulation.generateDrops(deadEnemyName);
             }
         }
     }
