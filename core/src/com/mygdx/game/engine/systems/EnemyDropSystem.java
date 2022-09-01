@@ -35,6 +35,16 @@ public class EnemyDropSystem extends EntitySystem {
     }
 
     private void addToCoinPouch(HashMap<Integer, Integer> loot) {
-
+        for (Integer itemId: loot.keySet()) {
+            // check if itemId is -1 (coins)
+            if (itemId == -1) {
+                // add coins to coinPouch
+                Mappers.inventory.get(player).coinPouch += loot.get(itemId);
+                // remove from loot, no longer needed since it was dded to coinPouch
+                loot.remove(itemId);
+                // only one coins object exists
+                break;
+            }
+        }
     }
 }
