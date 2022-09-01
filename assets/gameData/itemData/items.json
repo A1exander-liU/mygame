@@ -1,38 +1,38 @@
 [
   {
     "id": 0, "itemType": "main",
-    "name": "Iron Sword", "sprite": "testPlayer.png", "rarity": "COMMON",
-    "minDmg": 5, "maxDmg": 10, "attackDelay": 1, "critChance": 2,
-    "critDmg": 1.5, "desc": "Common sword used by soldiers"
+    "name": "Iron Sword", "sprite": "testPlayer.png",
+    "minDmg": 5, "maxDmg": 10, "attackDelay": 1,
+    "desc": "Common sword used by soldiers"
   },
   {
     "id": 1, "itemType": "main",
-    "name": "Steel Sword", "sprite": "testPlayer.png", "rarity": "COMMON",
-    "minDmg": 6, "maxDmg": 12, "attackDelay": 1, "critChance": 2,
-    "critDmg": 1.5, "desc": "Reliable blade favoured by many"
+    "name": "Steel Sword", "sprite": "testPlayer.png",
+    "minDmg": 6, "maxDmg": 12, "attackDelay": 1,
+    "desc": "Reliable blade favoured by many"
   },
   {
     "id": 2, "itemType": "head",
-    "name": "Scale Helmet", "sprite": "testPlayer.png", "rarity": "COMMON",
-    "physicalDef": 5, "magicalDef": 10, "hp": 0, "mp": 0,
+    "name": "Scale Helmet", "sprite": "testPlayer.png",
+    "physicalDef": 5, "magicalDef": 10,
     "desc": "Light-weight armour made from lizard scales, boasting high magical defense"
   },
   {
     "id": 3, "itemType": "torso",
-    "name": "Scale Armour", "sprite": "testPlayer.png", "rarity": "COMMON",
-    "physicalDef": 10, "magicalDef": 20, "hp": 0, "mp": 0,
+    "name": "Scale Armour", "sprite": "testPlayer.png",
+    "physicalDef": 10, "magicalDef": 20,
     "desc": "Light-weight armour made from lizard scales, boasting high magical defense"
   },
   {
     "id": 4, "itemType": "leg",
-    "name": "Scale Pants", "sprite": "testPlayer.png", "rarity": "COMMON",
-    "physicalDef": 8, "magicalDef": 15, "hp": 0, "mp": 0,
+    "name": "Scale Pants", "sprite": "testPlayer.png",
+    "physicalDef": 8, "magicalDef": 15,
     "desc": "Light-weight armour made from lizard scales, boasting high magical defense"
   },
   {
     "id": 5, "itemType": "feet",
-    "name": "Scale Boots", "sprite": "testPlayer.png", "rarity": "COMMON",
-    "physicalDef": 5, "magicalDef": 5, "hp": 0, "mp": 0,
+    "name": "Scale Boots", "sprite": "testPlayer.png",
+    "physicalDef": 5, "magicalDef": 5,
     "desc": "Light-weight armour made from lizard scales, boasting high magical defense"
   },
   {
