@@ -26,7 +26,8 @@ public class EnemyDropSystem extends EntitySystem {
             Entity enemy = enemies.get(i);
             if (Mappers.removable.get(enemy) != null) {
                 String deadEnemyName = Mappers.name.get(enemy).name;
-                HashMap<String, Integer> loot = lootSimulation.generateDrops(deadEnemyName);
+                HashMap<Integer, Integer> loot = lootSimulation.generateDrops(deadEnemyName);
+                float r = 0;
             }
         }
     }
