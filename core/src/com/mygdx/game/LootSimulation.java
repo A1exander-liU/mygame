@@ -107,7 +107,10 @@ public class LootSimulation {
 
     private void rollAnyOf(HashMap<String, Integer> loot, JsonValue anyOf) {
         for (JsonValue item: anyOf) {
-            
+            float random = rollForItem();
+            if (random <= item.getFloat("chance")) {
+
+            }
         }
     }
 
