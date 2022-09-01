@@ -50,7 +50,7 @@ public class LootGenerator {
         // the index of the dropped item in the oneOf array
         float choice = determineDroppedItem(randomWeight, itemWeights);
         // chceck if dropped item to make sure it isn't nothing
-        if (oneOf.get((int) choice).getInt("itemId") != -1) {
+        if (oneOf.get((int) choice).getInt("itemId") != -2) {
             int amount = rollAmount(oneOf.get((int) choice));
             loot.put(oneOf.get((int) choice).getInt("itemId"), amount);
         }
