@@ -4,6 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
 
+import java.util.Objects;
+
 public class EquipmentGenerator {
 
     JsonValue items;
@@ -14,6 +16,16 @@ public class EquipmentGenerator {
     }
 
     public void generateEquipment(int itemId) {
-        
+        for (JsonValue item: items) {
+            // determine the item
+            if (item.getInt("id") == itemId && isEquipment(item)) {
+                
+            }
+        }
+    }
+
+    private boolean isEquipment(JsonValue item) {
+        return !Objects.equals(item.getString("itemType"), "material")
+                && !Objects.equals(item.getString("itemType"), "consumable");
     }
 }
