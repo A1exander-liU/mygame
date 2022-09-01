@@ -125,7 +125,6 @@ public class LootSimulation {
         // the index of the dropped item in the oneOf array
         float choice = determineDroppedItem(randomWeight, itemWeights);
         // chceck if dropped item to make sure it isn't nothing
-        choice = 1;
         if (!Objects.equals(oneOf.get((int) choice).getString("item"), "nothing")) {
             int amount = rollAmount(oneOf.get((int) choice));
             loot.put(oneOf.get((int) choice).getString("item"), amount);
