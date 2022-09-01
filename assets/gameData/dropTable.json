@@ -1,12 +1,15 @@
 [
   {
     "name": "slime",
-    "always": [{"item": "Wood"}],
-    "chance":
+    "anyOf":
     [
-      {"item": "Iron Sword", "weight": 10},
-      {"item": "Steel Sword", "weight": 1},
-      {"item": "nothing", "weight": 50}
+      {"item": "Coin", "amount": [3, 10], "chance": 100},
+      {"item": "Gel", "amount": [1, 3], "chance": 50}
+    ],
+    "oneOf":
+    [
+      {"item": "Iron Sword", "amount": [1, 1], "chance": 10},
+      {"item": "Steel Sword", "amount": [1, 1], "chance": 5}
     ]
   }
 ]
