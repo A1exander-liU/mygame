@@ -194,81 +194,11 @@ public class LootSimulation {
         }
         return -1;
     }
-
-    public void equipmentGeneration(String equipmentName) {
-        HashMap<Rarity, Integer> rarityWeights = generateRarityWeights();
-        JsonValue equipment = findEquipment(equipmentName);
-        Rarity randomRarity = generateEquipmentRarity(rarityWeights);
-        float statBoost = getStatBoost(randomRarity);
-        System.out.println(randomRarity + " " + equipment.getString("name"));
-        System.out.println("minDmg: " + (int)(equipment.getInt("minDmg") * statBoost));
-        System.out.println("maxDmg: " + (int)(equipment.getInt("maxDMg") + statBoost));
-        System.out.println("attackDelay: " + equipment.getFloat("attackDelay"));
-        System.out.println("critDmg: " + equipment.getFloat("critDmg"));
-        System.out.println("critChance: " + equipment.getFloat("critChance"));
-    }
-
+    
     private JsonValue getEnemyLootTable(String enemyName) {
         for (JsonValue drop: drops) {
             if (Objects.equals(drop.getString("name"), enemyName)) return drop;
         }
         return null;
-    }
-
-    private HashMap<Rarity, Integer> generateRarityWeights() {
-        HashMap<Rarity, Integer> hashMap = new HashMap<>();
-        hashMap.put(Rarity.COMMON, 85);
-        hashMap.put(Rarity.UNCOMMON, 50);
-        hashMap.put(Rarity.RARE, 25);
-        hashMap.put(Rarity.EPIC, 10);
-        hashMap.put(Rarity.LEGENDARY, 3);
-        hashMap.put(Rarity.MYTHICAL, 1);
-        return hashMap;
-    }
-
-    private JsonValue findEquipment(String equipmentName) {
-        JsonItemFinder itemFinder = new JsonItemFinder();
-        JsonValue equipmentData = itemFinder.findWeaponByName(equipmentName);
-        if (equipmentData == null) equipmentData = itemFinder.findHeadArmourByName(equipmentName);
-        else return equipmentData;
-
-        if (equipmentData == null) equipmentData = itemFinder.findChestArmourByName(equipmentName);
-        else return equipmentData;
-
-        if (equipmentData == null) equipmentData = itemFinder.findLegArmourByName(equipmentName);
-        else return equipmentData;
-
-        if (equipmentData == null) equipmentData = itemFinder.findFeetArmourByName(equipmentName);
-        return equipmentData;
-    }
-
-    private Rarity generateEquipmentRarity(HashMap<Rarity, Integer> rarityWeights) {
-        float totalWeight = 0;
-        // sum up the weights
-        for (Integer weight: rarityWeights.values()) totalWeight += weight;
-        Random random = new Random();
-
-        float randomWeight = random.nextFloat() * totalWeight;
-        float runTotal = 0;
-        Rarity randomRarity = null;
-
-        for (Rarity rarity: rarityWeights.keySet()) {
-            runTotal += rarityWeights.get(rarity);
-            if (randomWeight < runTotal) {
-                randomRarity = rarity;
-                break;
-            }
-        }
-        return randomRarity;
-    }
-
-    private float getStatBoost(Rarity rarity) {
-        if (rarity == Rarity.COMMON) return 1;
-        if (rarity == Rarity.UNCOMMON) return 1.2f;
-        if (rarity == Rarity.RARE) return 1.4f;
-        if (rarity == Rarity.EPIC) return 1.6f;
-        if (rarity == Rarity.LEGENDARY) return 1.8f;
-        if (rarity == Rarity.MYTHICAL) return 2;
-        return 0;
     }
 }
