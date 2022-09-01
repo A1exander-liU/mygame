@@ -19,6 +19,7 @@ public class InventoryComponent implements Component {
     public Array<Entity> items = new Array<>(capacity);
     public Array<InventorySlot> inventorySlots = new Array<>(capacity);
     public Array<InventorySlot> equipSlots = new Array<>(equipSize);
+    public int coinPouch = 0;
     public boolean opened = false;
     public DragAndDrop dragAndDrop = new DragAndDrop();
     Skin skin = new Skin(Gdx.files.internal("Game_UI_Skin/Game_UI_Skin.json"));
