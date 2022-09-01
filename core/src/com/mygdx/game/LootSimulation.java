@@ -119,6 +119,10 @@ public class LootSimulation {
     private void rollOneOf(HashMap<String, Integer> loot, JsonValue oneOf) {
         float totalWeight = calcTotalWeight(oneOf);
         float[] itemWeights = generateItemWeights(oneOf);
+
+        float randomWeight = generateRandomWeight(totalWeight);
+        float runTotal = 0;
+
     }
 
     private float rollForItem() {
