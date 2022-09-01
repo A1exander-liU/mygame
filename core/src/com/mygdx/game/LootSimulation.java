@@ -93,9 +93,9 @@ public class LootSimulation {
             System.out.println(item + ": " + totalLoot.get(item));
     }
 
-    public void generateDrops(String enemyName) {
+    public HashMap<String, Integer> generateDrops(String enemyName) {
         JsonValue enemyLootTable = getEnemyLootTable(enemyName);
-        if (enemyLootTable == null) return;
+        if (enemyLootTable == null) return null;
         HashMap<String, Integer> loot = new HashMap<>();
         // roll for each item to see it dropped
         // roll random number, check if <= drop chance
@@ -104,6 +104,7 @@ public class LootSimulation {
         JsonValue oneOf = enemyLootTable.get("oneOf");
         rollAnyOf(loot, anyOf);
         rollOneOf(loot, oneOf);
+        return loot;
     }
 
     private void rollAnyOf(HashMap<String, Integer> loot, JsonValue anyOf) {
