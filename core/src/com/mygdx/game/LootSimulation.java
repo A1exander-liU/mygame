@@ -121,11 +121,18 @@ public class LootSimulation {
     }
 
     private float rollAmount(JsonValue item) {
-        Random random = new Random();
         // if min and max amount is the same
-        if (item.get("amount").get(0) == item.get("amount").get(1)) {
-            return item.get("amount").getInt(0);
+        int min = item.get("amount").getInt(0);
+        int max = item.get("amount").getInt(1);
+        if (min == max) {
+            return min;
         }
+        return roll(min, max);
+    }
+
+    private int roll(int min, int max) {
+        Random random = new Random();
+        return random.nextInt(max) + min;
     }
 
     private float calcTotalWeight(JsonValue chanceDrops) {
