@@ -8,6 +8,7 @@
     ],
     "oneOf":
     [
+      {"item": "nothing", "amount": [0, 0], "chance": 85},
       {"item": "Iron Sword", "amount": [1, 1], "chance": 10},
       {"item": "Steel Sword", "amount": [1, 1], "chance": 5}
     ]
