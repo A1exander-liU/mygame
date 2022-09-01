@@ -96,7 +96,7 @@ public class LootSimulation {
     public void generateDrops(String enemyName) {
         JsonValue enemyLootTable = getEnemyLootTable(enemyName);
         if (enemyLootTable == null) return;
-
+        HashMap<String, Integer> loot = new HashMap<>();
         // roll for each item to see it dropped
         // roll random number, check if <= drop chance
         JsonValue anyOf = enemyLootTable.get("anyOf");
