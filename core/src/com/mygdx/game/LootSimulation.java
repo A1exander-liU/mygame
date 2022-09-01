@@ -122,8 +122,12 @@ public class LootSimulation {
 
         float randomWeight = generateRandomWeight(totalWeight);
         float runTotal = 0;
+        // the index of the dropped item in the oneOf array
         float choice = determineDroppedItem(randomWeight, itemWeights);
-
+        // chceck if dropped item to make sure it isn't nothing
+        if (!Objects.equals(oneOf.get((int) choice).getString("item"), "nothing")) {
+            
+        }
     }
 
     private float rollForItem() {
