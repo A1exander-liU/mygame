@@ -3,7 +3,9 @@ package com.mygdx.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
+import com.mygdx.game.engine.Rarity;
 
+import java.util.HashMap;
 import java.util.Objects;
 
 public class EquipmentGenerator {
@@ -30,6 +32,7 @@ public class EquipmentGenerator {
     }
 
     private void makeEquipment(JsonValue item) {
+        Rarity itemRarity = rollForRarity();
         switch (item.getString("id")) {
             case "main":
             case "off":
@@ -39,5 +42,15 @@ public class EquipmentGenerator {
             case "leg":
             case "feet":
         }
+    }
+
+    private Rarity rollForRarity() {
+        HashMap<Rarity, Integer> rarityWeights = new HashMap<>();
+        rarityWeights.put(Rarity.COMMON, 52);
+        rarityWeights.put(Rarity.UNCOMMON, 21); 
+        rarityWeights.put(Rarity.RARE, 15);
+        rarityWeights.put(Rarity.EPIC, 8);
+        rarityWeights.put(Rarity.LEGENDARY, 3);
+        rarityWeights.put(Rarity.MYTHICAL, 1);
     }
 }
