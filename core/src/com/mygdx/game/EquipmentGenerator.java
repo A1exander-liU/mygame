@@ -19,7 +19,7 @@ public class EquipmentGenerator {
         for (JsonValue item: items) {
             // determine the item
             if (item.getInt("id") == itemId && isEquipment(item)) {
-                
+                makeEquipment(item);
             }
         }
     }
@@ -27,5 +27,17 @@ public class EquipmentGenerator {
     private boolean isEquipment(JsonValue item) {
         return !Objects.equals(item.getString("itemType"), "material")
                 && !Objects.equals(item.getString("itemType"), "consumable");
+    }
+
+    private void makeEquipment(JsonValue item) {
+        switch (item.getString("id")) {
+            case "main":
+            case "off":
+            case "accessory":
+            case "head":
+            case "torso":
+            case "leg":
+            case "feet":
+        }
     }
 }
