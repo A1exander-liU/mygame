@@ -109,6 +109,7 @@ public class LootSimulation {
         for (JsonValue item: anyOf) {
             float random = rollForItem();
             if (random <= item.getFloat("chance")) {
+                float amount = rollAmount(item);
 
             }
         }
@@ -117,6 +118,14 @@ public class LootSimulation {
     private float rollForItem() {
         Random random = new Random();
         return random.nextFloat() * 100;
+    }
+
+    private float rollAmount(JsonValue item) {
+        Random random = new Random();
+        // if min and max amount is the same
+        if (item.get("amount").get(0) == item.get("amount").get(1)) {
+            return item.get("amount").getInt(0);
+        }
     }
 
     private float calcTotalWeight(JsonValue chanceDrops) {
