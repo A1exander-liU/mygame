@@ -14,10 +14,12 @@ public class EnemyDropSystem extends EntitySystem {
 
     ImmutableArray<Entity> enemies;
     LootGenerator lootGenerator = new LootGenerator();
+    Entity player;
 
     public EnemyDropSystem() {
         super(103);
         enemies = MyGame.engine.getEntitiesFor(Families.enemies);
+        player = MyGame.engine.getEntitiesFor(Families.player).get(0);
     }
 
     @Override
