@@ -103,6 +103,7 @@ public class LootSimulation {
         // roll to see which one of the items dropped
         JsonValue oneOf = enemyLootTable.get("oneOf");
         rollAnyOf(loot, anyOf);
+        rollOneOf();
     }
 
     private void rollAnyOf(HashMap<String, Integer> loot, JsonValue anyOf) {
@@ -110,9 +111,13 @@ public class LootSimulation {
             float random = rollForItem();
             if (random <= item.getFloat("chance")) {
                 int amount = rollAmount(item);
-                loot.put(item.getString("name"), amount);
+                loot.put(item.getString("item"), amount);
             }
         }
+    }
+
+    private void rollOneOf() {
+
     }
 
     private float rollForItem() {
