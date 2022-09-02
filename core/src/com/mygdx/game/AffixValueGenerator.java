@@ -14,6 +14,6 @@ public class AffixValueGenerator {
         // floor( ( level / 3 ) + level ) - (level * 3)
         int minValue = (int)Math.floor(((itemLevel / 3f) + itemLevel));
         int maxValue = itemLevel * 3;
-        return 0;
+        return RandomNumberGenerator.roll(minValue, maxValue);
     }
 }
