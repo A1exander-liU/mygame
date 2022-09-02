@@ -48,7 +48,9 @@ public class EnemyDropSystem extends EntitySystem {
                 addToCoinPouch(loot);
                 for (Integer itemId: loot.keySet()) {
                     if (isMaterial(itemId)) {
-
+                        JsonValue item = getItem(itemId);
+                        if (item != null)
+                            lootEntities.add(itemFactory.makeMaterial(item.getString("name"), loot.get(itemId)));
                     }
                     Entity equipment = equipmentGenerator.generateEquipment(itemId);
                     lootEntities.add(equipment);
