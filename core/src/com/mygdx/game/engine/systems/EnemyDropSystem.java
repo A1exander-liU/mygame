@@ -17,12 +17,13 @@ public class EnemyDropSystem extends EntitySystem {
     ItemFactory itemFactory;
     ImmutableArray<Entity> enemies;
     LootGenerator lootGenerator = new LootGenerator();
-    EquipmentGenerator equipmentGenerator = new EquipmentGenerator();
+    EquipmentGenerator equipmentGenerator;
     Entity player;
 
     public EnemyDropSystem(ItemFactory itemFactory) {
         super(103);
         this.itemFactory = itemFactory;
+        equipmentGenerator = new EquipmentGenerator(itemFactory);
         enemies = MyGame.engine.getEntitiesFor(Families.enemies);
         player = MyGame.engine.getEntitiesFor(Families.player).get(0);
     }

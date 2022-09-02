@@ -3,6 +3,7 @@ package com.mygdx.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
+import com.mygdx.game.engine.ItemFactory;
 import com.mygdx.game.engine.Rarity;
 
 import java.util.HashMap;
@@ -11,10 +12,12 @@ import java.util.Objects;
 public class EquipmentGenerator {
 
     JsonValue items;
+    ItemFactory itemFactory;
 
-    public EquipmentGenerator() {
+    public EquipmentGenerator(ItemFactory itemFactory) {
         JsonReader reader = new JsonReader();
         items = reader.parse(Gdx.files.internal("gameData/itemData/items.json"));
+        this.itemFactory = itemFactory;
     }
 
     public void generateEquipment(int itemId) {
@@ -35,11 +38,18 @@ public class EquipmentGenerator {
         Rarity itemRarity = rollForRarity();
         switch (item.getString("id")) {
             case "main":
+                makeMain(item, itemRarity);
+                break;
             case "off":
+
             case "accessory":
+
             case "head":
+
             case "torso":
+
             case "leg":
+
             case "feet":
         }
     }
@@ -61,5 +71,9 @@ public class EquipmentGenerator {
                 return rarity;
         }
         return null;
+    }
+
+    private void makeMain(JsonValue item, Rarity itemRarity) {
+
     }
 }
