@@ -4,16 +4,20 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
 import com.mygdx.game.EquipmentGenerator;
+import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.LootGenerator;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.Families;
 import com.mygdx.game.engine.ItemFactory;
 import com.mygdx.game.engine.Mappers;
+import com.mygdx.game.utils.EntityTextureObject;
 
 import java.util.HashMap;
 import java.util.Objects;
@@ -54,6 +58,7 @@ public class EnemyDropSystem extends EntitySystem {
                     }
                     Entity equipment = equipmentGenerator.generateEquipment(itemId);
                     lootEntities.add(equipment);
+                    displayDropsOnGround(lootEntities);
                 }
             }
         }
@@ -85,5 +90,10 @@ public class EnemyDropSystem extends EntitySystem {
             if (item.getInt("itemId") == itemId) return item;
         }
         return null;
+    }
+
+    private void displayDropsOnGround(Array<Entity> lootEntities) {
+        MapObjects drops = MyGame.gameMapProperties.getMapLayer(GameMapProperties.ENEMY_DROPS).getObjects();
+
     }
 }
