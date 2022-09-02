@@ -1,9 +1,11 @@
 package com.mygdx.game.engine.components.inventory.items.individual;
 
 import com.badlogic.ashley.core.Component;
-
-import java.util.HashMap;
+import com.badlogic.gdx.utils.Array;
+import com.mygdx.game.CharAttributes;
 
 public class AffixesComponent implements Component {
-    HashMap<String, Float> affixes = new HashMap<>();
+    public Array<CharAttributes> affixes;
+
+    public AffixesComponent() {}
 }
