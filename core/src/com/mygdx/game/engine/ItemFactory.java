@@ -113,10 +113,10 @@ public class ItemFactory {
 
     public Entity makeWeapon2(JsonValue item, Rarity rarity) {
         Entity weaponEntity = new Entity();
-        weaponEntity.add(new Name());
-        weaponEntity.add(new Sprite());
-        weaponEntity.add(new RarityComponent());
-        weaponEntity.add(new DescriptionComponent());
+        weaponEntity.add(new Name(item.getString("name")));
+        weaponEntity.add(new Sprite(new Texture(Gdx.files.internal(item.getString("sprite")))));
+        weaponEntity.add(new RarityComponent(rarity));
+        weaponEntity.add(new DescriptionComponent(item.getString("desc")));
 
         return weaponEntity;
     }
