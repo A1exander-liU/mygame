@@ -5,4 +5,10 @@ import com.mygdx.game.engine.Rarity;
 
 public class RarityComponent implements Component {
     public Rarity rarity;
+
+    public RarityComponent() {}
+
+    public RarityComponent(Rarity rarity) {
+        this.rarity = rarity;
+    }
 }

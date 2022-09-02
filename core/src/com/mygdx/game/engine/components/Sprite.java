@@ -5,4 +5,10 @@ import com.badlogic.gdx.graphics.Texture;
 
 public class Sprite implements Component {
     public Texture texture;
+
+    public Sprite() {}
+
+    public Sprite(Texture texture) {
+        this.texture = texture;
+    }
 }
