@@ -101,7 +101,12 @@ public class EquipmentGenerator {
 
         // generate affixes (extra stats)
         // hashmap with affix name and value
+        // str, vit, dex (for now)
 
+        // generate each affix
+        for (int i = 0; i < affixesAmount; i++) {
+
+        }
     }
 
     private HashMap<Rarity, float[]> generateModifiers() {
