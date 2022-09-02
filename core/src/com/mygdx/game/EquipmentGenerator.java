@@ -171,5 +171,6 @@ public class EquipmentGenerator {
             randomAffix.setValue(value);
             affixesArray.add(randomAffix);
         }
+        return affixesArray;
     }
 }
