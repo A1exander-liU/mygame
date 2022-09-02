@@ -25,13 +25,14 @@ public class EquipmentGenerator {
         this.itemFactory = itemFactory;
     }
 
-    public void generateEquipment(int itemId) {
+    public Entity generateEquipment(int itemId) {
         for (JsonValue item: items) {
             // determine the item
             if (item.getInt("id") == itemId && isEquipment(item)) {
-                makeEquipment(item);
+                return makeEquipment(item);
             }
         }
+        return null;
     }
 
     private boolean isEquipment(JsonValue item) {
