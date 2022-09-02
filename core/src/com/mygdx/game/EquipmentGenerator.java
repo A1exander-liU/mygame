@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
 import com.mygdx.game.engine.ItemFactory;
+import com.mygdx.game.engine.Mappers;
 import com.mygdx.game.engine.Rarity;
 
 import java.util.HashMap;
@@ -85,9 +86,13 @@ public class EquipmentGenerator {
         // legendary: 1.61 - 1.8
         // mythical: 1.81 - 2
         if (itemRarity != Rarity.COMMON) {
+            // get modifier of rarity
             float[] modifierRange = modifiers.get(itemRarity);
             modifier = RandomNumberGenerator.roll(modifierRange[0], modifierRange[1]);
         }
+        // dmg values will be multiplied by the modifier
+        Mappers.weaponBaseStat.get(weaponEntity).minDmg = (int)Math.ceil(item.getInt("minDmg") * modifier);
+        Mappers.weaponBaseStat.get(weaponEntity).minDmg = (int)Math.ceil(item.getInt("maxDmg") * modifier);
     }
 
     private HashMap<Rarity, float[]> generateModifiers() {
