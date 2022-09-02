@@ -5,6 +5,7 @@ import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
 import com.mygdx.game.EquipmentGenerator;
@@ -47,7 +48,7 @@ public class EnemyDropSystem extends EntitySystem {
                 addToCoinPouch(loot);
                 for (Integer itemId: loot.keySet()) {
                     if (isMaterial(itemId)) {
-                        
+
                     }
                     Entity equipment = equipmentGenerator.generateEquipment(itemId);
                     lootEntities.add(equipment);
@@ -75,5 +76,12 @@ public class EnemyDropSystem extends EntitySystem {
             return Objects.equals(item.getString("itemType"), "material");
         }
         return false;
+    }
+
+    private JsonValue getItem(int itemId) {
+        for (JsonValue item: items) {
+            if (item.getInt("itemId") == itemId) return item;
+        }
+        return null;
     }
 }
