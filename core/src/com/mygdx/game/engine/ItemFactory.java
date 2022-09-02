@@ -117,6 +117,7 @@ public class ItemFactory {
         weaponEntity.add(new Sprite(new Texture(Gdx.files.internal(item.getString("sprite")))));
         weaponEntity.add(new RarityComponent(rarity));
         weaponEntity.add(new DescriptionComponent(item.getString("desc")));
+        weaponEntity.add(new InventoryItemComponent(ItemType.MAIN));
 
         return weaponEntity;
     }
