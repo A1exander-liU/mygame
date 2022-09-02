@@ -97,7 +97,7 @@ public class EquipmentGenerator {
         affixesAmount = RandomNumberGenerator.roll(affixesRange[0], affixesRange[1]);
         // dmg values will be multiplied by the modifier
         Mappers.weaponBaseStat.get(weaponEntity).minDmg = (int)Math.ceil(item.getInt("minDmg") * modifier);
-        Mappers.weaponBaseStat.get(weaponEntity).minDmg = (int)Math.ceil(item.getInt("maxDmg") * modifier);
+        Mappers.weaponBaseStat.get(weaponEntity).maxDmg = (int)Math.ceil(item.getInt("maxDmg") * modifier);
 
         // generate affixes (extra stats)
         // hashmap with affix name and value
