@@ -58,7 +58,7 @@ public class EnemyDropSystem extends EntitySystem {
                     }
                     Entity equipment = equipmentGenerator.generateEquipment(itemId);
                     lootEntities.add(equipment);
-                    displayDropsOnGround(lootEntities);
+                    displayDropsOnGround(lootEntities, enemy);
                 }
             }
         }
@@ -92,7 +92,7 @@ public class EnemyDropSystem extends EntitySystem {
         return null;
     }
 
-    private void displayDropsOnGround(Array<Entity> lootEntities) {
+    private void displayDropsOnGround(Array<Entity> lootEntities, Entity enemy) {
         MapObjects drops = MyGame.gameMapProperties.getMapLayer(GameMapProperties.ENEMY_DROPS).getObjects();
 
     }
