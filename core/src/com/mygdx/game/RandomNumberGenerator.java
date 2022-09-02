@@ -12,11 +12,15 @@ public class RandomNumberGenerator {
         return random.nextFloat() * 100;
     }
 
-    public static float roll(int min, int max) {
+    public static float roll(float min, float max) {
         return (random.nextFloat() * max) + min;
     }
 
     public static int roll(int max) {
         return random.nextInt(max);
+    }
+
+    public static int roll(int min, int max) {
+        return (random.nextInt(max)) + min;
     }
 }
