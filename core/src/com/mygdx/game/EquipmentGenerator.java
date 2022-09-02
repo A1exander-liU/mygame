@@ -129,6 +129,14 @@ public class EquipmentGenerator {
         HashMap<Rarity, float[]> modifiers = generateModifiers();
         HashMap<Rarity, int[]> affixes = generateAffixesAmount();
 
+        if (itemRarity != Rarity.COMMON) {
+            // get modifier of rarity
+            float[] modifierRange = modifiers.get(itemRarity);
+            modifier = RandomNumberGenerator.roll(modifierRange[0], modifierRange[1]);
+        }
+        int[] affixesRange = affixes.get(itemRarity);
+        affixesAmount = RandomNumberGenerator.roll(affixesRange[0], affixesRange[1]);
+
         return armourEntity;
     }
 
