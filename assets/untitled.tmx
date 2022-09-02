@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.0" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="65">
+<map version="1.9" tiledversion="1.9.0" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="7" nextobjectid="65">
  <tileset firstgid="1" source="sampleTileSheet.tsx"/>
  <layer id="1" name="Tile Layer 1" width="30" height="20">
   <data encoding="base64" compression="zlib">
@@ -31,6 +31,7 @@
   <object id="63" x="0" y="0" width="960.016" height="5.33333"/>
   <object id="64" x="928" y="448" width="31.9167" height="32.4417"/>
  </objectgroup>
+ <objectgroup id="6" name="Enemy Drops"/>
  <layer id="3" name="Tile Layer 2" width="30" height="20">
   <data encoding="base64" compression="zlib">
    eJztk0EKgDAMBOv/f6a+QH2BgnpWqMZDoQRMt2krIg7ES7skzbrG/DhqquZBnaOj6jPrZkA/Uk2KvpLOAvqNalf01eq+COJvCRB/3wKay9T8ctA8a3N/B5pnfq+N7MP3heaS3xvYeWgOaV8pHvI5ONJeEQ/9dy1UKziXtFfEa/9dx/WpwMbKmSRi/7FchLwtzQkihDfQ
