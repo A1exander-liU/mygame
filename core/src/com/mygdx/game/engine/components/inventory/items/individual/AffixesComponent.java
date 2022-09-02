@@ -8,4 +8,8 @@ public class AffixesComponent implements Component {
     public Array<CharAttributes> affixes;
 
     public AffixesComponent() {}
+
+    public AffixesComponent(Array<CharAttributes> affixes) {
+        this.affixes = affixes;
+    }
 }
