@@ -6,6 +6,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
 import com.mygdx.game.engine.ItemFactory;
+import com.mygdx.game.engine.ItemType;
 import com.mygdx.game.engine.Mappers;
 import com.mygdx.game.engine.Rarity;
 import com.mygdx.game.engine.components.inventory.items.individual.AffixesComponent;
@@ -50,13 +51,13 @@ public class EquipmentGenerator {
             case "accessory":
 
             case "head":
-
+                return makeArmor(item, itemRarity, ItemType.HEAD);
             case "torso":
-
+                return makeArmor(item, itemRarity, ItemType.TORSO);
             case "leg":
-
+                return makeArmor(item, itemRarity, ItemType.LEG);
             case "feet":
-
+                return makeArmor(item, itemRarity, ItemType.FEET);
             default:
                 return null;
         }
@@ -119,6 +120,10 @@ public class EquipmentGenerator {
         }
         weaponEntity.add(new AffixesComponent(affixesArray));
         return weaponEntity;
+    }
+
+    private Entity makeArmor(JsonValue item, Rarity itemRarity, ItemType itemType) {
+
     }
 
     private HashMap<Rarity, float[]> generateModifiers() {
