@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.JsonValue;
 import com.mygdx.game.JsonItemFinder;
 import com.mygdx.game.MyGame;
+import com.mygdx.game.engine.components.inventory.items.individual.ArmourBaseStatComponent;
 import com.mygdx.game.engine.components.inventory.items.individual.ArmourStatComponent;
 import com.mygdx.game.engine.components.Name;
 import com.mygdx.game.engine.components.Sprite;
@@ -124,6 +125,18 @@ public class ItemFactory {
         Mappers.weaponBaseStat.get(weaponEntity).attackDelay = item.getFloat("attackDelay");
 
         return weaponEntity;
+    }
+
+    public Entity makeArmour2(JsonValue item, Rarity rarity, ItemType itemType) {
+        Entity armourEntity = new Entity();
+        armourEntity.add(new Name(item.getString("name")));
+        armourEntity.add(new Sprite(new Texture(Gdx.files.internal(item.getString("sprite")))));
+        armourEntity.add(new RarityComponent(rarity));
+        armourEntity.add(new DescriptionComponent(item.getString("desc")));
+        armourEntity.add(new ArmourBaseStatComponent());
+        armourEntity.add(new InventoryItemComponent(itemType));
+
+        return armourEntity;
     }
 
     private Rarity determineRarity(String rarity) {
