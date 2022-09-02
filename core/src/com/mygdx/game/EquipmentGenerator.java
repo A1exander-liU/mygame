@@ -54,5 +54,12 @@ public class EquipmentGenerator {
         rarityWeights.put(Rarity.MYTHICAL, 1);
 
         float randomWeight = RandomNumberGenerator.roll();
+        float runTotal = 0;
+        for (Rarity rarity: rarityWeights.keySet()) {
+            runTotal += rarityWeights.get(rarity);
+            if (randomWeight < runTotal)
+                return rarity;
+        }
+        return null;
     }
 }
