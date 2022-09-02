@@ -6,6 +6,7 @@ import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapObjects;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonReader;
@@ -17,6 +18,7 @@ import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.Families;
 import com.mygdx.game.engine.ItemFactory;
 import com.mygdx.game.engine.Mappers;
+import com.mygdx.game.engine.components.Position;
 import com.mygdx.game.utils.EntityTextureObject;
 
 import java.util.HashMap;
@@ -94,6 +96,10 @@ public class EnemyDropSystem extends EntitySystem {
 
     private void displayDropsOnGround(Array<Entity> lootEntities, Entity enemy) {
         MapObjects drops = MyGame.gameMapProperties.getMapLayer(GameMapProperties.ENEMY_DROPS).getObjects();
-
+        Position pos = Mappers.position.get(enemy);
+        Vector2 enemyDeathPosition = new Vector2(pos.x, pos.y);
+        for (int i = 0; i < lootEntities.size; i++) {
+            Entity lootEntity = lootEntities.get(i);
+        }
     }
 }
