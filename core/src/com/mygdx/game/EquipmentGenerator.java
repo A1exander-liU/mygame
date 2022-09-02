@@ -7,12 +7,10 @@ import com.badlogic.gdx.utils.JsonValue;
 import com.mygdx.game.engine.ItemFactory;
 import com.mygdx.game.engine.Mappers;
 import com.mygdx.game.engine.Rarity;
-import com.sun.tools.example.debug.expr.ExpressionParserConstants;
 
 import java.util.HashMap;
 import java.util.Objects;
 
-import jdk.internal.org.objectweb.asm.util.CheckSignatureAdapter;
 
 public class EquipmentGenerator {
 
@@ -41,7 +39,7 @@ public class EquipmentGenerator {
 
     private void makeEquipment(JsonValue item) {
         Rarity itemRarity = rollForRarity();
-        switch (item.getString("id")) {
+        switch (item.getString("itemType")) {
             case "main":
                 makeMain(item, itemRarity);
                 break;
