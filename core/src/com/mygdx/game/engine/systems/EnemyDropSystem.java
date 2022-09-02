@@ -37,7 +37,7 @@ public class EnemyDropSystem extends EntitySystem {
                 HashMap<Integer, Integer> loot = lootGenerator.generateDrops(deadEnemyName);
                 addToCoinPouch(loot);
                 for (Integer itemId: loot.keySet()) {
-                    equipmentGenerator.generateEquipment(itemId);
+                    Entity equipment = equipmentGenerator.generateEquipment(itemId);
                 }
             }
         }
