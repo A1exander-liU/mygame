@@ -8,6 +8,7 @@ import com.badlogic.gdx.utils.JsonValue;
 import com.mygdx.game.engine.ItemFactory;
 import com.mygdx.game.engine.Mappers;
 import com.mygdx.game.engine.Rarity;
+import com.mygdx.game.engine.components.inventory.items.individual.AffixesComponent;
 
 import java.util.HashMap;
 import java.util.Objects;
@@ -113,6 +114,7 @@ public class EquipmentGenerator {
             randomAffix.setValue(value);
             affixesArray.add(randomAffix);
         }
+        weaponEntity.add(new AffixesComponent(affixesArray));
     }
 
     private HashMap<Rarity, float[]> generateModifiers() {
