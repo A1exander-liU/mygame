@@ -25,7 +25,6 @@ public class EnemyDropSystem extends EntitySystem {
     LootGenerator lootGenerator = new LootGenerator();
     EquipmentGenerator equipmentGenerator;
     Entity player;
-    Array<Entity> lootEntities = new Array<>(0);
     JsonReader reader = new JsonReader();
     JsonValue items;
 
@@ -46,6 +45,7 @@ public class EnemyDropSystem extends EntitySystem {
                 String deadEnemyName = Mappers.name.get(enemy).name;
                 HashMap<Integer, Integer> loot = lootGenerator.generateDrops(deadEnemyName);
                 addToCoinPouch(loot);
+                Array<Entity> lootEntities = new Array<>(0);
                 for (Integer itemId: loot.keySet()) {
                     if (isMaterial(itemId)) {
                         JsonValue item = getItem(itemId);
