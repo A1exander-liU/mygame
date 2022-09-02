@@ -133,7 +133,7 @@ public class GameScreen implements Screen {
         ItemWindowRenderSystem itemWindowRenderSystem = new ItemWindowRenderSystem();
         LootingSystem lootingSystem = new LootingSystem();
         EnemyDeathSystem enemyDeathSystem = new EnemyDeathSystem();
-        EnemyDropSystem enemyDropSystem = new EnemyDropSystem();
+        EnemyDropSystem enemyDropSystem = new EnemyDropSystem(itemFactory);
         MyGame.engine.addSystem(movementSystem);
         MyGame.engine.addSystem(enemySpawningSystem);
         MyGame.engine.addSystem(steeringSystem);
