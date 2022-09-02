@@ -11,6 +11,7 @@ import com.mygdx.game.engine.components.inventory.items.individual.ArmourStatCom
 import com.mygdx.game.engine.components.Name;
 import com.mygdx.game.engine.components.Sprite;
 import com.mygdx.game.engine.components.inventory.items.individual.StackableComponent;
+import com.mygdx.game.engine.components.inventory.items.individual.WeaponBaseStatComponent;
 import com.mygdx.game.engine.components.inventory.items.individual.WeaponStatComponent;
 import com.mygdx.game.engine.components.inventory.items.shared.DescriptionComponent;
 import com.mygdx.game.engine.components.inventory.items.shared.InventoryItemComponent;
@@ -117,7 +118,12 @@ public class ItemFactory {
         weaponEntity.add(new Sprite(new Texture(Gdx.files.internal(item.getString("sprite")))));
         weaponEntity.add(new RarityComponent(rarity));
         weaponEntity.add(new DescriptionComponent(item.getString("desc")));
+        weaponEntity.add(new WeaponBaseStatComponent());
         weaponEntity.add(new InventoryItemComponent(ItemType.MAIN));
+
+        Mappers.weaponBaseStat.get(weaponEntity).minDmg = item.getInt("minDmg");
+        Mappers.weaponBaseStat.get(weaponEntity).maxDmg = item.getInt("maxDmg");
+        Mappers.weaponBaseStat.get(weaponEntity).attackDelay = item.getFloat("attackDelay");
 
         return weaponEntity;
     }
