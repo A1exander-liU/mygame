@@ -1,5 +1,6 @@
 package com.mygdx.game;
 
+import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
@@ -74,6 +75,7 @@ public class EquipmentGenerator {
     }
 
     private void makeMain(JsonValue item, Rarity itemRarity) {
-
+        Entity weaponEntity = itemFactory.makeWeapon2(item, itemRarity);
+        
     }
 }
