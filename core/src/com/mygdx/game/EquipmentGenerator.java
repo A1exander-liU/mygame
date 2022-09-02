@@ -81,6 +81,7 @@ public class EquipmentGenerator {
     private void makeMain(JsonValue item, Rarity itemRarity) {
         Entity weaponEntity = itemFactory.makeWeapon2(item, itemRarity);
         float modifier = 1;
+        int affixesAmount = 0;
         HashMap<Rarity, float[]> modifiers = generateModifiers();
         HashMap<Rarity, int[]> affixes = generateAffixesAmount();
         // common will have modifier of 1
@@ -94,6 +95,8 @@ public class EquipmentGenerator {
             float[] modifierRange = modifiers.get(itemRarity);
             modifier = RandomNumberGenerator.roll(modifierRange[0], modifierRange[1]);
         }
+        int[] affixesRange = affixes.get(itemRarity);
+        affixesAmount = RandomNumberGenerator.roll(affixesRange[0], affixesRange[1]);
         // dmg values will be multiplied by the modifier
         Mappers.weaponBaseStat.get(weaponEntity).minDmg = (int)Math.ceil(item.getInt("minDmg") * modifier);
         Mappers.weaponBaseStat.get(weaponEntity).minDmg = (int)Math.ceil(item.getInt("maxDmg") * modifier);
