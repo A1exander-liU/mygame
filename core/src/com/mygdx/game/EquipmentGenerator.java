@@ -77,9 +77,25 @@ public class EquipmentGenerator {
     private void makeMain(JsonValue item, Rarity itemRarity) {
         Entity weaponEntity = itemFactory.makeWeapon2(item, itemRarity);
         float modifier = 1;
+        HashMap<Rarity, float[]> modifiers = generateModifiers();
         // common will have modifier of 1
+        // uncommon: 1.01 - 1.2
+        // rare: 1.21 - 1.4
+        // epic: 1.41 - 1.6
+        // legendary: 1.61 - 1.8
+        // mythical: 1.81 - 2
         if (itemRarity != Rarity.COMMON) {
-            
+
         }
+    }
+
+    private HashMap<Rarity, float[]> generateModifiers() {
+        HashMap<Rarity, float[]> hashMap = new HashMap<>();
+        hashMap.put(Rarity.UNCOMMON, new float[] {1.01f, 1.2f});
+        hashMap.put(Rarity.RARE, new float[] {1.21f, 1.4f});
+        hashMap.put(Rarity.EPIC, new float[] {1.41f, 1.6f});
+        hashMap.put(Rarity.LEGENDARY, new float[] {1.61f, 1.8f});
+        hashMap.put(Rarity.MYTHICAL, new float[] {1.81f, 2});
+        return hashMap;
     }
 }
