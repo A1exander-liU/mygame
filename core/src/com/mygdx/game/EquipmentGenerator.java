@@ -110,6 +110,8 @@ public class EquipmentGenerator {
         for (int i = 0; i < affixesAmount; i++) {
             CharAttributes randomAffix = attributes[RandomNumberGenerator.roll(0, attributes.length)];
             int value = AffixValueGenerator.generate(item.getInt("itemLevel"));
+            randomAffix.setValue(value);
+            affixesArray.add(randomAffix);
         }
     }
 
