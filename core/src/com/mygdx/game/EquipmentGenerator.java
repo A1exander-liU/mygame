@@ -137,6 +137,10 @@ public class EquipmentGenerator {
         int[] affixesRange = affixes.get(itemRarity);
         affixesAmount = RandomNumberGenerator.roll(affixesRange[0], affixesRange[1]);
 
+        // update defense value according to the modifier
+        Mappers.armourBaseStat.get(armourEntity).phyDef = (int)Math.ceil(item.getInt("physicalDef") * modifier);
+        Mappers.armourBaseStat.get(armourEntity).magDef = (int)Math.ceil(item.getInt("magicalDef") * modifier);
+
         return armourEntity;
     }
 
