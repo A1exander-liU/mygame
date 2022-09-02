@@ -141,6 +141,17 @@ public class EquipmentGenerator {
         Mappers.armourBaseStat.get(armourEntity).phyDef = (int)Math.ceil(item.getInt("physicalDef") * modifier);
         Mappers.armourBaseStat.get(armourEntity).magDef = (int)Math.ceil(item.getInt("magicalDef") * modifier);
 
+        // generate each affix
+        CharAttributes[] attributes = {CharAttributes.STR, CharAttributes.VIT, CharAttributes.DEX};
+        Array<CharAttributes> affixesArray = new Array<>(0);
+        for (int i = 0; i < affixesAmount; i++) {
+            CharAttributes randomAffix = attributes[RandomNumberGenerator.roll(0, attributes.length)];
+            int value = AffixValueGenerator.generate(item.getInt("itemLevel"));
+            randomAffix.setValue(value);
+            affixesArray.add(randomAffix);
+        }
+        armourEntity.add(new AffixesComponent(affixesArray));
+
         return armourEntity;
     }
 
