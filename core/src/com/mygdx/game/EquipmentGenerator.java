@@ -98,13 +98,7 @@ public class EquipmentGenerator {
 
         // generate each affix
         CharAttributes[] attributes = {CharAttributes.STR, CharAttributes.VIT, CharAttributes.DEX};
-        Array<CharAttributes> affixesArray = new Array<>(0);
-        for (int i = 0; i < affixesAmount; i++) {
-            CharAttributes randomAffix = attributes[RandomNumberGenerator.roll(0, attributes.length)];
-            int value = AffixValueGenerator.generate(item.getInt("itemLevel"));
-            randomAffix.setValue(value);
-            affixesArray.add(randomAffix);
-        }
+        Array<CharAttributes> affixesArray = generateAffixes(attributes, affixesAmount, item);
         weaponEntity.add(new AffixesComponent(affixesArray));
         return weaponEntity;
     }
@@ -122,13 +116,7 @@ public class EquipmentGenerator {
 
         // generate each affix
         CharAttributes[] attributes = {CharAttributes.STR, CharAttributes.VIT, CharAttributes.DEX};
-        Array<CharAttributes> affixesArray = new Array<>(0);
-        for (int i = 0; i < affixesAmount; i++) {
-            CharAttributes randomAffix = attributes[RandomNumberGenerator.roll(0, attributes.length)];
-            int value = AffixValueGenerator.generate(item.getInt("itemLevel"));
-            randomAffix.setValue(value);
-            affixesArray.add(randomAffix);
-        }
+        Array<CharAttributes> affixesArray = generateAffixes(attributes, affixesAmount, item);
         armourEntity.add(new AffixesComponent(affixesArray));
 
         return armourEntity;
@@ -173,5 +161,15 @@ public class EquipmentGenerator {
         // mythical: 1.81 - 2
         int[] affixesRange = affixes.get(itemRarity);
         return RandomNumberGenerator.roll(affixesRange[0], affixesRange[1]);
+    }
+
+    private Array<CharAttributes> generateAffixes(CharAttributes[] availableAffixes, int affixesAmount, JsonValue item) {
+        Array<CharAttributes> affixesArray = new Array<>(0);
+        for (int i = 0; i < affixesAmount; i++) {
+            CharAttributes randomAffix = availableAffixes[RandomNumberGenerator.roll(0, availableAffixes.length)];
+            int value = AffixValueGenerator.generate(item.getInt("itemLevel"));
+            randomAffix.setValue(value);
+            affixesArray.add(randomAffix);
+        }
     }
 }
