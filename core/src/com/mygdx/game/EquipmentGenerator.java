@@ -76,6 +76,10 @@ public class EquipmentGenerator {
 
     private void makeMain(JsonValue item, Rarity itemRarity) {
         Entity weaponEntity = itemFactory.makeWeapon2(item, itemRarity);
-        
+        float modifier = 1;
+        // common will have modifier of 1
+        if (itemRarity != Rarity.COMMON) {
+            
+        }
     }
 }
