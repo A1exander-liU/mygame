@@ -104,8 +104,9 @@ public class EquipmentGenerator {
         // str, vit, dex (for now)
 
         // generate each affix
+        String[] attributes = {"Strength", "Vitality", "Dexterity"};
         for (int i = 0; i < affixesAmount; i++) {
-
+            String randomAffix = attributes[RandomNumberGenerator.roll(0, attributes.length)];
         }
     }
 
