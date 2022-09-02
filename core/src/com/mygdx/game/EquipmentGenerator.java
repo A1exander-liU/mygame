@@ -84,21 +84,16 @@ public class EquipmentGenerator {
 
     private Entity makeMain(JsonValue item, Rarity itemRarity) {
         Entity weaponEntity = itemFactory.makeWeapon2(item, itemRarity);
-        float modifier = 1;
-        int affixesAmount = 0;
         HashMap<Rarity, float[]> modifiers = generateModifiers();
         HashMap<Rarity, int[]> affixes = generateAffixesAmount();
+        float modifier = rollModifier(modifiers, itemRarity);
+        int affixesAmount = 0;
         // common will have modifier of 1
         // uncommon: 1.01 - 1.2
         // rare: 1.21 - 1.4
         // epic: 1.41 - 1.6
         // legendary: 1.61 - 1.8
         // mythical: 1.81 - 2
-        if (itemRarity != Rarity.COMMON) {
-            // get modifier of rarity
-            float[] modifierRange = modifiers.get(itemRarity);
-            modifier = RandomNumberGenerator.roll(modifierRange[0], modifierRange[1]);
-        }
         int[] affixesRange = affixes.get(itemRarity);
         affixesAmount = RandomNumberGenerator.roll(affixesRange[0], affixesRange[1]);
         // dmg values will be multiplied by the modifier
@@ -124,16 +119,11 @@ public class EquipmentGenerator {
 
     private Entity makeArmor(JsonValue item, Rarity itemRarity, ItemType itemType) {
         Entity armourEntity = itemFactory.makeArmour2(item, itemRarity, itemType);
-        float modifier = 1;
-        int affixesAmount = 0;
         HashMap<Rarity, float[]> modifiers = generateModifiers();
         HashMap<Rarity, int[]> affixes = generateAffixesAmount();
+        float modifier = rollModifier(modifiers, itemRarity);
+        int affixesAmount = 0;
 
-        if (itemRarity != Rarity.COMMON) {
-            // get modifier of rarity
-            float[] modifierRange = modifiers.get(itemRarity);
-            modifier = RandomNumberGenerator.roll(modifierRange[0], modifierRange[1]);
-        }
         int[] affixesRange = affixes.get(itemRarity);
         affixesAmount = RandomNumberGenerator.roll(affixesRange[0], affixesRange[1]);
 
@@ -174,5 +164,14 @@ public class EquipmentGenerator {
         hashMap.put(Rarity.LEGENDARY, new int[] {4, 6});
         hashMap.put(Rarity.MYTHICAL, new int[] {7, 8});
         return hashMap;
+    }
+
+    private float rollModifier(HashMap<Rarity, float[]> modifiers, Rarity itemRarity) {
+        if (itemRarity != Rarity.COMMON) {
+            // get modifier of rarity
+            float[] modifierRange = modifiers.get(itemRarity);
+            return RandomNumberGenerator.roll(modifierRange[0], modifierRange[1]);
+        }
+        return 1;
     }
 }
