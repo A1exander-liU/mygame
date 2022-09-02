@@ -78,7 +78,7 @@ public class EquipmentGenerator {
         return null;
     }
 
-    private void makeMain(JsonValue item, Rarity itemRarity) {
+    private Entity makeMain(JsonValue item, Rarity itemRarity) {
         Entity weaponEntity = itemFactory.makeWeapon2(item, itemRarity);
         float modifier = 1;
         int affixesAmount = 0;
@@ -115,6 +115,7 @@ public class EquipmentGenerator {
             affixesArray.add(randomAffix);
         }
         weaponEntity.add(new AffixesComponent(affixesArray));
+        return weaponEntity;
     }
 
     private HashMap<Rarity, float[]> generateModifiers() {
