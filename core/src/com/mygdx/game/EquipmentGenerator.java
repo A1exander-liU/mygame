@@ -87,15 +87,7 @@ public class EquipmentGenerator {
         HashMap<Rarity, float[]> modifiers = generateModifiers();
         HashMap<Rarity, int[]> affixes = generateAffixesAmount();
         float modifier = rollModifier(modifiers, itemRarity);
-        int affixesAmount = 0;
-        // common will have modifier of 1
-        // uncommon: 1.01 - 1.2
-        // rare: 1.21 - 1.4
-        // epic: 1.41 - 1.6
-        // legendary: 1.61 - 1.8
-        // mythical: 1.81 - 2
-        int[] affixesRange = affixes.get(itemRarity);
-        affixesAmount = RandomNumberGenerator.roll(affixesRange[0], affixesRange[1]);
+        int affixesAmount = rollAffixesAmount(affixes, itemRarity);
         // dmg values will be multiplied by the modifier
         Mappers.weaponBaseStat.get(weaponEntity).minDmg = (int)Math.ceil(item.getInt("minDmg") * modifier);
         Mappers.weaponBaseStat.get(weaponEntity).maxDmg = (int)Math.ceil(item.getInt("maxDmg") * modifier);
@@ -122,10 +114,7 @@ public class EquipmentGenerator {
         HashMap<Rarity, float[]> modifiers = generateModifiers();
         HashMap<Rarity, int[]> affixes = generateAffixesAmount();
         float modifier = rollModifier(modifiers, itemRarity);
-        int affixesAmount = 0;
-
-        int[] affixesRange = affixes.get(itemRarity);
-        affixesAmount = RandomNumberGenerator.roll(affixesRange[0], affixesRange[1]);
+        int affixesAmount = rollAffixesAmount(affixes, itemRarity);
 
         // update defense value according to the modifier
         Mappers.armourBaseStat.get(armourEntity).phyDef = (int)Math.ceil(item.getInt("physicalDef") * modifier);
@@ -173,5 +162,16 @@ public class EquipmentGenerator {
             return RandomNumberGenerator.roll(modifierRange[0], modifierRange[1]);
         }
         return 1;
+    }
+
+    private int rollAffixesAmount(HashMap<Rarity, int[]> affixes, Rarity itemRarity) {
+        // common will have modifier of 1
+        // uncommon: 1.01 - 1.2
+        // rare: 1.21 - 1.4
+        // epic: 1.41 - 1.6
+        // legendary: 1.61 - 1.8
+        // mythical: 1.81 - 2
+        int[] affixesRange = affixes.get(itemRarity);
+        return RandomNumberGenerator.roll(affixesRange[0], affixesRange[1]);
     }
 }
