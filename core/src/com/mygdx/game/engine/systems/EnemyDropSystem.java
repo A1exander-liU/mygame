@@ -3,6 +3,10 @@ package com.mygdx.game.engine.systems;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.utils.ImmutableArray;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.JsonReader;
+import com.badlogic.gdx.utils.JsonValue;
 import com.mygdx.game.EquipmentGenerator;
 import com.mygdx.game.LootGenerator;
 import com.mygdx.game.MyGame;
@@ -11,6 +15,7 @@ import com.mygdx.game.engine.ItemFactory;
 import com.mygdx.game.engine.Mappers;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 public class EnemyDropSystem extends EntitySystem {
 
@@ -19,6 +24,9 @@ public class EnemyDropSystem extends EntitySystem {
     LootGenerator lootGenerator = new LootGenerator();
     EquipmentGenerator equipmentGenerator;
     Entity player;
+    Array<Entity> lootEntities = new Array<>(0);
+    JsonReader reader = new JsonReader();
+    JsonValue items;
 
     public EnemyDropSystem(ItemFactory itemFactory) {
         super(103);
@@ -26,6 +34,7 @@ public class EnemyDropSystem extends EntitySystem {
         equipmentGenerator = new EquipmentGenerator(itemFactory);
         enemies = MyGame.engine.getEntitiesFor(Families.enemies);
         player = MyGame.engine.getEntitiesFor(Families.player).get(0);
+        items = reader.parse(Gdx.files.internal("gameData/itemData/items.json"));
     }
 
     @Override
@@ -37,7 +46,11 @@ public class EnemyDropSystem extends EntitySystem {
                 HashMap<Integer, Integer> loot = lootGenerator.generateDrops(deadEnemyName);
                 addToCoinPouch(loot);
                 for (Integer itemId: loot.keySet()) {
+                    if (isMaterial(itemId)) {
+                        
+                    }
                     Entity equipment = equipmentGenerator.generateEquipment(itemId);
+                    lootEntities.add(equipment);
                 }
             }
         }
@@ -55,5 +68,12 @@ public class EnemyDropSystem extends EntitySystem {
                 break;
             }
         }
+    }
+
+    private boolean isMaterial(int itemId) {
+        for (JsonValue item: items) {
+            return Objects.equals(item.getString("itemType"), "material");
+        }
+        return false;
     }
 }
