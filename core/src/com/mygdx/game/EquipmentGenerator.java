@@ -2,6 +2,7 @@ package com.mygdx.game;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
 import com.mygdx.game.engine.ItemFactory;
@@ -104,9 +105,11 @@ public class EquipmentGenerator {
         // str, vit, dex (for now)
 
         // generate each affix
-        String[] attributes = {"Strength", "Vitality", "Dexterity"};
+        CharAttributes[] attributes = {CharAttributes.STR, CharAttributes.VIT, CharAttributes.DEX};
+        Array<CharAttributes> affixesArray = new Array<>(0);
         for (int i = 0; i < affixesAmount; i++) {
-            String randomAffix = attributes[RandomNumberGenerator.roll(0, attributes.length)];
+            CharAttributes randomAffix = attributes[RandomNumberGenerator.roll(0, attributes.length)];
+            int value = AffixValueGenerator.generate(item.getInt("itemLevel"));
         }
     }
 
