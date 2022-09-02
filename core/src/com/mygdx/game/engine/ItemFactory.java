@@ -121,6 +121,8 @@ public class ItemFactory {
         weaponEntity.add(new WeaponBaseStatComponent());
         weaponEntity.add(new InventoryItemComponent(ItemType.MAIN));
 
+        Mappers.weaponBaseStat.get(weaponEntity).attackDelay = item.getFloat("attackDelay");
+
         return weaponEntity;
     }
 
