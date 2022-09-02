@@ -7,9 +7,12 @@ import com.badlogic.gdx.utils.JsonValue;
 import com.mygdx.game.engine.ItemFactory;
 import com.mygdx.game.engine.Mappers;
 import com.mygdx.game.engine.Rarity;
+import com.sun.tools.example.debug.expr.ExpressionParserConstants;
 
 import java.util.HashMap;
 import java.util.Objects;
+
+import jdk.internal.org.objectweb.asm.util.CheckSignatureAdapter;
 
 public class EquipmentGenerator {
 
@@ -79,6 +82,7 @@ public class EquipmentGenerator {
         Entity weaponEntity = itemFactory.makeWeapon2(item, itemRarity);
         float modifier = 1;
         HashMap<Rarity, float[]> modifiers = generateModifiers();
+        HashMap<Rarity, int[]> affixes = generateAffixesAmount();
         // common will have modifier of 1
         // uncommon: 1.01 - 1.2
         // rare: 1.21 - 1.4
@@ -93,6 +97,10 @@ public class EquipmentGenerator {
         // dmg values will be multiplied by the modifier
         Mappers.weaponBaseStat.get(weaponEntity).minDmg = (int)Math.ceil(item.getInt("minDmg") * modifier);
         Mappers.weaponBaseStat.get(weaponEntity).minDmg = (int)Math.ceil(item.getInt("maxDmg") * modifier);
+
+        // generate affixes (extra stats)
+        // hashmap with affix name and value
+
     }
 
     private HashMap<Rarity, float[]> generateModifiers() {
@@ -102,6 +110,17 @@ public class EquipmentGenerator {
         hashMap.put(Rarity.EPIC, new float[] {1.41f, 1.6f});
         hashMap.put(Rarity.LEGENDARY, new float[] {1.61f, 1.8f});
         hashMap.put(Rarity.MYTHICAL, new float[] {1.81f, 2});
+        return hashMap;
+    }
+
+    private HashMap<Rarity, int[]> generateAffixesAmount() {
+        HashMap<Rarity, int[]> hashMap = new HashMap<>();
+        hashMap.put(Rarity.COMMON, new int[] {0, 2});
+        hashMap.put(Rarity.UNCOMMON, new int[] {1, 3});
+        hashMap.put(Rarity.RARE, new int[] {2, 4});
+        hashMap.put(Rarity.EPIC, new int[] {3, 5});
+        hashMap.put(Rarity.LEGENDARY, new int[] {4, 6});
+        hashMap.put(Rarity.MYTHICAL, new int[] {7, 8});
         return hashMap;
     }
 }
