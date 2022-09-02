@@ -39,12 +39,11 @@ public class EquipmentGenerator {
                 && !Objects.equals(item.getString("itemType"), "consumable");
     }
 
-    private void makeEquipment(JsonValue item) {
+    private Entity makeEquipment(JsonValue item) {
         Rarity itemRarity = rollForRarity();
         switch (item.getString("itemType")) {
             case "main":
-                makeMain(item, itemRarity);
-                break;
+                return makeMain(item, itemRarity);
             case "off":
 
             case "accessory":
@@ -56,6 +55,9 @@ public class EquipmentGenerator {
             case "leg":
 
             case "feet":
+
+            default:
+                return null;
         }
     }
 
