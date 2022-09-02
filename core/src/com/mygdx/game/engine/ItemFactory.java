@@ -123,7 +123,7 @@ public class ItemFactory {
         weaponEntity.add(new InventoryItemComponent(ItemType.MAIN));
 
         Mappers.weaponBaseStat.get(weaponEntity).attackDelay = item.getFloat("attackDelay");
-
+        addToEngine(weaponEntity);
         return weaponEntity;
     }
 
@@ -136,6 +136,7 @@ public class ItemFactory {
         armourEntity.add(new ArmourBaseStatComponent());
         armourEntity.add(new InventoryItemComponent(itemType));
 
+        addToEngine(armourEntity);
         return armourEntity;
     }
 
