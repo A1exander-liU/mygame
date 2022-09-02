@@ -121,10 +121,6 @@ public class ItemFactory {
         weaponEntity.add(new WeaponBaseStatComponent());
         weaponEntity.add(new InventoryItemComponent(ItemType.MAIN));
 
-        Mappers.weaponBaseStat.get(weaponEntity).minDmg = item.getInt("minDmg");
-        Mappers.weaponBaseStat.get(weaponEntity).maxDmg = item.getInt("maxDmg");
-        Mappers.weaponBaseStat.get(weaponEntity).attackDelay = item.getFloat("attackDelay");
-
         return weaponEntity;
     }
 
