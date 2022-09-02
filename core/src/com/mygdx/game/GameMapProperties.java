@@ -19,6 +19,7 @@ public class GameMapProperties {
     public static String GROUND_LAYER;
     public static String ENEMY_SPAWNS;
     public static String COLLISIONS;
+    public static String ENEMY_DROPS;
     public static String OBSTACLE_LAYER;
     // all the collision boxes on the map
     public ImmutableArray<Entity> staticObstacles;
@@ -45,7 +46,8 @@ public class GameMapProperties {
         GROUND_LAYER = tiledMap.getLayers().get(0).getName();
         ENEMY_SPAWNS = tiledMap.getLayers().get(1).getName();
         COLLISIONS = tiledMap.getLayers().get(2).getName();
-        OBSTACLE_LAYER = tiledMap.getLayers().get(3).getName();
+        ENEMY_DROPS = tiledMap.getLayers().get(3).getName();
+        OBSTACLE_LAYER = tiledMap.getLayers().get(4).getName();
     }
 
     public MapLayer getMapLayer(String name) {
