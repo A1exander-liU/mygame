@@ -85,7 +85,8 @@ public class EquipmentGenerator {
         // legendary: 1.61 - 1.8
         // mythical: 1.81 - 2
         if (itemRarity != Rarity.COMMON) {
-
+            float[] modifierRange = modifiers.get(itemRarity);
+            modifier = RandomNumberGenerator.roll(modifierRange[0], modifierRange[1]);
         }
     }
 
