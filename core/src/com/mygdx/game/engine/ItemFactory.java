@@ -111,6 +111,16 @@ public class ItemFactory {
         return armourEntity;
     }
 
+    public Entity makeWeapon2(JsonValue item, Rarity rarity) {
+        Entity weaponEntity = new Entity();
+        weaponEntity.add(new Name());
+        weaponEntity.add(new Sprite());
+        weaponEntity.add(new RarityComponent());
+        weaponEntity.add(new DescriptionComponent());
+
+        return weaponEntity;
+    }
+
     private Rarity determineRarity(String rarity) {
         switch (rarity) {
             case "COMMON":
