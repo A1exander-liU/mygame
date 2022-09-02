@@ -9,7 +9,7 @@ public class AffixValueGenerator {
 
     public AffixValueGenerator() {}
 
-    public static int generate(int itemLevel, Rarity itemRarity) {
+    public static int generate(int itemLevel) {
         // determine range of affix value
         // floor( ( level / 3 ) + level ) - (level * 3)
         int minValue = (int)Math.floor(((itemLevel / 3f) + itemLevel));
