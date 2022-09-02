@@ -123,7 +123,13 @@ public class EquipmentGenerator {
     }
 
     private Entity makeArmor(JsonValue item, Rarity itemRarity, ItemType itemType) {
+        Entity armourEntity = itemFactory.makeArmour2(item, itemRarity, itemType);
+        float modifier = 1;
+        int affixesAmount = 0;
+        HashMap<Rarity, float[]> modifiers = generateModifiers();
+        HashMap<Rarity, int[]> affixes = generateAffixesAmount();
 
+        return armourEntity;
     }
 
     private HashMap<Rarity, float[]> generateModifiers() {
