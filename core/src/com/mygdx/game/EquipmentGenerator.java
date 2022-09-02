@@ -47,10 +47,12 @@ public class EquipmentGenerator {
     private Rarity rollForRarity() {
         HashMap<Rarity, Integer> rarityWeights = new HashMap<>();
         rarityWeights.put(Rarity.COMMON, 52);
-        rarityWeights.put(Rarity.UNCOMMON, 21); 
+        rarityWeights.put(Rarity.UNCOMMON, 21);
         rarityWeights.put(Rarity.RARE, 15);
         rarityWeights.put(Rarity.EPIC, 8);
         rarityWeights.put(Rarity.LEGENDARY, 3);
         rarityWeights.put(Rarity.MYTHICAL, 1);
+
+        float randomWeight = RandomNumberGenerator.roll();
     }
 }
