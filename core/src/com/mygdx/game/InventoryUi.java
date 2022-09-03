@@ -129,6 +129,9 @@ public class InventoryUi {
     }
 
     public void addToInventory(Entity item) {
-        
+        // is item stackable
+        if (Mappers.stackable.get(item) != null) {
+
+        }
     }
 }
