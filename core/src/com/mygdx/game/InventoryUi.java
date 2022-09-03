@@ -145,6 +145,7 @@ public class InventoryUi {
             // place item first to use stackItems method
             if (inventorySlots.get(i).isEmpty()) {
                 inventorySlots.get(i).setOccupiedItem(item);
+                slotAddedTo = i;
                 break;
             }
         }
