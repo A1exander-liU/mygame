@@ -92,7 +92,7 @@ public class EnemyDropSystem extends EntitySystem {
 
     private JsonValue getItem(int itemId) {
         for (JsonValue item: items) {
-            if (item.getInt("itemId") == itemId) return item;
+            if (item.getInt("id") == itemId) return item;
         }
         return null;
     }
