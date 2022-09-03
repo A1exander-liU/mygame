@@ -19,6 +19,7 @@ import com.mygdx.game.utils.EntityTextureObject;
 public class MapUpdateSystem extends EntitySystem {
     ComponentGrabber cg;
     ImmutableArray<Entity> characters;
+    ImmutableArray<Entity> itemDrops;
     Entity player;
 
     MapObjectDrawer tiledMapRenderer;
@@ -28,6 +29,7 @@ public class MapUpdateSystem extends EntitySystem {
         this.cg = cg;
         this.tiledMapRenderer = tiledMapRenderer;
         characters = MyGame.engine.getEntitiesFor(Family.one(Player.class, Enemy.class).get());
+        itemDrops = MyGame.engine.getEntitiesFor(Families.itemDrops);
         player = MyGame.engine.getEntitiesFor(Families.player).get(0);
     }
 
@@ -36,6 +38,10 @@ public class MapUpdateSystem extends EntitySystem {
         for (int i = 0; i < characters.size(); i++) {
             Entity entity = characters.get(i);
             updateEntityInMap(entity);
+        }
+        for (int i = 0; i < itemDrops.size(); i++) {
+            Entity itemDrop = itemDrops.get(i);
+            
         }
         updatePlayerCamPosition();
         tiledMapRenderer.setView(cg.getCamera(player).camera);
