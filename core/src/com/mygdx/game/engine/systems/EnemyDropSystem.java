@@ -10,6 +10,8 @@ import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonReader;
@@ -41,6 +43,7 @@ public class EnemyDropSystem extends EntitySystem {
     JsonValue items;
     Stage stage;
     MapObjects enemyDrops;
+    Skin skin;
 
     public EnemyDropSystem(ItemFactory itemFactory) {
         super(95);
@@ -51,6 +54,7 @@ public class EnemyDropSystem extends EntitySystem {
         items = reader.parse(Gdx.files.internal("gameData/itemData/items.json"));
         stage = new Stage(new ScreenViewport());
         enemyDrops = MyGame.gameMapProperties.getMapLayer(GameMapProperties.ENEMY_DROPS).getObjects();
+        skin = new Skin(Gdx.files.internal("Game_UI_Skin/Game_UI_Skin.json"));
     }
 
     @Override
@@ -82,6 +86,7 @@ public class EnemyDropSystem extends EntitySystem {
             Entity drop = textureObject.getOwner();
             Vector3 dropPosition = new Vector3(Mappers.position.get(drop).x, Mappers.position.get(drop).y, 0);
             Vector3 dropScreenPosition = Mappers.camera.get(player).camera.project(dropPosition);
+            Label itemName = new Label(Mappers.name.get(drop).name, skin);
         }
     }
 
