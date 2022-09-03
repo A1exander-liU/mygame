@@ -84,7 +84,8 @@ public class EnemyDropSystem extends EntitySystem {
 
     private boolean isMaterial(int itemId) {
         for (JsonValue item: items) {
-            return Objects.equals(item.getString("itemType"), "material");
+            if (item.getInt("id") == itemId)
+                return Objects.equals(item.getString("itemType"), "material");
         }
         return false;
     }
