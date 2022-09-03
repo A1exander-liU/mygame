@@ -29,6 +29,7 @@ import com.mygdx.game.engine.systems.HealthBarRenderSystem;
 import com.mygdx.game.engine.systems.InventoryRenderSystem;
 import com.mygdx.game.engine.systems.InventoryTest;
 import com.mygdx.game.engine.systems.ItemDropLabelRenderSystem;
+import com.mygdx.game.engine.systems.ItemPickupSystem;
 import com.mygdx.game.engine.systems.ItemWindowRenderSystem;
 import com.mygdx.game.engine.systems.LootingSystem;
 import com.mygdx.game.engine.systems.MapUpdateSystem;
@@ -136,6 +137,7 @@ public class GameScreen implements Screen {
         EnemyDeathSystem enemyDeathSystem = new EnemyDeathSystem();
         EnemyDropSystem enemyDropSystem = new EnemyDropSystem(itemFactory);
         ItemDropLabelRenderSystem itemDropLabelRenderSystem = new ItemDropLabelRenderSystem();
+        ItemPickupSystem itemPickupSystem = new ItemPickupSystem();
         MyGame.engine.addSystem(movementSystem);
         MyGame.engine.addSystem(enemySpawningSystem);
         MyGame.engine.addSystem(steeringSystem);
@@ -156,6 +158,7 @@ public class GameScreen implements Screen {
         MyGame.engine.addSystem(enemyDeathSystem);
         MyGame.engine.addSystem(enemyDropSystem);
         MyGame.engine.addSystem(itemDropLabelRenderSystem);
+        MyGame.engine.addSystem(itemPickupSystem);
         checkPriorities();
     }
 
