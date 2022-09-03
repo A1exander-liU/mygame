@@ -150,6 +150,7 @@ public class InventoryUi {
             }
         }
         for (int i = 0; i < inventorySlots.size; i++) {
+            if (inventorySlots.get(i).isEmpty()) continue;
             Entity inventoryItem = inventorySlots.get(i).getOccupiedItem();
             if ((i != slotAddedTo && slotAddedTo != -1) && Objects.equals(Mappers.name.get(inventoryItem).name, Mappers.name.get(item).name)) {
                 stackItems(inventorySlots.get(slotAddedTo), inventorySlots.get(i));
