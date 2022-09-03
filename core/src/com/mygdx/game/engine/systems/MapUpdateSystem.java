@@ -37,35 +37,35 @@ public class MapUpdateSystem extends EntitySystem {
     public void update(float delta) {
         for (int i = 0; i < characters.size(); i++) {
             Entity entity = characters.get(i);
-            updateEntityInMap(entity);
+            updateEntityInMap(entity, GameMapProperties.COLLISIONS);
         }
         for (int i = 0; i < itemDrops.size(); i++) {
             Entity itemDrop = itemDrops.get(i);
-            
+            updateEntityInMap(itemDrop, GameMapProperties.ENEMY_DROPS);
         }
         updatePlayerCamPosition();
         tiledMapRenderer.setView(cg.getCamera(player).camera);
         tiledMapRenderer.render();
     }
 
-    private void updateEntityInMap(Entity entity) {
+    private void updateEntityInMap(Entity entity, String mapLayer) {
         Position pos = cg.getPosition(entity);
-        EntityTextureObject textureObject = findSameOwner(entity);
+        EntityTextureObject textureObject = findSameOwner(entity, mapLayer);
         if (textureObject != null) {
             textureObject.setX(pos.x);
             textureObject.setY(pos.y);
         }
     }
 
-    private EntityTextureObject findSameOwner(Entity entity) {
-        MapObjects collisions = MyGame.gameMapProperties.getMapLayer(GameMapProperties.COLLISIONS).getObjects();
+    private EntityTextureObject findSameOwner(Entity entity, String mapLayer) {
+        MapObjects layer = MyGame.gameMapProperties.getMapLayer(mapLayer).getObjects();
         // going through each item in collision layer
         // check if it is EntityTextureMap object
         // check if the owner of it is same as the owner we are trying to find the texture for
-        for (int i = 0; i < collisions.getCount(); i++) {
+        for (int i = 0; i < layer.getCount(); i++) {
             // EntityTextureObject is a character
-            if (collisions.get(i) instanceof EntityTextureObject) {
-                EntityTextureObject textureObject = (EntityTextureObject) collisions.get(i);
+            if (layer.get(i) instanceof EntityTextureObject) {
+                EntityTextureObject textureObject = (EntityTextureObject) layer.get(i);
                 if (textureObject.getOwner() == entity)
                     return textureObject;
             }
