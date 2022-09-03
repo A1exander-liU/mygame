@@ -32,6 +32,12 @@
 		"b": 0.44705883,
 		"a": 1
 	},
+	"light-gray": {
+		"r": 0.92941177,
+		"g": 0.92941177,
+		"b": 0.92941177,
+		"a": 0.35955057
+	},
 	"white": {
 		"r": 1,
 		"g": 1,
@@ -766,6 +772,28 @@
 		"regions": [],
 		"playMode": 2,
 		"crushMode": 0
+	},
+	"label-grey-bg": {
+		"region": "progress-bar-grey-bg",
+		"horizontalStretchAreas": [ 0, 63 ],
+		"verticalStretchAreas": [ 28, 39 ],
+		"tiling": false,
+		"minWidth": 64,
+		"minHeight": 64,
+		"rightWidth": 5,
+		"leftWidth": 5,
+		"bottomHeight": 31,
+		"topHeight": 27,
+		"color1": "light-gray",
+		"color2": "light-gray",
+		"offsetX": 0,
+		"offsetY": 0,
+		"offsetXspeed": 0,
+		"offsetYspeed": 0,
+		"frameDuration": 0.03,
+		"regions": [],
+		"playMode": 2,
+		"crushMode": 0
 	}
 },
 "com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle": {
@@ -794,6 +822,11 @@
 	"default": {
 		"font": "advanced-pixel-small",
 		"fontColor": "white"
+	},
+	"label-gray-bg": {
+		"font": "advanced-pixel-small",
+		"fontColor": "white",
+		"background": "label-grey-bg"
 	}
 },
 "com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle": {
