@@ -84,6 +84,7 @@ public class EnemyDropSystem extends EntitySystem {
             }
         }
         for (int i = 0; i < enemyDrops.getCount(); i++) {
+            stage.clear();
             EntityTextureObject textureObject = (EntityTextureObject) enemyDrops.get(i);
             Entity drop = textureObject.getOwner();
             Vector3 dropPosition = new Vector3(Mappers.position.get(drop).x, Mappers.position.get(drop).y, 0);
@@ -92,6 +93,9 @@ public class EnemyDropSystem extends EntitySystem {
             itemName.setColor(RarityColour.getColour(Mappers.rarity.get(drop).rarity));
             Container<Label> labelContainer = new Container<>(itemName);
             labelContainer.setBounds(dropScreenPosition.x, dropScreenPosition.y, 32, 10);
+            stage.addActor(labelContainer);
+            stage.act(delta);
+            stage.draw();
         }
     }
 
