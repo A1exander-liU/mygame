@@ -123,9 +123,7 @@ public class EnemyDropSystem extends EntitySystem {
     private void generatePositionNearEnemy(Vector2 enemyPos, Entity lootEntity, float radius) {
         // get random pos within certain radius of enemyPos
         float lootXPos = RandomNumberGenerator.roll(enemyPos.x - radius, enemyPos.x + radius);
-        if (lootXPos > enemyPos.x + radius) lootXPos = enemyPos.x + radius;
         float lootYPos = RandomNumberGenerator.roll(enemyPos.y - radius, enemyPos.y + radius);
-        if (lootYPos > enemyPos.y + radius) lootYPos = enemyPos.y + radius;
         Mappers.size.get(lootEntity).height = 10;
         Mappers.size.get(lootEntity).width = 10;
         Mappers.position.get(lootEntity).x = lootXPos;
