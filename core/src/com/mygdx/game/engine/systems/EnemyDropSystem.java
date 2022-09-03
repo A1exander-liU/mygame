@@ -81,7 +81,7 @@ public class EnemyDropSystem extends EntitySystem {
             EntityTextureObject textureObject = (EntityTextureObject) enemyDrops.get(i);
             Entity drop = textureObject.getOwner();
             Vector3 dropPosition = new Vector3(Mappers.position.get(drop).x, Mappers.position.get(drop).y, 0);
-            Vector3 dropScreenPosition = stage.getCamera().project(dropPosition);
+            Vector3 dropScreenPosition = Mappers.camera.get(player).camera.project(dropPosition);
         }
     }
 
