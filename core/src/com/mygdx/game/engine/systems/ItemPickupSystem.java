@@ -14,6 +14,7 @@ public class ItemPickupSystem extends EntitySystem {
     MapObjects enemyDrops;
 
     public ItemPickupSystem() {
+        super(96);
         player = MyGame.engine.getEntitiesFor(Families.player).get(0);
         enemyDrops = MyGame.gameMapProperties.getMapLayer(GameMapProperties.ENEMY_DROPS).getObjects();
     }
