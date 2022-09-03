@@ -104,13 +104,15 @@ public class EnemyDropSystem extends EntitySystem {
         MapObjects drops = MyGame.gameMapProperties.getMapLayer(GameMapProperties.ENEMY_DROPS).getObjects();
         Position pos = Mappers.position.get(enemy);
         Vector2 enemyDeathPosition = new Vector2(pos.x, pos.y);
+        System.out.println(enemyDeathPosition);
         for (int i = 0; i < lootEntities.size; i++) {
             Entity lootEntity = lootEntities.get(i);
             lootEntity.add(new Size());
             lootEntity.add(new Position());
             generatePositionNearEnemy(enemyDeathPosition, lootEntity, 20);
+            System.out.println(Mappers.position.get(lootEntity).x +", "+ Mappers.position.get(lootEntity).y);
             Size size = Mappers.size.get(lootEntity);
-            TextureRegion textureRegion = new TextureRegion(Mappers.sprite.get(lootEntity).texture, 32, 32);
+            TextureRegion textureRegion = new TextureRegion(Mappers.sprite.get(lootEntity).texture, 20, 20);
             EntityTextureObject textureObject = new EntityTextureObject(textureRegion, lootEntity);
             textureObject.setX(Mappers.position.get(lootEntity).x);
             textureObject.setY(Mappers.position.get(lootEntity).y);
@@ -121,7 +123,9 @@ public class EnemyDropSystem extends EntitySystem {
     private void generatePositionNearEnemy(Vector2 enemyPos, Entity lootEntity, float radius) {
         // get random pos within certain radius of enemyPos
         float lootXPos = RandomNumberGenerator.roll(enemyPos.x - radius, enemyPos.x + radius);
+        if (lootXPos > enemyPos.x + radius) lootXPos = enemyPos.x + radius;
         float lootYPos = RandomNumberGenerator.roll(enemyPos.y - radius, enemyPos.y + radius);
+        if (lootYPos > enemyPos.y + radius) lootYPos = enemyPos.y + radius;
         Mappers.size.get(lootEntity).height = 10;
         Mappers.size.get(lootEntity).width = 10;
         Mappers.position.get(lootEntity).x = lootXPos;
