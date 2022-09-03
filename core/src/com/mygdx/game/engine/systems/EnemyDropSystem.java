@@ -83,20 +83,6 @@ public class EnemyDropSystem extends EntitySystem {
                 displayDropsOnGround(lootEntities, enemy);
             }
         }
-        for (int i = 0; i < enemyDrops.getCount(); i++) {
-            stage.clear();
-            EntityTextureObject textureObject = (EntityTextureObject) enemyDrops.get(i);
-            Entity drop = textureObject.getOwner();
-            Vector3 dropPosition = new Vector3(Mappers.position.get(drop).x, Mappers.position.get(drop).y, 0);
-            Vector3 dropScreenPosition = Mappers.camera.get(player).camera.project(dropPosition);
-            Label itemName = new Label(Mappers.name.get(drop).name, skin);
-            itemName.setColor(RarityColour.getColour(Mappers.rarity.get(drop).rarity));
-            Container<Label> labelContainer = new Container<>(itemName);
-            labelContainer.setBounds(dropScreenPosition.x, dropScreenPosition.y, 32, 10);
-            stage.addActor(labelContainer);
-            stage.act(delta);
-            stage.draw();
-        }
     }
 
     private void addToCoinPouch(HashMap<Integer, Integer> loot) {
