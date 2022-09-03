@@ -38,7 +38,8 @@ public class ItemDropLabelRenderSystem extends EntitySystem {
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/PressStart2P-Regular.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.size = 8;
-        parameter.color = Color.RED;
+        // set to white to allow colour tinting
+        parameter.color = Color.WHITE;
         BitmapFont font = generator.generateFont(parameter);
         skin.add("itemDropFont", font);
 
@@ -59,8 +60,7 @@ public class ItemDropLabelRenderSystem extends EntitySystem {
             // convert to screen position
             Vector3 dropScreenPosition = Mappers.camera.get(player).camera.project(dropPosition);
             // create label inside container
-            Label itemName = new Label(Mappers.name.get(drop).name, skin, "itemDropFont", Color.BLACK);
-            itemName.setColor(RarityColour.getColour(Mappers.rarity.get(drop).rarity));
+            Label itemName = new Label(Mappers.name.get(drop).name, skin, "itemDropFont", RarityColour.getColour(Mappers.rarity.get(drop).rarity));
             Container<Label> labelContainer = new Container<>(itemName);
             labelContainer.setBounds(dropScreenPosition.x, dropScreenPosition.y + Mappers.size.get(drop).height / 2, 32, 10);
             stage.addActor(labelContainer);
