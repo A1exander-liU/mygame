@@ -13,7 +13,7 @@ public class RandomNumberGenerator {
     }
 
     public static float roll(float min, float max) {
-        return (random.nextFloat() * max) + min;
+        return min + random.nextFloat() * (max - min);
     }
 
     public static int roll(int max) {
