@@ -62,8 +62,8 @@ public class EnemyDropSystem extends EntitySystem {
                     }
                     Entity equipment = equipmentGenerator.generateEquipment(itemId);
                     lootEntities.add(equipment);
-                    displayDropsOnGround(lootEntities, enemy);
                 }
+                displayDropsOnGround(lootEntities, enemy);
             }
         }
     }
