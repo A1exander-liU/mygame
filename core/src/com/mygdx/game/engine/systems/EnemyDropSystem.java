@@ -105,6 +105,9 @@ public class EnemyDropSystem extends EntitySystem {
             lootEntity.add(new Size());
             lootEntity.add(new Position());
             generatePositionNearEnemy(enemyDeathPosition, lootEntity, 20);
+            Size size = Mappers.size.get(lootEntity);
+            TextureRegion textureRegion = new TextureRegion(Mappers.sprite.get(lootEntity).texture, (int)size.width, (int)size.height);
+            EntityTextureObject textureObject = new EntityTextureObject(textureRegion, lootEntity);
         }
     }
 
