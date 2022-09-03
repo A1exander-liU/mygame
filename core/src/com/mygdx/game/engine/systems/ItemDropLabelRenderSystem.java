@@ -62,7 +62,7 @@ public class ItemDropLabelRenderSystem extends EntitySystem {
             Label itemName = new Label(Mappers.name.get(drop).name, skin, "itemDropFont", Color.BLACK);
             itemName.setColor(RarityColour.getColour(Mappers.rarity.get(drop).rarity));
             Container<Label> labelContainer = new Container<>(itemName);
-            labelContainer.setBounds(dropScreenPosition.x, dropScreenPosition.y, 32, 10);
+            labelContainer.setBounds(dropScreenPosition.x, dropScreenPosition.y + Mappers.size.get(drop).height / 2, 32, 10);
             stage.addActor(labelContainer);
             stage.act(delta);
             stage.draw();
