@@ -13,7 +13,7 @@ public class EnemyDeathSystem extends EntitySystem {
     ImmutableArray<Entity> enemies;
 
     public EnemyDeathSystem() {
-        super(102);
+        super(94);
         enemies = MyGame.engine.getEntitiesFor(Families.enemies);
 
     }

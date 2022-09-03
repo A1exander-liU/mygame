@@ -37,7 +37,7 @@ public class EnemyDropSystem extends EntitySystem {
     JsonValue items;
 
     public EnemyDropSystem(ItemFactory itemFactory) {
-        super(103);
+        super(95);
         this.itemFactory = itemFactory;
         equipmentGenerator = new EquipmentGenerator(itemFactory);
         enemies = MyGame.engine.getEntitiesFor(Families.enemies);
@@ -60,9 +60,12 @@ public class EnemyDropSystem extends EntitySystem {
                         if (item != null)
                             lootEntities.add(itemFactory.makeMaterial(item.getString("name"), loot.get(itemId)));
                     }
-                    Entity equipment = equipmentGenerator.generateEquipment(itemId);
-                    lootEntities.add(equipment);
+                    else {
+                        Entity equipment = equipmentGenerator.generateEquipment(itemId);
+                        lootEntities.add(equipment);
+                    }
                 }
+                System.out.println(lootEntities.size);
                 displayDropsOnGround(lootEntities, enemy);
             }
         }
@@ -107,7 +110,7 @@ public class EnemyDropSystem extends EntitySystem {
             lootEntity.add(new Position());
             generatePositionNearEnemy(enemyDeathPosition, lootEntity, 20);
             Size size = Mappers.size.get(lootEntity);
-            TextureRegion textureRegion = new TextureRegion(Mappers.sprite.get(lootEntity).texture, (int)size.width, (int)size.height);
+            TextureRegion textureRegion = new TextureRegion(Mappers.sprite.get(lootEntity).texture, 32, 32);
             EntityTextureObject textureObject = new EntityTextureObject(textureRegion, lootEntity);
             textureObject.setX(Mappers.position.get(lootEntity).x);
             textureObject.setY(Mappers.position.get(lootEntity).y);
