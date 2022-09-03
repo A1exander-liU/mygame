@@ -127,4 +127,8 @@ public class InventoryUi {
         // dereference equipped item in equipped slot
         equipSlots.get(equipSlots.indexOf(source, true)).setOccupiedItem(null);
     }
+
+    public void addToInventory(Entity item) {
+        
+    }
 }
