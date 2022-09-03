@@ -78,6 +78,8 @@ public class EnemyDropSystem extends EntitySystem {
         }
         for (int i = 0; i < enemyDrops.getCount(); i++) {
             EntityTextureObject textureObject = (EntityTextureObject) enemyDrops.get(i);
+            Entity drop = textureObject.getOwner();
+            Vector2 dropPosition = new Vector2(Mappers.position.get(drop).x, Mappers.position.get(drop).y);
         }
     }
 
