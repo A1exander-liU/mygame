@@ -8,6 +8,8 @@ import com.mygdx.game.engine.Mappers;
 import com.mygdx.game.screens.GameScreen;
 import com.mygdx.game.utils.InventorySlot;
 
+import java.util.Objects;
+
 public class InventoryUi {
     // will contain methods to manage the inventory
     // moving inventory items around
@@ -129,9 +131,22 @@ public class InventoryUi {
     }
 
     public void addToInventory(Entity item) {
+        Entity player = MyGame.engine.getEntitiesFor(Families.player).get(0);
+        Array<InventorySlot> inventorySlots = Mappers.inventory.get(player).inventorySlots;
         // is item stackable
         if (Mappers.stackable.get(item) != null) {
 
+        }
+    }
+
+    private void placeStackable(Entity item, Array<InventorySlot> inventorySlots) {
+        int slotAddedTo;
+        for (int i = 0; i < inventorySlots.size; i++) {
+            // place item first to use stackItems method
+            if (inventorySlots.get(i).isEmpty()) {
+                inventorySlots.get(i).setOccupiedItem(item);
+                break;
+            }
         }
     }
 }
