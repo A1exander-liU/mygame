@@ -3,6 +3,10 @@ package com.mygdx.game.engine.systems;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -30,6 +34,16 @@ public class ItemDropLabelRenderSystem extends EntitySystem {
         skin = new Skin(Gdx.files.internal("Game_UI_Skin/Game_UI_Skin.json"));
         enemyDrops = MyGame.gameMapProperties.getMapLayer(GameMapProperties.ENEMY_DROPS).getObjects();
         stage = new Stage(new ScreenViewport());
+
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/PressStart2P-Regular.ttf"));
+        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        parameter.size = 8;
+        parameter.color = Color.RED;
+        BitmapFont font = generator.generateFont(parameter);
+        skin.add("itemDropFont", font);
+
+        skin.addRegions(new TextureAtlas("Game_UI_Skin/Game_UI_Skin.atlas"));
+        skin.load(Gdx.files.internal("Game_UI_Skin/Game_UI_Skin.json"));
     }
 
     @Override
@@ -45,7 +59,7 @@ public class ItemDropLabelRenderSystem extends EntitySystem {
             // convert to screen position
             Vector3 dropScreenPosition = Mappers.camera.get(player).camera.project(dropPosition);
             // create label inside container
-            Label itemName = new Label(Mappers.name.get(drop).name, skin);
+            Label itemName = new Label(Mappers.name.get(drop).name, skin, "itemDropFont", Color.BLACK);
             itemName.setColor(RarityColour.getColour(Mappers.rarity.get(drop).rarity));
             Container<Label> labelContainer = new Container<>(itemName);
             labelContainer.setBounds(dropScreenPosition.x, dropScreenPosition.y, 32, 10);
