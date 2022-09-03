@@ -4,13 +4,16 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.EquipmentGenerator;
 import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.LootGenerator;
@@ -35,6 +38,8 @@ public class EnemyDropSystem extends EntitySystem {
     Entity player;
     JsonReader reader = new JsonReader();
     JsonValue items;
+    Stage stage;
+    MapObjects enemyDrops;
 
     public EnemyDropSystem(ItemFactory itemFactory) {
         super(95);
@@ -43,6 +48,8 @@ public class EnemyDropSystem extends EntitySystem {
         enemies = MyGame.engine.getEntitiesFor(Families.enemies);
         player = MyGame.engine.getEntitiesFor(Families.player).get(0);
         items = reader.parse(Gdx.files.internal("gameData/itemData/items.json"));
+        stage = new Stage(new ScreenViewport());
+        enemyDrops = MyGame.gameMapProperties.getMapLayer(GameMapProperties.ENEMY_DROPS).getObjects();
     }
 
     @Override
@@ -68,6 +75,9 @@ public class EnemyDropSystem extends EntitySystem {
                 System.out.println(lootEntities.size);
                 displayDropsOnGround(lootEntities, enemy);
             }
+        }
+        for (int i = 0; i < enemyDrops.getCount(); i++) {
+            EntityTextureObject textureObject = (EntityTextureObject) enemyDrops.get(i);
         }
     }
 
@@ -124,9 +134,10 @@ public class EnemyDropSystem extends EntitySystem {
         // get random pos within certain radius of enemyPos
         float lootXPos = RandomNumberGenerator.roll(enemyPos.x - radius, enemyPos.x + radius);
         float lootYPos = RandomNumberGenerator.roll(enemyPos.y - radius, enemyPos.y + radius);
-        Mappers.size.get(lootEntity).height = 10;
-        Mappers.size.get(lootEntity).width = 10;
         Mappers.position.get(lootEntity).x = lootXPos;
         Mappers.position.get(lootEntity).y = lootYPos;
+        // now they are drawn on the ground
+        // need to pickup and also attack labels (name with coloured rarity) on them
+
     }
 }
