@@ -13,13 +13,13 @@ public class RarityColour {
         else if (rarity == Rarity.UNCOMMON)
             return Color.LIME;
         else if (rarity == Rarity.RARE)
-            return Color.NAVY;
+            return Color.valueOf("009CFFFF");
         else if (rarity == Rarity.EPIC)
-            return Color.PURPLE;
+            return Color.MAGENTA;
         else if (rarity == Rarity.LEGENDARY)
-            return Color.ORANGE;
+            return Color.CORAL;
         else if (rarity == Rarity.MYTHICAL)
-            return Color.FIREBRICK;
+            return Color.SCARLET;
         return Color.BLACK;
     }
 
