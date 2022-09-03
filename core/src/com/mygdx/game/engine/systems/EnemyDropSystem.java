@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
@@ -79,7 +80,8 @@ public class EnemyDropSystem extends EntitySystem {
         for (int i = 0; i < enemyDrops.getCount(); i++) {
             EntityTextureObject textureObject = (EntityTextureObject) enemyDrops.get(i);
             Entity drop = textureObject.getOwner();
-            Vector2 dropPosition = new Vector2(Mappers.position.get(drop).x, Mappers.position.get(drop).y);
+            Vector3 dropPosition = new Vector3(Mappers.position.get(drop).x, Mappers.position.get(drop).y, 0);
+
         }
     }
 
