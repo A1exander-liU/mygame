@@ -140,12 +140,18 @@ public class InventoryUi {
     }
 
     private void placeStackable(Entity item, Array<InventorySlot> inventorySlots) {
-        int slotAddedTo;
+        int slotAddedTo = -1;
         for (int i = 0; i < inventorySlots.size; i++) {
             // place item first to use stackItems method
             if (inventorySlots.get(i).isEmpty()) {
                 inventorySlots.get(i).setOccupiedItem(item);
                 break;
+            }
+        }
+        for (int i = 0; i < inventorySlots.size; i++) {
+            Entity inventoryItem = inventorySlots.get(i).getOccupiedItem();
+            if (i != slotAddedTo && Objects.equals(Mappers.name.get(inventoryItem).name, Mappers.name.get(item).name)) {
+
             }
         }
     }
