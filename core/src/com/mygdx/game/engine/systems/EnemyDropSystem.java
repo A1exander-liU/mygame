@@ -15,6 +15,7 @@ import com.mygdx.game.EquipmentGenerator;
 import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.LootGenerator;
 import com.mygdx.game.MyGame;
+import com.mygdx.game.RandomNumberGenerator;
 import com.mygdx.game.engine.Families;
 import com.mygdx.game.engine.ItemFactory;
 import com.mygdx.game.engine.Mappers;
@@ -100,6 +101,13 @@ public class EnemyDropSystem extends EntitySystem {
         Vector2 enemyDeathPosition = new Vector2(pos.x, pos.y);
         for (int i = 0; i < lootEntities.size; i++) {
             Entity lootEntity = lootEntities.get(i);
+            lootEntity.add(new Position());
+
         }
+    }
+
+    private void generatePositionNearEnemy(Vector2 enemyPos, Entity lootEntity, float radius) {
+        float lootXPos = RandomNumberGenerator.roll(enemyPos.x - radius, enemyPos.x + radius);
+        float lootYPos = RandomNumberGenerator.roll(enemyPos.y - radius, enemyPos.y + radius);
     }
 }
