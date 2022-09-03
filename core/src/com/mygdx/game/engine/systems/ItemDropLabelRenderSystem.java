@@ -35,11 +35,16 @@ public class ItemDropLabelRenderSystem extends EntitySystem {
     @Override
     public void update(float delta) {
         for (int i = 0; i < enemyDrops.getCount(); i++) {
+            // clear previous labels
             stage.clear();
+            // cast to EntityTextureObject (subclass to get the entity that belongs to it)
             EntityTextureObject textureObject = (EntityTextureObject) enemyDrops.get(i);
             Entity drop = textureObject.getOwner();
+            // get the world position of the item drop
             Vector3 dropPosition = new Vector3(Mappers.position.get(drop).x, Mappers.position.get(drop).y, 0);
+            // convert to screen position
             Vector3 dropScreenPosition = Mappers.camera.get(player).camera.project(dropPosition);
+            // create label inside container
             Label itemName = new Label(Mappers.name.get(drop).name, skin);
             itemName.setColor(RarityColour.getColour(Mappers.rarity.get(drop).rarity));
             Container<Label> labelContainer = new Container<>(itemName);
