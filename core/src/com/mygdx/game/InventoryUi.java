@@ -135,7 +135,7 @@ public class InventoryUi {
         Array<InventorySlot> inventorySlots = Mappers.inventory.get(player).inventorySlots;
         // is item stackable
         if (Mappers.stackable.get(item) != null) {
-
+            placeStackable(item, inventorySlots);
         }
     }
 
@@ -152,7 +152,7 @@ public class InventoryUi {
         for (int i = 0; i < inventorySlots.size; i++) {
             Entity inventoryItem = inventorySlots.get(i).getOccupiedItem();
             if (i != slotAddedTo && Objects.equals(Mappers.name.get(inventoryItem).name, Mappers.name.get(item).name)) {
-
+                stackItems(inventorySlots.get(slotAddedTo), inventorySlots.get(i));
             }
         }
     }
