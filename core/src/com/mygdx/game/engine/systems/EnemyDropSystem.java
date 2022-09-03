@@ -108,6 +108,9 @@ public class EnemyDropSystem extends EntitySystem {
             Size size = Mappers.size.get(lootEntity);
             TextureRegion textureRegion = new TextureRegion(Mappers.sprite.get(lootEntity).texture, (int)size.width, (int)size.height);
             EntityTextureObject textureObject = new EntityTextureObject(textureRegion, lootEntity);
+            textureObject.setX(Mappers.position.get(lootEntity).x);
+            textureObject.setY(Mappers.position.get(lootEntity).y);
+            MyGame.gameMapProperties.getMapLayer(GameMapProperties.ENEMY_DROPS).getObjects().add(textureObject);
         }
     }
 
