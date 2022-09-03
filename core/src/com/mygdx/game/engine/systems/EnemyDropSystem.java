@@ -10,6 +10,7 @@ import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Container;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Array;
@@ -89,6 +90,8 @@ public class EnemyDropSystem extends EntitySystem {
             Vector3 dropScreenPosition = Mappers.camera.get(player).camera.project(dropPosition);
             Label itemName = new Label(Mappers.name.get(drop).name, skin);
             itemName.setColor(RarityColour.getColour(Mappers.rarity.get(drop).rarity));
+            Container<Label> labelContainer = new Container<>(itemName);
+            labelContainer.setBounds(dropScreenPosition.x, dropScreenPosition.y, 32, 10);
         }
     }
 
