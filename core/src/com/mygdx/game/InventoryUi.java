@@ -137,6 +137,10 @@ public class InventoryUi {
         if (Mappers.stackable.get(item) != null) {
             placeStackable(item, inventorySlots);
         }
+        // not stackable, just add to first empty slot
+        else {
+            addToFirstEmptySlot(item, inventorySlots);
+        }
     }
 
     private void placeStackable(Entity item, Array<InventorySlot> inventorySlots) {
