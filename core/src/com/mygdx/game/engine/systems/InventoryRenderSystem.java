@@ -200,6 +200,7 @@ public class InventoryRenderSystem extends EntitySystem {
             // immediately set to false so the inventory is only drawn once
             // when it is opened once
             canDraw = false;
+            updateCoinsLabel();
             addInventorySlots();
             stage.act(delta);
             stage.draw();
@@ -346,5 +347,9 @@ public class InventoryRenderSystem extends EntitySystem {
         equipSlotsInner.add(inventoryComponent.equipSlots.get(6));
         equipSlotsInner.add(inventoryComponent.equipSlots.get(3));
         equipSlotsInner.add(inventoryComponent.equipSlots.get(7));
+    }
+
+    private void updateCoinsLabel() {
+        coins.setText("Coins: " + Mappers.inventory.get(player).coinPouch);
     }
 }
