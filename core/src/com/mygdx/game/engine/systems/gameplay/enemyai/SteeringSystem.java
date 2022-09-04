@@ -1,4 +1,4 @@
-package com.mygdx.game.engine.systems.enemyai;
+package com.mygdx.game.engine.systems.gameplay.enemyai;
 
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;

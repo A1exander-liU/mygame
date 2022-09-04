@@ -1,4 +1,4 @@
-package com.mygdx.game.engine.systems.combat;
+package com.mygdx.game.engine.systems.gameplay.combat;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
@@ -9,8 +9,6 @@ import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.ComponentGrabber;
 import com.mygdx.game.engine.EnemyState;
 import com.mygdx.game.engine.Families;
-import com.mygdx.game.engine.components.Enemy;
-import com.mygdx.game.engine.components.Name;
 import com.mygdx.game.engine.components.ParameterComponent;
 import com.mygdx.game.engine.systems.TimeSystem;
 

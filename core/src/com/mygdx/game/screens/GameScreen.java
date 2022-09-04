@@ -37,10 +37,10 @@ import com.mygdx.game.engine.systems.CollisionSystem;
 import com.mygdx.game.engine.systems.OrientationSystem;
 import com.mygdx.game.engine.systems.ui.PlayerHudRenderSystem;
 import com.mygdx.game.engine.systems.TimeSystem;
-import com.mygdx.game.engine.systems.combat.BasicAttackSystem;
-import com.mygdx.game.engine.systems.combat.EnemyAttackSystem;
-import com.mygdx.game.engine.systems.enemyai.StateSystem;
-import com.mygdx.game.engine.systems.enemyai.SteeringSystem;
+import com.mygdx.game.engine.systems.gameplay.combat.BasicAttackSystem;
+import com.mygdx.game.engine.systems.gameplay.combat.EnemyAttackSystem;
+import com.mygdx.game.engine.systems.gameplay.enemyai.StateSystem;
+import com.mygdx.game.engine.systems.gameplay.enemyai.SteeringSystem;
 
 public class GameScreen implements Screen {
     public MyGame parent;
