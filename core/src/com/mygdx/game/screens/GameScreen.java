@@ -29,7 +29,7 @@ import com.mygdx.game.engine.systems.render.ui.InventoryRenderSystem;
 import com.mygdx.game.engine.systems.render.ui.InventoryTest;
 import com.mygdx.game.engine.systems.ItemDropLabelRenderSystem;
 import com.mygdx.game.engine.systems.ItemPickupSystem;
-import com.mygdx.game.engine.systems.ItemWindowRenderSystem;
+import com.mygdx.game.engine.systems.render.ui.ItemWindowRenderSystem;
 import com.mygdx.game.engine.systems.LootingSystem;
 import com.mygdx.game.engine.systems.render.MapUpdateSystem;
 import com.mygdx.game.engine.systems.MovementSystem;
