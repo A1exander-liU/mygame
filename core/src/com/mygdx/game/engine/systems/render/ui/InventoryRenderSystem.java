@@ -21,7 +21,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.mygdx.game.engine.systems.MovementSystem;
+import com.mygdx.game.engine.systems.gameplay.movement.MovementSystem;
 import com.mygdx.game.engine.systems.TimeSystem;
 import com.mygdx.game.utils.ui.ItemInfoDialog;
 import com.mygdx.game.MyGame;

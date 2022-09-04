@@ -32,7 +32,7 @@ import com.mygdx.game.engine.systems.gameplay.looting.ItemPickupSystem;
 import com.mygdx.game.engine.systems.render.ui.ItemWindowRenderSystem;
 import com.mygdx.game.engine.systems.gameplay.looting.LootingSystem;
 import com.mygdx.game.engine.systems.render.MapUpdateSystem;
-import com.mygdx.game.engine.systems.MovementSystem;
+import com.mygdx.game.engine.systems.gameplay.movement.MovementSystem;
 import com.mygdx.game.engine.systems.gameplay.movement.CollisionSystem;
 import com.mygdx.game.engine.systems.OrientationSystem;
 import com.mygdx.game.engine.systems.render.ui.PlayerHudRenderSystem;
