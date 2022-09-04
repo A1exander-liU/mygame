@@ -22,6 +22,7 @@ public class MyGame extends Game {
 	public InputMultiplexer inputMultiplexer;
 
 	private StoredPreferences storedPreferences;
+	private SaveStates saveStates;
 
 	public static final int MENU_SCREEN = 0;
 	public static final int GAME_SCREEN = 1;
@@ -38,6 +39,9 @@ public class MyGame extends Game {
 	public StoredPreferences getStoredPreferences() {
 		return storedPreferences;
 	}
+	public SaveStates getSaveStates() {
+		return saveStates;
+	}
 
 	@Override
 	public void create() {
@@ -45,6 +49,7 @@ public class MyGame extends Game {
 		this.changeScreen(MyGame.MENU_SCREEN);
 
 		storedPreferences = new StoredPreferences();
+		saveStates = new SaveStates();
 	}
 
 	public void changeScreen(int screen) {
