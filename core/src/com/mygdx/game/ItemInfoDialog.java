@@ -16,7 +16,6 @@ import com.mygdx.game.engine.Mappers;
 import com.mygdx.game.engine.ItemType;
 import com.mygdx.game.engine.components.inventory.items.individual.AffixesComponent;
 import com.mygdx.game.engine.components.inventory.items.individual.ArmourBaseStatComponent;
-import com.mygdx.game.engine.components.inventory.items.individual.ArmourStatComponent;
 import com.mygdx.game.engine.components.inventory.items.individual.WeaponBaseStatComponent;
 import com.mygdx.game.utils.InventorySlot;
 
