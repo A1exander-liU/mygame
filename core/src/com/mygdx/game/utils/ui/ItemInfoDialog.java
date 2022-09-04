@@ -14,7 +14,7 @@ import com.badlogic.gdx.utils.Scaling;
 import com.mygdx.game.CharAttributes;
 import com.mygdx.game.inventory.InventoryUi;
 import com.mygdx.game.MyGame;
-import com.mygdx.game.RarityColour;
+import com.mygdx.game.inventory.gameitem.RarityColour;
 import com.mygdx.game.engine.utils.componentutils.Families;
 import com.mygdx.game.engine.utils.componentutils.Mappers;
 import com.mygdx.game.inventory.gameitem.ItemType;

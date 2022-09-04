@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.game.inventory.gameitem;
 
 import com.badlogic.gdx.graphics.Color;
 import com.mygdx.game.inventory.gameitem.Rarity;
