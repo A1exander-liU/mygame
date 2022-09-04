@@ -31,8 +31,8 @@ public class ItemPickupSystem extends EntitySystem {
         for (int i = 0; i < enemyDrops.getCount(); i++) {
             EntityTextureObject textureObject = (EntityTextureObject) enemyDrops.get(i);
             if (overItemDrop(textureObject)) {
-                inventoryUi.addToInventory(textureObject.getOwner());
-                removeFromEnemyDropsLayer(textureObject);
+                if (inventoryUi.addToInventory(textureObject.getOwner()))
+                    removeFromEnemyDropsLayer(textureObject);
             }
         }
     }
