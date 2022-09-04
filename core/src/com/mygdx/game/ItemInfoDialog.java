@@ -121,6 +121,8 @@ public class ItemInfoDialog extends Dialog {
         atkSpdTitle.setAlignment(Align.center);
         Label dmg = new Label(weaponBaseStat.minDmg + " - " + weaponBaseStat.maxDmg, getSkin(), "pixel2D", Color.BLACK);
         dmg.setAlignment(Align.center);
+        Label atkSpd = new Label("" + weaponBaseStat.attackDelay, getSkin(), "pixel2D", Color.BLACK);
+        atkSpd.setAlignment(Align.center);
         Label desc = new Label("\"" + Mappers.description.get(item).description + "\"", getSkin(), "pixel2D", Color.BLACK);
         desc.setAlignment(Align.center);
         desc.setWrap(true);
@@ -129,7 +131,10 @@ public class ItemInfoDialog extends Dialog {
         weaponStatTable.defaults().expand().fill().space(5);
         weaponStatTable.add(dmgTitle);
         weaponStatTable.add(dmg);
-        weaponStatTable.row().row();
+        weaponStatTable.row();
+        weaponStatTable.add(atkSpdTitle);
+        weaponStatTable.add(atkSpd);
+        weaponStatTable.row();
 
         // make label for each affix
         for (int i = 0; i < affixes.affixes.size; i++) {
