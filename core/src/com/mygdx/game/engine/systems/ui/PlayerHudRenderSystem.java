@@ -1,4 +1,4 @@
-package com.mygdx.game.engine.systems.inventory;
+package com.mygdx.game.engine.systems.ui;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;

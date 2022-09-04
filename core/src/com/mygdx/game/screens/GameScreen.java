@@ -35,7 +35,7 @@ import com.mygdx.game.engine.systems.MapUpdateSystem;
 import com.mygdx.game.engine.systems.MovementSystem;
 import com.mygdx.game.engine.systems.CollisionSystem;
 import com.mygdx.game.engine.systems.OrientationSystem;
-import com.mygdx.game.engine.systems.inventory.PlayerHudRenderSystem;
+import com.mygdx.game.engine.systems.ui.PlayerHudRenderSystem;
 import com.mygdx.game.engine.systems.TimeSystem;
 import com.mygdx.game.engine.systems.combat.BasicAttackSystem;
 import com.mygdx.game.engine.systems.combat.EnemyAttackSystem;
