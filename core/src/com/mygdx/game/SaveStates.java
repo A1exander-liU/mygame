@@ -12,4 +12,13 @@ public class SaveStates {
     protected Preferences getPrefs() {
         return Gdx.app.getPreferences(PREFS_NAME);
     }
+
+    public void setSlotOneData(String serializedData) {
+        getPrefs().putString(SLOT_ONE, serializedData);
+        getPrefs().flush();
+    }
+
+    public String getSlotOneSerializedData() {
+        return getPrefs().getString(SLOT_ONE, "");
+    }
 }
