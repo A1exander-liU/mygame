@@ -18,7 +18,7 @@ import com.mygdx.game.engine.components.Spawn;
 import com.mygdx.game.engine.components.SpawnArea;
 import com.mygdx.game.engine.components.Name;
 import com.mygdx.game.engine.components.Position;
-import com.mygdx.game.utils.EntityTextureObject;
+import com.mygdx.game.utils.map.EntityTextureObject;
 
 import java.util.Objects;
 

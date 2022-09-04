@@ -8,7 +8,7 @@ import com.mygdx.game.engine.components.Name;
 import com.mygdx.game.engine.components.Sprite;
 import com.mygdx.game.engine.components.Position;
 import com.mygdx.game.engine.components.Size;
-import com.mygdx.game.utils.EntityTextureObject;
+import com.mygdx.game.utils.map.EntityTextureObject;
 
 public class EntityToMapAdder {
     ComponentGrabber cg;

@@ -19,7 +19,7 @@ import com.mygdx.game.MyGame;
 import com.mygdx.game.RarityColour;
 import com.mygdx.game.engine.Families;
 import com.mygdx.game.engine.Mappers;
-import com.mygdx.game.utils.EntityTextureObject;
+import com.mygdx.game.utils.map.EntityTextureObject;
 
 public class ItemDropLabelRenderSystem extends EntitySystem {
 

@@ -14,7 +14,7 @@ import com.mygdx.game.engine.components.Camera;
 import com.mygdx.game.engine.components.Enemy;
 import com.mygdx.game.engine.components.Player;
 import com.mygdx.game.engine.components.Position;
-import com.mygdx.game.utils.EntityTextureObject;
+import com.mygdx.game.utils.map.EntityTextureObject;
 
 public class MapUpdateSystem extends EntitySystem {
     ComponentGrabber cg;

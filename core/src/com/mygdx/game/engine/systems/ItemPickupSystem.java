@@ -11,7 +11,7 @@ import com.mygdx.game.engine.Families;
 import com.mygdx.game.engine.Mappers;
 import com.mygdx.game.engine.components.Position;
 import com.mygdx.game.engine.components.Size;
-import com.mygdx.game.utils.EntityTextureObject;
+import com.mygdx.game.utils.map.EntityTextureObject;
 
 public class ItemPickupSystem extends EntitySystem {
 

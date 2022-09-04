@@ -16,7 +16,7 @@ import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.utils.GameLocation;
+import com.mygdx.game.utils.map.GameLocation;
 import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.ComponentGrabber;
@@ -28,7 +28,7 @@ import com.mygdx.game.engine.components.Size;
 import com.mygdx.game.engine.components.Spawn;
 import com.mygdx.game.engine.components.StateComponent;
 import com.mygdx.game.engine.systems.TimeSystem;
-import com.mygdx.game.utils.GameRaycastCollisionDetector;
+import com.mygdx.game.utils.map.GameRaycastCollisionDetector;
 
 import java.util.Random;
 // 3 states: idle(random walk), hunting(pursue and attack player), flee(return)

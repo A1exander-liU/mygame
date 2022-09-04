@@ -8,7 +8,7 @@ import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.GameMapProperties;
-import com.mygdx.game.utils.GameLocation;
+import com.mygdx.game.utils.map.GameLocation;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.MobEntity;
 import com.mygdx.game.engine.components.MovementBehavior;

@@ -11,7 +11,7 @@ import com.mygdx.game.engine.ComponentGrabber;
 import com.mygdx.game.engine.Families;
 import com.mygdx.game.engine.Mappers;
 import com.mygdx.game.engine.components.SpawnArea;
-import com.mygdx.game.utils.EntityTextureObject;
+import com.mygdx.game.utils.map.EntityTextureObject;
 
 public class EntityRemovalSystem extends EntitySystem {
     ComponentGrabber cg;
