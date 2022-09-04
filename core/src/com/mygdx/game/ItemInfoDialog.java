@@ -14,9 +14,9 @@ import com.badlogic.gdx.utils.Scaling;
 import com.mygdx.game.engine.Families;
 import com.mygdx.game.engine.Mappers;
 import com.mygdx.game.engine.ItemType;
+import com.mygdx.game.engine.components.inventory.items.individual.AffixesComponent;
 import com.mygdx.game.engine.components.inventory.items.individual.ArmourStatComponent;
 import com.mygdx.game.engine.components.inventory.items.individual.WeaponBaseStatComponent;
-import com.mygdx.game.engine.components.inventory.items.individual.WeaponStatComponent;
 import com.mygdx.game.utils.InventorySlot;
 
 public class ItemInfoDialog extends Dialog {
@@ -114,6 +114,7 @@ public class ItemInfoDialog extends Dialog {
 
     public void addWeaponInfo() {
         WeaponBaseStatComponent weaponBaseStat = Mappers.weaponBaseStat.get(item);
+        AffixesComponent affixes = Mappers.affixes.get(item);
         Label dmgTitle = new Label("DMG", getSkin(), "pixel2D", Color.BLACK);
         Label atkSpdTitle = new Label("Attack Spd", getSkin(), "pixel2D", Color.BLACK);
 
@@ -129,7 +130,16 @@ public class ItemInfoDialog extends Dialog {
         weaponStatTable.add(dmg);
         weaponStatTable.row().row();
 
-        getContentTable().row();
+        // make label for each affix
+        for (int i = 0; i < affixes.affixes.size; i++) {
+            CharAttributes affix = affixes.affixes.get(i);
+            // make label for name of the affix and the value
+            Label affixName = new Label(affix.getAttributeName(), getSkin(), "pixel2D", Color.BLACK);
+            Label affixValue = new Label(""+affix.getValue(), getSkin(), "pixel2D", Color.BLACK);
+            weaponStatTable.add(affixName);
+            weaponStatTable.add(affixValue);
+            weaponStatTable.row();
+        }
         getContentTable().add(weaponStatTable);
         getContentTable().row();
         getContentTable().add(desc).grow().padTop(10);
