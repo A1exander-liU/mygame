@@ -97,23 +97,23 @@ public class InventoryTest extends EntitySystem {
         Entity woodItem = itemFactory.makeMaterial("Wood", 8);
         addToInventorySlot(woodItem, 2);
 
-        Entity swordItem = itemFactory.makeWeapon("Iron Sword");
-        addToInventorySlot(swordItem, 3);
+//        Entity swordItem = itemFactory.makeWeapon("Iron Sword");
+//        addToInventorySlot(swordItem, 3);
 
-        Entity swordItem2 = itemFactory.makeWeapon("Steel Sword");
-        addToInventorySlot(swordItem2, 4);
+//        Entity swordItem2 = itemFactory.makeWeapon("Steel Sword");
+//        addToInventorySlot(swordItem2, 4);
 
-        Entity head = itemFactory.makeArmour("Scale Helmet", AcceptedEquipType.HEAD);
-        addToInventorySlot(head, 5);
+//        Entity head = itemFactory.makeArmour("Scale Helmet", AcceptedEquipType.HEAD);
+//        addToInventorySlot(head, 5);
 
-        Entity torso = itemFactory.makeArmour("Scale Armour", AcceptedEquipType.TORSO);
-        addToInventorySlot(torso, 6);
+//        Entity torso = itemFactory.makeArmour("Scale Armour", AcceptedEquipType.TORSO);
+//        addToInventorySlot(torso, 6);
 
-        Entity leg = itemFactory.makeArmour("Scale Pants", AcceptedEquipType.LEG);
-        addToInventorySlot(leg, 7);
+//        Entity leg = itemFactory.makeArmour("Scale Pants", AcceptedEquipType.LEG);
+//        addToInventorySlot(leg, 7);
 
-        Entity feet = itemFactory.makeArmour("Scale Boots", AcceptedEquipType.FEET);
-        addToInventorySlot(feet, 8);
+//        Entity feet = itemFactory.makeArmour("Scale Boots", AcceptedEquipType.FEET);
+//        addToInventorySlot(feet, 8);
     }
 
     private void addToInventorySlot(Entity item, int slot) {
