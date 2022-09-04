@@ -25,7 +25,7 @@ import com.mygdx.game.engine.systems.EnemyDropSystem;
 import com.mygdx.game.engine.systems.EnemySpawningSystem;
 import com.mygdx.game.engine.systems.EntityRemovalSystem;
 import com.mygdx.game.engine.systems.HealthBarRenderSystem;
-import com.mygdx.game.engine.systems.InventoryRenderSystem;
+import com.mygdx.game.engine.systems.ui.InventoryRenderSystem;
 import com.mygdx.game.engine.systems.InventoryTest;
 import com.mygdx.game.engine.systems.ItemDropLabelRenderSystem;
 import com.mygdx.game.engine.systems.ItemPickupSystem;
