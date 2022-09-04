@@ -6,13 +6,12 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.MyGame;
-import com.mygdx.game.engine.AcceptedEquipType;
 import com.mygdx.game.engine.ComponentGrabber;
 import com.mygdx.game.engine.Families;
 import com.mygdx.game.engine.ItemFactory;
 import com.mygdx.game.engine.Mappers;
-import com.mygdx.game.engine.components.inventory.InventoryComponent;
-import com.mygdx.game.engine.components.inventory.InventorySlotComponent;
+import com.mygdx.game.engine.components.InventoryComponent;
+import com.mygdx.game.engine.components.InventorySlotComponent;
 import com.mygdx.game.utils.InventorySlot;
 
 public class InventoryTest extends EntitySystem {

@@ -6,10 +6,10 @@ import com.mygdx.game.engine.components.AttackRange;
 import com.mygdx.game.engine.components.DetectionProximity;
 import com.mygdx.game.engine.components.EnemyStateMachine;
 import com.mygdx.game.engine.components.ExpComponent;
-import com.mygdx.game.engine.components.inventory.InventoryComponent;
-import com.mygdx.game.engine.components.inventory.items.shared.DescriptionComponent;
-import com.mygdx.game.engine.components.inventory.items.shared.InventoryItemComponent;
-import com.mygdx.game.engine.components.inventory.InventorySlotComponent;
+import com.mygdx.game.engine.components.InventoryComponent;
+import com.mygdx.game.engine.components.DescriptionComponent;
+import com.mygdx.game.engine.components.InventoryItemComponent;
+import com.mygdx.game.engine.components.InventorySlotComponent;
 import com.mygdx.game.engine.components.Item;
 import com.mygdx.game.engine.components.LevelComponent;
 import com.mygdx.game.engine.components.ManaComponent;
@@ -30,8 +30,8 @@ import com.mygdx.game.engine.components.Player;
 import com.mygdx.game.engine.components.Position;
 import com.mygdx.game.engine.components.Size;
 import com.mygdx.game.engine.components.Speed;
-import com.mygdx.game.engine.components.inventory.items.shared.QuantityComponent;
-import com.mygdx.game.engine.components.inventory.items.shared.RarityComponent;
+import com.mygdx.game.engine.components.QuantityComponent;
+import com.mygdx.game.engine.components.RarityComponent;
 
 public class ComponentGrabber {
 

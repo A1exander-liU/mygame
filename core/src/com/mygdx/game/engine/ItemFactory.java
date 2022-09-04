@@ -7,17 +7,15 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.JsonValue;
 import com.mygdx.game.JsonItemFinder;
 import com.mygdx.game.MyGame;
-import com.mygdx.game.engine.components.inventory.items.individual.ArmourBaseStatComponent;
-import com.mygdx.game.engine.components.inventory.items.individual.ArmourStatComponent;
+import com.mygdx.game.engine.components.ArmourBaseStatComponent;
 import com.mygdx.game.engine.components.Name;
 import com.mygdx.game.engine.components.Sprite;
-import com.mygdx.game.engine.components.inventory.items.individual.StackableComponent;
-import com.mygdx.game.engine.components.inventory.items.individual.WeaponBaseStatComponent;
-import com.mygdx.game.engine.components.inventory.items.individual.WeaponStatComponent;
-import com.mygdx.game.engine.components.inventory.items.shared.DescriptionComponent;
-import com.mygdx.game.engine.components.inventory.items.shared.InventoryItemComponent;
-import com.mygdx.game.engine.components.inventory.items.shared.QuantityComponent;
-import com.mygdx.game.engine.components.inventory.items.shared.RarityComponent;
+import com.mygdx.game.engine.components.StackableComponent;
+import com.mygdx.game.engine.components.WeaponBaseStatComponent;
+import com.mygdx.game.engine.components.DescriptionComponent;
+import com.mygdx.game.engine.components.InventoryItemComponent;
+import com.mygdx.game.engine.components.QuantityComponent;
+import com.mygdx.game.engine.components.RarityComponent;
 
 public class ItemFactory {
     JsonItemFinder itemFinder;

@@ -9,7 +9,7 @@ import com.mygdx.game.engine.ItemFactory;
 import com.mygdx.game.engine.ItemType;
 import com.mygdx.game.engine.Mappers;
 import com.mygdx.game.engine.Rarity;
-import com.mygdx.game.engine.components.inventory.items.individual.AffixesComponent;
+import com.mygdx.game.engine.components.AffixesComponent;
 
 import java.util.HashMap;
 import java.util.Objects;

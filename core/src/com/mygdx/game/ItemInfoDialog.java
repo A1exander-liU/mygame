@@ -14,9 +14,9 @@ import com.badlogic.gdx.utils.Scaling;
 import com.mygdx.game.engine.Families;
 import com.mygdx.game.engine.Mappers;
 import com.mygdx.game.engine.ItemType;
-import com.mygdx.game.engine.components.inventory.items.individual.AffixesComponent;
-import com.mygdx.game.engine.components.inventory.items.individual.ArmourBaseStatComponent;
-import com.mygdx.game.engine.components.inventory.items.individual.WeaponBaseStatComponent;
+import com.mygdx.game.engine.components.AffixesComponent;
+import com.mygdx.game.engine.components.ArmourBaseStatComponent;
+import com.mygdx.game.engine.components.WeaponBaseStatComponent;
 import com.mygdx.game.utils.InventorySlot;
 
 public class ItemInfoDialog extends Dialog {

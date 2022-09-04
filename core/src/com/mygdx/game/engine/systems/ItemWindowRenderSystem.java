@@ -3,34 +3,22 @@ package com.mygdx.game.engine.systems;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputMultiplexer;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Cell;
-import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.Window;
-import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.mygdx.game.ItemInfoDialog;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.Families;
 import com.mygdx.game.engine.Mappers;
-import com.mygdx.game.engine.components.inventory.InventoryComponent;
-import com.mygdx.game.screens.GameScreen;
+import com.mygdx.game.engine.components.InventoryComponent;
 import com.mygdx.game.utils.InventorySlot;
 
 import java.util.Objects;
-
-import jdk.javadoc.internal.doclets.toolkit.taglets.UserTaglet;
 
 
 public class ItemWindowRenderSystem extends EntitySystem {

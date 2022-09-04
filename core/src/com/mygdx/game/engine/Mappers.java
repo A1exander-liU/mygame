@@ -8,9 +8,9 @@ import com.mygdx.game.engine.components.DetectionProximity;
 import com.mygdx.game.engine.components.Enemy;
 import com.mygdx.game.engine.components.EnemyStateMachine;
 import com.mygdx.game.engine.components.RemovableComponent;
-import com.mygdx.game.engine.components.inventory.items.individual.AffixesComponent;
-import com.mygdx.game.engine.components.inventory.items.individual.ArmourBaseStatComponent;
-import com.mygdx.game.engine.components.inventory.items.individual.ArmourStatComponent;
+import com.mygdx.game.engine.components.AffixesComponent;
+import com.mygdx.game.engine.components.ArmourBaseStatComponent;
+import com.mygdx.game.engine.components.ArmourStatComponent;
 import com.mygdx.game.engine.components.ExpComponent;
 import com.mygdx.game.engine.components.Health;
 import com.mygdx.game.engine.components.ID;
@@ -31,15 +31,15 @@ import com.mygdx.game.engine.components.Speed;
 import com.mygdx.game.engine.components.Sprite;
 import com.mygdx.game.engine.components.StateComponent;
 import com.mygdx.game.engine.components.Steering;
-import com.mygdx.game.engine.components.inventory.items.individual.StackableComponent;
-import com.mygdx.game.engine.components.inventory.items.individual.WeaponBaseStatComponent;
-import com.mygdx.game.engine.components.inventory.items.individual.WeaponStatComponent;
-import com.mygdx.game.engine.components.inventory.InventoryComponent;
-import com.mygdx.game.engine.components.inventory.InventorySlotComponent;
-import com.mygdx.game.engine.components.inventory.items.shared.DescriptionComponent;
-import com.mygdx.game.engine.components.inventory.items.shared.InventoryItemComponent;
-import com.mygdx.game.engine.components.inventory.items.shared.QuantityComponent;
-import com.mygdx.game.engine.components.inventory.items.shared.RarityComponent;
+import com.mygdx.game.engine.components.StackableComponent;
+import com.mygdx.game.engine.components.WeaponBaseStatComponent;
+import com.mygdx.game.engine.components.WeaponStatComponent;
+import com.mygdx.game.engine.components.InventoryComponent;
+import com.mygdx.game.engine.components.InventorySlotComponent;
+import com.mygdx.game.engine.components.DescriptionComponent;
+import com.mygdx.game.engine.components.InventoryItemComponent;
+import com.mygdx.game.engine.components.QuantityComponent;
+import com.mygdx.game.engine.components.RarityComponent;
 
 
 public class Mappers {
