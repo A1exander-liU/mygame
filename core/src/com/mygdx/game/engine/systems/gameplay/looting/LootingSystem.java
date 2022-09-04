@@ -1,4 +1,4 @@
-package com.mygdx.game.engine.systems;
+package com.mygdx.game.engine.systems.gameplay.looting;
 
 import com.badlogic.ashley.core.EntitySystem;
 import com.mygdx.game.LootGenerator;
