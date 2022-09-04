@@ -1,4 +1,4 @@
-package com.mygdx.game.items;
+package com.mygdx.game.equipgeneration;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.JsonReader;

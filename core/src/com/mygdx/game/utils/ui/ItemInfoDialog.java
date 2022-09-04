@@ -11,7 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Scaling;
-import com.mygdx.game.CharAttributes;
+import com.mygdx.game.inventory.gameitem.CharAttributes;
 import com.mygdx.game.inventory.InventoryUi;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.inventory.gameitem.RarityColour;

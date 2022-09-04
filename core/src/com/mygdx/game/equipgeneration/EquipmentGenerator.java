@@ -1,11 +1,11 @@
-package com.mygdx.game.items;
+package com.mygdx.game.equipgeneration;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
-import com.mygdx.game.CharAttributes;
+import com.mygdx.game.inventory.gameitem.CharAttributes;
 import com.mygdx.game.engine.utils.factories.ItemFactory;
 import com.mygdx.game.inventory.gameitem.ItemType;
 import com.mygdx.game.engine.utils.componentutils.Mappers;

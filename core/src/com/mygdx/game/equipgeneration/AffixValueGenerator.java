@@ -1,4 +1,4 @@
-package com.mygdx.game.items;
+package com.mygdx.game.equipgeneration;
 
 import com.mygdx.game.utils.RandomNumberGenerator;
 

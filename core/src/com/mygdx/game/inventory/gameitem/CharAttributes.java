@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.game.inventory.gameitem;
 
 public enum CharAttributes {
     // different values affixes can have
