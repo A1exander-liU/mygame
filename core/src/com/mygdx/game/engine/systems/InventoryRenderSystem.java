@@ -52,7 +52,9 @@ public class InventoryRenderSystem extends EntitySystem {
 
     Table root;
     Table inventory;
+    Table equipAndCoins;
     Table equipSlots;
+    Label coins;
     Table outerTable;
     Table inventorySettings;
     ScrollPane inventoryScroll;
@@ -117,14 +119,25 @@ public class InventoryRenderSystem extends EntitySystem {
         inventory.setSize(root.getWidth() * 0.75f, root.getHeight() * 0.60f);
         root.add(inventory).expand().center().width(inventory.getWidth()).height(inventory.getHeight());
 
+        equipAndCoins = new Table();
+        equipAndCoins.setName("equipAndCoins");
+
         // build the tables in constructor
         // only slots will be cleared and added each frame
         equipSlots = new Table();
         equipSlots.setName("equipSlots");
 
         // setting up the equipSlots table
-        equipSlots.setSize(inventory.getWidth() * 0.4f, inventory.getHeight() * 0.95f);
-        inventory.add(equipSlots).expand().width(equipSlots.getWidth()).height(equipSlots.getHeight());
+//        equipSlots.setSize(inventory.getWidth() * 0.4f, inventory.getHeight() * 0.95f);
+//        inventory.add(equipSlots).expand().width(equipSlots.getWidth()).height(equipSlots.getHeight());
+
+        equipAndCoins.setSize(inventory.getWidth() * 0.4f, inventory.getHeight() * 0.9f);
+        inventory.add(equipAndCoins).expand().width(equipAndCoins.getWidth()).height(equipAndCoins.getHeight());
+
+        equipAndCoins.add(equipSlots).expand().width(equipAndCoins.getWidth()).height(equipAndCoins.getHeight() * 0.85f);
+        coins = new Label("Coins: " + Mappers.inventory.get(player).coinPouch, skin, "pixel2D", Color.BLACK);
+        equipAndCoins.row();
+        equipAndCoins.add(coins);
 
         equipSlots.defaults().expand().width(equipSlots.getWidth() / 3).height(equipSlots.getHeight() / 4);
 
