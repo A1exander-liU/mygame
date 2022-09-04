@@ -9,7 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
-import com.mygdx.game.InventoryUi;
+import com.mygdx.game.inventory.InventoryUi;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.utils.componentutils.Families;
 import com.mygdx.game.engine.utils.componentutils.Mappers;

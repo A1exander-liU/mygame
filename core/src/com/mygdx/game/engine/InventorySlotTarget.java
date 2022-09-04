@@ -2,7 +2,7 @@ package com.mygdx.game.engine;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
-import com.mygdx.game.InventoryUi;
+import com.mygdx.game.inventory.InventoryUi;
 import com.mygdx.game.engine.utils.componentutils.Mappers;
 import com.mygdx.game.utils.ui.ItemSplitDialog;
 import com.mygdx.game.utils.ui.InventorySlot;

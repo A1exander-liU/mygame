@@ -12,7 +12,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Scaling;
 import com.mygdx.game.CharAttributes;
-import com.mygdx.game.InventoryUi;
+import com.mygdx.game.inventory.InventoryUi;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.RarityColour;
 import com.mygdx.game.engine.utils.componentutils.Families;

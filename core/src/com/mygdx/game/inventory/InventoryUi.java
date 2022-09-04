@@ -1,7 +1,8 @@
-package com.mygdx.game;
+package com.mygdx.game.inventory;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.utils.Array;
+import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.utils.componentutils.Families;
 import com.mygdx.game.engine.utils.componentutils.Mappers;
 import com.mygdx.game.screens.GameScreen;

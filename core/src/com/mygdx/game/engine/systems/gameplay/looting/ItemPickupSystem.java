@@ -5,7 +5,7 @@ import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.math.Rectangle;
 import com.mygdx.game.utils.map.GameMapProperties;
-import com.mygdx.game.InventoryUi;
+import com.mygdx.game.inventory.InventoryUi;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.utils.componentutils.Families;
 import com.mygdx.game.engine.utils.componentutils.Mappers;
