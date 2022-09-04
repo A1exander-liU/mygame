@@ -117,10 +117,8 @@ public class ItemInfoDialog extends Dialog {
         WeaponBaseStatComponent weaponBaseStat = Mappers.weaponBaseStat.get(item);
         AffixesComponent affixes = Mappers.affixes.get(item);
 
-        Label dmgTitle = new Label("DMG", getSkin(), "pixel2D", Color.BLACK);
-        Label atkSpdTitle = new Label("Atk.Spd", getSkin(), "pixel2D", Color.BLACK);
-        Label dmg = new Label(weaponBaseStat.minDmg + " - " + weaponBaseStat.maxDmg, getSkin(), "pixel2D", Color.BLACK);
-        Label atkSpd = new Label("" + weaponBaseStat.attackDelay, getSkin(), "pixel2D", Color.BLACK);
+        Label dmg = new Label("DMG " +weaponBaseStat.minDmg + " - " + weaponBaseStat.maxDmg, getSkin(), "pixel2D", Color.BLACK);
+        Label atkSpd = new Label("Atk.Spd " + weaponBaseStat.attackDelay, getSkin(), "pixel2D", Color.BLACK);
 
         Label desc = new Label("\"" + Mappers.description.get(item).description + "\"", getSkin(), "pixel2D", Color.BLACK);
         desc.setAlignment(Align.center);
@@ -128,10 +126,8 @@ public class ItemInfoDialog extends Dialog {
 
         Table weaponStatTable = new Table();
         weaponStatTable.defaults().expand().fill().space(5);
-        weaponStatTable.add(dmgTitle);
         weaponStatTable.add(dmg);
         weaponStatTable.row();
-        weaponStatTable.add(atkSpdTitle);
         weaponStatTable.add(atkSpd);
         weaponStatTable.row();
 
@@ -139,10 +135,8 @@ public class ItemInfoDialog extends Dialog {
         for (int i = 0; i < affixes.affixes.size; i++) {
             CharAttributes affix = affixes.affixes.get(i);
             // make label for name of the affix and the value
-            Label affixName = new Label(affix.getAttributeName(), getSkin(), "pixel2D", Color.BLACK);
-            Label affixValue = new Label(""+affix.getValue(), getSkin(), "pixel2D", Color.BLACK);
-            weaponStatTable.add(affixValue);
-            weaponStatTable.add(affixName);
+            Label affixLabel = new Label(affix.getValue() + " " + affix.getAttributeName(), getSkin(), "pixel2D", Color.BLACK);
+            weaponStatTable.add(affixLabel);
             weaponStatTable.row();
         }
 
