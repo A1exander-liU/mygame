@@ -14,7 +14,7 @@ import com.mygdx.game.utils.map.GameMapProperties;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.utils.ComponentGrabber;
 import com.mygdx.game.engine.Direction;
-import com.mygdx.game.engine.Families;
+import com.mygdx.game.engine.utils.Families;
 import com.mygdx.game.engine.components.AttackRange;
 import com.mygdx.game.engine.components.Orientation;
 import com.mygdx.game.engine.components.ParameterComponent;

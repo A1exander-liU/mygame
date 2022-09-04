@@ -13,8 +13,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.MyGame;
-import com.mygdx.game.engine.Families;
-import com.mygdx.game.engine.Mappers;
+import com.mygdx.game.engine.utils.Families;
+import com.mygdx.game.engine.utils.Mappers;
 import com.mygdx.game.engine.components.InventoryComponent;
 import com.mygdx.game.utils.ui.InventorySlot;
 

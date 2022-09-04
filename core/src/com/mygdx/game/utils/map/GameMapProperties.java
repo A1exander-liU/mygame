@@ -9,7 +9,7 @@ import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.EntityFactory;
-import com.mygdx.game.engine.Families;
+import com.mygdx.game.engine.utils.Families;
 
 public class GameMapProperties {
     public TiledMap tiledMap;

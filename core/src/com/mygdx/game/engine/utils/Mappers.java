@@ -1,4 +1,4 @@
-package com.mygdx.game.engine;
+package com.mygdx.game.engine.utils;
 
 import com.badlogic.ashley.core.ComponentMapper;
 import com.mygdx.game.engine.components.AttackRange;

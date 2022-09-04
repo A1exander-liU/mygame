@@ -8,10 +8,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.MyGame;
-import com.mygdx.game.engine.Families;
-import com.mygdx.game.engine.Mappers;
+import com.mygdx.game.engine.utils.Families;
+import com.mygdx.game.engine.utils.Mappers;
 import com.mygdx.game.engine.Rarity;
-import com.mygdx.game.utils.ui.InventorySlot;
 
 public class RarityFilterBox extends SelectBox<String> {
 

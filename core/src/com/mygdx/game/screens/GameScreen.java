@@ -17,7 +17,7 @@ import com.mygdx.game.utils.map.MapObjectDrawer;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.utils.map.GameMapProperties;
 import com.mygdx.game.engine.EntityFactory;
-import com.mygdx.game.engine.EntityToMapAdder;
+import com.mygdx.game.engine.utils.EntityToMapAdder;
 import com.mygdx.game.engine.ItemFactory;
 import com.mygdx.game.engine.entityListeners.EnemyRemovalListener;
 import com.mygdx.game.engine.systems.EnemyDeathSystem;

@@ -7,7 +7,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.utils.ComponentGrabber;
-import com.mygdx.game.engine.Families;
+import com.mygdx.game.engine.utils.Families;
 import com.mygdx.game.engine.components.Position;
 import com.mygdx.game.engine.components.Speed;
 

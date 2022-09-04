@@ -15,13 +15,12 @@ import com.mygdx.game.CharAttributes;
 import com.mygdx.game.InventoryUi;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.RarityColour;
-import com.mygdx.game.engine.Families;
-import com.mygdx.game.engine.Mappers;
+import com.mygdx.game.engine.utils.Families;
+import com.mygdx.game.engine.utils.Mappers;
 import com.mygdx.game.engine.ItemType;
 import com.mygdx.game.engine.components.AffixesComponent;
 import com.mygdx.game.engine.components.ArmourBaseStatComponent;
 import com.mygdx.game.engine.components.WeaponBaseStatComponent;
-import com.mygdx.game.utils.ui.InventorySlot;
 
 public class ItemInfoDialog extends Dialog {
 

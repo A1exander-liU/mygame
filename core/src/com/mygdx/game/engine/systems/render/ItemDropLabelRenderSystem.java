@@ -17,8 +17,8 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.utils.map.GameMapProperties;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.RarityColour;
-import com.mygdx.game.engine.Families;
-import com.mygdx.game.engine.Mappers;
+import com.mygdx.game.engine.utils.Families;
+import com.mygdx.game.engine.utils.Mappers;
 import com.mygdx.game.utils.map.EntityTextureObject;
 
 public class ItemDropLabelRenderSystem extends EntitySystem {

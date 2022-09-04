@@ -12,7 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.utils.ComponentGrabber;
 import com.mygdx.game.engine.EnemyState;
-import com.mygdx.game.engine.Families;
+import com.mygdx.game.engine.utils.Families;
 import com.mygdx.game.engine.components.Camera;
 import com.mygdx.game.engine.components.EnemyStateMachine;
 import com.mygdx.game.engine.components.ParameterComponent;
