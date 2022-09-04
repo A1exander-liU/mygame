@@ -118,7 +118,7 @@ public class ItemInfoDialog extends Dialog {
         AffixesComponent affixes = Mappers.affixes.get(item);
 
         Label dmgTitle = new Label("DMG", getSkin(), "pixel2D", Color.BLACK);
-        Label atkSpdTitle = new Label("Atk Spd", getSkin(), "pixel2D", Color.BLACK);
+        Label atkSpdTitle = new Label("Atk.Spd", getSkin(), "pixel2D", Color.BLACK);
         Label dmg = new Label(weaponBaseStat.minDmg + " - " + weaponBaseStat.maxDmg, getSkin(), "pixel2D", Color.BLACK);
         Label atkSpd = new Label("" + weaponBaseStat.attackDelay, getSkin(), "pixel2D", Color.BLACK);
 
@@ -161,11 +161,8 @@ public class ItemInfoDialog extends Dialog {
         ArmourBaseStatComponent armourBaseStat = Mappers.armourBaseStat.get(item);
         AffixesComponent affixes = Mappers.affixes.get(item);
 
-        Label pDefTitle = new Label("Phy.Def", getSkin(), "pixel2D", Color.BLACK);
-        Label mDefTitle = new Label("Mag.Def", getSkin(), "pixel2D", Color.BLACK);
-
-        Label pDef = new Label("" + armourBaseStat.phyDef, getSkin(), "pixel2D", Color.BLACK);
-        Label mDef = new Label("" + armourBaseStat.magDef, getSkin(), "pixel2D", Color.BLACK);
+        Label pDef = new Label("Phy.Def " + armourBaseStat.phyDef, getSkin(), "pixel2D", Color.BLACK);
+        Label mDef = new Label("Mag.Def " + armourBaseStat.magDef, getSkin(), "pixel2D", Color.BLACK);
 
         Label desc = new Label("\"" + Mappers.description.get(item).description + "\"", getSkin(), "pixel2D", Color.BLACK);
         desc.setAlignment(Align.center);
@@ -173,20 +170,16 @@ public class ItemInfoDialog extends Dialog {
 
         Table armourStatTable = new Table();
         armourStatTable.defaults().expand().fill().space(5);
-        armourStatTable.add(pDefTitle);
         armourStatTable.add(pDef);
         armourStatTable.row();
-        armourStatTable.add(mDefTitle);
         armourStatTable.add(mDef);
         armourStatTable.row();
 
         for (int i = 0; i < affixes.affixes.size; i++) {
             CharAttributes affix = affixes.affixes.get(i);
             // make label for each armour affix
-            Label affixValue = new Label("" + affix.getValue(), getSkin(), "pixel2D", Color.BLACK);
-            Label affixName = new Label(affix.getAttributeName(), getSkin(), "pixel2D", Color.BLACK);
-            armourStatTable.add(affixValue);
-            armourStatTable.add(affixName);
+            Label affixLabel = new Label(affix.getValue() + " " + affix.getAttributeName(), getSkin(), "pixel2D", Color.BLACK);
+            armourStatTable.add(affixLabel);
             armourStatTable.row();
         }
 
