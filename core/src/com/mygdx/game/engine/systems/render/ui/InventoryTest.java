@@ -6,7 +6,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.MyGame;
-import com.mygdx.game.engine.ComponentGrabber;
+import com.mygdx.game.engine.utils.ComponentGrabber;
 import com.mygdx.game.engine.Families;
 import com.mygdx.game.engine.ItemFactory;
 import com.mygdx.game.engine.Mappers;

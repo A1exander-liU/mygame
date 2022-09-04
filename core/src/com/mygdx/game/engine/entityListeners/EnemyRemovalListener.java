@@ -2,7 +2,7 @@ package com.mygdx.game.engine.entityListeners;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntityListener;
-import com.mygdx.game.engine.ComponentGrabber;
+import com.mygdx.game.engine.utils.ComponentGrabber;
 import com.mygdx.game.engine.Families;
 import com.mygdx.game.engine.components.Item;
 import com.mygdx.game.engine.systems.gameplay.movement.CollisionSystem;

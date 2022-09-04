@@ -25,7 +25,7 @@ import com.mygdx.game.engine.systems.gameplay.movement.MovementSystem;
 import com.mygdx.game.engine.systems.TimeSystem;
 import com.mygdx.game.utils.ui.ItemInfoDialog;
 import com.mygdx.game.MyGame;
-import com.mygdx.game.engine.ComponentGrabber;
+import com.mygdx.game.engine.utils.ComponentGrabber;
 import com.mygdx.game.engine.Families;
 import com.mygdx.game.engine.Mappers;
 import com.mygdx.game.engine.components.InventoryComponent;

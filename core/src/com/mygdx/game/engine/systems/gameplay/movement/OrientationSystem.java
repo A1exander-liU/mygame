@@ -5,7 +5,7 @@ import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.MyGame;
-import com.mygdx.game.engine.ComponentGrabber;
+import com.mygdx.game.engine.utils.ComponentGrabber;
 import com.mygdx.game.engine.Direction;
 import com.mygdx.game.engine.Families;
 import com.mygdx.game.engine.components.Position;

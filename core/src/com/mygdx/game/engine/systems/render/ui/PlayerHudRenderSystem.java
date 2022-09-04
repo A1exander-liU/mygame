@@ -17,7 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.MyGame;
-import com.mygdx.game.engine.ComponentGrabber;
+import com.mygdx.game.engine.utils.ComponentGrabber;
 import com.mygdx.game.engine.Families;
 import com.mygdx.game.engine.components.ExpComponent;
 import com.mygdx.game.engine.components.ManaComponent;

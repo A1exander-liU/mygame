@@ -8,7 +8,7 @@ import com.badlogic.gdx.maps.MapObjects;
 import com.mygdx.game.utils.map.GameMapProperties;
 import com.mygdx.game.utils.map.MapObjectDrawer;
 import com.mygdx.game.MyGame;
-import com.mygdx.game.engine.ComponentGrabber;
+import com.mygdx.game.engine.utils.ComponentGrabber;
 import com.mygdx.game.engine.Families;
 import com.mygdx.game.engine.components.Camera;
 import com.mygdx.game.engine.components.Enemy;

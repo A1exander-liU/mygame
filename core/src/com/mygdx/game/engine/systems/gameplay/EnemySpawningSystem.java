@@ -11,7 +11,7 @@ import com.mygdx.game.engine.systems.TimeSystem;
 import com.mygdx.game.engine.systems.gameplay.movement.CollisionSystem;
 import com.mygdx.game.utils.map.GameMapProperties;
 import com.mygdx.game.MyGame;
-import com.mygdx.game.engine.ComponentGrabber;
+import com.mygdx.game.engine.utils.ComponentGrabber;
 import com.mygdx.game.engine.EntityFactory;
 import com.mygdx.game.engine.Families;
 import com.mygdx.game.engine.components.Item;

@@ -12,7 +12,7 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.mygdx.game.JsonEnemyFinder;
 import com.mygdx.game.JsonItemFinder;
-import com.mygdx.game.engine.ComponentGrabber;
+import com.mygdx.game.engine.utils.ComponentGrabber;
 import com.mygdx.game.utils.map.MapObjectDrawer;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.utils.map.GameMapProperties;
