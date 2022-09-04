@@ -5,7 +5,7 @@ import com.badlogic.ashley.core.EntityListener;
 import com.mygdx.game.engine.ComponentGrabber;
 import com.mygdx.game.engine.Families;
 import com.mygdx.game.engine.components.Item;
-import com.mygdx.game.engine.systems.CollisionSystem;
+import com.mygdx.game.engine.systems.gameplay.movement.CollisionSystem;
 
 public class EnemyRemovalListener implements EntityListener {
     ComponentGrabber cg;
