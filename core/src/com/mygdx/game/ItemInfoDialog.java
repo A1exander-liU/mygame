@@ -116,10 +116,11 @@ public class ItemInfoDialog extends Dialog {
         WeaponBaseStatComponent weaponBaseStat = Mappers.weaponBaseStat.get(item);
         AffixesComponent affixes = Mappers.affixes.get(item);
         Label dmgTitle = new Label("DMG", getSkin(), "pixel2D", Color.BLACK);
+        dmgTitle.setAlignment(Align.center);
         Label atkSpdTitle = new Label("Attack Spd", getSkin(), "pixel2D", Color.BLACK);
-
+        atkSpdTitle.setAlignment(Align.center);
         Label dmg = new Label(weaponBaseStat.minDmg + " - " + weaponBaseStat.maxDmg, getSkin(), "pixel2D", Color.BLACK);
-
+        dmg.setAlignment(Align.center);
         Label desc = new Label("\"" + Mappers.description.get(item).description + "\"", getSkin(), "pixel2D", Color.BLACK);
         desc.setAlignment(Align.center);
         desc.setWrap(true);
@@ -135,11 +136,15 @@ public class ItemInfoDialog extends Dialog {
             CharAttributes affix = affixes.affixes.get(i);
             // make label for name of the affix and the value
             Label affixName = new Label(affix.getAttributeName(), getSkin(), "pixel2D", Color.BLACK);
+            affixName.setAlignment(Align.center);
             Label affixValue = new Label(""+affix.getValue(), getSkin(), "pixel2D", Color.BLACK);
-            weaponStatTable.add(affixName);
+            affixValue.setAlignment(Align.center);
             weaponStatTable.add(affixValue);
+            weaponStatTable.add(affixName);
             weaponStatTable.row();
         }
+
+        getContentTable().row();
         getContentTable().add(weaponStatTable);
         getContentTable().row();
         getContentTable().add(desc).grow().padTop(10);
