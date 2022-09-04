@@ -3,7 +3,7 @@ package com.mygdx.game.engine.components;
 import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.ai.fsm.StackStateMachine;
-import com.mygdx.game.engine.EnemyState;
+import com.mygdx.game.engine.utils.EnemyState;
 
 public class EnemyStateMachine extends StackStateMachine<Entity, EnemyState> implements Component {
     public Entity entity;

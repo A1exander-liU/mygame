@@ -11,7 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.utils.componentutils.ComponentGrabber;
-import com.mygdx.game.engine.EnemyState;
+import com.mygdx.game.engine.utils.EnemyState;
 import com.mygdx.game.engine.utils.componentutils.Families;
 import com.mygdx.game.engine.components.Camera;
 import com.mygdx.game.engine.components.EnemyStateMachine;

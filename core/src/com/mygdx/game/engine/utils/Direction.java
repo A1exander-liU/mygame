@@ -1,4 +1,4 @@
-package com.mygdx.game.engine;
+package com.mygdx.game.engine.utils;
 
 import com.badlogic.gdx.math.Vector2;
 

@@ -9,7 +9,7 @@ import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.JsonValue;
 import com.mygdx.game.MyGame;
-import com.mygdx.game.engine.EnemyState;
+import com.mygdx.game.engine.utils.EnemyState;
 import com.mygdx.game.engine.utils.entities.MobEntity;
 import com.mygdx.game.engine.utils.entities.PlayerEntity;
 import com.mygdx.game.engine.components.Camera;

@@ -12,7 +12,7 @@ import com.dongbat.jbump.Response;
 import com.dongbat.jbump.World;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.utils.componentutils.ComponentGrabber;
-import com.mygdx.game.engine.EnemyState;
+import com.mygdx.game.engine.utils.EnemyState;
 import com.mygdx.game.engine.utils.componentutils.Families;
 import com.mygdx.game.engine.utils.entities.MobEntity;
 import com.mygdx.game.engine.utils.entities.PlayerEntity;

@@ -7,7 +7,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.JsonValue;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.utils.componentutils.ComponentGrabber;
-import com.mygdx.game.engine.EnemyState;
+import com.mygdx.game.engine.utils.EnemyState;
 import com.mygdx.game.engine.utils.componentutils.Families;
 import com.mygdx.game.engine.components.ParameterComponent;
 import com.mygdx.game.engine.systems.TimeSystem;

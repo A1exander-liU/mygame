@@ -13,7 +13,7 @@ import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.utils.map.GameMapProperties;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.utils.componentutils.ComponentGrabber;
-import com.mygdx.game.engine.Direction;
+import com.mygdx.game.engine.utils.Direction;
 import com.mygdx.game.engine.utils.componentutils.Families;
 import com.mygdx.game.engine.components.AttackRange;
 import com.mygdx.game.engine.components.Orientation;
