@@ -6,7 +6,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.utils.Array;
-import com.mygdx.game.InventoryChangeListener;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.inventory.gameitem.AcceptedEquipType;
 import com.mygdx.game.engine.utils.componentutils.Families;
