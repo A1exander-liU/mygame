@@ -27,7 +27,7 @@ import com.mygdx.game.engine.systems.EntityRemovalSystem;
 import com.mygdx.game.engine.systems.render.HealthBarRenderSystem;
 import com.mygdx.game.engine.systems.render.ui.InventoryRenderSystem;
 import com.mygdx.game.engine.systems.render.ui.InventoryTest;
-import com.mygdx.game.engine.systems.ItemDropLabelRenderSystem;
+import com.mygdx.game.engine.systems.render.ItemDropLabelRenderSystem;
 import com.mygdx.game.engine.systems.gameplay.looting.ItemPickupSystem;
 import com.mygdx.game.engine.systems.render.ui.ItemWindowRenderSystem;
 import com.mygdx.game.engine.systems.gameplay.looting.LootingSystem;
