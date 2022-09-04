@@ -5,7 +5,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.JsonValue;
-import com.mygdx.game.JsonItemFinder;
+import com.mygdx.game.jsonreaders.JsonItemFinder;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.inventory.gameitem.ItemType;
 import com.mygdx.game.inventory.gameitem.Rarity;

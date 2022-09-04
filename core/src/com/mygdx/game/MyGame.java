@@ -5,6 +5,8 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.engine.utils.EntityToMapAdder;
+import com.mygdx.game.jsonreaders.JsonEnemyFinder;
+import com.mygdx.game.jsonreaders.JsonItemFinder;
 import com.mygdx.game.screens.GameScreen;
 import com.mygdx.game.screens.LoadingScreen;
 import com.mygdx.game.screens.MainMenuScreen;
