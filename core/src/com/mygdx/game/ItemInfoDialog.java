@@ -117,7 +117,7 @@ public class ItemInfoDialog extends Dialog {
         AffixesComponent affixes = Mappers.affixes.get(item);
 
         Label dmgTitle = new Label("DMG", getSkin(), "pixel2D", Color.BLACK);
-        Label atkSpdTitle = new Label("Attack Spd", getSkin(), "pixel2D", Color.BLACK);
+        Label atkSpdTitle = new Label("Atk Spd", getSkin(), "pixel2D", Color.BLACK);
         Label dmg = new Label(weaponBaseStat.minDmg + " - " + weaponBaseStat.maxDmg, getSkin(), "pixel2D", Color.BLACK);
         Label atkSpd = new Label("" + weaponBaseStat.attackDelay, getSkin(), "pixel2D", Color.BLACK);
 
