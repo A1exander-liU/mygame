@@ -17,7 +17,7 @@ import com.mygdx.game.MyGame;
 import com.mygdx.game.RarityColour;
 import com.mygdx.game.engine.utils.componentutils.Families;
 import com.mygdx.game.engine.utils.componentutils.Mappers;
-import com.mygdx.game.engine.utils.gameitem.ItemType;
+import com.mygdx.game.inventory.gameitem.ItemType;
 import com.mygdx.game.engine.components.AffixesComponent;
 import com.mygdx.game.engine.components.ArmourBaseStatComponent;
 import com.mygdx.game.engine.components.WeaponBaseStatComponent;

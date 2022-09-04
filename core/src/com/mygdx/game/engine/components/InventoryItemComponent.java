@@ -1,7 +1,7 @@
 package com.mygdx.game.engine.components;
 
 import com.badlogic.ashley.core.Component;
-import com.mygdx.game.engine.utils.gameitem.ItemType;
+import com.mygdx.game.inventory.gameitem.ItemType;
 
 public class InventoryItemComponent implements Component {
     public ItemType acceptedItemType;
