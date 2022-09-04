@@ -21,7 +21,7 @@ import com.mygdx.game.engine.EntityToMapAdder;
 import com.mygdx.game.engine.ItemFactory;
 import com.mygdx.game.engine.entityListeners.EnemyRemovalListener;
 import com.mygdx.game.engine.systems.EnemyDeathSystem;
-import com.mygdx.game.engine.systems.EnemyDropSystem;
+import com.mygdx.game.engine.systems.gameplay.looting.EnemyDropSystem;
 import com.mygdx.game.engine.systems.EnemySpawningSystem;
 import com.mygdx.game.engine.systems.EntityRemovalSystem;
 import com.mygdx.game.engine.systems.HealthBarRenderSystem;
