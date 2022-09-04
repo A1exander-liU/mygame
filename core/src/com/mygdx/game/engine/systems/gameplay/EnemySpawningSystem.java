@@ -1,4 +1,4 @@
-package com.mygdx.game.engine.systems;
+package com.mygdx.game.engine.systems.gameplay;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
@@ -7,6 +7,7 @@ import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.Rectangle;
+import com.mygdx.game.engine.systems.TimeSystem;
 import com.mygdx.game.engine.systems.gameplay.movement.CollisionSystem;
 import com.mygdx.game.utils.map.GameMapProperties;
 import com.mygdx.game.MyGame;
