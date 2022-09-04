@@ -2,7 +2,7 @@ package com.mygdx.game.engine;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.mygdx.game.GameMapProperties;
+import com.mygdx.game.utils.map.GameMapProperties;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.components.Name;
 import com.mygdx.game.engine.components.Sprite;

@@ -14,7 +14,7 @@ import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.EquipmentGenerator;
-import com.mygdx.game.GameMapProperties;
+import com.mygdx.game.utils.map.GameMapProperties;
 import com.mygdx.game.LootGenerator;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.utils.RandomNumberGenerator;

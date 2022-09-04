@@ -9,6 +9,7 @@ import com.mygdx.game.screens.GameScreen;
 import com.mygdx.game.screens.LoadingScreen;
 import com.mygdx.game.screens.MainMenuScreen;
 import com.mygdx.game.screens.SettingsScreen;
+import com.mygdx.game.utils.map.GameMapProperties;
 
 public class MyGame extends Game {
 	MainMenuScreen mainMenuScreen;

@@ -14,7 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Container;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.mygdx.game.GameMapProperties;
+import com.mygdx.game.utils.map.GameMapProperties;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.RarityColour;
 import com.mygdx.game.engine.Families;

@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.game.utils.map;
 
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.TextureMapObject;

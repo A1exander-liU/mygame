@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.game.utils.map;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.utils.ImmutableArray;
@@ -7,6 +7,7 @@ import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.EntityFactory;
 import com.mygdx.game.engine.Families;
 
