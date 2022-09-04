@@ -127,7 +127,7 @@ public class ItemInfoDialog extends Dialog {
         weaponStatTable.defaults().expand().fill().space(5);
         weaponStatTable.add(dmgTitle);
         weaponStatTable.add(dmg);
-        weaponStatTable.row();
+        weaponStatTable.row().row();
 
         getContentTable().row();
         getContentTable().add(weaponStatTable);
