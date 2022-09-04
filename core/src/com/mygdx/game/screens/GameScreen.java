@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.mygdx.game.engine.systems.saving.SaveTest;
 import com.mygdx.game.jsonreaders.JsonEnemyFinder;
 import com.mygdx.game.jsonreaders.JsonItemFinder;
 import com.mygdx.game.engine.utils.componentutils.ComponentGrabber;
@@ -137,6 +138,7 @@ public class GameScreen implements Screen {
         EnemyDropSystem enemyDropSystem = new EnemyDropSystem(itemFactory);
         ItemDropLabelRenderSystem itemDropLabelRenderSystem = new ItemDropLabelRenderSystem();
         ItemPickupSystem itemPickupSystem = new ItemPickupSystem();
+        SaveTest saveTest = new SaveTest();
         MyGame.engine.addSystem(movementSystem);
         MyGame.engine.addSystem(enemySpawningSystem);
         MyGame.engine.addSystem(steeringSystem);
@@ -158,6 +160,7 @@ public class GameScreen implements Screen {
         MyGame.engine.addSystem(enemyDropSystem);
         MyGame.engine.addSystem(itemDropLabelRenderSystem);
         MyGame.engine.addSystem(itemPickupSystem);
+        MyGame.engine.addSystem(saveTest);
         checkPriorities();
     }
 
