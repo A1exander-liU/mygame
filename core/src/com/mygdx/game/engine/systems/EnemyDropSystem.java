@@ -17,7 +17,7 @@ import com.mygdx.game.EquipmentGenerator;
 import com.mygdx.game.GameMapProperties;
 import com.mygdx.game.LootGenerator;
 import com.mygdx.game.MyGame;
-import com.mygdx.game.RandomNumberGenerator;
+import com.mygdx.game.utils.RandomNumberGenerator;
 import com.mygdx.game.engine.Families;
 import com.mygdx.game.engine.ItemFactory;
 import com.mygdx.game.engine.Mappers;

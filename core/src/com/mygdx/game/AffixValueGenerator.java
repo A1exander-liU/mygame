@@ -1,6 +1,6 @@
 package com.mygdx.game;
 
-import com.mygdx.game.engine.Rarity;
+import com.mygdx.game.utils.RandomNumberGenerator;
 
 import java.util.Random;
 

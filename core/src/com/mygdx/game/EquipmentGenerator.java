@@ -10,6 +10,7 @@ import com.mygdx.game.engine.ItemType;
 import com.mygdx.game.engine.Mappers;
 import com.mygdx.game.engine.Rarity;
 import com.mygdx.game.engine.components.AffixesComponent;
+import com.mygdx.game.utils.RandomNumberGenerator;
 
 import java.util.HashMap;
 import java.util.Objects;
