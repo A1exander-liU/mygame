@@ -1,4 +1,4 @@
-package com.mygdx.game.utils;
+package com.mygdx.game.utils.ui;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -9,41 +9,44 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.Families;
+import com.mygdx.game.engine.ItemType;
 import com.mygdx.game.engine.Mappers;
-import com.mygdx.game.engine.Rarity;
+import com.mygdx.game.utils.ui.InventorySlot;
 
-public class RarityFilterBox extends SelectBox<String> {
+public class ItemFilterBox extends SelectBox<String> {
 
-    Rarity currentFilter;
+    ItemType currentFilter;
     Entity player;
     Array<InventorySlot> currentInventory;
 
-    public RarityFilterBox(Skin skin) {
+    public ItemFilterBox(Skin skin) {
         super(skin);
         player = MyGame.engine.getEntitiesFor(Families.player).get(0);
-        setItems("All", "Common", "Uncommon", "Rare", "Epic", "Legendary", "Mythical");
+        setItems("All", "MainHand", "OffHand", "Accessory", "Head", "Torso", "Leg", "Feet",
+                 "Consumable", "Material");
         getList().setAlignment(Align.left);
         getStyle().listStyle.font.getData().setScale(.8f);
         addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                determineRarityFilter(getSelected());
+                determineItemFilter(getSelected());
                 filter();
             }
         });
     }
 
-    public RarityFilterBox(Skin skin, String actorName) {
+    public ItemFilterBox(Skin skin, String actorName) {
         super(skin);
         setName(actorName);
         player = MyGame.engine.getEntitiesFor(Families.player).get(0);
-        setItems("All", "Common", "Uncommon", "Rare", "Epic", "Legendary", "Mythical");
+        setItems("All", "MainHand", "OffHand", "Accessory", "Head", "Torso", "Leg", "Feet",
+                "Consumable", "Material");
         getList().setAlignment(Align.left);
         getStyle().listStyle.font.getData().setScale(.8f);
         addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                determineRarityFilter(getSelected());
+                determineItemFilter(getSelected());
 //                filter();
             }
         });
@@ -57,59 +60,71 @@ public class RarityFilterBox extends SelectBox<String> {
         this.currentInventory = currentInventory;
     }
 
-    private void determineRarityFilter(String selectedFilter) {
+    private void determineItemFilter(String selectedFilter) {
         switch (selectedFilter) {
             case "All":
-                // null will mean all
                 currentFilter = null;
                 break;
-            case "Common":
-                currentFilter = Rarity.COMMON;
+            case "MainHand":
+                currentFilter = ItemType.MAIN;
                 break;
-            case "Uncommon":
-                currentFilter = Rarity.UNCOMMON;
+            case "OffHand":
+                currentFilter = ItemType.OFF;
                 break;
-            case "Rare":
-                currentFilter = Rarity.RARE;
+            case "Accessory":
+                currentFilter = ItemType.ACCESSORY;
                 break;
-            case "Epic":
-                currentFilter = Rarity.EPIC;
+            case "Head":
+                currentFilter = ItemType.HEAD;
                 break;
-            case "Legendary":
-                currentFilter = Rarity.LEGENDARY;
+            case "Torso":
+                currentFilter = ItemType.TORSO;
                 break;
-            case "Mythical":
-                currentFilter = Rarity.MYTHICAL;
+            case "Leg":
+                currentFilter = ItemType.LEG;
+                break;
+            case "Feet":
+                currentFilter = ItemType.FEET;
+                break;
+            case "Consumable":
+                currentFilter = ItemType.CONSUMABLE;
+                break;
+            case "Material":
+                currentFilter = ItemType.MATERIAL;
                 break;
         }
     }
 
     private void filter() {
-        System.out.println(getSelected());
         Array<InventorySlot> filtered = new Array<>(0);
-        // use new array to store all filtered items
-        // once finished adding all filtered items (loop through currentInventory)
-        // set inventorySlots in InventoryComponent to filteredArray
-        // once inventory is exited or filter is back to all -> set with currentInventory
 
-        // return inventory back to normal and immediately return
-        // the filter will be under this if statement
         if (currentFilter == null) {
             Mappers.inventory.get(player).inventorySlots = currentInventory;
             return;
         }
-        // check the rarity
+
+        // how to make both filter work
+        // if rarity filter is set to COMMON
+        // common wil be selected
+        // then if you want to materials only
+        // have to look at current filtered inventory and pick out all the items
+
+        // then you change rarity filter back to all
+
+        // need a way for the two filters to communicate
+
         for (int i = 0; i < currentInventory.size; i++) {
-            if (!currentInventory.get(i).isEmpty() && Mappers.rarity.get(currentInventory.get(i).getOccupiedItem()).rarity == currentFilter)
+            if (!currentInventory.get(i).isEmpty() && Mappers.inventoryItem.get(currentInventory.get(i).getOccupiedItem()).acceptedItemType == currentFilter)
                 filtered.add(currentInventory.get(i));
         }
-        // add in all the empty slots
+
         for (int i = 0; i < currentInventory.size; i++) {
             if (currentInventory.get(i).isEmpty())
                 filtered.add(currentInventory.get(i));
         }
-        // set inventorySlots to filtered array to have it rendered
-        Mappers.inventory.get(player).inventorySlots = filtered;
-    }
 
+        Mappers.inventory.get(player).inventorySlots = filtered;
+
+
+    }
 }

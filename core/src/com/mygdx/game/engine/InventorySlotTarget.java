@@ -4,7 +4,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 import com.mygdx.game.InventoryUi;
 import com.mygdx.game.ItemSplitDialog;
-import com.mygdx.game.utils.InventorySlot;
+import com.mygdx.game.utils.ui.InventorySlot;
 
 import java.util.Objects;
 

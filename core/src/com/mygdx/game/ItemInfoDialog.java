@@ -17,7 +17,7 @@ import com.mygdx.game.engine.ItemType;
 import com.mygdx.game.engine.components.AffixesComponent;
 import com.mygdx.game.engine.components.ArmourBaseStatComponent;
 import com.mygdx.game.engine.components.WeaponBaseStatComponent;
-import com.mygdx.game.utils.InventorySlot;
+import com.mygdx.game.utils.ui.InventorySlot;
 
 public class ItemInfoDialog extends Dialog {
 

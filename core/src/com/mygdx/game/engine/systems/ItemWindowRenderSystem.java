@@ -16,7 +16,7 @@ import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.Families;
 import com.mygdx.game.engine.Mappers;
 import com.mygdx.game.engine.components.InventoryComponent;
-import com.mygdx.game.utils.InventorySlot;
+import com.mygdx.game.utils.ui.InventorySlot;
 
 import java.util.Objects;
 

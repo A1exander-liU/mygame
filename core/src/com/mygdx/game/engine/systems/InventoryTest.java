@@ -12,7 +12,7 @@ import com.mygdx.game.engine.ItemFactory;
 import com.mygdx.game.engine.Mappers;
 import com.mygdx.game.engine.components.InventoryComponent;
 import com.mygdx.game.engine.components.InventorySlotComponent;
-import com.mygdx.game.utils.InventorySlot;
+import com.mygdx.game.utils.ui.InventorySlot;
 
 public class InventoryTest extends EntitySystem {
     ComponentGrabber cg;

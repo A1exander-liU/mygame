@@ -10,7 +10,7 @@ import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.InventorySlotSource;
 import com.mygdx.game.engine.InventorySlotTarget;
 import com.mygdx.game.engine.ItemType;
-import com.mygdx.game.utils.InventorySlot;
+import com.mygdx.game.utils.ui.InventorySlot;
 
 public class InventoryComponent implements Component {
     // how many unique items can be held

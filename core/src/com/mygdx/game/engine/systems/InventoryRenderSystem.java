@@ -31,11 +31,11 @@ import com.mygdx.game.engine.systems.combat.BasicAttackSystem;
 import com.mygdx.game.engine.systems.combat.EnemyAttackSystem;
 import com.mygdx.game.engine.systems.enemyai.SteeringSystem;
 import com.mygdx.game.screens.GameScreen;
-import com.mygdx.game.utils.InventoryFilterListener;
-import com.mygdx.game.utils.InventorySlot;
-import com.mygdx.game.utils.ItemFilterBox;
-import com.mygdx.game.utils.QuickSortButton;
-import com.mygdx.game.utils.RarityFilterBox;
+import com.mygdx.game.utils.ui.InventoryFilterListener;
+import com.mygdx.game.utils.ui.InventorySlot;
+import com.mygdx.game.utils.ui.ItemFilterBox;
+import com.mygdx.game.utils.ui.QuickSortButton;
+import com.mygdx.game.utils.ui.RarityFilterBox;
 
 public class InventoryRenderSystem extends EntitySystem {
     ComponentGrabber cg;

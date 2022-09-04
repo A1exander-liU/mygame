@@ -10,10 +10,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.engine.Families;
-import com.mygdx.game.engine.ItemFactory;
 import com.mygdx.game.engine.Mappers;
-import com.mygdx.game.screens.GameScreen;
-import com.mygdx.game.utils.InventorySlot;
+import com.mygdx.game.utils.ui.InventorySlot;
 
 public class ItemSplitDialog extends Dialog {
 
