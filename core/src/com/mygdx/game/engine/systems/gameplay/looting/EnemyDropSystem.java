@@ -19,7 +19,7 @@ import com.mygdx.game.LootGenerator;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.utils.RandomNumberGenerator;
 import com.mygdx.game.engine.utils.componentutils.Families;
-import com.mygdx.game.engine.ItemFactory;
+import com.mygdx.game.engine.utils.factories.ItemFactory;
 import com.mygdx.game.engine.utils.componentutils.Mappers;
 import com.mygdx.game.engine.components.Position;
 import com.mygdx.game.engine.components.Size;

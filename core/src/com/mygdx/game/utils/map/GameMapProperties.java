@@ -8,7 +8,7 @@ import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.mygdx.game.MyGame;
-import com.mygdx.game.engine.EntityFactory;
+import com.mygdx.game.engine.utils.factories.EntityFactory;
 import com.mygdx.game.engine.utils.componentutils.Families;
 
 public class GameMapProperties {

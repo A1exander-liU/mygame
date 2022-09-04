@@ -5,7 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
-import com.mygdx.game.engine.ItemFactory;
+import com.mygdx.game.engine.utils.factories.ItemFactory;
 import com.mygdx.game.engine.ItemType;
 import com.mygdx.game.engine.utils.componentutils.Mappers;
 import com.mygdx.game.engine.Rarity;

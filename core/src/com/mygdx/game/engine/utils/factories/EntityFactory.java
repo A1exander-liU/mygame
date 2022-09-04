@@ -1,4 +1,4 @@
-package com.mygdx.game.engine;
+package com.mygdx.game.engine.utils.factories;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
@@ -9,6 +9,9 @@ import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.JsonValue;
 import com.mygdx.game.MyGame;
+import com.mygdx.game.engine.EnemyState;
+import com.mygdx.game.engine.MobEntity;
+import com.mygdx.game.engine.PlayerEntity;
 import com.mygdx.game.engine.components.Camera;
 import com.mygdx.game.engine.components.CollidableComponent;
 import com.mygdx.game.engine.components.EnemyStateMachine;

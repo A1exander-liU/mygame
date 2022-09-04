@@ -1,4 +1,4 @@
-package com.mygdx.game.engine;
+package com.mygdx.game.engine.utils.factories;
 
 
 import com.badlogic.ashley.core.Entity;
@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.JsonValue;
 import com.mygdx.game.JsonItemFinder;
 import com.mygdx.game.MyGame;
+import com.mygdx.game.engine.ItemType;
+import com.mygdx.game.engine.Rarity;
 import com.mygdx.game.engine.components.ArmourBaseStatComponent;
 import com.mygdx.game.engine.components.Name;
 import com.mygdx.game.engine.components.Sprite;
