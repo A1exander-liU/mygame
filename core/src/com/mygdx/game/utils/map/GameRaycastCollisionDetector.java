@@ -9,7 +9,7 @@ import com.dongbat.jbump.CollisionFilter;
 import com.dongbat.jbump.Item;
 import com.dongbat.jbump.ItemInfo;
 import com.dongbat.jbump.Response;
-import com.mygdx.game.engine.MobEntity;
+import com.mygdx.game.engine.utils.entities.MobEntity;
 import com.mygdx.game.engine.systems.gameplay.movement.CollisionSystem;
 
 import java.util.ArrayList;

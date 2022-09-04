@@ -3,7 +3,7 @@ package com.mygdx.game.aiTasks.enemy.steering;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.ai.btree.LeafTask;
 import com.badlogic.gdx.ai.btree.Task;
-import com.mygdx.game.engine.MobEntity;
+import com.mygdx.game.engine.utils.entities.MobEntity;
 import com.mygdx.game.engine.components.MovementBehavior;
 import com.mygdx.game.engine.components.Steering;
 

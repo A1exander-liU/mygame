@@ -10,7 +10,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.utils.map.GameMapProperties;
 import com.mygdx.game.utils.map.GameLocation;
 import com.mygdx.game.MyGame;
-import com.mygdx.game.engine.MobEntity;
+import com.mygdx.game.engine.utils.entities.MobEntity;
 import com.mygdx.game.engine.components.MovementBehavior;
 import com.mygdx.game.engine.components.Size;
 import com.mygdx.game.engine.components.Spawn;

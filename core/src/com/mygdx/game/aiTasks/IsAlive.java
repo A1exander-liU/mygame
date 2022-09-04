@@ -3,7 +3,7 @@ package com.mygdx.game.aiTasks;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.ai.btree.LeafTask;
 import com.badlogic.gdx.ai.btree.Task;
-import com.mygdx.game.engine.MobEntity;
+import com.mygdx.game.engine.utils.entities.MobEntity;
 import com.mygdx.game.engine.components.Enemy;
 
 public class IsAlive extends LeafTask<MobEntity> {

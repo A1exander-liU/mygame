@@ -1,4 +1,4 @@
-package com.mygdx.game.engine;
+package com.mygdx.game.engine.utils.entities;
 
 import com.badlogic.ashley.core.Entity;
 import com.mygdx.game.engine.components.Camera;
