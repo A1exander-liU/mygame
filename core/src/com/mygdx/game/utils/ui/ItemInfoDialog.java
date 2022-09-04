@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.game.utils.ui;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.graphics.Color;
@@ -11,6 +11,10 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Scaling;
+import com.mygdx.game.CharAttributes;
+import com.mygdx.game.InventoryUi;
+import com.mygdx.game.MyGame;
+import com.mygdx.game.RarityColour;
 import com.mygdx.game.engine.Families;
 import com.mygdx.game.engine.Mappers;
 import com.mygdx.game.engine.ItemType;
