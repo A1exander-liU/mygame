@@ -138,7 +138,7 @@ public class GameScreen implements Screen {
         EnemyDropSystem enemyDropSystem = new EnemyDropSystem(itemFactory);
         ItemDropLabelRenderSystem itemDropLabelRenderSystem = new ItemDropLabelRenderSystem();
         ItemPickupSystem itemPickupSystem = new ItemPickupSystem();
-        SaveTest saveTest = new SaveTest();
+        SaveTest saveTest = new SaveTest(parent);
         MyGame.engine.addSystem(movementSystem);
         MyGame.engine.addSystem(enemySpawningSystem);
         MyGame.engine.addSystem(steeringSystem);
