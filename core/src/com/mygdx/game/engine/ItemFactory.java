@@ -47,73 +47,7 @@ public class ItemFactory {
         return materialEntity;
     }
 
-    public Entity makeWeapon(String weaponName) {
-        JsonValue weapon = itemFinder.findWeaponByName(weaponName);
-        Entity weaponEntity = new Entity();
-        weaponEntity.add(new Name());
-        weaponEntity.add(new Sprite());
-        weaponEntity.add(new RarityComponent());
-        weaponEntity.add(new DescriptionComponent());
-        weaponEntity.add(new InventoryItemComponent(ItemType.MAIN));
-        weaponEntity.add(new WeaponStatComponent());
-
-        Mappers.name.get(weaponEntity).name = weapon.getString("name");
-        Mappers.sprite.get(weaponEntity).texture = new Texture(Gdx.files.internal(weapon.getString("sprite")));
-        Mappers.rarity.get(weaponEntity).rarity = determineRarity(weapon.getString("rarity"));
-        Mappers.description.get(weaponEntity).description = weapon.getString("desc");
-
-        WeaponStatComponent weaponStat = Mappers.weaponStat.get(weaponEntity);
-        weaponStat.minDmg = weapon.getInt("minDmg");
-        weaponStat.maxDmg = weapon.getInt("maxDmg");
-        weaponStat.attackDelay = weapon.getFloat("attackDelay");
-        weaponStat.critChance = weapon.getFloat("critChance");
-        weaponStat.critDmg = weapon.getFloat("critDmg");
-
-        addToEngine(weaponEntity);
-        return weaponEntity;
-    }
-
-    public Entity makeArmour(String name, AcceptedEquipType armourType) {
-        Entity armourEntity = new Entity();
-        JsonValue armour = null;
-        if (armourType == AcceptedEquipType.HEAD) {
-            armour = itemFinder.findHeadArmourByName(name);
-            armourEntity.add(new InventoryItemComponent(ItemType.HEAD));
-        }
-        else if (armourType == AcceptedEquipType.TORSO) {
-            armour = itemFinder.findChestArmourByName(name);
-            armourEntity.add(new InventoryItemComponent(ItemType.TORSO));
-        }
-        else if (armourType == AcceptedEquipType.LEG) {
-            armour = itemFinder.findLegArmourByName(name);
-            armourEntity.add(new InventoryItemComponent(ItemType.LEG));
-        }
-        else if (armourType == AcceptedEquipType.FEET) {
-            armour = itemFinder.findFeetArmourByName(name);
-            armourEntity.add(new InventoryItemComponent(ItemType.FEET));
-        }
-        armourEntity.add(new Name());
-        armourEntity.add(new Sprite());
-        armourEntity.add(new RarityComponent());
-        armourEntity.add(new DescriptionComponent());
-        armourEntity.add(new ArmourStatComponent());
-
-        Mappers.name.get(armourEntity).name = armour.getString("name");
-        Mappers.sprite.get(armourEntity).texture = new Texture(Gdx.files.internal(armour.getString("sprite")));
-        Mappers.rarity.get(armourEntity).rarity = determineRarity(armour.getString("rarity"));
-        Mappers.description.get(armourEntity).description = armour.getString("desc");
-
-        ArmourStatComponent armourStat = Mappers.armourStat.get(armourEntity);
-        armourStat.physicalDef = armour.getInt("physicalDef");
-        armourStat.magicalDef = armour.getInt("magicalDef");
-        armourStat.hp = armour.getInt("hp");
-        armourStat.mp = armour.getInt("mp");
-
-        addToEngine(armourEntity);
-        return armourEntity;
-    }
-
-    public Entity makeWeapon2(JsonValue item, Rarity rarity) {
+    public Entity makeWeapon(JsonValue item, Rarity rarity) {
         Entity weaponEntity = new Entity();
         weaponEntity.add(new Name(item.getString("name")));
         weaponEntity.add(new Sprite(new Texture(Gdx.files.internal(item.getString("sprite")))));
@@ -127,7 +61,7 @@ public class ItemFactory {
         return weaponEntity;
     }
 
-    public Entity makeArmour2(JsonValue item, Rarity rarity, ItemType itemType) {
+    public Entity makeArmour(JsonValue item, Rarity rarity, ItemType itemType) {
         Entity armourEntity = new Entity();
         armourEntity.add(new Name(item.getString("name")));
         armourEntity.add(new Sprite(new Texture(Gdx.files.internal(item.getString("sprite")))));

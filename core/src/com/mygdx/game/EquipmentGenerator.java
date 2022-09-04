@@ -83,7 +83,7 @@ public class EquipmentGenerator {
     }
 
     private Entity makeMain(JsonValue item, Rarity itemRarity) {
-        Entity weaponEntity = itemFactory.makeWeapon2(item, itemRarity);
+        Entity weaponEntity = itemFactory.makeWeapon(item, itemRarity);
         HashMap<Rarity, float[]> modifiers = generateModifiers();
         HashMap<Rarity, int[]> affixes = generateAffixesAmount();
         float modifier = rollModifier(modifiers, itemRarity);
@@ -104,7 +104,7 @@ public class EquipmentGenerator {
     }
 
     private Entity makeArmor(JsonValue item, Rarity itemRarity, ItemType itemType) {
-        Entity armourEntity = itemFactory.makeArmour2(item, itemRarity, itemType);
+        Entity armourEntity = itemFactory.makeArmour(item, itemRarity, itemType);
         HashMap<Rarity, float[]> modifiers = generateModifiers();
         HashMap<Rarity, int[]> affixes = generateAffixesAmount();
         float modifier = rollModifier(modifiers, itemRarity);
