@@ -15,6 +15,7 @@ import com.mygdx.game.engine.Families;
 import com.mygdx.game.engine.Mappers;
 import com.mygdx.game.engine.ItemType;
 import com.mygdx.game.engine.components.inventory.items.individual.ArmourStatComponent;
+import com.mygdx.game.engine.components.inventory.items.individual.WeaponBaseStatComponent;
 import com.mygdx.game.engine.components.inventory.items.individual.WeaponStatComponent;
 import com.mygdx.game.utils.InventorySlot;
 
@@ -112,16 +113,11 @@ public class ItemInfoDialog extends Dialog {
     }
 
     public void addWeaponInfo() {
-        WeaponStatComponent weaponStat = Mappers.weaponStat.get(item);
+        WeaponBaseStatComponent weaponBaseStat = Mappers.weaponBaseStat.get(item);
         Label dmgTitle = new Label("DMG", getSkin(), "pixel2D", Color.BLACK);
-        Label attackDelayTitle = new Label("Attack Delay", getSkin(), "pixel2D", Color.BLACK);
-        Label critTitle = new Label("Crit", getSkin(), "pixel2D", Color.BLACK);
-        Label critDmgTitle = new Label("CritDmg", getSkin(), "pixel2D", Color.BLACK);
+        Label atkSpdTitle = new Label("Attack Spd", getSkin(), "pixel2D", Color.BLACK);
 
-        Label dmg = new Label(weaponStat.minDmg + "-" + weaponStat.maxDmg, getSkin(), "pixel2D", Color.BLACK);
-        Label attackDelay = new Label(weaponStat.attackDelay + "s", getSkin(), "pixel2D", Color.BLACK);
-        Label critChance = new Label(weaponStat.critChance + "%", getSkin(), "pixel2D", Color.BLACK);
-        Label critDmg = new Label(weaponStat.critDmg + "x", getSkin(), "pixel2D", Color.BLACK);
+        Label dmg = new Label(weaponBaseStat.minDmg + " - " + weaponBaseStat.maxDmg, getSkin(), "pixel2D", Color.BLACK);
 
         Label desc = new Label("\"" + Mappers.description.get(item).description + "\"", getSkin(), "pixel2D", Color.BLACK);
         desc.setAlignment(Align.center);
@@ -132,14 +128,6 @@ public class ItemInfoDialog extends Dialog {
         weaponStatTable.add(dmgTitle);
         weaponStatTable.add(dmg);
         weaponStatTable.row();
-        weaponStatTable.add(attackDelayTitle);
-        weaponStatTable.add(attackDelay);
-        weaponStatTable.row();
-        weaponStatTable.add(critTitle);
-        weaponStatTable.add(critChance);
-        weaponStatTable.row();
-        weaponStatTable.add(critDmgTitle);
-        weaponStatTable.add(critDmg);
 
         getContentTable().row();
         getContentTable().add(weaponStatTable);
