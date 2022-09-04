@@ -1,7 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.graphics.Color;
-import com.mygdx.game.engine.Rarity;
+import com.mygdx.game.engine.utils.gameitem.Rarity;
 
 public class RarityColour {
 

@@ -9,7 +9,7 @@ import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.InventorySlotSource;
 import com.mygdx.game.engine.InventorySlotTarget;
-import com.mygdx.game.engine.ItemType;
+import com.mygdx.game.engine.utils.gameitem.ItemType;
 import com.mygdx.game.utils.ui.InventorySlot;
 
 public class InventoryComponent implements Component {

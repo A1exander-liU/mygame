@@ -8,10 +8,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.InventoryChangeListener;
 import com.mygdx.game.MyGame;
-import com.mygdx.game.engine.AcceptedEquipType;
+import com.mygdx.game.engine.utils.gameitem.AcceptedEquipType;
 import com.mygdx.game.engine.utils.componentutils.Families;
 import com.mygdx.game.engine.utils.componentutils.Mappers;
-import com.mygdx.game.engine.ItemType;
+import com.mygdx.game.engine.utils.gameitem.ItemType;
 
 public class InventorySlot extends ImageButton {
     // the item in this slot

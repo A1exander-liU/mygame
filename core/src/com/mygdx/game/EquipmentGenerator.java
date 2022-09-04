@@ -6,9 +6,9 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
 import com.mygdx.game.engine.utils.factories.ItemFactory;
-import com.mygdx.game.engine.ItemType;
+import com.mygdx.game.engine.utils.gameitem.ItemType;
 import com.mygdx.game.engine.utils.componentutils.Mappers;
-import com.mygdx.game.engine.Rarity;
+import com.mygdx.game.engine.utils.gameitem.Rarity;
 import com.mygdx.game.engine.components.AffixesComponent;
 import com.mygdx.game.utils.RandomNumberGenerator;
 

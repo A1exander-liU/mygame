@@ -1,4 +1,4 @@
-package com.mygdx.game.engine;
+package com.mygdx.game.engine.utils.gameitem;
 
 public enum Rarity {
     COMMON    (1),

@@ -1,4 +1,4 @@
-package com.mygdx.game.engine;
+package com.mygdx.game.engine.utils.gameitem;
 
 public enum ItemType {
     MATERIAL   (1),
