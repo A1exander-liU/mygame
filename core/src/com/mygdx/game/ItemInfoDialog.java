@@ -15,6 +15,7 @@ import com.mygdx.game.engine.Families;
 import com.mygdx.game.engine.Mappers;
 import com.mygdx.game.engine.ItemType;
 import com.mygdx.game.engine.components.inventory.items.individual.AffixesComponent;
+import com.mygdx.game.engine.components.inventory.items.individual.ArmourBaseStatComponent;
 import com.mygdx.game.engine.components.inventory.items.individual.ArmourStatComponent;
 import com.mygdx.game.engine.components.inventory.items.individual.WeaponBaseStatComponent;
 import com.mygdx.game.utils.InventorySlot;
@@ -157,17 +158,13 @@ public class ItemInfoDialog extends Dialog {
     }
 
     private void addArmourInfo() {
-        ArmourStatComponent armourStat = Mappers.armourStat.get(item);
+        ArmourBaseStatComponent armourBaseStat = Mappers.armourBaseStat.get(item);
 
         Label pDefTitle = new Label("Phy.Def", getSkin(), "pixel2D", Color.BLACK);
         Label mDefTitle = new Label("Mag.Def", getSkin(), "pixel2D", Color.BLACK);
-        Label hpTitle = new Label("HP", getSkin(), "pixel2D", Color.BLACK);
-        Label mpTitle = new Label("MP", getSkin(), "pixel2D", Color.BLACK);
 
-        Label pDef = new Label("" + armourStat.physicalDef, getSkin(), "pixel2D", Color.BLACK);
-        Label mDef = new Label("" + armourStat.magicalDef, getSkin(), "pixel2D", Color.BLACK);
-        Label hp = new Label("" + armourStat.hp, getSkin(), "pixel2D", Color.BLACK);
-        Label mp = new Label("" + armourStat.mp, getSkin(), "pixel2D", Color.BLACK);
+        Label pDef = new Label("" + armourBaseStat.phyDef, getSkin(), "pixel2D", Color.BLACK);
+        Label mDef = new Label("" + armourBaseStat.magDef, getSkin(), "pixel2D", Color.BLACK);
 
         Label desc = new Label("\"" + Mappers.description.get(item).description + "\"", getSkin(), "pixel2D", Color.BLACK);
         desc.setAlignment(Align.center);
@@ -180,12 +177,6 @@ public class ItemInfoDialog extends Dialog {
         armourStatTable.row();
         armourStatTable.add(mDefTitle);
         armourStatTable.add(mDef);
-        armourStatTable.row();
-        armourStatTable.add(hpTitle);
-        armourStatTable.add(hp);
-        armourStatTable.row();
-        armourStatTable.add(mpTitle);
-        armourStatTable.add(mp);
 
         getContentTable().row();
         getContentTable().add(armourStatTable);
