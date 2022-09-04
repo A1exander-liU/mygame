@@ -8,7 +8,7 @@ import com.badlogic.gdx.ai.steer.Steerable;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.MyGame;
-import com.mygdx.game.engine.utils.Families;
+import com.mygdx.game.engine.utils.componentutils.Families;
 
 public class DetectionProximity implements Component, Proximity<Vector2> {
     public Entity entity;

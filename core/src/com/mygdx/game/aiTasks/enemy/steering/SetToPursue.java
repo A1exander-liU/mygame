@@ -6,7 +6,7 @@ import com.badlogic.gdx.ai.btree.Task;
 import com.badlogic.gdx.ai.steer.behaviors.PrioritySteering;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.MyGame;
-import com.mygdx.game.engine.utils.Families;
+import com.mygdx.game.engine.utils.componentutils.Families;
 import com.mygdx.game.engine.MobEntity;
 import com.mygdx.game.engine.components.MovementBehavior;
 import com.mygdx.game.engine.components.Position;

@@ -4,8 +4,8 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.mygdx.game.MyGame;
-import com.mygdx.game.engine.utils.Families;
-import com.mygdx.game.engine.utils.Mappers;
+import com.mygdx.game.engine.utils.componentutils.Families;
+import com.mygdx.game.engine.utils.componentutils.Mappers;
 import com.mygdx.game.engine.components.RemovableComponent;
 
 public class EnemyDeathSystem extends EntitySystem {

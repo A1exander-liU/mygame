@@ -2,8 +2,8 @@ package com.mygdx.game;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.utils.Array;
-import com.mygdx.game.engine.utils.Families;
-import com.mygdx.game.engine.utils.Mappers;
+import com.mygdx.game.engine.utils.componentutils.Families;
+import com.mygdx.game.engine.utils.componentutils.Mappers;
 import com.mygdx.game.screens.GameScreen;
 import com.mygdx.game.utils.ui.InventorySlot;
 

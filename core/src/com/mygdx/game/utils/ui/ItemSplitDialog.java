@@ -11,8 +11,8 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.InventoryUi;
 import com.mygdx.game.MyGame;
-import com.mygdx.game.engine.utils.Families;
-import com.mygdx.game.engine.utils.Mappers;
+import com.mygdx.game.engine.utils.componentutils.Families;
+import com.mygdx.game.engine.utils.componentutils.Mappers;
 
 public class ItemSplitDialog extends Dialog {
 

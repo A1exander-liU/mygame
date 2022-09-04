@@ -23,7 +23,7 @@ import com.mygdx.game.engine.components.SpawnArea;
 import com.mygdx.game.engine.components.Speed;
 import com.mygdx.game.engine.components.Sprite;
 import com.mygdx.game.engine.components.Steering;
-import com.mygdx.game.engine.utils.ComponentGrabber;
+import com.mygdx.game.engine.utils.componentutils.ComponentGrabber;
 
 public class EntityFactory {
     ComponentGrabber cg;

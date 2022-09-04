@@ -6,8 +6,8 @@ import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.mygdx.game.MyGame;
-import com.mygdx.game.engine.utils.ComponentGrabber;
-import com.mygdx.game.engine.utils.Families;
+import com.mygdx.game.engine.utils.componentutils.ComponentGrabber;
+import com.mygdx.game.engine.utils.componentutils.Families;
 import com.mygdx.game.engine.components.Position;
 import com.mygdx.game.engine.components.Speed;
 

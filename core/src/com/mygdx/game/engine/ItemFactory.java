@@ -16,7 +16,7 @@ import com.mygdx.game.engine.components.DescriptionComponent;
 import com.mygdx.game.engine.components.InventoryItemComponent;
 import com.mygdx.game.engine.components.QuantityComponent;
 import com.mygdx.game.engine.components.RarityComponent;
-import com.mygdx.game.engine.utils.Mappers;
+import com.mygdx.game.engine.utils.componentutils.Mappers;
 
 public class ItemFactory {
     JsonItemFinder itemFinder;

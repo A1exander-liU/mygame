@@ -1,4 +1,4 @@
-package com.mygdx.game.engine.utils;
+package com.mygdx.game.engine.utils.componentutils;
 
 import com.badlogic.ashley.core.Family;
 import com.mygdx.game.engine.components.CollidableComponent;
