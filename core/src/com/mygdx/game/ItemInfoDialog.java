@@ -159,6 +159,7 @@ public class ItemInfoDialog extends Dialog {
 
     private void addArmourInfo() {
         ArmourBaseStatComponent armourBaseStat = Mappers.armourBaseStat.get(item);
+        AffixesComponent affixes = Mappers.affixes.get(item);
 
         Label pDefTitle = new Label("Phy.Def", getSkin(), "pixel2D", Color.BLACK);
         Label mDefTitle = new Label("Mag.Def", getSkin(), "pixel2D", Color.BLACK);
@@ -177,6 +178,17 @@ public class ItemInfoDialog extends Dialog {
         armourStatTable.row();
         armourStatTable.add(mDefTitle);
         armourStatTable.add(mDef);
+        armourStatTable.row();
+
+        for (int i = 0; i < affixes.affixes.size; i++) {
+            CharAttributes affix = affixes.affixes.get(i);
+            // make label for each armour affix
+            Label affixValue = new Label("" + affix.getValue(), getSkin(), "pixel2D", Color.BLACK);
+            Label affixName = new Label(affix.getAttributeName(), getSkin(), "pixel2D", Color.BLACK);
+            armourStatTable.add(affixValue);
+            armourStatTable.add(affixName);
+            armourStatTable.row();
+        }
 
         getContentTable().row();
         getContentTable().add(armourStatTable);
