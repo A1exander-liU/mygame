@@ -130,20 +130,22 @@ public class InventoryUi {
         equipSlots.get(equipSlots.indexOf(source, true)).setOccupiedItem(null);
     }
 
-    public void addToInventory(Entity item) {
+    public boolean addToInventory(Entity item) {
         Entity player = MyGame.engine.getEntitiesFor(Families.player).get(0);
         Array<InventorySlot> inventorySlots = Mappers.inventory.get(player).inventorySlots;
         // is item stackable
         if (Mappers.stackable.get(item) != null) {
-            placeStackable(item, inventorySlots);
+            int slot = placeStackable(item, inventorySlots);
+            return slot != -1;
         }
         // not stackable, just add to first empty slot
         else {
-            addToFirstEmptySlot(item, inventorySlots);
+            int slot = addToFirstEmptySlot(item, inventorySlots);
+            return slot != -1;
         }
     }
 
-    private void placeStackable(Entity item, Array<InventorySlot> inventorySlots) {
+    private int placeStackable(Entity item, Array<InventorySlot> inventorySlots) {
         int slotAddedTo = addToFirstEmptySlot(item, inventorySlots);
         for (int i = 0; i < inventorySlots.size; i++) {
             if (inventorySlots.get(i).isEmpty()) continue;
@@ -152,6 +154,7 @@ public class InventoryUi {
                 stackItems(inventorySlots.get(slotAddedTo), inventorySlots.get(i));
             }
         }
+        return slotAddedTo;
     }
 
     private int addToFirstEmptySlot(Entity item, Array<InventorySlot> inventorySlots) {
