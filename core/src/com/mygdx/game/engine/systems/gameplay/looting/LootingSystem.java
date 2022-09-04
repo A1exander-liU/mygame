@@ -1,7 +1,7 @@
 package com.mygdx.game.engine.systems.gameplay.looting;
 
 import com.badlogic.ashley.core.EntitySystem;
-import com.mygdx.game.LootGenerator;
+import com.mygdx.game.items.LootGenerator;
 
 public class LootingSystem extends EntitySystem {
     LootGenerator lootGenerator;
