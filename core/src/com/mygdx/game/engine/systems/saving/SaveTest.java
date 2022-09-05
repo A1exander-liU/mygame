@@ -29,8 +29,10 @@ import com.mygdx.game.engine.components.Size;
 import com.mygdx.game.engine.components.Speed;
 import com.mygdx.game.engine.components.Sprite;
 import com.mygdx.game.engine.components.Steering;
+import com.mygdx.game.engine.utils.componentutils.Families;
 import com.mygdx.game.engine.utils.componentutils.Mappers;
 import com.mygdx.game.engine.utils.entities.PlayerEntity;
+import com.mygdx.game.utils.ui.InventorySlot;
 
 public class SaveTest extends EntitySystem {
     MyGame root;
@@ -42,11 +44,24 @@ public class SaveTest extends EntitySystem {
         String serialized = json.toJson(item);
         System.out.println(json.prettyPrint(serialized));
 
+//        PlayerEntity player = new PlayerEntity();
+//        SavedPlayer savedPlayer = new SavedPlayer(player);
+//        String savedPlayerJson = json.toJson(savedPlayer);
+//        System.out.println(json.prettyPrint(savedPlayerJson));
+    }
+
+    public void savePlayer(PlayerEntity player) {
+        SavedPlayer savedPlayer = new SavedPlayer(player);
+        Json json = new Json();
+        String serialized = json.toJson(savedPlayer);
+        System.out.println(json.prettyPrint(serialized));
     }
 
     @Override
     public void update(float delta) {
-
+        if (Gdx.input.isKeyJustPressed(Input.Keys.P)) {
+            savePlayer((PlayerEntity) MyGame.engine.getEntitiesFor(Families.player).get(0));
+        }
     }
 
     static class SaveTestItem {
@@ -71,45 +86,31 @@ public class SaveTest extends EntitySystem {
 
     static class SavedPlayer {
         Camera camera;
-        DetectionProximity detectionProximity;
         ExpComponent expComponent;
         Health health;
-        ID id;
-        InventoryComponent inventoryComponent;
-        Item item;
         LevelComponent levelComponent;
         ManaComponent manaComponent;
         Name name;
         Orientation orientation;
         ParameterComponent parameterComponent;
-        Player player;
         Position position;
         Size size;
         Speed speed;
         Sprite sprite;
-        Steering steering;
-        CollidableComponent collidableComponent;
 
         public SavedPlayer(PlayerEntity playerToSave) {
             camera = Mappers.camera.get(playerToSave);
-            detectionProximity = Mappers.detectionProximity.get(playerToSave);
             expComponent = Mappers.exp.get(playerToSave);
             health = Mappers.health.get(playerToSave);
-            id = Mappers.id.get(playerToSave);
-            inventoryComponent = Mappers.inventory.get(playerToSave);
-            item = Mappers.item.get(playerToSave);
             levelComponent = Mappers.level.get(playerToSave);
             manaComponent = Mappers.mana.get(playerToSave);
             name = Mappers.name.get(playerToSave);
             orientation = Mappers.orientation.get(playerToSave);
             parameterComponent = Mappers.parameter.get(playerToSave);
-            player = Mappers.player.get(playerToSave);
             position = Mappers.position.get(playerToSave);
             size = Mappers.size.get(playerToSave);
-            speed =  Mappers.speed.get(playerToSave);
+            speed = Mappers.speed.get(playerToSave);
             sprite = Mappers.sprite.get(playerToSave);
-            steering = Mappers.steering.get(playerToSave);
-            collidableComponent = Mappers.collidable.get(playerToSave);
         }
     }
 }
