@@ -124,16 +124,20 @@ public class SaveTest extends EntitySystem {
             inventorySlots = new Array<>();
             for (int i = 0; i < slots.size; i++) {
                 SavedSlot slot = new SavedSlot(slots.get(i));
-                SavedItem item = new SavedItem(slots.get(i).getOccupiedItem());
                 inventorySlots.add(slot);
-                inventoryItems.add(item);
+                if (!slots.get(i).isEmpty())
+                    inventoryItems.add(new SavedItem(slots.get(i).getOccupiedItem()));
+                else
+                    inventoryItems.add(null);
             }
             equipSlots = new Array<>();
             for (int i = 0; i < equips.size; i++) {
                 SavedSlot slot = new SavedSlot(equips.get(i));
-                SavedItem item = new SavedItem(equips.get(i).getOccupiedItem());
                 equipSlots.add(slot);
-                equipItems.add(item);
+                if (!slots.get(i).isEmpty())
+                    inventoryItems.add(new SavedItem(slots.get(i).getOccupiedItem()));
+                else
+                    inventoryItems.add(null);
             }
         }
     }
