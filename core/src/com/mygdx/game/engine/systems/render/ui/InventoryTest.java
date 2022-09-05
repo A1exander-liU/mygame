@@ -70,17 +70,17 @@ public class InventoryTest extends EntitySystem {
     }
 
     private void getInventory(InventoryComponent inventory) {
-        for (int i = 0; i < inventory.items.size; i++) {
-            Entity slot = inventory.items.get(i);
-            String dividers = currentSlot == i + 1 ? "**********" : "----------";
-            InventorySlotComponent slotComponent = cg.getInventorySlot(slot);
-            System.out.println(dividers);
-            System.out.println("Slot " + (i + 1));
-            System.out.println((slotComponent.itemOccupied == null) ? "" : cg.getRarity(slotComponent.itemOccupied).rarity);
-            System.out.println((slotComponent.itemOccupied == null) ? "empty": "Item: " + cg.getName(slotComponent.itemOccupied).name);
-            System.out.println("Amount: " + slotComponent.quantity);
-            System.out.println(dividers);
-        }
+//        for (int i = 0; i < inventory.items.size; i++) {
+//            Entity slot = inventory.items.get(i);
+//            String dividers = currentSlot == i + 1 ? "**********" : "----------";
+//            InventorySlotComponent slotComponent = cg.getInventorySlot(slot);
+//            System.out.println(dividers);
+//            System.out.println("Slot " + (i + 1));
+//            System.out.println((slotComponent.itemOccupied == null) ? "" : cg.getRarity(slotComponent.itemOccupied).rarity);
+//            System.out.println((slotComponent.itemOccupied == null) ? "empty": "Item: " + cg.getName(slotComponent.itemOccupied).name);
+//            System.out.println("Amount: " + slotComponent.quantity);
+//            System.out.println(dividers);
+//        }
     }
 
     private void test() {
