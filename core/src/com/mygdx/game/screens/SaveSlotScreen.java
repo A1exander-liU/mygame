@@ -59,7 +59,7 @@ public class SaveSlotScreen implements Screen {
             }
         });
 
-        table.add(backButton);
+        table.add(backButton).expand().top().left();
     }
 
     @Override
