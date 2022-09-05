@@ -58,6 +58,12 @@ public class InventorySlot extends ImageButton {
         return acceptedItemType;
     }
 
+    public boolean getIsEquipSlot() {
+        return isEquipSlot;
+    }
+
+    
+
     public boolean isClicked() {
         return clicked;
     }
