@@ -65,26 +65,6 @@ public class SaveTest extends EntitySystem {
         }
     }
 
-    static class SaveTestItem {
-        int id;
-        Array<Entity> entities;
-        Entity entity;
-
-        public SaveTestItem(int id) {
-            this.id = id;
-            entities = new Array<>();
-            entity = new Entity();
-        }
-
-        public int getId() {
-            return id;
-        }
-
-        public void setId(int id) {
-            this.id = id;
-        }
-    }
-
     static class SavedPlayer {
         Camera camera;
         ExpComponent expComponent;
@@ -98,6 +78,8 @@ public class SaveTest extends EntitySystem {
         Size size;
         Speed speed;
         String textureImgPath;
+
+        public SavedPlayer() {}
 
         public SavedPlayer(PlayerEntity playerToSave) {
             camera = Mappers.camera.get(playerToSave);
