@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
 import com.badlogic.gdx.utils.JsonWriter;
 import com.mygdx.game.MyGame;
+import com.mygdx.game.SaveStates;
 import com.mygdx.game.engine.components.AffixesComponent;
 import com.mygdx.game.engine.components.ArmourBaseStatComponent;
 import com.mygdx.game.engine.components.Camera;
@@ -79,7 +80,12 @@ public class SaveTest extends EntitySystem {
         json.setOutputType(JsonWriter.OutputType.minimal);
         json.setElementType(SavedPlayer.class, "inventorySlots", SavedSlot.class);
         String serialized = json.toJson(savedPlayer);
+        SavedPlayer unserialized = json.fromJson(SavedPlayer.class, serialized);
         System.out.println(json.prettyPrint(serialized));
+        // now when loading game need to recreate playerEntity
+        // set the values with saved player components
+        // need to recreate and set items in the inventory
+        root.getSaveStates().setSlotData(SaveStates.SLOT_ONE, serialized);
     }
 
     static class SavedPlayer {
