@@ -39,6 +39,7 @@ import com.mygdx.game.engine.components.Speed;
 import com.mygdx.game.engine.components.Sprite;
 import com.mygdx.game.engine.components.StackableComponent;
 import com.mygdx.game.engine.components.Steering;
+import com.mygdx.game.engine.components.WeaponBaseStatComponent;
 import com.mygdx.game.engine.components.WeaponStatComponent;
 import com.mygdx.game.engine.utils.componentutils.Families;
 import com.mygdx.game.engine.utils.componentutils.Mappers;
@@ -46,6 +47,8 @@ import com.mygdx.game.engine.utils.entities.PlayerEntity;
 import com.mygdx.game.inventory.gameitem.AcceptedEquipType;
 import com.mygdx.game.inventory.gameitem.ItemType;
 import com.mygdx.game.utils.ui.InventorySlot;
+
+import java.util.Map;
 
 public class SaveTest extends EntitySystem {
     MyGame root;
@@ -157,14 +160,23 @@ public class SaveTest extends EntitySystem {
         DescriptionComponent descriptionComponent;
         QuantityComponent quantityComponent;
         StackableComponent stackableComponent;
-        WeaponStatComponent weaponStatComponent;
+        WeaponBaseStatComponent weaponBaseStatComponent;
         ArmourBaseStatComponent armourBaseStatComponent;
         AffixesComponent affixesComponent;
 
         public SavedItem() {}
 
         public SavedItem(Entity item) {
-
+            inventoryItemComponent = Mappers.inventoryItem.get(item);
+            name = Mappers.name.get(item);
+            itemImgPath = ((FileTextureData) Mappers.sprite.get(item).texture.getTextureData()).getFileHandle().path();
+            rarityComponent = Mappers.rarity.get(item);
+            descriptionComponent = Mappers.description.get(item);
+            quantityComponent = Mappers.quantity.get(item);
+            stackableComponent = Mappers.stackable.get(item);
+            weaponBaseStatComponent = Mappers.weaponBaseStat.get(item);
+            armourBaseStatComponent = Mappers.armourBaseStat.get(item);
+            affixesComponent = Mappers.affixes.get(item);
         }
     }
 }
