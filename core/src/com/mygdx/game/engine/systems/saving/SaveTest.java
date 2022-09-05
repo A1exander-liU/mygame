@@ -5,6 +5,7 @@ import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.glutils.FileTextureData;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonReader;
@@ -96,7 +97,7 @@ public class SaveTest extends EntitySystem {
         Position position;
         Size size;
         Speed speed;
-        Sprite sprite;
+        String textureImgPath;
 
         public SavedPlayer(PlayerEntity playerToSave) {
             camera = Mappers.camera.get(playerToSave);
@@ -110,7 +111,7 @@ public class SaveTest extends EntitySystem {
             position = Mappers.position.get(playerToSave);
             size = Mappers.size.get(playerToSave);
             speed = Mappers.speed.get(playerToSave);
-            sprite = Mappers.sprite.get(playerToSave);
+            textureImgPath = ((FileTextureData) Mappers.sprite.get(playerToSave).texture.getTextureData()).getFileHandle().path();
         }
     }
 }
