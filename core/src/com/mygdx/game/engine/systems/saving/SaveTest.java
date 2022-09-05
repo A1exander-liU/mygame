@@ -96,6 +96,8 @@ public class SaveTest extends EntitySystem {
         int coins;
         Array<SavedSlot> inventorySlots;
         Array<SavedSlot> equipSlots;
+        Array<SavedItem> inventoryItems;
+        Array<SavedItem> equipItems;
 
         public SavedPlayer() {}
 
@@ -162,7 +164,7 @@ public class SaveTest extends EntitySystem {
         public SavedItem() {}
 
         public SavedItem(Entity item) {
-            
+
         }
     }
 }
