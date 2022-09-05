@@ -58,12 +58,16 @@ public class SaveSlotScreen implements Screen {
                 parent.changeScreen(MyGame.MENU_SCREEN);
             }
         });
+
+        table.add(backButton);
     }
 
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(0.8824f, 0.7765f, 0.6f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        
     }
 
     @Override
