@@ -72,6 +72,11 @@ public class SaveTest extends EntitySystem {
         if (Gdx.input.isKeyJustPressed(Input.Keys.P)) {
             savePlayer((PlayerEntity) MyGame.engine.getEntitiesFor(Families.player).get(0));
         }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.O)) {
+            Json json = new Json();
+            String lastSavedData = root.getSaveStates().getSlotSerializedData(SaveStates.SLOT_ONE);
+            SavedPlayer lastSavedPlayer = json.fromJson(SavedPlayer.class, lastSavedData);
+        }
     }
 
     public void savePlayer(PlayerEntity player) {
