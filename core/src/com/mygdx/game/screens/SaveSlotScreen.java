@@ -67,7 +67,8 @@ public class SaveSlotScreen implements Screen {
         Gdx.gl.glClearColor(0.8824f, 0.7765f, 0.6f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        
+        stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
+        stage.draw();
     }
 
     @Override
