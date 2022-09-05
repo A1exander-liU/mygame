@@ -135,9 +135,9 @@ public class SaveTest extends EntitySystem {
                 SavedSlot slot = new SavedSlot(equips.get(i));
                 equipSlots.add(slot);
                 if (!slots.get(i).isEmpty())
-                    inventoryItems.add(new SavedItem(slots.get(i).getOccupiedItem()));
+                    equipItems.add(new SavedItem(slots.get(i).getOccupiedItem()));
                 else
-                    inventoryItems.add(null);
+                    equipItems.add(null);
             }
         }
     }
