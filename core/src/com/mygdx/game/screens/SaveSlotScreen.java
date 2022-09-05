@@ -8,8 +8,11 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.MyGame;
 
@@ -41,6 +44,10 @@ public class SaveSlotScreen implements Screen {
         gameUiSkin.add("pixel2D", font);
         gameUiSkin.addRegions(new TextureAtlas("Game_UI_Skin/Game_UI_Skin.atlas"));
         gameUiSkin.load(Gdx.files.internal("Game_UI_Skin/Game_UI_Skin.json"));
+
+        TextButton backButton = new TextButton("Back", gameUiSkin);
+        backButton.setLabel(new Label("Back", gameUiSkin, "pixel2D", Color.BLACK));
+        backButton.getLabel().setAlignment(Align.center);
     }
 
     @Override
