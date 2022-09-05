@@ -16,7 +16,6 @@ public class InventoryComponent implements Component {
     // how many unique items can be held
     public int capacity = 40;
     public int equipSize = 8;
-    public Array<Entity> items = new Array<>(capacity);
     public Array<InventorySlot> inventorySlots = new Array<>(capacity);
     public Array<InventorySlot> equipSlots = new Array<>(equipSize);
     public int coinPouch = 0;
@@ -42,12 +41,6 @@ public class InventoryComponent implements Component {
     // like getting 3 wood for chopping a tree
 
     public InventoryComponent() {
-        for (int i = 0; i < capacity; i++) {
-            Entity slot = new Entity();
-            slot.add(new InventorySlotComponent());
-            items.add(slot);
-            MyGame.engine.addEntity(slot);
-        }
         for (int i = 0; i < capacity; i++) {
             InventorySlot inventorySlot = new InventorySlot(skin);
             dragAndDrop.addSource(new InventorySlotSource(inventorySlot, dragAndDrop));
