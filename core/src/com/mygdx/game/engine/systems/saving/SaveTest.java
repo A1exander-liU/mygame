@@ -122,6 +122,7 @@ public class SaveTest extends EntitySystem {
             Array<InventorySlot> slots = Mappers.inventory.get(playerToSave).inventorySlots;
             Array<InventorySlot> equips = Mappers.inventory.get(playerToSave).equipSlots;
             inventorySlots = new Array<>();
+            inventoryItems = new Array<>();
             for (int i = 0; i < slots.size; i++) {
                 SavedSlot slot = new SavedSlot(slots.get(i));
                 inventorySlots.add(slot);
@@ -131,6 +132,7 @@ public class SaveTest extends EntitySystem {
                     inventoryItems.add(null);
             }
             equipSlots = new Array<>();
+            equipItems = new Array<>();
             for (int i = 0; i < equips.size; i++) {
                 SavedSlot slot = new SavedSlot(equips.get(i));
                 equipSlots.add(slot);
