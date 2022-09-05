@@ -68,7 +68,7 @@ public class MainMenuScreen implements Screen {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 System.out.println("Start Game!");
-                parent.changeScreen(MyGame.GAME_SCREEN);
+                parent.changeScreen(MyGame.SAVE_SLOT_SCREEN);
             }
         });
         settings.addListener(new ChangeListener() {
