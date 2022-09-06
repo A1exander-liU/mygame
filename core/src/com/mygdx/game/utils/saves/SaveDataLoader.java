@@ -1,5 +1,7 @@
 package com.mygdx.game.utils.saves;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.Json;
 import com.mygdx.game.engine.systems.saving.SaveTest;
 import com.mygdx.game.engine.utils.componentutils.Mappers;
@@ -15,8 +17,18 @@ public class SaveDataLoader {
     public PlayerEntity load(String serializedData) {
         SavedPlayer savedPlayer = json.fromJson(SavedPlayer.class, serializedData);
         PlayerEntity player = new PlayerEntity(false);
-        // need to set component
-
+        // add in rest of the components
+        player.add(savedPlayer.camera);
+        player.add(savedPlayer.expComponent);
+        player.add(savedPlayer.health);
+        player.add(savedPlayer.levelComponent);
+        player.add(savedPlayer.manaComponent);
+        player.add(savedPlayer.name);
+        player.add(savedPlayer.orientation);
+        player.add(savedPlayer.parameterComponent);
+        player.add(savedPlayer.position);
+        player.add(savedPlayer.size);
+        player.add(savedPlayer.speed);
 
         return player;
     }
