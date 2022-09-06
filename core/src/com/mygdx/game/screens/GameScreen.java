@@ -70,50 +70,13 @@ public class GameScreen implements Screen {
             // make new player
             entityFactory.makePlayer("player");
         // if loaded from non-empty slot, PlayerEntity already exists
-
-
+        
         inventoryMultiplexer = new InputMultiplexer();
-        // to add system (now all allowed entities will move every frame)
-        // you can enable and disable a system temporarily
-        /* disabled systems will not update (enemies will stop moving)
-        *  useful when you need to call the pause method (you can just disable
-        *  the systems like movement)*/
-        // parent.engine.getSystem(MovementSystem.class).setProcessing(false);
-        // the engine: center of the framework
-//        Entity enemy = new Entity();
-        // need to add entities to the engine (can also remove entities)
-        // to add components to an entity
-//        enemy.add(new Health());
-//        enemy.add(new Position());
-//        enemy.add(new Speed());
-//        enemy.add(new Size());
-//        enemy.add(new Sprite());
-//        enemy.add(new ID());
-//        Sprite enemySprite = cg.getSprite(enemy);
-//        enemySprite.texture = new Texture(Gdx.files.internal("testPlayer.png"));
-//        parent.engine.addEntity(enemy);
-//        entityToMapAdder.addEntityToMap(testMap, enemy);
-
-        // families (entities with same collection of components)
-        /* here: creating a family called obstacles (meaning obstacles will only
-        have the components: position and size) */
-        /* can add more options to add more controls:
-        *  one(): choose between one of the provided components
-        *  exclude(): can't have this component */
 
         parent.batch = new SpriteBatch();
         // to display the map as orthogonal (top down)
         tiledMapRenderer = new MapObjectDrawer(testMap);
 
-        // system priority:
-        // timeSystem: 1
-        // spawnSystem: 2
-        // movementSystem: 3
-        // stateSystem: 4
-        // steeringSystem: 5
-        // collisionSystem: 6
-        // mapUpdateSystem: 98
-        // removalSystem: 99
         MovementSystem movementSystem = new MovementSystem(cg);
         EnemySpawningSystem enemySpawningSystem = new EnemySpawningSystem(cg, entityFactory);
         SteeringSystem steeringSystem = new SteeringSystem(cg);
