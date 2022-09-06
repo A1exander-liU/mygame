@@ -27,7 +27,14 @@ public class PlayerEntity extends Entity {
         if (newCharacter)
             addRequiredComponents();
         else {
-
+            super.add(new DetectionProximity(this, 20));
+            super.add(new ID());
+            super.add(new InventoryComponent());
+            super.add(new Item());
+            super.add(new Player());
+            super.add(new Sprite());
+            super.add(new Steering(this));
+            super.add(new CollidableComponent());
         }
     }
 
