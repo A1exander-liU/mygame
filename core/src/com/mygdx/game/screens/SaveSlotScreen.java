@@ -97,9 +97,11 @@ public class SaveSlotScreen implements Screen {
         saveSlot1.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                // get serialized data from prefs
                 String slotOneData = parent.getSaveStates().getSlotSerializedData(SaveStates.SLOT_ONE);
                 if (!Objects.equals(slotOneData, "")) {
                     System.out.println(json.prettyPrint(slotOneData));
+                    // call load to get player entity back
                     PlayerEntity player = saveDataLoader.load(slotOneData);
                 }
                 else
