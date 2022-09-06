@@ -30,6 +30,9 @@ public class SaveDataLoader {
         player.add(savedPlayer.size);
         player.add(savedPlayer.speed);
 
+        // set values of other components already inside
+        Mappers.sprite.get(player).texture = new Texture(Gdx.files.internal(savedPlayer.textureImgPath));
+
         return player;
     }
 }
