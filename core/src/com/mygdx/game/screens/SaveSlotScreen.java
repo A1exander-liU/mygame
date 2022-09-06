@@ -22,6 +22,8 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.SaveStates;
 
+import java.util.Objects;
+
 public class SaveSlotScreen implements Screen {
     MyGame parent;
     Stage stage;
@@ -93,7 +95,10 @@ public class SaveSlotScreen implements Screen {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 String slotOneData = parent.getSaveStates().getSlotSerializedData(SaveStates.SLOT_ONE);
-                System.out.println(json.prettyPrint(slotOneData));
+                if (!Objects.equals(slotOneData, ""))
+                    System.out.println(json.prettyPrint(slotOneData));
+                else
+                    System.out.println("empty");
             }
         });
 
@@ -101,7 +106,10 @@ public class SaveSlotScreen implements Screen {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 String slotTwoData = parent.getSaveStates().getSlotSerializedData(SaveStates.SLOT_TWO);
-                System.out.println(json.prettyPrint(slotTwoData));
+                if (!Objects.equals(slotTwoData, ""))
+                    System.out.println(json.prettyPrint(slotTwoData));
+                else
+                    System.out.println("empty");
             }
         });
 
@@ -109,7 +117,10 @@ public class SaveSlotScreen implements Screen {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 String slotThreeData = parent.getSaveStates().getSlotSerializedData(SaveStates.SLOT_THREE);
-                System.out.println(json.prettyPrint(slotThreeData));
+                if (!Objects.equals(slotThreeData, ""))
+                    System.out.println(json.prettyPrint(slotThreeData));
+                else
+                    System.out.println("empty");
             }
         });
 
