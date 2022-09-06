@@ -14,13 +14,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.SaveStates;
+import com.mygdx.game.engine.utils.entities.PlayerEntity;
+import com.mygdx.game.utils.saves.SaveDataLoader;
 
 import java.util.Objects;
 
@@ -28,11 +29,13 @@ public class SaveSlotScreen implements Screen {
     MyGame parent;
     Stage stage;
     Json json;
+    SaveDataLoader saveDataLoader;
 
     public SaveSlotScreen(MyGame parent) {
         this.parent = parent;
         stage = new Stage(new ScreenViewport());
         json = new Json();
+        saveDataLoader = new SaveDataLoader();
     }
 
     @Override
@@ -95,8 +98,10 @@ public class SaveSlotScreen implements Screen {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 String slotOneData = parent.getSaveStates().getSlotSerializedData(SaveStates.SLOT_ONE);
-                if (!Objects.equals(slotOneData, ""))
+                if (!Objects.equals(slotOneData, "")) {
                     System.out.println(json.prettyPrint(slotOneData));
+                    PlayerEntity player = saveDataLoader.load(slotOneData);
+                }
                 else
                     System.out.println("empty");
             }
@@ -106,8 +111,10 @@ public class SaveSlotScreen implements Screen {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 String slotTwoData = parent.getSaveStates().getSlotSerializedData(SaveStates.SLOT_TWO);
-                if (!Objects.equals(slotTwoData, ""))
+                if (!Objects.equals(slotTwoData, "")) {
                     System.out.println(json.prettyPrint(slotTwoData));
+                    PlayerEntity player = saveDataLoader.load(slotTwoData);
+                }
                 else
                     System.out.println("empty");
             }
@@ -117,8 +124,10 @@ public class SaveSlotScreen implements Screen {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 String slotThreeData = parent.getSaveStates().getSlotSerializedData(SaveStates.SLOT_THREE);
-                if (!Objects.equals(slotThreeData, ""))
+                if (!Objects.equals(slotThreeData, "")) {
                     System.out.println(json.prettyPrint(slotThreeData));
+                    PlayerEntity player = saveDataLoader.load(slotThreeData);
+                }
                 else
                     System.out.println("empty");
             }
