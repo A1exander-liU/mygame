@@ -13,7 +13,7 @@ import com.mygdx.game.engine.utils.entities.PlayerEntity;
 import com.mygdx.game.utils.ui.InventorySlot;
 
 public class SaveDataLoader {
-    Json json = new Json();
+    Json json;
 
     public SaveDataLoader() {
         json = new Json();
@@ -39,6 +39,7 @@ public class SaveDataLoader {
         Mappers.sprite.get(player).texture = new Texture(Gdx.files.internal(savedPlayer.textureImgPath));
 
         loadInventory(player, savedPlayer);
+        loadEquipSlots(player, savedPlayer);
 
         return player;
     }
@@ -75,6 +76,36 @@ public class SaveDataLoader {
                 }
                 inventorySlots.get(i).setOccupiedItem(item);
                 MyGame.engine.addEntity(item);
+            }
+        }
+        Mappers.inventory.get(player).inventorySlots = inventorySlots;
+    }
+
+    private void loadEquipSlots(PlayerEntity player, SavedPlayer savedPlayer) {
+        Array<InventorySlot> equipSlots = Mappers.inventory.get(player).equipSlots;
+        for (int i = 0; i < savedPlayer.equipItems.size; i++) {
+            Entity equippedItem = new Entity();
+            SavedItem savedItem = savedPlayer.equipItems.get(i);
+            if (savedItem == null)
+                equipSlots.get(i).setOccupiedItem(null);
+            else {
+                equippedItem.add(savedItem.inventoryItemComponent);
+                equippedItem.add(savedItem.name);
+                equippedItem.add(new Sprite());
+                Mappers.sprite.get(equippedItem).texture = new Texture(Gdx.files.internal(savedItem.itemImgPath));
+                equippedItem.add(savedItem.rarityComponent);
+                equippedItem.add(savedItem.descriptionComponent);
+                // if its weapon or armour add the baseStatComponent and Affix
+                if (savedItem.weaponBaseStatComponent != null) {
+                    equippedItem.add(savedItem.weaponBaseStatComponent);
+                    equippedItem.add(savedItem.affixesComponent);
+                }
+                if (savedItem.armourBaseStatComponent != null) {
+                    equippedItem.add(savedItem.armourBaseStatComponent);
+                    equippedItem.add(savedItem.affixesComponent);
+                }
+                equipSlots.get(i).setOccupiedItem(equippedItem);
+                MyGame.engine.addEntity(equippedItem);
             }
         }
     }
