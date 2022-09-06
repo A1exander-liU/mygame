@@ -7,6 +7,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.components.Sprite;
+import com.mygdx.game.engine.components.Steering;
 import com.mygdx.game.engine.systems.saving.SaveTest;
 import com.mygdx.game.engine.utils.componentutils.Mappers;
 import com.mygdx.game.engine.utils.entities.PlayerEntity;
@@ -34,6 +35,7 @@ public class SaveDataLoader {
         player.add(savedPlayer.position);
         player.add(savedPlayer.size);
         player.add(savedPlayer.speed);
+        player.add(new Steering(player));
 
         // set values of other components already inside
         Mappers.sprite.get(player).texture = new Texture(Gdx.files.internal(savedPlayer.textureImgPath));
@@ -75,6 +77,7 @@ public class SaveDataLoader {
                     item.add(savedItem.affixesComponent);
                 }
                 inventorySlots.get(i).setOccupiedItem(item);
+                // engine hasn't existed yet
                 MyGame.engine.addEntity(item);
             }
         }

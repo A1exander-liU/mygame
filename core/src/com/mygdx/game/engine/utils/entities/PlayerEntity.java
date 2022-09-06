@@ -33,7 +33,6 @@ public class PlayerEntity extends Entity {
             super.add(new Item());
             super.add(new Player());
             super.add(new Sprite());
-            super.add(new Steering(this));
             super.add(new CollidableComponent());
         }
     }
