@@ -103,6 +103,8 @@ public class SaveSlotScreen implements Screen {
                     System.out.println(json.prettyPrint(slotOneData));
                     // call load to get player entity back
                     PlayerEntity player = saveDataLoader.load(slotOneData);
+                    // now player is loaded with all info go to game screen
+                    parent.changeScreen(MyGame.GAME_SCREEN);
                 }
                 else
                     System.out.println("empty");
@@ -116,6 +118,7 @@ public class SaveSlotScreen implements Screen {
                 if (!Objects.equals(slotTwoData, "")) {
                     System.out.println(json.prettyPrint(slotTwoData));
                     PlayerEntity player = saveDataLoader.load(slotTwoData);
+                    parent.changeScreen(MyGame.GAME_SCREEN);
                 }
                 else
                     System.out.println("empty");
@@ -129,6 +132,7 @@ public class SaveSlotScreen implements Screen {
                 if (!Objects.equals(slotThreeData, "")) {
                     System.out.println(json.prettyPrint(slotThreeData));
                     PlayerEntity player = saveDataLoader.load(slotThreeData);
+                    parent.changeScreen(MyGame.GAME_SCREEN);
                 }
                 else
                     System.out.println("empty");
