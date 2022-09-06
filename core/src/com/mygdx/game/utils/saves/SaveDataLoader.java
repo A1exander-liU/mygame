@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
+import com.mygdx.game.engine.components.Sprite;
 import com.mygdx.game.engine.systems.saving.SaveTest;
 import com.mygdx.game.engine.utils.componentutils.Mappers;
 import com.mygdx.game.engine.utils.entities.PlayerEntity;
@@ -50,6 +51,28 @@ public class SaveDataLoader {
             // if null means slot was empty
             if (savedItem == null)
                 inventorySlots.get(i).setOccupiedItem(null);
+            else {
+                item.add(savedItem.inventoryItemComponent);
+                item.add(savedItem.name);
+                item.add(new Sprite());
+                Mappers.sprite.get(item).texture = new Texture(Gdx.files.internal(savedItem.itemImgPath));
+                item.add(savedItem.rarityComponent);
+                item.add(savedItem.descriptionComponent);
+                // if stackable add the necessary components
+                if (savedItem.stackableComponent != null) {
+                    item.add(savedItem.quantityComponent);
+                    item.add(savedItem.stackableComponent);
+                }
+                // if its weapon or armour add the baseStatComponent and Affix
+                if (savedItem.weaponBaseStatComponent != null) {
+                    item.add(savedItem.weaponBaseStatComponent);
+                    item.add(savedItem.affixesComponent);
+                }
+                if (savedItem.armourBaseStatComponent != null) {
+                    item.add(savedItem.armourBaseStatComponent);
+                    item.add(savedItem.affixesComponent);
+                }
+            }
         }
     }
 }
