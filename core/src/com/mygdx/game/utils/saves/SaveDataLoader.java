@@ -43,8 +43,12 @@ public class SaveDataLoader {
 
     private void loadInventory(PlayerEntity player, SavedPlayer savedPlayer) {
         // convert all SavedItem to entities
+        Array<InventorySlot> inventorySlots = Mappers.inventory.get(player).inventorySlots;
         for (int i = 0; i < savedPlayer.inventoryItems.size; i++) {
             Entity item = new Entity();
+            SavedItem savedItem = savedPlayer.inventoryItems.get(i);
+            // if null means slot was empty
+            inventorySlots.get(i).setOccupiedItem(null);
         }
     }
 }
