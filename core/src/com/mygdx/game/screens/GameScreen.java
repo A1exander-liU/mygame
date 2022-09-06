@@ -63,18 +63,7 @@ public class GameScreen implements Screen {
     public static InputMultiplexer inventoryMultiplexer;
 
     public GameScreen(MyGame parent) {
-        parent.jsonSearcher = new JsonEnemyFinder();
-        parent.itemFinder = new JsonItemFinder();
-        itemFactory = new ItemFactory(parent.itemFinder);
-        ItemFactory itemFactory = new ItemFactory(parent.itemFinder);
-        testMap = new TmxMapLoader().load("untitled.tmx");
-        this.parent = parent;
-        cg = new ComponentGrabber();
-        MyGame.engine.addEntityListener(new EnemyRemovalListener(cg));
-        entityFactory = new EntityFactory(cg, parent);
-        MyGame.gameMapProperties = new GameMapProperties(testMap, entityFactory);
-        parent.entityToMapAdder = new EntityToMapAdder(cg);
-
+        initializeObjects();
         // now player is loaded from slot and is in engine
         // check if no player entity exists means it was loaded from slot that was empty
         if (MyGame.engine.getEntitiesFor(Families.player).size() == 0)
@@ -230,5 +219,19 @@ public class GameScreen implements Screen {
         for (EntitySystem system : systems) {
             System.out.println(system.getClass() + ": " + system.priority);
         }
+    }
+
+    private void initializeObjects() {
+        parent.jsonSearcher = new JsonEnemyFinder();
+        parent.itemFinder = new JsonItemFinder();
+        itemFactory = new ItemFactory(parent.itemFinder);
+        ItemFactory itemFactory = new ItemFactory(parent.itemFinder);
+        testMap = new TmxMapLoader().load("untitled.tmx");
+        this.parent = parent;
+        cg = new ComponentGrabber();
+        MyGame.engine.addEntityListener(new EnemyRemovalListener(cg));
+        entityFactory = new EntityFactory(cg, parent);
+        MyGame.gameMapProperties = new GameMapProperties(testMap, entityFactory);
+        parent.entityToMapAdder = new EntityToMapAdder(cg);
     }
 }
