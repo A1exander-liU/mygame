@@ -61,8 +61,11 @@ public class SaveSlotScreen implements Screen {
         });
 
         Window saveSlot1 = new Window("Slot 1", gameUiSkin);
+        saveSlot1.setMovable(false);
         Window saveSlot2 = new Window("Slot 2", gameUiSkin);
+        saveSlot2.setMovable(false);
         Window saveSlot3 = new Window("Slot 3", gameUiSkin);
+        saveSlot3.setMovable(false);
 
         Table backButtonTable = new Table();
         backButtonTable.add(backButton).expand().top().left();
