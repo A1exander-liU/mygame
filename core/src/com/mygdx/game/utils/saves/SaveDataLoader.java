@@ -12,6 +12,7 @@ public class SaveDataLoader {
     }
 
     public PlayerEntity load(String serializedData) {
+        SavedPlayer savedPlayer = json.fromJson(SavedPlayer.class, serializedData);
         PlayerEntity player = new PlayerEntity();
 
         return player;
