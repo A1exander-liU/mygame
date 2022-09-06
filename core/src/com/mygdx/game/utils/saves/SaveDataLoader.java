@@ -43,6 +43,8 @@ public class SaveDataLoader {
         loadInventory(player, savedPlayer);
         loadEquipSlots(player, savedPlayer);
 
+        MyGame.engine.addEntity(player);
+
         return player;
     }
 
@@ -77,7 +79,7 @@ public class SaveDataLoader {
                     item.add(savedItem.affixesComponent);
                 }
                 inventorySlots.get(i).setOccupiedItem(item);
-                // engine hasn't existed yet
+
                 MyGame.engine.addEntity(item);
             }
         }
