@@ -17,16 +17,20 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.MyGame;
+import com.mygdx.game.SaveStates;
 
 public class SaveSlotScreen implements Screen {
     MyGame parent;
     Stage stage;
+    Json json;
 
     public SaveSlotScreen(MyGame parent) {
         this.parent = parent;
         stage = new Stage(new ScreenViewport());
+        json = new Json();
     }
 
     @Override
@@ -53,7 +57,7 @@ public class SaveSlotScreen implements Screen {
         backButton.setLabel(new Label("Back", gameUiSkin, "pixel2D", Color.BLACK));
         backButton.getLabel().setAlignment(Align.center);
 
-        Button saveSlot1 = new Button(gameUiSkin);
+        final Button saveSlot1 = new Button(gameUiSkin);
         Label saveSlot1Title = new Label("Slot 1", gameUiSkin, "pixel2D", Color.BLACK);
         Button saveSlot2 = new Button(gameUiSkin);
         Label saveSlot2Title = new Label("Slot 2", gameUiSkin, "pixel2D", Color.BLACK);
@@ -84,6 +88,31 @@ public class SaveSlotScreen implements Screen {
                 parent.changeScreen(MyGame.MENU_SCREEN);
             }
         });
+
+        saveSlot1.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                String slotOneData = parent.getSaveStates().getSlotSerializedData(SaveStates.SLOT_ONE);
+                System.out.println(json.prettyPrint(slotOneData));
+            }
+        });
+
+        saveSlot2.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                String slotTwoData = parent.getSaveStates().getSlotSerializedData(SaveStates.SLOT_TWO);
+                System.out.println(json.prettyPrint(slotTwoData));
+            }
+        });
+
+        saveSlot3.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                String slotThreeData = parent.getSaveStates().getSlotSerializedData(SaveStates.SLOT_THREE);
+                System.out.println(json.prettyPrint(slotThreeData));
+            }
+        });
+
     }
 
     @Override
