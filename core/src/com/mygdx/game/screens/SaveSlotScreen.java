@@ -62,8 +62,15 @@ public class SaveSlotScreen implements Screen {
         });
 
         Button saveSlot1 = new Button(gameUiSkin);
+        Label saveSlot1Title = new Label("Slot 1", gameUiSkin, "pixel2D", Color.BLACK);
         Button saveSlot2 = new Button(gameUiSkin);
+        Label saveSlot2Title = new Label("Slot 2", gameUiSkin, "pixel2D", Color.BLACK);
         Button saveSlot3 = new Button(gameUiSkin);
+        Label saveSlot3Title = new Label("Slot 3", gameUiSkin, "pixel2D", Color.BLACK);
+
+        saveSlot1.add(saveSlot1Title);
+        saveSlot2.add(saveSlot2Title);
+        saveSlot3.add(saveSlot3Title);
 
         Table backButtonTable = new Table();
         backButtonTable.add(backButton).expand().top().left();
