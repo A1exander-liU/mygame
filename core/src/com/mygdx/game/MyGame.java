@@ -53,6 +53,7 @@ public class MyGame extends Game {
 
 		storedPreferences = new StoredPreferences();
 		saveStates = new SaveStates();
+		MyGame.engine = new Engine();
 	}
 
 	public void changeScreen(int screen) {
