@@ -1,11 +1,14 @@
 package com.mygdx.game.utils.saves;
 
+import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.mygdx.game.engine.systems.saving.SaveTest;
 import com.mygdx.game.engine.utils.componentutils.Mappers;
 import com.mygdx.game.engine.utils.entities.PlayerEntity;
+import com.mygdx.game.utils.ui.InventorySlot;
 
 public class SaveDataLoader {
     Json json = new Json();
@@ -33,6 +36,15 @@ public class SaveDataLoader {
         // set values of other components already inside
         Mappers.sprite.get(player).texture = new Texture(Gdx.files.internal(savedPlayer.textureImgPath));
 
+        loadInventory(player, savedPlayer);
+
         return player;
+    }
+
+    private void loadInventory(PlayerEntity player, SavedPlayer savedPlayer) {
+        // convert all SavedItem to entities
+        for (int i = 0; i < savedPlayer.inventoryItems.size; i++) {
+            Entity item = new Entity();
+        }
     }
 }
