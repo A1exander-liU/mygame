@@ -63,6 +63,7 @@ public class GameScreen implements Screen {
     public static InputMultiplexer inventoryMultiplexer;
 
     public GameScreen(MyGame parent) {
+        this.parent = parent;
         initializeObjects();
         // now player is loaded from slot and is in engine
         // check if no player entity exists means it was loaded from slot that was empty
@@ -70,12 +71,6 @@ public class GameScreen implements Screen {
             // make new player
             entityFactory.makePlayer("player");
         // if loaded from non-empty slot, PlayerEntity already exists
-        
-        inventoryMultiplexer = new InputMultiplexer();
-
-        parent.batch = new SpriteBatch();
-        // to display the map as orthogonal (top down)
-        tiledMapRenderer = new MapObjectDrawer(testMap);
 
         MovementSystem movementSystem = new MovementSystem(cg);
         EnemySpawningSystem enemySpawningSystem = new EnemySpawningSystem(cg, entityFactory);
@@ -188,13 +183,16 @@ public class GameScreen implements Screen {
         parent.jsonSearcher = new JsonEnemyFinder();
         parent.itemFinder = new JsonItemFinder();
         itemFactory = new ItemFactory(parent.itemFinder);
-        ItemFactory itemFactory = new ItemFactory(parent.itemFinder);
+        itemFactory = new ItemFactory(parent.itemFinder);
         testMap = new TmxMapLoader().load("untitled.tmx");
-        this.parent = parent;
         cg = new ComponentGrabber();
         MyGame.engine.addEntityListener(new EnemyRemovalListener(cg));
         entityFactory = new EntityFactory(cg, parent);
         MyGame.gameMapProperties = new GameMapProperties(testMap, entityFactory);
         parent.entityToMapAdder = new EntityToMapAdder(cg);
+        inventoryMultiplexer = new InputMultiplexer();
+        parent.batch = new SpriteBatch();
+        // to display the map as orthogonal (top down)
+        tiledMapRenderer = new MapObjectDrawer(testMap);
     }
 }
