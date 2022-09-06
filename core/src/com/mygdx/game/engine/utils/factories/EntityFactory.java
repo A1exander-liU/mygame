@@ -50,7 +50,7 @@ public class EntityFactory {
     }
 
     public void makePlayer(String name) {
-        PlayerEntity player = new PlayerEntity();
+        PlayerEntity player = new PlayerEntity(true);
         modifyPlayerComponentValues(player, name);
         addToEngine(player);
         addToMap(player);

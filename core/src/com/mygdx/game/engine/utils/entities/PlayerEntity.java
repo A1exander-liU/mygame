@@ -23,8 +23,12 @@ import com.mygdx.game.engine.components.Steering;
 
 public class PlayerEntity extends Entity {
 
-    public PlayerEntity() {
-        addRequiredComponents();
+    public PlayerEntity(boolean newCharacter) {
+        if (newCharacter)
+            addRequiredComponents();
+        else {
+
+        }
     }
 
     private void addRequiredComponents() {
