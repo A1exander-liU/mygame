@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -60,12 +61,9 @@ public class SaveSlotScreen implements Screen {
             }
         });
 
-        Window saveSlot1 = new Window("Slot 1", gameUiSkin);
-        saveSlot1.setMovable(false);
-        Window saveSlot2 = new Window("Slot 2", gameUiSkin);
-        saveSlot2.setMovable(false);
-        Window saveSlot3 = new Window("Slot 3", gameUiSkin);
-        saveSlot3.setMovable(false);
+        Button saveSlot1 = new Button(gameUiSkin);
+        Button saveSlot2 = new Button(gameUiSkin);
+        Button saveSlot3 = new Button(gameUiSkin);
 
         Table backButtonTable = new Table();
         backButtonTable.add(backButton).expand().top().left();
