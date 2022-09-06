@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.mygdx.game.engine.systems.saving.SaveTest;
+import com.mygdx.game.engine.utils.componentutils.Families;
 import com.mygdx.game.jsonreaders.JsonEnemyFinder;
 import com.mygdx.game.jsonreaders.JsonItemFinder;
 import com.mygdx.game.engine.utils.componentutils.ComponentGrabber;
@@ -73,7 +74,15 @@ public class GameScreen implements Screen {
         entityFactory = new EntityFactory(cg, parent);
         MyGame.gameMapProperties = new GameMapProperties(testMap, entityFactory);
         parent.entityToMapAdder = new EntityToMapAdder(cg);
-        entityFactory.makePlayer("player");
+
+        // now player is loaded from slot and is in engine
+        // check if no player entity exists means it was loaded from slot that was empty
+        if (MyGame.engine.getEntitiesFor(Families.player).size() == 0)
+            // make new player
+            entityFactory.makePlayer("player");
+        // if loaded from non-empty slot, PlayerEntity already exists
+
+
         inventoryMultiplexer = new InputMultiplexer();
         // to add system (now all allowed entities will move every frame)
         // you can enable and disable a system temporarily
