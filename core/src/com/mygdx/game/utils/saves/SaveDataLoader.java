@@ -1,4 +1,4 @@
-package com.mygdx.game.utils;
+package com.mygdx.game.utils.saves;
 
 import com.badlogic.gdx.utils.Json;
 import com.mygdx.game.engine.utils.entities.PlayerEntity;
