@@ -53,14 +53,6 @@ public class SaveSlotScreen implements Screen {
         backButton.setLabel(new Label("Back", gameUiSkin, "pixel2D", Color.BLACK));
         backButton.getLabel().setAlignment(Align.center);
 
-        backButton.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                System.out.println("Menu Screen!");
-                parent.changeScreen(MyGame.MENU_SCREEN);
-            }
-        });
-
         Button saveSlot1 = new Button(gameUiSkin);
         Label saveSlot1Title = new Label("Slot 1", gameUiSkin, "pixel2D", Color.BLACK);
         Button saveSlot2 = new Button(gameUiSkin);
@@ -72,6 +64,7 @@ public class SaveSlotScreen implements Screen {
         saveSlot2.add(saveSlot2Title);
         saveSlot3.add(saveSlot3Title);
 
+        // table
         Table backButtonTable = new Table();
         backButtonTable.add(backButton).expand().top().left();
 
@@ -82,6 +75,15 @@ public class SaveSlotScreen implements Screen {
         table.add(saveSlot1).expand().center();
         table.add(saveSlot2).expand().center();
         table.add(saveSlot3).expand().center();
+
+        // listeners
+        backButton.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                System.out.println("Menu Screen!");
+                parent.changeScreen(MyGame.MENU_SCREEN);
+            }
+        });
     }
 
     @Override
