@@ -68,7 +68,6 @@ public class GameScreen implements Screen {
         ItemFactory itemFactory = new ItemFactory(parent.itemFinder);
         testMap = new TmxMapLoader().load("untitled.tmx");
         this.parent = parent;
-        MyGame.engine = new Engine();
         cg = new ComponentGrabber();
         MyGame.engine.addEntityListener(new EnemyRemovalListener(cg));
         entityFactory = new EntityFactory(cg, parent);
