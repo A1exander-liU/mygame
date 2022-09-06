@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
+import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.components.Sprite;
 import com.mygdx.game.engine.systems.saving.SaveTest;
 import com.mygdx.game.engine.utils.componentutils.Mappers;
@@ -72,6 +73,8 @@ public class SaveDataLoader {
                     item.add(savedItem.armourBaseStatComponent);
                     item.add(savedItem.affixesComponent);
                 }
+                inventorySlots.get(i).setOccupiedItem(item);
+                MyGame.engine.addEntity(item);
             }
         }
     }
