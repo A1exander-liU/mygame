@@ -48,7 +48,8 @@ public class SaveDataLoader {
             Entity item = new Entity();
             SavedItem savedItem = savedPlayer.inventoryItems.get(i);
             // if null means slot was empty
-            inventorySlots.get(i).setOccupiedItem(null);
+            if (savedItem == null)
+                inventorySlots.get(i).setOccupiedItem(null);
         }
     }
 }
