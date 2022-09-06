@@ -106,8 +106,11 @@ public class SaveSlotScreen implements Screen {
                     // now player is loaded with all info go to game screen
                     parent.changeScreen(MyGame.GAME_SCREEN);
                 }
-                else
+                else {
                     System.out.println("empty");
+                    // go the game screen regardless
+                    parent.changeScreen(MyGame.GAME_SCREEN);
+                }
             }
         });
 
@@ -120,8 +123,10 @@ public class SaveSlotScreen implements Screen {
                     PlayerEntity player = saveDataLoader.load(slotTwoData);
                     parent.changeScreen(MyGame.GAME_SCREEN);
                 }
-                else
+                else {
                     System.out.println("empty");
+                    parent.changeScreen(MyGame.GAME_SCREEN);
+                }
             }
         });
 
@@ -134,8 +139,10 @@ public class SaveSlotScreen implements Screen {
                     PlayerEntity player = saveDataLoader.load(slotThreeData);
                     parent.changeScreen(MyGame.GAME_SCREEN);
                 }
-                else
+                else {
                     System.out.println("empty");
+                    parent.changeScreen(MyGame.GAME_SCREEN);
+                }
             }
         });
 
