@@ -91,7 +91,7 @@ public class PlayerHudRenderSystem extends EntitySystem {
     @Override
     public void update(float delta) {
         Gdx.input.setInputProcessor(playerHud);
-        
+        updateHpMpExpLevelValues();
 //        playerHud.clear();
 //        // the root table
 //        Table root = new Table();
@@ -139,6 +139,7 @@ public class PlayerHudRenderSystem extends EntitySystem {
         root.add(playerLevel).expand().top().left().height(playerLevel.getHeight()).width(playerLevel.getWidth());
         // create and add level label to the table
         Label playerLevelLabel = new Label("" + cg.getLevel(player).level, skin, "pixel2D", Color.BLACK);
+        playerLevelLabel.setName("playerLevelLabel");
         // center the text
         playerLevelLabel.setAlignment(0);
         playerLevel.add(playerLevelLabel).fill();
@@ -212,5 +213,13 @@ public class PlayerHudRenderSystem extends EntitySystem {
         healthBarStackCell.height(playerLevel.getHeight() / 3).padTop(5);
         manaBarStackCell.height(playerLevel.getHeight() / 3);
         expBarStackCell.height(playerLevel.getHeight() / 3);
+    }
+
+    private void updateHpMpExpLevelValues() {
+        ((ProgressBar)((Stack) playerHud.getRoot().findActor("healthStack")).getChildren().get(0)).setValue(calcCurrentRemainingHealth());
+
+        ((ProgressBar)((Stack) playerHud.getRoot().findActor("manaStack")).getChildren().get(0)).setValue(calcRemainingMana());
+
+        
     }
 }
