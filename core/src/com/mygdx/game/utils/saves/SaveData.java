@@ -10,7 +10,6 @@ import com.mygdx.game.MyGame;
 import com.mygdx.game.SaveStates;
 import com.mygdx.game.engine.components.Sprite;
 import com.mygdx.game.engine.components.Steering;
-import com.mygdx.game.engine.systems.saving.SaveTest;
 import com.mygdx.game.engine.utils.componentutils.Mappers;
 import com.mygdx.game.engine.utils.entities.PlayerEntity;
 import com.mygdx.game.utils.ui.InventorySlot;
@@ -18,10 +17,19 @@ import com.mygdx.game.utils.ui.InventorySlot;
 public class SaveData {
     Json json;
     MyGame root;
+    String currentSlot;
 
     public SaveData(MyGame root) {
         this.root = root;
         json = new Json();
+    }
+
+    public String getCurrentSlot() {
+        return currentSlot;
+    }
+
+    public void setCurrentSlot(String currentSlot) {
+        this.currentSlot = currentSlot;
     }
 
     public PlayerEntity load(String serializedData) {
