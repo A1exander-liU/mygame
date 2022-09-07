@@ -23,6 +23,7 @@ import com.mygdx.game.engine.utils.componentutils.Families;
 import com.mygdx.game.engine.components.ExpComponent;
 import com.mygdx.game.engine.components.ManaComponent;
 import com.mygdx.game.engine.components.ParameterComponent;
+import com.mygdx.game.utils.ui.PauseButton;
 
 public class PlayerHudRenderSystem extends EntitySystem {
     ComponentGrabber cg;
@@ -80,7 +81,7 @@ public class PlayerHudRenderSystem extends EntitySystem {
 
         adjustStackCellSizes(playerLevel, playerHealthManaExp);
 
-        ImageButton pauseButton = new ImageButton(skin, "image-button-pause");
+        PauseButton pauseButton = new PauseButton(skin);
         root.add(pauseButton).expand().top().right();
 
         playerHud.act();
