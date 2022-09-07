@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Cell;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -78,6 +79,9 @@ public class PlayerHudRenderSystem extends EntitySystem {
         createExpStack(playerHealthManaExp);
 
         adjustStackCellSizes(playerLevel, playerHealthManaExp);
+
+        ImageButton pauseButton = new ImageButton(skin, "image-button-pause");
+        root.add(pauseButton).expand().top().right();
 
         playerHud.act();
         playerHud.draw();
