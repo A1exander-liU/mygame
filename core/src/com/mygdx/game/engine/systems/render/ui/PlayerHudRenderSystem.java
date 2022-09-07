@@ -130,6 +130,10 @@ public class PlayerHudRenderSystem extends EntitySystem {
         return (cg.getMana(player).currentMana / cg.getMana(player).maxMana * 100);
     }
 
+    private float calcCurrentExp() {
+        return ((float) cg.getExp(player).currentExp / cg.getExp(player).toNextLevel) * 100;
+    }
+
     private void createLevelUiArea(Table root, Table playerLevel) {
         // setting the table width and height
         playerLevel.setSize(root.getWidth() / 3, root.getHeight() / 6);
@@ -220,6 +224,6 @@ public class PlayerHudRenderSystem extends EntitySystem {
 
         ((ProgressBar)((Stack) playerHud.getRoot().findActor("manaStack")).getChildren().get(0)).setValue(calcRemainingMana());
 
-        
+        ((ProgressBar)((Stack) playerHud.getRoot().findActor("expStack")).getChildren().get(0)).setValue(calcCurrentExp());
     }
 }
