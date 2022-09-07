@@ -21,6 +21,9 @@ public class PauseDialog extends Dialog {
     @Override
     protected void result(Object result) {
         // hide to remove
+        if (result == "mainMenu") {
+            root.changeScreen(MyGame.MENU_SCREEN);
+        }
     }
 
     private void buildPauseDialog() {
