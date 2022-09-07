@@ -87,6 +87,7 @@ public class SaveDataLoader {
             }
         }
         Mappers.inventory.get(player).inventorySlots = inventorySlots;
+        Mappers.inventory.get(player).coinPouch = savedPlayer.coins;
     }
 
     private void loadEquipSlots(PlayerEntity player, SavedPlayer savedPlayer) {
