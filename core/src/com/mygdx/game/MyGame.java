@@ -4,6 +4,8 @@ import com.badlogic.ashley.core.Engine;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.mygdx.game.engine.utils.EntityToMapAdder;
 import com.mygdx.game.jsonreaders.JsonEnemyFinder;
 import com.mygdx.game.jsonreaders.JsonItemFinder;
@@ -13,6 +15,7 @@ import com.mygdx.game.screens.MainMenuScreen;
 import com.mygdx.game.screens.SaveSlotScreen;
 import com.mygdx.game.screens.SettingsScreen;
 import com.mygdx.game.utils.map.GameMapProperties;
+import com.mygdx.game.utils.map.MapObjectDrawer;
 
 public class MyGame extends Game {
 	MainMenuScreen mainMenuScreen;
@@ -38,6 +41,8 @@ public class MyGame extends Game {
 	public JsonEnemyFinder jsonSearcher;
 	public JsonItemFinder itemFinder;
 	public EntityToMapAdder entityToMapAdder;
+	public TiledMap testMap;
+	public MapObjectDrawer tiledMapRenderer;
 
 	public StoredPreferences getStoredPreferences() {
 		return storedPreferences;
@@ -54,6 +59,8 @@ public class MyGame extends Game {
 		storedPreferences = new StoredPreferences();
 		saveStates = new SaveStates();
 		MyGame.engine = new Engine();
+		testMap = new TmxMapLoader().load("untitled.tmx");
+		tiledMapRenderer = new MapObjectDrawer(testMap);
 	}
 
 	public void changeScreen(int screen) {

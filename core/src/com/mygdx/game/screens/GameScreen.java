@@ -54,8 +54,6 @@ public class GameScreen implements Screen {
 
     public static ItemFactory itemFactory;
 
-    TiledMap testMap;
-    MapObjectDrawer tiledMapRenderer;
     EntityFactory entityFactory;
 
     ComponentGrabber cg;
@@ -79,7 +77,7 @@ public class GameScreen implements Screen {
         StateSystem stateSystem = new StateSystem(cg);
         EntityRemovalSystem entityRemovalSystem = new EntityRemovalSystem(cg);
         CollisionSystem collisionSystem = new CollisionSystem(cg);
-        MapUpdateSystem mapUpdateSystem = new MapUpdateSystem(cg, tiledMapRenderer);
+        MapUpdateSystem mapUpdateSystem = new MapUpdateSystem(cg, parent.tiledMapRenderer);
         OrientationSystem orientationSystem = new OrientationSystem(cg);
         BasicAttackSystem basicAttackSystem = new BasicAttackSystem(cg, MyGame.gameMapProperties);
         HealthBarRenderSystem healthBarRenderSystem = new HealthBarRenderSystem(cg);
@@ -155,7 +153,7 @@ public class GameScreen implements Screen {
     @Override
     public void dispose() {
         parent.batch.dispose();
-        testMap.dispose();
+        parent.testMap.dispose();
     }
 
     private void pauseSystems() {
@@ -184,15 +182,12 @@ public class GameScreen implements Screen {
         parent.itemFinder = new JsonItemFinder();
         itemFactory = new ItemFactory(parent.itemFinder);
         itemFactory = new ItemFactory(parent.itemFinder);
-        testMap = new TmxMapLoader().load("untitled.tmx");
         cg = new ComponentGrabber();
         MyGame.engine.addEntityListener(new EnemyRemovalListener(cg));
         entityFactory = new EntityFactory(cg, parent);
-        MyGame.gameMapProperties = new GameMapProperties(testMap, entityFactory);
+        MyGame.gameMapProperties = new GameMapProperties(parent.testMap, entityFactory);
         parent.entityToMapAdder = new EntityToMapAdder(cg);
         inventoryMultiplexer = new InputMultiplexer();
         parent.batch = new SpriteBatch();
-        // to display the map as orthogonal (top down)
-        tiledMapRenderer = new MapObjectDrawer(testMap);
     }
 }
