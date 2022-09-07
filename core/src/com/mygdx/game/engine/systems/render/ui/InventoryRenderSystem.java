@@ -65,7 +65,6 @@ public class InventoryRenderSystem extends EntitySystem {
         player = MyGame.engine.getEntitiesFor(Families.player).get(0);
         stage = new Stage(new ScreenViewport());
         GameScreen.inventoryMultiplexer.addProcessor(stage);
-        Gdx.input.setInputProcessor(stage);
 
         skin = new Skin();
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/PressStart2P-Regular.ttf"));
@@ -196,6 +195,7 @@ public class InventoryRenderSystem extends EntitySystem {
         // so future frames won't keep redrawing
 
         if (inventoryOpened) {
+            Gdx.input.setInputProcessor(stage);
             stage.setScrollFocus(inventoryScroll);
             // immediately set to false so the inventory is only drawn once
             // when it is opened once
