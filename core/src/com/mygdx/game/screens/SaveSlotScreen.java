@@ -35,7 +35,7 @@ public class SaveSlotScreen implements Screen {
         this.parent = parent;
         stage = new Stage(new ScreenViewport());
         json = new Json();
-        saveDataLoader = new SaveDataLoader();
+        saveDataLoader = new SaveDataLoader(parent);
     }
 
     @Override

@@ -15,8 +15,10 @@ import com.mygdx.game.utils.ui.InventorySlot;
 
 public class SaveDataLoader {
     Json json;
+    MyGame root;
 
-    public SaveDataLoader() {
+    public SaveDataLoader(MyGame root) {
+        this.root = root;
         json = new Json();
     }
 
@@ -44,6 +46,7 @@ public class SaveDataLoader {
         loadEquipSlots(player, savedPlayer);
 
         MyGame.engine.addEntity(player);
+        root.entityToMapAdder.addEntityToMap(player);
 
         return player;
     }
