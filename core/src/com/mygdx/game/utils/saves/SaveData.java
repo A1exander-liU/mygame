@@ -5,7 +5,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
+import com.badlogic.gdx.utils.JsonWriter;
 import com.mygdx.game.MyGame;
+import com.mygdx.game.SaveStates;
 import com.mygdx.game.engine.components.Sprite;
 import com.mygdx.game.engine.components.Steering;
 import com.mygdx.game.engine.systems.saving.SaveTest;
@@ -117,5 +119,16 @@ public class SaveData {
                 MyGame.engine.addEntity(equippedItem);
             }
         }
+    }
+
+    public void save(PlayerEntity player) {
+        SavedPlayer savedPlayer = new SavedPlayer(player);
+        json.setOutputType(JsonWriter.OutputType.minimal);
+        json.setElementType(SavedPlayer.class, "inventorySlots", SavedSlot.class);
+        String serialized = json.toJson(savedPlayer);
+        // now when loading game need to recreate playerEntity
+        // set the values with saved player components
+        // need to recreate and set items in the inventory
+        root.getSaveStates().setSlotData(SaveStates.SLOT_ONE, serialized);
     }
 }

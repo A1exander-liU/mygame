@@ -31,26 +31,12 @@ public class SaveTest extends EntitySystem {
     @Override
     public void update(float delta) {
         if (Gdx.input.isKeyJustPressed(Input.Keys.P)) {
-            savePlayer((PlayerEntity) MyGame.engine.getEntitiesFor(Families.player).get(0));
+            root.saveData.save((PlayerEntity) MyGame.engine.getEntitiesFor(Families.player).get(0));
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.O)) {
             Json json = new Json();
             String lastSavedData = root.getSaveStates().getSlotSerializedData(SaveStates.SLOT_ONE);
             SavedPlayer lastSavedPlayer = json.fromJson(SavedPlayer.class, lastSavedData);
         }
-    }
-
-    public void savePlayer(PlayerEntity player) {
-        SavedPlayer savedPlayer = new SavedPlayer(player);
-        Json json = new Json();
-        json.setOutputType(JsonWriter.OutputType.minimal);
-        json.setElementType(SavedPlayer.class, "inventorySlots", SavedSlot.class);
-        String serialized = json.toJson(savedPlayer);
-        SavedPlayer unserialized = json.fromJson(SavedPlayer.class, serialized);
-        System.out.println(json.prettyPrint(serialized));
-        // now when loading game need to recreate playerEntity
-        // set the values with saved player components
-        // need to recreate and set items in the inventory
-        root.getSaveStates().setSlotData(SaveStates.SLOT_ONE, serialized);
     }
 }
