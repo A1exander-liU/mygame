@@ -70,21 +70,21 @@ public class GameScreen implements Screen {
             entityFactory.makePlayer("player");
         // if loaded from non-empty slot, PlayerEntity already exists
 
-        MovementSystem movementSystem = new MovementSystem(cg);
-        EnemySpawningSystem enemySpawningSystem = new EnemySpawningSystem(cg, entityFactory);
-        SteeringSystem steeringSystem = new SteeringSystem(cg);
+        MovementSystem movementSystem = new MovementSystem(parent.cg);
+        EnemySpawningSystem enemySpawningSystem = new EnemySpawningSystem(parent.cg, parent.entityFactory);
+        SteeringSystem steeringSystem = new SteeringSystem(parent.cg);
         TimeSystem timeSystem = new TimeSystem();
-        StateSystem stateSystem = new StateSystem(cg);
-        EntityRemovalSystem entityRemovalSystem = new EntityRemovalSystem(cg);
-        CollisionSystem collisionSystem = new CollisionSystem(cg);
-        MapUpdateSystem mapUpdateSystem = new MapUpdateSystem(cg, parent.tiledMapRenderer);
-        OrientationSystem orientationSystem = new OrientationSystem(cg);
-        BasicAttackSystem basicAttackSystem = new BasicAttackSystem(cg, MyGame.gameMapProperties);
-        HealthBarRenderSystem healthBarRenderSystem = new HealthBarRenderSystem(cg);
-        EnemyAttackSystem enemyAttackSystem = new EnemyAttackSystem(cg, parent);
-        PlayerHudRenderSystem playerHudRenderSystem = new PlayerHudRenderSystem(cg);
-        InventoryRenderSystem inventoryRenderSystem = new InventoryRenderSystem(cg);
-        InventoryTest inventoryTest = new InventoryTest(cg, itemFactory);
+        StateSystem stateSystem = new StateSystem(parent.cg);
+        EntityRemovalSystem entityRemovalSystem = new EntityRemovalSystem(parent.cg);
+        CollisionSystem collisionSystem = new CollisionSystem(parent.cg);
+        MapUpdateSystem mapUpdateSystem = new MapUpdateSystem(parent.cg, parent.tiledMapRenderer);
+        OrientationSystem orientationSystem = new OrientationSystem(parent.cg);
+        BasicAttackSystem basicAttackSystem = new BasicAttackSystem(parent.cg, MyGame.gameMapProperties);
+        HealthBarRenderSystem healthBarRenderSystem = new HealthBarRenderSystem(parent.cg);
+        EnemyAttackSystem enemyAttackSystem = new EnemyAttackSystem(parent.cg, parent);
+        PlayerHudRenderSystem playerHudRenderSystem = new PlayerHudRenderSystem(parent.cg);
+        InventoryRenderSystem inventoryRenderSystem = new InventoryRenderSystem(parent.cg);
+        InventoryTest inventoryTest = new InventoryTest(parent.cg, itemFactory);
         ItemWindowRenderSystem itemWindowRenderSystem = new ItemWindowRenderSystem();
         LootingSystem lootingSystem = new LootingSystem();
         EnemyDeathSystem enemyDeathSystem = new EnemyDeathSystem();
@@ -182,10 +182,7 @@ public class GameScreen implements Screen {
         parent.itemFinder = new JsonItemFinder();
         itemFactory = new ItemFactory(parent.itemFinder);
         itemFactory = new ItemFactory(parent.itemFinder);
-        cg = new ComponentGrabber();
         MyGame.engine.addEntityListener(new EnemyRemovalListener(cg));
-        entityFactory = new EntityFactory(cg, parent);
-        MyGame.gameMapProperties = new GameMapProperties(parent.testMap, entityFactory);
         parent.entityToMapAdder = new EntityToMapAdder(cg);
         inventoryMultiplexer = new InputMultiplexer();
         parent.batch = new SpriteBatch();

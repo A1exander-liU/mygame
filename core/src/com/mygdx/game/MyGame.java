@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.mygdx.game.engine.utils.EntityToMapAdder;
+import com.mygdx.game.engine.utils.componentutils.ComponentGrabber;
+import com.mygdx.game.engine.utils.factories.EntityFactory;
 import com.mygdx.game.jsonreaders.JsonEnemyFinder;
 import com.mygdx.game.jsonreaders.JsonItemFinder;
 import com.mygdx.game.screens.GameScreen;
@@ -43,6 +45,8 @@ public class MyGame extends Game {
 	public EntityToMapAdder entityToMapAdder;
 	public TiledMap testMap;
 	public MapObjectDrawer tiledMapRenderer;
+	public ComponentGrabber cg;
+	public EntityFactory entityFactory;
 
 	public StoredPreferences getStoredPreferences() {
 		return storedPreferences;
@@ -62,6 +66,9 @@ public class MyGame extends Game {
 		testMap = new TmxMapLoader().load("untitled.tmx");
 		tiledMapRenderer = new MapObjectDrawer(testMap);
 		entityToMapAdder = new EntityToMapAdder();
+		cg = new ComponentGrabber();
+		entityFactory = new EntityFactory(cg, this);
+		gameMapProperties = new GameMapProperties(testMap, entityFactory);
 	}
 
 	public void changeScreen(int screen) {
