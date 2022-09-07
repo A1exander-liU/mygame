@@ -11,6 +11,7 @@ public class PauseDialog extends Dialog {
 
     public PauseDialog(String title, Skin skin) {
         super(title, skin);
+        setMovable(false);
         buildPauseDialog();
     }
 
