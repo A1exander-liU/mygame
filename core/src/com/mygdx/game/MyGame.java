@@ -61,6 +61,7 @@ public class MyGame extends Game {
 		MyGame.engine = new Engine();
 		testMap = new TmxMapLoader().load("untitled.tmx");
 		tiledMapRenderer = new MapObjectDrawer(testMap);
+		entityToMapAdder = new EntityToMapAdder();
 	}
 
 	public void changeScreen(int screen) {
