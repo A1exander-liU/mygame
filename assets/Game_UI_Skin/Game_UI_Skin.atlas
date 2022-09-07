@@ -46,6 +46,48 @@ inv-scroll-h
   orig: 32, 32
   offset: 0, 0
   index: -1
+pause
+  rotate: false
+  xy: 469, 292
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+pause-button
+  rotate: false
+  xy: 167, 126
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+pause2
+  rotate: false
+  xy: 167, 160
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+pause3
+  rotate: false
+  xy: 167, 92
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+pause5
+  rotate: false
+  xy: 233, 226
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+pause6
+  rotate: false
+  xy: 103, 28
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
 pixil-frame-0
   rotate: false
   xy: 1, 28
@@ -153,7 +195,7 @@ pixil-frame-30
   index: -1
 pixil-frame-31
   rotate: false
-  xy: 199, 208
+  xy: 503, 308
   size: 1, 16
   orig: 1, 16
   offset: 0, 0
@@ -174,7 +216,7 @@ pixil-frame-33
   index: -1
 pixil-frame-34
   rotate: false
-  xy: 167, 170
+  xy: 199, 202
   size: 16, 22
   orig: 16, 22
   offset: 0, 0
@@ -216,7 +258,7 @@ slider-bg
   index: -1
 slider-knob2
   rotate: false
-  xy: 233, 226
+  xy: 201, 168
   size: 15, 32
   orig: 15, 32
   offset: 0, 0

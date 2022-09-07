@@ -794,6 +794,46 @@
 		"regions": [],
 		"playMode": 2,
 		"crushMode": 0
+	},
+	"image-button-pause-img": {
+		"region": "pause",
+		"horizontalStretchAreas": [ 10, 12, 19, 21 ],
+		"verticalStretchAreas": [ 8, 23 ],
+		"tiling": false,
+		"minWidth": 32,
+		"minHeight": 32,
+		"rightWidth": 0,
+		"leftWidth": 0,
+		"bottomHeight": 0,
+		"topHeight": 0,
+		"offsetX": 0,
+		"offsetY": 0,
+		"offsetXspeed": 0,
+		"offsetYspeed": 0,
+		"frameDuration": 0.03,
+		"regions": [],
+		"playMode": 2,
+		"crushMode": 0
+	},
+	"pause5a": {
+		"region": "pause5",
+		"horizontalStretchAreas": [ 0, 31 ],
+		"verticalStretchAreas": [ 0, 31 ],
+		"tiling": false,
+		"minWidth": 32,
+		"minHeight": 32,
+		"rightWidth": 0,
+		"leftWidth": 0,
+		"bottomHeight": 0,
+		"topHeight": 0,
+		"offsetX": 0,
+		"offsetY": 0,
+		"offsetXspeed": 0,
+		"offsetYspeed": 0,
+		"frameDuration": 0.03,
+		"regions": [],
+		"playMode": 2,
+		"crushMode": 0
 	}
 },
 "com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle": {
@@ -816,6 +856,12 @@
 "com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle": {
 	"default": {
 		"up": "button-up"
+	},
+	"image-button-pause": {
+		"imageUp": "pause6",
+		"up": "button-up",
+		"down": "text-button-down",
+		"over": "text-button-over"
 	}
 },
 "com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle": {
