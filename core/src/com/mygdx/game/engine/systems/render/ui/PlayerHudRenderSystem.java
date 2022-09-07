@@ -7,7 +7,9 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -15,6 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.MyGame;
@@ -36,6 +39,8 @@ public class PlayerHudRenderSystem extends EntitySystem {
     ManaComponent playerMana;
     ExpComponent playerExp;
 
+    Table root;
+
     public PlayerHudRenderSystem(ComponentGrabber cg) {
         super(98);
         this.cg = cg;
@@ -55,13 +60,9 @@ public class PlayerHudRenderSystem extends EntitySystem {
         playerParams = cg.getParameters(player);
         playerMana = cg.getMana(player);
         playerExp = cg.getExp(player);
-    }
 
-    @Override
-    public void update(float delta) {
-        playerHud.clear();
         // the root table
-        Table root = new Table();
+        root = new Table();
         // make root table as big as the stage
         root.setSize(playerHud.getWidth(), playerHud.getHeight());
         // add root table to the stage
@@ -84,7 +85,39 @@ public class PlayerHudRenderSystem extends EntitySystem {
         PauseButton pauseButton = new PauseButton(skin);
         root.add(pauseButton).expand().top().right();
 
-        playerHud.act();
+
+    }
+
+    @Override
+    public void update(float delta) {
+        Gdx.input.setInputProcessor(playerHud);
+        
+//        playerHud.clear();
+//        // the root table
+//        Table root = new Table();
+//        // make root table as big as the stage
+//        root.setSize(playerHud.getWidth(), playerHud.getHeight());
+//        // add root table to the stage
+//        playerHud.addActor(root);
+//        // create nested table to display player hp and exp for now
+//        Table playerLevel = new Table();
+//        playerLevel.setDebug(true);
+//
+//        createLevelUiArea(root, playerLevel);
+//        // nested table for health and exp
+//        Table playerHealthManaExp = new Table();
+//        playerLevel.add(playerHealthManaExp).width(playerLevel.getWidth() * (3f / 4)).pad(0, 0, 0, 0);
+//
+//        createHealthStack(playerHealthManaExp);
+//        createManaStack(playerHealthManaExp);
+//        createExpStack(playerHealthManaExp);
+//
+//        adjustStackCellSizes(playerLevel, playerHealthManaExp);
+//
+//        PauseButton pauseButton = new PauseButton(skin);
+//        root.add(pauseButton).expand().top().right();
+
+        playerHud.act(delta);
         playerHud.draw();
     }
 
