@@ -55,7 +55,6 @@ public class SavedPlayer {
         speed = Mappers.speed.get(playerToSave);
         textureImgPath = ((FileTextureData) Mappers.sprite.get(playerToSave).texture.getTextureData()).getFileHandle().path();
 
-        Array<Entity> slotItems = new Array<>();
         Array<InventorySlot> slots = Mappers.inventory.get(playerToSave).inventorySlots;
         Array<InventorySlot> equips = Mappers.inventory.get(playerToSave).equipSlots;
         inventorySlots = new Array<>();
@@ -73,8 +72,8 @@ public class SavedPlayer {
         for (int i = 0; i < equips.size; i++) {
             SavedSlot slot = new SavedSlot(equips.get(i));
             equipSlots.add(slot);
-            if (!slots.get(i).isEmpty())
-                equipItems.add(new SavedItem(slots.get(i).getOccupiedItem()));
+            if (!equips.get(i).isEmpty())
+                equipItems.add(new SavedItem(equips.get(i).getOccupiedItem()));
             else
                 equipItems.add(null);
         }
