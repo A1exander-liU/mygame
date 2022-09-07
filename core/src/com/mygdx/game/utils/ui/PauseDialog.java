@@ -18,9 +18,10 @@ public class PauseDialog extends Dialog {
     }
 
     private void buildPauseDialog() {
+        TextButton closeButton = new TextButton("x", getSkin());
         getTitleLabel().setText("Paused");
         getTitleLabel().setAlignment(Align.center);
-        getTitleTable().add(new TextButton("x", getSkin())).expand().right().pad(10,10,0,0);
+        getTitleTable().add(closeButton).expand().right().pad(10,10,0,0);
         getButtonTable().defaults().expand().fill().pad(5);
         button("Main Menu", "mainMenu");
         getButtonTable().row();
