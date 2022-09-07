@@ -97,6 +97,8 @@ public class SaveSlotScreen implements Screen {
             public void changed(ChangeEvent event, Actor actor) {
                 // get serialized data from prefs
                 String slotOneData = parent.getSaveStates().getSlotSerializedData(SaveStates.SLOT_ONE);
+                // set currentSlot to the slot clicked on
+                parent.saveData.setCurrentSlot(SaveStates.SLOT_ONE);
                 if (!Objects.equals(slotOneData, "")) {
                     System.out.println(json.prettyPrint(slotOneData));
                     // call load to get player entity back
@@ -116,6 +118,7 @@ public class SaveSlotScreen implements Screen {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 String slotTwoData = parent.getSaveStates().getSlotSerializedData(SaveStates.SLOT_TWO);
+                parent.saveData.setCurrentSlot(SaveStates.SLOT_TWO);
                 if (!Objects.equals(slotTwoData, "")) {
                     System.out.println(json.prettyPrint(slotTwoData));
                     PlayerEntity player = parent.saveData.load(slotTwoData);
@@ -132,6 +135,7 @@ public class SaveSlotScreen implements Screen {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 String slotThreeData = parent.getSaveStates().getSlotSerializedData(SaveStates.SLOT_THREE);
+                parent.saveData.setCurrentSlot(SaveStates.SLOT_THREE);
                 if (!Objects.equals(slotThreeData, "")) {
                     System.out.println(json.prettyPrint(slotThreeData));
                     PlayerEntity player = parent.saveData.load(slotThreeData);
