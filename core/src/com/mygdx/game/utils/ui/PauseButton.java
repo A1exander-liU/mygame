@@ -25,5 +25,6 @@ public class PauseButton extends ImageButton {
 
     private void showPauseMenu() {
         PauseDialog pauseDialog = new PauseDialog("", getSkin(), root);
+        pauseDialog.show(getStage())
     }
 }
