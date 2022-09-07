@@ -55,6 +55,7 @@ public class SavedPlayer {
         speed = Mappers.speed.get(playerToSave);
         textureImgPath = ((FileTextureData) Mappers.sprite.get(playerToSave).texture.getTextureData()).getFileHandle().path();
 
+        coins = Mappers.inventory.get(playerToSave).coinPouch;
         Array<InventorySlot> slots = Mappers.inventory.get(playerToSave).inventorySlots;
         Array<InventorySlot> equips = Mappers.inventory.get(playerToSave).equipSlots;
         inventorySlots = new Array<>();
