@@ -67,7 +67,7 @@ public class GameScreen implements Screen {
         // check if no player entity exists means it was loaded from slot that was empty
         if (MyGame.engine.getEntitiesFor(Families.player).size() == 0)
             // make new player
-            entityFactory.makePlayer("player");
+            parent.entityFactory.makePlayer("player");
         // if loaded from non-empty slot, PlayerEntity already exists
 
         MovementSystem movementSystem = new MovementSystem(parent.cg);
