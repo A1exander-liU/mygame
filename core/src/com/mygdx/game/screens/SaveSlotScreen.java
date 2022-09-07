@@ -21,7 +21,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.SaveStates;
 import com.mygdx.game.engine.utils.entities.PlayerEntity;
-import com.mygdx.game.utils.saves.SaveDataLoader;
+import com.mygdx.game.utils.saves.SaveData;
 
 import java.util.Objects;
 
@@ -29,13 +29,13 @@ public class SaveSlotScreen implements Screen {
     MyGame parent;
     Stage stage;
     Json json;
-    SaveDataLoader saveDataLoader;
+    SaveData saveData;
 
     public SaveSlotScreen(MyGame parent) {
         this.parent = parent;
         stage = new Stage(new ScreenViewport());
         json = new Json();
-        saveDataLoader = new SaveDataLoader(parent);
+        saveData = new SaveData(parent);
     }
 
     @Override
@@ -102,7 +102,7 @@ public class SaveSlotScreen implements Screen {
                 if (!Objects.equals(slotOneData, "")) {
                     System.out.println(json.prettyPrint(slotOneData));
                     // call load to get player entity back
-                    PlayerEntity player = saveDataLoader.load(slotOneData);
+                    PlayerEntity player = saveData.load(slotOneData);
                     // now player is loaded with all info go to game screen
                     parent.changeScreen(MyGame.GAME_SCREEN);
                 }
@@ -120,7 +120,7 @@ public class SaveSlotScreen implements Screen {
                 String slotTwoData = parent.getSaveStates().getSlotSerializedData(SaveStates.SLOT_TWO);
                 if (!Objects.equals(slotTwoData, "")) {
                     System.out.println(json.prettyPrint(slotTwoData));
-                    PlayerEntity player = saveDataLoader.load(slotTwoData);
+                    PlayerEntity player = saveData.load(slotTwoData);
                     parent.changeScreen(MyGame.GAME_SCREEN);
                 }
                 else {
@@ -136,7 +136,7 @@ public class SaveSlotScreen implements Screen {
                 String slotThreeData = parent.getSaveStates().getSlotSerializedData(SaveStates.SLOT_THREE);
                 if (!Objects.equals(slotThreeData, "")) {
                     System.out.println(json.prettyPrint(slotThreeData));
-                    PlayerEntity player = saveDataLoader.load(slotThreeData);
+                    PlayerEntity player = saveData.load(slotThreeData);
                     parent.changeScreen(MyGame.GAME_SCREEN);
                 }
                 else {

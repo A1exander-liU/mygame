@@ -13,11 +13,11 @@ import com.mygdx.game.engine.utils.componentutils.Mappers;
 import com.mygdx.game.engine.utils.entities.PlayerEntity;
 import com.mygdx.game.utils.ui.InventorySlot;
 
-public class SaveDataLoader {
+public class SaveData {
     Json json;
     MyGame root;
 
-    public SaveDataLoader(MyGame root) {
+    public SaveData(MyGame root) {
         this.root = root;
         json = new Json();
     }
