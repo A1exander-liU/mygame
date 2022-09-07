@@ -224,7 +224,7 @@ public class PlayerHudRenderSystem extends EntitySystem {
         ((Label)((Stack) playerHud.getRoot().findActor("healthStack")).getChildren().get(0)).setText(playerParams.health.currentHealth + " / " + playerParams.health.maxHealth);
 
         ((ProgressBar)((Stack) playerHud.getRoot().findActor("manaStack")).getChildren().get(0)).setValue(calcRemainingMana());
-        ((Label)((Stack) playerHud.getRoot().findActor("healthStack")).getChildren().get(0)).setText(playerMana.currentMana + " / " + playerMana.maxMana);
+        ((Label)((Stack) playerHud.getRoot().findActor("manaStack")).getChildren().get(0)).setText(playerMana.currentMana + " / " + playerMana.maxMana);
 
         ((ProgressBar)((Stack) playerHud.getRoot().findActor("expStack")).getChildren().get(0)).setValue(calcCurrentExp());
     }
