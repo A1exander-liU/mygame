@@ -137,6 +137,6 @@ public class SaveData {
         // now when loading game need to recreate playerEntity
         // set the values with saved player components
         // need to recreate and set items in the inventory
-        root.getSaveStates().setSlotData(SaveStates.SLOT_ONE, serialized);
+        root.getSaveStates().setSlotData(currentSlot, serialized);
     }
 }
