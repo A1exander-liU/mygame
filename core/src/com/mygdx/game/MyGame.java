@@ -18,6 +18,7 @@ import com.mygdx.game.screens.SaveSlotScreen;
 import com.mygdx.game.screens.SettingsScreen;
 import com.mygdx.game.utils.map.GameMapProperties;
 import com.mygdx.game.utils.map.MapObjectDrawer;
+import com.mygdx.game.utils.saves.SaveData;
 
 public class MyGame extends Game {
 	MainMenuScreen mainMenuScreen;
@@ -47,6 +48,7 @@ public class MyGame extends Game {
 	public MapObjectDrawer tiledMapRenderer;
 	public ComponentGrabber cg;
 	public EntityFactory entityFactory;
+	public SaveData saveData;
 
 	public StoredPreferences getStoredPreferences() {
 		return storedPreferences;
@@ -69,6 +71,7 @@ public class MyGame extends Game {
 		cg = new ComponentGrabber();
 		entityFactory = new EntityFactory(cg, this);
 		gameMapProperties = new GameMapProperties(testMap, entityFactory);
+		saveData = new SaveData(this);
 	}
 
 	public void changeScreen(int screen) {

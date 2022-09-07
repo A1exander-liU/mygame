@@ -29,13 +29,11 @@ public class SaveSlotScreen implements Screen {
     MyGame parent;
     Stage stage;
     Json json;
-    SaveData saveData;
 
     public SaveSlotScreen(MyGame parent) {
         this.parent = parent;
         stage = new Stage(new ScreenViewport());
         json = new Json();
-        saveData = new SaveData(parent);
     }
 
     @Override
@@ -102,7 +100,7 @@ public class SaveSlotScreen implements Screen {
                 if (!Objects.equals(slotOneData, "")) {
                     System.out.println(json.prettyPrint(slotOneData));
                     // call load to get player entity back
-                    PlayerEntity player = saveData.load(slotOneData);
+                    PlayerEntity player = parent.saveData.load(slotOneData);
                     // now player is loaded with all info go to game screen
                     parent.changeScreen(MyGame.GAME_SCREEN);
                 }
@@ -120,7 +118,7 @@ public class SaveSlotScreen implements Screen {
                 String slotTwoData = parent.getSaveStates().getSlotSerializedData(SaveStates.SLOT_TWO);
                 if (!Objects.equals(slotTwoData, "")) {
                     System.out.println(json.prettyPrint(slotTwoData));
-                    PlayerEntity player = saveData.load(slotTwoData);
+                    PlayerEntity player = parent.saveData.load(slotTwoData);
                     parent.changeScreen(MyGame.GAME_SCREEN);
                 }
                 else {
@@ -136,7 +134,7 @@ public class SaveSlotScreen implements Screen {
                 String slotThreeData = parent.getSaveStates().getSlotSerializedData(SaveStates.SLOT_THREE);
                 if (!Objects.equals(slotThreeData, "")) {
                     System.out.println(json.prettyPrint(slotThreeData));
-                    PlayerEntity player = saveData.load(slotThreeData);
+                    PlayerEntity player = parent.saveData.load(slotThreeData);
                     parent.changeScreen(MyGame.GAME_SCREEN);
                 }
                 else {
