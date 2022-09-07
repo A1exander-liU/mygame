@@ -221,10 +221,10 @@ public class PlayerHudRenderSystem extends EntitySystem {
 
     private void updateHpMpExpLevelValues() {
         ((ProgressBar)((Stack) playerHud.getRoot().findActor("healthStack")).getChildren().get(0)).setValue(calcCurrentRemainingHealth());
-        ((Label)((Stack) playerHud.getRoot().findActor("healthStack")).getChildren().get(0)).setText(playerParams.health.currentHealth + " / " + playerParams.health.maxHealth);
+        ((Label)((Stack) playerHud.getRoot().findActor("healthStack")).getChildren().get(1)).setText((int)playerParams.health.currentHealth + " / " + (int)playerParams.health.maxHealth);
 
         ((ProgressBar)((Stack) playerHud.getRoot().findActor("manaStack")).getChildren().get(0)).setValue(calcRemainingMana());
-        ((Label)((Stack) playerHud.getRoot().findActor("manaStack")).getChildren().get(0)).setText(playerMana.currentMana + " / " + playerMana.maxMana);
+        ((Label)((Stack) playerHud.getRoot().findActor("manaStack")).getChildren().get(1)).setText((int)playerMana.currentMana + " / " + (int)playerMana.maxMana);
 
         ((ProgressBar)((Stack) playerHud.getRoot().findActor("expStack")).getChildren().get(0)).setValue(calcCurrentExp());
         ((Label)((Stack) playerHud.getRoot().findActor("expStack")).getChildren().get(1)).setText(playerExp.currentExp + " / " + playerExp.toNextLevel);
