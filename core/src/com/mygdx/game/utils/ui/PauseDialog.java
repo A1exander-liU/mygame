@@ -6,11 +6,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
+import com.mygdx.game.MyGame;
 
 public class PauseDialog extends Dialog {
+    MyGame root;
 
-    public PauseDialog(String title, Skin skin) {
+    public PauseDialog(String title, Skin skin, MyGame root) {
         super(title, skin);
+        this.root = root;
         setMovable(false);
         buildPauseDialog();
     }

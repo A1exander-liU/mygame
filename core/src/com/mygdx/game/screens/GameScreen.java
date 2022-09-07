@@ -82,7 +82,7 @@ public class GameScreen implements Screen {
         BasicAttackSystem basicAttackSystem = new BasicAttackSystem(parent.cg, MyGame.gameMapProperties);
         HealthBarRenderSystem healthBarRenderSystem = new HealthBarRenderSystem(parent.cg);
         EnemyAttackSystem enemyAttackSystem = new EnemyAttackSystem(parent.cg, parent);
-        PlayerHudRenderSystem playerHudRenderSystem = new PlayerHudRenderSystem(parent.cg);
+        PlayerHudRenderSystem playerHudRenderSystem = new PlayerHudRenderSystem(parent.cg, parent);
         InventoryRenderSystem inventoryRenderSystem = new InventoryRenderSystem(parent.cg);
         InventoryTest inventoryTest = new InventoryTest(parent.cg, itemFactory);
         ItemWindowRenderSystem itemWindowRenderSystem = new ItemWindowRenderSystem();

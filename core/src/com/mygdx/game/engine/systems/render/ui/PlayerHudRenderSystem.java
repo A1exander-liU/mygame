@@ -34,16 +34,18 @@ public class PlayerHudRenderSystem extends EntitySystem {
     Stage playerHud;
     Skin skin;
     FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+    MyGame root;
 
     ParameterComponent playerParams;
     ManaComponent playerMana;
     ExpComponent playerExp;
 
-    Table root;
+    Table rootTable;
 
-    public PlayerHudRenderSystem(ComponentGrabber cg) {
+    public PlayerHudRenderSystem(ComponentGrabber cg, MyGame root) {
         super(98);
         this.cg = cg;
+        this.root = root;
         player = MyGame.engine.getEntitiesFor(Families.player).get(0);
         playerHud = new Stage(new ScreenViewport());
         skin = new Skin();
@@ -62,16 +64,16 @@ public class PlayerHudRenderSystem extends EntitySystem {
         playerExp = cg.getExp(player);
 
         // the root table
-        root = new Table();
+        rootTable = new Table();
         // make root table as big as the stage
-        root.setSize(playerHud.getWidth(), playerHud.getHeight());
+        rootTable.setSize(playerHud.getWidth(), playerHud.getHeight());
         // add root table to the stage
-        playerHud.addActor(root);
+        playerHud.addActor(rootTable);
         // create nested table to display player hp and exp for now
         Table playerLevel = new Table();
         playerLevel.setDebug(true);
 
-        createLevelUiArea(root, playerLevel);
+        createLevelUiArea(rootTable, playerLevel);
         // nested table for health and exp
         Table playerHealthManaExp = new Table();
         playerLevel.add(playerHealthManaExp).width(playerLevel.getWidth() * (3f / 4)).pad(0, 0, 0, 0);
@@ -82,8 +84,8 @@ public class PlayerHudRenderSystem extends EntitySystem {
 
         adjustStackCellSizes(playerLevel, playerHealthManaExp);
 
-        PauseButton pauseButton = new PauseButton(skin);
-        root.add(pauseButton).expand().top().right();
+        PauseButton pauseButton = new PauseButton(skin, root);
+        rootTable.add(pauseButton).expand().top().right();
 
 
     }
