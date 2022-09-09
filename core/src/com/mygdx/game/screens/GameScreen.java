@@ -1,6 +1,7 @@
 package com.mygdx.game.screens;
 
 import com.badlogic.ashley.core.Engine;
+import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
@@ -10,6 +11,8 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.dongbat.jbump.World;
+import com.mygdx.game.engine.entityListeners.WorldListener;
 import com.mygdx.game.engine.systems.saving.SaveTest;
 import com.mygdx.game.engine.utils.componentutils.Families;
 import com.mygdx.game.jsonreaders.JsonEnemyFinder;
@@ -59,16 +62,11 @@ public class GameScreen implements Screen {
     ComponentGrabber cg;
 
     public static InputMultiplexer inventoryMultiplexer;
+    public static World<Entity> world;
 
     public GameScreen(MyGame parent) {
         this.parent = parent;
         initializeObjects();
-        // now player is loaded from slot and is in engine
-        // check if no player entity exists means it was loaded from slot that was empty
-        if (MyGame.engine.getEntitiesFor(Families.player).size() == 0)
-            // make new player
-            parent.entityFactory.makePlayer("player");
-        // if loaded from non-empty slot, PlayerEntity already exists
 
         MovementSystem movementSystem = new MovementSystem(parent.cg);
         EnemySpawningSystem enemySpawningSystem = new EnemySpawningSystem(parent.cg, parent.entityFactory);
@@ -119,7 +117,22 @@ public class GameScreen implements Screen {
 
     @Override
     public void show() {
+        // now that all entities in engine are removed
+        // need to rebuild all the obstacles as entities since they were removed too
+        // plus the are only built inside the constructor of GameMapProperties
 
+        // make sure there are no entities of obstacles before rebuilding them
+        // when game screen is no longer current screen, no entities should exist
+        if (MyGame.engine.getEntitiesFor(Families.obstacles).size() == 0) {
+            MyGame.gameMapProperties.makeEntitiesFromCollisions();
+        }
+
+        // now player is loaded from slot and is in engine
+        // check if no player entity exists means it was loaded from slot that was empty
+        if (MyGame.engine.getEntitiesFor(Families.player).size() == 0)
+            // make new player
+            parent.entityFactory.makePlayer("player");
+        // if loaded from non-empty slot, PlayerEntity already exists
     }
 
     @Override
@@ -147,7 +160,9 @@ public class GameScreen implements Screen {
 
     @Override
     public void hide() {
-
+        // when screen is moved back to game screen, all previous entities still exist
+        // need to remove all entities
+        MyGame.engine.removeAllEntities();
     }
 
     @Override
@@ -178,11 +193,12 @@ public class GameScreen implements Screen {
     }
 
     private void initializeObjects() {
+        world = new World<>();
         parent.jsonSearcher = new JsonEnemyFinder();
         parent.itemFinder = new JsonItemFinder();
         itemFactory = new ItemFactory(parent.itemFinder);
         itemFactory = new ItemFactory(parent.itemFinder);
-        MyGame.engine.addEntityListener(new EnemyRemovalListener(parent.cg));
+        MyGame.engine.addEntityListener(new WorldListener());
         parent.entityToMapAdder = new EntityToMapAdder(cg);
         inventoryMultiplexer = new InputMultiplexer();
         parent.batch = new SpriteBatch();
