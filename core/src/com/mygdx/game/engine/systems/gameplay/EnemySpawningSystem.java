@@ -9,6 +9,7 @@ import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.Rectangle;
 import com.mygdx.game.engine.systems.TimeSystem;
 import com.mygdx.game.engine.systems.gameplay.movement.CollisionSystem;
+import com.mygdx.game.screens.GameScreen;
 import com.mygdx.game.utils.map.GameMapProperties;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.utils.componentutils.ComponentGrabber;
@@ -159,7 +160,7 @@ public class EnemySpawningSystem extends EntitySystem {
         textureObject.setX(pos.x);
         textureObject.setY(pos.y);
         spawnArea.owner = enemy;
-        addToWorld(enemy);
+//        addToWorld(enemy);
     }
 
     private void addBack() {
@@ -194,6 +195,6 @@ public class EnemySpawningSystem extends EntitySystem {
         Item item = cg.getItem(entity);
         Position pos = cg.getPosition(entity);
         Size size = cg.getSize(entity);
-        CollisionSystem.world.add(item.item, pos.x, pos.y, size.width, size.height);
+        GameScreen.world.add(item.item, pos.x, pos.y, size.width, size.height);
     }
 }
