@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonWriter;
+import com.dongbat.jbump.Item;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.SaveStates;
 import com.mygdx.game.engine.components.Sprite;
@@ -51,6 +52,7 @@ public class SaveData {
 
         // set values of other components already inside
         Mappers.sprite.get(player).texture = new Texture(Gdx.files.internal(savedPlayer.textureImgPath));
+        Mappers.item.get(player).item = new Item<>((Entity) player);
 
         loadInventory(player, savedPlayer);
         loadEquipSlots(player, savedPlayer);
