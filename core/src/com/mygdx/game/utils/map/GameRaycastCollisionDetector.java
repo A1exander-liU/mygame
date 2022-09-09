@@ -11,6 +11,7 @@ import com.dongbat.jbump.ItemInfo;
 import com.dongbat.jbump.Response;
 import com.mygdx.game.engine.utils.entities.MobEntity;
 import com.mygdx.game.engine.systems.gameplay.movement.CollisionSystem;
+import com.mygdx.game.screens.GameScreen;
 
 import java.util.ArrayList;
 
@@ -56,7 +57,7 @@ public class GameRaycastCollisionDetector implements RaycastCollisionDetector<Ve
         };
 
         // query the world for anything that collides with the given ray
-        items = CollisionSystem.world.queryRayWithCoords(
+        items = GameScreen.world.queryRayWithCoords(
                 start.x, start.y, end.x, end.y,
                 rayFilter,
                 items);

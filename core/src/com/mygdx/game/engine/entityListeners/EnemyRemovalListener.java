@@ -6,6 +6,7 @@ import com.mygdx.game.engine.utils.componentutils.ComponentGrabber;
 import com.mygdx.game.engine.utils.componentutils.Families;
 import com.mygdx.game.engine.components.Item;
 import com.mygdx.game.engine.systems.gameplay.movement.CollisionSystem;
+import com.mygdx.game.screens.GameScreen;
 
 public class EnemyRemovalListener implements EntityListener {
     ComponentGrabber cg;
@@ -29,6 +30,6 @@ public class EnemyRemovalListener implements EntityListener {
 
     private void removeFromWorld(Entity entity) {
         Item item = cg.getItem(entity);
-        CollisionSystem.world.remove(item.item);
+        GameScreen.world.remove(item.item);
     }
 }
