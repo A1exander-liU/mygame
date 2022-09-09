@@ -55,7 +55,7 @@ public class GameMapProperties {
         return tiledMap.getLayers().get(name);
     }
 
-    private void makeEntitiesFromCollisions() {
+    public void makeEntitiesFromCollisions() {
         // will only account for non enemies
         MapObjects collisions = getMapLayer(COLLISIONS).getObjects();
         for (int i = 0; i < collisions.getCount(); i++) {
