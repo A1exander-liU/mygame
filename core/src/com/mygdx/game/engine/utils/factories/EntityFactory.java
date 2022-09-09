@@ -152,10 +152,12 @@ public class EntityFactory {
     private void modifyObstacleComponentValues(Entity entity, Rectangle collisionRegion) {
         Position pos = cg.getPosition(entity);
         Size size = cg.getSize(entity);
+        Item item = cg.getItem(entity);
         pos.x = collisionRegion.x;
         pos.y = collisionRegion.y;
         size.width = collisionRegion.width;
         size.height = collisionRegion.height;
+        item.item = new com.dongbat.jbump.Item<>(entity);
     }
 
     private void fillEnemyParameterValues(Entity entity, String name) {
