@@ -20,6 +20,7 @@ import com.mygdx.game.engine.components.EnemyStateMachine;
 import com.mygdx.game.engine.components.Position;
 import com.mygdx.game.engine.components.Size;
 import com.mygdx.game.engine.components.SpawnArea;
+import com.mygdx.game.screens.GameScreen;
 
 public class CollisionSystem extends EntitySystem {
     ComponentGrabber cg;
@@ -27,7 +28,7 @@ public class CollisionSystem extends EntitySystem {
     ImmutableArray<Entity> enemies;
     ImmutableArray<Entity> spawns;
     Entity player;
-    public static World<Entity> world;
+//    public static World<Entity> world;
 
     public CollisionSystem(ComponentGrabber cg) {
         super(7);
@@ -36,11 +37,11 @@ public class CollisionSystem extends EntitySystem {
         enemies = MyGame.engine.getEntitiesFor(Families.enemies);
         spawns = MyGame.engine.getEntitiesFor(Families.spawns);
         player = MyGame.engine.getEntitiesFor(Families.player).get(0);
-        world = new World<>();
-        for (int i = 0; i < collisions.size(); i++) {
-            Entity entity = collisions.get(i);
-            addToWorld(entity);
-        }
+//        world = new World<>();
+//        for (int i = 0; i < collisions.size(); i++) {
+//            Entity entity = collisions.get(i);
+//            addToWorld(entity);
+//        }
     }
 
     @Override
@@ -82,13 +83,13 @@ public class CollisionSystem extends EntitySystem {
                 keepEntityInsideSpawnZone(entity);
             }
 
-            Response.Result result = world.move(item.item, pos.x, pos.y, obstacleCollisionFilter);
+            Response.Result result = GameScreen.world.move(item.item, pos.x, pos.y, obstacleCollisionFilter);
             if (result.projectedCollisions.size() < 1) {
                 continue;
             }
             for (int j = 0; j < result.projectedCollisions.size(); j++) {
                 Collision collision = result.projectedCollisions.get(j);
-                Rect rect = world.getRect(collision.item);
+                Rect rect = GameScreen.world.getRect(collision.item);
                 Entity dynamic = (Entity) collision.item.userData;
                 Position itemPos = cg.getPosition(dynamic);
                 itemPos.x = rect.x;
@@ -102,12 +103,12 @@ public class CollisionSystem extends EntitySystem {
         Size size = cg.getSize(entity);
         Item<Entity> item = new Item<>(entity);
         cg.getItem(entity).item = item;
-        world.add(item, pos.x, pos.y, size.width, size.height);
+        GameScreen.world.add(item, pos.x, pos.y, size.width, size.height);
     }
 
     private void removeFromWorld(Entity entity) {
         com.mygdx.game.engine.components.Item item = cg.getItem(entity);
-        world.remove(item.item);
+        GameScreen.world.remove(item.item);
     }
 
     private void keepEntityInsideSpawnZone(Entity entity) {
