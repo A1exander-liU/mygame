@@ -129,6 +129,7 @@ public class EnemySpawningSystem extends EntitySystem {
                     collisions.remove(i);
                     // getting the spawn area and setting the owner
                     setSpawnAreaOwner(enemy);
+                    MyGame.world.update(cg.getItem(enemy).item, pos.x, pos.y);
                     break;
                 }
             }
