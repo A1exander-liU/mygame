@@ -2,14 +2,11 @@ package com.mygdx.game.engine.entityListeners;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntityListener;
-import com.dongbat.jbump.Item;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.components.Position;
 import com.mygdx.game.engine.components.Size;
-import com.mygdx.game.engine.systems.gameplay.movement.CollisionSystem;
 import com.mygdx.game.engine.utils.componentutils.Families;
 import com.mygdx.game.engine.utils.componentutils.Mappers;
-import com.mygdx.game.screens.GameScreen;
 
 public class WorldListener implements EntityListener {
     // will remove and add collidable  entities to the world
