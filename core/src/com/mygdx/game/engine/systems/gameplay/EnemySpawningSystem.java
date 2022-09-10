@@ -190,11 +190,4 @@ public class EnemySpawningSystem extends EntitySystem {
             }
         }
     }
-
-    private void addToWorld(Entity entity) {
-        Item item = cg.getItem(entity);
-        Position pos = cg.getPosition(entity);
-        Size size = cg.getSize(entity);
-        GameScreen.world.add(item.item, pos.x, pos.y, size.width, size.height);
-    }
 }
