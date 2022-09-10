@@ -156,7 +156,9 @@ public class EnemySpawningSystem extends EntitySystem {
         textureObject.setX(pos.x);
         textureObject.setY(pos.y);
         spawnArea.owner = enemy;
-//        addToWorld(enemy);
+        // enemy was already was added to world but the position was updated after it was added
+        // so the enemies are off the map
+        MyGame.world.update(cg.getItem(entity).item, pos.x, pos.y);
     }
 
     private void addBack() {
