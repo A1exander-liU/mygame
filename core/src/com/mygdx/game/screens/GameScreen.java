@@ -48,8 +48,6 @@ public class GameScreen implements Screen {
 
     public static ItemFactory itemFactory;
 
-    EntityFactory entityFactory;
-
     ComponentGrabber cg;
 
     public static InputMultiplexer inventoryMultiplexer;
