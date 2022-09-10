@@ -97,30 +97,30 @@ public class EnemySpawningSystem extends EntitySystem {
         }
     }
 
-    private void spawn(MapObject spawn) {
+    private void spawn(MapObject spawnPoint) {
         for (int i = 0; i < objects.getCount(); i++) {
-            Rectangle spawnArea = ((RectangleMapObject) spawn).getRectangle();
+            Rectangle spawnArea = ((RectangleMapObject) spawnPoint).getRectangle();
             // entity texture objects are enemies
             if (objects.get(i) instanceof EntityTextureObject) {
                 // check if they have same name
                 // ex. spawn area is named slime and the enemy is named slime
                 // basically determining the correct enemy to spawn at each area
-                if (Objects.equals(spawn.getName(), objects.get(i).getName())) {
+                if (Objects.equals(spawnPoint.getName(), objects.get(i).getName())) {
                     // spawn them at the center of the spawn area
                     float xCenter = spawnArea.x + (spawnArea.width / 2);
                     float yCenter = spawnArea.y + (spawnArea.height / 2);
                     EntityTextureObject textureObject = (EntityTextureObject) objects.get(i);
                     Entity enemy = textureObject.getOwner();
                     Position pos = cg.getPosition(enemy);
-                    Spawn spawnPoint = cg.getSpawn(enemy);
+                    Spawn spawnComponent = cg.getSpawn(enemy);
                     // setting the enemy position values
                     pos.x = xCenter;
                     pos.y = yCenter;
                     pos.oldX = pos.x;
                     pos.oldY = pos.y;
                     // setting their spawn point so they can move back here
-                    spawnPoint.spawnPosX = pos.x;
-                    spawnPoint.spawnPosY = pos.y;
+                    spawnComponent.spawnPosX = pos.x;
+                    spawnComponent.spawnPosY = pos.y;
                     textureObject.setX(xCenter);
                     textureObject.setY(yCenter);
                     // remove from objects so same enemy with same name is not used
