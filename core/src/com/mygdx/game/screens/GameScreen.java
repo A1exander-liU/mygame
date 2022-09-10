@@ -1,5 +1,6 @@
 package com.mygdx.game.screens;
 
+import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
@@ -7,6 +8,7 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.maps.MapObjects;
 import com.mygdx.game.engine.systems.saving.SaveTest;
 import com.mygdx.game.engine.utils.componentutils.Families;
 import com.mygdx.game.jsonreaders.JsonEnemyFinder;
@@ -37,6 +39,7 @@ import com.mygdx.game.engine.systems.gameplay.combat.BasicAttackSystem;
 import com.mygdx.game.engine.systems.gameplay.combat.EnemyAttackSystem;
 import com.mygdx.game.engine.systems.gameplay.enemyai.StateSystem;
 import com.mygdx.game.engine.systems.gameplay.enemyai.SteeringSystem;
+import com.mygdx.game.utils.map.GameMapProperties;
 
 public class GameScreen implements Screen {
     public MyGame parent;
@@ -114,6 +117,11 @@ public class GameScreen implements Screen {
         if (MyGame.engine.getEntitiesFor(Families.obstacles).size() == 0) {
             MyGame.gameMapProperties.makeEntitiesFromCollisions();
         }
+        // rebuild spawn entities (to spawn enemies and all entities are removed when changing
+        // screens)
+        if (MyGame.engine.getEntitiesFor(Families.spawns).size() == 0) {
+            MyGame.engine.getSystem(EnemySpawningSystem.class).makeSpawnAreaEntities();;
+        }
 
         // now player is loaded from slot and is in engine
         // check if no player entity exists means it was loaded from slot that was empty
@@ -151,6 +159,8 @@ public class GameScreen implements Screen {
         // when screen is moved back to game screen, all previous entities still exist
         // need to remove all entities
         MyGame.engine.removeAllEntities();
+        System.out.println(MyGame.world.getItems().size());
+        ImmutableArray<Entity> spawnPoints = MyGame.engine.getEntitiesFor(Families.spawns);
     }
 
     @Override
