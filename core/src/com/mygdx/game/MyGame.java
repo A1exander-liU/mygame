@@ -6,6 +6,7 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.mygdx.game.engine.entityListeners.WorldListener;
 import com.mygdx.game.engine.utils.EntityToMapAdder;
 import com.mygdx.game.engine.utils.componentutils.ComponentGrabber;
 import com.mygdx.game.engine.utils.factories.EntityFactory;
@@ -65,6 +66,7 @@ public class MyGame extends Game {
 		storedPreferences = new StoredPreferences();
 		saveStates = new SaveStates();
 		MyGame.engine = new Engine();
+		MyGame.engine.addEntityListener(new WorldListener());
 		testMap = new TmxMapLoader().load("untitled.tmx");
 		tiledMapRenderer = new MapObjectDrawer(testMap);
 		entityToMapAdder = new EntityToMapAdder();

@@ -198,7 +198,6 @@ public class GameScreen implements Screen {
         parent.itemFinder = new JsonItemFinder();
         itemFactory = new ItemFactory(parent.itemFinder);
         itemFactory = new ItemFactory(parent.itemFinder);
-        MyGame.engine.addEntityListener(new WorldListener());
         parent.entityToMapAdder = new EntityToMapAdder(cg);
         inventoryMultiplexer = new InputMultiplexer();
         parent.batch = new SpriteBatch();
