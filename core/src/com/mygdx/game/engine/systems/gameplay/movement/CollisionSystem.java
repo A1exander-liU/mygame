@@ -9,7 +9,6 @@ import com.dongbat.jbump.CollisionFilter;
 import com.dongbat.jbump.Item;
 import com.dongbat.jbump.Rect;
 import com.dongbat.jbump.Response;
-import com.dongbat.jbump.World;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.engine.utils.componentutils.ComponentGrabber;
 import com.mygdx.game.engine.utils.EnemyState;
@@ -20,7 +19,6 @@ import com.mygdx.game.engine.components.EnemyStateMachine;
 import com.mygdx.game.engine.components.Position;
 import com.mygdx.game.engine.components.Size;
 import com.mygdx.game.engine.components.SpawnArea;
-import com.mygdx.game.screens.GameScreen;
 
 public class CollisionSystem extends EntitySystem {
     ComponentGrabber cg;
@@ -28,7 +26,6 @@ public class CollisionSystem extends EntitySystem {
     ImmutableArray<Entity> enemies;
     ImmutableArray<Entity> spawns;
     Entity player;
-//    public static World<Entity> world;
 
     public CollisionSystem(ComponentGrabber cg) {
         super(7);
@@ -37,11 +34,6 @@ public class CollisionSystem extends EntitySystem {
         enemies = MyGame.engine.getEntitiesFor(Families.enemies);
         spawns = MyGame.engine.getEntitiesFor(Families.spawns);
         player = MyGame.engine.getEntitiesFor(Families.player).get(0);
-//        world = new World<>();
-//        for (int i = 0; i < collisions.size(); i++) {
-//            Entity entity = collisions.get(i);
-//            addToWorld(entity);
-//        }
     }
 
     @Override
@@ -96,19 +88,6 @@ public class CollisionSystem extends EntitySystem {
                 itemPos.y = rect.y;
             }
         }
-    }
-
-    private void addToWorld(Entity entity) {
-        Position pos = cg.getPosition(entity);
-        Size size = cg.getSize(entity);
-        Item<Entity> item = new Item<>(entity);
-        cg.getItem(entity).item = item;
-        MyGame.world.add(item, pos.x, pos.y, size.width, size.height);
-    }
-
-    private void removeFromWorld(Entity entity) {
-        com.mygdx.game.engine.components.Item item = cg.getItem(entity);
-        MyGame.world.remove(item.item);
     }
 
     private void keepEntityInsideSpawnZone(Entity entity) {
