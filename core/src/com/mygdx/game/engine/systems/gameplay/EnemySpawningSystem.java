@@ -24,7 +24,7 @@ import java.util.Objects;
 public class EnemySpawningSystem extends EntitySystem {
     private final ImmutableArray<Entity> spawns;
     private final MapObjects spawnPoints;
-    private final MapObjects objects;
+    private final MapObjects collisions;
     private MapObjects temp;
     ComponentGrabber cg;
     EntityFactory entityFactory;
@@ -36,7 +36,7 @@ public class EnemySpawningSystem extends EntitySystem {
         this.entityFactory = entityFactory;
         spawns = MyGame.engine.getEntitiesFor(Families.spawns);
         spawnPoints = MyGame.gameMapProperties.getMapLayer(GameMapProperties.ENEMY_SPAWNS).getObjects();
-        objects = MyGame.gameMapProperties.getMapLayer(GameMapProperties.COLLISIONS).getObjects();
+        collisions = MyGame.gameMapProperties.getMapLayer(GameMapProperties.COLLISIONS).getObjects();
         // create a enemy and place at each spawn point
         // spawns are named to determine the enemy to spawn
         temp = new MapObjects();
@@ -98,18 +98,18 @@ public class EnemySpawningSystem extends EntitySystem {
     }
 
     private void spawn(MapObject spawnPoint) {
-        for (int i = 0; i < objects.getCount(); i++) {
+        for (int i = 0; i < collisions.getCount(); i++) {
             Rectangle spawnArea = ((RectangleMapObject) spawnPoint).getRectangle();
             // entity texture objects are enemies
-            if (objects.get(i) instanceof EntityTextureObject) {
+            if (collisions.get(i) instanceof EntityTextureObject) {
                 // check if they have same name
                 // ex. spawn area is named slime and the enemy is named slime
                 // basically determining the correct enemy to spawn at each area
-                if (Objects.equals(spawnPoint.getName(), objects.get(i).getName())) {
+                if (Objects.equals(spawnPoint.getName(), collisions.get(i).getName())) {
                     // spawn them at the center of the spawn area
                     float xCenter = spawnArea.x + (spawnArea.width / 2);
                     float yCenter = spawnArea.y + (spawnArea.height / 2);
-                    EntityTextureObject textureObject = (EntityTextureObject) objects.get(i);
+                    EntityTextureObject textureObject = (EntityTextureObject) collisions.get(i);
                     Entity enemy = textureObject.getOwner();
                     Position pos = cg.getPosition(enemy);
                     Spawn spawnComponent = cg.getSpawn(enemy);
@@ -125,8 +125,8 @@ public class EnemySpawningSystem extends EntitySystem {
                     textureObject.setY(yCenter);
                     // remove from objects so same enemy with same name is not used
                     // adding to temp to keep a copy
-                    temp.add(objects.get(i));
-                    objects.remove(i);
+                    temp.add(collisions.get(i));
+                    collisions.remove(i);
                     // getting the spawn area and setting the owner
                     setSpawnAreaOwner(enemy);
                     break;
@@ -140,7 +140,7 @@ public class EnemySpawningSystem extends EntitySystem {
         SpawnArea spawnArea = cg.getSpawnArea(entity);
         entityFactory.makeEnemy(name.name);
         // since it was just added, it will be the last element
-        EntityTextureObject textureObject = (EntityTextureObject) objects.get(objects.getCount() - 1);
+        EntityTextureObject textureObject = (EntityTextureObject) collisions.get(collisions.getCount() - 1);
         Entity enemy = textureObject.getOwner();
 
         Position pos = cg.getPosition(enemy);
@@ -164,7 +164,7 @@ public class EnemySpawningSystem extends EntitySystem {
     private void addBack() {
         // add back the enemies now
         for (MapObject mapObject : temp) {
-            objects.add(mapObject);
+            collisions.add(mapObject);
         }
         // clear the collection
         temp = new MapObjects();
