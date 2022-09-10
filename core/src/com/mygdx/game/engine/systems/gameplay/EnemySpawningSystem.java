@@ -171,7 +171,7 @@ public class EnemySpawningSystem extends EntitySystem {
         temp = new MapObjects();
     }
 
-    private void makeSpawnAreaEntities() {
+    public void makeSpawnAreaEntities() {
         for (int i = 0; i < spawnPoints.getCount(); i++) {
             entityFactory.makeSpawn(spawnPoints.get(i));
         }
