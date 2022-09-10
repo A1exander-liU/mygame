@@ -1,11 +1,13 @@
 package com.mygdx.game;
 
 import com.badlogic.ashley.core.Engine;
+import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.dongbat.jbump.World;
 import com.mygdx.game.engine.entityListeners.WorldListener;
 import com.mygdx.game.engine.utils.EntityToMapAdder;
 import com.mygdx.game.engine.utils.componentutils.ComponentGrabber;
@@ -42,6 +44,7 @@ public class MyGame extends Game {
 	public SpriteBatch batch;
 	public static Engine engine;
 	public static GameMapProperties gameMapProperties;
+	public static World<Entity> world;
 	public JsonEnemyFinder jsonSearcher;
 	public JsonItemFinder itemFinder;
 	public EntityToMapAdder entityToMapAdder;
@@ -67,6 +70,8 @@ public class MyGame extends Game {
 		saveStates = new SaveStates();
 		MyGame.engine = new Engine();
 		MyGame.engine.addEntityListener(new WorldListener());
+		world = new World<>();
+
 		testMap = new TmxMapLoader().load("untitled.tmx");
 		tiledMapRenderer = new MapObjectDrawer(testMap);
 		entityToMapAdder = new EntityToMapAdder();

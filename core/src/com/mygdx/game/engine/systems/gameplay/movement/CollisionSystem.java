@@ -83,13 +83,13 @@ public class CollisionSystem extends EntitySystem {
                 keepEntityInsideSpawnZone(entity);
             }
 
-            Response.Result result = GameScreen.world.move(item.item, pos.x, pos.y, obstacleCollisionFilter);
+            Response.Result result = MyGame.world.move(item.item, pos.x, pos.y, obstacleCollisionFilter);
             if (result.projectedCollisions.size() < 1) {
                 continue;
             }
             for (int j = 0; j < result.projectedCollisions.size(); j++) {
                 Collision collision = result.projectedCollisions.get(j);
-                Rect rect = GameScreen.world.getRect(collision.item);
+                Rect rect = MyGame.world.getRect(collision.item);
                 Entity dynamic = (Entity) collision.item.userData;
                 Position itemPos = cg.getPosition(dynamic);
                 itemPos.x = rect.x;
@@ -103,12 +103,12 @@ public class CollisionSystem extends EntitySystem {
         Size size = cg.getSize(entity);
         Item<Entity> item = new Item<>(entity);
         cg.getItem(entity).item = item;
-        GameScreen.world.add(item, pos.x, pos.y, size.width, size.height);
+        MyGame.world.add(item, pos.x, pos.y, size.width, size.height);
     }
 
     private void removeFromWorld(Entity entity) {
         com.mygdx.game.engine.components.Item item = cg.getItem(entity);
-        GameScreen.world.remove(item.item);
+        MyGame.world.remove(item.item);
     }
 
     private void keepEntityInsideSpawnZone(Entity entity) {

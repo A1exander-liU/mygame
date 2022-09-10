@@ -62,7 +62,6 @@ public class GameScreen implements Screen {
     ComponentGrabber cg;
 
     public static InputMultiplexer inventoryMultiplexer;
-    public static World<Entity> world;
 
     public GameScreen(MyGame parent) {
         this.parent = parent;
@@ -193,7 +192,6 @@ public class GameScreen implements Screen {
     }
 
     private void initializeObjects() {
-        world = new World<>();
         parent.jsonSearcher = new JsonEnemyFinder();
         parent.itemFinder = new JsonItemFinder();
         itemFactory = new ItemFactory(parent.itemFinder);
