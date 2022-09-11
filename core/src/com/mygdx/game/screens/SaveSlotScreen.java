@@ -22,6 +22,7 @@ import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.SaveStates;
+import com.mygdx.game.utils.saves.SavedPlayer;
 import com.mygdx.game.utils.ui.saving.DeleteSaveButton;
 import com.mygdx.game.utils.ui.saving.StartSaveButton;
 
@@ -96,6 +97,9 @@ public class SaveSlotScreen implements Screen {
 
         saveSlot1.add(saveSlot1Title).top().padTop(10);
         saveSlot1.add(new DeleteSaveButton("", gameUiSkin, parent, SaveStates.SLOT_ONE)).top();
+        if (!Objects.equals(parent.getSaveStates().getSlotSerializedData(SaveStates.SLOT_ONE), "")) {
+            String savedData = parent.getSaveStates().getSlotSerializedData(SaveStates.SLOT_ONE);
+        }
         saveSlot1.row();
         saveSlot1.add(new StartSaveButton("", gameUiSkin, parent, SaveStates.SLOT_ONE)).colspan(2).center().bottom();
 
