@@ -39,6 +39,7 @@ import com.mygdx.game.engine.systems.gameplay.combat.BasicAttackSystem;
 import com.mygdx.game.engine.systems.gameplay.combat.EnemyAttackSystem;
 import com.mygdx.game.engine.systems.gameplay.enemyai.StateSystem;
 import com.mygdx.game.engine.systems.gameplay.enemyai.SteeringSystem;
+import com.mygdx.game.utils.map.EntityTextureObject;
 import com.mygdx.game.utils.map.GameMapProperties;
 
 public class GameScreen implements Screen {
@@ -55,10 +56,65 @@ public class GameScreen implements Screen {
 
     public static InputMultiplexer inventoryMultiplexer;
 
+    int loads;
+
     public GameScreen(MyGame parent) {
         this.parent = parent;
         initializeObjects();
 
+//        MovementSystem movementSystem = new MovementSystem(parent.cg);
+//        EnemySpawningSystem enemySpawningSystem = new EnemySpawningSystem(parent.cg, parent.entityFactory);
+//        SteeringSystem steeringSystem = new SteeringSystem(parent.cg);
+//        TimeSystem timeSystem = new TimeSystem();
+//        StateSystem stateSystem = new StateSystem(parent.cg);
+//        EntityRemovalSystem entityRemovalSystem = new EntityRemovalSystem(parent.cg);
+//        CollisionSystem collisionSystem = new CollisionSystem(parent.cg);
+//        MapUpdateSystem mapUpdateSystem = new MapUpdateSystem(parent.cg, parent.tiledMapRenderer);
+//        OrientationSystem orientationSystem = new OrientationSystem(parent.cg);
+//        BasicAttackSystem basicAttackSystem = new BasicAttackSystem(parent.cg, MyGame.gameMapProperties);
+//        HealthBarRenderSystem healthBarRenderSystem = new HealthBarRenderSystem(parent.cg);
+//        EnemyAttackSystem enemyAttackSystem = new EnemyAttackSystem(parent.cg, parent);
+//        PlayerHudRenderSystem playerHudRenderSystem = new PlayerHudRenderSystem(parent.cg, parent);
+//        InventoryRenderSystem inventoryRenderSystem = new InventoryRenderSystem(parent.cg);
+//        InventoryTest inventoryTest = new InventoryTest(parent.cg, itemFactory);
+//        ItemWindowRenderSystem itemWindowRenderSystem = new ItemWindowRenderSystem();
+//        LootingSystem lootingSystem = new LootingSystem();
+//        EnemyDeathSystem enemyDeathSystem = new EnemyDeathSystem();
+//        EnemyDropSystem enemyDropSystem = new EnemyDropSystem(itemFactory);
+//        ItemDropLabelRenderSystem itemDropLabelRenderSystem = new ItemDropLabelRenderSystem();
+//        ItemPickupSystem itemPickupSystem = new ItemPickupSystem();
+//        SaveTest saveTest = new SaveTest(parent);
+//        MyGame.engine.addSystem(movementSystem);
+//        MyGame.engine.addSystem(enemySpawningSystem);
+//        MyGame.engine.addSystem(steeringSystem);
+//        MyGame.engine.addSystem(timeSystem);
+//        MyGame.engine.addSystem(stateSystem);
+//        MyGame.engine.addSystem(entityRemovalSystem);
+//        MyGame.engine.addSystem(collisionSystem);
+//        MyGame.engine.addSystem(mapUpdateSystem);
+//        MyGame.engine.addSystem(orientationSystem);
+//        MyGame.engine.addSystem(basicAttackSystem);
+//        MyGame.engine.addSystem(healthBarRenderSystem);
+//        MyGame.engine.addSystem(enemyAttackSystem);
+//        MyGame.engine.addSystem(playerHudRenderSystem);
+//        MyGame.engine.addSystem(inventoryRenderSystem);
+//        MyGame.engine.addSystem(inventoryTest);
+//        MyGame.engine.addSystem(itemWindowRenderSystem);
+//        MyGame.engine.addSystem(lootingSystem);
+//        MyGame.engine.addSystem(enemyDeathSystem);
+//        MyGame.engine.addSystem(enemyDropSystem);
+//        MyGame.engine.addSystem(itemDropLabelRenderSystem);
+//        MyGame.engine.addSystem(itemPickupSystem);
+//        MyGame.engine.addSystem(saveTest);
+//        checkPriorities();
+    }
+
+    @Override
+    public void show() {
+        loads++;
+        if (loads > 1) {
+            System.out.println("loaded more than once");
+        }
         MovementSystem movementSystem = new MovementSystem(parent.cg);
         EnemySpawningSystem enemySpawningSystem = new EnemySpawningSystem(parent.cg, parent.entityFactory);
         SteeringSystem steeringSystem = new SteeringSystem(parent.cg);
@@ -104,10 +160,6 @@ public class GameScreen implements Screen {
         MyGame.engine.addSystem(itemPickupSystem);
         MyGame.engine.addSystem(saveTest);
         checkPriorities();
-    }
-
-    @Override
-    public void show() {
         // now that all entities in engine are removed
         // need to rebuild all the obstacles as entities since they were removed too
         // plus the are only built inside the constructor of GameMapProperties
@@ -160,7 +212,6 @@ public class GameScreen implements Screen {
         // need to remove all entities
         MyGame.engine.removeAllEntities();
         System.out.println(MyGame.world.getItems().size());
-        ImmutableArray<Entity> spawnPoints = MyGame.engine.getEntitiesFor(Families.spawns);
     }
 
     @Override
