@@ -16,10 +16,10 @@ public class DeleteConfirmDialog extends Dialog {
 
     @Override
     protected void result(Object result) {
-
     }
 
     private void buildDialog() {
-
+        button("No", "no");
+        button("Yes", "yes");
     }
 }
