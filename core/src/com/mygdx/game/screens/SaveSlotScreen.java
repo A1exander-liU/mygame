@@ -23,6 +23,7 @@ import com.mygdx.game.MyGame;
 import com.mygdx.game.SaveStates;
 import com.mygdx.game.engine.utils.entities.PlayerEntity;
 import com.mygdx.game.utils.saves.SaveData;
+import com.mygdx.game.utils.ui.DeleteSaveButton;
 import com.mygdx.game.utils.ui.StartSaveButton;
 
 import java.util.Objects;
@@ -44,7 +45,7 @@ public class SaveSlotScreen implements Screen {
         Gdx.input.setInputProcessor(stage);
         Table table = new Table();
         table.setFillParent(true);
-        table.setDebug(true);
+        table.setDebug(false);
         stage.addActor(table);
 
         Skin gameUiSkin = new Skin();
@@ -80,14 +81,17 @@ public class SaveSlotScreen implements Screen {
         deleteButton3.setLabel(new Label("x", gameUiSkin, "pixel2D", Color.BLACK));
 
         saveSlot1.add(saveSlot1Title);
+        saveSlot1.add(new DeleteSaveButton("", gameUiSkin, parent, SaveStates.SLOT_ONE));
         saveSlot1.row();
         saveSlot1.add(new StartSaveButton("", gameUiSkin, parent, SaveStates.SLOT_ONE));
 
         saveSlot2.add(saveSlot2Title);
+        saveSlot2.add(new DeleteSaveButton("", gameUiSkin, parent, SaveStates.SLOT_TWO));
         saveSlot2.row();
         saveSlot2.add(new StartSaveButton("", gameUiSkin, parent, SaveStates.SLOT_TWO));
 
         saveSlot3.add(saveSlot3Title);
+        saveSlot3.add(new DeleteSaveButton("", gameUiSkin, parent, SaveStates.SLOT_THREE));
         saveSlot3.row();
         saveSlot3.add(new StartSaveButton("", gameUiSkin, parent, SaveStates.SLOT_THREE));
 
