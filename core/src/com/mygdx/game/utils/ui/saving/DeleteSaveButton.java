@@ -1,4 +1,4 @@
-package com.mygdx.game.utils.ui;
+package com.mygdx.game.utils.ui.saving;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.mygdx.game.MyGame;
+import com.mygdx.game.utils.ui.saving.DeleteConfirmDialog;
 
 public class DeleteSaveButton extends TextButton {
     MyGame root;

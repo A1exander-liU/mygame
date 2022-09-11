@@ -9,8 +9,6 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -21,12 +19,8 @@ import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.SaveStates;
-import com.mygdx.game.engine.utils.entities.PlayerEntity;
-import com.mygdx.game.utils.saves.SaveData;
-import com.mygdx.game.utils.ui.DeleteSaveButton;
-import com.mygdx.game.utils.ui.StartSaveButton;
-
-import java.util.Objects;
+import com.mygdx.game.utils.ui.saving.DeleteSaveButton;
+import com.mygdx.game.utils.ui.saving.StartSaveButton;
 
 public class SaveSlotScreen implements Screen {
     MyGame parent;

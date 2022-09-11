@@ -1,4 +1,4 @@
-package com.mygdx.game.utils.ui;
+package com.mygdx.game.utils.ui.saving;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
