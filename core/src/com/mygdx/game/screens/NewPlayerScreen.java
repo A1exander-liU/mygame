@@ -52,6 +52,8 @@ public class NewPlayerScreen implements Screen {
         TextField textField = new TextField("", gameUiSkin);
         TextButton cancelButton = new TextButton("", gameUiSkin);
         cancelButton.setLabel(new Label("Cancel", gameUiSkin, "pixel2D", Color.BLACK));
+        TextButton okButton = new TextButton("", gameUiSkin);
+        okButton.setLabel(new Label("Ok", gameUiSkin, "pixel2D", Color.BLACK));
 
         playerCreation.defaults().expand().pad(5);
         playerCreation.add(nameLabel);
@@ -59,6 +61,7 @@ public class NewPlayerScreen implements Screen {
         playerCreation.add(textField).fillX();
         playerCreation.row();
         playerCreation.add(cancelButton);
+        playerCreation.add(okButton);
 
         table.add(playerCreation).expand().grow().width(stage.getWidth() / 3f).height(stage.getHeight() / 4f);
     }
