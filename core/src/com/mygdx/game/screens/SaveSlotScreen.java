@@ -83,7 +83,7 @@ public class SaveSlotScreen implements Screen {
         deleteButton3.setLabel(new Label("x", gameUiSkin, "pixel2D", Color.BLACK));
 
         saveSlot1.defaults().expand().pad(5);
-        saveSlot1.setDebug(false);
+        saveSlot1.setDebug(true);
         saveSlot2.defaults().expand().pad(5);
         saveSlot3.defaults().expand().pad(5);
 
@@ -110,9 +110,9 @@ public class SaveSlotScreen implements Screen {
 
         table.add(backButtonTable).growX();
         table.row();
-        table.add(saveSlot1).expand().center();
-        table.add(saveSlot2).expand().center();
-        table.add(saveSlot3).expand().center();
+        table.add(saveSlot1).expand().center().width(stage.getWidth() / 4f).height(stage.getHeight() / 3f);
+        table.add(saveSlot2).expand().center().width(stage.getWidth() / 4f).height(stage.getHeight() / 3f);
+        table.add(saveSlot3).expand().center().width(stage.getWidth() / 4f).height(stage.getHeight() / 3f);
 
         // listeners
         backButton.addListener(new ChangeListener() {
