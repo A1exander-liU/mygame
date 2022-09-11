@@ -38,9 +38,14 @@ public class StartSaveButton extends TextButton {
     private void startSave() {
         String slotData = root.getSaveStates().getSlotSerializedData(saveSlot);
         root.saveData.setCurrentSlot(saveSlot);
+        // when the slot has data
         if (!Objects.equals(slotData, "")) {
             root.saveData.load(slotData);
+            root.changeScreen(MyGame.GAME_SCREEN);
         }
-        root.changeScreen(MyGame.GAME_SCREEN);
+        // no save data in the slot, go to new player screen
+        else {
+            root.changeScreen(MyGame.NEW_PLAYER_SCREEN);
+        }
     }
 }
