@@ -42,13 +42,18 @@ public class NewPlayerScreen implements Screen {
         gameUiSkin.addRegions(new TextureAtlas("Game_UI_Skin/Game_UI_Skin.atlas"));
         gameUiSkin.load(Gdx.files.internal("Game_UI_Skin/Game_UI_Skin.json"));
 
+        Table playerCreation = new Table();
+        playerCreation.setBackground(gameUiSkin.getDrawable("player-hud-bg-01"));
 
+        table.add(playerCreation).width(stage.getWidth() / 3f).height(stage.getHeight() / 4f);
     }
 
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(0.8824f, 0.7765f, 0.6f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+
 
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
         stage.draw();
