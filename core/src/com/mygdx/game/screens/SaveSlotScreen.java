@@ -100,10 +100,10 @@ public class SaveSlotScreen implements Screen {
         if (!Objects.equals(parent.getSaveStates().getSlotSerializedData(SaveStates.SLOT_ONE), "")) {
             String savedData = parent.getSaveStates().getSlotSerializedData(SaveStates.SLOT_ONE);
             SavedPlayer savedPlayer = json.fromJson(SavedPlayer.class, savedData);
+            slotOnePlayerName.setText(savedPlayer.name.name + "\nLv." + savedPlayer.levelComponent.level);
         }
         saveSlot1.row();
         saveSlot1.add(new StartSaveButton("", gameUiSkin, parent, SaveStates.SLOT_ONE)).colspan(2).center().bottom();
-
         saveSlot2.add(saveSlot2Title).top().padTop(10);
         saveSlot2.add(new DeleteSaveButton("", gameUiSkin, parent, SaveStates.SLOT_TWO)).top();
         saveSlot2.row();
