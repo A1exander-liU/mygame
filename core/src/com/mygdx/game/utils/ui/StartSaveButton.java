@@ -20,7 +20,7 @@ public class StartSaveButton extends TextButton {
         this.root = root;
         this.saveSlot = saveSlot;
         // if slot is empty, change to New
-        if (Objects.equals(root.getSaveStates().getSlotSerializedData(slot), "")) {
+        if (Objects.equals(root.getSaveStates().getSlotSerializedData(saveSlot), "")) {
             setLabel(new Label("New", skin, "pixel2D", Color.BLACK));
         }
         // if the slot has save data, change to Continue
@@ -36,6 +36,6 @@ public class StartSaveButton extends TextButton {
     }
 
     private void startSave() {
-
+        String slotData = root.getSaveStates().getSlotSerializedData(saveSlot);
     }
 }
