@@ -115,6 +115,24 @@ public class GameScreen implements Screen {
         if (loads > 1) {
             System.out.println("loaded more than once");
         }
+
+        // now that all entities in engine are removed
+        // need to rebuild all the obstacles as entities since they were removed too
+        // plus the are only built inside the constructor of GameMapProperties
+
+        // make sure there are no entities of obstacles before rebuilding them
+        // when game screen is no longer current screen, no entities should exist
+        if (MyGame.engine.getEntitiesFor(Families.obstacles).size() == 0) {
+            MyGame.gameMapProperties.makeEntitiesFromCollisions();
+        }
+
+        // now player is loaded from slot and is in engine
+        // check if no player entity exists means it was loaded from slot that was empty
+        if (MyGame.engine.getEntitiesFor(Families.player).size() == 0)
+            // make new player
+            parent.entityFactory.makePlayer("player");
+        // if loaded from non-empty slot, PlayerEntity already exists
+
         MovementSystem movementSystem = new MovementSystem(parent.cg);
         EnemySpawningSystem enemySpawningSystem = new EnemySpawningSystem(parent.cg, parent.entityFactory);
         SteeringSystem steeringSystem = new SteeringSystem(parent.cg);
@@ -160,27 +178,12 @@ public class GameScreen implements Screen {
         MyGame.engine.addSystem(itemPickupSystem);
         MyGame.engine.addSystem(saveTest);
         checkPriorities();
-        // now that all entities in engine are removed
-        // need to rebuild all the obstacles as entities since they were removed too
-        // plus the are only built inside the constructor of GameMapProperties
-
-        // make sure there are no entities of obstacles before rebuilding them
-        // when game screen is no longer current screen, no entities should exist
-        if (MyGame.engine.getEntitiesFor(Families.obstacles).size() == 0) {
-            MyGame.gameMapProperties.makeEntitiesFromCollisions();
-        }
         // rebuild spawn entities (to spawn enemies and all entities are removed when changing
         // screens)
         if (MyGame.engine.getEntitiesFor(Families.spawns).size() == 0) {
             MyGame.engine.getSystem(EnemySpawningSystem.class).makeSpawnAreaEntities();;
         }
 
-        // now player is loaded from slot and is in engine
-        // check if no player entity exists means it was loaded from slot that was empty
-        if (MyGame.engine.getEntitiesFor(Families.player).size() == 0)
-            // make new player
-            parent.entityFactory.makePlayer("player");
-        // if loaded from non-empty slot, PlayerEntity already exists
     }
 
     @Override
