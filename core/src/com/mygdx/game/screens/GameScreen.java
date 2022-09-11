@@ -1,6 +1,5 @@
 package com.mygdx.game.screens;
 
-import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
@@ -8,14 +7,12 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.maps.MapObjects;
 import com.mygdx.game.engine.systems.saving.SaveTest;
 import com.mygdx.game.engine.utils.componentutils.Families;
 import com.mygdx.game.jsonreaders.JsonEnemyFinder;
 import com.mygdx.game.jsonreaders.JsonItemFinder;
 import com.mygdx.game.engine.utils.componentutils.ComponentGrabber;
 import com.mygdx.game.MyGame;
-import com.mygdx.game.engine.utils.factories.EntityFactory;
 import com.mygdx.game.engine.utils.EntityToMapAdder;
 import com.mygdx.game.engine.utils.factories.ItemFactory;
 import com.mygdx.game.engine.systems.EnemyDeathSystem;
@@ -24,7 +21,6 @@ import com.mygdx.game.engine.systems.gameplay.EnemySpawningSystem;
 import com.mygdx.game.engine.systems.EntityRemovalSystem;
 import com.mygdx.game.engine.systems.render.HealthBarRenderSystem;
 import com.mygdx.game.engine.systems.render.ui.InventoryRenderSystem;
-import com.mygdx.game.engine.systems.render.ui.InventoryTest;
 import com.mygdx.game.engine.systems.render.ItemDropLabelRenderSystem;
 import com.mygdx.game.engine.systems.gameplay.looting.ItemPickupSystem;
 import com.mygdx.game.engine.systems.render.ui.ItemWindowRenderSystem;
@@ -39,8 +35,6 @@ import com.mygdx.game.engine.systems.gameplay.combat.BasicAttackSystem;
 import com.mygdx.game.engine.systems.gameplay.combat.EnemyAttackSystem;
 import com.mygdx.game.engine.systems.gameplay.enemyai.StateSystem;
 import com.mygdx.game.engine.systems.gameplay.enemyai.SteeringSystem;
-import com.mygdx.game.utils.map.EntityTextureObject;
-import com.mygdx.game.utils.map.GameMapProperties;
 
 public class GameScreen implements Screen {
     public MyGame parent;
@@ -147,7 +141,6 @@ public class GameScreen implements Screen {
         EnemyAttackSystem enemyAttackSystem = new EnemyAttackSystem(parent.cg, parent);
         PlayerHudRenderSystem playerHudRenderSystem = new PlayerHudRenderSystem(parent.cg, parent);
         InventoryRenderSystem inventoryRenderSystem = new InventoryRenderSystem(parent.cg);
-        InventoryTest inventoryTest = new InventoryTest(parent.cg, itemFactory);
         ItemWindowRenderSystem itemWindowRenderSystem = new ItemWindowRenderSystem();
         LootingSystem lootingSystem = new LootingSystem();
         EnemyDeathSystem enemyDeathSystem = new EnemyDeathSystem();
@@ -169,7 +162,6 @@ public class GameScreen implements Screen {
         MyGame.engine.addSystem(enemyAttackSystem);
         MyGame.engine.addSystem(playerHudRenderSystem);
         MyGame.engine.addSystem(inventoryRenderSystem);
-        MyGame.engine.addSystem(inventoryTest);
         MyGame.engine.addSystem(itemWindowRenderSystem);
         MyGame.engine.addSystem(lootingSystem);
         MyGame.engine.addSystem(enemyDeathSystem);
