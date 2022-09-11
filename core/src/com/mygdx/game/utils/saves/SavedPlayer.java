@@ -20,18 +20,18 @@ import com.mygdx.game.engine.utils.entities.PlayerEntity;
 import com.mygdx.game.utils.ui.InventorySlot;
 
 public class SavedPlayer {
-    Camera camera;
-    ExpComponent expComponent;
-    Health health;
-    LevelComponent levelComponent;
-    ManaComponent manaComponent;
-    Name name;
-    Orientation orientation;
-    ParameterComponent parameterComponent;
-    Position position;
-    Size size;
-    Speed speed;
-    String textureImgPath;
+    public Camera camera;
+    public ExpComponent expComponent;
+    public Health health;
+    public LevelComponent levelComponent;
+    public ManaComponent manaComponent;
+    public Name name;
+    public Orientation orientation;
+    public ParameterComponent parameterComponent;
+    public Position position;
+    public Size size;
+    public Speed speed;
+    public String textureImgPath;
 
     int coins;
     Array<SavedSlot> inventorySlots;
