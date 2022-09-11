@@ -37,6 +37,7 @@ public class StartSaveButton extends TextButton {
 
     private void startSave() {
         String slotData = root.getSaveStates().getSlotSerializedData(saveSlot);
+        root.saveData.setCurrentSlot(saveSlot);
         if (!Objects.equals(slotData, "")) {
             root.saveData.load(slotData);
         }
