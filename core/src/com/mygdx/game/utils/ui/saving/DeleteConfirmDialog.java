@@ -5,7 +5,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.mygdx.game.MyGame;
+
+import org.w3c.dom.Text;
 
 public class DeleteConfirmDialog extends Dialog {
     MyGame root;
@@ -38,6 +41,7 @@ public class DeleteConfirmDialog extends Dialog {
     private void updateLoadDataButton() {
         Table saveFile = (Table) deleteSaveButton.getParent();
         Actor actor = new StartSaveButton("", getSkin(), root, saveSlot);
-        saveFile.getCells().get(2).setActor(actor);
+        Cell<?> cell = saveFile.getCells().get(2);
+        cell.setActor(actor);
     }
 }
