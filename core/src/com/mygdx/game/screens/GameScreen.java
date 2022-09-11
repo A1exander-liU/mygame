@@ -211,6 +211,9 @@ public class GameScreen implements Screen {
         // when screen is moved back to game screen, all previous entities still exist
         // need to remove all entities
         MyGame.engine.removeAllEntities();
+
+        MyGame.gameMapProperties.removeNonPersistingMapObjects();
+
         System.out.println(MyGame.world.getItems().size());
     }
 
