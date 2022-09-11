@@ -87,20 +87,20 @@ public class SaveSlotScreen implements Screen {
         saveSlot2.defaults().expand().pad(5);
         saveSlot3.defaults().expand().pad(5);
 
-        saveSlot1.add(saveSlot1Title);
-        saveSlot1.add(new DeleteSaveButton("", gameUiSkin, parent, SaveStates.SLOT_ONE));
+        saveSlot1.add(saveSlot1Title).top();
+        saveSlot1.add(new DeleteSaveButton("", gameUiSkin, parent, SaveStates.SLOT_ONE)).top();
         saveSlot1.row();
-        saveSlot1.add(new StartSaveButton("", gameUiSkin, parent, SaveStates.SLOT_ONE)).colspan(2).center();
+        saveSlot1.add(new StartSaveButton("", gameUiSkin, parent, SaveStates.SLOT_ONE)).colspan(2).center().bottom();
 
-        saveSlot2.add(saveSlot2Title);
-        saveSlot2.add(new DeleteSaveButton("", gameUiSkin, parent, SaveStates.SLOT_TWO));
+        saveSlot2.add(saveSlot2Title).top();
+        saveSlot2.add(new DeleteSaveButton("", gameUiSkin, parent, SaveStates.SLOT_TWO)).top();
         saveSlot2.row();
-        saveSlot2.add(new StartSaveButton("", gameUiSkin, parent, SaveStates.SLOT_TWO)).colspan(2).center();
+        saveSlot2.add(new StartSaveButton("", gameUiSkin, parent, SaveStates.SLOT_TWO)).colspan(2).center().bottom();
 
-        saveSlot3.add(saveSlot3Title);
-        saveSlot3.add(new DeleteSaveButton("", gameUiSkin, parent, SaveStates.SLOT_THREE));
+        saveSlot3.add(saveSlot3Title).top();
+        saveSlot3.add(new DeleteSaveButton("", gameUiSkin, parent, SaveStates.SLOT_THREE)).top();
         saveSlot3.row();
-        saveSlot3.add(new StartSaveButton("", gameUiSkin, parent, SaveStates.SLOT_THREE)).colspan(2).center();
+        saveSlot3.add(new StartSaveButton("", gameUiSkin, parent, SaveStates.SLOT_THREE)).colspan(2).center().bottom();
 
         // table
         Table backButtonTable = new Table();
