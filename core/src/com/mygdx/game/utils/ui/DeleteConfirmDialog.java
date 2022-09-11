@@ -6,8 +6,9 @@ import com.mygdx.game.MyGame;
 
 public class DeleteConfirmDialog extends Dialog {
     MyGame root;
+    String saveSlot;
 
-    public DeleteConfirmDialog(String title, Skin skin, MyGame root) {
+    public DeleteConfirmDialog(String title, Skin skin, MyGame root, String saveSlot) {
         super(title, skin);
         getTitleLabel().setText("Do you want to delete this save file?");
         this.root = root;
