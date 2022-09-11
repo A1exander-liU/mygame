@@ -17,6 +17,9 @@ public class DeleteConfirmDialog extends Dialog {
 
     @Override
     protected void result(Object result) {
+        if (result == "yes") {
+            
+        }
     }
 
     private void buildDialog() {
