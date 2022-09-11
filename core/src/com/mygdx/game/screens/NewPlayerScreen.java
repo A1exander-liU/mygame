@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
@@ -43,8 +44,11 @@ public class NewPlayerScreen implements Screen {
         gameUiSkin.addRegions(new TextureAtlas("Game_UI_Skin/Game_UI_Skin.atlas"));
         gameUiSkin.load(Gdx.files.internal("Game_UI_Skin/Game_UI_Skin.json"));
 
+        Label nameLabel = new Label("Enter your name", gameUiSkin, "pixel2D", Color.BLACK);
         TextField textField = new TextField("", gameUiSkin);
 
+        table.add(nameLabel);
+        table.row();
         table.add(textField);
     }
 
