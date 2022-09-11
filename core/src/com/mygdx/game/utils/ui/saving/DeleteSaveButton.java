@@ -21,8 +21,9 @@ public class DeleteSaveButton extends TextButton {
         addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                DeleteConfirmDialog deleteConfirmDialog = new DeleteConfirmDialog("", skin, root, saveSlot);
+                DeleteConfirmDialog deleteConfirmDialog = new DeleteConfirmDialog("", skin, root, saveSlot, DeleteSaveButton.this);
                 deleteConfirmDialog.show(getStage());
+
             }
         });
     }
