@@ -56,9 +56,9 @@ public class NewPlayerScreen implements Screen {
         okButton.setLabel(new Label("Ok", gameUiSkin, "pixel2D", Color.BLACK));
 
         playerCreation.defaults().expand().pad(5);
-        playerCreation.add(nameLabel);
+        playerCreation.add(nameLabel).colspan(2);
         playerCreation.row();
-        playerCreation.add(textField).fillX();
+        playerCreation.add(textField).fillX().colspan(2);
         playerCreation.row();
         playerCreation.add(cancelButton);
         playerCreation.add(okButton);
