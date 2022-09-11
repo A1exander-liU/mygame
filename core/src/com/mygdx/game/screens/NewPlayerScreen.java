@@ -52,7 +52,7 @@ public class NewPlayerScreen implements Screen {
         playerCreation.setDebug(true);
 
         Label nameLabel = new Label("Enter your name", gameUiSkin, "pixel2D", Color.BLACK);
-        TextField textField = new TextField("", gameUiSkin);
+        final TextField textField = new TextField("", gameUiSkin);
         TextButton cancelButton = new TextButton("", gameUiSkin);
         cancelButton.setLabel(new Label("Cancel", gameUiSkin, "pixel2D", Color.BLACK));
         cancelButton.getLabel().setAlignment(Align.center);
@@ -74,6 +74,13 @@ public class NewPlayerScreen implements Screen {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 parent.changeScreen(MyGame.SAVE_SLOT_SCREEN);
+            }
+        });
+
+        okButton.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                String playerName = textField.getText();
             }
         });
     }
