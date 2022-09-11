@@ -258,7 +258,7 @@ slider-bg
   index: -1
 slider-knob2
   rotate: false
-  xy: 201, 168
+  xy: 171, 58
   size: 15, 32
   orig: 15, 32
   offset: 0, 0
@@ -266,6 +266,13 @@ slider-knob2
 slider-knobBefore
   rotate: false
   xy: 299, 292
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+text-bg
+  rotate: false
+  xy: 137, 58
   size: 32, 32
   orig: 32, 32
   offset: 0, 0

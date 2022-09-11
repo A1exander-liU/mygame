@@ -14,6 +14,12 @@
 		"b": 0,
 		"a": 1
 	},
+	"cyan": {
+		"r": 0.38039216,
+		"g": 0.9372549,
+		"b": 1,
+		"a": 1
+	},
 	"green": {
 		"r": 0,
 		"g": 0.84705883,
@@ -61,7 +67,7 @@
 "com.badlogic.gdx.scenes.scene2d.ui.Skin$TintedDrawable": {
 	"text-area-highlight": {
 		"name": "white-pixel",
-		"color": "light-brown"
+		"color": "cyan"
 	},
 	"cursor-black": {
 		"name": "white-pixel",
@@ -702,8 +708,8 @@
 		"minHeight": 32,
 		"rightWidth": 11,
 		"leftWidth": 11,
-		"bottomHeight": 2,
-		"topHeight": 28,
+		"bottomHeight": 0,
+		"topHeight": 31,
 		"offsetX": 0,
 		"offsetY": 0,
 		"offsetXspeed": 0,
@@ -834,6 +840,26 @@
 		"regions": [],
 		"playMode": 2,
 		"crushMode": 0
+	},
+	"text-field-bg": {
+		"region": "text-bg",
+		"horizontalStretchAreas": [ 6, 25 ],
+		"verticalStretchAreas": [ 6, 25 ],
+		"tiling": false,
+		"minWidth": 32,
+		"minHeight": 32,
+		"rightWidth": 9,
+		"leftWidth": 9,
+		"bottomHeight": 10,
+		"topHeight": 10,
+		"offsetX": 0,
+		"offsetY": 0,
+		"offsetXspeed": 0,
+		"offsetYspeed": 0,
+		"frameDuration": 0.03,
+		"regions": [],
+		"playMode": 2,
+		"crushMode": 0
 	}
 },
 "com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle": {
@@ -859,6 +885,8 @@
 	},
 	"image-button-pause": {
 		"imageUp": "pause6",
+		"imageDown": "pause6",
+		"imageOver": "pause6",
 		"up": "button-up",
 		"down": "text-button-down",
 		"over": "text-button-over"
@@ -968,7 +996,7 @@
 	"default": {
 		"font": "advanced-pixel-small",
 		"fontColor": "black",
-		"background": "text-area-background",
+		"background": "text-field-bg",
 		"cursor": "text-field-cursor-black",
 		"selection": "text-area-highlight"
 	}
