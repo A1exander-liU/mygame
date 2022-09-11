@@ -47,6 +47,8 @@ public class NewPlayerScreen implements Screen {
         Label nameLabel = new Label("Enter your name", gameUiSkin, "pixel2D", Color.BLACK);
         TextField textField = new TextField("", gameUiSkin);
 
+        table.defaults().pad(5);
+
         table.add(nameLabel);
         table.row();
         table.add(textField);
