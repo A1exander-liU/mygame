@@ -45,14 +45,15 @@ public class NewPlayerScreen implements Screen {
         gameUiSkin.load(Gdx.files.internal("Game_UI_Skin/Game_UI_Skin.json"));
 
         Table playerCreation = new Table();
+        playerCreation.setDebug(true);
 
         Label nameLabel = new Label("Enter your name", gameUiSkin, "pixel2D", Color.BLACK);
         TextField textField = new TextField("", gameUiSkin);
 
-        playerCreation.defaults().pad(5);
+        playerCreation.defaults().expand().pad(5);
         playerCreation.add(nameLabel);
         playerCreation.row();
-        playerCreation.add(textField);
+        playerCreation.add(textField).fillX();
 
         table.add(playerCreation).expand().grow().width(stage.getWidth() / 3f).height(stage.getHeight() / 4f);
     }
