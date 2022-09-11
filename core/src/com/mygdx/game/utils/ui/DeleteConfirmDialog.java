@@ -18,7 +18,8 @@ public class DeleteConfirmDialog extends Dialog {
     @Override
     protected void result(Object result) {
         if (result == "yes") {
-            
+            // remove the slot data by setting to an empty string
+            root.getSaveStates().setSlotData(saveSlot, "");
         }
     }
 
