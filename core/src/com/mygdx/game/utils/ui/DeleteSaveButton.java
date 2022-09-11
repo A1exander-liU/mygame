@@ -12,7 +12,7 @@ public class DeleteSaveButton extends TextButton {
     MyGame root;
     String saveSlot;
 
-    public DeleteSaveButton(String text, Skin skin, MyGame root, String saveSlot) {
+    public DeleteSaveButton(String text, final Skin skin, final MyGame root, final String saveSlot) {
         super(text, skin);
         this.root = root;
         this.saveSlot = saveSlot;
@@ -20,7 +20,8 @@ public class DeleteSaveButton extends TextButton {
         addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-
+                DeleteConfirmDialog deleteConfirmDialog = new DeleteConfirmDialog("", skin, root, saveSlot);
+                deleteConfirmDialog.show(getStage());
             }
         });
     }
