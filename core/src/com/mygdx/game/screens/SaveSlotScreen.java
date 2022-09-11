@@ -52,7 +52,7 @@ public class SaveSlotScreen implements Screen {
 
         FreeTypeFontGenerator generator  = new FreeTypeFontGenerator(Gdx.files.internal("fonts/PressStart2P-Regular.ttf"));
         final FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = 16;
+        parameter.size = 12;
         parameter.color = Color.BLACK;
         BitmapFont font = generator.generateFont(parameter);
         gameUiSkin.add("pixel2D", font);
