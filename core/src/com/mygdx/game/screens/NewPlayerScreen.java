@@ -60,8 +60,8 @@ public class NewPlayerScreen implements Screen {
         playerCreation.row();
         playerCreation.add(textField).fillX().colspan(2);
         playerCreation.row();
-        playerCreation.add(cancelButton);
-        playerCreation.add(okButton);
+        playerCreation.add(cancelButton).fill();
+        playerCreation.add(okButton).fill();
 
         table.add(playerCreation).expand().grow().width(stage.getWidth() / 3f).height(stage.getHeight() / 4f);
     }
