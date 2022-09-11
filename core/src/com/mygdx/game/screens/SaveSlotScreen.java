@@ -82,6 +82,13 @@ public class SaveSlotScreen implements Screen {
         TextButton deleteButton3 = new TextButton("x", gameUiSkin);
         deleteButton3.setLabel(new Label("x", gameUiSkin, "pixel2D", Color.BLACK));
 
+        Label slotOnePlayerName = new Label("", gameUiSkin, "pixel2D", Color.BLACK);
+        slotOnePlayerName.setName("slotOneName");
+        Label slotTwoPlayerName = new Label("", gameUiSkin, "pixel2D", Color.BLACK);
+        slotTwoPlayerName.setName("slotTwoName");
+        Label slotThreePlayerName = new Label("", gameUiSkin, "pixel2D", Color.BLACK);
+        slotThreePlayerName.setName("slotThreeName");
+
         saveSlot1.defaults().expand().space(5);
         saveSlot1.setDebug(false);
         saveSlot2.defaults().expand().space(5);
