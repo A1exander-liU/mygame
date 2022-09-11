@@ -82,6 +82,8 @@ public class NewPlayerScreen implements Screen {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 String playerName = textField.getText();
+                parent.entityFactory.makePlayer(playerName);
+                parent.changeScreen(MyGame.GAME_SCREEN);
             }
         });
     }
