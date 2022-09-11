@@ -67,4 +67,19 @@ public class GameMapProperties {
         }
         staticObstacles = MyGame.engine.getEntitiesFor(Families.obstacles);
     }
+
+    public void removeNonPersistingMapObjects() {
+        MapObjects collisions = getMapLayer(GameMapProperties.COLLISIONS).getObjects();
+        MapObjects enemyDrops = getMapLayer(GameMapProperties.ENEMY_DROPS).getObjects();
+        // iterate backwards to prevent using a changed index
+        for (int i = collisions.getCount() - 1; i >= 0; --i) {
+            if (collisions.get(i) instanceof EntityTextureObject) {
+                collisions.remove(collisions.get(i));
+            }
+        }
+        // remove them all
+        for (int i = enemyDrops.getCount() - 1; i >= 0; --i) {
+            enemyDrops.remove(enemyDrops.get(i));
+        }
+    }
 }
