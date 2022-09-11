@@ -10,18 +10,22 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.SaveStates;
 import com.mygdx.game.utils.ui.saving.DeleteSaveButton;
 import com.mygdx.game.utils.ui.saving.StartSaveButton;
+
+import java.util.Objects;
 
 public class SaveSlotScreen implements Screen {
     MyGame parent;
@@ -59,12 +63,15 @@ public class SaveSlotScreen implements Screen {
         backButton.getLabel().setAlignment(Align.center);
 
         Table saveSlot1 = new Table(gameUiSkin);
+        saveSlot1.setName("slotOne");
         saveSlot1.setBackground(gameUiSkin.getDrawable("player-hud-bg-01"));
         Label saveSlot1Title = new Label("Slot 1", gameUiSkin, "pixel2D", Color.BLACK);
         Table saveSlot2 = new Table(gameUiSkin);
+        saveSlot2.setName("slotTwo");
         saveSlot2.setBackground(gameUiSkin.getDrawable("player-hud-bg-01"));
         Label saveSlot2Title = new Label("Slot 2", gameUiSkin, "pixel2D", Color.BLACK);
         Table saveSlot3 = new Table(gameUiSkin);
+        saveSlot3.setName("slotThree");
         saveSlot3.setBackground(gameUiSkin.getDrawable("player-hud-bg-01"));
         Label saveSlot3Title = new Label("Slot 3", gameUiSkin, "pixel2D", Color.BLACK);
 
@@ -121,6 +128,24 @@ public class SaveSlotScreen implements Screen {
     public void render(float delta) {
         Gdx.gl.glClearColor(0.8824f, 0.7765f, 0.6f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        if (Objects.equals(parent.getSaveStates().getSlotSerializedData(SaveStates.SLOT_ONE), "")) {
+            Table saveSlot = stage.getRoot().findActor("slotOne");
+            Cell<?> cell = saveSlot.getCells().get(1);
+            cell.setActor(null);
+        }
+
+        if (Objects.equals(parent.getSaveStates().getSlotSerializedData(SaveStates.SLOT_TWO), "")) {
+            Table saveSlot = stage.getRoot().findActor("slotTwo");
+            Cell<?> cell = saveSlot.getCells().get(1);
+            cell.setActor(null);
+        }
+
+        if (Objects.equals(parent.getSaveStates().getSlotSerializedData(SaveStates.SLOT_THREE), "")) {
+            Table saveSlot = stage.getRoot().findActor("slotThree");
+            Cell<?> cell = saveSlot.getCells().get(1);
+            cell.setActor(null);
+        }
 
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
         stage.draw();
