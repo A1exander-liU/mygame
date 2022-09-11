@@ -17,6 +17,7 @@ import com.mygdx.game.jsonreaders.JsonItemFinder;
 import com.mygdx.game.screens.GameScreen;
 import com.mygdx.game.screens.LoadingScreen;
 import com.mygdx.game.screens.MainMenuScreen;
+import com.mygdx.game.screens.NewPlayerScreen;
 import com.mygdx.game.screens.SaveSlotScreen;
 import com.mygdx.game.screens.SettingsScreen;
 import com.mygdx.game.utils.map.GameMapProperties;
@@ -29,6 +30,7 @@ public class MyGame extends Game {
 	SettingsScreen settingsScreen;
 	LoadingScreen loadingScreen;
 	SaveSlotScreen saveSlotScreen;
+	NewPlayerScreen newPlayerScreen;
 
 	public InputMultiplexer inputMultiplexer;
 
@@ -40,6 +42,7 @@ public class MyGame extends Game {
 	public static final int SETTINGS_SCREEN = 2;
 	public static final int LOADING_SCREEN = 3;
 	public static final int SAVE_SLOT_SCREEN = 4;
+	public static final int NEW_PLAYER_SCREEN = 5;
 
 	public SpriteBatch batch;
 	public static Engine engine;
@@ -107,6 +110,11 @@ public class MyGame extends Game {
 				if (saveSlotScreen == null)
 					saveSlotScreen = new SaveSlotScreen(this);
 				this.setScreen(saveSlotScreen);
+				break;
+			case NEW_PLAYER_SCREEN:
+				if (newPlayerScreen == null)
+					newPlayerScreen = new NewPlayerScreen(this);
+				this.setScreen(newPlayerScreen);
 				break;
 		}
 	}
