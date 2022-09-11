@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -58,7 +59,7 @@ public class SaveSlotScreen implements Screen {
         backButton.getLabel().setAlignment(Align.center);
 
         Table saveSlot1 = new Table(gameUiSkin);
-        saveSlot1.setBackground(gameUiSkin.getDrawable("window-bg"));
+        saveSlot1.setBackground(gameUiSkin.getDrawable("player-hud-bg-01"));
         Label saveSlot1Title = new Label("Slot 1", gameUiSkin, "pixel2D", Color.BLACK);
         Table saveSlot2 = new Table(gameUiSkin);
         saveSlot2.setBackground(gameUiSkin.getDrawable("window-bg"));
@@ -73,8 +74,8 @@ public class SaveSlotScreen implements Screen {
         deleteButton2.setLabel(new Label("x", gameUiSkin, "pixel2D", Color.BLACK));
         TextButton deleteButton3 = new TextButton("x", gameUiSkin);
         deleteButton3.setLabel(new Label("x", gameUiSkin, "pixel2D", Color.BLACK));
-
-        saveSlot1.defaults().expand().pad(5);
+        
+        saveSlot1.setDebug(true);
         saveSlot2.defaults().expand().pad(5);
         saveSlot3.defaults().expand().pad(5);
 
