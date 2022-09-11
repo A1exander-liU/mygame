@@ -1,8 +1,11 @@
 package com.mygdx.game.utils.ui.saving;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -17,7 +20,9 @@ public class DeleteConfirmDialog extends Dialog {
 
     public DeleteConfirmDialog(String title, Skin skin, MyGame root, String saveSlot, DeleteSaveButton deleteSaveButton) {
         super(title, skin);
-        getTitleLabel().setText("Do you want to delete this save file?");
+        getTitleLabel().setName("title");
+        getTitleTable().removeActor(getTitleTable().findActor("title"));
+        getTitleTable().add(new Label("Do you want to delete this save file?", skin, "pixel2D", Color.BLACK));
         this.root = root;
         this.saveSlot = saveSlot;
         this.deleteSaveButton = deleteSaveButton;
