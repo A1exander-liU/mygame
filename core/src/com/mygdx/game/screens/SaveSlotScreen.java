@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -22,6 +23,7 @@ import com.mygdx.game.MyGame;
 import com.mygdx.game.SaveStates;
 import com.mygdx.game.engine.utils.entities.PlayerEntity;
 import com.mygdx.game.utils.saves.SaveData;
+import com.mygdx.game.utils.ui.StartSaveButton;
 
 import java.util.Objects;
 
@@ -60,16 +62,34 @@ public class SaveSlotScreen implements Screen {
         backButton.setLabel(new Label("Back", gameUiSkin, "pixel2D", Color.BLACK));
         backButton.getLabel().setAlignment(Align.center);
 
-        final Button saveSlot1 = new Button(gameUiSkin);
+        Table saveSlot1 = new Table(gameUiSkin);
+        saveSlot1.setBackground(gameUiSkin.getDrawable("window-bg"));
         Label saveSlot1Title = new Label("Slot 1", gameUiSkin, "pixel2D", Color.BLACK);
-        Button saveSlot2 = new Button(gameUiSkin);
+        Table saveSlot2 = new Table(gameUiSkin);
+        saveSlot2.setBackground(gameUiSkin.getDrawable("window-bg"));
         Label saveSlot2Title = new Label("Slot 2", gameUiSkin, "pixel2D", Color.BLACK);
-        Button saveSlot3 = new Button(gameUiSkin);
+        Table saveSlot3 = new Table(gameUiSkin);
+        saveSlot3.setBackground(gameUiSkin.getDrawable("window-bg"));
         Label saveSlot3Title = new Label("Slot 3", gameUiSkin, "pixel2D", Color.BLACK);
 
+        TextButton deleteButton1 = new TextButton("x", gameUiSkin);
+        deleteButton1.setLabel(new Label("x", gameUiSkin, "pixel2D", Color.BLACK));
+        TextButton deleteButton2 = new TextButton("x", gameUiSkin);
+        deleteButton2.setLabel(new Label("x", gameUiSkin, "pixel2D", Color.BLACK));
+        TextButton deleteButton3 = new TextButton("x", gameUiSkin);
+        deleteButton3.setLabel(new Label("x", gameUiSkin, "pixel2D", Color.BLACK));
+
         saveSlot1.add(saveSlot1Title);
+        saveSlot1.row();
+        saveSlot1.add(new StartSaveButton("", gameUiSkin, parent, SaveStates.SLOT_ONE));
+
         saveSlot2.add(saveSlot2Title);
+        saveSlot2.row();
+        saveSlot2.add(new StartSaveButton("", gameUiSkin, parent, SaveStates.SLOT_TWO));
+
         saveSlot3.add(saveSlot3Title);
+        saveSlot3.row();
+        saveSlot3.add(new StartSaveButton("", gameUiSkin, parent, SaveStates.SLOT_THREE));
 
         // table
         Table backButtonTable = new Table();
@@ -92,61 +112,63 @@ public class SaveSlotScreen implements Screen {
             }
         });
 
-        saveSlot1.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                // get serialized data from prefs
-                String slotOneData = parent.getSaveStates().getSlotSerializedData(SaveStates.SLOT_ONE);
-                // set currentSlot to the slot clicked on
-                parent.saveData.setCurrentSlot(SaveStates.SLOT_ONE);
-                if (!Objects.equals(slotOneData, "")) {
-                    System.out.println(json.prettyPrint(slotOneData));
-                    // call load to get player entity back
-                    PlayerEntity player = parent.saveData.load(slotOneData);
-                    // now player is loaded with all info go to game screen
-                    parent.changeScreen(MyGame.GAME_SCREEN);
-                }
-                else {
-                    System.out.println("empty");
-                    // go the game screen regardless
-                    parent.changeScreen(MyGame.GAME_SCREEN);
-                }
-            }
-        });
+//        saveSlot1.addListener(new ChangeListener() {
+//            @Override
+//            public void changed(ChangeEvent event, Actor actor) {
+//                // get serialized data from prefs
+//                String slotOneData = parent.getSaveStates().getSlotSerializedData(SaveStates.SLOT_ONE);
+//                // set currentSlot to the slot clicked on
+//                parent.saveData.setCurrentSlot(SaveStates.SLOT_ONE);
+//                if (!Objects.equals(slotOneData, "")) {
+//                    System.out.println(json.prettyPrint(slotOneData));
+//                    // call load to get player entity back
+//                    PlayerEntity player = parent.saveData.load(slotOneData);
+//                    // now player is loaded with all info go to game screen
+//                    parent.changeScreen(MyGame.GAME_SCREEN);
+//                }
+//                else {
+//                    System.out.println("empty");
+//                    // go the game screen regardless
+//                    parent.changeScreen(MyGame.GAME_SCREEN);
+//                }
+//            }
+//        });
+//
+//        saveSlot2.addListener(new ChangeListener() {
+//            @Override
+//            public void changed(ChangeEvent event, Actor actor) {
+//                String slotTwoData = parent.getSaveStates().getSlotSerializedData(SaveStates.SLOT_TWO);
+//                parent.saveData.setCurrentSlot(SaveStates.SLOT_TWO);
+//                if (!Objects.equals(slotTwoData, "")) {
+//                    System.out.println(json.prettyPrint(slotTwoData));
+//                    PlayerEntity player = parent.saveData.load(slotTwoData);
+//                    parent.changeScreen(MyGame.GAME_SCREEN);
+//                }
+//                else {
+//                    System.out.println("empty");
+//                    parent.changeScreen(MyGame.GAME_SCREEN);
+//                }
+//            }
+//        });
+//
+//        saveSlot3.addListener(new ChangeListener() {
+//            @Override
+//            public void changed(ChangeEvent event, Actor actor) {
+//                String slotThreeData = parent.getSaveStates().getSlotSerializedData(SaveStates.SLOT_THREE);
+//                parent.saveData.setCurrentSlot(SaveStates.SLOT_THREE);
+//                if (!Objects.equals(slotThreeData, "")) {
+//                    System.out.println(json.prettyPrint(slotThreeData));
+//                    PlayerEntity player = parent.saveData.load(slotThreeData);
+//                    parent.changeScreen(MyGame.GAME_SCREEN);
+//                }
+//                else {
+//                    System.out.println("empty");
+//                    parent.changeScreen(MyGame.GAME_SCREEN);
+//                }
+//            }
+//        });
 
-        saveSlot2.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                String slotTwoData = parent.getSaveStates().getSlotSerializedData(SaveStates.SLOT_TWO);
-                parent.saveData.setCurrentSlot(SaveStates.SLOT_TWO);
-                if (!Objects.equals(slotTwoData, "")) {
-                    System.out.println(json.prettyPrint(slotTwoData));
-                    PlayerEntity player = parent.saveData.load(slotTwoData);
-                    parent.changeScreen(MyGame.GAME_SCREEN);
-                }
-                else {
-                    System.out.println("empty");
-                    parent.changeScreen(MyGame.GAME_SCREEN);
-                }
-            }
-        });
 
-        saveSlot3.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                String slotThreeData = parent.getSaveStates().getSlotSerializedData(SaveStates.SLOT_THREE);
-                parent.saveData.setCurrentSlot(SaveStates.SLOT_THREE);
-                if (!Objects.equals(slotThreeData, "")) {
-                    System.out.println(json.prettyPrint(slotThreeData));
-                    PlayerEntity player = parent.saveData.load(slotThreeData);
-                    parent.changeScreen(MyGame.GAME_SCREEN);
-                }
-                else {
-                    System.out.println("empty");
-                    parent.changeScreen(MyGame.GAME_SCREEN);
-                }
-            }
-        });
 
     }
 
