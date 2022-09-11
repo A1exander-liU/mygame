@@ -53,6 +53,7 @@ public class NewPlayerScreen implements Screen {
 
         Label nameLabel = new Label("Enter your name", gameUiSkin, "pixel2D", Color.BLACK);
         final TextField textField = new TextField("", gameUiSkin);
+        textField.setMaxLength(20);
         TextButton cancelButton = new TextButton("", gameUiSkin);
         cancelButton.setLabel(new Label("Cancel", gameUiSkin, "pixel2D", Color.BLACK));
         cancelButton.getLabel().setAlignment(Align.center);
