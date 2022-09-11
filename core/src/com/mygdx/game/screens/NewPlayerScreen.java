@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.MyGame;
 
@@ -52,8 +53,10 @@ public class NewPlayerScreen implements Screen {
         TextField textField = new TextField("", gameUiSkin);
         TextButton cancelButton = new TextButton("", gameUiSkin);
         cancelButton.setLabel(new Label("Cancel", gameUiSkin, "pixel2D", Color.BLACK));
+        cancelButton.getLabel().setAlignment(Align.center);
         TextButton okButton = new TextButton("", gameUiSkin);
         okButton.setLabel(new Label("Ok", gameUiSkin, "pixel2D", Color.BLACK));
+        okButton.getLabel().setAlignment(Align.center);
 
         playerCreation.defaults().expand().pad(5);
         playerCreation.add(nameLabel).colspan(2);
