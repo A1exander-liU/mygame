@@ -9,6 +9,7 @@ public class DeleteConfirmDialog extends Dialog {
 
     public DeleteConfirmDialog(String title, Skin skin, MyGame root) {
         super(title, skin);
+        getTitleLabel().setText("Do you want to delete this save file?");
         this.root = root;
         buildDialog();
     }
