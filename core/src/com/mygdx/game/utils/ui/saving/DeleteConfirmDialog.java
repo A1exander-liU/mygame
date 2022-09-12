@@ -39,6 +39,7 @@ public class DeleteConfirmDialog extends Dialog {
     }
 
     private void buildDialog() {
+        getButtonTable().defaults().pad(5);
         button("No", "no");
         button("Yes", "yes");
     }
