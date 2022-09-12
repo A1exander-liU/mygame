@@ -165,18 +165,21 @@ public class SaveSlotScreen implements Screen {
             Table saveSlot = stage.getRoot().findActor("slotOne");
             Cell<?> cell = saveSlot.getCells().get(1);
             cell.setActor(null);
+            saveSlot.removeActor(saveSlot.findActor("slotOneName"));
         }
 
         if (Objects.equals(parent.getSaveStates().getSlotSerializedData(SaveStates.SLOT_TWO), "")) {
             Table saveSlot = stage.getRoot().findActor("slotTwo");
             Cell<?> cell = saveSlot.getCells().get(1);
             cell.setActor(null);
+            saveSlot.removeActor(saveSlot.findActor("slotTwoName"));
         }
 
         if (Objects.equals(parent.getSaveStates().getSlotSerializedData(SaveStates.SLOT_THREE), "")) {
             Table saveSlot = stage.getRoot().findActor("slotThree");
             Cell<?> cell = saveSlot.getCells().get(1);
             cell.setActor(null);
+            saveSlot.removeActor(saveSlot.findActor("saveSlotThree"));
         }
 
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
