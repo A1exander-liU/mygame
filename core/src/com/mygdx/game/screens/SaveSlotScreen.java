@@ -75,14 +75,7 @@ public class SaveSlotScreen implements Screen {
         saveSlot3.setName("slotThree");
         saveSlot3.setBackground(gameUiSkin.getDrawable("player-hud-bg-01"));
         Label saveSlot3Title = new Label("Slot 3", gameUiSkin, "pixel2D", Color.BLACK);
-
-        TextButton deleteButton1 = new TextButton("x", gameUiSkin);
-        deleteButton1.setLabel(new Label("x", gameUiSkin, "pixel2D", Color.BLACK));
-        TextButton deleteButton2 = new TextButton("x", gameUiSkin);
-        deleteButton2.setLabel(new Label("x", gameUiSkin, "pixel2D", Color.BLACK));
-        TextButton deleteButton3 = new TextButton("x", gameUiSkin);
-        deleteButton3.setLabel(new Label("x", gameUiSkin, "pixel2D", Color.BLACK));
-
+        
         Label slotOnePlayerName = new Label("", gameUiSkin, "pixel2D", Color.BLACK);
         slotOnePlayerName.setName("slotOneName");
         slotOnePlayerName.setAlignment(Align.center);
