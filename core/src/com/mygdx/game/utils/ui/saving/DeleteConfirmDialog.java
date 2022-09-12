@@ -46,7 +46,11 @@ public class DeleteConfirmDialog extends Dialog {
     private void updateLoadDataButton() {
         Table saveFile = (Table) deleteSaveButton.getParent();
         Actor actor = new StartSaveButton("", getSkin(), root, saveSlot);
-        Cell<?> cell = saveFile.getCells().get(2);
-        cell.setActor(actor);
+        for (int i = 0; i < saveFile.getCells().size; i++) {
+            if (saveFile.getCells().get(i).getActor() instanceof StartSaveButton) {
+                Cell<?> cell = saveFile.getCells().get(i);
+                cell.setActor(actor);
+            }
+        }
     }
 }
