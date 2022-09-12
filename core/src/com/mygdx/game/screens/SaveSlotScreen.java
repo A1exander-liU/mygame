@@ -105,7 +105,7 @@ public class SaveSlotScreen implements Screen {
             SavedPlayer savedPlayer = json.fromJson(SavedPlayer.class, savedData);
             slotOnePlayerName.setText("Lv." + savedPlayer.levelComponent.level + "\n\n" + savedPlayer.name.name);
             saveSlot1.row();
-            saveSlot1.add(slotOnePlayerName);
+            saveSlot1.add(slotOnePlayerName).colspan(2);
         }
         saveSlot1.row();
         saveSlot1.add(new StartSaveButton("", gameUiSkin, parent, SaveStates.SLOT_ONE)).colspan(2).center().bottom();
