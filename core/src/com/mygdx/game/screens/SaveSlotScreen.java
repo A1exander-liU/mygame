@@ -163,22 +163,29 @@ public class SaveSlotScreen implements Screen {
 
         if (Objects.equals(parent.getSaveStates().getSlotSerializedData(SaveStates.SLOT_ONE), "")) {
             Table saveSlot = stage.getRoot().findActor("slotOne");
-            Cell<?> cell = saveSlot.getCells().get(1);
-            cell.setActor(null);
+            Actor actor = saveSlot.findActor("deleteSlotOne");
+            // check if the actor is in table before getting its cell
+            if (actor != null) {
+                saveSlot.getCell(actor).setActor(null);
+            }
             saveSlot.removeActor(saveSlot.findActor("slotOneName"));
         }
 
         if (Objects.equals(parent.getSaveStates().getSlotSerializedData(SaveStates.SLOT_TWO), "")) {
             Table saveSlot = stage.getRoot().findActor("slotTwo");
-            Cell<?> cell = saveSlot.getCells().get(1);
-            cell.setActor(null);
+            Actor actor = saveSlot.findActor("deleteSlotTwo");
+            if (actor != null) {
+                saveSlot.getCell(actor).setActor(null);
+            }
             saveSlot.removeActor(saveSlot.findActor("slotTwoName"));
         }
 
         if (Objects.equals(parent.getSaveStates().getSlotSerializedData(SaveStates.SLOT_THREE), "")) {
             Table saveSlot = stage.getRoot().findActor("slotThree");
-            Cell<?> cell = saveSlot.getCells().get(1);
-            cell.setActor(null);
+            Actor actor = saveSlot.findActor("deleteSlotThree");
+            if (actor != null) {
+                saveSlot.getCell(actor).setActor(null);
+            }
             saveSlot.removeActor(saveSlot.findActor("saveSlotThree"));
         }
 
