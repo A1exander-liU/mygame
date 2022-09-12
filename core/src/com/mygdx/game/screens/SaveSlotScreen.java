@@ -75,7 +75,14 @@ public class SaveSlotScreen implements Screen {
         saveSlot3.setName("slotThree");
         saveSlot3.setBackground(gameUiSkin.getDrawable("player-hud-bg-01"));
         Label saveSlot3Title = new Label("Slot 3", gameUiSkin, "pixel2D", Color.BLACK);
-        
+
+        DeleteSaveButton deleteSlotOne = new DeleteSaveButton("", gameUiSkin, parent, SaveStates.SLOT_ONE);
+        deleteSlotOne.setName("deleteSlotOne");
+        DeleteSaveButton deleteSlotTwo = new DeleteSaveButton("", gameUiSkin, parent, SaveStates.SLOT_TWO);
+        deleteSlotTwo.setName("deleteSlotTwo");
+        DeleteSaveButton deleteSlotThree = new DeleteSaveButton("", gameUiSkin, parent, SaveStates.SLOT_THREE);
+        deleteSlotThree.setName("deleteSlotThree");
+
         Label slotOnePlayerName = new Label("", gameUiSkin, "pixel2D", Color.BLACK);
         slotOnePlayerName.setName("slotOneName");
         slotOnePlayerName.setAlignment(Align.center);
@@ -92,7 +99,7 @@ public class SaveSlotScreen implements Screen {
         saveSlot3.defaults().expand().space(5);
 
         saveSlot1.add(saveSlot1Title).top().padTop(10);
-        saveSlot1.add(new DeleteSaveButton("", gameUiSkin, parent, SaveStates.SLOT_ONE)).top();
+        saveSlot1.add(deleteSlotOne).top();
         if (!Objects.equals(parent.getSaveStates().getSlotSerializedData(SaveStates.SLOT_ONE), "")) {
             String savedData = parent.getSaveStates().getSlotSerializedData(SaveStates.SLOT_ONE);
             SavedPlayer savedPlayer = json.fromJson(SavedPlayer.class, savedData);
@@ -104,7 +111,7 @@ public class SaveSlotScreen implements Screen {
         saveSlot1.add(new StartSaveButton("", gameUiSkin, parent, SaveStates.SLOT_ONE)).colspan(2).center().bottom();
 
         saveSlot2.add(saveSlot2Title).top().padTop(10);
-        saveSlot2.add(new DeleteSaveButton("", gameUiSkin, parent, SaveStates.SLOT_TWO)).top();
+        saveSlot2.add(deleteSlotTwo).top();
         if (!Objects.equals(parent.getSaveStates().getSlotSerializedData(SaveStates.SLOT_TWO), "")) {
             String savedData = parent.getSaveStates().getSlotSerializedData(SaveStates.SLOT_TWO);
             SavedPlayer savedPlayer = json.fromJson(SavedPlayer.class, savedData);
@@ -116,7 +123,7 @@ public class SaveSlotScreen implements Screen {
         saveSlot2.add(new StartSaveButton("", gameUiSkin, parent, SaveStates.SLOT_TWO)).colspan(2).center().bottom();
 
         saveSlot3.add(saveSlot3Title).top().padTop(10);
-        saveSlot3.add(new DeleteSaveButton("", gameUiSkin, parent, SaveStates.SLOT_THREE)).top();
+        saveSlot3.add(deleteSlotThree).top();
         if (!Objects.equals(parent.getSaveStates().getSlotSerializedData(SaveStates.SLOT_THREE), "")) {
             String savedData = parent.getSaveStates().getSlotSerializedData(SaveStates.SLOT_THREE);
             SavedPlayer savedPlayer = json.fromJson(SavedPlayer.class, savedData);
