@@ -85,10 +85,13 @@ public class SaveSlotScreen implements Screen {
 
         Label slotOnePlayerName = new Label("", gameUiSkin, "pixel2D", Color.BLACK);
         slotOnePlayerName.setName("slotOneName");
+        slotOnePlayerName.setAlignment(Align.center);
         Label slotTwoPlayerName = new Label("", gameUiSkin, "pixel2D", Color.BLACK);
         slotTwoPlayerName.setName("slotTwoName");
+        slotTwoPlayerName.setAlignment(Align.center);
         Label slotThreePlayerName = new Label("", gameUiSkin, "pixel2D", Color.BLACK);
         slotThreePlayerName.setName("slotThreeName");
+        slotThreePlayerName.setAlignment(Align.center);
 
         saveSlot1.defaults().expand().space(5);
         saveSlot1.setDebug(false);
