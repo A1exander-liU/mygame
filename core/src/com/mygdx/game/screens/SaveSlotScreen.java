@@ -115,9 +115,9 @@ public class SaveSlotScreen implements Screen {
         if (!Objects.equals(parent.getSaveStates().getSlotSerializedData(SaveStates.SLOT_TWO), "")) {
             String savedData = parent.getSaveStates().getSlotSerializedData(SaveStates.SLOT_TWO);
             SavedPlayer savedPlayer = json.fromJson(SavedPlayer.class, savedData);
-            slotOnePlayerName.setText("Lv." + savedPlayer.levelComponent.level + "\n\n" + savedPlayer.name.name);
+            slotTwoPlayerName.setText("Lv." + savedPlayer.levelComponent.level + "\n\n" + savedPlayer.name.name);
             saveSlot2.row();
-            saveSlot2.add(slotOnePlayerName).colspan(2);
+            saveSlot2.add(slotTwoPlayerName).colspan(2);
         }
         saveSlot2.row();
         saveSlot2.add(new StartSaveButton("", gameUiSkin, parent, SaveStates.SLOT_TWO)).colspan(2).center().bottom();
@@ -127,9 +127,9 @@ public class SaveSlotScreen implements Screen {
         if (!Objects.equals(parent.getSaveStates().getSlotSerializedData(SaveStates.SLOT_THREE), "")) {
             String savedData = parent.getSaveStates().getSlotSerializedData(SaveStates.SLOT_THREE);
             SavedPlayer savedPlayer = json.fromJson(SavedPlayer.class, savedData);
-            slotOnePlayerName.setText("Lv." + savedPlayer.levelComponent.level + "\n\n" + savedPlayer.name.name);
+            slotThreePlayerName.setText("Lv." + savedPlayer.levelComponent.level + "\n\n" + savedPlayer.name.name);
             saveSlot3.row();
-            saveSlot3.add(slotOnePlayerName).colspan(2);
+            saveSlot3.add(slotThreePlayerName).colspan(2);
         }
         saveSlot3.row();
         saveSlot3.add(new StartSaveButton("", gameUiSkin, parent, SaveStates.SLOT_THREE)).colspan(2).center().bottom();
