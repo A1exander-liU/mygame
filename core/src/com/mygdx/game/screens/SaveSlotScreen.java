@@ -100,7 +100,7 @@ public class SaveSlotScreen implements Screen {
         if (!Objects.equals(parent.getSaveStates().getSlotSerializedData(SaveStates.SLOT_ONE), "")) {
             String savedData = parent.getSaveStates().getSlotSerializedData(SaveStates.SLOT_ONE);
             SavedPlayer savedPlayer = json.fromJson(SavedPlayer.class, savedData);
-            slotOnePlayerName.setText(savedPlayer.name.name + "\n\nLv." + savedPlayer.levelComponent.level);
+            slotOnePlayerName.setText("Lv." + savedPlayer.levelComponent.level + "\n\n" + savedPlayer.name.name);
             saveSlot1.row();
             saveSlot1.add(slotOnePlayerName);
         }
